@@ -1,0 +1,135 @@
+#+TITLE:  Prácticas con Gretl
+#+AUTHOR: Marcos Bujosa
+#+EMAIL:  mbujosab@ucm.es
+#+DESCRIPTION: Presentación para uso con el cañon proyector del aula
+#+KEYWORDS: Gretl, econometría, prácticas
+#+LANGUAGE:  en-es
+#+STARTUP: showall
+
+#+EXPORT_FILE_NAME: pub/PrimeraSesionScreen
+
+#+OPTIONS: toc:nil
+#+OPTIONS: H:2 
+#+OPTIONS: num:t
+#+COLUMNS: %40ITEM %10BEAMER_env(Env) %9BEAMER_envargs(Env Args) %4BEAMER_col(Col) %10BEAMER_extra(Extra)
+
+#+startup: beamer
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [10pt, presentation, mathserif, aspectratio=149, xcolor=table]  
+#+BEAMER_THEME: Goettingen
+
+# +LaTeX_HEADER: \input{notacionLinAlg.tex}
+#+LaTeX_HEADER: \usepackage{nacal}
+#+LATEX_HEADER: \RequirePackage{fancyvrb}
+#+LATEX_HEADER: \DefineVerbatimEnvironment{verbatim}{Verbatim}{fontsize=\scriptsize}
+
+#+LaTeX_HEADER: \usepackage{framed}
+
+#+LaTeX_HEADER: \usepackage{listings}
+#+LaTeX_HEADER: \lstnewenvironment{hansl-gretl}
+#+LaTeX_HEADER: {\lstset{language={hansl},basicstyle={\ttfamily\footnotesize},numbers,rame=single,breaklines=true}}
+#+LaTeX_HEADER: {}
+#+LaTeX_HEADER: \newcommand{\hansl}[1]{\lstset{language={hansl},basicstyle={\ttfamily\small}}\lstinline{#1}}
+# +LaTeX_HEADER: \lstset{backgroundcolor=\color{lightgray!20},basicstyle=\ttfamily\footnotesize,breaklines=true, captionpos=b,commentstyle=\color{green!40!black}\textit,escapeinside={\%*}{*)}, keywordstyle=\color{blue},stringstyle=\color{mymauve}, }
+#+LaTeX_HEADER: \input{hansl.tex}
+
+#+name: setup-listings
+#+begin_src emacs-lisp :exports none :results silent
+  (setq org-latex-listings 'listings)
+  (setq org-latex-custom-lang-environments
+	;'((emacs-lisp "common-lispcode")))
+	'((emacs-lisp "hansl-gretl")))
+  (setq org-latex-listings-options
+	'(("frame" "lines")
+	  ("basicstyle" "\\scritpsize")
+	  ("basicstyle" "\\ttfamily")
+	  ("numbers=none" "left")
+	  ("backgroundcolor=\\color{lightgray!20}")
+	  ("numberstyle" "\\tiny")))
+  (setq org-latex-to-pdf-process
+	'("pdflatex -interaction nonstopmode -output-directory %o %f"
+	"pdflatex -interaction nonstopmode -output-directory %o %f"
+	"pdflatex -interaction nonstopmode -output-directory %o %f"))
+  (org-add-link-type
+   "latex" nil
+   (lambda (path desc format)
+     (cond
+      ((eq format 'html)
+       (format "<span class=\"%s\">%s</span>" path desc))
+      ((eq format 'latex)
+       (format "\\%s{%s}" path desc)))))
+#+end_src
+
+
+#+begin_comment
+Este fichero emplea subsecciones de [[file:./PracticasPrint.org]] como
+slides para generar una presentación al exportarlo como fichero Beamer
+con ~C-e l O~
+#+end_comment
+
+* Precio de casas unifamiliares
+
+#+INCLUDE: "PracticasPrint.org::* Practica Precio Casas Unifamiliares" :only-contents t 
+
+** Código completo de la práctica: ~EjPvivienda.inp~
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+BEGIN_SRC hansl :noweb yes :tangle no
+  <<PCU Lectura del fichero de datos>>
+  <<PCU Mostramos los valores de los datos en columna>>
+  
+  <<PCU Guardamos scatterplot como icono>>
+  
+  <<PCU Ajuste MCO que se guarda como icono>>
+  <<PCU Mostramos la ventana del ajuste MCO>>
+  
+  <<PCU Guardamos las series de valores ajustados y de errores>>
+  
+  <<PCU Otras formas de calcular phat>>
+  <<PCU Otra forma chapucera de calcular phat>>
+  <<PCU Forma correcta de calcular phat>>
+  <<PCU Otra forma correcta de calcular phat>>
+  
+  print -o price phat phat2 phat3 phat4 
+#+END_SRC
+
+* Datos de Anscombe
+
+#+INCLUDE: "PracticasPrint.org::* Practica con los datos de Anscombe" :only-contents t 
+
+** Código completo de la práctica: ~anscombe.inp~
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+#+begin_src hansl-gretl :noweb yes :notangle 
+  <<DA-carga-datos>>
+  
+  <<DA-estadisticos-simples>>
+  
+  <<DA-correlaciones>>
+  
+  <<DA-regresiones>>
+  
+  <<DA-diagramas>>
+#+END_SRC
+
+* Houses
+
+#+INCLUDE: "PracticasPrint.org::* Practica con los datos de las casas añadiendo más características" :only-contents t 
+
+** Código completo de la práctica: ~houses.inp~
+    :PROPERTIES:
+    :BEAMER_env: block
+    :END:
+
+# +ATTR_LATEX: :options basicstyle=\ttfamily\footnotesizesize
+#+begin_src hansl :noweb yes :notangle 
+  <<Houses - Lectura del fichero de datos>>
+  
+  <<Houses - Ajuste MCO que se guarda como icono>>
+  
+  <<Houses - previsiones>>
+#+END_SRC

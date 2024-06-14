@@ -1,0 +1,17 @@
+open data4-6.gdt
+
+corr urb famsize unemp highschl college medinc
+
+ModeloA <- ols povrate const urb famsize unemp highschl college medinc
+
+ModeloB <- omit unemp
+
+ModeloC <- omit urb
+vif
+
+ModeloD <- omit medinc
+
+Aux     <- ols medinc 0 famsize unemp highschl college
+
+ols povrate const urb famsize unemp highschl college
+Final   <- omit --auto

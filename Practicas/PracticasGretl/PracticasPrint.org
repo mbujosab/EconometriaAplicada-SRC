@@ -1,0 +1,638 @@
+#+title:  Prácticas con Gretl
+#+author: Marcos Bujosa
+#+STARTUP: show4levels
+#+LANGUAGE: es-es
+
+#+EXPORT_FILE_NAME: pub/PrimeraSesionPractica
+
+# +OPTIONS: toc:nil
+#+OPTIONS: tags:nil
+
+#+LATEX_CLASS: article
+#+LATEX_HEADER: \usepackage[spanish]{babel}
+#+LATEX_HEADER: \decimalpoint
+#+LATEX_HEADER: \usepackage[margin=0.5in]{geometry}
+#+LaTeX_HEADER: \usepackage[svgnames,x11names]{xcolor}
+#+LaTeX_HEADER: \hypersetup{linktoc = all, colorlinks = true, urlcolor = DodgerBlue4, citecolor = PaleGreen1, linkcolor = SpringGreen4}
+#+LaTeX_HEADER: \PassOptionsToPackage{hyphens}{url}
+# +LaTeX_HEADER: \input{notacionLinAlg.tex}
+#+LaTeX_HEADER: \usepackage{nacal}
+
+#+LaTeX_HEADER: \usepackage{framed}
+
+#+LaTeX_HEADER: \usepackage{listings}
+#+LaTeX_HEADER: \input{hansl.tex}
+#+LaTeX_HEADER: \lstnewenvironment{hansl-gretl}
+#+LaTeX_HEADER: {\lstset{language={hansl},basicstyle={\ttfamily\footnotesize},numbers,rame=single,breaklines=true}}
+#+LaTeX_HEADER: {}
+#+LaTeX_HEADER: \newcommand{\hansl}[1]{\lstset{language={hansl},basicstyle={\ttfamily\small}}\lstinline{#1}}
+# +LaTeX_HEADER: \lstset{backgroundcolor=\color{white},basicstyle=\ttfamily\footnotesize,breaklines=true, captionpos=b,commentstyle=\color{mygreen},escapeinside={\%*}{*)}, keywordstyle=\color{blue},stringstyle=\color{mymauve}, }
+# +LaTeX_HEADER: \lstset{backgroundcolor=\color{lightgray!20},basicstyle=\ttfamily\footnotesize,breaklines=true, }
+
+#+name: setup-listings
+#+begin_src emacs-lisp :exports none :results silent
+  (setq org-latex-listings 'listings)
+  (setq org-latex-custom-lang-environments
+  	;'((emacs-lisp "common-lispcode")))
+  	'((emacs-lisp "hansl-gretl")))
+  (setq org-latex-listings-options
+	'(("frame" "lines")
+	  ("basicstyle" "\\scriptsize")
+	  ("basicstyle" "\\ttfamily")
+	  ("numbers=none" "left")
+	  ("backgroundcolor=\\color{lightgray!20}")
+	  ("numberstyle" "\\tiny")))
+  (setq org-latex-to-pdf-process
+	'("pdflatex -interaction nonstopmode -output-directory %o %f"
+	"pdflatex -interaction nonstopmode -output-directory %o %f"
+	"pdflatex -interaction nonstopmode -output-directory %o %f"))
+  (org-add-link-type
+   "latex" nil
+   (lambda (path desc format)
+     (cond
+      ((eq format 'html)
+       (format "<span class=\"%s\">%s</span>" path desc))
+      ((eq format 'latex)
+       (format "\\%s{%s}" path desc)))))
+#+end_src
+
+# \lstnewenvironment{code}
+#     {\lstset{language=haskell,
+#     basicstyle=\small\ttfamily,
+#     numbers=left,
+#     numberstyle=\tiny\color{gray},
+#     backgroundcolor=\color{lightgray},
+#     firstnumber=auto
+#     }}
+#     {}
+
+#+bibliography: ref.bib
+
+#+latex: \clearpage
+
+* TODO
+- incluir enlaces a los guiones en github
+
+* Precio de casas unifamiliares
+   :PROPERTIES:
+   :header-args: :tangle ./pub/scripts/EjPvivienda.inp
+   :END:
+
+| Guión: | [[./pub/scripts/EjPvivienda.inp][scripts/EjPvivienda.inp]] |
+   
+En esta primera práctica con [[https://gretl.sourceforge.net/es.html][Gretl]] reproduciremos el ejemplo visto
+repetidamente en clase.
+
+Los datos corresponden a los precios de venta y superficie útil de 14
+casas unifamiliares en /University City/. San Diego,
+California. Año 1990. [cite:@Ramanathan:IEA-02]
+
+Veremos como mostrar los datos, generar diagramas de dispersión,
+realizar un ajuste por MCO, y operar con series de datos y con
+parámetros estimados. Al final de la práctica aparece el guión
+completo con el código que evita trabajar con los menús en modo
+gráfico (que es el peor modo de trabajar con Gretl).
+
+** Practica Precio Casas Unifamiliares
+  
+*** Precio de casas unifamiliares
+
+***** Objetivo
+1. Reproducir el primer ejemplo de regresión visto en clase.
+
+2. Mostrar datos.
+3. Generar gráficos.
+4. Guardar un modelo para poder consultarlo más tarde.
+5. Recuperar valores ajustados, errores estimados, etc.
+
+***** Carga de datos
+*/~Archivo --> Abrir datos --> Archivo de muestra~/* y en la pestaña
+*/~Ramanathan~/* seleccione =data3-1=.
+
+#+latex: {\vspace{3pt} \scriptsize \color{gray!70!black}
+/o bien teclee en linea de comandos/:
+#+NAME: PCU Lectura del fichero de datos
+#+begin_src hansl 
+open data3-1            # LEEMOS los datos
+#+end_src
+#+latex: }
+
+*** Actividad 1 - mostrar datos
+***** Visualice los datos de precios y tamaños de las casas
+- En la ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]], marque con el ratón ambas
+  variables: =price=, =sqrt=.
+- ``Pinche'' sobre ellas con el botón derecho del ratón.
+- Seleccione */~mostrar valores~/* del menú desplegable que se ha
+  abierto al pinchar.
+  
+  #+latex: {\vspace{3pt} \scriptsize \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+NAME: PCU Mostramos los valores de los datos en columna
+    #+begin_src hansl 
+    print -o price sqft     # MOSTRAMOS los datos
+    #+end_src
+  #+latex: }
+
+#+latex: \vspace{-3pt}   
+  
+***** Ayuda
+Para consultar la documentación sobre cualquier comando, puede emplear
+el menú desplegable */~Ayuda~/* que aparece arriba, a la derecha de la
+ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
+  + */~Ayuda -> Guía de Instrucciones~/* y ``pinche'' sobre */~print~/*
+
+#+latex: {\vspace{0pt} \scriptsize \color{gray!70!black}
+/o bien teclee en linea de comandos/: =help print=
+#+latex: }
+    
+*** Actividad 2 - diagrama de dispersión
+***** Scatter plot
+- Marque =price= y =sqrt= (pulsando ~ctrl~ y pinchando con el botón
+  derecho del ratón sobre ellas). Elija */~Gráfico de dos variables
+  XY~/*
+- Seleccione =sqft= como variable del eje X
+
+  #+latex: {\vspace{3pt} \scriptsize \color{gray!70!black}
+  /o bien teclee en linea de comandos/: =gnuplot price sqft=
+  #+latex: }
+
+***** Guardar gráfico como /icono/ para editarlo más tarde
+- ``Pinche'' con el botón derecho sobre la ventana del gráfico.
+- Seleccione */~Guardar a sesión como icono~/*
+
+  #+latex: {\vspace{3pt} \scriptsize \color{gray!70!black} \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+NAME: PCU Guardamos scatterplot como icono
+    #+begin_src hansl 
+    NombreDelGrafico <- gnuplot price sqft
+    #+end_src
+    (=NombreDelGrafico= /es el nombre con el que se guardará el icono/)
+  #+latex: }
+
+En la zona inferior izquierda de la ventana principal puede ver una
+serie de iconos. Uno de ellos es la */~vista de iconos de sesión~/*.
+
+*** Actividad 3 - Ajuste por MCO
+
+***** Ajuste por MCO el modelo de regresión visto en clase
+#+ATTR_BEAMER: :overlay <+->
+- Estime el modelo mediante los menús desplegables: */~Modelo ->
+  Mínimos Cuadrados Ordinarios~/*; indique a [[https://gretl.sourceforge.net/es.html][Gretl]] el regresando y los
+  regresores y pulse */~Aceptar~/*.
+  
+  #+latex: {\vspace{3pt} \scriptsize \color{gray!70!black} \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+begin_src hansl
+    ols price 0 sqft
+    #+end_src
+    (/el cero/ =0= /indica el término constante/: =const=)
+  #+latex: }
+  
+- ``Pinche'' */~Archivo~/* en la ventana del modelo estimado y
+  seleccione */~guardar como un icono y cerrar~/*
+
+  #+latex: {\vspace{3pt} \scriptsize \color{gray!70!black} \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+NAME: PCU Ajuste MCO que se guarda como icono
+    #+begin_src hansl 
+    Regresion  <- ols price 0 sqft
+    #+end_src
+  #+latex: }
+    
+- Recupere el modelo ``pinchando'' sobre su icono
+
+  #+latex: {\vspace{3pt} \scriptsize \color{gray!70!black} \color{gray!70!black}
+  /o teclee en linea de comandos el nombre que ha dado al icono
+    seguido de/ =.show=, /es decir/:
+    #+NAME: PCU Mostramos la ventana del ajuste MCO
+    #+begin_src hansl 
+    Regresion.show
+    #+end_src
+  #+latex: }
+  
+*** Actividad 4 - Recuperar los valores ajustados
+***** Recuperemos los valores ajustados 
+    :PROPERTIES:
+    :BEAMER_ENV: block
+    :BEAMER_ACT: <+->
+    :END:
+    
+- Desde la ventana del modelo ajustado (recupérese con su icono),
+  ``pinche'' en */~guardar -> valores estimados~/*. Elija como nombre
+  =phat= (puede añadir una descripción de la variable). Pulse en
+  */~Aceptar~/*
+- Repita para guardar los =residuos= con el nombre =ehat=
+  
+  #+latex: {\vspace{3pt} \scriptsize \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+NAME: PCU Guardamos las series de valores ajustados y de errores
+    #+begin_src hansl 
+    series phat =  $yhat
+    series ehat =  $uhat
+    #+end_src
+  #+latex: }
+    
+***** Mostremos las variables =price=, =sqft=, =phat= y =ehat=
+    :PROPERTIES:
+    :BEAMER_ENV: block
+    :BEAMER_ACT: <2>
+    :END:
+#+ATTR_BEAMER: :overlay <+->
+- Marque las 4 variables (~ctrl~ y ``pinchar'' con el botón derecho) y elija
+  */~mostrar valores~/*
+  
+  #+latex: {\vspace{3pt} \scriptsize \color{gray!70!black}
+  /o bien teclee en linea de comandos/: 
+    #+begin_src hansl 
+    print -o price sqft phat ehat
+    #+end_src
+    #+latex: }
+
+*** Actividad 5 - Otras formas de recuperar el ajuste
+#+ATTR_BEAMER: :overlay <+>
+- =phat2=: restar a los precios los errores
+  
+  Desde la ventana del modelo: */~Guardar -> Definir una nueva
+  variable~/* y teclee:
+  =phat2 = price - ehat=
+  
+  #+latex: {\vspace{3pt} \scriptsize \color{gray!70!black} \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+NAME: PCU Otras formas de calcular phat
+    #+begin_src hansl 
+    series phat2 = price - ehat
+    #+end_src
+  #+latex: }
+    
+- =phat2=: Cálculo /``chapucero''/: 52.351 + 0.139 /sqft/
+
+  */~Guardar -> Definir una nueva variable~/* y teclee:
+  #+latex: {\vspace{3pt} \scriptsize \color{gray!70!black} \color{gray!70!black}
+    #+NAME: PCU Otra forma chapucera de calcular phat
+    #+begin_src hansl 
+    series phat3 = 52.351 + 0.139*sqft
+    #+end_src
+  #+latex: }
+  
+- =phat2=: Cálculo correcto: \Estmc{\beta_1} + \Estmc{\beta_2} /sqft/
+
+  */~Guardar -> Definir una nueva variable~/* y teclee:
+  #+latex: {\vspace{3pt} \scriptsize \color{gray!70!black} \color{gray!70!black}
+    #+NAME: PCU Forma correcta de calcular phat
+    #+begin_src hansl 
+    series phat4 = $coeff[1] + $coeff[2]*sqft
+    #+end_src
+  #+latex: }
+  o bien 
+  #+latex: {\vspace{3pt} \scriptsize \color{gray!70!black} \color{gray!70!black}
+    #+NAME: PCU Otra forma correcta de calcular phat 
+    #+begin_src hansl 
+    series phat5 = $coeff(const) + $coeff(sqft)*sqft
+    #+end_src
+  #+latex: }
+
+  #+latex: {\vspace{3pt} \small \color{blue!70!black}
+  Visualice los valores ¿Hay diferencias?
+  #+latex: }
+    #+NAME: PCU Compare lo cálculos 
+    #+begin_src hansl 
+    print -o price phat phat2 phat3 phat4 
+    #+end_src
+
+*** TODO
+- [ ] Analizar la varianza de las estimaciones y la sensibilidad de
+  estas a pequeños cambios en la muestra.
+
+#+LATEX: \clearpage
+
+** COMMENT Código completo de la práctica: ~EjPvivienda.inp~
+\lstinputlisting{scripts/EjPvivienda.inp}
+** COMMENT Resultado en Gretl
+
+#+begin_src bash :results file :file EjPviviendaOUTPUT.txt :output-dir ~/gretl/resultados 
+  gretlcli -b pub/EjPvivienda.inp 
+#+end_src
+
+#+RESULTS:
+[[file:~/gretl/resultados/EjPviviendaOUTPUT.txt]]
+
+
+* Datos de Anscombe
+   :PROPERTIES:
+   :header-args: :tangle ./pub/scripts/anscombe.inp
+   :END:
+
+| Guión: | [[./pub/scripts/anscombe.inp][scripts/anscombe.inp]] |
+
+En esta práctica con [[https://gretl.sourceforge.net/es.html][Gretl]] trabajaremos con los datos diseñados por
+F.J. Anscombe para ilustrar la importancia de /ver/ los diagramas de
+dispersión entre distintas variables para identificar deficiencias en
+el planteamiento de los modelos estimados, pues si únicamente se
+analizan los resultados numéricos dichas deficiencias quedan ocultas.
+
+
+** Practica con los datos de Anscombe
+
+*** La importancia de /ver/ los datos
+***** Objetivo
+Cuando se ajusta un modelo a los datos, es NECESARIO comenzar
+observando gráficamente los datos. F.J. Anscombe diseñó este [[http://en.wikipedia.org/wiki/Anscombe's_quartet][conjunto
+de datos]] para ilustrar la importancia de representar gráficamente los
+datos antes de realizar un análisis empírico.
+
+*** Los datos
+
+| \Vect[1]{y} | \Vect[2]{y} | \Vect[3]{y} | \Vect[4]{y} | \Vect{x} | \Vect[4]{x} |
+|-------------+-------------+-------------+-------------+----------+-------------|
+|        8.04 |        9.14 |        7.46 |        6.58 |       10 |           8 |
+|        6.95 |        8.14 |        6.77 |        5.76 |        8 |           8 |
+|        7.58 |        8.74 |       12.74 |        7.71 |       13 |           8 |
+|        8.81 |        8.77 |        7.11 |        8.84 |        9 |           8 |
+|        8.33 |        9.26 |        7.81 |        8.47 |       11 |           8 |
+|        9.96 |        8.10 |        8.84 |        7.04 |       14 |           8 |
+|        7.24 |        6.13 |        6.08 |        5.25 |        6 |           8 |
+|        4.26 |        3.10 |        5.39 |       12.50 |        4 |          19 |
+|       10.84 |        9.13 |        8.15 |        5.56 |       12 |           8 |
+|        4.82 |        7.26 |        6.42 |        7.91 |        7 |           8 |
+|        5.68 |        4.74 |        5.73 |        6.89 |        5 |           8 |
+|-------------+-------------+-------------+-------------+----------+-------------|
+
+*** Los estadísticos de los datos
+
+
+|------------------------------------------------------------------------+-------|
+| Estadísticos de los datos                                              |       |
+|------------------------------------------------------------------------+-------|
+| Media de cada una de las variables \Vect{x}:                           |   9.0 |
+| Varianza de cada una de las variables \Vect{x}:                        |  11.0 |
+| Media de cada una de las variables \Vect{y}:                           |   7.5 |
+| Varianza de cada una de las variables \Vect{y}:                        |  4.12 |
+| Correlación entre las variables \Vect{x} e \Vect{y} de cada regresión: | 0.816 |
+|------------------------------------------------------------------------+-------|
+
+|--------------------------------------------------------------+------|
+| Rectas de regresión                                          |  R^2 |
+|--------------------------------------------------------------+------|
+| $\Estmc{\Vect[1]{y}} = 3\cdot\Vect{1} + 0.5\cdot\Vect{x}$    | 0.67 |
+| $\Estmc{\Vect[2]{y}} = 3\cdot\Vect{1} + 0.5\cdot\Vect{x}$    | 0.67 |
+| $\Estmc{\Vect[3]{y}} = 3\cdot\Vect{1} + 0.5\cdot\Vect{x}$    | 0.67 |
+| $\Estmc{\Vect[4]{y}} = 3\cdot\Vect{1} + 0.5\cdot\Vect[4]{x}$ | 0.67 |
+|--------------------------------------------------------------+------|
+
+*** Actividad 1 - Estadísticos descriptivos
+
+***** Carga de datos
+*/~Archivo --> Abrir datos --> Archivo de muestra~/* y en la pestaña
+*/~Gretl~/* seleccione =anscombe=.
+
+#+latex: {\vspace{2pt} \scriptsize \color{gray!70!black}
+/o bien teclee en linea de comandos/:
+  #+NAME: DA-carga-datos
+  #+begin_src hansl
+  open anscombe
+  #+end_src  
+#+latex: }
+
+#+BEAMER:  \vspace{-8pt}
+
+***** Visualice los estadísticos descriptivos de las datos
+
+- Marque una variable (o varias) y ``Pinche'' con el botón derecho.
+  Elija */~Estadísticos principales~/*
+  
+  #+latex: {\vspace{3pt} \scriptsize \color{gray!70!black}
+  /o bien teclee en linea de comandos/ =summary= seguido de las series. Por ejemplo:
+    #+NAME: DA-estadisticos-simples
+    #+begin_src hansl
+    summary --simple y1 y2 y3 y4 x x4
+    #+end_src
+  #+latex: }
+
+#+BEAMER:  \vspace{-8pt}
+  
+***** Observar la correlación entre variables
+  
+- */~Ver --> Matriz de correlación~/* y elija variables
+
+  #+latex: {\vspace{3pt} \scriptsize \color{gray!70!black}
+  /o, por ejemplo, teclee en linea de comandos/:
+    #+NAME: DA-correlaciones
+    #+begin_src hansl
+    corr y1 y2 y3 y4 x x4
+    #+end_src
+  #+latex: }
+
+*** Actividad 2 - Cuatro regresiones
+
+Realice las siguientes cuatro regresiones:
+- Modelo 1: $\quad \VA[1]{y} = {a}\VAindUno + {b} \VA{x}   + \per$ 
+- Modelo 2: $\quad \VA[2]{y} = {a}\VAindUno + {b} \VA{x}   + \per$ 
+- Modelo 3: $\quad \VA[3]{y} = {a}\VAindUno + {b} \VA{x}   + \per$ 
+- Modelo 4: $\quad \VA[4]{y} = {a}\VAindUno + {b} \VA[4]{x}+ \per$
+   
+y compare los resultados.
+
+- Para cada modelo:
+
+  */~Modelo -> Mínimos Cuadrados Ordinarios~/*; indique regresando y
+  regresores. Pulse */~Aceptar~/* (guarde el modelo como icono).
+  
+  #+latex: {\vspace{3pt} \scriptsize \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+NAME: DA-regresiones
+    #+begin_src hansl
+    Modelo1 <- ols y1 0 x
+    Modelo2 <- ols y2 0 x
+    Modelo3 <- ols y3 0 x
+    Modelo4 <- ols y4 0 x4
+    #+end_src
+  #+latex: }
+      
+*** Actividad 3 - Discusión
+
+***** A la luz de los resultados de las regresiones ¿Qué modelo es mejor?
+
+***** Observe el diagrama de dispersión XY en cada modelo
+
+  - ``pinche'' en */~Ver --> Gráficos --> Gráfico XY (scatter)~/*
+    Elija la variable para el eje X (regresor) y la variable Y
+    (regresando)
+
+  #+latex: {\vspace{3pt} \scriptsize \color{gray!70!black}
+  /o, por ejemplo, teclee en linea de comandos/:
+    #+begin_src hansl
+    gnuplot y1 x
+    #+end_src
+  /podemos pintar varios diagramas juntos con/:
+    #+begin_src hansl
+    gnuplot y1 y2 y3 x
+    #+end_src
+  /o varios diagramas separados con/:
+    #+NAME: DA-diagramas
+    #+begin_src hansl
+    scatters y1 y2 y3 ; x
+    scatters y4 ; x4
+    #+end_src    
+  #+latex: }
+
+    \vspace{-10pt}
+  
+  
+***** De los cuatro modelos\dots ¿cuáles parecen razonables?
+
+
+#+LATEX: \clearpage
+
+** COMMENT Código completo de la práctica: ~anscombe.inp~
+\lstinputlisting{scripts/anscombe.inp}
+** COMMENT Resultado en Gretl
+
+#+begin_src bash :results file :file anscombeOUTPUT.txt :output-dir ~/gretl/resultados 
+  gretlcli -b pub/anscombe.inp 
+#+end_src
+
+#+RESULTS:
+[[file:~/gretl/resultados/anscombeOUTPUT.txt]]
+
+
+* Houses
+   :PROPERTIES:
+   :header-args: :tangle ./pub/scripts/houses.inp
+   :END:
+
+| Guión: | [[./pub/scripts/houses.inp][scripts/houses.inp]] |
+
+En esta práctica con [[https://gretl.sourceforge.net/es.html][Gretl]] retomamos los datos correspondientes a los
+precios de venta y superficie útil de 14 casas unifamiliares en
+/University City/. San Diego,
+California. Año 1990. [cite:@Ramanathan:IEA-02].
+
+En esta ocasión también incorporamos otras caráterísticas de las
+casas: su número de dormitorios y su número de cuartos de baño para
+tratar de ajustar el precio de venta.
+
+Ello nos permitirá ilustrar cuál es la interpretación correcta de los
+parámetros estimados en el modelo.
+
+** Practica con los datos de las casas añadiendo más características
+
+*** Interpretación de los coeficientes estimados
+
+***** Los datos
+
+Son los del primer ejemplo de clase, junto a dos características
+adicionales de las casas: número de dormitorios (\textsl{bedrms}) y
+cuartos de baño (\textsl{baths}).
+
+*/~Archivo --> Abrir datos --> Archivo de muestra~/* y en la pestaña
+*/~Ramanathan~/* seleccione =data4-1=.
+
+#+latex: {\vspace{3pt} \scriptsize \color{gray!70!black}
+/o bien teclee en linea de comandos/:
+#+NAME: Houses - Lectura del fichero de datos
+#+begin_src hansl
+open data4-1
+#+end_src
+#+latex: }
+
+***** Actividad 1
+
+Piense cuáles son los signos esperados de los parámetros del modelo
+$$
+\VA{price}=
+\beta_1\VAindUno+
+\beta_2\VA{sqft}+
+\beta_3\VA{bedrms}+
+\beta_4\VA{baths}+
+\per
+$$
+_Este siempre debe ser el primer paso en un análisis empírico_
+
+*** Actividad 2 - Ajuste MCO y resultados
+
+***** Ajuste el modelo por MCO y guárdelo como un icono
+#+ATTR_BEAMER: :overlay <+>
+- */~Modelo -> Mínimos Cuadrados Ordinarios~/*; e indique regresando y
+  regresores. Pulse */~Aceptar~/*.
+  
+  #+latex: {\vspace{3pt} \scriptsize \color{gray!70!black} \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+NAME: Houses - Ajuste MCO que se guarda como icono
+    #+begin_src hansl
+    Modelo1 <- ols price const sqft bedrms baths 
+    #+end_src
+  #+latex: }
+
+- ¿Confirman los resultados su previsión sobre los signos en \Vect{\beta}?
+
+- La interpretación de los coeficientes es /ceteris paribus/, es
+  decir, manteniendo el resto de variables sin cambios.
+
+  Así, \beta_3 es el efecto esperado de añadir una habitación
+  /¡manteniendo el mismo tamaño de casa!/
+  
+*** Actividad 3 - Previsión con el modelo completo
+Para una casa de 1600 /sqft/ con 3 habitaciones y 2 cuartos de baño,
+el modelo estimado /prevé un precio/ (en miles de dólares) /de/
+$$
+129.062+0.154800\cdot(\;1600\;)-21.5875\cdot(\;3\;)-12.1928\cdot(\;2\;)=287.593
+$$
+
+#+latex: {\vspace{0pt} \scriptsize \color{gray!70!black}
+  #+NAME: Houses - prevision precio casa con 1600 pies2, 3 hab. y 2 cb.
+  #+begin_src hansl
+  yhat1 = $coeff(const)+$coeff(sqft)*1600+$coeff(bedrms)*3+$coeff(baths)*2
+  #+end_src
+#+latex: }
+
+***** Previsión al /ampliar/ una casa con una habitación más
+:PROPERTIES:
+:BEAMER_env: block
+:BEAMER_act: <2->
+:END:
+
+Sabiendo que cada pie cuadrado son 0.092 m^2, el modelo prevé que
+/*ampliar la casa* con una habitación adicional de/ 20 m^2 (unos 220
+pies^2) /*aumenta su precio* en/... ¿cuanto?
+
+#+latex: {\vspace{3pt} \color{gray!70!black}
+  #+NAME: Houses - prevision precio al ampliar la casa con otra habitacion
+  #+begin_src hansl
+  yhat2 = $coeff(const)+$coeff(sqft)*(1600+220)+$coeff(bedrms)*(3+1)+$coeff(baths)*2
+  #+end_src
+#+latex: }
+  
+#+ATTR_BEAMER: :overlay <3>
+- ...unos 300 mil dólares. ¿Contradice esto su idea inicial?
+
+#+NAME: Houses - previsiones
+#+begin_src hansl :noweb strip-export
+<<Houses - prevision precio casa con 1600 pies2, 3 hab. y 2 cb.>>
+<<Houses - prevision precio al ampliar la casa con otra habitacion>>
+#+end_src
+
+*** TODO
+- Analizar la varianza de las estimaciones y la sensibilidad de estas
+  a pequeños cambios en la muestra.
+
+- Comparar el R^2 del ajuste con y sin estos datos adicionales.
+  
+- Comparar el R^2 ajustado con y sin estos datos adicionales.
+
+- Comparar previsiones entre el modelo completo y el modelo sin datos
+  sobre dormitorios y cuartos de baño.
+    
+** COMMENT Código completo de la práctica: ~houses.inp~
+\lstinputlisting{scripts/houses.inp}
+** COMMENT Resultado en Gretl
+
+#+begin_src bash :results file :file housesOUTPUT.txt :output-dir ~/gretl/resultados 
+  gretlcli -b pub/houses.inp 
+#+end_src
+
+#+RESULTS:
+[[file:~/gretl/resultados/housesOUTPUT.txt]]
+
+#+cite_export: basic author author-year
+
+#+PRINT_BIBLIOGRAPHY:

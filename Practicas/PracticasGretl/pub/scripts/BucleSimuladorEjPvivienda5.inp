@@ -1,0 +1,33 @@
+scalar TM  = 500
+nulldata --preserve TM
+scalar mu    = 0
+scalar sigma = 100
+loop 5000 --progressive --quiet
+     series S = randgen(U, 35, 120)
+     series D = randgen(X, 5) * 3
+     series YS = 100 + 3*S - 130*D
+     series U  = randgen(N, 0, 1)
+     series U  = U - mean(U)
+     series U  = U / sqrt( var(U)*(TM-1)/TM )
+     series U  = mu + sigma * U
+     ols U 0 S D
+     series U  = $uhat
+     series Y  = YS + U
+     scalar mU  = mean(U)
+     scalar mUS = mean(U*S)
+     scalar mUD = mean(U*D)
+     scalar cUS = corr(U,S)
+     scalar cUD = corr(U,D)
+     ols Y 0 S D
+     scalar b1 = $coeff(const)
+     scalar b2 = $coeff(S)
+     scalar b3 = $coeff(D)
+     print mU mUS mUD cUS cUD b1 b2 b3
+     store "@workdir/coef.gdt" mU mUS mUD cUS cUD b1 b2 b3
+endloop
+open "@workdir/coef.gdt"
+MediaU_b1  <- gnuplot b1 mU  --output="display"
+CorrUS_b2  <- gnuplot b2 cUS --output="display"
+CorrUD_b3  <- gnuplot b3 cUD --output="display"
+CorrUD_b2  <- gnuplot b2 cUD --output="display"
+CorrUS_b3  <- gnuplot b3 cUS --output="display"

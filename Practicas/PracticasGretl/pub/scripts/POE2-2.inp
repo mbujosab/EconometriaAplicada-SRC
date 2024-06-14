@@ -1,0 +1,15 @@
+open andy.gdt
+
+setinfo sales  -d "Ingresos mensuales por ventas ($1000)" \
+               -n "Ventas mensuales ($1000)"
+
+setinfo price  -d "Precio ($)" -n "Precio ($)"
+
+setinfo advert -d "Gastos mensuales en publicidad ($1000)" \
+               -n "Publicidad mensual ($1000)"
+
+labels
+
+Ventas_Precio     <- gnuplot sales price  --suppress-fitted --output="display"
+
+Ventas_Publicidad <- gnuplot sales advert --suppress-fitted --output="display"

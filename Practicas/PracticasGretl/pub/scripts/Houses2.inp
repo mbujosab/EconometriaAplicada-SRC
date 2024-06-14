@@ -1,0 +1,28 @@
+open data4-1
+
+logs sqft bedrms baths
+Modelo1 <- ols price 0 l_sqft l_bedrms l_baths
+
+omit l_baths
+
+omit l_bedrms
+
+Modelo2 <- add l_bedrms
+
+dataset addobs 2
+
+genr l_sqft[15]  =log(3000*1.01)
+genr l_bedrms[15]=log(4)
+genr l_baths[15] =log(3)
+
+genr l_sqft[16]  =log(1065*1.01)
+genr l_bedrms[16]=log(3)
+genr l_baths[16] =log(1.75)
+
+smpl 1 16
+fcast --static predP
+print predP -o
+
+matrix P = {predP}
+scalar d1 = P[16,1]-P[1,1]
+scalar d2 = P[15,1]-P[14,1]

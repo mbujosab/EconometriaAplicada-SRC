@@ -1,0 +1,19 @@
+open data3-1
+Modelo0  <- ols price 0 sqft
+Scatter0 <- gnuplot price sqft --output=display
+
+series x  = sqft
+series y1 = 52 + 0.14*x
+
+series u1 = randgen(N, 0, 39)
+
+# Datos de precios simulados
+series y1 = ys + u1
+
+Modelo1  <- ols y1 0 x
+Scatter1 <- gnuplot y1 x --output=display
+
+series u2 = randgen(N, 0, 39)
+series y2 = ys + u2
+Modelo2  <- ols y2 0 x
+Scatter2 <- gnuplot y2 x --output=display

@@ -1,0 +1,200 @@
+% Created 2023-11-10 vie 13:30
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[spanish, ]{babel}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[svgnames,x11names]{xcolor}
+\hypersetup{linktoc = all, colorlinks = true, urlcolor = DodgerBlue4, citecolor = PaleGreen1, linkcolor = SpringGreen4}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{nacal}
+\usepackage{framed}
+\usepackage{listings}
+\input{hansl.tex}
+\lstnewenvironment{hansl-gretl}
+{\lstset{language={hansl},basicstyle={\ttfamily\footnotesize},numbers,rame=single,breaklines=true}}
+{}
+\newcommand{\hansl}[1]{\lstset{language={hansl},basicstyle={\ttfamily\small}}\lstinline{#1}}
+\lstset{backgroundcolor=\color{lightgray!20}, }
+\author{Marcos Bujosa}
+\date{\today}
+\title{Lección 9}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\clearpage
+
+\section{Estimación restringida vía mínimos cuadrados restringidos y vía sustitución}
+\label{sec:orgde5c535}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/GujaratiEx8-3.inp}{GujaratiEx8-3.inp}\\[0pt]
+\end{tabular}
+\end{center}
+
+Cargue los datos \texttt{Table\_8.8.gdt} de la pestaña del libro de Gujarati.
+\begin{verbatim}
+open Table_8.8.gdt
+\end{verbatim}
+
+\begin{description}
+\item[{Estimación restringida}] Suponga que deseamos estimar el siguiente
+modelo en logaritmos proveniente de una función de Cobb-Douglas:
+\begin{displaymath}
+   \ln \VA{Y} = 
+   \beta_1\VAindUno + \beta_2\ln\VA{k} + \beta_3\ln\VA{L} + \per;
+\end{displaymath}
+pero que deseamos imponer la restricción de rendimientos constantes a
+escala, es decir, \(\beta_2+\beta_3=1\). Veamos dos maneras equivalentes
+de proceder:
+
+\begin{enumerate}
+\item Transforme las variables en logaritmos
+\begin{verbatim}
+logs GDP Employ Capital
+\end{verbatim}
+\begin{itemize}
+\item Estime por MCO el modelo sin restringir (guarde el el modelo como
+icono con el nombre \texttt{U} (unrestricted).
+\begin{verbatim}
+# modelo 1
+U <- ols l_GDP const l_Employ l_Capital
+\end{verbatim}
+\item Imponga la restricción \(\beta_2+\beta_3=1\). Desde la ventana del
+modelo estimado sin restricciones siga los pasos \textbf{\emph{\texttt{Contrastes ->
+      Restricciones lineales}}} y teclee \texttt{b[2]+b[3]=1} o bien, en un
+guión o la consola teclee
+\begin{verbatim}
+restrict
+ b[2]+b[3]=1
+end restrict
+\end{verbatim}
+Observe los coeficientes estimados resultantes tras imponer la
+restricción.
+\end{itemize}
+
+\item Defina las variables \textsf{Capital/Employ} y \textsf{GDP/Employ}
+y transforme las nuevas variables mediante logaritmos.
+\begin{verbatim}
+series CE   = Capital/Employ
+series GDPE = GDP/Employ
+logs CE GDPE
+\end{verbatim}
+\begin{itemize}
+\item Estime por MCO el modelo
+\begin{displaymath}
+   \ln \VA{Y} = \beta_1\VAindUno + \beta_2 \ln\frac{\VA{k}}{\VA{L}} + \per
+\end{displaymath}
+y compare los resultados anteriores (los del primer modelo tras
+imponer la restricción).
+\begin{verbatim}
+# modelo 2
+R <- ols l_GDPE const l_CE
+\end{verbatim}
+\end{itemize}
+\end{enumerate}
+
+\item[{Contraste de la hipótesis}] Calcule el estadístico \(\Festadistico\)
+(en su formulación mediante sumas residuales de los modelos
+restringidos y sin restringir) y su \emph{p}-valor para contrastar la
+hipótesis de rendimientos constantes a escala. ¿Rechaza la \Hnula al
+5\% de significación?
+\begin{verbatim}
+/* contraste de la F mediante sumas residuales */
+scalar r = 1                             # num. restriciones (solo una en este caso)
+scalar f = U.$df*(R.$ess-U.$ess)/U.$ess/r
+pvalue F r U.$df f
+\end{verbatim}
+\end{description}
+
+\clearpage
+\vspace{10pt}
+\noindent
+\subsection{Código completo de la práctica \texttt{GujaratiEx8-3.inp}}
+\label{sec:org3870d9b}
+\vspace{10pt}
+\lstinputlisting{scripts/GujaratiEx8-3.inp}
+\clearpage
+
+
+\section{Test de Chow de cambio estructural}
+\label{sec:org4b34ea2}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/GujaratiSec8-8.inp}{GujaratiSec8-8.inp}\\[0pt]
+\end{tabular}
+\end{center}
+
+Cargue los datos \texttt{Table\_8.9.gdt} de la pestaña del libro de Gujarati
+con datos para la economía americana del 1970 a 1995.
+\begin{verbatim}
+open Table_8.9.gdt
+\end{verbatim}
+
+Considere el modelo:
+\begin{displaymath}
+  \VA{Y} = \beta_1\VAindUno + \beta_2\VA{X} + \per,
+\end{displaymath}
+donde \VA{X} es el ahorro de las familias e \VA{Y} es la renta
+disponible.
+
+En el año 1982 se produjo una importante crisis económica. Contraste
+si el modelo es idéntico para toda la muestra, o si se produjo un
+cambio estructural (use los periodos 1970--1981 y 1982--1995).
+
+\begin{itemize}
+\item Estime el modelo restringido (mismos betas para todo el
+periodo). Guarde la Suma de los Residuos al Cuadrado (SRC)
+\begin{verbatim}
+ModeloR       <- ols SAVINGS 0 INCOME --quiet
+scalar sse_R  = $ess
+\end{verbatim}
+
+\item Estime dos modelos, uno para los 12 primeros datos y otro para los
+14 siguientes. Guarde la Suma de los Residuos al Cuadrado (SRC)
+conjunta del modelo sin restringir.
+\begin{verbatim}
+smpl 1 12
+ModeloU1      <- ols SAVINGS 0 INCOME --quiet
+scalar sse_U1  = $ess
+
+smpl full
+smpl 13 26
+ModeloU2      <- ols SAVINGS 0 INCOME --quiet
+scalar sse_U2  = $ess
+\end{verbatim}
+
+\item Calcule el estadístico del contraste de cambio estructural de Chow y
+su p-valor.
+\begin{verbatim}
+scalar sse_U = sse_U1+sse_U2
+smpl full
+scalar chowtest = ((sse_R-sse_U)/2)/(sse_U/($nobs-4))
+pvalue F 2 $nobs-4 chowtest
+\end{verbatim}
+
+\item ¿Rechaza que el modelo es el mismo para todo el periodo? ¿o no?
+\end{itemize}
+
+
+\clearpage
+\vspace{10pt}
+\noindent
+\subsection{Código completo de la práctica \texttt{GujaratiSec8-8.inp}}
+\label{sec:orgb2b398d}
+\vspace{10pt}
+\lstinputlisting{scripts/GujaratiSec8-8.inp}
+\clearpage
+\end{document}

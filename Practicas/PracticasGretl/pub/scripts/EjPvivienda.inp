@@ -1,0 +1,26 @@
+open data3-1
+
+print -o price sqft
+
+RectaDeRegresion <- gnuplot price sqft
+
+ols price 0 sqft
+
+Regresion  <- ols price 0 sqft
+
+Regresion.show
+
+series phat =  $yhat
+series ehat =  $uhat
+
+print -o price sqft phat ehat
+
+series phat2 = price - ehat
+
+series phat3 = 52.351 + 0.139*sqft
+
+series phat4 = $coeff[1] + $coeff[2]*sqft
+
+series phat5 = $coeff(const) + $coeff(sqft)*sqft
+
+print -o price phat phat2 phat3 phat4

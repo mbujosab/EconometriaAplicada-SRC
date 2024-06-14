@@ -1,0 +1,102 @@
+#+TITLE: Lección 01 - Gráficos ventas
+
+#+AUTHOR: Marcos Bujosa
+#+LANGUAGE: es-es
+# +STARTUP: show3levels
+# +STARTUP: latexpreview
+
+#+EXPORT_FILE_NAME: ../notebooks/Lecc01-Graficos.ipynb
+
+
+# +OPTIONS: toc:nil
+
+#+ox-ipynb-keyword-metadata: key1 key2
+
+#+BEGIN_EXPORT latex
+\maketitle
+#+END_EXPORT
+
+# COMMENT +PROPERTY: header-args:jupyter-python :results replace raw :display text/latex 
+# COMMENT +PROPERTY: header-args:jupyter-python :results raw :results replace :display text/latex 
+# COMMENT +PROPERTY: header-args:jupyter-python :results replace drawer
+#+PROPERTY: header-args:jupyter-python :results replace
+
+/La siguiente celda es para instalar en [[https://mybinder.org/][mybinder]] los módulos necesarios para este ejemplo/
+
+El módulo [[https://pandas.pydata.org/][pandas]] pandas es para leer los datos y [[https://matplotlib.org/][matplotlib]] para
+realizar el gráfico.
+#+BEGIN_SRC jupyter-python
+%pip install pandas
+%pip install matplotlib
+#+END_SRC
+
+
+*** Primer paso es cargar algunas librerías de Python
+    :PROPERTIES:  
+    :UNNUMBERED: t
+    :END:  
+
+Cargamos el módulo [[https://pandas.pydata.org/][pandas]]
+#+BEGIN_SRC jupyter-python :results silent
+import pandas as pd
+#+END_SRC
+
+*** Leemos el fichero de datos para generar un dataframe
+
+Creamos un dataframe leyendo los datos del directorio donde estén. 
+- Los datos están separados por un espacio en blanco. 
+- Vamos a leer las columnas por su nombre
+- Pero evitamos guardar la primera fila (que es la que contiene los
+  nombres de cada columna en el fichero de [[../datos/ventas.txt][datos]]
+#+BEGIN_SRC jupyter-python :results silent
+data = pd.read_csv('./datos/ventas.txt', sep=" ", names = ['Exper','Ventas'], skiprows=1)
+#+END_SRC
+
+Cambiamos el nombre de las columnas 
+#+BEGIN_SRC jupyter-python :results silent
+data.columns = ["Semanas de experiencia", "Ventas"]
+#+END_SRC
+
+Visualicemos el dataframe
+#+BEGIN_SRC jupyter-python :results silent
+data
+#+END_SRC
+
+*** Algunos gráficos
+
+Vamos a pintar un diagrama de dispersión para visualizar los datos
+#+BEGIN_SRC jupyter-python  :results silent
+ax1 = data.plot.scatter(x='Semanas de experiencia',
+                        y='Ventas',
+                        c='DarkBlue')
+#+END_SRC
+
+Pintemos ahora un diagrama de caja para ambas variables
+#+BEGIN_SRC jupyter-python :results silent
+boxplot = data.boxplot(column=['Semanas de experiencia', 'Ventas'])  
+#+END_SRC
+
+
+Pintemos un histograma de las ventas
+#+BEGIN_SRC jupyter-python
+hist = data.hist(bins=8, column=['Ventas'])
+#+END_SRC
+
+
+#+CALL: exporta()
+
+
+* COMMENT Para exportar a ipynb                                 :noexports:
+
+#+BEGIN_SRC emacs-lisp :exports none :results silent
+(use-package ox-ipynb
+  :load-path (lambda () (expand-file-name "ox-ipynb" scimax-dir)))
+#+END_SRC
+
+#+name: exporta
+#+ox-ipynb-language: jupyter-python
+#+BEGIN_SRC emacs-lisp :exports none :results silent
+(setq  org-export-with-broken-links t)
+(ox-ipynb-export-to-ipynb-file-and-open)
+#+END_SRC
+

@@ -1,0 +1,297 @@
+% Created 2023-11-20 lun 11:43
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[spanish, ]{babel}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[svgnames,x11names]{xcolor}
+\hypersetup{linktoc = all, colorlinks = true, urlcolor = DodgerBlue4, citecolor = PaleGreen1, linkcolor = SpringGreen4}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{nacal}
+\usepackage{framed}
+\usepackage{listings}
+\input{hansl.tex}
+\lstnewenvironment{hansl-gretl}
+{\lstset{language={hansl},basicstyle={\ttfamily\footnotesize},numbers,rame=single,breaklines=true}}
+{}
+\newcommand{\hansl}[1]{\lstset{language={hansl},basicstyle={\ttfamily\small}}\lstinline{#1}}
+\lstset{backgroundcolor=\color{lightgray!20}, }
+\author{Marcos Bujosa}
+\date{\today}
+\title{Lección 10}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\clearpage
+
+\section{Precio de casas unifamiliares (Modelo Lin-log)}
+\label{sec:org93b157e}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/Houses2.inp}{Houses2.inp}\\
+\end{tabular}
+\end{center}
+
+\begin{description}
+\item[{Objetivo}] \begin{itemize}
+\item Ajustar un modelo que incorpore posibles no linealidades en el  comportamiento de los precios.
+\item Eliminar variables no significativas de un modelo.
+\item Comparar el ajuste de dos modelos.
+\item Interpretar los coeficientes de un modelo lineal-logarítmico.
+\end{itemize}
+
+\item[{Los datos}] Son los datos del ejemplo de clase, junto con dos
+variables adicionales: número de dormitorios (\texttt{bedrms}) y cuartos de
+baño (\texttt{baths}).
+
+\item Motivación: Probablemente la valoración en el mercado de un metro
+cuadrado adicional de casa no es la misma para casas grandes (pues
+un metro más añade poca utilidad) que en casas pequeñas.
+
+Por ello, una forma funcional que recoja esta no linealidad en el
+comportamiento de los precios parece sensata.
+
+Así pues, vamos a incorporar los regresores en logaritmos.
+
+\item[{Para empezar}] primero cargue los datos de la base de datos de
+Gretl
+\begin{verbatim}
+open data4-1
+\end{verbatim}
+\end{description}
+
+\subsection{Tareas}
+\label{sec:org1c7b635}
+
+\begin{description}
+\item[{Actividad 1}] Transforme las variables \texttt{sqft}, \texttt{bedrms} y \texttt{baths}\}
+en logaritmos y ajuste el siguiente modelo de regresión lin-log
+\begin{displaymath}
+  \VA{price}=
+  \beta_1+
+  \beta_2\VA{l\_sqft}  +
+  \beta_3\VA{l\_bedrms}+
+  \beta_4\VA{l\_baths} +
+  \per.
+\end{displaymath}
+  Marque con el ratón las variables \texttt{sqft}, \texttt{bedrms} y \texttt{baths} y
+``pinche'' en \textbf{\emph{\texttt{Añadir -> Logaritmos de las variables
+  seleccionadas}}}.
+
+Ajuste por MCO el modelo indicado.
+
+\emph{O bien ejecute el código}
+\begin{verbatim}
+logs sqft bedrms baths
+Modelo1 <- ols price 0 l_sqft l_bedrms l_baths
+\end{verbatim}
+
+\item[{Actividad 2}] Observe que el parámetro asociado a \texttt{l\_baths}\} no es
+estadísticamente significativo.
+
+Pruebe a omitir dicha variable para ver si el modelo mejora.
+\begin{verbatim}
+omit l_baths
+\end{verbatim}
+
+\item[{Actividad 3}] Observe que el parámetro asociado a \texttt{l\_bedrms},
+tampoco es estadísticamente significativo.
+
+Repita con esta variable los pasos de la actividad anterior.
+\begin{verbatim}
+omit l_bedrms
+\end{verbatim}
+
+\item[{Actividad 4}] Habrá podido observar que aunque el parámetro
+asociado a \texttt{l\_bedrms} no era estadísticamente significativo al 10\%,
+si lo era al 12\%.
+
+Como además ninguno de los estadísticos de selección de modelos ha
+mejorado al omitir esta variable vamos a optar por incluirla de
+nuevo.
+\begin{itemize}
+\item En la ventana del último modelo estimado, ``pinche'' en
+\textbf{\emph{\texttt{Contrastes -> Añadir variables}}} y seleccione \texttt{l\_bedrms}.
+
+\item Compruebe que mejoran los 3 estadísticos de selección de
+modelos.
+\end{itemize}
+
+\emph{O bien ejecute el código}
+\begin{verbatim}
+Modelo2 <- add l_bedrms
+\end{verbatim}
+
+\item[{Actividad 5}] En un modelo con variable dependiente en niveles, y
+regresor en logaritmos, la interpretación del parámetro \(\beta\)
+asociado es la siguiente:
+\begin{center}
+\begin{tabular}{l}
+\emph{Un incremento de un uno por ciento (\(0.01\)) del regresor supone un incremento del nivel del regresando de \(\beta*0.01\).}\\
+\end{tabular}
+\end{center}
+ Empleando el último modelo, compruebe que 10,65 pies cuadrados
+adicionales en la casa más pequeña tienen el mismo precio esperado
+que 30 pies cuadrados en la casa más grande de la muestra.
+
+\begin{itemize}
+\item Amplíe la muestra en dos observaciones (\textbf{\emph{\texttt{Datos -> Añadir
+    observaciones}}} y añada 2).
+
+\begin{itemize}
+\item Para la casa número 15, replique los datos de la 14, pero con 1\% más de superficie.
+\item Para la casa número 16, replique los datos de la 1, pero  con 1\% más de superficie.
+\end{itemize}
+
+Marque \texttt{l\_sqft}, \texttt{l\_bedrms} y \texttt{l\_baths} y en \textbf{\emph{\texttt{Datos -> Editar
+    los valores}}} añada los siguientes valores
+
+\begin{table}[htbp]
+\caption{Logaritmo de los datos para las casas 15 y 16 (réplica de las casa 14 y 1 salvo por el incremento en un 1\% de la superficie)}
+\centering
+\begin{tabular}{rlll}
+obs. & \texttt{l\_sqft} & \texttt{l\_bedrms} & \texttt{l\_baths}\\
+\hline
+15 & 8,0163179=log(3000*1.01) & 8,0163179=log(4) & 1,0986123=log(3)\\
+16 & 6,9806804=log(1065*1.01) & 1,0986123=log(3) & 0,55961579=log(1.75)\\
+\end{tabular}
+\end{table}
+\emph{O bien ejecute el código}
+\begin{verbatim}
+dataset addobs 2
+
+genr l_sqft[15]  =log(3000*1.01)
+genr l_bedrms[15]=log(4)
+genr l_baths[15] =log(3)
+
+genr l_sqft[16]  =log(1065*1.01)
+genr l_bedrms[16]=log(3)
+genr l_baths[16] =log(1.75)
+\end{verbatim}
+
+\item Ajuste la muestra a las observaciones 1 a 16 (\textbf{\emph{\texttt{Muestra ->
+    Establecer rango}}} y establezca el rango de 1 a 16)
+
+\item Re-estime el modelo finalmente elegido
+
+\item En la ventana del modelo re-estimado observe la predicción de los
+precios (\textbf{\emph{\texttt{Análisis -> Predicciones}}} y ajuste el \textbf{\emph{\texttt{Dominio de
+    predicción}}} para que incluya toda la muestra (observaciones 1 a
+15).
+
+\item Verifique que el aumento de precio (\(2984,8\) dólares) entre la
+casa 1 y la 16 es el mismo que entre la casa 14 y la 15, pese a
+que a la casa 15 se le ha agregado el triple de superficie que a
+la 16.
+
+\emph{O bien ejecute el código}
+\begin{verbatim}
+smpl 1 16
+fcast --static predP
+print predP -o
+
+matrix P = {predP}
+scalar d1 = P[16,1]-P[1,1]
+scalar d2 = P[15,1]-P[14,1]
+\end{verbatim}
+\end{itemize}
+\end{description}
+
+
+\vspace{10pt}
+\noindent
+\subsection{Código completo de la práctica}
+\label{sec:org38b8978}
+\vspace{10pt}
+\lstinputlisting{scripts/Houses2.inp}
+\clearpage
+\section{Relaciones lineales en las variables}
+\label{sec:org643e246}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/POE2-4.inp}{POE2-4.inp}\\
+\end{tabular}
+\end{center}
+
+\vspace{10pt}
+\noindent
+\textbf{Código completo de la práctica}
+\vspace{10pt}
+\lstinputlisting{scripts/POE2-4.inp}
+\clearpage
+
+\section{Precio de casas unifamiliares}
+\label{sec:org04f9c21}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/RamanathanEX6-1.inp}{RamanathanEX6-1.inp}\\
+\end{tabular}
+\end{center}
+
+\vspace{10pt}
+\noindent
+\textbf{Código completo de la práctica}
+\vspace{10pt}
+\lstinputlisting{scripts/RamanathanEX6-1.inp}
+
+\clearpage
+
+\section{Modelo para los salarios}
+\label{sec:org9495088}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/RamanathanEX6-5.inp}{RamanathanEX6-5.inp}\\
+\end{tabular}
+\end{center}
+
+\vspace{10pt}
+\noindent
+\textbf{Código completo de la práctica}
+\vspace{10pt}
+\lstinputlisting{scripts/RamanathanEX6-5.inp}
+\clearpage
+
+\section{Otro modelo para los salarios}
+\label{sec:org6971184}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/RamanathanEX6-6.inp}{RamanathanEX6-6.inp}\\
+\end{tabular}
+\end{center}
+
+\vspace{10pt}
+\noindent
+\textbf{Código completo de la práctica}
+\vspace{10pt}
+\lstinputlisting{scripts/RamanathanEX6-6.inp}
+\clearpage
+
+\section{Elasticidades en la demanda del transporte en autobús}
+\label{sec:orgd0e7044}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/RamanathanAp6-11.inp}{RamanathanAp6-11.inp}\\
+\end{tabular}
+\end{center}
+
+\vspace{10pt}
+\noindent
+\textbf{Código completo de la práctica}
+\vspace{10pt}
+\lstinputlisting{scripts/RamanathanAp6-11.inp}
+\clearpage
+\end{document}

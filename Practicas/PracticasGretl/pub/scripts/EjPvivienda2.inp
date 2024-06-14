@@ -1,0 +1,7 @@
+open data3-1
+RectaDeRegresion <- gnuplot price sqft
+Regresion  <- ols price 0 sqft
+Regresion.show
+series phat =  $yhat
+series ehat =  $uhat
+print -o price sqft phat ehat

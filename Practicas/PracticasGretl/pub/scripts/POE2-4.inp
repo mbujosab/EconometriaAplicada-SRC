@@ -1,0 +1,25 @@
+open food.gdt
+
+#Ajuste por Minimos Cuadrados
+Modelo <- ols food_exp const income 
+
+#Resumen de estadisticos descriptivos
+summary food_exp income
+
+#Representacion grafica de los datos
+NubePuntos <- gnuplot food_exp income --output="display" 
+
+#Listado de datos
+print food_exp income --byobs
+
+#Calculo de la elasticidad
+scalar elast = $coeff(income)*mean(income)/mean(food_exp)
+
+#Prediccion del modelo
+scalar yhat  = $coeff(const) + $coeff(income)*20
+
+#Analisis de los residuos
+series ehat = $uhat
+normtest --jbera ehat
+normtest --all   ehat
+DibujoResiduos <- gnuplot ehat income --output="display"

@@ -1,0 +1,32 @@
+open data3-7.gdt
+
+corr age miles
+
+ModeloA <- ols cost 0 age
+modeltab add
+
+ModeloB <- ols cost 0 miles
+modeltab add
+
+ModeloC <- ols cost 0 age miles
+modeltab add
+
+modeltab show
+
+vif
+scatters miles; age --output="display"
+rho = corr(miles, age)
+
+scalar estadF  = $Fstat
+scalar pvalorF = pvalue(F, 2, ModeloC.$df, estadF)
+
+# Error porcentual absoluto (ape)
+series apeA = 100*abs(ModeloA.$uhat)/cost
+series apeB = 100*abs(ModeloB.$uhat)/cost
+series apeC = 100*abs(ModeloC.$uhat)/cost
+
+# Error porcentual absoluto medio 
+scalar mapeA = mean(apeA)
+scalar mapeB = mean(apeB)
+scalar mapeC = mean(apeC)
+print mapeA mapeB mapeC

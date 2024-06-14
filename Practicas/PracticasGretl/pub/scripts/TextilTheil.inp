@@ -1,0 +1,13 @@
+open theil
+
+AjusteMCO <- ols consume const income relprice
+
+series ehat = $uhat
+series yhat = $yhat
+
+series ei = ehat*income
+series er = ehat*relprice
+series ey = ehat*yhat
+series ec = ehat*consume
+
+summary --simple ehat ei er ey ec

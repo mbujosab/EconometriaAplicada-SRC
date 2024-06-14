@@ -1,0 +1,22 @@
+open data4-3.gdt
+
+ModeloA <- ols housing 0 intrate pop
+modeltab add
+
+ModeloB <- ols housing 0 intrate gnp
+modeltab add
+
+ModeloC <- ols housing 0 intrate pop gnp
+modeltab add
+
+modeltab show
+
+vif
+
+omit pop gnp
+modeltab add
+scalar estadF  = $test
+scalar pvalorF = pvalue(F, 2, ModeloC.$df, estadF)
+
+modeltab show
+corr intrate pop gnp

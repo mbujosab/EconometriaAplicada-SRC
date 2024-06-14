@@ -1,0 +1,104 @@
+% Created 2023-11-04 sáb 20:57
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[spanish, ]{babel}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[svgnames,x11names]{xcolor}
+\hypersetup{linktoc = all, colorlinks = true, urlcolor = DodgerBlue4, citecolor = PaleGreen1, linkcolor = SpringGreen4}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{nacal}
+\usepackage{framed}
+\usepackage{listings}
+\input{hansl.tex}
+\lstnewenvironment{hansl-gretl}
+{\lstset{language={hansl},basicstyle={\ttfamily\footnotesize},numbers,rame=single,breaklines=true}}
+{}
+\newcommand{\hansl}[1]{\lstset{language={hansl},basicstyle={\ttfamily\small}}\lstinline{#1}}
+\lstset{backgroundcolor=\color{lightgray!20}, }
+\author{Marcos Bujosa}
+\date{\today}
+\title{Lección 13}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\clearpage
+
+\section{Omisión de un regresor ortogonal al resto de regresores}
+\label{sec:orgabb0ca9}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/OmisionRegresorOrtogonal.inp}{OmisionRegresorOrtogonal.inp}\\[0pt]
+\end{tabular}
+\end{center}
+
+
+\vspace{10pt}
+\noindent
+\textbf{Código completo de la práctica}
+\vspace{10pt}
+\lstinputlisting{scripts/OmisionRegresorOrtogonal.inp}
+\clearpage
+
+\section{Omisión de un regresor NO ortogonal al resto de regresores}
+\label{sec:org3ff717a}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/OmisionRegresorNoOrtogonal.inp}{OmisionRegresorNoOrtogonal.inp}\\[0pt]
+\end{tabular}
+\end{center}
+
+
+\vspace{10pt}
+\noindent
+\textbf{Código completo de la práctica}
+\vspace{10pt}
+\lstinputlisting{scripts/OmisionRegresorNoOrtogonal.inp}
+\clearpage
+
+\section{Omisión de un regresor cuando hay multicolinealidad}
+\label{sec:org1b7e7b9}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/OmisionRegresorMulticol.inp}{OmisionRegresorMulticol.inp}\\[0pt]
+\end{tabular}
+\end{center}
+
+
+\vspace{10pt}
+\noindent
+\textbf{Código completo de la práctica}
+\vspace{10pt}
+\lstinputlisting{scripts/OmisionRegresorMulticol.inp}
+\clearpage
+
+
+
+\section{Omisión de un regresor cuando hay multicolinealidad}
+\label{sec:org6e83fc9}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/ErrorDeEspecificacionPorInclusion.inp}{ErrorDeEspecificacionPorInclusion.inp}\\[0pt]
+\end{tabular}
+\end{center}
+
+
+\vspace{10pt}
+\noindent
+\textbf{Código completo de la práctica}
+\vspace{10pt}
+\lstinputlisting{scripts/ErrorDeEspecificacionPorInclusion.inp}
+\clearpage
+\end{document}

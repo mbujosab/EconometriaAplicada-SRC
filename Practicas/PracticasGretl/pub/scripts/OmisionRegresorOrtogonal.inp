@@ -1,0 +1,36 @@
+nulldata 1000                       # tamano de muestra en la simulacion
+
+loop 5000 --progressive --quiet
+     series S = normal(0,10)        # generamos datos S correspondientes a la superficie
+     series D = normal(0,1)         # generamos datos D correspondientes a la distancia    
+     series U = normal(0,25)        # perturbaciones U: otros factores que afectan el precio
+
+     /* variante para regresores verdaderamente ortogonales (media cero y covarianza cero) */
+     /* series SS = normal(0,10)    # generamos datos S correspondientes a la superficie   */
+     /* series S = SS - mean(SS)    # con media cero                                       */
+     /* series DD = normal(0,1)     # generamos datos D correspondientes a la distancia    */
+     /* ols DD 0 S                  # regresion auxiliar                                   */
+     /* series D = $uhat            # con media cero y perpendiculares a S                 */
+
+     series P = 100 +3*S -130*D +U  # precios P como combinacion lineal de regresores + U
+     
+     ols P 0 S D                    # Regresion MCO Verdadero modelo: P = 100 +3*S -130*D +U
+     scalar C1 = $coeff(const)
+     scalar S1 = $coeff(S)
+     scalar D1 = $coeff(D)
+     scalar sigma1 = $sigma
+
+     ols P 0 D                      # Regresion MCO omision S
+     scalar C2 = $coeff(const)
+     scalar D2 = $coeff(D)
+     scalar sigma2 = $sigma
+
+     ols P 0 S                      # Regresion MCO omision D
+     scalar C3 = $coeff(const)
+     scalar S3 = $coeff(S)
+     scalar sigma3 = $sigma
+
+     print C1 S1 D1 sigma1 
+     print C2    D2 sigma2
+     print C3 S3    sigma3
+endloop

@@ -1,0 +1,7 @@
+open andy.gdt
+
+ols sales 0 price advert
+
+Regresion  <- ols sales 0 price advert
+
+# solo es posible visualizar el plano de regresion con los menus desplegables

@@ -1,0 +1,17 @@
+open anscombe
+
+summary --simple y1 y2 y3 y4 x x4
+
+corr y1 y2 y3 y4 x x4
+
+Modelo1 <- ols y1 0 x
+Modelo2 <- ols y2 0 x
+Modelo3 <- ols y3 0 x
+Modelo4 <- ols y4 0 x4
+
+gnuplot y1 x
+
+gnuplot y1 y2 y3 x
+
+scatters y1 y2 y3 ; x
+scatters y4 ; x4

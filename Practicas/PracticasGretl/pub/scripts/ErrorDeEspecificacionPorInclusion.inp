@@ -1,0 +1,54 @@
+nulldata 1000                        # tamano de muestra en la simulacion
+
+matrix C = { 1, 0, 0, 0; \
+           100, 1, 0, 0; \
+            -6, 0, 1, 0; \
+             0, 1, 0, 1}
+
+loop 10000 --progressive --quiet
+     series S  = randgen(N,  0 , 1)  # primer regresor
+
+     series U  = randgen(N,  0 , 1)  # perturbaciones
+
+     series X  = randgen(N,  0 , 1) 
+
+     matrix Z  = {S,X,U,U}
+     Z *= C'                         # note: use the transpose '
+     
+     series D = Z[,2]                # segundo regresor fuertemente correlado solo con S (Variable Irrelevante)
+
+     series E = Z[,4]                # segundo regresor fuertemente correlado solo con U
+
+     series F = Z[,3]/10             # segundo regresor fuertemente correlado con S y U
+
+     series Y = 1 - S + U            # regresando beta1=1 y beta2=-1
+     
+     ols Y 0 S                       # Regresion MCO modelo completo (estimadores insesgados)
+     scalar C1     = $coeff(const)
+     scalar S1     = $coeff(S)
+     scalar sigma1 = $sigma
+
+     ols Y 0 S D                     # Incusion regresor ortogonal a U (no a S) (Variable irrelevante)
+     scalar C2     = $coeff(const)
+     scalar S2     = $coeff(S)
+     scalar D2     = $coeff(D)
+     scalar sigma2 = $sigma
+
+     ols Y 0 S E                     # Incusion regresor ortogonal a S (no a U)
+     scalar C3     = $coeff(const)
+     scalar S3     = $coeff(S)
+     scalar E3     = $coeff(E)
+     scalar sigma3 = $sigma
+
+     ols Y 0 S F                     # Incusion regresor ni ortogonal a S ni a U
+     scalar C4     = $coeff(const)
+     scalar S4     = $coeff(S)
+     scalar F4     = $coeff(F)
+     scalar sigma4 = $sigma
+
+     print C1 S1    sigma1
+     print C2 S2 D2 sigma2
+     print C3 S3 E3 sigma3
+     print C4 S4 F4 sigma4
+endloop
+corr U S D E F

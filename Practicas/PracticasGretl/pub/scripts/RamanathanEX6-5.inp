@@ -1,0 +1,34 @@
+open data6-4  
+
+logs WAGE  
+square EDUC EXPER AGE  
+
+Modelo1 <- ols l_WAGE const EDUC EXPER AGE sq_EDUC sq_EXPER sq_AGE  
+Modelo2 <- omit --auto
+
+printf "\n Un año adicional de experiencia supone un incremento salarial \n\ 
+esperado de approx. %2.2f por ciento\n\n", $coeff(EXPER)*100
+
+printf "\n Con más precision: un año adicional de experiencia supone un \n\
+incremento salarial esperado de %2.2f por ciento\n\n", (exp($coeff(EXPER))-1)*100
+
+series lwhat   = $yhat
+scalar sigmasq = $ess/$df
+series what    = exp(lwhat+(sigmasq/2))
+AjusteSalarios <- gnuplot what WAGE --suppress-fitted --output="display"
+
+printf "\n Un año adicional de educación para alguien con formación de 1 año \n\
+supone un incremento salarial esperado de approx. %2.2f por ciento\n\n",
+2*$coeff(sq_EDUC)*1*100
+
+printf "\n Un año adicional de educación para alguien con formación de 7 años \n\
+supone un incremento salarial esperado de approx. %2.2f por ciento\n\n",
+2*$coeff(sq_EDUC)*7*100
+
+printf "\n Con más precision: un año adicional de educación para alguien con formación \n\
+de 1 año supone un incremento salarial esperado de %2.2f por ciento\n\n",
+(exp(2*$coeff(sq_EDUC)*1)-1)*100
+
+printf "\n Con más precision: un año adicional de educación para alguien con formación \n\
+de 7 años supone un incremento salarial esperado de %2.2f por ciento\n\n",
+(exp(2*$coeff(sq_EDUC)*7)-1)*100

@@ -1,0 +1,30 @@
+open data4-1
+
+help logs                              # mas informacion sobre el comando "logs"
+logs sqft bedrms baths 
+Lin     <- ols price 0 sqft            # "mejor" modelo lineal
+modeltab add                           # incluimos el modelo a la tabla de modelos
+
+ols price 0 l_sqft l_bedrms l_baths    # modelo lin-log 
+LinLog  <- omit --auto=0.05
+modeltab add                           # incluimos el modelo a la tabla de modelos
+modeltab show                          # MOSTRAMOS TODOS LOS MODELOS a la vez
+
+scalar yhat1500      = Lin.$coeff[1]+Lin.$coeff[2]*(1500)
+scalar etaLin1500    = Lin.$coeff[2] * 1500/yhat1500
+scalar yhat2000      = Lin.$coeff[1]+Lin.$coeff[2]*(2000)
+scalar etaLin2000    = Lin.$coeff[2] * 2000/yhat2000
+scalar yhat2500      = Lin.$coeff[1]+Lin.$coeff[2]*(2500)
+scalar etaLin2500    = Lin.$coeff[2] * 2500/yhat2500
+scalar yhat1500      = LinLog.$coeff[1]+LinLog.$coeff[2]*log(1500)
+scalar etaLinLog1500 = LinLog.$coeff[2] / yhat1500
+scalar yhat2000      = LinLog.$coeff[1]+LinLog.$coeff[2]*log(2000)
+scalar etaLinLog2000 = LinLog.$coeff[2] / yhat2000
+scalar yhat2500      = LinLog.$coeff[1]+LinLog.$coeff[2]*log(2500)
+scalar etaLinLog2500 = LinLog.$coeff[2] / yhat2500
+
+print etaLin1500    etaLin2000    etaLin2500
+print etaLinLog1500 etaLinLog2000 etaLinLog2500
+
+printf "\n\n Un incremento de un 1\% en la superticie de una casa \n \
+supone un aumento del precio de unos %.4f miles de dolares \n\n", LinLog.$coeff[2]/100

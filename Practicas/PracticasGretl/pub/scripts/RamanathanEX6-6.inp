@@ -1,0 +1,27 @@
+include criteria.gfn 
+open data6-4
+
+logs WAGE  
+square EDUC 
+
+LinLin        <- ols WAGE 0 sq_EDUC EXPER 
+LogLin        <- ols l_WAGE 0 sq_EDUC EXPER 
+
+series lwhat  = $yhat
+scalar sgmasq = $ess/$df
+series what   = exp(lwhat+(sgmasq/2))
+series error  = WAGE -what
+scalar ess    = sum(error*error)
+
+# correlacion entre salarios observados y ajustados 
+corr WAGE what 
+scalar c1          = corr(WAGE,what)
+scalar LinLog_rsq  = c1*c1
+scalar LinLin_rsq  = LinLin.$rsq
+print  LinLin_rsq LinLog_rsq 
+
+# info sobre la función "criteria"
+# help criteria
+# calculando criterios de seleccion
+criteria(LinLin.$ess, $nobs, LinLin.$ncoeff)
+criteria(        ess, $nobs,        $ncoeff)

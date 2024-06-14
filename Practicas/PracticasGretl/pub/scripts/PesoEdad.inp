@@ -1,0 +1,19 @@
+open datos/PesoEdad.gdt
+
+series Edad2=Edad^2
+series Edad3=Edad^3
+
+Modelo1 <- ols Peso_Kg const Edad
+modeltab add
+Modelo2 <- ols Peso_Kg const Edad Edad2
+modeltab add
+Modelo3 <- ols Peso_Kg const Edad Edad2 Edad3
+modeltab add
+modeltab show   
+
+series yhat1=Modelo1.$yhat
+Modelo1 <- gnuplot Peso_Kg yhat1 Edad --with-lp=yhat1 --output="display"
+series yhat2=Modelo2.$yhat
+Modelo2 <- gnuplot Peso_Kg yhat2 Edad --with-lp=yhat2 --output="display" --fit=quadratic
+series yhat3=Modelo3.$yhat
+Modelo3 <- gnuplot Peso_Kg yhat3 Edad --with-lp=yhat3 --output="display" --fit=cubic

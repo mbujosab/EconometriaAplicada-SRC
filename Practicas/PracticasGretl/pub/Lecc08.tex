@@ -1,0 +1,703 @@
+% Created 2023-11-12 dom 23:11
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[spanish, ]{babel}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[svgnames,x11names]{xcolor}
+\hypersetup{linktoc = all, colorlinks = true, urlcolor = DodgerBlue4, citecolor = PaleGreen1, linkcolor = SpringGreen4}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{nacal}
+\usepackage{framed}
+\usepackage{listings}
+\input{hansl.tex}
+\lstnewenvironment{hansl-gretl}
+{\lstset{language={hansl},basicstyle={\ttfamily\footnotesize},numbers,rame=single,breaklines=true}}
+{}
+\newcommand{\hansl}[1]{\lstset{language={hansl},basicstyle={\ttfamily\small}}\lstinline{#1}}
+\lstset{backgroundcolor=\color{lightgray!20}, }
+\author{Marcos Bujosa}
+\date{\today}
+\title{Lección 8}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\clearpage
+
+\section{Intervalos y regiones de confianza}
+\label{sec:org79452d8}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/EjPvivienda4.inp}{EjPvivienda4.inp}\\[0pt]
+\end{tabular}
+\end{center}
+
+Cargue los datos de precios de casas \texttt{data3-1.gdt} del libro de
+Ramanthan.
+\begin{verbatim}
+open data3-1
+\end{verbatim}
+
+\begin{itemize}
+\item Estime el modelo de siempre y guárdelo como icono.
+\begin{verbatim}
+Modelo1 <- ols price const sqft --vcv
+\end{verbatim}
+
+\item Observe la matriz de covarianzas entre los parámetros estimados del
+modelo de regresión. Hay covarianza entre los estimadores, ¿con qué
+signo?
+
+\item Calcule los intervalos de confianza de los parámetros beta
+estimados: desde la ventana del modelo estimado siga los pasos
+\textbf{\emph{\texttt{Análisis -> Intervalos de confianza para los coeficientes}}} o
+bien directamente en un guión o la consola de Gretl aplique
+directamente las expresiones vistas en clase:
+\begin{verbatim}
+scalar ns = 0.05  # nivel de signifacion
+
+scalar i1 = $coeff(const) - critical(t, $df, ns/2) * $stderr(const)
+scalar s1 = $coeff(const) + critical(t, $df, ns/2) * $stderr(const)
+
+scalar i2 = $coeff(sqft)  - critical(t, $df, ns/2) * $stderr(sqft)
+scalar s2 = $coeff(sqft)  + critical(t, $df, ns/2) * $stderr(sqft)
+
+matrix IC = {i1, s1; i2, s2}
+print IC
+\end{verbatim}
+
+\item Recuerde que los intervalos de confianza al 95\% nos sirven para
+contrastar hipótesis al 5\% de significación. Piense qué valores
+están en el umbral de ser rechazados según los intervalos obtenidos.
+
+\item Dado el signo de la covarianza entre los estimadores, ¿qué relación
+cabe esperar entre ellos?
+
+\item Visualice la región de confianza de los parámetros: desde en la
+ventana del modelo estimado siga los pasos \textbf{\emph{\texttt{Análisis -> Elipse de
+  confianza}}} y seleccione ambos regresores para ver la elipse de
+confianza. ¿Confirma sus expectativas?
+
+\item Contrastemos algunas hipótesis compuestas. En particular, contraste
+las distintas combinaciones de valores que están en el umbral de ser
+hipótesis a rechazar individualmente (las correspondientes a las
+esquinas del cuadrado que se ve en el gráfico del apartado
+anterior). En la ventana del modelo \textbf{\emph{\texttt{Contrastes -> Restricciones
+  lineales}}} y se introducen las restriciones; o bien ejecute el
+código de más abajo.
+
+¿Cuál es la conclusión respecto a la elipse de confianza en relación
+a los contrastes de hipótesis de dos parámetros?
+\begin{verbatim}
+restrict Modelo1
+ b[1] = i1
+ b[2] = s2
+end restrict
+
+restrict Modelo1
+ b[1] = s1
+ b[2] = s2
+end restrict
+
+restrict Modelo1
+ b[1] = i1
+ b[2] = i2
+end restrict
+
+restrict Modelo1
+ b[1] = s1
+ b[2] = i2
+end restrict
+
+/* notese que el contraste individual H0: b[2]=i2 esta en el limite de ser rechazado al 5% 
+   Pero si conjuntamente tambien se considera que b[1]=s1 entonces no se rechaza ni con un
+   13% de sigificacion */
+\end{verbatim}
+\end{itemize}
+
+
+\vspace{10pt}
+\noindent
+\subsection{Código completo de la práctica \texttt{EjPvivienda4.inp}}
+\label{sec:org76d7c4c}
+\vspace{10pt}
+\lstinputlisting{scripts/EjPvivienda4.inp}
+\clearpage
+
+
+\section{Experimento de Montecarlo para los intervalos de confianza}
+\label{sec:orgdc8d8e9}
+
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/samplinghouses5.inp}{samplinghouses5.inp}\\[0pt]
+\end{tabular}
+\end{center}
+
+Cargue los datos de precios de casas \texttt{data3-1.gdt} del libro de
+Ramanthan.  Este experimento de Montecarlo es una extensión a los ya
+realizados con estos mismos datos.
+
+\begin{itemize}
+\item Defina la serie \texttt{x} con las superficies y la serie \texttt{y} con los
+precios. Programe un bucle como las otras veces:
+\begin{verbatim}
+open data3-1
+series x = sqft
+series y = price
+#set seed 3213798
+loop 100 --progressive --quiet
+    <<Estimación MCO>>
+    <<Cálculo de los límites de los intervalos de confianza>>
+    <<Comprobación de si los parámetros pertenecen al intervalo>>
+    <<Estimación de la varianza de los errores>>
+    <<Muestra de resultados y guardado en disco>>
+endloop
+\end{verbatim}
+\end{itemize}
+
+La serie de cálculos son los siguientes (todos dentro del bucle).
+
+\begin{enumerate}
+\item El primer bloque de cálculos simula el modelo con nuevas
+perturbaciones, lo estima por MCO y guarda los betas estimados y
+sus errores estándar:
+\begin{verbatim}
+series U  = randgen(n, 0, 39)
+series ys = 52 + 0.14*x + U
+ols ys const x
+scalar b1 = $coeff(const)
+scalar b2 = $coeff(x)
+scalar s1 = $stderr(const)
+scalar s2 = $stderr(x)
+\end{verbatim}
+
+\item Luego calculamos los intervalos de confianza al 95$\backslash$%
+\begin{verbatim}
+scalar c1L = b1 - critical(t,$df,.025)*s1
+scalar c1R = b1 + critical(t,$df,.025)*s1
+scalar c2L = b2 - critical(t,$df,.025)*s2
+scalar c2R = b2 + critical(t,$df,.025)*s2
+\end{verbatim}
+
+\item Verificamos si los verdaderos valores pertenecen al intervalo estimado
+\begin{verbatim}
+scalar p1 = (52  >c1L && 52  <c1R)
+scalar p2 = (0.14>c2L && 0.14<c2R)
+\end{verbatim}
+
+\item Al finalizar todas las cuentas, queremos que Gretl nos muestre los
+estadísticos de los parámetros estimados, y el porcentaje de veces
+que el intervalo contuvo a los parámetros, y que guarde todo lo
+calculado en el fichero de datos \texttt{cicoeff.gdt}.
+\begin{verbatim}
+print b1 b2 p1 p2 
+store cicoeff.gdt b1 b2 c1L c1R c2L c2R 
+\end{verbatim}
+\end{enumerate}
+
+Por último abrimos el fichero \texttt{cicoeff.gdt}. Generamos una serie \texttt{B1}
+constante e igual a valor del parámetro constante del modelo simulado (\(52\))
+y otra \texttt{B2} igual a valor del parámetro de la pendiente del modelo
+simulado (\(0.14\)); y finalmente generamos unos gráficos que muestren los
+intervalos estimados en cada iteración y si incluyen o no al verdadero
+valor del parámetro correspondiente.
+\begin{verbatim}
+open "cicoeff.gdt"
+series B1 = 52
+series B2 = 0.14
+IntervaloConstante <- gnuplot c1L c1R B1 --time-series --with-lines --output="display"
+IntervaloPendiente <- gnuplot c2L c2R B2 --time-series --with-lines --output="display"
+\end{verbatim}
+
+\vspace{10pt}
+\noindent
+\subsection{Código completo de la práctica \texttt{samplinghouses5.inp}}
+\label{sec:org8b6cbcc}
+\vspace{10pt}
+\lstinputlisting{scripts/samplinghouses5.inp}
+\clearpage
+
+
+\section{Precio de casas unifamiliares (constante más tres regresores)}
+\label{sec:orge6d7877}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/Houses.inp}{Houses.inp}\\[0pt]
+\end{tabular}
+\end{center}
+
+
+\begin{description}
+\item[{Objetivos.}] Son tres:
+\begin{itemize}
+\item Asimilar la interpretación ``ceteris paribus'' de los coeficientes de un modelo de regresión.
+\item Eliminar variables no significativas de un modelo.
+\item Comparar el ajuste de dos modelos.
+\end{itemize}
+
+\item[{Los datos}] son los del ejemplo de clase junto con dos variables
+adicionales: número de dormitorios (\texttt{bedrms}) y cuartos de baño
+(\texttt{baths}).
+
+\item[{Para empezar}] cargue los datos de la base de datos de Gretl desde
+la pestaña del manual de Ramanathan
+\begin{verbatim}
+open data4-1
+\end{verbatim}
+\end{description}
+
+\subsection{Tareas}
+\label{sec:org47dda6c}
+
+\begin{description}
+\item[{Actividad 1}] Piense cuáles son los signos esperados de los
+parámetros del siguiente modelo
+\begin{displaymath}
+   \VA{price}=
+   \beta_1\VAindUno+
+   \beta_2\VA{sqft}+
+   \beta_3\VA{bedrms}+
+   \beta_4\VA{baths}+
+   \per.
+ \end{displaymath}
+  donde \VA{price} es el precio de una vivienda, \VA{sqft} su
+superficie, \VA{bedrms} es su número de dormitorios y \VA{baths} su
+número de cuartos de baño.
+
+\item[{Actividad 2}] Con los datos de la muestra Ajuste dicho modelo de
+regresión por MCO y guárdelo como un icono.
+\begin{verbatim}
+Modelo1 <- ols price 0 sqft bedrms baths 
+\end{verbatim}
+
+\item[{Actividad 3}] ¿Confirman los resultados su previsión respecto a los
+signos de los parámetros?
+
+\item[{Actividad 4}] El modelo estimado sugiere que una casa de \(1600\) pies al cuadrado,
+con \(3\) habitaciones y \(2\) cuartos de baño tiene un precio esperado de
+\begin{displaymath}
+  129.062 + 0.154800\times(1600) -21.5875\times(3) -12.1928\times(2) =  287.59 \; \text{miles de dólares.}
+\end{displaymath}
+
+Según este modelo (y sabiendo que un pie cuadrado son \(0.092m^2\))
+\emph{ampliar} esta casa con una habitación adicional de unos \(20\) metros
+cuadrados (unos \(220\) pies cuadrados más de casa) arrojaría un
+precio esperado de ¿cuanto?
+\begin{displaymath}
+   129.062 + 0.154800\times(1820) -21.5875\times(4) -12.1928\times(2) =  300.06;
+\end{displaymath}
+es decir, \emph{ampliar} esta casa con una habitación adicional de unos
+\(20\) metros cuadrados \emph{eleva} el precio en unos \(13\) mil dolares.
+¿Contradice esto su idea inicial?
+\begin{verbatim}
+series yhat1 = $coeff(const)+$coeff(sqft)*1600+$coeff(bedrms)*3+$coeff(baths)*2
+series yhat2 = $coeff(const)+$coeff(sqft)*(1600+220)+$coeff(bedrms)*(3+1)+$coeff(baths)*2
+\end{verbatim}
+
+\item[{Actividad 5}] Aunque, con la correcta interpretación de los
+coeficientes, el resultado parece sensato, sólo una de las variables
+es estadísticamente significativa.
+
+\begin{itemize}
+\item Esto quiere decir, que la estimación de los parámetros es muy
+imprecisa. Sin embargo, el estadístico \(\Festadistico\) indica que
+el modelo es conjuntamente significativo (así que la previsión de
+precios de la actividad anterior es fiable); pero no el efecto
+individual de cada regresor.
+
+\item Observe además que hay un elevado grado de correlación entre los
+regresores (en la ventana de iconos, ``pinche'' en
+\textbf{\emph{\texttt{Correlaciones}}}) o ejecute los siguiente
+\begin{verbatim}
+corr sqft bedrms baths
+\end{verbatim}
+Esto sugiere que pudiera surgir un problema de multicolinealidad.
+Además, la interpretación caeteris paribus cuestiona la relevancia
+de algunos los regresores. Todo ello apunta a la posible
+conveniencia de excluir uno o más regresores del modelo inicial.
+\end{itemize}
+
+\item[{Actividad 6}] Puesto que la variable menos significativa es
+\texttt{baths}, ésta será la primera variable a omitir del modelo inicial:
+\begin{itemize}
+\item En la ventana del Modelo 1, ``pinche'' en \textbf{\emph{\texttt{Contrastes ->
+    omitir variables}}} y seleccione la variable \texttt{baths} (y pulse
+\textbf{\emph{\texttt{Aceptar}}}). O bien ejecute el código
+\begin{verbatim}
+omit baths
+\end{verbatim}
+Note como el coeficiente de determinación ha disminuido, pero el
+corregido ha aumentado.
+\end{itemize}
+
+Aunque ha aumentado la significatividad de los coeficientes,
+\texttt{bedrms} continua siendo no significativa. Así que la vamos a
+omitir:
+\begin{itemize}
+\item En la ventana del Modelo 1, ``pinche'' en \textbf{\emph{\texttt{Contrastes ->
+    omitir variables}}} y seleccione la variable \texttt{bedrms} (y pulse
+\textbf{\emph{\texttt{Aceptar}}}). O bien ejecute el código
+\begin{verbatim}
+omit bedrms
+\end{verbatim}
+Note como de nuevo el coeficiente de determinación ha
+disminuido, pero el corregido ha aumentado.
+\end{itemize}
+
+\emph{La constante sigue sin ser significativa ¿debemos hacer como con
+\texttt{baths} y \texttt{bedrms} y tratar de omitirla también?}
+
+\item[{Actividad 7}] Hemos excluido las variables \texttt{baths} y \texttt{bedrms} del
+modelo original, debido a que individualmente son no significativas.
+
+Pero pudiera ocurrir que conjuntamente si fueran
+significativas. Vamos a verificar que conjuntamente tampoco son
+significativas:
+
+\begin{itemize}
+\item En la ventana del Modelo 1, ``pinche'' en \textbf{\emph{\texttt{Análisis -> Elipse de
+    confianza}}} y seleccione \texttt{baths} y \texttt{bedrms}.
+
+\item Compruebe que \((0,0)\) es un punto que pertenece a la elipse de
+confianza, y que por tanto, la hipótesis nula \(\beta_3=0,\;
+    \beta_4=0\) no se puede rechazar al nivel de confianza de la
+elipse.
+
+\item Omita de golpe las dos variables: En la ventana del Modelo 1,
+``pinche'' en \textbf{\emph{\texttt{Contrastes -> omitir variables}}} y seleccione
+las variables \texttt{baths} y \texttt{bedrms} (y pulse \textbf{\emph{\texttt{Aceptar}}})
+\begin{verbatim}
+ols price 0 sqft bedrms baths
+Modelo2 <- omit baths bedrms
+\end{verbatim}
+
+\item Observe los resultados.
+\end{itemize}
+\end{description}
+
+
+\begin{description}
+\item[{Actividad 8}] Comparar las previsiones del modelo ampliado y el
+reducido.
+
+Vamos a comprobar que las predicciones no difieren demasiado entre
+uno y otro modelo. Pero hay mayor precisión con el modelo reducido
+(no multicolinealidad).
+
+\emph{Primero añadimos una observación adicional} con los datos de
+superficie, número de dormitorios y cuartos de baño del ejemplo
+anterior.
+\begin{itemize}
+\item ``Pinche'' en \textbf{\emph{\texttt{Datos -> Añadir observaciones}}} y añada una observación
+
+\item Marque con el ratón las variables \texttt{sqft},
+\texttt{bedrms} y \texttt{baths}\}, y con las tres variables
+marcadas, pinche en \textbf{\emph{\texttt{Datos -> Editar valores}}}. Teclee \(1820\)
+en la fila \(15\) de la columna \texttt{sqft}, teclee \(4\) en la fila
+\(15\) de la columna \texttt{bedrms} y \(2\) en la fila \(15\) de la columna
+\texttt{baths}.
+
+\item Fije la muestra con las nuevas observaciones: ``pinche'' en
+\textbf{\emph{\texttt{Muestra -> Establecer rango}}} y fíjelo para las observaciones
+de 1 a 15.  O bien teclee en la  consola de comandos
+\begin{verbatim}
+dataset addobs 1
+genr sqft[15] =1820
+genr bedrms[15]=4
+genr baths[15] =2
+\end{verbatim}
+
+\item Re-estime el primer modelo pero usando la muestra ampliada.
+\begin{verbatim}
+smpl 1 15
+ols price const sqft bedrms baths
+\end{verbatim}
+
+\begin{itemize}
+\item En la ventana del modelo re-estimado ``pinche'' en \textbf{\emph{\texttt{Análisis
+      -> Predicciones}}}. Nos aseguramos de que el dominio de
+predicción contiene la observación 15 y pulsamos \textbf{\emph{\texttt{Aceptar}}}.
+\begin{verbatim}
+fcast 15 15 --static
+fcast --plot="display"
+\end{verbatim}
+
+\item Observe la previsión puntual y el intervalo de confianza
+\end{itemize}
+
+\item Re-estime también el segundo modelo con la muestra ampliada
+\begin{verbatim}
+ols price const sqft
+\end{verbatim}
+
+\begin{itemize}
+\item En la ventana del modelo re-estimado ``pinche'' en \textbf{\emph{\texttt{Análisis
+      -> Predicciones}}}. Asegúrese de que el dominio de predicción
+contiene la observación 15 y pulse \textbf{\emph{\texttt{Aceptar}}}.
+\begin{verbatim}
+fcast 15 15 --static
+fcast --plot="display"
+\end{verbatim}
+\end{itemize}
+
+\item Note cómo ambas previsiones puntuales están contenidas en
+ambos intervalos, por lo que no son estadísticamente distintas.
+
+\item Pero fíjese en cómo la falta de precisión del primer modelo se
+plasma en una mayor desviación típica, y en un intervalo de
+confianza más amplio.
+\end{itemize}
+\end{description}
+\subsection{Código completo de la práctica \texttt{Houses.inp}}
+\label{sec:orga940e3e}
+\lstinputlisting{scripts/Houses.inp}
+\clearpage
+
+
+\section{Los determinantes del número de viajeros de autobús}
+\label{sec:orgbc38b3f}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/BusTravelers.inp}{BusTravelers.inp}\\[0pt]
+\end{tabular}
+\end{center}
+
+Aplicación 4.6 del libro de texto (Ramanathan, R., 1998). Para más
+detalles consulte el citado manual.
+
+\begin{description}
+\item[{Objetivo}] Especificación de un modelo de regresión.
+
+En general, eliminar variables no significativas incrementa la
+precisión de la estimación del resto de parámetros. Pero eliminar de
+golpe todas las variables no significativas no es recomendable. Al
+quitar algunas variables puede que otras se vuelvan
+significativas. Un procedimiento más cauteloso es ir quitando
+variables de una en una.
+
+La significación estadística no es el único criterio, ni el más
+conveniente, para tomar una decisión. Si hay razones teóricas para
+mantener una variable debemos cuestionarnos seriamente el quitar
+dicha variable por el mero hecho de que ésta resulte no
+significativa estadísticamente.
+
+Por otra parte, siempre debemos mantener el término constante.
+
+\item[{Los datos y el modelo}] Ésta es una aplicación con datos reales que
+relaciona el número de horas viajadas en autobús (en miles)
+\texttt{Bustravl} (\VA{B}) en 40 ciudades de los Estados Unidos con las
+siguientes variables explicativas:
+\begin{itemize}
+\item \texttt{Fare} = la tarifa del billete en dólares (\VA{F}).
+\item \texttt{Gasprice} =Precio del galón de gasolina en dólares (\VA{G}).
+\item \texttt{Income} = Renta percápita media de la ciudad en dólares (\VA{I}).
+\item \texttt{Pop} = Población de la ciudad en miles (\VA{P}).
+\item \texttt{Density} = Densidad de población de la ciudad (personas por milla
+cuadrada) (\VA{D}).
+\item \texttt{Landarea} = Extensión del área urbana en millas cuadradas (\VA{L}).
+\end{itemize}
+
+La especificación inicial del modelo es:
+\begin{displaymath}
+  \VA{B}=
+  \beta_1\VAindUno+
+  \beta_2\VA{F}+
+  \beta_3\VA{G}+
+  \beta_4\VA{I}+
+  \beta_5\VA{P}+
+  \beta_6\VA{D}+
+  \beta_7\VA{L}+
+  \per.
+\end{displaymath}
+Se trata de decidir cuales de todas las variables disponibles es
+razonable mantener en un modelo final.
+
+\item[{Para empezar}] cargue los datos de la base de datos de Gretl desde
+la pestaña del manual de Ramanathan.
+\begin{verbatim}
+open data4-4
+\end{verbatim}
+\end{description}
+
+\subsection{Tareas}
+\label{sec:org0b524f9}
+
+\begin{description}
+\item[{Actividad 1}] Piense cuáles son los signos esperados de los parámetros del modelo
+
+\item[{Actividad 2}] Observe los diagramas de dispersión entre la variable
+dependiente y los regresores. Observe así mismo los estadísticos
+descriptivos de las variables y la matriz de correlaciones. Hágalo
+con los menus desplegables o ejecutando el siguiente código:
+\begin{verbatim}
+summary BUSTRAVL FARE GASPRICE INCOME POP DENSITY LANDAREA --simple
+corr BUSTRAVL FARE GASPRICE INCOME POP DENSITY LANDAREA --plot="display"  
+fare_bustravl     <- gnuplot BUSTRAVL FARE     --output="display"
+gasprice_bustravl <- gnuplot BUSTRAVL GASPRICE --output="display"
+income_bustravl   <- gnuplot BUSTRAVL INCOME   --output="display"
+pop_bustravl      <- gnuplot BUSTRAVL POP      --output="display"
+density_bustravl  <- gnuplot BUSTRAVL DENSITY  --output="display"
+landarea_bustravl <- gnuplot BUSTRAVL LANDAREA --output="display"
+\end{verbatim}
+
+\item[{Actividad 3}] Estime por MCO el modelo inicial completo y guárdelo como un icono
+\begin{verbatim}
+ModeloInicial <- ols BUSTRAVL 0 FARE GASPRICE INCOME POP DENSITY LANDAREA
+modeltab add
+\end{verbatim}
+El nombre (en la línea anterior \texttt{ModeloInicial}) puede ser el que
+usted elija, pero si tiene espacios en blanco debe escribirlo entre
+comillas, por ejemplo \texttt{"Modelo uno"} \texttt{<- ols Y 0 x1 x2}). Recuerde
+además que Gretl entiende la variable \texttt{0} como el regresor
+constante).
+
+Compare los resultados con sus expectativas iniciales.
+
+\begin{itemize}
+\item Observe qué variables son significativas y cuáles no. ¿Cuál es la
+menos significativa?
+
+\item Observe también el coeficiente de determinación ajustado, así como
+los criterios de información para la selección de modelos
+``Criterio de información de Akaike (AIC)'' y ``Criterio de
+información Bayesiano de Schwarz (BIC)'' para compararlos con
+otros alternativos más adelante.
+\end{itemize}
+
+\item[{Actividad 4}] La variable con mayor \emph{p}-valor (``la menos
+significativa'') es el precio del combustible \texttt{GASPRICE}.
+Realice una nueva regresión omitiendo esta variable.
+
+Puede hacerlo partiendo del modelo anterior, o definiendo un nuevo
+modelo (le recomiendo la primera):
+
+\begin{itemize}
+\item Partiendo del modelo anterior podemos omitir la variable:
+
+\begin{itemize}
+\item Desde la ventana del modelo estimado ``pinche'' en \textbf{\emph{\texttt{contrastes
+      -{}-> omitir variables}}} seleccione \texttt{GASPRICE}; o bien
+ejecute\footnote{el comando opuesto a \texttt{omit} es \texttt{add}}
+\begin{verbatim}
+omit GASPRICE
+\end{verbatim}
+
+\item Alternativamente podemos definir un nuevo modelo sin \texttt{GASPRICE}.
+``pinchando'' en \textbf{\emph{\texttt{Modelo -{}-> Mínimos Cuadrados Ordinarios}}} y
+seleccionando todos los regresores menos \texttt{GASPRICE}, o bien ejecutando
+\texttt{ols BUSTRAVL 0 FARE INCOME POP DENSITY LANDAREA}
+\end{itemize}
+
+Analice los resultados:
+
+\begin{itemize}
+\item ¿Mejora la precisión de las estimaciones? ¿Qué variable es ahora
+la menos significativa?
+
+\item Observe también el coeficiente de determinación ajustado, así
+como los criterios de información para la selección de modelos
+``Criterio de información de Akaike (AIC)'' y ``Criterio de
+información Bayesiano de Schwarz (BIC)''. ¿Le parece que ha
+mejorado el modelo?
+\end{itemize}
+\end{itemize}
+
+\item[{Actividad 5}] El mayor \emph{p}-valor corresponde ahora a \texttt{FARE}, pero
+la teoría económica sugiere que el precio es una importante variable
+a la hora de explicar la demanda de un bien o servicio. Por ello la
+debemos mantener. La siguiente variable menos significativa (un
+inaceptable \emph{p}-valor del 50\%) es la extensión de la ciudad
+\texttt{LANDAREA}
+
+Repita los pasos del punto anterior, pero omitiendo \texttt{LANDAREA}.
+\begin{verbatim}
+omit LANDAREA
+\end{verbatim}
+
+\item[{Actividad 6}] La variable \texttt{FARE} continua teniendo un \emph{p}-valor
+excesivo (49\%). Esto sugiere, que dadas las demás variables
+explicativas, la tarifa del billete no afecta demasiado a la demanda
+de este servicio; es decir, los viajeros no parecer ser muy
+sensibles al precio del billete\footnote{al menos para tarifas en torno a
+las observadas en la muestra: alrededor de 0.8 dolares con una
+tarifa mínima de 0.5\$ y una máxima de 1.5\$.}. Observe de nuevo el
+diagrama de dispersión entre \texttt{FARE} y \texttt{BUSTRAVL} que siguiere este
+comportamiento. Por tanto, veamos que pasa si finalmente omitimos la
+variable \texttt{FARE} (si tenemos fundadas dudas sobre este comportamiento
+de los consumidores, entonces \emph{no deberíamos eliminar la variable}
+\texttt{FARE} del modelo).
+
+Repita los pasos omitiendo \texttt{FARE}.
+\begin{verbatim}
+omit FARE 
+\end{verbatim}
+
+\item[{Actividad 7}] Las variables del modelo final son significativas y
+los criterios de selección de modelos han mejorado, pero queda un
+último paso.
+
+Hemos ido ``quitando'' variables basándonos en los estadísticos
+\Testadistico. Sabemos que esto es incorrecto puesto que
+conjuntamente estas variables podrían ser significativas. Así pues,
+debemos realizar un contraste de significación de las tres variables
+conjuntamente; es decir, partiendo del modelo inicial debemos
+contrastar
+\begin{displaymath}
+  \Hnula:\ \beta_2=0,\quad \beta_3=0,\quad \beta_7=0.
+\end{displaymath}
+
+\begin{itemize}
+\item \emph{Partiendo del modelo inicial} omita de golpe las variables
+\texttt{FARE}, \texttt{GASPRICE} y \texttt{LANDAREA} para obtener un modelo
+restringido. Seleccione con el ratón la ventana del primer modelo
+y en \textbf{\emph{\texttt{omitir}}} y marque las tres variables, o bien ejecute el
+código:
+\begin{verbatim}
+ols BUSTRAVL 0 FARE GASPRICE INCOME POP DENSITY LANDAREA
+ModeloFinal <- omit FARE GASPRICE LANDAREA
+modeltab add
+\end{verbatim}
+¿Son conjuntamente significativas? ¿Mejora la precisión de las
+estimaciones? ¿y los criterios de selección? ¿Son los signos de
+los parámetros los esperados? A la luz de los resultados, viajar
+en autobús ¿parece ser un bien normal, o un bien inferior?
+\end{itemize}
+
+\item[{Actividad 8}] Toda la inferencia que hemos realizado se basa en la
+hipótesis de normalidad de los residuos. Contraste si se puede
+rechazar o no la hipótesis de normalidad en ambos modelos (el
+inicial y el final). El contraste Jarque-Bera es el más frecuente en
+Econometría.
+\begin{itemize}
+\item En la ventana de resultados de un modelo ``pinche'' en
+\textbf{\emph{\texttt{contrastes -{}-> Normalidad de los residuos}}}, o bien ejecute el
+código:
+\begin{verbatim}
+series e = $uhat
+normtest --all e
+\end{verbatim}
+Piense que los contrastes realizados en la anteriores actividades,
+asumen la normalidad de las perturbaciones. Si esta hipótesis es
+rechazada toda la inferencia de los contrates anteriores podría
+quedar cuestionada.
+\end{itemize}
+\end{description}
+
+\subsection{Código completo de la práctica \texttt{BusTravelers.inp}}
+\label{sec:org29c0ce6}
+\lstinputlisting{scripts/BusTravelers.inp}
+\clearpage
+\end{document}

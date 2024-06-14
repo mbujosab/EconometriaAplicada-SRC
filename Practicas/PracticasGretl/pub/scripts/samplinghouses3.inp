@@ -1,0 +1,32 @@
+open data3-1.gdt
+series x  = sqft
+series ys = 52 + 0.14*x
+scalar s  = 39
+
+matrix X   = {const, sqft}
+matrix invXTX = invpd(X'X) # inversa de X'X
+scalar m11 = invXTX[1,1]
+scalar m21 = invXTX[2,1]
+scalar m22 = invXTX[2,2]
+
+loop 10000 --progressive --quiet
+   series U = randgen(u, -5,  5)              # Descomente el que corresponda
+   #series U = randgen(beta, 0.5, 0.5) - 0.5   # Descomente el que corresponda
+   #series U = randgen(X, 3) - 3               # Descomente el que corresponda
+   y = ys + U
+   ols y const x
+   scalar b1   = $coeff(const)
+   scalar b2   = $coeff(x)
+   scalar cs2  = $ess/$df                      # cuasivarianza de los errores
+   print b1 b2 cs2
+   store "@workdir\coef.gdt" b1 b2 cs2 m11 m21 m22    
+endloop
+open "@workdir\coef.gdt"
+summary   --simple  b1 b2 cs2
+freq b1   --normal --silent --plot="display"
+freq b2   --normal --silent --plot="display"
+freq cs2  --normal --silent --plot="display"
+
+matrix s2invXTXhat = {var(b1), cov(b1,b2); cov(b2,b1), var(b2)}
+matrix s2invXTX    = mean(cs2)*{m11[1],m21[1];m21[1],m22[1]}
+print s2invXTX s2invXTXhat

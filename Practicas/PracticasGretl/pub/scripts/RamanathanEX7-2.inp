@@ -1,0 +1,10 @@
+open data7-3
+Modelo1 <- ols price const sqft
+Modelo2 <- ols price const sqft bedrms baths pool famroom firepl
+Modelo3 <- omit --auto
+
+series lsqft = log(sqft)
+Modelo4 <- ols price 0 lsqft
+Modelo5 <- ols price 0 lsqft bedrms baths pool famroom firepl
+Modelo6 <- omit --auto
+Modelo7 <- omit lsqft

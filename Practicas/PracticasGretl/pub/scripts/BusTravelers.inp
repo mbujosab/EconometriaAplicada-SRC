@@ -1,0 +1,26 @@
+open data4-4
+
+summary BUSTRAVL FARE GASPRICE INCOME POP DENSITY LANDAREA --simple
+corr BUSTRAVL FARE GASPRICE INCOME POP DENSITY LANDAREA --plot="display"  
+fare_bustravl     <- gnuplot BUSTRAVL FARE     --output="display"
+gasprice_bustravl <- gnuplot BUSTRAVL GASPRICE --output="display"
+income_bustravl   <- gnuplot BUSTRAVL INCOME   --output="display"
+pop_bustravl      <- gnuplot BUSTRAVL POP      --output="display"
+density_bustravl  <- gnuplot BUSTRAVL DENSITY  --output="display"
+landarea_bustravl <- gnuplot BUSTRAVL LANDAREA --output="display"
+
+ModeloInicial <- ols BUSTRAVL 0 FARE GASPRICE INCOME POP DENSITY LANDAREA
+modeltab add
+
+omit GASPRICE
+
+omit LANDAREA
+
+omit FARE
+
+ols BUSTRAVL 0 FARE GASPRICE INCOME POP DENSITY LANDAREA
+ModeloFinal <- omit FARE GASPRICE LANDAREA
+modeltab add
+
+series e = $uhat
+normtest --all e

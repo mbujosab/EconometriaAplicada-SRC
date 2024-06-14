@@ -1,0 +1,12 @@
+open datos/cigfecfr.gdt
+
+Diagrama  <- gnuplot fec cig  --output="display"
+scalar rho = corr(fec, cig)
+ols fec 0 cig
+
+FecCig <- gnuplot fec cig --time-series --with-lines --output="display" 
+series cig6=cig(-6)
+
+Diagrama6 <- gnuplot fec cig6 --output="display"
+scalar rho = corr(fec, cig6)
+ols fec 0 cig6

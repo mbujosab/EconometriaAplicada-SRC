@@ -1,0 +1,18 @@
+open Table_8.9.gdt
+
+ModeloR       <- ols SAVINGS 0 INCOME --quiet
+scalar sse_R  = $ess
+
+smpl 1 12
+ModeloU1      <- ols SAVINGS 0 INCOME --quiet
+scalar sse_U1  = $ess
+
+smpl full
+smpl 13 26
+ModeloU2      <- ols SAVINGS 0 INCOME --quiet
+scalar sse_U2  = $ess
+
+scalar sse_U = sse_U1+sse_U2
+smpl full
+scalar chowtest = ((sse_R-sse_U)/2)/(sse_U/($nobs-4))
+pvalue F 2 $nobs-4 chowtest

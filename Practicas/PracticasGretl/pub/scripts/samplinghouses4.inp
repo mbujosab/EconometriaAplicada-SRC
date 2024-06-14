@@ -1,0 +1,31 @@
+open data3-1.gdt
+# nulldata 150
+
+series x = sqft
+# series x = randgen(U,1000,3000)
+
+# Generamos parte sistematica del modelo
+series ys = 52 + 0.14*x
+
+# Desviacion tipica de las perturbaciones
+scalar s  = 39
+scalar gl = 1
+loop 100000 --progressive --quiet
+    series U = randgen(n, 0, s)
+    #series U = randgen(X, gl) - gl
+    scalar m = mean(U)
+    series y = ys + U
+    
+    ols y const x
+    # Hnula (b1=52)
+    scalar t = ($coeff(const)-52)/$stderr(const)
+    scalar p = 2*pvalue(t,$df,abs(t))
+
+    print p m
+    store "@workdir\pvalue.gdt" p m
+endloop
+
+open "@workdir\pvalue.gdt"
+series ns = p<0.05
+summary ns
+freq ns --plot="display"

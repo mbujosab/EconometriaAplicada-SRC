@@ -1,0 +1,39 @@
+open data3-1
+
+Modelo   <- ols price const sqft
+
+# Hnula (b2=0.1)    Halt (b2>0.1)
+scalar t1 = ($coeff(sqft)-0.1)/$stderr(sqft)
+scalar c1 = critical(t,$df,.05)
+scalar p1 = pvalue(t,$df,t1)
+
+# Hnula (b2=0.15) Halt (b2<0.15) 
+scalar t2 = ($coeff(sqft)-0.15)/$stderr(sqft)
+scalar c2 = -1*critical(t,$df,.05)          # alternativa A
+scalar c2 =    critical(t,$df,.95)          # alternativa B
+scalar p2 = 1-pvalue(t,$df, t2)             # Alternativa 1
+scalar p2 =   pvalue(t,$df,-t2)             # Alternativa 2
+
+# Hnula (b1=0)    Halt (b1<0) 
+scalar t3 = ($coeff(const)-0)/$stderr(const)
+scalar c3 =   critical(t,$df,.95)
+scalar p3 = 1-pvalue(t,$df,t3)
+
+# Hnula (b1=0)    Halt (b1>0) 
+scalar t3 = ($coeff(const)-0)/$stderr(const)
+scalar c3 = critical(t,$df,.05)
+scalar p3 = pvalue(t,$df,t3)
+
+# Hnula (b2=0.15)  Halt (b1~=0.15) Bilateral
+scalar t4 = ($coeff(sqft)-0.15)/$stderr(sqft)
+scalar c4 = critical(t,$df,.025)
+scalar p4 = 2*pvalue(t,$df,abs(t4))
+scalar f4 = t4^2
+scalar pf4 = pvalue(f,1,$df,f4)
+
+# Hnula (b1+b2=10)  Halt (b1+b2~=10) Bilateral
+scalar t5 = ($coeff(sqft)+$coeff(const)-10)/sqrt($vcv[1,1]+$vcv[2,2]+2*$vcv[1,2])
+scalar c5 = critical(t,$df,.025)
+scalar p5 = 2*pvalue(t,$df,abs(t5))
+scalar f5 = t5^2
+scalar pf5 = pvalue(f,1,$df,f5)

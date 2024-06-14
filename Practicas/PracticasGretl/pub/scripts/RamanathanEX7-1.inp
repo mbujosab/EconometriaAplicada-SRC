@@ -1,0 +1,45 @@
+open data7-2
+/* Primer modelo e interpretación */
+Modelo1     <- ols WAGE const GENDER EXPER
+scalar efG1 =  $coeff(GENDER)                
+printf "\n \
+En media, un hombre gana %4.2f dólares más que una mujer\n\n",  $coeff(GENDER)
+
+printf "\n \
+En media, por cada año adicional de experiencia el salario (de hombres y mujeres)\n\
+aumenta %4.2f dólares\n\n", $coeff(EXPER)
+
+/* Segundo modelo e interpretación */
+logs WAGE
+Modelo2     <- ols l_WAGE const GENDER EXPER 
+printf "\n Un hombre cobra en media (aprox.) un %3.1f%% más que una mujer\n\n", 
+100*(exp( $coeff(GENDER))-1)
+
+printf "\n En media, el salario de una mujer es (aprox.) un %3.1f%% menor que el de un hombre\n\n", 
+100*(exp(-$coeff(GENDER))-1)*(-1)
+
+printf "\n \
+Cada año de experiencia aumenta el salario esperado (de hombres y mujeres) un %2.2f%% (aprox.)\n\n", 
+$coeff(EXPER)*100
+
+# Como \$coeff(EXPER) es pequeño, la aproximacion anterior es suficientemente buena. 
+# Comprobémoslo con el calculo correcto...
+printf "\n (con mayor precision) \n \
+Cada año de experiencia aumenta el salario esperado (de hombres y mujeres) un %2.2f%%\n\n", 
+(exp($coeff(EXPER))-1)*100
+
+/* Tercer modelo e interpretación */
+Modelo3     <- ols l_WAGE const GENDER EXPER EDUC 
+printf "\n Un hombre cobra en media (aprox.) un %3.1f%% más que una mujer\n\n", 
+100*(exp( $coeff(GENDER))-1)
+
+printf "\n En media, el salario de una mujer es (aprox.) un %3.1f%% menor que el de un hombre\n\n", 
+100*(exp(-$coeff(GENDER))-1)*(-1)
+
+printf "\n \
+Cada año de experiencia aumenta el salario esperado (de hombres y mujeres) un %2.2f%%\n\n", 
+(exp($coeff(EXPER))-1)*100
+
+printf "\n \
+Cada año de educación aumenta el salario esperado (de hombres y mujeres) un %2.2f%%\n\n", 
+(exp($coeff(EDUC))-1)*100

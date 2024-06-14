@@ -1,0 +1,64 @@
+nulldata 1500
+series C = randgen(N, 40, 20)
+series S = randgen(U, 20, 70) + C
+series D = randgen(X, 8) + 100 - C
+series U = randgen(N, 0, 40)
+series P = 300 + 5*S - 2*D + U
+
+ModeloCompleto <- ols P 0 S D
+modeltab add    
+ModeloSinD <- ols P 0 S
+modeltab add
+ModeloSinS <- ols P 0 D
+modeltab add
+ModeloSin1 <- ols P S D
+modeltab add
+
+# calculo del coeficiente de determinacion
+scalar R2Sin1 = 1 - $ess/(($T-1) * var(P))
+scalar R2AjustadoSin1 = 1 - ($T-1)/($T-2)*(1 - R2Sin1)
+
+# ortogonalizamos D respecto de las constantes
+series D0 = D - mean(D)
+# o de manera equivalente
+ols D 0 
+series D0 = $uhat
+
+# ortogonalizamos S respecto de las constantes y D
+ols S 0 D
+series SpD = $uhat
+
+ModeloCompleto2   <- ols P 0 SpD D0
+modeltab add
+
+ModeloSolo1       <- ols P 0
+modeltab add
+
+ModeloSoloS       <- ols P SpD
+modeltab add
+
+ModeloSoloD       <- ols P D0
+modeltab add
+
+modeltab show
+
+## Dos ajustes curiosos
+
+ols 0 S D                # proyeccion del vector 1 sobre S y D
+series cte = $uhat       # componente del vector 1 que es perpendicular a S y a D
+
+##################### Primer ajuste curioso ##################
+ols S cte D
+series SpD = $uhat       # componente de S que es perpendicular a "cte" y a D
+
+# regresion MCO que mantiene la pendiente de S del ajuste sin cte
+ModeloCompletoAlternativo1 <- ols P cte SpD D 
+modeltab add
+
+##################### Segundo ajuste curioso ##################
+ols D cte S
+series DpS = $uhat       # componente de D que es perpendicular a cte y a S
+## regresion MCO que mantiene la pendiente de D del ajuste sin cte
+ModeloCompletoAlternativo2 <- ols P cte DpS S 
+modeltab add  
+modeltab show

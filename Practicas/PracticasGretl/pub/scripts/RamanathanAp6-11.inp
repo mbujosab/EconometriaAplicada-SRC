@@ -1,0 +1,13 @@
+open data4-4
+logs BUSTRAVL FARE GASPRICE INCOME POP DENSITY LANDAREA  
+ols l_BUSTRAVL const l_FARE l_GASPRICE l_INCOME l_POP l_DENSITY l_LANDAREA 
+LogLog <- omit --auto
+
+scalar tInc  = (abs($coeff(l_INCOME))  -1) / $stderr(l_INCOME)
+scalar pInc  = 2*pvalue(t,$df,abs(tInc))
+
+scalar tPop  = (abs($coeff(l_POP))     -1) / $stderr(l_POP)
+scalar pPop  = 2*pvalue(t,$df,abs(tPop))
+
+scalar tLand = (abs($coeff(l_LANDAREA))-1) / $stderr(l_LANDAREA)
+scalar pLand = 2*pvalue(t,$df,abs(tLand))

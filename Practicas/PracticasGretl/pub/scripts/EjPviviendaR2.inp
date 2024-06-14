@@ -1,0 +1,4 @@
+open data3-1
+ols price const sqft
+genr phat  = $yhat
+scalar Coef_detR2 = corr(price,phat)^2

@@ -1,0 +1,22 @@
+open Table_8.8.gdt
+
+logs GDP Employ Capital
+
+# modelo 1
+U <- ols l_GDP const l_Employ l_Capital
+
+restrict
+ b[2]+b[3]=1
+end restrict
+
+series CE   = Capital/Employ
+series GDPE = GDP/Employ
+logs CE GDPE
+
+# modelo 2
+R <- ols l_GDPE const l_CE
+
+/* contraste de la F mediante sumas residuales */
+scalar r = 1                             # num. restriciones (solo una en este caso)
+scalar f = U.$df*(R.$ess-U.$ess)/U.$ess/r
+pvalue F r U.$df f

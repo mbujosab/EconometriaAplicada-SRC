@@ -1,0 +1,28 @@
+open wage1.gdt 
+series marrmale   = married*(1-female)
+series marrfem    = married*female
+series singmale   = (1-married)*(1-female)
+series singfem    = (1-married)*female
+Modelo1 <- ols lwage 0 marrmale marrfem singfem educ exper expersq tenure tenursq
+
+scalar efectoHombreCas   = 100*(exp($coeff(marrmale)) -1)
+scalar efectoMujerCas    = 100*(exp($coeff(marrfem) ) -1)
+scalar efectoMujerSolt   = 100*(exp($coeff(singfem) ) -1)
+
+scalar DifemSolCas       = $coeff(singfem)-$coeff(marrfem)
+
+scalar EDifemSolCas      = 100*(exp(DifemSolCas) -1)
+
+scalar VarDif    = $vcv(singfem,singfem) + $vcv(marrfem,marrfem) - 2*$vcv(singfem,marrfem)
+scalar StdDif    = sqrt(VarDif)
+scalar c1        = critical(t, $T-$ncoeff, 0.975)
+scalar c2        = critical(t, $T-$ncoeff, 0.025)
+matrix int       = { DifemSolCas+c1*StdDif , DifemSolCas+c2*StdDif }
+print int
+
+Modelo2 <- ols lwage 0 marrmale singmale singfem educ exper expersq tenure tenursq
+
+scalar efecto    = 100*(exp($coeff(singfem))-1)
+matrix intervalo = 100*(exp(int)-1)
+
+print int intervalo

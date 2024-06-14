@@ -1,0 +1,36 @@
+scalar TM  = 500
+nulldata --preserve TM
+series S = randgen(U, 35, 120)
+series D = randgen(X, 5) * 3
+series YS = 100 + 3*S - 130*D
+scalar mu    = 0
+scalar sigma = 100
+loop 5000 --progressive --quiet
+     series U  = randgen(N, 0, 1)
+     series U  = U - mean(U)
+     series U  = U / sqrt( var(U)*(TM-1)/TM )
+     series U  = mu + sigma * U
+     ols U 0 S D
+     series U  = $uhat
+
+     series Y   = YS + U
+     scalar m   = mean(U)      # U ortogonal al vector 1 solo si su media es cero
+     scalar us  = corr(U,S)    # U ortogonal al vector S solo si la corr. es cero
+     scalar us2 = mean(U*S)    # U ortogonal al vector S solo si la corr. es cero
+     scalar ud  = corr(U,D)    # U ortogonal al vector D solo si la corr. es cero
+     scalar ud2 = mean(U*D)    # U ortogonal al vector D solo si la corr. es cero
+     ols Y 0 S D
+     scalar b1 = $coeff(const)
+     scalar b2 = $coeff(S)
+     scalar b3 = $coeff(D)
+     print m us us2 ud ud2 b1 b2 b3
+     store "@workdir/coef.gdt" m us us2 ud ud2 b1 b2 b3
+endloop
+open "@workdir/coef.gdt"
+
+MediaU_b1        <- gnuplot b1 m  --output="display"
+AnguloUconS2_b2  <- gnuplot b2 us --output="display"
+AnguloUconD3_b3  <- gnuplot b3 ud --output="display"
+
+AnguloUconD3_b2  <- gnuplot b2 ud --output="display"
+AnguloUconS2_b3  <- gnuplot b3 us --output="display"

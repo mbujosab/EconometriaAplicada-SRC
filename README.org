@@ -1,0 +1,5 @@
+* Código fuente del material para un curso de Econometría Aplicada
+
+Fuente del material para impartir la asignatura Econometría Aplicada
+
+- [[https://drive.google.com/open?id=0Bwa1A30pN0IwWUtNNzRQRFRJUTQ][Ficha de la asignatura]]

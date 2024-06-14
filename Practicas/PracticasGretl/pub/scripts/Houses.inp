@@ -1,0 +1,31 @@
+open data4-1
+
+Modelo1 <- ols price 0 sqft bedrms baths
+
+series yhat1 = $coeff(const)+$coeff(sqft)*1600+$coeff(bedrms)*3+$coeff(baths)*2
+series yhat2 = $coeff(const)+$coeff(sqft)*(1600+220)+$coeff(bedrms)*(3+1)+$coeff(baths)*2
+
+corr sqft bedrms baths
+
+omit baths
+
+omit bedrms
+
+ols price 0 sqft bedrms baths
+Modelo2 <- omit baths bedrms
+
+dataset addobs 1
+genr sqft[15] =1820
+genr bedrms[15]=4
+genr baths[15] =2
+
+smpl 1 15
+ols price const sqft bedrms baths
+
+fcast 15 15 --static
+fcast --plot="display"
+
+ols price const sqft
+
+fcast 15 15 --static
+fcast --plot="display"

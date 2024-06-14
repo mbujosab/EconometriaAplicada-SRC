@@ -1,0 +1,29 @@
+nulldata 1000                             # tamano de muestra en la simulacion
+loop 5000 --progressive --quiet
+
+     series C = randgen(U, 0   , 40 )     # C: un factor comun en S y D
+     series S = randgen(U, 35  ,100 ) + C # datos S correspondientes a la superficie
+     series D = randgen(X, 10)        + C # datos D correspondientes a la distancia
+     series U = randgen(N, 0   , 40 )     # U: otros factores que afectan a P
+     series P = 100 +3*S -130*D +U        # precios P como combinacion lineal de regresores + U
+     
+     ols P 0 S D                          # Regresion MCO Verdadero modelo: P = 100 +3*S -130*D +U
+     scalar C1     = $coeff(const)
+     scalar S1     = $coeff(S)
+     scalar D1     = $coeff(D)
+     scalar sigma1 = $sigma
+
+     ols P 0 D                            # Regresion MCO omision S
+     scalar C2     = $coeff(const)
+     scalar D2     = $coeff(D)
+     scalar sigma2 = $sigma
+
+     ols P 0 S                            # Regresion MCO omision D
+     scalar C3     = $coeff(const)
+     scalar S3     = $coeff(S)
+     scalar sigma3 = $sigma
+
+     print C1 S1 D1 sigma1 
+     print C2    D2 sigma2
+     print C3 S3    sigma3
+endloop

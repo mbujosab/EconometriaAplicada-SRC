@@ -1,0 +1,24 @@
+open data3-1.gdt
+Modelo <- ols price 0 sqft
+
+series x  = sqft
+series ys = 52 + 0.14*x
+
+scalar s  = 39
+
+loop 10000 --progressive --quiet
+   series y = ys + randgen(N, 0, s)
+   ols y const x
+   scalar b1   = $coeff(const)
+   scalar b2   = $coeff(x)
+   scalar cs2  = $ess/$df                      # cuasivarianza de los errores
+   print b1 b2 cs2
+   store "@workdir\coef.gdt" b1 b2 cs2
+endloop
+
+open "@workdir\coef.gdt"
+
+summary   --simple
+freq b1   --normal --silent --plot="display"
+freq b2   --normal --silent --plot="display"
+freq cs2  --normal --silent --plot="display"

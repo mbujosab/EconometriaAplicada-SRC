@@ -1,0 +1,271 @@
+% Created 2024-06-13 jue 10:59
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[spanish, ]{babel}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[svgnames,x11names]{xcolor}
+\hypersetup{linktoc = all, colorlinks = true, urlcolor = DodgerBlue4, citecolor = PaleGreen1, linkcolor = SpringGreen4}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{nacal}
+\usepackage{framed}
+\usepackage{listings}
+\input{hansl.tex}
+\lstnewenvironment{hansl-gretl}
+{\lstset{language={hansl},basicstyle={\ttfamily\footnotesize},numbers,rame=single,breaklines=true}}
+{}
+\newcommand{\hansl}[1]{\lstset{language={hansl},basicstyle={\ttfamily\small}}\lstinline{#1}}
+\lstset{backgroundcolor=\color{lightgray!20}, }
+\author{Marcos Bujosa}
+\date{\today}
+\title{Lección 1}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+
+\section{Número de viajeros internacionales}
+\label{sec:org805c6da}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/airlinePass.inp}{airlinePass.inp}\\
+\end{tabular}
+\end{center}
+
+En esta primera práctica con \href{https://gretl.sourceforge.net/es.html}{Gretl} reproduciremos el ejemplo visto en
+clase, en el que hemos aplicado distintas transformaciones a los datos
+hasta obtener una serie temporal que podemos asumir que podría ser una
+realización de un proceso estocástico estacionario.  Los datos son
+mensuales y contienen el número de viajeros internacionales (en miles)
+en las líneas aéreas norteamericanas en los años 1949--1960 que
+aparece en manual de Box \& Jenkins.
+
+\begin{enumerate}
+\item Objetivo
+\label{sec:orgef80f2a}
+\begin{enumerate}
+\item Reproducir el primer ejemplo visto en clase.
+\item Mostrar datos.
+\item Transformalos
+\item Generar gráficos.
+\end{enumerate}
+
+\item Carga de datos
+\label{sec:org0590275}
+\textbf{\emph{\texttt{Archivo -{}-> Abrir datos -{}-> Archivo de muestra}}} y en la pestaña
+\textbf{\emph{\texttt{Gretl}}} seleccione \texttt{bjg}.
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+open bjg
+\end{verbatim}
+}
+\end{enumerate}
+
+\subsection{Actividad 1 - mostrar datos}
+\label{sec:orge59612f}
+\begin{enumerate}
+\item Visualice los datos de precios y tamaños de las casas
+\label{sec:org7e88022}
+\begin{itemize}
+\item En la ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}, marque con el ratón la 
+variable: \texttt{g}.
+\item ``Pinche'' sobre ella con el botón derecho del ratón.
+\item Seleccione \textbf{\emph{\texttt{mostrar valores}}} del menú desplegable que se ha
+abierto al pinchar.
+
+{\vspace{1pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+print -o g
+\end{verbatim}
+}
+\end{itemize}
+
+\vspace{-3pt}
+
+\item Ayuda
+\label{sec:orgce2b207}
+Para consultar la documentación sobre cualquier comando, puede emplear
+el menú desplegable \textbf{\emph{\texttt{Ayuda}}} que aparece arriba, a la derecha de la
+ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
+\begin{itemize}
+\item \textbf{\emph{\texttt{Ayuda -> Guía de Instrucciones}}} y ``pinche'' sobre \textbf{\emph{\texttt{print}}}
+\end{itemize}
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}: \texttt{help print}
+}
+\end{enumerate}
+
+\subsection{Actividad 2 - Gráfico de series temporales}
+\label{sec:org059848e}
+\begin{enumerate}
+\item Scatter plot
+\label{sec:org0e0d6f5}
+\begin{itemize}
+\item Marque la variable \texttt{g} (pulsando \texttt{ctrl} y pinchando con el botón
+derecho del ratón sobre ella). Elija \textbf{\emph{\texttt{Gráfico de series temporales}}}
+
+{\vspace{1pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}: \texttt{gnuplot g -{}-time-series -{}-with-lines}
+}
+\end{itemize}
+
+\item Guardar gráfico como \emph{icono} para editarlo más tarde
+\label{sec:org03e1df3}
+\begin{itemize}
+\item ``Pinche'' con el botón derecho sobre la ventana del gráfico.
+\item Seleccione \textbf{\emph{\texttt{Guardar a sesión como icono}}}
+
+{\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+AirlinePassengers <- gnuplot g --time-series --with-lines
+\end{verbatim}
+(\texttt{AirlinePassengers} \emph{es el nombre con el que se guardará el icono})
+}
+\end{itemize}
+
+En la zona inferior izquierda de la ventana principal puede ver una
+serie de iconos. Uno de ellos es la \textbf{\emph{\texttt{vista de iconos de sesión}}}.
+\end{enumerate}
+
+
+\subsection{Actividad 3 - Transformar logarítmicamente los datos}
+\label{sec:orgc63b462}
+Aunque el fichero ya contiene el logaritmo de la serie, vamos a
+tranfformar logarítmicamente los datos originales.
+
+Selecione con el ratón la variable \texttt{g} y luego pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
+ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
+\begin{itemize}
+\item \textbf{\emph{\texttt{Añadir -> Logaritmos de las variables seleccionadas}}}
+\end{itemize}
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}: 
+\begin{verbatim}
+logs g
+\end{verbatim}
+}
+
+Entre las variables aparecerá una nueva con el prefijo \texttt{l\_}, es decir,
+en este caso aparecerá la variable \texttt{l\_g} (que contiene exactamente la
+misma serie temporal que \texttt{lg}).
+
+Genere el gráfico de series temporales de esta nueva serie y guardelo
+como un nuevo icono (use un nombre suficientemente descriptivo para el
+icono, por ejemplo \texttt{LogsAirlinePassengers})
+
+\subsection{Actividad 4 - Primera diferencia de los datos en logaritmos}
+\label{sec:org2444ac7}
+
+Selecione con el ratón la variable \texttt{l\_g} y luego pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
+ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
+\begin{itemize}
+\item \textbf{\emph{\texttt{Añadir -> Primeras diferencias de las variables seleccionadas}}}
+\end{itemize}
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}: 
+\begin{verbatim}
+diff l_g
+\end{verbatim}
+}
+
+Entre las variables aparecerá una nueva con el prefijo \texttt{d\_}, es decir,
+en este caso aparecerá la variable \texttt{d\_l\_g}.
+
+Genere el gráfico de series temporales de esta nueva serie y guardelo
+como un nuevo icono (Use un nombre suficientemente descriptivo, por
+ejemplo \texttt{D\_LogsAirlinePassengers})
+
+\subsection{Actividad 5 - El logaritmo no es una función lineal}
+\label{sec:org6efa756}
+
+Aunque el operador primera diferencia es lineal, la función logaritmo
+no lo es. Comprobemos que no es lo mismo la primera diferencia del
+logaritmo (calculado en la actividad anterior) que el logaritmo de la
+diferencia.
+
+\begin{itemize}
+\item Añada la primera diferencia de \texttt{g} y luego el logaritmo de \texttt{d\_g}.
+\item Marque con el ratón \texttt{d\_l\_g} y \texttt{l\_d\_g} y muestre sus valores; verá
+que son distintos (no solo eso, dado que la función logaritmo solo
+está definida para números positivos, en \texttt{l\_d\_g} parecen una gran
+cantidad de valores ausentes).
+\end{itemize}
+
+\begin{verbatim}
+diff g
+logs d_g
+print -o d_l_g l_d_g
+\end{verbatim}
+
+\subsection{Actividad 6 - Diferencia de orden 12 (o estacional) de la primera diferencia de los datos en logaritmos}
+\label{sec:orgb256d47}
+Selecione con el ratón la variable \texttt{d\_l\_g} y luego pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
+ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
+\begin{itemize}
+\item \textbf{\emph{\texttt{Añadir -> Diferencias estacionales de las variables seleccionadas}}}
+\end{itemize}
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}: 
+\begin{verbatim}
+sdiff d_l_g
+\end{verbatim}
+}
+
+Entre las variables aparecerá una nueva con el prefijo \texttt{sd\_}, es
+decir, en este caso aparecerá la variable \texttt{sd\_d\_l\_g}.
+
+Genere el gráfico de series temporales de esta nueva serie y guardelo
+como un nuevo icono (Use un nombre suficientemente descriptivo, por
+ejemplo \texttt{D12\_D\_LogsAirlinePassengers})
+
+Observe que en la serie obtenida ya no se observa ni tendencia ni un
+componente cíclico estacional.
+
+\subsection{Actividad 5 - El orden en que se aplican los operadores diferencia y diferencia estacional es irelevante}
+\label{sec:org077f8e1}
+
+\begin{enumerate}
+\item calcule la diferencia estacional de la serie en logaritmos \texttt{l\_g} y
+genere su gráfico
+
+Observe que en la serie obtenida ya no el componente cíclico
+estacional, pero sin embargo el promedio de cada año "deambula"
+alrededor del valor \(0.1\) en ciclos de unos 4 años
+
+\item ahora tome una primera diferencia de la serie anterior (sd\textsubscript{l}\textsubscript{g}) y
+compruebe las diferencias entre la serie resultante (\texttt{d\_sd\_l\_g}) y
+la obtenida en la actividad anterior (\texttt{sd\_d\_l\_g}).
+\end{enumerate}
+
+Es decir, el orden en que se tomen la diferencia ordinaria y la
+diferencia estacional es irrelevante (pero recuerde que no pasa lo
+mismo con la transformación logarítmica, que debe la primera
+transformación aplicada a los datos).
+
+\vspace{10pt}
+\noindent
+\textbf{Código completo de la práctica} \texttt{airlinePass.inp}
+\vspace{10pt}
+\lstinputlisting{scripts/airlinePass.inp}
+\clearpage
+\end{document}

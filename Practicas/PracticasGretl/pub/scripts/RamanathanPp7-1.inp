@@ -1,0 +1,10 @@
+open data7-1
+ols WAGE 0 D
+
+scalar Wbar  = mean(WAGE)
+scalar Hbar  = sum(WAGE*D)/sum(D)
+scalar Mbar  = sum(WAGE*(1-D))/sum(1-D)
+
+summary WAGE --simple --by=D
+
+scalar difer = Hbar-Mbar

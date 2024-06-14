@@ -1,0 +1,36 @@
+nulldata 1000                          # tamano de muestra en la simulacion
+
+matrix C = {1 , 0; -10, 1}
+
+loop 10000 --progressive --quiet
+     series S  = randgen(N,  10 , 5)   # primer regresor
+
+     series X  = randgen(N, -10 , 5)  
+     matrix Z  = {S,X}
+     Z *= C'                           # note: use the transpose '
+     series D = Z[,2]                  # segundo regresor
+
+     series U  = randgen(N, 0   , 40 ) # perturbaciones
+
+     series Y = 1 + 10*S -1*D + U      # regresando
+     
+     ols Y 0 S D                       # Regresion MCO modelo completo
+     scalar C1     = $coeff(const)
+     scalar S1     = $coeff(S)
+     scalar D1     = $coeff(D)
+     scalar sigma1 = $sigma
+
+     ols Y 0 D                         # Regresion MCO omision S
+     scalar C2     = $coeff(const)
+     scalar D2     = $coeff(D)
+     scalar sigma2 = $sigma
+
+     ols Y 0 S                         # Regresion MCO omision D
+     scalar C3     = $coeff(const)
+     scalar S3     = $coeff(S)
+     scalar sigma3 = $sigma
+
+     print C1 S1 D1 sigma1
+     print C2    D2 sigma2
+     print C3 S3    sigma3
+endloop

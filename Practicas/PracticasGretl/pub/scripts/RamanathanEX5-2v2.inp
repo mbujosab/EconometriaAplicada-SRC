@@ -1,0 +1,28 @@
+open data3-7.gdt
+
+ModeloA      <- ols cost 0 age
+modeltab add
+
+AuxRegA      <- ols miles const age
+series uhatMiles = $uhat
+
+corr uhatMiles age
+
+ModeloA_Raux <- ols cost 0 age uhatMiles
+modeltab add
+vif
+
+ModeloB      <- ols cost 0 miles
+modeltab add
+
+AuxRegB      <- ols age 0 miles
+series uhatAge   = $uhat
+
+ModeloB_Raux <- ols cost 0 miles uhatAge
+modeltab add
+vif
+
+ModeloC      <- ols cost 0 age miles
+modeltab add
+
+modeltab show
