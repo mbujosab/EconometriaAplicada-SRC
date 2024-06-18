@@ -3,6 +3,8 @@
 
 # +OPTIONS: toc:nil
 
+#+EXCLUDE_TAGS: pngoutput noexport
+
 #+startup: shrink
 
 
@@ -34,6 +36,18 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt   # data visualization
 mpl.rc('text', usetex=True)
 mpl.rc('text.latex', preamble=r'\usepackage{amsmath}')
+import dataframe_image as dfi
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results none
+from sympy.printing.preview import preview
+
+def repr_png(tex, ImgFile):
+    preamble = "\\documentclass[preview]{standalone}\n" \
+        "\\usepackage{booktabs,amsmath,amsfonts}\\begin{document}"    
+    preview(tex, filename=ImgFile, viewer='file', preamble=preamble, dvioptions=['-D','250'])
+    #return open(ImgFile,'rb').read()
 #+END_SRC
 
 
@@ -41,12 +55,14 @@ mpl.rc('text.latex', preamble=r'\usepackage{amsmath}')
 
 #+BEGIN_SRC jupyter-python :results replace output table
 
-import os
-for dirname, _, filenames in os.walk('./database'):
-    for filename in filenames:
-        print(os.path.join(dirname, filename))
+# import os
+# for dirname, _, filenames in os.walk('./database'):
+#     for filename in filenames:
+#         print(os.path.join(dirname, filename))
 
 #+END_SRC
+
+#+RESULTS:
 
 
 
@@ -73,6 +89,34 @@ for dirname, _, filenames in os.walk('./database'):
     /realización de un tramo/ de un proceso estocástico: 
 
    $$(x_1, x_2,\ldots x_n) \text{ es una realización de }\{X_t \mid t=1,2,\ldots n\}.$$
+
+** Datos de series temporales vs datos de sección cruzada
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+- Series temporales :: Corresponden a mediciones de un mismo objeto a
+  lo largo del tiempo. El índice indica el instante de cada medición.
+  Consecuentemente, el orden temporal de los datos podría ser
+  fundamental para explicar cada uno de ellos.
+
+  - El motivo es que frecuentemente la medición en un instante de
+    tiempo está relacionada con otras mediciones próximas en el
+    tiempo.
+
+  - Esto presupone que en el proceso estocástico subyacente,
+    $\boldsymbol{X}=\{X_t\}$, las variables aleatorias no son
+    independientes entre sí.
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+- Sección cruzada ::  el índice NO es cronológico. Cada índice es solo
+  una /etiqueta/ (asignada arbitrariamente) que identifica al
+  individuo, empresa, objeto, etc. que ha sido medido.
+  
+  - Por tanto, /el orden en el que aparecen los datos es irrelevante/.
+
+  - Consecuentemente, conocer únicamente el índice de un dato no
+    permite deducir nada respecto de cualquier otro dato.
 
 
 ** El desafío
@@ -221,12 +265,13 @@ Veamos ejemplos de series temporales para los que
 
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
+Leemos los datos de un fichero =csv= y generamos un =dataframe= de pandas.
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+BEGIN_SRC jupyter-python :exports code
-path = './database/Datasets-master/airline-passengers.csv'
-data = pd.read_csv(path)
-data['Month']=pd.to_datetime(data['Month'])
-data=data.set_index(['Month'])
-print(data.head())
+OrigData = pd.read_csv('./database/Datasets-master/airline-passengers.csv')
+OrigData['Month']=pd.to_datetime(OrigData['Month'])
+OrigData=OrigData.set_index(['Month'])
+print(OrigData.head())
 #+END_SRC
 
 #+RESULTS:
@@ -240,15 +285,6 @@ Month
 1949-05-01         121
 :END:
 
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :exports code :results silent
-data['data_log'] = np.log(data)
-data['data_log_diff'] = data['data_log'].diff(1)
-data['data_log_diff_diff12'] = data['data_log_diff'].diff(12)
-print(data.head())
-print(data.tail())
-#+END_SRC
-
 
 $$\boldsymbol{x}=(x_1,\ldots x_{114})$$
 
@@ -258,11 +294,11 @@ $$\boldsymbol{x}=(x_1,\ldots x_{114})$$
 #+BEGIN_SRC jupyter-python :results file :var image="img/airlinepass+hist.png" :results silent
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
-plt.plot(data['Passengers'])
+plt.plot(OrigData['Passengers'])
 plt.xlabel("Month")
 plt.ylabel(r"Number of Air Passengers, ($\boldsymbol{x}$)")
 plt.subplot(1, 2, 2)
-plt.hist(data['Passengers'], edgecolor='white', bins=11)
+plt.hist(OrigData['Passengers'], edgecolor='white', bins=11)
 plt.tight_layout()
 plt.savefig(image)   # "image" no definido. Comentar esta línea al ejecutar el notebook
 #+END_SRC
@@ -332,15 +368,25 @@ plt.savefig(image)   # "image" no definido. Comentar esta línea al ejecutar el 
 $$\ln\boldsymbol{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
+Vamos a crear un nuevo =dataframe= con los datos originales y varias transformaciones de los datos
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :exports code :results silent
+TransformedData = OrigData.copy()
+TransformedData['dataLog'] = np.log(OrigData['Passengers'])
+TransformedData['dataLogDiff'] = TransformedData['dataLog'].diff(1)
+TransformedData['dataLogDiffDiff12'] = TransformedData['dataLogDiff'].diff(12)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+NAME: figura-airlinepass-log
 #+BEGIN_SRC jupyter-python :results file :var image="img/airlinepass_log+hist.png" :results silent
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
-plt.plot(data['data_log'])
+plt.plot(TransformedData['dataLog'])
 plt.xlabel("Month")
 plt.ylabel(r"Log-Passengers, ($\ln\boldsymbol{x}$) ")
 plt.subplot(1, 2, 2)
-plt.hist(data['data_log'], edgecolor='white', bins=11)
+plt.hist(TransformedData['dataLog'], edgecolor='white', bins=11)
 plt.tight_layout()
 plt.savefig(image)   # "image" no definido. Comentar esta línea al ejecutar el notebook
 #+END_SRC
@@ -353,7 +399,7 @@ plt.savefig(image)   # "image" no definido. Comentar esta línea al ejecutar el 
 - Ahora la variabilidad estacional parece mantenerse de año en año
 - Pero la media sigue creciendo de año en año
 
-*** Primera diferencia de la trasformación logarítmica de los datos
+*** Primera diferencia del logarítmo de los datos
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
@@ -362,21 +408,21 @@ $$\boldsymbol{y}=\nabla\ln\boldsymbol{x}=\Big(\big[\ln(x_2)-\ln(x_1)\big],\ldots
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+NAME: figura-airlinepass-log-diff
-#+BEGIN_SRC jupyter-python :results file :var image="img/airlinepass_log_diff+hist.png" :results silent
+#+BEGIN_SRC jupyter-python :results file :var image="img/airlinepass_logDiff+hist.png" :results silent
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
-plt.plot(data['data_log_diff'])
+plt.plot(TransformedData['dataLogDiff'])
 plt.xlabel("Month")
 plt.ylabel(r"$\nabla\ln\boldsymbol{x}$")
 plt.subplot(1, 2, 2)
-plt.hist(data['data_log_diff'], edgecolor='white', bins=11)
+plt.hist(TransformedData['dataLogDiff'], edgecolor='white', bins=11)
 plt.tight_layout()
 plt.savefig(image)   # "image" no definido. Comentar esta línea al ejecutar el notebook
 #+END_SRC
 
 
 
-[[./img/airlinepass_log_diff+hist.png]]
+[[./img/airlinepass_logDiff+hist.png]]
 
 
 Esta serie tampoco parece /"estacionaria"/ (*)
@@ -386,7 +432,7 @@ Esta serie tampoco parece /"estacionaria"/ (*)
   mes o estación del año).
 # - Por tanto la varianza también cambia en las distintas estaciones.
 
-*** Diferencia estacional de la primera diferencia de la trasformación logarítmica de los datos
+*** Diferencia estacional de la primera diferencia del logarítmo de los datos
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
@@ -395,21 +441,21 @@ $$\boldsymbol{z}=\nabla_{12}(\nabla\ln\boldsymbol{x})=\nabla_{12}(\boldsymbol{y}
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+NAME: figura-airlinepass-log-diff-diff12
-#+BEGIN_SRC jupyter-python :results file :var image="img/airlinepass_log_diff_diff12+hist.png" :results silent
+#+BEGIN_SRC jupyter-python :results file :var image="img/airlinepass_logDiffDiff12+hist.png" :results silent
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
-plt.plot(data['data_log_diff_diff12'])
+plt.plot(TransformedData['dataLogDiffDiff12'])
 plt.xlabel("Month")
 plt.ylabel(r"$\nabla_{12}(\nabla\ln\boldsymbol{x})$")
 plt.subplot(1, 2, 2)
-plt.hist(data['data_log_diff_diff12'], edgecolor='white', bins=11)
+plt.hist(TransformedData['dataLogDiffDiff12'], edgecolor='white', bins=11)
 plt.tight_layout()
 plt.savefig(image)   # "image" no definido. Comentar esta línea al ejecutar el notebook
 #+END_SRC
 
 
 
-[[./img/airlinepass_log_diff_diff12+hist.png]]
+[[./img/airlinepass_logDiffDiff12+hist.png]]
 
 
 Esta serie se aproxima más al aspecto de la realización de un proceso /estacionario/
@@ -422,14 +468,69 @@ Esta serie se aproxima más al aspecto de la realización de un proceso /estacio
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python  :results none
+START = 100
+UnoPorCiento = lambda n0, t: n0 if t<=1 else 1.01 * UnoPorCiento(n0, t-1)
+TasaLogCrecimiento = pd.DataFrame({'$y_t$':[UnoPorCiento(START,t+1) for t in range(10)]})
+TasaLogCrecimiento['$\\frac{y_t-y_{t-1}}{y_{t-1}}$'] = TasaLogCrecimiento['$y_t$'].pct_change()
+TasaLogCrecimiento['$\\ln y_t$'] = np.log(TasaLogCrecimiento['$y_t$'])
+TasaLogCrecimiento['$\\nabla\\ln\\boldsymbol{y}$'] = TasaLogCrecimiento['$\\ln y_t$'] - TasaLogCrecimiento['$\\ln y_t$'].shift(+1)
+TasaLogCrecimiento['$\\frac{y_t-y_{0}}{y_{0}}$'] = TasaLogCrecimiento['$y_t$'].apply(lambda x: ((x/START)-1))
+TasaLogCrecimiento['$\\ln y_t- \\ln y_{0}$'] = TasaLogCrecimiento['$\\ln y_t$'] - TasaLogCrecimiento['$\\ln y_t$'].iloc[0]
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :var file="img/TasaLogCrecimiento.png"  :results none
+dfi.export(TasaLogCrecimiento, file, use_mathjax=True, dpi=200)
+#+END_SRC
+
 La tasa logarítmica de variación de $\boldsymbol{y}$ se define como
+$z_t=\ln{y_t}-\ln{y_{t-1}};$ es decir
 
 $$\boldsymbol{z}=\nabla\ln\boldsymbol{y} = \Big(\big[\ln(y_2)-\ln(y_1)\big],\ldots\; \big[\ln(y_{n})-\ln(y_{n-1})\big]\Big)$$
 
-es decir: $z_t=\ln y_t- \ln y_{t-1}$
+y se /aproxima/ a la tasa de crecimiento (en tanto por uno) si el
+incremento es pequeño.
 
-Es una aceptable /aproximación/ de la tasa de crecimiento (en tanto
-por uno) si los incrementos son pequeños.
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_org: :width 700
+#+attr_html: :width 250px
+#+attr_latex: :width 250px
+[[file:./img/TasaLogCrecimiento.png]]
+
+
+
+
+*** Observaciones sobre los datos transformados
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+
+#+begin_export html
+<style>
+.reveal  td {font-size: 135%;}
+</style>
+#+end_export
+#+ATTR_LATEX: :align |p{3.8cm}|p{11.9cm}|
+| Transformación  de la serie temporal @@latex:\newline@@ $\displaystyle \boldsymbol{y}=\{y_t\},\; t=1:n$ | Observaciones                                                                                                                                                             |
+|---------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| $\boldsymbol{z}=\ln\boldsymbol{y}=\{\ln y_t\}$                                                          | A veces independiza la volatilidad del nivel e induce normalidad.                                                                                                         |
+| $\boldsymbol{z}=\nabla\boldsymbol{y}=\{y_t-y_{t-1}\}$                                                   | Indica al crecimiento absoluto entre  periodos consecutivos.                                                                                                              |
+| $\boldsymbol{z}=\nabla\ln\boldsymbol{y}$                                                                | Tasa logarítmica de crecimiento. Aproximación del crecimiento relativo entre periodos consecutivos.                                                                       |
+| $\boldsymbol{z}=\nabla\nabla\ln\boldsymbol{y}=\nabla^2\ln\boldsymbol{y}$                                | Cambio en la tasa log, de crecimiento. Indica la “aceleración” en el crecimiento relativo.                                                                                |
+| $\boldsymbol{z}=\nabla_{s}\ln\boldsymbol{y}=$ @@latex:\newline\;@@ $\{\ln{y_t}-\ln{y_{t-s}}\}$          | Tasa de crecimiento acumulada en un ciclo estacional completo ($s$ períodos). Cuando el período estacional es de un año, se conoce como “tasa anual” o “tasa interanual”. |
+| $\boldsymbol{z}=\nabla\nabla_{s}\ln\boldsymbol{y}$                                                      | Cambio en la tasa de crecimiento acumulada en un ciclo estacional completo. Es un indicador de aceleración en el crecimiento acumulado.                                   |
+# :float sideways 
+
+
+* COMMENT Tabla con org mode                                       :noexport:
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+  
 
 #+begin_export html
 <style>
@@ -459,25 +560,76 @@ por uno) si los incrementos son pequeños.
 
 #+latex: \newpage
 
-*** Observaciones sobre los datos transformados
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
-   :END:
+De lo que hay debajo,  no sé si algo funciona
+#+BEGIN_SRC jupyter-python
+import IPython
+import tabulate
+
+class OrgFormatter(IPython.core.formatters.BaseFormatter):
+    format_type = IPython.core.formatters.Unicode('text/org')
+    print_method = IPython.core.formatters.ObjectName('_repr_org_')
+
+def pd_dataframe_to_org(df):
+    return tabulate.tabulate(df, headers='keys', tablefmt='orgtbl', showindex='always')
+
+ip = get_ipython()
+ip.display_formatter.formatters['text/org'] = OrgFormatter()
+
+f = ip.display_formatter.formatters['text/org']
+f.for_type_by_name('pandas.core.frame', 'DataFrame', pd_dataframe_to_org)
+#+END_SRC
+
+#+RESULTS:
 
 
-#+begin_export html
-<style>
-.reveal  td {font-size: 130%;}
-</style>
-#+end_export
-#+ATTR_LATEX: :align |p{3.8cm}|p{11.9cm}|
-| Transformación  de la serie temporal @@latex:\newline@@ $\displaystyle \boldsymbol{y}=\{y_t\},\; t=1:n$ | Observaciones                                                                                                                                                             |
-|---------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| $\boldsymbol{z}=\ln\boldsymbol{y}=\{\ln y_t\}$                                                          | A veces independiza la volatilidad del nivel e induce normalidad.                                                                                                         |
-| $\boldsymbol{z}=\nabla\boldsymbol{y}=\{y_t-y_{t-1}\}$                                                   | Indica al crecimiento absoluto entre  periodos consecutivos.                                                                                                              |
-| $\boldsymbol{z}=\nabla\ln\boldsymbol{y}$                                                                | Tasa logarítmica de crecimiento. Aproximación del crecimiento relativo entre periodos consecutivos.                                                                       |
-| $\boldsymbol{z}=\nabla\nabla\ln\boldsymbol{y}=\nabla^2\ln\boldsymbol{y}$                                | Cambio en la tasa log, de crecimiento. Indica la “aceleración” en el crecimiento relativo.                                                                                |
-| $\boldsymbol{z}=\nabla_{s}\ln\boldsymbol{y}=$ @@latex:\newline\;@@ $\{\ln{y_t}-\ln{y_{t-s}}\}$          | Tasa de crecimiento acumulada en un ciclo estacional completo ($s$ períodos). Cuando el período estacional es de un año, se conoce como “tasa anual” o “tasa interanual”. |
-| $\boldsymbol{z}=\nabla\nabla_{s}\ln\boldsymbol{y}$                                                      | Cambio en la tasa de crecimiento acumulada en un ciclo estacional completo. Es un indicador de aceleración en el crecimiento acumulado.                                   |
-# :float sideways 
+#+BEGIN_SRC jupyter-python
+import matplotlib.pyplot as plt
+import pandas as pd
+from pandas.table.plotting import table # EDIT: see deprecation
+
+ax = plt.subplot(111, frame_on=False) # no visible frame
+ax.xaxis.set_visible(False)  # hide the x axis
+ax.yaxis.set_visible(False)  # hide the y axis
+
+table(ax, TasaLogCrecimiento)  # where df is your data frame
+
+plt.savefig('mytable.png')
+
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# [goto error]
+
+ModuleNotFoundErrorTraceback (most recent call last)
+<ipython-input-26-914a90124ac2> in <module>
+      1 import matplotlib.pyplot as plt
+      2 import pandas as pd
+----> 3 from pandas.table.plotting import table # EDIT: see deprecation
+      4 
+      5 ax = plt.subplot(111, frame_on=False) # no visible frame
+
+ModuleNotFoundError: No module named 'pandas.table'
+:END:
+
+
+
+#+BEGIN_SRC jupyter-python :var image="img/TasaLogCrecimiento.png"
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :var image="img/resultsModel1.png" :results none
+_repr_png_(TasaLogCrecimiento.to_latex(), image)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# [goto error]
+
+NameErrorTraceback (most recent call last)
+<ipython-input-27-5587a6267ff0> in <module>
+      2 #+attr_ipynb: (slideshow . ((slide_type . notes)))
+      3 #+BEGIN_SRC jupyter-python :var image="img/resultsModel1.png" :results none
+----> 4 _repr_png_(TasaLogCrecimiento.to_latex(), image)
+
+NameError: name '_repr_png_' is not defined
+:END:
 

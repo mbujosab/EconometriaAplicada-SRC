@@ -13402,6 +13402,28 @@ a.anchor-link {
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>   <span class="c1"># data visualization</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text.latex&#39;</span><span class="p">,</span> <span class="n">preamble</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{amsmath}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">dataframe_image</span> <span class="k">as</span> <span class="nn">dfi</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</aside><aside class="notes">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sympy.printing.preview</span> <span class="kn">import</span> <span class="n">preview</span>
+
+<span class="k">def</span> <span class="nf">repr_png</span><span class="p">(</span><span class="n">tex</span><span class="p">,</span> <span class="n">ImgFile</span><span class="p">):</span>
+    <span class="n">preamble</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">documentclass[preview]</span><span class="si">{standalone}</span><span class="se">\n</span><span class="s2">&quot;</span> \
+        <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">usepackage{booktabs,amsmath,amsfonts}</span><span class="se">\\</span><span class="s2">begin</span><span class="si">{document}</span><span class="s2">&quot;</span>    
+    <span class="n">preview</span><span class="p">(</span><span class="n">tex</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">ImgFile</span><span class="p">,</span> <span class="n">viewer</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="n">preamble</span><span class="o">=</span><span class="n">preamble</span><span class="p">,</span> <span class="n">dvioptions</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;-D&#39;</span><span class="p">,</span><span class="s1">&#39;250&#39;</span><span class="p">])</span>
+    <span class="c1">#return open(ImgFile,&#39;rb&#39;).read()</span>
 </pre></div>
 
     </div>
@@ -13441,7 +13463,58 @@ variable aleatoria</em> $X_t$.</p>
 
 </div>
 </div>
-</div></section></section><section><section>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Datos-de-series-temporales-vs-datos-de-secci&#243;n-cruzada">Datos de series temporales vs datos de secci&#243;n cruzada<a class="anchor-link" href="#Datos-de-series-temporales-vs-datos-de-secci&#243;n-cruzada">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p><strong>Series temporales:</strong> Corresponden a mediciones de un mismo objeto a
+lo largo del tiempo. El índice indica el instante de cada medición.
+Consecuentemente, el orden temporal de los datos podría ser
+fundamental para explicar cada uno de ellos.</p>
+<ul>
+<li><p>El motivo es que frecuentemente la medición en un instante de
+tiempo está relacionada con otras mediciones próximas en el
+tiempo.</p>
+</li>
+<li><p>Esto presupone que en el proceso estocástico subyacente,
+$\boldsymbol{X}=\{X_t\}$, las variables aleatorias no son
+independientes entre sí.</p>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p><strong>Sección cruzada:</strong> el índice NO es cronológico. Cada índice es solo
+una <em>etiqueta</em> (asignada arbitrariamente) que identifica al
+individuo, empresa, objeto, etc. que ha sido medido.</p>
+<ul>
+<li><p>Por tanto, <em>el orden en el que aparecen los datos es irrelevante</em>.</p>
+</li>
+<li><p>Consecuentemente, conocer únicamente el índice de un dato no
+permite deducir nada respecto de cualquier otro dato.</p>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13669,16 +13742,25 @@ lenguaje</em>).</p>
 </div>
 </div><aside class="notes">
 
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Leemos los datos de un fichero <code>csv</code> y generamos un <code>dataframe</code> de pandas.</p>
+
+</div>
+</div>
+</div>
+</aside><aside class="notes">
+
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;./database/Datasets-master/airline-passengers.csv&#39;</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">])</span>
-<span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;Month&#39;</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">OrigData</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./database/Datasets-master/airline-passengers.csv&#39;</span><span class="p">)</span>
+<span class="n">OrigData</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">OrigData</span><span class="p">[</span><span class="s1">&#39;Month&#39;</span><span class="p">])</span>
+<span class="n">OrigData</span><span class="o">=</span><span class="n">OrigData</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">&#39;Month&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">OrigData</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 
     </div>
@@ -13709,25 +13791,6 @@ Month
 </div>
 
 </div>
-</aside><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;data_log&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">&#39;data_log_diff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;data_log&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">data</span><span class="p">[</span><span class="s1">&#39;data_log_diff_diff12&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;data_log_diff&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">tail</span><span class="p">())</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
 </aside>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13744,11 +13807,11 @@ $$\boldsymbol{x}=(x_1,\ldots x_{114})$$
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Passengers&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">OrigData</span><span class="p">[</span><span class="s1">&#39;Passengers&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Month&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Number of Air Passengers, ($\boldsymbol</span><span class="si">{x}</span><span class="s2">$)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Passengers&#39;</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">OrigData</span><span class="p">[</span><span class="s1">&#39;Passengers&#39;</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>   <span class="c1"># &quot;image&quot; no definido. Comentar esta línea al ejecutar el notebook</span>
 </pre></div>
@@ -13849,6 +13912,34 @@ $$\ln\boldsymbol{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$
 </div>
 </div><aside class="notes">
 
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Vamos a crear un nuevo <code>dataframe</code> con los datos originales y varias transformaciones de los datos</p>
+
+</div>
+</div>
+</div>
+</aside><aside class="notes">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">TransformedData</span> <span class="o">=</span> <span class="n">OrigData</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">TransformedData</span><span class="p">[</span><span class="s1">&#39;dataLog&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">OrigData</span><span class="p">[</span><span class="s1">&#39;Passengers&#39;</span><span class="p">])</span>
+<span class="n">TransformedData</span><span class="p">[</span><span class="s1">&#39;dataLogDiff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TransformedData</span><span class="p">[</span><span class="s1">&#39;dataLog&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">TransformedData</span><span class="p">[</span><span class="s1">&#39;dataLogDiffDiff12&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TransformedData</span><span class="p">[</span><span class="s1">&#39;dataLogDiff&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</aside><aside class="notes">
+
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
@@ -13856,11 +13947,11 @@ $$\ln\boldsymbol{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;data_log&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">TransformedData</span><span class="p">[</span><span class="s1">&#39;dataLog&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Month&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Log-Passengers, ($\ln\boldsymbol</span><span class="si">{x}</span><span class="s2">$) &quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;data_log&#39;</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">TransformedData</span><span class="p">[</span><span class="s1">&#39;dataLog&#39;</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>   <span class="c1"># &quot;image&quot; no definido. Comentar esta línea al ejecutar el notebook</span>
 </pre></div>
@@ -13887,7 +13978,7 @@ $$\ln\boldsymbol{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Primera-diferencia-de-la-trasformaci&#243;n-logar&#237;tmica-de-los-datos">Primera diferencia de la trasformaci&#243;n logar&#237;tmica de los datos<a class="anchor-link" href="#Primera-diferencia-de-la-trasformaci&#243;n-logar&#237;tmica-de-los-datos">&#182;</a></h4>
+<h4 id="Primera-diferencia-del-logar&#237;tmo-de-los-datos">Primera diferencia del logar&#237;tmo de los datos<a class="anchor-link" href="#Primera-diferencia-del-logar&#237;tmo-de-los-datos">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -13906,11 +13997,11 @@ $$\boldsymbol{y}=\nabla\ln\boldsymbol{x}=\Big(\big[\ln(x_2)-\ln(x_1)\big],\ldots
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;data_log_diff&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">TransformedData</span><span class="p">[</span><span class="s1">&#39;dataLogDiff&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Month&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\nabla\ln\boldsymbol</span><span class="si">{x}</span><span class="s2">$&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;data_log_diff&#39;</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">TransformedData</span><span class="p">[</span><span class="s1">&#39;dataLogDiff&#39;</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>   <span class="c1"># &quot;image&quot; no definido. Comentar esta línea al ejecutar el notebook</span>
 </pre></div>
@@ -13924,7 +14015,7 @@ $$\boldsymbol{y}=\nabla\ln\boldsymbol{x}=\Big(\big[\ln(x_2)-\ln(x_1)\big],\ldots
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="./img/airlinepass_log_diff+hist.png" alt="img"></p>
+<p><img src="./img/airlinepass_logDiff+hist.png" alt="img"></p>
 <p>Esta serie tampoco parece <em>"estacionaria"</em> (*)</p>
 <ul>
 <li>Hay un componente periódico (de naturaleza estacional), debido a que
@@ -13939,7 +14030,7 @@ mes o estación del año).</li>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Diferencia-estacional-de-la-primera-diferencia-de-la-trasformaci&#243;n-logar&#237;tmica-de-los-datos">Diferencia estacional de la primera diferencia de la trasformaci&#243;n logar&#237;tmica de los datos<a class="anchor-link" href="#Diferencia-estacional-de-la-primera-diferencia-de-la-trasformaci&#243;n-logar&#237;tmica-de-los-datos">&#182;</a></h4>
+<h4 id="Diferencia-estacional-de-la-primera-diferencia-del-logar&#237;tmo-de-los-datos">Diferencia estacional de la primera diferencia del logar&#237;tmo de los datos<a class="anchor-link" href="#Diferencia-estacional-de-la-primera-diferencia-del-logar&#237;tmo-de-los-datos">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -13958,11 +14049,11 @@ $$\boldsymbol{z}=\nabla_{12}(\nabla\ln\boldsymbol{x})=\nabla_{12}(\boldsymbol{y}
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;data_log_diff_diff12&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">TransformedData</span><span class="p">[</span><span class="s1">&#39;dataLogDiffDiff12&#39;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Month&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\nabla_</span><span class="si">{12}</span><span class="s2">(\nabla\ln\boldsymbol</span><span class="si">{x}</span><span class="s2">)$&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;data_log_diff_diff12&#39;</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">TransformedData</span><span class="p">[</span><span class="s1">&#39;dataLogDiffDiff12&#39;</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>   <span class="c1"># &quot;image&quot; no definido. Comentar esta línea al ejecutar el notebook</span>
 </pre></div>
@@ -13976,7 +14067,7 @@ $$\boldsymbol{z}=\nabla_{12}(\nabla\ln\boldsymbol{x})=\nabla_{12}(\boldsymbol{y}
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="./img/airlinepass_log_diff_diff12+hist.png" alt="img"></p>
+<p><img src="./img/airlinepass_logDiffDiff12+hist.png" alt="img"></p>
 <p>Esta serie se aproxima más al aspecto de la realización de un proceso <em>estacionario</em></p>
 <ul>
 <li>Aunque parece haber más varianza a principios de los 50 que a finales</li>
@@ -13992,120 +14083,59 @@ $$\boldsymbol{z}=\nabla_{12}(\nabla\ln\boldsymbol{x})=\nabla_{12}(\boldsymbol{y}
 <h3 id="Tasa-logar&#237;tmica-de-crecimiento">Tasa logar&#237;tmica de crecimiento<a class="anchor-link" href="#Tasa-logar&#237;tmica-de-crecimiento">&#182;</a></h3>
 </div>
 </div>
+</div><aside class="notes">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">START</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">UnoPorCiento</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n0</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="n">n0</span> <span class="k">if</span> <span class="n">t</span><span class="o">&lt;=</span><span class="mi">1</span> <span class="k">else</span> <span class="mf">1.01</span> <span class="o">*</span> <span class="n">UnoPorCiento</span><span class="p">(</span><span class="n">n0</span><span class="p">,</span> <span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">TasaLogCrecimiento</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;$y_t$&#39;</span><span class="p">:[</span><span class="n">UnoPorCiento</span><span class="p">(</span><span class="n">START</span><span class="p">,</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]})</span>
+<span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">frac{y_t-y_{t-1}}{y_{t-1}}$&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">&#39;$y_t$&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+<span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">ln y_t$&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">&#39;$y_t$&#39;</span><span class="p">])</span>
+<span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">nabla</span><span class="se">\\</span><span class="s1">ln</span><span class="se">\\</span><span class="s1">boldsymbol</span><span class="si">{y}</span><span class="s1">$&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">ln y_t$&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">ln y_t$&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">frac{y_t-y_</span><span class="si">{0}</span><span class="s1">}{y_</span><span class="si">{0}</span><span class="s1">}$&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">&#39;$y_t$&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">((</span><span class="n">x</span><span class="o">/</span><span class="n">START</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">ln y_t- </span><span class="se">\\</span><span class="s1">ln y_</span><span class="si">{0}</span><span class="s1">$&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">ln y_t$&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">&#39;$</span><span class="se">\\</span><span class="s1">ln y_t$&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+
+    </div>
 </div>
+</div>
+
+</div>
+</aside><aside class="notes">
+
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dfi</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">TasaLogCrecimiento</span><span class="p">,</span> <span class="n">file</span><span class="p">,</span> <span class="n">use_mathjax</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+</aside>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>La tasa logarítmica de variación de $\boldsymbol{y}$ se define como</p>
-$$\boldsymbol{z}=\nabla\ln\boldsymbol{y} = \Big(\big[\ln(y_2)-\ln(y_1)\big],\ldots\; \big[\ln(y_{n})-\ln(y_{n-1})\big]\Big)$$<p>es decir: $z_t=\ln y_t- \ln y_{t-1}$</p>
-<p>Es una aceptable <em>aproximación</em> de la tasa de crecimiento (en tanto
-por uno) si los incrementos son pequeños.</p>
-<style>
-.reveal  td {font-size: 120%;}
-</style><table>
-<thead><tr>
-<th>$t$</th>
-<th>$y_t$</th>
-<th>Incremento en tanto por uno</th>
-<th>$\ln y_t$</th>
-<th>Primera diferencia de $\ln\boldsymbol{y}$</th>
-<th>Incremento en tanto por uno desde $t=1$</th>
-<th>$\ln y_t- \ln y_{1}$</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>100.</td>
-<td></td>
-<td>4.605170</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>2</td>
-<td>101.00000</td>
-<td>0.01</td>
-<td>4.615120</td>
-<td>0.0100</td>
-<td>0.0100</td>
-<td>0.0100</td>
-</tr>
-<tr>
-<td>3</td>
-<td>102.01000</td>
-<td>0.01</td>
-<td>4.625071</td>
-<td>0.0100</td>
-<td>0.0201</td>
-<td>0.0199</td>
-</tr>
-<tr>
-<td>4</td>
-<td>103.03010</td>
-<td>0.01</td>
-<td>4.635021</td>
-<td>0.0100</td>
-<td>0.0303</td>
-<td>0.0299</td>
-</tr>
-<tr>
-<td>5</td>
-<td>104.06040</td>
-<td>0.01</td>
-<td>4.644971</td>
-<td>0.0100</td>
-<td>0.0406</td>
-<td>0.0398</td>
-</tr>
-<tr>
-<td>6</td>
-<td>105.10100</td>
-<td>0.01</td>
-<td>4.654922</td>
-<td>0.0100</td>
-<td>0.0510</td>
-<td>0.0498</td>
-</tr>
-<tr>
-<td>7</td>
-<td>106.15201</td>
-<td>0.01</td>
-<td>4.664872</td>
-<td>0.0100</td>
-<td>0.0615</td>
-<td>0.0597</td>
-</tr>
-<tr>
-<td>8</td>
-<td>107.21353</td>
-<td>0.01</td>
-<td>4.674823</td>
-<td>0.0100</td>
-<td>0.0721</td>
-<td>0.0697</td>
-</tr>
-<tr>
-<td>9</td>
-<td>108.28567</td>
-<td>0.01</td>
-<td>4.684773</td>
-<td>0.0100</td>
-<td>0.0829</td>
-<td>0.0796</td>
-</tr>
-<tr>
-<td>10</td>
-<td>109.36853</td>
-<td>0.01</td>
-<td>4.694723</td>
-<td>0.0100</td>
-<td>0.0937</td>
-<td>0.0896</td>
-</tr>
-</tbody>
-</table>
+<p>La tasa logarítmica de variación de $\boldsymbol{y}$ se define como
+$z_t=\ln{y_t}-\ln{y_{t-1}};$ es decir</p>
+$$\boldsymbol{z}=\nabla\ln\boldsymbol{y} = \Big(\big[\ln(y_2)-\ln(y_1)\big],\ldots\; \big[\ln(y_{n})-\ln(y_{n-1})\big]\Big)$$<p>y se <em>aproxima</em> a la tasa de crecimiento (en tanto por uno) si el
+incremento es pequeño.</p>
+
+</div>
+</div>
+</div></section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="./img/TasaLogCrecimiento.png" alt="img"></p>
 
 </div>
 </div>
@@ -14121,7 +14151,7 @@ por uno) si los incrementos son pequeños.</p>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <style>
-.reveal  td {font-size: 130%;}
+.reveal  td {font-size: 135%;}
 </style><table>
 <thead><tr>
 <th>Transformación  de la serie temporal  $\displaystyle \boldsymbol{y}=\{y_t\},\; t=1:n$</th>
