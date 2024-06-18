@@ -1,0 +1,411 @@
+#+TITLE: Econometría Aplicada. Lección 2
+#+author: Marcos Bujosa
+
+# +OPTIONS: toc:nil
+
+#+EXCLUDE_TAGS: pngoutput noexport
+
+#+startup: shrink
+
+
+#+LATEX_HEADER_EXTRA: \usepackage{lmodern}
+#+LATEX_HEADER_EXTRA: \usepackage{tabularx}
+#+LATEX_HEADER_EXTRA: \usepackage{booktabs}
+# +LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=blue}
+
+#+LATEX: \maketitle
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC emacs-lisp :exports none :results silent
+(use-package ox-ipynb
+  :load-path (lambda () (expand-file-name "ox-ipynb" scimax-dir)))
+#+END_SRC
+
+***  Carga de algunos módulos de python
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :UNNUMBERED: t 
+   :END:
+   
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results none
+# Para trabajar con los datos y dibujarlos necesitamos cargar algunos módulos de python
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+import matplotlib as mpl
+import matplotlib.pyplot as plt   # data visualization
+mpl.rc('text', usetex=True)
+mpl.rc('text.latex', preamble=r'\usepackage{amsmath}')
+import dataframe_image as dfi
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results none
+from sympy.printing.preview import preview
+
+def repr_png(tex, ImgFile):
+    preamble = "\\documentclass[preview]{standalone}\n" \
+        "\\usepackage{booktabs,amsmath,amsfonts}\\begin{document}"    
+    preview(tex, filename=ImgFile, viewer='file', preamble=preamble, dvioptions=['-D','250'])
+    #return open(ImgFile,'rb').read()
+#+END_SRC
+
+
+*** Datos                                                         :noexport:
+
+#+BEGIN_SRC jupyter-python :results replace output table
+
+# import os
+# for dirname, _, filenames in os.walk('./database'):
+#     for filename in filenames:
+#         print(os.path.join(dirname, filename))
+
+#+END_SRC
+
+#+RESULTS:
+
+
+
+
+** Internat. airline passengers: monthly totals in thousands. Jan 49 – Dec 60
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+Leemos los datos de un fichero =csv= y generamos un =dataframe= de pandas.
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :exports code
+OrigData = pd.read_csv('./database/Datasets-master/airline-passengers.csv')
+OrigData['Month']=pd.to_datetime(OrigData['Month'])
+OrigData=OrigData.set_index(['Month'])
+print(OrigData.head())
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+            Passengers
+Month                 
+1949-01-01         112
+1949-02-01         118
+1949-03-01         132
+1949-04-01         129
+1949-05-01         121
+:END:
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+Vamos a crear un nuevo =dataframe= con los datos originales y varias transformaciones de los datos
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :exports code :results silent
+TransformedData = OrigData.copy()
+TransformedData['dataLog'] = np.log(OrigData['Passengers'])
+TransformedData['dataLogDiff'] = TransformedData['dataLog'].diff(1)
+TransformedData['dataLogDiffDiff12'] = TransformedData['dataLogDiff'].diff(12)
+#+END_SRC
+
+
+* Descomposición estructural de una serie temporal
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+Una estrategia para analizar series temporales es transformar los
+datos para
+
+1) primero lograr que sean "*/estacionarios/*" y
+2) después, mediante más transformaciones, lograr una secuencia de
+   "*datos /i.i.d/*" (este segundo paso aún no lo hemos abordado)
+#+LATEX:  \newline \noindent
+(/recuerde que las expresiones "datos estacionarios" o "datos i.i.d." son un abuso del lenguaje/).
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+LATEX: \medskip \noindent
+Pero existe otro enfoque que pretende descomponer la serie temporal en
+los siguientes componentes /"no observables"/ (o un subconjunto de
+ellos):
+
+$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{c} + \boldsymbol{s} + \boldsymbol{e}$$
+
+#+LATEX: \noindent
+donde:
+
+- La tendencia "$\boldsymbol{t}$" :: recoge la lenta evolución de la
+  media a /largo plazo/.
+
+- El componente estacional "$\boldsymbol{s}$" :: recoge las
+  oscilaciones periódicas que se repiten regularmente en ciclos
+  estacionales (de año en año, o de semana en semana, etc.).
+
+- El componente cíclico "$\boldsymbol{c}$" :: Cuando aparece
+  explícitamente en el modelo, $\boldsymbol{c}$ recoge las
+  oscilaciones a medio plazo. Es decir, aquellas de un plazo más largo
+  que las oscilaciones estacionales, pero más corto que la tendencia
+  de largo plazo. Si está ausente, dichas oscilaciones suelen aparecer
+  en el componente de la tendencia, que entonces también podemos
+  denominar /tendencia-ciclo/.
+
+- El componente irregular "$\boldsymbol{e}$" :: recoge las
+  oscilaciones no captadas por el resto de componentes, ya que debe
+  cumplir la siguiente identidad: $\boldsymbol{e} = \boldsymbol{y} -
+  \boldsymbol{t} - \boldsymbol{c} - \boldsymbol{s}$.
+
+Ajuste aceptable si (como poco) el componente irregular
+$\boldsymbol{e}$ parece "/estacionario/".
+
+
+
+
+** Tendencia determinista /lineal/
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+#+NAME: ajuste-tendencia-lineal
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python  :results silent
+datosModelo1 = TransformedData[['dataLog']].copy()
+nsample = len(datosModelo1)
+datosModelo1['cte'] = [1]*nsample
+datosModelo1['time'] = np.linspace(1, nsample, nsample)
+model1 = sm.OLS(datosModelo1['dataLog'], datosModelo1[['cte', 'time']])
+results1 = model1.fit()
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file :var image="img/airlinepass+linearTrend.png" :results silent
+import seaborn as sns
+from matplotlib import rcParams
+rcParams['figure.figsize'] = 15,5
+plt.grid()  
+ax = sns.regplot(x="time", y="dataLog", data=datosModelo1,
+                 scatter_kws={"color": "black"}, line_kws={"color": "red"})
+fig = ax.get_figure()
+fig.savefig(image) # "image" no definido. Comentar esta línea al ejecutar el notebook
+#+END_SRC
+
+
+El modelo de tendencia más simple es la recta de regresión donde el
+regresor es el propio índice $t$ que indica el instante del tiempo de
+cada dato:
+
+$$\ln{y_t}=\beta_1\cdot{1}+\beta_2\cdot t + e_t; \quad t=1:114$$
+
+[[./img/airlinepass+linearTrend.png]]
+
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+NAME: Cte-ajuste-tendencia-lineal
+#+BEGIN_SRC jupyter-python :results value :results silent
+round(results1.params['cte'],4)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+NAME: Pte-ajuste-tendencia-lineal
+#+BEGIN_SRC jupyter-python :results value :results silent
+round(results1.params['time'],4)
+#+END_SRC
+
+#+name: my-latex-code
+#+BEGIN_SRC latex :noweb strip-export :exports result :results raw
+$$\widehat{\ln{y_t}}=<<Cte-ajuste-tendencia-lineal()>>+<<Pte-ajuste-tendencia-lineal()>>\cdot\big(t\big), \qquad t=1:114$$
+#+END_SRC
+
+#+RESULTS: my-latex-code
+$$\widehat{\ln{y_t}}=nil+nil\cdot\big(t\big), \qquad t=1:114$$
+$$\widehat{\ln{y_t}}=4.8137+0.01\cdot\big(t\big), \qquad t=1:114$$
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :var image="img/resultsModel1.png"  :results none
+# print(results.summary()) Esta es la forma habitual de ver los resultados
+repr_png(results1.summary().as_latex(), image) # emplearé esta para importar los resultados como imagen png en el material de clase
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_org: :width 700
+#+attr_html: :width 100px
+#+attr_latex: :width 250px
+[[./img/resultsModel1.png]]
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results replace text/plain :exports results
+results1.fittedvalues
+results1.rsquared
+print(results1.params)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# [goto error]
+
+NameErrorTraceback (most recent call last)
+<ipython-input-13-92a3b181b4ba> in <module>
+----> 1 results1.fittedvalues
+      2 results1.rsquared
+      3 print(results1.params)
+
+NameError: name 'results1' is not defined
+:END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :var image="img/airlinepass+irreg.png" 
+
+ax = sns.lineplot(data=datosModelo1, x="time", y=results1.resid)
+fig = ax.get_figure()
+fig.savefig(image) # "image" no definido. Comentar esta línea al ejecutar el notebook
+#+END_SRC
+
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+
+En este caso, el modelo 
+
+$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$
+
+donde $\boldsymbol{t}$ es una tendencia lineal no es un ajuste
+satisfactorio, pues el componente irregular $\boldsymbol{e}$ no parece
+la realización de un proceso estacionario.
+
+
+[[file:./img/airlinepass+irreg.png]]
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results none
+datosModelo1['yhat'] = datosModelo1['cte']*results1.params['cte']+datosModelo1['time']*results1.params['time']
+datosModelo1['ehat'] = results1.resid
+datosModelo1['ehatDiff12'] = datosModelo1['ehat'].diff(12)
+#+END_SRC
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :var image="img/airlinepass+irregDiff12.png" 
+
+ax = sns.lineplot(data=datosModelo1, x="time", y=datosModelo1['ehatDiff12'])
+fig = ax.get_figure()
+fig.savefig(image) # "image" no definido. Comentar esta línea al ejecutar el notebook
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+
+Diferencia de orden 12 del componente irregular parece mostrar un componente cíclico.
+[[file:./img/airlinepass+irregDiff12.png]]
+
+Probemos con una tendencia cuadrática
+
+** Tendencia determinista /cuadrática/
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+NAME: ajuste-tendencia-cuadratica
+#+BEGIN_SRC jupyter-python  :results silent
+datosModelo2 = TransformedData[['dataLog']].copy()
+nsample = len(datosModelo1)
+datosModelo2['cte'] = [1]*nsample
+datosModelo2['time'] = np.linspace(1, nsample, nsample)
+datosModelo2['sq_time'] = [t**2 for t in datosModelo2['time']]
+model2 = sm.OLS(datosModelo1['dataLog'], datosModelo2[['cte', 'time', 'sq_time']])
+results2 = model2.fit()
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results none
+datosModelo2['yhat'] = datosModelo2['cte']*results2.params['cte']+datosModelo2['time']*results2.params['time']+datosModelo2['sq_time']*results2.params['sq_time']
+datosModelo2['ehat'] = results2.resid
+datosModelo2['ehatDiff12'] = datosModelo2['ehat'].diff(12)
+#+END_SRC
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python  :results file :var image="img/airlinepass+quadraticTrend.png" :results silent
+ax = sns.lineplot(data=datosModelo2, x="time", y="dataLog")
+ax = sns.lineplot(data=datosModelo2, x="time", y="yhat")
+fig = ax.get_figure()
+fig.savefig(image) # "image" no definido. Comentar esta línea al ejecutar el notebook
+#+END_SRC
+
+
+
+$$\ln{y_t}=\beta_1\cdot{1}+\beta_2\cdot t + \beta_3\cdot t^2 + e_t; \quad t=1:114$$
+
+[[./img/airlinepass+quadraticTrend.png]]
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :var image="img/resultsModel2.png"  :results none
+# print(results.summary()) Esta es la forma habitual de ver los resultados
+repr_png(results2.summary().as_latex(), image) # emplearé esta para importar los resultados como imagen png en el material de clase
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_org: :width 700
+#+attr_html: :width 100px
+#+attr_latex: :width 250px
+[[./img/resultsModel2.png]]
+
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :var image="img/airlinepass+irreg2.png" 
+
+ax = sns.lineplot(data=datosModelo2, x="time", y=results2.resid)
+fig = ax.get_figure()
+fig.savefig(image) # "image" no definido. Comentar esta línea al ejecutar el notebook
+#+END_SRC
+
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+
+[[./img/airlinepass+irreg2.png]]
+
+En este caso, el modelo 
+
+$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$
+
+donde $\boldsymbol{t}$ es una tendencia cuadrática tampoco es un
+ajuste satisfactorio, pues el componente irregular $\boldsymbol{e}$
+sigue sin parecer la realización de un proceso estacionario.
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :var image="img/airlinepass+irregDiff12-2.png" 
+ax = sns.lineplot(data=datosModelo2, x="time", y=datosModelo2['ehatDiff12'])
+fig = ax.get_figure()
+fig.savefig(image) # "image" no definido. Comentar esta línea al ejecutar el notebook
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+
+La diferencia de orden 12 del componente irregular de este segundo
+modelo sigue mostrando un componente cíclico.
+
+[[file:./img/airlinepass+irregDiff12.png]]
+
+Para obtener una /tendencia-ciclo/ que capte este ciclo, necesitamos
+procedimientos más sofisticados (TRAMO-SEATS, X13-ARIMA, STAMP, LDHR,
+etc.)... y que estiman tendencias estocásticas (en lugar de tendencias
+deterministas con en los dos ejemplos vistos).
+
+Pasemos a estimar un componente estacional 
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+
+** Componente estacional determinista mediante /dummies/
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+
