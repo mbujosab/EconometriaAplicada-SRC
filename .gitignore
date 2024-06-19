@@ -1,6 +1,8 @@
 .projectile
 .gitignore
 
+*~
+
 datos
 .ipynb_checkpoints
 .ob-jupyter

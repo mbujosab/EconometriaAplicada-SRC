@@ -37,6 +37,7 @@ import matplotlib.pyplot as plt   # data visualization
 mpl.rc('text', usetex=True)
 mpl.rc('text.latex', preamble=r'\usepackage{amsmath}')
 import dataframe_image as dfi
+import statsmodels.api as sm
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
@@ -174,7 +175,7 @@ results1 = model1.fit()
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file :var image="img/airlinepass+linearTrend.png" :results silent
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+linearTrend.png
 import seaborn as sns
 from matplotlib import rcParams
 rcParams['figure.figsize'] = 15,5
@@ -182,7 +183,7 @@ plt.grid()
 ax = sns.regplot(x="time", y="dataLog", data=datosModelo1,
                  scatter_kws={"color": "black"}, line_kws={"color": "red"})
 fig = ax.get_figure()
-fig.savefig(image) # "image" no definido. Comentar esta línea al ejecutar el notebook
+#fig.savefig("./img/airlinepass+linearTrend.png")
 #+END_SRC
 
 
@@ -215,14 +216,13 @@ $$\widehat{\ln{y_t}}=<<Cte-ajuste-tendencia-lineal()>>+<<Pte-ajuste-tendencia-li
 #+END_SRC
 
 #+RESULTS: my-latex-code
-$$\widehat{\ln{y_t}}=nil+nil\cdot\big(t\big), \qquad t=1:114$$
 $$\widehat{\ln{y_t}}=4.8137+0.01\cdot\big(t\big), \qquad t=1:114$$
 
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :var image="img/resultsModel1.png"  :results none
+#+BEGIN_SRC jupyter-python :results file :file ./img/resultsModel1.png :results none
 # print(results.summary()) Esta es la forma habitual de ver los resultados
-repr_png(results1.summary().as_latex(), image) # emplearé esta para importar los resultados como imagen png en el material de clase
+repr_png(results1.summary().as_latex(),  "./img/resultsModel1.png") # pero emplearé esta para importar los resultados como imagen png en el material de clase
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
@@ -242,24 +242,17 @@ print(results1.params)
 
 #+RESULTS:
 :RESULTS:
-# [goto error]
-
-NameErrorTraceback (most recent call last)
-<ipython-input-13-92a3b181b4ba> in <module>
-----> 1 results1.fittedvalues
-      2 results1.rsquared
-      3 print(results1.params)
-
-NameError: name 'results1' is not defined
+cte     4.813668
+time    0.010048
+dtype: float64
 :END:
 
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :var image="img/airlinepass+irreg.png" 
-
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+irreg.png 
 ax = sns.lineplot(data=datosModelo1, x="time", y=results1.resid)
 fig = ax.get_figure()
-fig.savefig(image) # "image" no definido. Comentar esta línea al ejecutar el notebook
+#fig.savefig("./img/airlinepass+irreg.png") 
 #+END_SRC
 
 
@@ -287,11 +280,10 @@ datosModelo1['ehatDiff12'] = datosModelo1['ehat'].diff(12)
 
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :var image="img/airlinepass+irregDiff12.png" 
-
+#+BEGIN_SRC jupyter-python :results file silent  :file ./img/airlinepass+irregDiff12.png 
 ax = sns.lineplot(data=datosModelo1, x="time", y=datosModelo1['ehatDiff12'])
 fig = ax.get_figure()
-fig.savefig(image) # "image" no definido. Comentar esta línea al ejecutar el notebook
+#fig.savefig("./img/airlinepass+irregDiff12.png")
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
@@ -305,7 +297,6 @@ Probemos con una tendencia cuadrática
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
-
 
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
@@ -329,11 +320,11 @@ datosModelo2['ehatDiff12'] = datosModelo2['ehat'].diff(12)
 
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python  :results file :var image="img/airlinepass+quadraticTrend.png" :results silent
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+quadraticTrend.png
 ax = sns.lineplot(data=datosModelo2, x="time", y="dataLog")
 ax = sns.lineplot(data=datosModelo2, x="time", y="yhat")
 fig = ax.get_figure()
-fig.savefig(image) # "image" no definido. Comentar esta línea al ejecutar el notebook
+#fig.savefig("./img/airlinepass+quadraticTrend.png")
 #+END_SRC
 
 
@@ -344,9 +335,9 @@ $$\ln{y_t}=\beta_1\cdot{1}+\beta_2\cdot t + \beta_3\cdot t^2 + e_t; \quad t=1:11
 
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :var image="img/resultsModel2.png"  :results none
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/resultsModel2.png
 # print(results.summary()) Esta es la forma habitual de ver los resultados
-repr_png(results2.summary().as_latex(), image) # emplearé esta para importar los resultados como imagen png en el material de clase
+repr_png(results2.summary().as_latex(), "./img/resultsModel2.png") # pero usaré esta
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
@@ -359,11 +350,10 @@ repr_png(results2.summary().as_latex(), image) # emplearé esta para importar lo
 
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :var image="img/airlinepass+irreg2.png" 
-
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+irreg2.png
 ax = sns.lineplot(data=datosModelo2, x="time", y=results2.resid)
 fig = ax.get_figure()
-fig.savefig(image) # "image" no definido. Comentar esta línea al ejecutar el notebook
+#fig.savefig("./img/airlinepass+irreg2.png")
 #+END_SRC
 
 
@@ -381,10 +371,10 @@ sigue sin parecer la realización de un proceso estacionario.
 
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :var image="img/airlinepass+irregDiff12-2.png" 
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+irregDiff12-2.png
 ax = sns.lineplot(data=datosModelo2, x="time", y=datosModelo2['ehatDiff12'])
 fig = ax.get_figure()
-fig.savefig(image) # "image" no definido. Comentar esta línea al ejecutar el notebook
+#fig.savefig("./img/airlinepass+irregDiff12-2.png")
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
@@ -407,5 +397,46 @@ Pasemos a estimar un componente estacional
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+NAME: ajuste-tendencia-cuadratica
+#+BEGIN_SRC jupyter-python  :results silent
+datosModelo3 = TransformedData[['dataLog']].copy()
+nsample = len(datosModelo1)
+datosModelo3['cte'] = [1]*nsample
+datosModelo3['time'] = np.linspace(1, nsample, nsample)
+datosModelo3['sq_time'] = [t**2 for t in datosModelo3['time']]
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+Creamos las /dummies/ estacionales
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python
+from statsmodels.datasets import sunspots
+from statsmodels.tsa.deterministic import Seasonality
+seas_gen = Seasonality(12, initial_period=1)
+seas_gen.in_sample(datosModelo3.index)
+#+END_SRC
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+NAME: ajuste-tendencia-cuadratica
+#+BEGIN_SRC jupyter-python  :results silent
+datosModelo2 = TransformedData[['dataLog']].copy()
+nsample = len(datosModelo1)
+datosModelo2['cte'] = [1]*nsample
+datosModelo2['time'] = np.linspace(1, nsample, nsample)
+datosModelo2['sq_time'] = [t**2 for t in datosModelo2['time']]
+model2 = sm.OLS(datosModelo1['dataLog'], datosModelo2[['cte', 'time', 'sq_time']])
+results2 = model2.fit()
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results none
+datosModelo2['yhat'] = datosModelo2['cte']*results2.params['cte']+datosModelo2['time']*results2.params['time']+datosModelo2['sq_time']*results2.params['sq_time']
+datosModelo2['ehat'] = results2.resid
+datosModelo2['ehatDiff12'] = datosModelo2['ehat'].diff(12)
+#+END_SRC
 
 

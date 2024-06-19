@@ -219,7 +219,7 @@ pintar una realización, tan solo un pequeño porcentaje de los datos
 caerán fuera de la franja $\left(\mu-c\sigma, \mu+c\sigma\right)$.
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file :var image="img/stationaryTimeSeriesExample.png" :results silent
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/stationaryTimeSeriesExample.png
 import statsmodels.api as sm
 np.random.seed(12345)
 arparams = np.array([.75, -.25])
@@ -229,7 +229,7 @@ ma = np.r_[1, maparams] # add zero-lag
 y = sm.tsa.arma_generate_sample(ar, ma, 250)
 plt.figure(figsize=(15,5))
 plt.plot(y)
-plt.savefig(image)   # "image" no definido. Comentar esta línea al ejecutar el notebook
+#plt.savefig("./img/stationaryTimeSeriesExample.png")
 #+END_SRC
 
 [[./img/stationaryTimeSeriesExample.png]]
@@ -291,7 +291,7 @@ $$\boldsymbol{x}=(x_1,\ldots x_{114})$$
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+NAME: figura-airlinepass
-#+BEGIN_SRC jupyter-python :results file :var image="img/airlinepass+hist.png" :results silent
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+hist.png
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
 plt.plot(OrigData['Passengers'])
@@ -300,7 +300,7 @@ plt.ylabel(r"Number of Air Passengers, ($\boldsymbol{x}$)")
 plt.subplot(1, 2, 2)
 plt.hist(OrigData['Passengers'], edgecolor='white', bins=11)
 plt.tight_layout()
-plt.savefig(image)   # "image" no definido. Comentar esta línea al ejecutar el notebook
+#plt.savefig("./img/airlinepass+hist.png")
 #+END_SRC
 
 
@@ -330,7 +330,7 @@ Serie /"no estacionaria"/ (*):
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+NAME: funcion_logaritmica
-#+BEGIN_SRC jupyter-python :results file :var image="img/funcion_logaritmica.png" :results silent
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/funcion_logaritmica.png
 # Definir el rango de valores para x (empezando desde un número positivo ya que log(0) no está definido)
 x = np.linspace(0.01, 7, 400)  # Valores de 0.1 a 10
 
@@ -349,8 +349,7 @@ plt.axhline(0, color='black',linewidth=0.5)
 plt.axvline(0, color='black',linewidth=0.5)
 plt.grid(color = 'gray', linestyle = '--', linewidth = 0.5)
 plt.legend()
-
-plt.savefig(image)   # "image" no definido. Comentar esta línea al ejecutar el notebook
+#plt.savefig("./img/funcion_logaritmica.png")
 #+END_SRC
 # Establecer la escala logarítmica en el eje x
 # #plt.xscale('log')
@@ -379,7 +378,7 @@ TransformedData['dataLogDiffDiff12'] = TransformedData['dataLogDiff'].diff(12)
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+NAME: figura-airlinepass-log
-#+BEGIN_SRC jupyter-python :results file :var image="img/airlinepass_log+hist.png" :results silent
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass_log+hist.png
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
 plt.plot(TransformedData['dataLog'])
@@ -388,7 +387,7 @@ plt.ylabel(r"Log-Passengers, ($\ln\boldsymbol{x}$) ")
 plt.subplot(1, 2, 2)
 plt.hist(TransformedData['dataLog'], edgecolor='white', bins=11)
 plt.tight_layout()
-plt.savefig(image)   # "image" no definido. Comentar esta línea al ejecutar el notebook
+#plt.savefig("./img/airlinepass_log+hist.png")
 #+END_SRC
 
 
@@ -408,7 +407,7 @@ $$\boldsymbol{y}=\nabla\ln\boldsymbol{x}=\Big(\big[\ln(x_2)-\ln(x_1)\big],\ldots
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+NAME: figura-airlinepass-log-diff
-#+BEGIN_SRC jupyter-python :results file :var image="img/airlinepass_logDiff+hist.png" :results silent
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass_logDiff+hist.png
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
 plt.plot(TransformedData['dataLogDiff'])
@@ -417,7 +416,7 @@ plt.ylabel(r"$\nabla\ln\boldsymbol{x}$")
 plt.subplot(1, 2, 2)
 plt.hist(TransformedData['dataLogDiff'], edgecolor='white', bins=11)
 plt.tight_layout()
-plt.savefig(image)   # "image" no definido. Comentar esta línea al ejecutar el notebook
+#plt.savefig("./img/airlinepass_logDiff+hist.png")
 #+END_SRC
 
 
@@ -441,7 +440,7 @@ $$\boldsymbol{z}=\nabla_{12}(\nabla\ln\boldsymbol{x})=\nabla_{12}(\boldsymbol{y}
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+NAME: figura-airlinepass-log-diff-diff12
-#+BEGIN_SRC jupyter-python :results file :var image="img/airlinepass_logDiffDiff12+hist.png" :results silent
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass_logDiffDiff12+hist.png
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
 plt.plot(TransformedData['dataLogDiffDiff12'])
@@ -450,7 +449,7 @@ plt.ylabel(r"$\nabla_{12}(\nabla\ln\boldsymbol{x})$")
 plt.subplot(1, 2, 2)
 plt.hist(TransformedData['dataLogDiffDiff12'], edgecolor='white', bins=11)
 plt.tight_layout()
-plt.savefig(image)   # "image" no definido. Comentar esta línea al ejecutar el notebook
+#plt.savefig("./img/airlinepass_logDiffDiff12+hist.png")
 #+END_SRC
 
 
@@ -481,8 +480,8 @@ TasaLogCrecimiento['$\\ln y_t- \\ln y_{0}$'] = TasaLogCrecimiento['$\\ln y_t$'] 
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :var file="img/TasaLogCrecimiento.png"  :results none
-dfi.export(TasaLogCrecimiento, file, use_mathjax=True, dpi=200)
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/TasaLogCrecimiento.png
+dfi.export(TasaLogCrecimiento, "./img/TasaLogCrecimiento.png", use_mathjax=True, dpi=200)
 #+END_SRC
 
 La tasa logarítmica de variación de $\boldsymbol{y}$ se define como
