@@ -47,23 +47,7 @@ def repr_png(tex, ImgFile):
     preamble = "\\documentclass[preview]{standalone}\n" \
         "\\usepackage{booktabs,amsmath,amsfonts}\\begin{document}"    
     preview(tex, filename=ImgFile, viewer='file', preamble=preamble, dvioptions=['-D','250'])
-    #return open(ImgFile,'rb').read()
 #+END_SRC
-
-
-*** Datos                                                         :noexport:
-
-#+BEGIN_SRC jupyter-python :results replace output table
-
-# import os
-# for dirname, _, filenames in os.walk('./database'):
-#     for filename in filenames:
-#         print(os.path.join(dirname, filename))
-
-#+END_SRC
-
-#+RESULTS:
-
 
 
 * Procesos estocásticos y datos de series temporales
@@ -89,6 +73,7 @@ def repr_png(tex, ImgFile):
     /realización de un tramo/ de un proceso estocástico: 
 
    $$(x_1, x_2,\ldots x_n) \text{ es una realización de }\{X_t \mid t=1,2,\ldots n\}.$$
+
 
 ** Datos de series temporales vs datos de sección cruzada
    :PROPERTIES:
@@ -167,6 +152,7 @@ lo largo del tiempo
 Por tanto, algún tipo de _estabilidad_ o _estacionariedad_ es
 necesaria.
 
+
 ** Estacionariedad en sentido débil
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
@@ -191,6 +177,7 @@ Cov(X_t,X_{t-k}) & = \gamma_k
   Es decir, $\gamma_0$ es la varianza común a todas las variables
   aleatorias del proceso.
  
+
 ** Función de autocovarianzas y función de autocorrelación
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
@@ -261,7 +248,6 @@ Veamos ejemplos de series temporales para los que
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
-
 
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
@@ -501,7 +487,6 @@ incremento es pequeño.
 
 
 
-
 *** Observaciones sobre los datos transformados
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
@@ -578,57 +563,5 @@ f = ip.display_formatter.formatters['text/org']
 f.for_type_by_name('pandas.core.frame', 'DataFrame', pd_dataframe_to_org)
 #+END_SRC
 
-#+RESULTS:
 
-
-#+BEGIN_SRC jupyter-python
-import matplotlib.pyplot as plt
-import pandas as pd
-from pandas.table.plotting import table # EDIT: see deprecation
-
-ax = plt.subplot(111, frame_on=False) # no visible frame
-ax.xaxis.set_visible(False)  # hide the x axis
-ax.yaxis.set_visible(False)  # hide the y axis
-
-table(ax, TasaLogCrecimiento)  # where df is your data frame
-
-plt.savefig('mytable.png')
-
-#+END_SRC
-
-#+RESULTS:
-:RESULTS:
-# [goto error]
-
-ModuleNotFoundErrorTraceback (most recent call last)
-<ipython-input-26-914a90124ac2> in <module>
-      1 import matplotlib.pyplot as plt
-      2 import pandas as pd
-----> 3 from pandas.table.plotting import table # EDIT: see deprecation
-      4 
-      5 ax = plt.subplot(111, frame_on=False) # no visible frame
-
-ModuleNotFoundError: No module named 'pandas.table'
-:END:
-
-
-
-#+BEGIN_SRC jupyter-python :var image="img/TasaLogCrecimiento.png"
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :var image="img/resultsModel1.png" :results none
-_repr_png_(TasaLogCrecimiento.to_latex(), image)
-#+END_SRC
-
-#+RESULTS:
-:RESULTS:
-# [goto error]
-
-NameErrorTraceback (most recent call last)
-<ipython-input-27-5587a6267ff0> in <module>
-      2 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-      3 #+BEGIN_SRC jupyter-python :var image="img/resultsModel1.png" :results none
-----> 4 _repr_png_(TasaLogCrecimiento.to_latex(), image)
-
-NameError: name '_repr_png_' is not defined
-:END:
 

@@ -1,5 +1,38 @@
+- Enlace a la [[https://mbujosab.github.io/EconometriaAplicada-SRC/][web]]
+
 * Código fuente del material para un curso de Econometría Aplicada
+    :PROPERTIES:  
+    :UNNUMBERED: t
+    :END:  
 
 Fuente del material para impartir la asignatura Econometría Aplicada
 
 - [[https://drive.google.com/open?id=0Bwa1A30pN0IwWUtNNzRQRFRJUTQ][Ficha de la asignatura]]
+
+  
+** Regresión con series temporales
+
+*** Transformación de los datos (Lecc01)
+
+- [[file:./Lecc01.slides.html][Slides]]
+- [[file:./Lecc01.pdf][pdf file]]
+- [[file:./Lecc01.ipynb][Notebook]]
+- [[file:./Lecc01.org][org file]]
+
+**** Practicas
+
+- [[file:./Practicas/PracticasGretl/pub/Lecc01.pdf][pdf file]]
+- [[file:./Practicas/PracticasGretl/pub/scripts/airlinePass.inp][Gretl script]]
+
+
+*** Regresión con series temporales - Modelos con componentes deterministas (Lecc02)
+
+- [[file:./Lecc02.slides.html][Slides]]
+- [[file:./Lecc02.pdf][pdf file]]
+- [[file:./Lecc02.ipynb][Notebook]]
+- [[file:./Lecc02.org][org file]]
+
+**** Practicas
+
+- [[file:./Practicas/PracticasGretl/pub/Lecc01.pdf][pdf file]]
+- [[file:./Practicas/PracticasGretl/pub/scripts/airlinePass.inp][Gretl script]]
