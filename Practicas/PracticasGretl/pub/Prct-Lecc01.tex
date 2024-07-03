@@ -1,16 +1,14 @@
-% Created 2024-06-28 vie 12:52
+% Created 2024-07-03 mié 13:46
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{graphicx}
-\usepackage{grffile}
 \usepackage{longtable}
 \usepackage{wrapfig}
 \usepackage{rotating}
 \usepackage[normalem]{ulem}
 \usepackage{amsmath}
-\usepackage{textcomp}
 \usepackage{amssymb}
 \usepackage{capt-of}
 \usepackage{hyperref}
@@ -39,7 +37,7 @@
 
 
 \section{Número de viajeros internacionales}
-\label{sec:org64db17b}
+\label{sec:orgec1ce73}
 \begin{center}
 \begin{tabular}{ll}
 Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/airlinePass.inp}{airlinePass.inp}\\
@@ -56,7 +54,7 @@ aparece en manual de Box \& Jenkins.
 
 \begin{enumerate}
 \item Objetivo
-\label{sec:orgdaf839d}
+\label{sec:orgbe7552e}
 \begin{enumerate}
 \item Reproducir el primer ejemplo visto en clase.
 \item Mostrar datos.
@@ -65,7 +63,7 @@ aparece en manual de Box \& Jenkins.
 \end{enumerate}
 
 \item Carga de datos
-\label{sec:org1662476}
+\label{sec:orge21d61d}
 \textbf{\emph{\texttt{Archivo -{}-> Abrir datos -{}-> Archivo de muestra}}} y en la pestaña
 \textbf{\emph{\texttt{Gretl}}} seleccione \texttt{bjg}.
 
@@ -78,10 +76,10 @@ open bjg
 \end{enumerate}
 
 \subsection{Actividad 1 - mostrar datos}
-\label{sec:org1857933}
+\label{sec:orgca15b6f}
 \begin{enumerate}
 \item Visualice los datos de precios y tamaños de las casas
-\label{sec:orga6c6dbc}
+\label{sec:orgd6346a8}
 \begin{itemize}
 \item En la ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}, marque con el ratón la 
 variable: \texttt{g}.
@@ -100,7 +98,7 @@ print -o g
 \vspace{-3pt}
 
 \item Ayuda
-\label{sec:org3ec6bf7}
+\label{sec:orge205437}
 Para consultar la documentación sobre cualquier comando, puede emplear
 el menú desplegable \textbf{\emph{\texttt{Ayuda}}} que aparece arriba, a la derecha de la
 ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
@@ -114,10 +112,10 @@ ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
 \end{enumerate}
 
 \subsection{Actividad 2 - Gráfico de series temporales}
-\label{sec:org4e98db4}
+\label{sec:org82bcab0}
 \begin{enumerate}
 \item Scatter plot
-\label{sec:orgba273bb}
+\label{sec:org3e90ee9}
 \begin{itemize}
 \item Marque la variable \texttt{g} (pulsando \texttt{ctrl} y pinchando con el botón
 derecho del ratón sobre ella). Elija \textbf{\emph{\texttt{Gráfico de series temporales}}}
@@ -128,7 +126,7 @@ derecho del ratón sobre ella). Elija \textbf{\emph{\texttt{Gráfico de series t
 \end{itemize}
 
 \item Guardar gráfico como \emph{icono} para editarlo más tarde
-\label{sec:org4b0a16a}
+\label{sec:orgcbfbbca}
 \begin{itemize}
 \item ``Pinche'' con el botón derecho sobre la ventana del gráfico.
 \item Seleccione \textbf{\emph{\texttt{Guardar a sesión como icono}}}
@@ -148,7 +146,7 @@ serie de iconos. Uno de ellos es la \textbf{\emph{\texttt{vista de iconos de ses
 
 
 \subsection{Actividad 3 - Transformar logarítmicamente los datos}
-\label{sec:org19d1736}
+\label{sec:org02fb0ce}
 Aunque el fichero ya contiene el logaritmo de la serie, vamos a
 tranfformar logarítmicamente los datos originales.
 
@@ -156,7 +154,6 @@ Selecione con el ratón la variable \texttt{g} y luego pulse en el menú despleg
 ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
 \begin{itemize}
 \item \textbf{\emph{\texttt{Añadir -> Logaritmos de las variables seleccionadas}}}
-\end{itemize}
 
 {\vspace{0pt} \footnotesize \color{gray!70!black}
 \emph{o bien teclee en linea de comandos}: 
@@ -164,6 +161,7 @@ ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
 logs g
 \end{verbatim}
 }
+\end{itemize}
 
 Entre las variables aparecerá una nueva con el prefijo \texttt{l\_}, es decir,
 en este caso aparecerá la variable \texttt{l\_g} (que contiene exactamente la
@@ -173,14 +171,16 @@ Genere el gráfico de series temporales de esta nueva serie y guardelo
 como un nuevo icono (use un nombre suficientemente descriptivo para el
 icono, por ejemplo \texttt{LogsAirlinePassengers})
 
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+}
+
 \subsection{Actividad 4 - Primera diferencia de los datos en logaritmos}
-\label{sec:orgb4584b3}
+\label{sec:org9f85769}
 
 Selecione con el ratón la variable \texttt{l\_g} y luego pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
 ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
 \begin{itemize}
 \item \textbf{\emph{\texttt{Añadir -> Primeras diferencias de las variables seleccionadas}}}
-\end{itemize}
 
 {\vspace{0pt} \footnotesize \color{gray!70!black}
 \emph{o bien teclee en linea de comandos}: 
@@ -188,6 +188,7 @@ ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
 diff l_g
 \end{verbatim}
 }
+\end{itemize}
 
 Entre las variables aparecerá una nueva con el prefijo \texttt{d\_}, es decir,
 en este caso aparecerá la variable \texttt{d\_l\_g}.
@@ -196,8 +197,11 @@ Genere el gráfico de series temporales de esta nueva serie y guardelo
 como un nuevo icono (Use un nombre suficientemente descriptivo, por
 ejemplo \texttt{D\_LogsAirlinePassengers})
 
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+}
+
 \subsection{Actividad 5 - El logaritmo no es una función lineal}
-\label{sec:orgf2382ca}
+\label{sec:org6afa38d}
 
 Aunque el operador primera diferencia es lineal, la función logaritmo
 no lo es. Comprobemos que no es lo mismo la primera diferencia del
@@ -210,21 +214,23 @@ diferencia.
 que son distintos (no solo eso, dado que la función logaritmo solo
 está definida para números positivos, en \texttt{l\_d\_g} parecen una gran
 cantidad de valores ausentes).
-\end{itemize}
 
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{en linea de comandos}: 
 \begin{verbatim}
 diff g
 logs d_g
 print -o d_l_g l_d_g
 \end{verbatim}
+}
+\end{itemize}
 
 \subsection{Actividad 6 - Diferencia de orden 12 (o estacional) de la primera diferencia de los datos en logaritmos}
-\label{sec:org5393791}
+\label{sec:org4e83248}
 Selecione con el ratón la variable \texttt{d\_l\_g} y luego pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
 ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
 \begin{itemize}
 \item \textbf{\emph{\texttt{Añadir -> Diferencias estacionales de las variables seleccionadas}}}
-\end{itemize}
 
 {\vspace{0pt} \footnotesize \color{gray!70!black}
 \emph{o bien teclee en linea de comandos}: 
@@ -232,6 +238,7 @@ ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
 sdiff d_l_g
 \end{verbatim}
 }
+\end{itemize}
 
 Entre las variables aparecerá una nueva con el prefijo \texttt{sd\_}, es
 decir, en este caso aparecerá la variable \texttt{sd\_d\_l\_g}.
@@ -240,15 +247,22 @@ Genere el gráfico de series temporales de esta nueva serie y guardelo
 como un nuevo icono (Use un nombre suficientemente descriptivo, por
 ejemplo \texttt{D12\_D\_LogsAirlinePassengers})
 
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+}
+
 Observe que en la serie obtenida ya no se observa ni tendencia ni un
 componente cíclico estacional.
 
 \subsection{Actividad 5 - El orden en que se aplican los operadores diferencia y diferencia estacional es irelevante}
-\label{sec:org2137e3a}
+\label{sec:orgca41628}
 
 \begin{enumerate}
 \item calcule la diferencia estacional de la serie en logaritmos \texttt{l\_g} y
 genere su gráfico
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{en linea de comandos}: 
+}
 
 Observe que en la serie obtenida ya no el componente cíclico
 estacional, pero sin embargo el promedio de cada año "deambula"
@@ -257,6 +271,10 @@ alrededor del valor \(0.1\) en ciclos de unos 4 años
 \item ahora tome una primera diferencia de la serie anterior (sd\textsubscript{l}\textsubscript{g}) y
 compruebe las diferencias entre la serie resultante (\texttt{d\_sd\_l\_g}) y
 la obtenida en la actividad anterior (\texttt{sd\_d\_l\_g}).
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{en linea de comandos}: 
+}
 \end{enumerate}
 
 Es decir, el orden en que se tomen la diferencia ordinaria y la

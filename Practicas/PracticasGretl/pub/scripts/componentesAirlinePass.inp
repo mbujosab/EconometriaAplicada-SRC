@@ -1,0 +1,70 @@
+open bjg
+
+genr time
+
+square time
+
+TendenciaLineal  <- ols lg 0 time
+
+TendenciaLineal.show
+
+series TendenciaLineal =  $yhat
+series Comp_irregular =  $uhat
+
+GraficoTendenciaLineal <- gnuplot lg TendenciaLineal --time-series --with-lines
+GraficoTendenciaLineal.show
+
+GraficoComponenteIrregular <- gnuplot Comp_irregular --time-series --with-lines
+GraficoComponenteIrregular.show
+
+sdiff Comp_irregular
+
+GraficoComponenteIrregularD12 <- gnuplot sd_Comp_irregular --time-series --with-lines
+GraficoComponenteIrregularD12.show
+
+# modelo con tendencia cuadrática
+TendenciaCuadratica  <- ols lg 0 time sq_time
+TendenciaCuadratica.show
+
+series TendenciaCuadratica =  $yhat
+series Comp_irregular2 =  $uhat
+
+GraficoTendenciaCuadratica <- gnuplot lg TendenciaCuadratica --time-series --with-lines
+GraficoTendenciaCuadratica.show
+
+GraficoComponenteIrregular2 <- gnuplot Comp_irregular2 --time-series --with-lines
+GraficoComponenteIrregular2.show
+
+sdiff Comp_irregular2
+
+GraficoComponenteIrregular2D12 <- gnuplot sd_Comp_irregular2 --time-series --with-lines
+GraficoComponenteIrregular2D12.show
+
+# modelo con tendencia cuadrática
+
+seasonals()
+
+ModeloCompleto  <- ols lg const time sq_time S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 S11
+ModeloCompleto.show
+
+series Tendencia3 = $coeff[1] + $coeff[2]*time + $coeff[3]*sq_time
+
+series Tendencia3 = $coeff(const) + $coeff(time)*time + $coeff(sq_time)*sq_time
+
+series Comp_Estacional3 = $coeff(S1)*S1 + $coeff(S2)*S2 + $coeff(S3)*S3 + $coeff(S4)*S4 \
+                        + $coeff(S5)*S5 + $coeff(S6)*S6 + $coeff(S7)*S7 + $coeff(S8)*S8 \
+                        + $coeff(S9)*S9 + $coeff(S10)*S10 + $coeff(S11)*S11
+
+GraficoTendencia3 <- gnuplot lg Tendencia3 --time-series --with-lines
+GraficoTendencia3.show
+
+GraficoComponenteEstacional3 <- gnuplot Comp_Estacional3 --time-series --with-lines
+GraficoComponenteEstacional3.show
+
+series ComponenteIrregular3 = $uhat
+GraficoComponenteIrregular3 <- gnuplot ComponenteIrregular3 --time-series --with-lines
+GraficoComponenteIrregular3.show
+
+series Ajuste3 = $yhat
+GraficoAjuste3 <- gnuplot lg Ajuste3 --time-series --with-lines
+GraficoAjuste3.show

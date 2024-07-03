@@ -165,7 +165,7 @@ datosModelo1['ehatDiff12'] = datosModelo1['ehat'].diff(12)
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+linearTrend.png
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+linearTrend.png
 # Dibujamos los datos junto a la tendencia estimada
 plt.plot(datosModelo1['dataLog'])
 plt.plot(results1.fittedvalues)
@@ -182,7 +182,7 @@ $$\ln{y_t}=\underbrace{\beta_1+\beta_2\cdot t}_{\text{tendencia}} + e_t; \quad t
 
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-[[./img/airlinepass+linearTrend.png]]
+[[./img/lecc02/airlinepass+linearTrend.png]]
 
 
 #+RESULTS: my-latex-code-linear-trend
@@ -200,19 +200,19 @@ print(results1.summary())
 #+attr_org: :width 650
 #+attr_html: :width 100px
 #+attr_latex: :width 250px
-[[./img/resultsModel1.png]]
+[[./img/lecc02/resultsModel1.png]]
 
 
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 *_Componente irregular_*
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+irreg.png
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+irreg.png
 # Gráfico de los residuos del ajuste.
 plt.grid()  
 plt.plot(results1.resid)
 #+END_SRC
-[[file:./img/airlinepass+irreg.png]]
+[[file:./img/lecc02/airlinepass+irreg.png]]
 En este caso, el modelo 
 
 $$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$
@@ -224,7 +224,7 @@ no tiene la apariencia de realización de un proceso estacionario.
 
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent  :file ./img/airlinepass+irregDiff12.png 
+#+BEGIN_SRC jupyter-python :results file silent  :file ./img/lecc02/airlinepass+irregDiff12.png 
 # Gráfico de la diferencia estacional de los residuos del ajuste.
 plt.grid()  
 plt.plot(datosModelo1['ehatDiff12'])
@@ -235,7 +235,7 @@ Adicionalmente podemos ver que diferencia de orden 12 del componente
 irregular parece mostrar un componente cíclico con un periodo de unos
 4 años.
 
-[[file:./img/airlinepass+irregDiff12.png]]
+[[file:./img/lecc02/airlinepass+irregDiff12.png]]
 
 En el siguiente ejercicio probaremos con una tendencia cuadrática...
 
@@ -269,9 +269,9 @@ $$\widehat{\ln{y_t}}=<<Cte-ajuste-tendencia-lineal()>>+<<Pte-ajuste-tendencia-li
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 Generamos un fichero =png= con los resultados de la estimación MCO.
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results silent file :file ./img/resultsModel1.png 
+#+BEGIN_SRC jupyter-python :results silent file :file ./img/lecc02/resultsModel1.png 
 # print(results.summary()) Esta es la forma habitual de ver los resultados
-repr_png(results1.summary().as_latex(),  "./img/resultsModel1.png") # pero emplearé esta para importar los resultados como imagen png en el material de clase
+repr_png(results1.summary().as_latex(),  "./img/lecc02/resultsModel1.png") # pero emplearé esta para importar los resultados como imagen png en el material de clase
 #+END_SRC
 
 
@@ -304,7 +304,7 @@ datosModelo2['ehatDiff12'] = datosModelo2['ehat'].diff(12)
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+quadraticTrend.png
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+quadraticTrend.png
 # Dibujamos los datos junto a la tendencia estimada.
 plt.plot(datosModelo1['dataLog'])
 plt.plot(results2.fittedvalues)
@@ -315,7 +315,7 @@ plt.ylabel(r"Log-Passengers, ($\ln\boldsymbol{x}$) ")
 $$\ln{y_t}=\underbrace{\beta_1+\beta_2\cdot t + \beta_3\cdot t^2}_{\text{tendencia}} + e_t; \quad t=1:114$$
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-[[./img/airlinepass+quadraticTrend.png]]
+[[./img/lecc02/airlinepass+quadraticTrend.png]]
 
 #+RESULTS: my-latex-code-quadratic-trend
 :results:
@@ -325,7 +325,7 @@ $$\widehat{\ln{y_t}}=4.7364+(0.0132)\cdot t +(-2.191e-05)\cdot t^2, \qquad t=1:1
  
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/resultsModel2.png
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel2.png
 print(results2.summary()) 
 #+END_SRC
 
@@ -333,18 +333,18 @@ print(results2.summary())
 #+attr_org: :width 650
 #+attr_html: :width 100px
 #+attr_latex: :width 250px
-[[./img/resultsModel2.png]]
+[[./img/lecc02/resultsModel2.png]]
 
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 *_Componente irregular_*
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+irreg2.png
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+irreg2.png
 plt.grid()  
 plt.plot(results2.resid)
 #+END_SRC
 
-[[./img/airlinepass+irreg2.png]]
+[[./img/lecc02/airlinepass+irreg2.png]]
 
 De manera análoga al caso anterior, el modelo
 
@@ -357,7 +357,7 @@ proceso estacionario.
 
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+irregDiff12-2.png
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+irregDiff12-2.png
 plt.grid()  
 plt.plot(datosModelo2['ehatDiff12'])
 #+END_SRC
@@ -367,7 +367,7 @@ plt.plot(datosModelo2['ehatDiff12'])
 También en este modelo la diferencia de orden 12 del componente
 irregular muestra un componente cíclico con un periodo de unos 4 años.
 
-[[file:./img/airlinepass+irregDiff12.png]]
+[[file:./img/lecc02/airlinepass+irregDiff12.png]]
 
 Para obtener una /tendencia-ciclo/ que capte este ciclo, son
 necesarios procedimientos más sofisticados (por ejemplo TRAMO-SEATS, o
@@ -409,8 +409,8 @@ $$\widehat{\ln{y_t}}=<<Cte-ajuste-tendencia-cuadr()>>+(<<beta2-tendencia-cuadr()
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/resultsModel2.png
-repr_png(results2.summary().as_latex(), "./img/resultsModel2.png") 
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel2.png
+repr_png(results2.summary().as_latex(), "./img/lecc02/resultsModel2.png") 
 #+END_SRC
 
 
@@ -455,7 +455,7 @@ TrendComp = datosModelo3[['cte','time','sq_time']].dot(results3.params[['cte','t
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+TrendC.png
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+TrendC.png
 rcParams['figure.figsize'] = 15,4
 plt.plot(datosModelo1['dataLog'])
 plt.plot(TrendComp)
@@ -464,16 +464,16 @@ plt.ylabel(r"Log-Passengers, ($\ln\boldsymbol{x}$) ")
 #+END_SRC
 
 
-[[./img/airlinepass+TrendC.png]]
+[[./img/lecc02/airlinepass+TrendC.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+SeasonalC.png
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+SeasonalC.png
 SeasonalComp = (seasonalDummies.iloc[:,:-1]).dot(results3.params[3:])
 plt.grid()  
 plt.plot(SeasonalComp)
 #+END_SRC
 
-[[file:./img/airlinepass+SeasonalC.png]]
+[[file:./img/lecc02/airlinepass+SeasonalC.png]]
 
 
 *** Ajuste y componente irregular $\boldsymbol{e}=\boldsymbol{y}-\boldsymbol{t}-\boldsymbol{s}$
@@ -483,21 +483,21 @@ plt.plot(SeasonalComp)
 
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+yhat.png
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+yhat.png
 plt.grid()  
 plt.plot(datosModelo3['dataLog'])
 plt.plot(TrendComp + SeasonalComp)
 #+END_SRC
 
-[[./img/airlinepass+yhat.png]]
+[[./img/lecc02/airlinepass+yhat.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+IrregC.png
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+IrregC.png
 plt.grid()  
 plt.plot(results3.resid)
 #+END_SRC
 
-[[./img/airlinepass+IrregC.png]]
+[[./img/lecc02/airlinepass+IrregC.png]]
 
 
 *** Valoración de modelos con componentes deterministas
@@ -530,20 +530,20 @@ Pero sigamos explorando este modelo...
 febrero y octubre).
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/resultsModel3.png
-repr_png(results3.summary().as_latex(), "./img/resultsModel3.png")
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel3.png
+repr_png(results3.summary().as_latex(), "./img/lecc02/resultsModel3.png")
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+attr_org: :width 650
 #+attr_html: :width 100px
 #+attr_latex: :width 250px
-[[./img/resultsModel3.png]]1
+[[./img/lecc02/resultsModel3.png]]1
 
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 <div>
-<img src="./img/resultsModel3.png" width="450" class="center"/>
+<img src="./img/lecc02/resultsModel3.png" width="450" class="center"/>
 </div>
 
 @@latex:\bigskip@@
@@ -589,12 +589,12 @@ print(results4.summary())
 #+attr_org: :width 650
 #+attr_html: :width 100px
 #+attr_latex: :width 250px
-[[file:./img/resultsModel4.png]]
+[[file:./img/lecc02/resultsModel4.png]]
 
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 <div>
-<img src="./img/resultsModel4.png" width="400" class="center"/>
+<img src="./img/lecc02/resultsModel4.png" width="400" class="center"/>
 </div>
 
 @@latex:\bigskip@@
@@ -606,8 +606,8 @@ desviaciones típicas es incorrecta*)
 **************  Codigo aux                                       :noexport:
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/resultsModel4.png
-repr_png(results4.summary().as_latex(), "./img/resultsModel4.png") 
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel4.png
+repr_png(results4.summary().as_latex(), "./img/lecc02/resultsModel4.png") 
 #+END_SRC
 
 
@@ -701,7 +701,7 @@ import statsmodels.stats.diagnostic as dg
 #perform Breusch-Godfrey test of order p = 3
 arbg = dg.acorr_breusch_godfrey(results4, nlags=3, store=True)
 arbg[:1]
-repr_png(arbg[-1].resols.summary().as_latex(), "./img/resultsBreusch-Godfrey.png") 
+repr_png(arbg[-1].resols.summary().as_latex(), "./img/lecc02/resultsBreusch-Godfrey.png") 
 #+END_SRC
 
 
@@ -709,7 +709,7 @@ repr_png(arbg[-1].resols.summary().as_latex(), "./img/resultsBreusch-Godfrey.png
 #+attr_org: :width 650
 #+attr_html: :width 100px
 #+attr_latex: :width 250px
-[[./img/resultsBreusch-Godfrey.png]]
+[[./img/lecc02/resultsBreusch-Godfrey.png]]
 
 
 
@@ -723,7 +723,7 @@ repr_png(arbg[-1].resols.summary().as_latex(), "./img/resultsBreusch-Godfrey.png
 - $x_{12}$ corresponde al primer retardo en la regresión auxiliar y es muy significativo
 :end:
 <div>
-<img src="./img/resultsBreusch-Godfrey.png" width="450" class="center"/>
+<img src="./img/lecc02/resultsBreusch-Godfrey.png" width="450" class="center"/>
 </div>
 
 
@@ -778,8 +778,8 @@ print(results5.get_robustcov_results(cov_type='HAC', maxlags=3, use_correction=T
 
  
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/resultsModel5.png
-repr_png(results5.get_robustcov_results(cov_type='HAC', maxlags=3, use_correction=True).summary().as_latex(), "./img/resultsModel5.png")
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel5.png
+repr_png(results5.get_robustcov_results(cov_type='HAC', maxlags=3, use_correction=True).summary().as_latex(), "./img/lecc02/resultsModel5.png")
 #+END_SRC
 
 
@@ -787,19 +787,19 @@ repr_png(results5.get_robustcov_results(cov_type='HAC', maxlags=3, use_correctio
 #+attr_org: :width 650
 #+attr_html: :width 100px
 #+attr_latex: :width 250px
-[[./img/resultsModel5.png]]
+[[./img/lecc02/resultsModel5.png]]
 
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 <div>
-<img src="./img/resultsModel5.png" width="400" class="center"/>
+<img src="./img/lecc02/resultsModel5.png" width="400" class="center"/>
 </div>
 
 Ahora, y empleando errores estándar robustos, podemos reducir el
 modelo de manera más cuidadosa usando desviaciones típicas robustas. El modelo reducido es...
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/resultsModel6.png
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel6.png
 y = datosModelo3['dataLog']
 X = datosModelo3.iloc[:,1:-1]
 
@@ -824,7 +824,7 @@ while insignificant_feature:
             else:            
                 X = remove_most_insignificant(X, results6)
 print(robustResults.summary())
-repr_png(robustResults.summary().as_latex(), "./img/resultsModel6.png") 
+repr_png(robustResults.summary().as_latex(), "./img/lecc02/resultsModel6.png") 
 #+END_SRC
 
 
@@ -832,11 +832,11 @@ repr_png(robustResults.summary().as_latex(), "./img/resultsModel6.png")
 #+attr_org: :width 650
 #+attr_html: :width 100px
 #+attr_latex: :width 250px
-[[./img/resultsModel6.png]]
+[[./img/lecc02/resultsModel6.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 <div>
-<img src="./img/resultsModel6.png" width="400" class="center"/>
+<img src="./img/lecc02/resultsModel6.png" width="400" class="center"/>
 </div>
 
 - Nótese que ahora se aprecia que enero y octubre son significativos al 5%
@@ -863,6 +863,8 @@ $$Var(\boldsymbol{U}\mid\boldsymbol{\mathsf{X}})=\boldsymbol{\Sigma}\ne\sigma^2\
 el Teorema de Gauss-Markov ya no es válido, ya que es posible explotar
 la estructura de la matriz $\boldsymbol{\Sigma}$ para minimizar la
 varianza del estimador.
+
+# https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.alph6.18.Alph1
 
 En particular, el estimador lineal de mínima varianza es el estimador
 MCG (mínimos cuadrados generalizados)
@@ -918,12 +920,12 @@ print(results.summary())
 #+attr_org: :width 650
 #+attr_html: :width 100px
 #+attr_latex: :width 250px
-[[./img/resultsModel7.png]]
+[[./img/lecc02/resultsModel7.png]]
 
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 <div>
-<img src="./img/resultsModel7.png" width="600" class="center"/>
+<img src="./img/lecc02/resultsModel7.png" width="600" class="center"/>
 </div>
 
 
@@ -938,141 +940,18 @@ print(model2.fit().summary())
 #+END_SRC
 
 
+
 **************  Codigo aux                                       :noexport:
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/resultsModel7.png
-repr_png(results.summary().as_latex(), "./img/resultsModel7.png") 
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel7.png
+repr_png(results.summary().as_latex(), "./img/lecc02/resultsModel7.png") 
 #+END_SRC
 
 
+# [[https://ninjakx.github.io/Introduction-to-Time-series/]]
 
-** COMMENT Descartados                                             :noexport:
+# [[https://www.kaggle.com/code/darpan25bajaj/air-passengers-forecasting]]
 
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results none
-import seaborn as sns
-from matplotlib import rcParams
-rcParams['figure.figsize'] = 15,5
-plt.grid()  
-#plt.plot(datosModelo1['dataLog'])
-ax = sns.regplot(x="time", y="dataLog", data=datosModelo1,
-                 scatter_kws={"color": "blue"}, line_kws={"color": "red"})
-fig = ax.get_figure()
-#+END_SRC
-
-
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results none 
-ax = sns.lineplot(data=datosModelo1, x=datosModelo1.index, y=results1.resid)
-fig = ax.get_figure()
-#fig.savefig("./img/airlinepass+irreg.png") 
-#+END_SRC
-
-
-#+BEGIN_SRC jupyter-python :results none 
-ax = sns.lineplot(data=datosModelo1, x=datosModelo1.index, y=datosModelo1['ehatDiff12'])
-fig = ax.get_figure()
-#fig.savefig("./img/airlinepass+irregDiff12.png")
-#+END_SRC
-
-#+BEGIN_SRC jupyter-python
-import numpy as np
-import pandas as pd
-base = pd.Timestamp("1949-1-1")
-gen = np.random.default_rng()
-gaps = np.cumsum(gen.integers(0, 1800, size=1000))
-times = [base + pd.Timedelta(gap, unit="s") for gap in gaps]
-index = pd.DatetimeIndex(pd.to_datetime(times))
-#+END_SRC
-
-#+RESULTS:
-
-#+BEGIN_SRC jupyter-python
-#from statsmodels.tsa.deterministic import CalendarSeasonality
-#cal_seas_gen = CalendarSeasonality("D","M")
-#cal_seas_gen.in_sample(index)
-#+END_SRC
-
-#+RESULTS:
-
-
-[[https://ninjakx.github.io/Introduction-to-Time-series/]]
-
-#+BEGIN_SRC jupyter-python
-from pandas import Series
-from matplotlib import pyplot
-from statsmodels.tsa.seasonal import seasonal_decompose
-series = datosModelo1['dataLog'] #pd.read_csv('./database/Datasets-master/airline-passengers.csv') #Series.from_csv('AirPassengers.csv', header=0)
-result = seasonal_decompose(series, model='multiplicative')
-rcParams['figure.figsize'] = 15,10
-result.plot()
-pyplot.show()
-#+END_SRC
-
-#+RESULTS:
-:RESULTS:
-[[file:./.ob-jupyter/90afbc8dc458dc4bd58b284c0ec207ce1109355c.png]]
-:END:
-
-
-
-[[https://www.kaggle.com/code/darpan25bajaj/air-passengers-forecasting]]
-
-#+BEGIN_SRC jupyter-python
-series = datosModelo1['dataLog'] 
-decompose = sm.tsa.seasonal_decompose(series,model='multiplicative',extrapolate_trend=8)
-
-#+END_SRC
-
-#+RESULTS:
-
-#+BEGIN_SRC jupyter-python
-fig = decompose.plot()
-fig.set_figheight(10)
-fig.set_figwidth(8)
-fig.suptitle('Decomposition of Time Series')
-#+END_SRC
-
-#+RESULTS:
-:RESULTS:
-: Text(0.5, 0.98, 'Decomposition of Time Series')
-[[file:./.ob-jupyter/8d3cb22d46cde426cacec6b43c614e92ecd13436.png]]
-:END:
-
-[[https://machinelearningmastery.com/time-series-forecasting-methods-in-python-cheat-sheet/]]
-
-
-
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results none
-# La combinación lineal de los regresores 'cte', 'time' y 'sq_time' usando los correspondientes
-# parámetros estimados nos da el componente de tendencia (determinista) estimado. 
-#TrendComp2 = datosModelo3[['cte','time','sq_time']].dot(results4.params[['cte','time','sq_time']])
-#+END_SRC
-
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+TrendC.png
-#rcParams['figure.figsize'] = 15,4
-#plt.plot(datosModelo1['dataLog'])
-#plt.plot(TrendComp2)
-#plt.grid()  
-#plt.ylabel(r"Log-Passengers, ($\ln\boldsymbol{x}$) ")
-#+END_SRC
-
-
-[[./img/airlinepass+TrendC.png]]
-
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+SeasonalC.png
-#SeasonalComp2 =  X.iloc[:,3:].dot(results4.params[3:])
-
-
-#plt.grid()  
-#plt.plot(SeasonalComp2)
-#+END_SRC
-
-[[file:./img/airlinepass+SeasonalC.png]]
-
-
+# [[https://machinelearningmastery.com/time-series-forecasting-methods-in-python-cheat-sheet/]]
 

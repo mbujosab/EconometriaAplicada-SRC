@@ -3,7 +3,7 @@
 #+STARTUP: show4levels
 #+LANGUAGE: es-es
 
-#+EXPORT_FILE_NAME: pub/Lecc01
+#+EXPORT_FILE_NAME: pub/Prct-Lecc01
 
 # +OPTIONS: toc:nil
 #+OPTIONS: tags:nil
@@ -116,7 +116,7 @@ open bjg
   /o bien teclee en linea de comandos/:
     #+NAME: Mostramos los valores de los datos en columna
     #+begin_src hansl 
-    print -o g
+print -o g
     #+end_src
   #+latex: }
 
@@ -149,7 +149,7 @@ ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
   /o bien teclee en linea de comandos/:
     #+NAME: Guardamos scatterplot como icono
     #+begin_src hansl 
-    AirlinePassengers <- gnuplot g --time-series --with-lines
+AirlinePassengers <- gnuplot g --time-series --with-lines
     #+end_src
     (=AirlinePassengers= /es el nombre con el que se guardará el icono/)
   #+latex: }
@@ -166,13 +166,13 @@ Selecione con el ratón la variable =g= y luego pulse en el menú desplegable */
 ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
   + */~Añadir -> Logaritmos de las variables seleccionadas~/*
 
-#+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
-/o bien teclee en linea de comandos/: 
-    #+NAME: Aplicamos la trnasformación logarítmica
-    #+begin_src hansl 
-    logs g
-    #+end_src
-#+latex: }
+    #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+    /o bien teclee en linea de comandos/: 
+      #+NAME: Aplicamos la trnasformación logarítmica
+      #+begin_src hansl 
+logs g
+      #+end_src
+    #+latex: }
 
 Entre las variables aparecerá una nueva con el prefijo =l_=, es decir,
 en este caso aparecerá la variable =l_g= (que contiene exactamente la
@@ -182,10 +182,12 @@ Genere el gráfico de series temporales de esta nueva serie y guardelo
 como un nuevo icono (use un nombre suficientemente descriptivo para el
 icono, por ejemplo =LogsAirlinePassengers=)
 
-#+NAME: Guardamos scatterplot como icono
-#+begin_src hansl :exports none
+#+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+  #+NAME: Guardamos scatterplot como icono
+  #+begin_src hansl :exports none
 LogsAirlinePassengers <- gnuplot l_g --time-series --with-lines
-#+end_src
+  #+end_src
+#+latex: }
 
 ** Actividad 4 - Primera diferencia de los datos en logaritmos
 
@@ -193,12 +195,12 @@ Selecione con el ratón la variable =l_g= y luego pulse en el menú desplegable 
 ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
   + */~Añadir -> Primeras diferencias de las variables seleccionadas~/*
 
-#+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
-/o bien teclee en linea de comandos/: 
-    #+begin_src hansl 
-    diff l_g
-    #+end_src
-#+latex: }
+    #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+    /o bien teclee en linea de comandos/: 
+      #+begin_src hansl 
+diff l_g
+      #+end_src
+    #+latex: }
 
 Entre las variables aparecerá una nueva con el prefijo =d_=, es decir,
 en este caso aparecerá la variable =d_l_g=.
@@ -207,10 +209,11 @@ Genere el gráfico de series temporales de esta nueva serie y guardelo
 como un nuevo icono (Use un nombre suficientemente descriptivo, por
 ejemplo =D_LogsAirlinePassengers=)
 
+#+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
 #+begin_src hansl :exports none
 D_LogsAirlinePassengers <- gnuplot d_l_g --time-series --with-lines
 #+end_src
-
+#+latex: }
 
 ** Actividad 5 - El logaritmo no es una función lineal
 
@@ -225,23 +228,26 @@ diferencia.
   está definida para números positivos, en =l_d_g= parecen una gran
   cantidad de valores ausentes).
 
-#+begin_src hansl 
+  #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+  /en linea de comandos/: 
+    #+begin_src hansl 
 diff g
 logs d_g
 print -o d_l_g l_d_g
-#+end_src
+    #+end_src
+  #+latex: }
 
 ** Actividad 6 - Diferencia de orden 12 (o estacional) de la primera diferencia de los datos en logaritmos
 Selecione con el ratón la variable =d_l_g= y luego pulse en el menú desplegable */~Añadir~/* que aparece arriba, en el centro de la
 ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
   + */~Añadir -> Diferencias estacionales de las variables seleccionadas~/*
 
-#+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
-/o bien teclee en linea de comandos/: 
-    #+begin_src hansl 
-    sdiff d_l_g
-    #+end_src
-#+latex: }
+    #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+    /o bien teclee en linea de comandos/: 
+      #+begin_src hansl 
+sdiff d_l_g
+      #+end_src
+    #+latex: }
 
 Entre las variables aparecerá una nueva con el prefijo =sd_=, es
 decir, en este caso aparecerá la variable =sd_d_l_g=.
@@ -250,9 +256,11 @@ Genere el gráfico de series temporales de esta nueva serie y guardelo
 como un nuevo icono (Use un nombre suficientemente descriptivo, por
 ejemplo =D12_D_LogsAirlinePassengers=)
 
-#+begin_src hansl :exports none
+#+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+  #+begin_src hansl :exports none
 D12_D_LogsAirlinePassengers <- gnuplot sd_d_l_g --time-series --with-lines
-#+end_src
+  #+end_src
+#+latex: }
 
 Observe que en la serie obtenida ya no se observa ni tendencia ni un
 componente cíclico estacional.
@@ -262,10 +270,13 @@ componente cíclico estacional.
 1) calcule la diferencia estacional de la serie en logaritmos =l_g= y
    genere su gráfico
 
-   #+begin_src hansl :exports none
+   #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+   /en linea de comandos/: 
+     #+begin_src hansl :exports none
 sdiff l_g
 D12_LogsAirlinePassengers <- gnuplot sd_l_g --time-series --with-lines
-   #+end_src
+     #+end_src
+   #+latex: }
 
    Observe que en la serie obtenida ya no el componente cíclico
    estacional, pero sin embargo el promedio de cada año "deambula"
@@ -275,11 +286,13 @@ D12_LogsAirlinePassengers <- gnuplot sd_l_g --time-series --with-lines
    compruebe las diferencias entre la serie resultante (=d_sd_l_g=) y
    la obtenida en la actividad anterior (=sd_d_l_g=).
 
-   #+begin_src hansl :exports none
+   #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+   /en linea de comandos/: 
+     #+begin_src hansl :exports none
 diff sd_l_g
 print -o sd_d_l_g  d_sd_l_g
-   #+end_src
-
+     #+end_src
+   #+latex: }
 
 Es decir, el orden en que se tomen la diferencia ordinaria y la
 diferencia estacional es irrelevante (pero recuerde que no pasa lo
@@ -293,4 +306,5 @@ transformación aplicada a los datos).
 #+latex: \vspace{10pt}
 \lstinputlisting{scripts/airlinePass.inp}
 #+LATEX: \clearpage
+
 

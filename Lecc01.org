@@ -206,7 +206,7 @@ pintar una realización, tan solo un pequeño porcentaje de los datos
 caerán fuera de la franja $\left(\mu-c\sigma, \mu+c\sigma\right)$.
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/stationaryTimeSeriesExample.png
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/stationaryTimeSeriesExample.png
 import statsmodels.api as sm
 np.random.seed(12345)
 arparams = np.array([.75, -.25])
@@ -216,10 +216,10 @@ ma = np.r_[1, maparams] # add zero-lag
 y = sm.tsa.arma_generate_sample(ar, ma, 250)
 plt.figure(figsize=(15,5))
 plt.plot(y)
-#plt.savefig("./img/stationaryTimeSeriesExample.png")
+#plt.savefig("./img/lecc01/stationaryTimeSeriesExample.png")
 #+END_SRC
 
-[[./img/stationaryTimeSeriesExample.png]]
+[[./img/lecc01/stationaryTimeSeriesExample.png]]
 
 
 
@@ -277,7 +277,7 @@ $$\boldsymbol{x}=(x_1,\ldots x_{114})$$
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+NAME: figura-airlinepass
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+hist.png
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/airlinepass+hist.png
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
 plt.plot(OrigData['Passengers'])
@@ -286,12 +286,12 @@ plt.ylabel(r"Number of Air Passengers, ($\boldsymbol{x}$)")
 plt.subplot(1, 2, 2)
 plt.hist(OrigData['Passengers'], edgecolor='white', bins=11)
 plt.tight_layout()
-#plt.savefig("./img/airlinepass+hist.png")
+#plt.savefig("./img/lecc01/airlinepass+hist.png")
 #+END_SRC
 
 
 
-[[./img/airlinepass+hist.png]]
+[[./img/lecc01/airlinepass+hist.png]]
 
 Serie /"no estacionaria"/ (*):
 - La media crece de año en año
@@ -316,7 +316,7 @@ Serie /"no estacionaria"/ (*):
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+NAME: funcion_logaritmica
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/funcion_logaritmica.png
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/funcion_logaritmica.png
 # Definir el rango de valores para x (empezando desde un número positivo ya que log(0) no está definido)
 x = np.linspace(0.01, 7, 400)  # Valores de 0.1 a 10
 
@@ -335,7 +335,7 @@ plt.axhline(0, color='black',linewidth=0.5)
 plt.axvline(0, color='black',linewidth=0.5)
 plt.grid(color = 'gray', linestyle = '--', linewidth = 0.5)
 plt.legend()
-#plt.savefig("./img/funcion_logaritmica.png")
+#plt.savefig("./img/lecc01/funcion_logaritmica.png")
 #+END_SRC
 # Establecer la escala logarítmica en el eje x
 # #plt.xscale('log')
@@ -345,7 +345,7 @@ plt.legend()
 
 
 
-[[./img/funcion_logaritmica.png]]
+[[./img/lecc01/funcion_logaritmica.png]]
 
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
@@ -364,7 +364,7 @@ TransformedData['dataLogDiffDiff12'] = TransformedData['dataLogDiff'].diff(12)
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+NAME: figura-airlinepass-log
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass_log+hist.png
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/airlinepass_log+hist.png
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
 plt.plot(TransformedData['dataLog'])
@@ -373,12 +373,12 @@ plt.ylabel(r"Log-Passengers, ($\ln\boldsymbol{x}$) ")
 plt.subplot(1, 2, 2)
 plt.hist(TransformedData['dataLog'], edgecolor='white', bins=11)
 plt.tight_layout()
-#plt.savefig("./img/airlinepass_log+hist.png")
+#plt.savefig("./img/lecc01/airlinepass_log+hist.png")
 #+END_SRC
 
 
 
-[[./img/airlinepass_log+hist.png]]
+[[./img/lecc01/airlinepass_log+hist.png]]
 
 Ésta tampoco parece la realización de un proceso estocástico /estacionario/
 - Ahora la variabilidad estacional parece mantenerse de año en año
@@ -393,7 +393,7 @@ $$\boldsymbol{y}=\nabla\ln\boldsymbol{x}=\Big(\big[\ln(x_2)-\ln(x_1)\big],\ldots
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+NAME: figura-airlinepass-log-diff
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass_logDiff+hist.png
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/airlinepass_logDiff+hist.png
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
 plt.plot(TransformedData['dataLogDiff'])
@@ -402,12 +402,12 @@ plt.ylabel(r"$\nabla\ln\boldsymbol{x}$")
 plt.subplot(1, 2, 2)
 plt.hist(TransformedData['dataLogDiff'], edgecolor='white', bins=11)
 plt.tight_layout()
-#plt.savefig("./img/airlinepass_logDiff+hist.png")
+#plt.savefig("./img/lecc01/airlinepass_logDiff+hist.png")
 #+END_SRC
 
 
 
-[[./img/airlinepass_logDiff+hist.png]]
+[[./img/lecc01/airlinepass_logDiff+hist.png]]
 
 
 Esta serie tampoco parece /"estacionaria"/ (*)
@@ -426,7 +426,7 @@ $$\boldsymbol{z}=\nabla_{12}(\nabla\ln\boldsymbol{x})=\nabla_{12}(\boldsymbol{y}
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+NAME: figura-airlinepass-log-diff-diff12
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass_logDiffDiff12+hist.png
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/airlinepass_logDiffDiff12+hist.png
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
 plt.plot(TransformedData['dataLogDiffDiff12'])
@@ -435,12 +435,12 @@ plt.ylabel(r"$\nabla_{12}(\nabla\ln\boldsymbol{x})$")
 plt.subplot(1, 2, 2)
 plt.hist(TransformedData['dataLogDiffDiff12'], edgecolor='white', bins=11)
 plt.tight_layout()
-#plt.savefig("./img/airlinepass_logDiffDiff12+hist.png")
+#plt.savefig("./img/lecc01/airlinepass_logDiffDiff12+hist.png")
 #+END_SRC
 
 
 
-[[./img/airlinepass_logDiffDiff12+hist.png]]
+[[./img/lecc01/airlinepass_logDiffDiff12+hist.png]]
 
 
 Esta serie se aproxima más al aspecto de la realización de un proceso /estacionario/
@@ -466,8 +466,8 @@ TasaLogCrecimiento['$\\ln y_t- \\ln y_{0}$'] = TasaLogCrecimiento['$\\ln y_t$'] 
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/TasaLogCrecimiento.png
-dfi.export(TasaLogCrecimiento, "./img/TasaLogCrecimiento.png", use_mathjax=True, dpi=200)
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/TasaLogCrecimiento.png
+dfi.export(TasaLogCrecimiento, "./img/lecc01/TasaLogCrecimiento.png", use_mathjax=True, dpi=200)
 #+END_SRC
 
 La tasa logarítmica de variación de $\boldsymbol{y}$ se define como
@@ -483,7 +483,7 @@ incremento es pequeño.
 #+attr_org: :width 700
 #+attr_html: :width 250px
 #+attr_latex: :width 250px
-[[file:./img/TasaLogCrecimiento.png]]
+[[file:./img/lecc01/TasaLogCrecimiento.png]]
 
 
 
@@ -562,6 +562,8 @@ ip.display_formatter.formatters['text/org'] = OrgFormatter()
 f = ip.display_formatter.formatters['text/org']
 f.for_type_by_name('pandas.core.frame', 'DataFrame', pd_dataframe_to_org)
 #+END_SRC
+
+#+RESULTS:
 
 
 
