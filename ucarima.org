@@ -1,0 +1,60 @@
+
+#+LANGUAGE: es-es
+
+#+options: toc:nil
+
+#+LATEX_HEADER_EXTRA: \usepackage[spanish]{babel}
+#+LATEX_HEADER_EXTRA: \usepackage{lmodern}
+#+LATEX_HEADER_EXTRA: \usepackage{tabularx}
+#+LATEX_HEADER_EXTRA: \usepackage{booktabs}
+#+latex_header: \usepackage{nacal}
+
+/La notación tradicional no me gusta. Usaré una más compacta con
+productos convolución en lugar de sumatorios y donde
+$\Vect{y}=\{y_t\mid t\in\Zz\}$/ (ya ves que tengo cierta obsesión con
+las notaciones).
+#+latex: \bigskip
+
+Sea $$\Vect{y}=\Vect[1]{c}+\cdots+\Vect[k]{c}$$ donde cada
+$\Vect[j]{c}=\{{c_j}_t\mid t\in\Zz\}$ es un proceso ARIMA
+$$\mathsf{A}_j*\Vect[j]{c}=\mathsf{B}_j*\Vect[j]{e},$$ es decir, donde
+$\mathsf{A}_j$ y $\mathsf{B}_j$ son polinomios en el operador retardo
+$L$, donde $*$ es el producto convolución y donde
+$\Vect[j]{e}=\{{e_j}_t\mid t\in\Zz\}$ es un proceso de ruido
+blanco. Entonces $\Vect{y}$ también es un proceso ARIMA
+$$\mathsf{A}*\Vect{y}=\mathsf{B}*\Vect{e}$$ donde, si denotamos el
+conjunto de índices $1,2,\ldots,k$ con $\{1:k\}$, tenemos que
+$$\mathsf{A}=\mathsf{A}_1*\cdots*\mathsf{A}_k=\prod\limits_{j\in\{1:k\}}\mathsf{A}_j.$$
+Consecuentemente
+#+BEGIN_EXPORT latex
+\begin{align*}
+\mathsf{A}*\Vect{y}=&\mathsf{B}*\Vect{e}\\
+\mathsf{A}*(\Vect[1]{c}+\cdots+\Vect[k]{c})=&\mathsf{B}*\Vect{e}\\
+\mathsf{A}*\Vect[1]{c}+\cdots+\mathsf{A}*\Vect[k]{c}=&\mathsf{B}*\Vect{e}\\
+\Parentesis*{\prod\limits_{\substack{j\in\{1:k\}\\j\ne 1}}\mathsf{A}_j}*\mathsf{A}_1*\Vect[1]{c}+
+\Parentesis*{\prod\limits_{\substack{j\in\{1:k\}\\j\ne 2}}\mathsf{A}_j}*\mathsf{A}_2*\Vect[2]{c}+
+\cdots+
+\Parentesis*{\prod\limits_{\substack{j\in\{1:k\}\\j\ne k}}\mathsf{A}_j}*\mathsf{A}_k*\Vect[k]{c}=&\mathsf{B}*\Vect{e}\\
+\Parentesis*{\prod\limits_{\substack{j\in\{1:k\}\\j\ne 1}}\mathsf{A}_j}*\mathsf{B}_1*\Vect[1]{e}+
+\Parentesis*{\prod\limits_{\substack{j\in\{1:k\}\\j\ne 2}}\mathsf{A}_j}*\mathsf{B}_2*\Vect[2]{e}+
+\cdots+
+\Parentesis*{\prod\limits_{\substack{j\in\{1:k\}\\j\ne k}}\mathsf{A}_j}*\mathsf{B}_k*\Vect[k]{e}=&\mathsf{B}*\Vect{e}\\
+\end{align*}
+#+END_EXPORT
+Y si asumimos que $\mathsf{B}$ es invertible, entonces
+$$\frac{\Parentesis*{\prod\limits_{\substack{j\in\{1:k\}\\j\ne
+1}}\mathsf{A}_j}*\mathsf{B}_1}{\mathsf{B}}*\Vect[1]{e}+
+\frac{\Parentesis*{\prod\limits_{\substack{j\in\{1:k\}\\j\ne
+2}}\mathsf{A}_j}*\mathsf{B}_2}{\mathsf{B}}*\Vect[2]{e}+ \cdots+
+\frac{\Parentesis*{\prod\limits_{\substack{j\in\{1:k\}\\j\ne
+k}}\mathsf{A}_j}*\mathsf{B}_k}{\mathsf{B}}*\Vect[k]{e}=\Vect{e}.$$
+
+Me da en la nariz que la condición no puede ser exclusivamente sobre
+el polinomio $\mathsf{B}$, probablemente también debe haber
+condiciones sobre los procesos de ruido blanco $\Vect[1]{e}$,
+$\Vect[2]{e},\ldots$ $\Vect[k]{e}$, pues la suma de los $k$ procesos
+de la izquierda en la última expresión resulta ser ruido blanco.
+#+latex: \bigskip
+
+No sé ¿voy bien orientado?... ¿o toda esta deducción es una
+gilipollez?

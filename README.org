@@ -1,38 +1,72 @@
-- Enlace a la [[https://mbujosab.github.io/EconometriaAplicada-SRC/][web]]
+#+title: Código del material para un curso de Econometría Aplicada
+#+author: Marcos Bujosa
+#+LANGUAGE: es-es
+# +OPTIONS: toc:nil
 
-* Código fuente del material para un curso de Econometría Aplicada
+# +MACRO: imglnk @@html:<a href="$1"><img src="$2"></a>@@
+
+# ###########
+# ESTO DA EL FORMATO FINAL DE LA PÁGINA WEB VÉASE [[https://olmon.gitlab.io/org-themes/]]
+#+SETUPFILE: simple_inlineUCM.theme  
+# ###########
+
+# +attr_html: :width 320px
+# file:./3-2016-07-21-Marca_UCM_logo_negro.png
+# https://www.ucm.es/data/cont/docs/3-2016-07-21-Marca%20UCM%20logo%20negro.png
+
+- Enlaces :: 
+  - [[https://mbujosab.github.io/EconometriaAplicada-SRC/][Web]] con el material
+  - [[https://github.com/mbujosab/EconometriaAplicada-SRC][Repositorio]] con el material
+  - [[https://drive.google.com/open?id=0Bwa1A30pN0IwWUtNNzRQRFRJUTQ][Ficha]] de la asignatura
+
+* Regresión con series temporales
     :PROPERTIES:  
-    :UNNUMBERED: t
+    :UNNUMBERED: nil
     :END:  
 
-Fuente del material para impartir la asignatura Econometría Aplicada
-
-- [[https://drive.google.com/open?id=0Bwa1A30pN0IwWUtNNzRQRFRJUTQ][Ficha de la asignatura]]
-
-  
-** Regresión con series temporales
-
-*** Transformación de los datos (Lecc01)
+** Transformación de los datos (Lecc01)
 
 - [[file:./Lecc01.slides.html][Slides]]
 - [[file:./Lecc01.pdf][pdf file]]
 - [[file:./Lecc01.ipynb][Notebook]]
 - [[file:./Lecc01.org][org file]]
 
-**** Practicas
+*** Practicas
 
-- [[file:./Practicas/PracticasGretl/pub/Lecc01.pdf][pdf file]]
-- [[file:./Practicas/PracticasGretl/pub/scripts/airlinePass.inp][Gretl script]]
+- [[file:./Practicas/PracticasGretl/pub/Prct-Lecc01.pdf][pdf file]]
+- Guiones de gretl
+  + [[file:./Practicas/PracticasGretl/pub/scripts/airlinePass.inp][airlinePass.inp]]
 
-
-*** Regresión con series temporales - Modelos con componentes deterministas (Lecc02)
+** Regresión con series temporales - Modelos con componentes deterministas (Lecc02)
 
 - [[file:./Lecc02.slides.html][Slides]]
 - [[file:./Lecc02.pdf][pdf file]]
 - [[file:./Lecc02.ipynb][Notebook]]
 - [[file:./Lecc02.org][org file]]
 
-**** Practicas
+*** Practicas
 
-- [[file:./Practicas/PracticasGretl/pub/Lecc01.pdf][pdf file]]
-- [[file:./Practicas/PracticasGretl/pub/scripts/airlinePass.inp][Gretl script]]
+- [[file:./Practicas/PracticasGretl/pub/Prct-Lecc02.pdf][pdf file]]
+- Guiones de gretl
+  + [[file:./Practicas/PracticasGretl/pub/scripts/componentesAirlinePass.inp][componentesAirlinePass.inp]]
+  + [[file:./Practicas/PracticasGretl/pub/scripts/componentesAirlinePass2.inp][componentesAirlinePass2.inp]]
+
+
+** Correlación y cointegración (Lecc03)
+
+- [[file:./Lecc03.slides.html][Slides]]
+- [[file:./Lecc03.pdf][pdf file]]
+- [[file:./Lecc03.ipynb][Notebook]]
+- [[file:./Lecc03.org][org file]]
+
+*** Practicas
+
+- [[file:./Practicas/PracticasGretl/pub/Prct-Lecc03.pdf][pdf file]]
+- Guiones de gretl
+  + [[file:./Practicas/PracticasGretl/pub/scripts/GNPvsMelanoma.inp][GNPvsMelanoma.inp]]
+  + [[file:./Practicas/PracticasGretl/pub/scripts/UKinterestRates.inp][UKinterestRates.inp]]
+
+* Modelos univariantes de series temporales
+    :PROPERTIES:  
+    :UNNUMBERED: nil
+    :END:  

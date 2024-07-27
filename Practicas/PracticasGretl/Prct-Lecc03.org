@@ -1,0 +1,356 @@
+#+title:  Lección 3
+#+author: Marcos Bujosa
+#+STARTUP: show4levels
+#+LANGUAGE: es-es
+
+#+EXPORT_FILE_NAME: pub/Prct-Lecc03
+
+# +OPTIONS: toc:nil
+#+OPTIONS: tags:nil
+
+#+LATEX_CLASS: article
+#+LATEX_HEADER: \usepackage[spanish]{babel}
+#+LATEX_HEADER: \usepackage[margin=0.5in]{geometry}
+#+LaTeX_HEADER: \usepackage[svgnames,x11names]{xcolor}
+#+LaTeX_HEADER: \hypersetup{linktoc = all, colorlinks = true, urlcolor = DodgerBlue4, citecolor = PaleGreen1, linkcolor = SpringGreen4}
+#+LaTeX_HEADER: \PassOptionsToPackage{hyphens}{url}
+# +LaTeX_HEADER: \input{notacionLinAlg.tex}
+#+LaTeX_HEADER: \usepackage{nacal}
+
+#+LaTeX_HEADER: \usepackage{framed}
+
+#+LaTeX_HEADER: \usepackage{listings}
+#+LaTeX_HEADER: \input{hansl.tex}
+#+LaTeX_HEADER: \lstnewenvironment{hansl-gretl}
+#+LaTeX_HEADER: {\lstset{language={hansl},basicstyle={\ttfamily\footnotesize},numbers,rame=single,breaklines=true}}
+#+LaTeX_HEADER: {}
+#+LaTeX_HEADER: \newcommand{\hansl}[1]{\lstset{language={hansl},basicstyle={\ttfamily\small}}\lstinline{#1}}
+# +LaTeX_HEADER: \lstset{backgroundcolor=\color{white},basicstyle=\ttfamily\footnotesize,breaklines=true, captionpos=b,commentstyle=\color{mygreen},escapeinside={\%*}{*)}, keywordstyle=\color{blue},stringstyle=\color{mymauve}, }
+# +LaTeX_HEADER: \lstset{backgroundcolor=\color{lightgray!20},basicstyle=\ttfamily\footnotesize,breaklines=true, }
+#+LaTeX_HEADER: \lstset{backgroundcolor=\color{lightgray!20}, }
+
+#+name: setup-listings
+#+begin_src emacs-lisp :exports none :results silent
+  (setq org-latex-listings 'listings)
+  (setq org-latex-custom-lang-environments
+  	;'((emacs-lisp "common-lispcode")))
+  	'((emacs-lisp "hansl-gretl")))
+  (setq org-latex-listings-options
+	'(("frame" "lines")
+	  ("basicstyle" "\\scriptsize")
+	  ("basicstyle" "\\ttfamily")
+	  ("numbers=none" "left")
+	  ("backgroundcolor=\\color{lightgray!20}")
+	  ("numberstyle" "\\tiny")))
+  (setq org-latex-to-pdf-process
+	'("pdflatex -interaction nonstopmode -output-directory %o %f"
+	"pdflatex -interaction nonstopmode -output-directory %o %f"
+	"pdflatex -interaction nonstopmode -output-directory %o %f"))
+  (org-add-link-type
+   "latex" nil
+   (lambda (path desc format)
+     (cond
+      ((eq format 'html)
+       (format "<span class=\"%s\">%s</span>" path desc))
+      ((eq format 'latex)
+       (format "\\%s{%s}" path desc)))))
+#+end_src
+
+# \lstnewenvironment{code}
+#     {\lstset{language=haskell,
+#     basicstyle=\small\ttfamily,
+#     numbers=left,
+#     numberstyle=\tiny\color{gray},
+#     backgroundcolor=\color{lightgray},
+#     firstnumber=auto
+#     }}
+#     {}
+
+#+bibliography: ref.bib
+
+# +latex: \clearpage
+
+
+* Correlación espuria entre la incidencia de melanoma en el estado de Connecticut y el PNB de EEUU
+   :PROPERTIES:
+   :header-args: :tangle ./pub/scripts/GNPvsMelanoma.inp
+   :END:
+
+   | Guión: | [[https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/GNPvsMelanoma.inp][GNPvsMelanoma.inp]] |
+   
+***** Objetivo
+Comprobar cómo la aparente relación entre ambas series temporales se
+desvanece al tomar primeras diferencias
+
+***** Carga de datos
+*/~Archivo --> Abrir datos --> Archivo de usuario~/* y buscar en el
+disco el fichero =GNPvsMelanoma.gdt=.
+
+#+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+/o bien teclee en linea de comandos/:
+#+NAME: Lectura del fichero de datos
+#+begin_src hansl 
+open datos/GNPvsMelanoma.gdt
+#+end_src
+#+latex: }
+
+** Actividad 1 - Dibujar ambas series en un mismo gráfico
+Marque las series =GNP= y =Melanoma=. Pulse sobre ellas con el botón
+derecho del ratón. En el menú desplegable seleccione */~Gráfico de
+Series Temporales~/* (indique representar en un único gráfico).
+
+Guarde el gráfico en la sesión como un icono.
+
+#+latex: {\vspace{1pt} \footnotesize \color{gray!70!black}
+/o bien teclee en linea de comandos/:
+      #+begin_src hansl
+      GraficoSeriesEnNiveles <- gnuplot GNP Melanoma --time-series --with-lines
+      #+end_src
+      #+latex: }
+ 
+#+latex: \vspace{-3pt}   
+
+** Actividad 2 - Dibujar el diagrama de dispersión
+Marque las series =GNP= y =Melanoma=. Pulse sobre ellas con el botón
+derecho del ratón. En el menú desplegable seleccione */~Gráfico de
+dispersión XY~/* (elija como variable del eje X =Melanoma= y marque
+suprimir la recta estimada).
+
+Guarde el gráfico en la sesión como un icono.
+
+#+latex: {\vspace{1pt} \footnotesize \color{gray!70!black}
+/o bien teclee en linea de comandos/:
+      #+begin_src hansl
+      DiagramDispersion <- gnuplot GNP Melanoma --fit=none
+      #+end_src
+      #+latex: }
+      
+#+latex: \vspace{-3pt}   
+
+1) ¿Tienen tendencia estas series temporales?
+2) ¿Parece ser una tendencia común a ambas series?
+3) Pero... ¿lo podemos saber con seguridad solo mirando el gráfico?
+
+** Actividad 3 - Calcular la correlación entre ambas series
+Marque las series =GNP= y =Melanoma=. Pulse sobre ellas con el botón
+derecho del ratón. En el menú desplegable seleccione */~Matriz de
+correlación~/*
+
+#+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+/o bien teclee en linea de comandos/:
+#+begin_src hansl 
+corr GNP Melanoma
+#+end_src
+#+latex: }
+
+** Actividad 4 - Regresar =GNP= sobre =Melanoma= y constatar que el ajuste es bueno
+Estime el modelo mediante los menús desplegables: */~Modelo -> Mínimos
+  Cuadrados Ordinarios~/*; indique a [[https://gretl.sourceforge.net/es.html][Gretl]] el regresando y regresor y
+  pulse */~Aceptar~/*.
+
+#+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+/o bien teclee en linea de comandos/:
+#+begin_src hansl 
+AjusteEnNiveles <- ols GNP 0 Melanoma
+#+end_src
+#+latex: }
+
+Aunque el coeficiente de determinación es muy elevado y los parámetros
+muy significativos, el modelo "/no vale una castaña/". Una forma de
+constatarlo es darse cuenta de que si fuera cierto que $$
+\boldsymbol{y}=\beta_1 \boldsymbol{1} + \beta_2 \boldsymbol{x} +
+\boldsymbol{u} $$ Entonces también sería cierto que (y nótese que
+$\nabla\boldsymbol{1}=\boldsymbol{0}$) $$ \nabla\boldsymbol{y}=
+\beta_2 \nabla\boldsymbol{x} + \nabla\boldsymbol{u}$$
+
+Consecuentemente, si $\boldsymbol{y}$ corresponde al =GNP= y
+$\boldsymbol{x}$ a =Melanoma=, al regresar la primera diferencia de
+=GNP= sobre la primera diferencia de =Melanoma= el ajuste debería
+indicar que el parámetro de la constante ($\beta_1$) no es
+significativo, pero si la pendiente ($\beta_2$). Veamos que ocurre justo lo contrario...
+
+** Actividad 5 - Añadir la primera diferencia de los datos
+
+Selecione con el ratón la variable =GNP= y =Melanoma=. Luego pulse en el menú desplegable */~Añadir~/* que aparece arriba, en el centro de la
+ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
+  + */~Añadir -> Primeras diferencias de las variables seleccionadas~/*
+
+Haga un gráfico con ambas series (verá que la tendencia ha desaparecido y que ya no se parecen entre sí).
+
+Calcule también la correlación entre ambas series diferenciadas
+(recuerde que en un modelo lineal simple el cuadrado de dicha
+correlación es el coeficiente de determinación).
+
+#+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+/o bien teclee en linea de comandos/: 
+      #+begin_src hansl 
+diff GNP Melanoma
+GraficoSeriesEnDiferencias <- gnuplot d_GNP d_Melanoma --time-series --with-lines
+corr d_GNP d_Melanoma
+      #+end_src
+      #+latex: }
+
+** Actividad 6 - Regresar =d_GNP= sobre =d_Melanoma= y constatar que el ajuste es horrible
+
+Estime el modelo mediante los menús desplegables: */~Modelo -> Mínimos
+  Cuadrados Ordinarios~/*; indique a [[https://gretl.sourceforge.net/es.html][Gretl]] el regresando y regresor y
+  pulse */~Aceptar~/*.
+
+#+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+/o bien teclee en linea de comandos/:
+#+begin_src hansl 
+AjusteEnDiferencias <- ols d_GNP 0 d_Melanoma
+#+end_src
+#+latex: }
+
+*Conclusión.* Las variables =GNP= y =Melanoma= muestran una tendencia
+creciente, lo que conduce a un elevado coeficiente de correlación
+entre ellas; pero la tendencia ni es común, ni la correlación se puede
+atribuir a ningúna relación de causalidad entre ellas. La correlación
+en este caso es espuria (es decir, carece de sentido tartar de
+interpretarla).
+
+# +LATEX: \clearpage
+#+latex: \vspace{10pt}
+#+latex: \noindent
+*Código completo de la práctica* ~GNPvsMelanoma.inp~
+#+latex: \vspace{10pt}
+\lstinputlisting{scripts/GNPvsMelanoma.inp}
+#+LATEX: \clearpage
+
+
+* Tipos de interés a corto y largo plazo
+   :PROPERTIES:
+   :header-args: :tangle ./pub/scripts/UKinterestRates.inp
+   :END:
+
+   | Guión: | [[https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/UKinterestRates.inp][UKinterestRates.inp]] |
+   
+***** Objetivo
+Ver que probablemmente la correlación entre los tipos a corto y largo
+plazo no es espuria, y que ambas series probablemente están
+cointegrados.
+
+***** Carga de datos
+*/~Archivo --> Abrir datos --> Archivo de usuario~/* y buscar en el
+disco el fichero =UKinterestRates.gdt=.
+
+#+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+/o bien teclee en linea de comandos/:
+#+begin_src hansl 
+open datos/UKinterestRates.gdt
+#+end_src
+#+latex: }
+
+** Actividad 1 - Dibujar ambas series en un mismo gráfico
+Marque las series =Long= y =Short=. Pulse sobre ellas con el botón
+derecho del ratón. En el menú desplegable seleccione */~Gráfico de
+Series Temporales~/* (indique representar en un único gráfico).
+
+Guarde el gráfico en la sesión como un icono.
+
+#+latex: {\vspace{1pt} \footnotesize \color{gray!70!black}
+/o bien teclee en linea de comandos/:
+      #+begin_src hansl
+      GraficoSeriesEnNiveles <- gnuplot Long Short --time-series --with-lines
+      #+end_src
+      #+latex: }
+ 
+#+latex: \vspace{-3pt}   
+
+1) ¿Tienen tendencia estas series temporales?
+2) ¿Parece ser una tendencia común a ambas series?
+3) Pero... ¿lo podemos saber con seguridad solo mirando el gráfico?
+
+** Actividad 2 - Dibujar el diagrama de dispersión y calcule la correlación 
+Marque las series =Long= y =Short=. Pulse sobre ellas con el botón
+derecho del ratón. En el menú desplegable seleccione */~Gráfico de
+dispersión XY~/* (elija como variable del eje X =Long= y marque
+suprimir la recta estimada).
+
+Guarde el gráfico en la sesión como un icono.
+
+Calcule la correlación entre ambas series.
+
+#+latex: {\vspace{1pt} \footnotesize \color{gray!70!black}
+/o bien teclee en linea de comandos/:
+      #+begin_src hansl
+      DiagramDispersion <- gnuplot Short Long --fit=none
+      corr Long Short
+      #+end_src
+      #+latex: }
+      
+#+latex: \vspace{-3pt}   
+
+** Actividad 3 - Regrese la primera diferencia de los tipos a corto sobre la diferencia de los tipos a largo
+1) Incluya las primeras diferencias de =Short= y =Long=
+2) Dibuje ambas series diferenciadas. ¿Parecen "ser estacionarias en
+   media"? ¿Son =Short= y =Long= aparentemente $I(1)?$
+3) ¿Están correladas?
+4) Regrese =d_Short= sobre =d_Long=
+5) Observe los resultados de la regresión.
+   - ¿Son significativos los parámetros? ¿cuales sí y cuales no?
+     (compare esto con lo que pasaba en el ejemplo anterior)
+   - ¿Reproduce el modelo parte de la varianza de =d_Short=?
+
+Realice los pasos con la interfáz gráfica y los menús desplegables,
+#+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+/o bien teclee en linea de comandos/:
+  #+begin_src hansl 
+diff Short Long
+GraficoSeriesEnDiferencias <- gnuplot d_Short d_Long --time-series --with-lines
+corr d_Short d_Long
+AjusteEnDiferencias <- ols d_Short 0 d_Long
+ #+end_src
+#+latex: }
+
+** Actividad 4 - Ajuste los tipos corto plazo en función de los tipos a largo
+
+Veamos si las series en niveles pueden estar cointegradas. Para ello
+debemos analizar los residuos de la regresión de =Short= sobre
+=Long=.
+
+1) Regrese =Short= sobre =Long=
+2) Observe los resultados de la regresión.
+   - ¿Son significativos los parámetros?
+   - ¿Reproduce el modelo parte de la varianza de =Short=?
+3) Dibuje los residuos de la regresión. ¿Parecen "estacionarios en
+   media"? dicho de otra forma ¿muestran alguna tendencia?
+
+Realice los pasos con la interfáz gráfica y los menús desplegables,
+#+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+/o bien teclee en linea de comandos/:
+  #+begin_src hansl 
+AjusteEnNiveles <- ols Short 0 Long
+residuos = $uhat
+GraficoResiduos <- gnuplot residuos --time-series --with-lines
+ #+end_src
+#+latex: }
+
+
+*Conclusión.* Las variables =Short= y =Long= son no estacionarias
+(tienen tendencia), lo que conduce a un elevado coeficiente de
+correlación entre ellas; sus primeras diferencias parecen
+"estacionarias" lo que sugiere que mabas series son $I(1)$.
+
+La regresión de las series en diferencias y los residuos de la
+regresión en niveles parecen compatibles con que =Short= y =Long=
+estén cointegradas, es decir, que tengan una tendencia común.
+
+En este caso la correlación no parece ser espuria, por lo que cabe
+interpretar dicha correlación y pensar que hay relación entre los
+tipos a corto y a largo plazo.
+
+A este análisis le falta la realización de contrartes estadísticos que
+confirmen la estacionariedad de las series diferenciadas y de los
+residuos de la última regresión.
+
+# +LATEX: \clearpage
+#+latex: \vspace{10pt}
+#+latex: \noindent
+*Código completo de la práctica* ~UKinterestRates.inp~
+#+latex: \vspace{10pt}
+\lstinputlisting{scripts/UKinterestRates.inp}
+#+LATEX: \clearpage
+  
+

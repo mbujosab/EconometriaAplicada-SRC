@@ -1,5 +1,6 @@
 #+TITLE: Econometría Aplicada. Lección 1
 #+author: Marcos Bujosa
+#+LANGUAGE: es-es
 
 # +OPTIONS: toc:nil
 
@@ -8,6 +9,7 @@
 #+startup: shrink
 
 
+#+LATEX_HEADER_EXTRA: \usepackage[spanish]{babel}
 #+LATEX_HEADER_EXTRA: \usepackage{lmodern}
 #+LATEX_HEADER_EXTRA: \usepackage{tabularx}
 #+LATEX_HEADER_EXTRA: \usepackage{booktabs}
@@ -21,11 +23,14 @@
   :load-path (lambda () (expand-file-name "ox-ipynb" scimax-dir)))
 #+END_SRC
 
+
+
 ***  Carga de algunos módulos de python
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . notes)))
    :UNNUMBERED: t 
    :END:
+
    
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+BEGIN_SRC jupyter-python :results none
@@ -33,9 +38,9 @@
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import matplotlib as mpl
-import matplotlib.pyplot as plt   # data visualization
 mpl.rc('text', usetex=True)
 mpl.rc('text.latex', preamble=r'\usepackage{amsmath}')
+import matplotlib.pyplot as plt   # data visualization
 import dataframe_image as dfi
 #+END_SRC
 
@@ -82,26 +87,27 @@ def repr_png(tex, ImgFile):
 
 - Series temporales :: Corresponden a mediciones de un mismo objeto a
   lo largo del tiempo. El índice indica el instante de cada medición.
-  Consecuentemente, el orden temporal de los datos podría ser
-  fundamental para explicar cada uno de ellos.
+  /Es habitual que el orden cronológico de los datos sea fundamental/
+  para explicar cada uno de ellos.
 
-  - El motivo es que frecuentemente la medición en un instante de
+  - El motivo es que con frecuencia la medición en un instante de
     tiempo está relacionada con otras mediciones próximas en el
     tiempo.
 
-  - Esto presupone que en el proceso estocástico subyacente,
-    $\boldsymbol{X}=\{X_t\}$, las variables aleatorias no son
+  - Si es así, no podremos asumir que las variables aleatorias del
+    proceso estocástico subyacente, $\boldsymbol{X}=\{X_t\}$, sean
     independientes entre sí.
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-- Sección cruzada ::  el índice NO es cronológico. Cada índice es solo
-  una /etiqueta/ (asignada arbitrariamente) que identifica al
-  individuo, empresa, objeto, etc. que ha sido medido.
+- Sección cruzada ::  el índice NO es cronológico. La numeración (la
+  indexación) de cada dato es solo una asignación arbitraria de
+  /etiquetas/ que identifican a cada individuo, empresa, objeto,
+  etc. que ha sido medido. Consecuentemente:
   
-  - Por tanto, /el orden en el que aparecen los datos es irrelevante/.
+  - /el orden en el que aparecen los datos en la muestra es irrelevante/.
 
-  - Consecuentemente, conocer únicamente el índice de un dato no
-    permite deducir nada respecto de cualquier otro dato.
+  - es decir, conocer únicamente el índice de un dato no permite
+    deducir nada respecto de cualquier otro dato.
 
 
 ** El desafío
@@ -261,15 +267,13 @@ print(OrigData.head())
 #+END_SRC
 
 #+RESULTS:
-:RESULTS:
-            Passengers
-Month                 
-1949-01-01         112
-1949-02-01         118
-1949-03-01         132
-1949-04-01         129
-1949-05-01         121
-:END:
+:             Passengers
+: Month                 
+: 1949-01-01         112
+: 1949-02-01         118
+: 1949-03-01         132
+: 1949-04-01         129
+: 1949-05-01         121
 
 
 $$\boldsymbol{x}=(x_1,\ldots x_{114})$$
@@ -308,9 +312,9 @@ Serie /"no estacionaria"/ (*):
   datos estabilizando la varianza cuando los valores son mayores que
   0.567 (aprox.)
 
-- ¡Pero ocurre lo contrario, pues se amplifica el valor absoluto,
-  cuando los valores están entre 0 y 0.567! De hecho,
-  $\lim\limits_{x\to\infty} \ln(x)=-\infty$
+- Pero ocurre lo contrario cuando los valores son pequeños (aumenta el
+  valor absoluto de aquellos entre 0 y 0.567 aprox.). De hecho,
+  $\lim\limits_{x\to0} \ln(x)=-\infty$.
 
 - Además, /el logaritmo no está definido para valores negativos/.
 
@@ -348,14 +352,9 @@ plt.legend()
 [[./img/lecc01/funcion_logaritmica.png]]
 
 
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
-
-$$\ln\boldsymbol{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$
-
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-Vamos a crear un nuevo =dataframe= con los datos originales y varias transformaciones de los datos
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+BEGIN_SRC jupyter-python :exports code :results silent
+# Creamos un nuevo dataframe con los datos originales y varias transformaciones de los mismos
 TransformedData = OrigData.copy()
 TransformedData['dataLog'] = np.log(OrigData['Passengers'])
 TransformedData['dataLogDiff'] = TransformedData['dataLog'].diff(1)
@@ -376,7 +375,9 @@ plt.tight_layout()
 #plt.savefig("./img/lecc01/airlinepass_log+hist.png")
 #+END_SRC
 
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
 
+$$\ln\boldsymbol{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$
 
 [[./img/lecc01/airlinepass_log+hist.png]]
 
@@ -467,7 +468,7 @@ TasaLogCrecimiento['$\\ln y_t- \\ln y_{0}$'] = TasaLogCrecimiento['$\\ln y_t$'] 
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/TasaLogCrecimiento.png
-dfi.export(TasaLogCrecimiento, "./img/lecc01/TasaLogCrecimiento.png", use_mathjax=True, dpi=200)
+dfi.export(TasaLogCrecimiento, "./img/lecc01/TasaLogCrecimiento.png", use_mathjax=True, dpi=200, table_conversion="matplotlib")
 #+END_SRC
 
 La tasa logarítmica de variación de $\boldsymbol{y}$ se define como
@@ -544,26 +545,6 @@ incremento es pequeño.
 
 #+latex: \newpage
 
-De lo que hay debajo,  no sé si algo funciona
-#+BEGIN_SRC jupyter-python
-import IPython
-import tabulate
-
-class OrgFormatter(IPython.core.formatters.BaseFormatter):
-    format_type = IPython.core.formatters.Unicode('text/org')
-    print_method = IPython.core.formatters.ObjectName('_repr_org_')
-
-def pd_dataframe_to_org(df):
-    return tabulate.tabulate(df, headers='keys', tablefmt='orgtbl', showindex='always')
-
-ip = get_ipython()
-ip.display_formatter.formatters['text/org'] = OrgFormatter()
-
-f = ip.display_formatter.formatters['text/org']
-f.for_type_by_name('pandas.core.frame', 'DataFrame', pd_dataframe_to_org)
-#+END_SRC
-
-#+RESULTS:
 
 
 

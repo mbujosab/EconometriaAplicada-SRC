@@ -1,0 +1,2800 @@
+#+BEGIN_SRC jupyter-R
+library(ggplot2)
+# Mostrando la serie capinst 
+p <- ggplot(data_frame, aes(x = obs))
+p <- p + geom_line(aes(y = GNP), colour="blue")
+
+
+# como capinst tiene una escala mayor que infla se
+# requiere ajustar los datos
+sf<-max(data_frame['GNP'])/max(data_frame['Melanoma'])
+
+# Se agrega infla a Y multiplicada por el factor
+p <- p + geom_line(aes(y = Melanoma*sf), colour="red")
+
+p <- p + scale_y_continuous(sec.axis = sec_axis(~.*sf, name = "Inflación Escalada"))
+p <- p + labs(y = "GNP",
+              x = "xFechas",
+              colour = "Parameter")
+p <- p + theme(legend.position = c(0.8, 0.9))
+p
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/6ac38045ce084ed03fe6f4fa0aeb02f6b63e0909.png]]
+:END:
+
+
+
+#+BEGIN_SRC jupyter-R
+dias <-100
+capinst<-rnorm(dias, mean=80, sd=10)
+infla<-rweibull(dias, shape=1, scale=0.75)
+index <- 1:dias
+
+capinfl<- data.frame(
+    capinst=capinst,
+    infla=infla,
+    index = index
+    )
+head(capinfl,3)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+|   |  capinst |       infla | index |
+|---+----------+-------------+-------|
+|   |    <dbl> |       <dbl> | <int> |
+| 1 | 93.45184 | 0.009721363 |     1 |
+| 2 | 70.16630 | 0.767510729 |     2 |
+| 3 | 75.57155 | 0.060896392 |     3 |
+#+caption: A data.frame: 3 × 3
+:END:
+
+#+BEGIN_SRC jupyter-R
+head(datos_ts, 5)
+head(data_frame, 5)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+|  obs |   GNP | Melanoma |
+|------+-------+----------|
+| 1936 | 193.0 |      1.0 |
+| 1937 | 203.2 |      0.8 |
+| 1938 | 192.9 |      0.8 |
+| 1939 | 209.4 |      1.4 |
+| 1940 | 227.2 |      1.2 |
+#+caption: A matrix: 5 × 3 of type dbl
+|   obs |   GNP | Melanoma |
+|-------+-------+----------|
+| <dbl> | <dbl> |    <dbl> |
+|  1936 | 193.0 |      1.0 |
+|  1937 | 203.2 |      0.8 |
+|  1938 | 192.9 |      0.8 |
+|  1939 | 209.4 |      1.4 |
+|  1940 | 227.2 |      1.2 |
+#+caption: A tibble: 5 × 3
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+data_frame['GNP']
+#+END_SRC
+
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/0fc71b38df2f16f7a7beb1142c331f61fde7c3c8.png]]
+:END:
+
+
+
+
+#+BEGIN_SRC jupyter-R
+library(latticeExtra)
+# se puede mostrar las dos variables en el mismo tiempo
+kk <- xyplot(capinst + infla ~ index, capinfl, type="l")
+
+# se agrega dos ejes Y
+# se construye cada serie por separado
+obj1 <- xyplot(capinst  ~ index, capinfl, type = "l" , lwd=2, ylab="capinst",  xlab="xDías")
+obj2 <- xyplot(infla ~ index, capinfl, type = "l", lwd=2, ylab="inflacion")
+
+# --> se realiza la grafica con el segundo eje Y
+doubleYScale(obj1, obj2, add.ylab2 = TRUE)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/5e4361de77bc86e0227d123f9abaeb87df7070c1.png]]
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+head(capinfl,3)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+|   |  capinst |       infla | index |
+|---+----------+-------------+-------|
+|   |    <dbl> |       <dbl> | <int> |
+| 1 | 93.45184 | 0.009721363 |     1 |
+| 2 | 70.16630 | 0.767510729 |     2 |
+| 3 | 75.57155 | 0.060896392 |     3 |
+#+caption: A data.frame: 3 × 3
+:END:
+
+#+BEGIN_SRC jupyter-R
+library(ggplot2)
+# Mostrando la serie capinst 
+p <- ggplot(capinfl, aes(x = index))
+p <- p + geom_line(aes(y = capinst), colour="blue")
+
+
+# como capinst tiene una escala mayor que infla se
+# requiere ajustar los datos
+sf<-max(capinst)/max(infla)
+
+# Se agrega infla a Y multiplicada por el factor
+p <- p + geom_line(aes(y = infla*sf), colour="red")
+
+p <- p + scale_y_continuous(sec.axis = sec_axis(~.*sf, name = "Inflación Escalada"))
+p <- p + labs(y = "Capinst",
+              x = "xFechas",
+              colour = "Parameter")
+p <- p + theme(legend.position = c(0.8, 0.9))
+p
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/a5e52ae62b2355e72c8275bc37bec5f489917048.png]]
+:END:
+
+
+
+#+BEGIN_SRC jupyter-R
+#library(ggplot2)
+library(tidyverse)
+library(hrbrthemes)
+
+#letal_mexico <- data.frame(FECHA_TOTAL = rep(as.Date('2020-01-01') + 1:50,2), 
+#                           ENT_REGIS = sample(100:300, 100),
+#                           SEXO = rep(1:2, each=50))
+
+data_frame %>% 
+  ggplot(aes(x=obs,y=GNP, color=ifelse(SEXO==1, 'Hombres', 'Mujeres'))) +
+  geom_line() +
+  ylab("Muertes") +
+  xlab("Fecha") +
+  scale_color_manual(values = c("blue", "red")) +
+  theme_ipsum() +
+  theme(legend.title=element_blank())
+#+END_SRC
+
+
+#+BEGIN_SRC jupyter-R
+grafico <- ggplot(datos_ts, aes(x = time)) +
+  geom_line(aes(y = GNP), color = "red") +
+  geom_line(aes(y = Melanoma), color = "blue")
+grafico
+#+END_SRC
+
+
+
+#+BEGIN_SRC jupyter-R
+plot(datos_ts[, "obs"], datos_ts[, "GNP"], type = "l", col = "red", ylab = "Variable 1")
+axis(side = 2, # Crea el eje y derecho
+     x = datos_ts[, "obs"], 
+     y = datos_ts[, "Melanoma"], 
+     col = "blue", 
+     ylab = "Variable 2")
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+: Warning message in axis(side = 2, x = datos_ts[, "obs"], y = datos_ts[, "Melanoma"], :
+: “"x" is not a graphical parameter”
+: Warning message in axis(side = 2, x = datos_ts[, "obs"], y = datos_ts[, "Melanoma"], :
+: “"y" is not a graphical parameter”
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/05ed965669d86e84f4e997edf33f80bd6df505af.png]]
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+plot(datos_ts[, "GNP"], datos_ts[, "Melanoma"], type = "l", col = "red", ylab = "Variable 1")
+lines(datos_ts[, "GNP"], datos_ts[, "Melanoma"], col = "blue", ylab = "Variable 2")
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# [goto error]
+: Error in plot.xy(xy.coords(x, y), type = type, ...): invalid plot type
+: Traceback:
+: 
+: 1. lines(datos_ts[, "GNP"], datos_ts[, "Melanoma"], col = "blue", 
+:  .     ylab = "Variable 2")
+: 2. lines.ts(datos_ts[, "GNP"], datos_ts[, "Melanoma"], col = "blue", 
+:  .     ylab = "Variable 2")
+: 3. lines.default(time(as.ts(x)), x, ...)
+: 4. plot.xy(xy.coords(x, y), type = type, ...)
+: 5. stop(gettextf("invalid plot type"))
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/9c2b2fe611b2c5fb95ac6430cac47448204e7f0f.png]]
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+scaleFactor <- max(data_frame$GNP) / max(data_frame$Melanoma)
+scaleFactor
+#ggplot(data) 
+#  geom_col() +
+#  geom_line(aes(y = a + Temp*b), color = "red") +
+#  scale_y_continuous("Precipitation", sec.axis = sec_axis(~ (. - a)/b, name = "Temperature")) +
+#  scale_x_continuous("Month", breaks = 1:12) +
+#  ggtitle("Climatogram for Oslo (1961-1990)")  
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+149.528301886792
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+library(ggplot2)
+library(scales)
+
+# Function factory for secondary axis transforms
+train_sec <- function(primary, secondary, na.rm = TRUE) {
+  # Thanks Henry Holm for including the na.rm argument!
+  from <- range(secondary, na.rm = na.rm)
+  to   <- range(primary, na.rm = na.rm)
+  # Forward transform for the data
+  forward <- function(x) {
+    rescale(x, from = from, to = to)
+  }
+  # Reverse transform for the secondary axis
+  reverse <- function(x) {
+    rescale(x, from = to, to = from)
+  }
+  list(fwd = forward, rev = reverse)
+}
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC jupyter-R
+# Rescaling the maximum
+sec <- with(data, train_sec(c(0, max(data[,'GNP'])),
+                            c(0, max(data[,'Melanoma']))))
+sec
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# [goto error]
+: Error in eval(substitute(expr), data, enclos = parent.frame()): argumento 'envir' númerico no tiene longitud uno
+: Traceback:
+: 
+: 1. with(data, train_sec(c(0, max(data[, "GNP"])), c(0, max(data[, 
+:  .     "Melanoma"]))))
+: 2. with.default(data, train_sec(c(0, max(data[, "GNP"])), c(0, max(data[, 
+:  .     "Melanoma"]))))
+: 3. eval(substitute(expr), data, enclos = parent.frame())
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+# Rescaling the maximum
+sec <- with(data, train_sec(c(0, max(data[,'GNP'])),
+                            c(0, max(data[,'Melanoma']))))
+
+ggplot(data, aes(date)) +
+  geom_line(aes(y = GNP), colour = "blue") +
+  geom_line(aes(y = sec$fwd(Melanoma)), colour = "red") +
+  scale_y_continuous(sec.axis = sec_axis(~sec$rev(.), name = "Melanoma"))
+
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# [goto error]
+: Error in eval(substitute(expr), data, enclos = parent.frame()): argumento 'envir' númerico no tiene longitud uno
+: Traceback:
+: 
+: 1. with(data, train_sec(c(0, max(data[, "GNP"])), c(0, max(data[, 
+:  .     "Melanoma"]))))
+: 2. with.default(data, train_sec(c(0, max(data[, "GNP"])), c(0, max(data[, 
+:  .     "Melanoma"]))))
+: 3. eval(substitute(expr), data, enclos = parent.frame())
+:END:
+
+
+
+#+BEGIN_SRC jupyter-R
+scaleFactor <- max(data[,'GNP']) / max(data[,'Melanoma'])
+scaleFactor
+
+ggplot(data, aes(x = time)) #+
+  geom_line(aes(y = GNP), color = "red") +
+  geom_line(aes(y = Melanoma), ylab = "Variable 2", axis.title.y = element_text(hjust = 1), color = "blue") #+
+  scaleYright(name = "Variable 1")
+
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+149.528301886792
+#+begin_example
+Don't know how to automatically pick scale for object of type <function>.
+Defaulting to continuous.
+ERROR while rich displaying an object: Error in `geom_blank()`:
+! Problem while computing aesthetics.
+ℹ Error occurred in the 1st layer.
+Caused by error in `compute_aesthetics()`:
+! Aesthetics are not valid data columns.
+✖ The following aesthetics are invalid:
+✖ `x = time`
+ℹ Did you mistype the name of a data column or forget to add `after_stat()`?
+
+Traceback:
+1. tryCatch(withCallingHandlers({
+ .     if (!mime %in% names(repr::mime2repr)) 
+ .         stop("No repr_* for mimetype ", mime, " in repr::mime2repr")
+ .     rpr <- repr::mime2repr[[mime]](obj)
+ .     if (is.null(rpr)) 
+ .         return(NULL)
+ .     prepare_content(is.raw(rpr), rpr)
+ . }, error = error_handler), error = outer_handler)
+2. tryCatchList(expr, classes, parentenv, handlers)
+3. tryCatchOne(expr, names, parentenv, handlers[[1L]])
+4. doTryCatch(return(expr), name, parentenv, handler)
+5. withCallingHandlers({
+ .     if (!mime %in% names(repr::mime2repr)) 
+ .         stop("No repr_* for mimetype ", mime, " in repr::mime2repr")
+ .     rpr <- repr::mime2repr[[mime]](obj)
+ .     if (is.null(rpr)) 
+ .         return(NULL)
+ .     prepare_content(is.raw(rpr), rpr)
+ . }, error = error_handler)
+6. repr::mime2repr[[mime]](obj)
+7. repr_text.default(obj)
+8. paste(capture.output(print(obj)), collapse = "\n")
+9. capture.output(print(obj))
+10. withVisible(...elt(i))
+11. print(obj)
+12. print.ggplot(obj)
+13. ggplot_build(x)
+14. ggplot_build.ggplot(x)
+15. by_layer(function(l, d) l$compute_aesthetics(d, plot), layers, 
+  .     data, "computing aesthetics")
+16. try_fetch(for (i in seq_along(data)) {
+  .     out[[i]] <- f(l = layers[[i]], d = data[[i]])
+  . }, error = function(cnd) {
+  .     cli::cli_abort(c("Problem while {step}.", i = "Error occurred in the {ordinal(i)} layer."), 
+  .         call = layers[[i]]$constructor, parent = cnd)
+  . })
+17. tryCatch(withCallingHandlers(expr, condition = function(cnd) {
+  .     {
+  .         .__handler_frame__. <- TRUE
+  .         .__setup_frame__. <- frame
+  .         if (inherits(cnd, "message")) {
+  .             except <- c("warning", "error")
+  .         }
+  .         else if (inherits(cnd, "warning")) {
+  .             except <- "error"
+  .         }
+  .         else {
+  .             except <- ""
+  .         }
+  .     }
+  .     while (!is_null(cnd)) {
+  .         if (inherits(cnd, "error")) {
+  .             out <- handlers[[1L]](cnd)
+  .             if (!inherits(out, "rlang_zap")) 
+  .                 throw(out)
+  .         }
+  .         inherit <- .subset2(.subset2(cnd, "rlang"), "inherit")
+  .         if (is_false(inherit)) {
+  .             return()
+  .         }
+  .         cnd <- .subset2(cnd, "parent")
+  .     }
+  . }), stackOverflowError = handlers[[1L]])
+18. tryCatchList(expr, classes, parentenv, handlers)
+19. tryCatchOne(expr, names, parentenv, handlers[[1L]])
+20. doTryCatch(return(expr), name, parentenv, handler)
+21. withCallingHandlers(expr, condition = function(cnd) {
+  .     {
+  .         .__handler_frame__. <- TRUE
+  .         .__setup_frame__. <- frame
+  .         if (inherits(cnd, "message")) {
+  .             except <- c("warning", "error")
+  .         }
+  .         else if (inherits(cnd, "warning")) {
+  .             except <- "error"
+  .         }
+  .         else {
+  .             except <- ""
+  .         }
+  .     }
+  .     while (!is_null(cnd)) {
+  .         if (inherits(cnd, "error")) {
+  .             out <- handlers[[1L]](cnd)
+  .             if (!inherits(out, "rlang_zap")) 
+  .                 throw(out)
+  .         }
+  .         inherit <- .subset2(.subset2(cnd, "rlang"), "inherit")
+  .         if (is_false(inherit)) {
+  .             return()
+  .         }
+  .         cnd <- .subset2(cnd, "parent")
+  .     }
+  . })
+22. f(l = layers[[i]], d = data[[i]])
+23. l$compute_aesthetics(d, plot)
+24. compute_aesthetics(..., self = self)
+25. cli::cli_abort(c("Aesthetics are not valid data columns.", x = "The following aesthetics are invalid:", 
+  .     issues, i = "Did you mistype the name of a data column or forget to add {.fn after_stat}?"))
+26. rlang::abort(message, ..., call = call, use_cli_format = TRUE, 
+  .     .frame = .frame)
+27. signal_abort(cnd, .file)
+28. signalCondition(cnd)
+29. (function (cnd) 
+  . {
+  .     {
+  .         .__handler_frame__. <- TRUE
+  .         .__setup_frame__. <- frame
+  .         if (inherits(cnd, "message")) {
+  .             except <- c("warning", "error")
+  .         }
+  .         else if (inherits(cnd, "warning")) {
+  .             except <- "error"
+  .         }
+  .         else {
+  .             except <- ""
+  .         }
+  .     }
+  .     while (!is_null(cnd)) {
+  .         if (inherits(cnd, "error")) {
+  .             out <- handlers[[1L]](cnd)
+  .             if (!inherits(out, "rlang_zap")) 
+  .                 throw(out)
+  .         }
+  .         inherit <- .subset2(.subset2(cnd, "rlang"), "inherit")
+  .         if (is_false(inherit)) {
+  .             return()
+  .         }
+  .         cnd <- .subset2(cnd, "parent")
+  .     }
+  . })(structure(list(message = structure("Aesthetics are not valid data columns.", names = ""), 
+  .     trace = structure(list(call = list(IRkernel::main(), kernel$run(), 
+  .         handle_shell(), executor$execute(msg), tryCatch(evaluate(request$content$code, 
+  .             envir = .GlobalEnv, output_handler = oh, stop_on_error = 1L), 
+  .             interrupt = function(cond) {
+  .                 log_debug("Interrupt during execution")
+  .                 interrupted <<- TRUE
+  .             }, error = .self$handle_error), tryCatchList(expr, 
+  .             classes, parentenv, handlers), tryCatchOne(tryCatchList(expr, 
+  .             names[-nh], parentenv, handlers[-nh]), names[nh], 
+  .             parentenv, handlers[[nh]]), doTryCatch(return(expr), 
+  .             name, parentenv, handler), tryCatchList(expr, names[-nh], 
+  .             parentenv, handlers[-nh]), tryCatchOne(expr, names, 
+  .             parentenv, handlers[[1L]]), doTryCatch(return(expr), 
+  .             name, parentenv, handler), evaluate(request$content$code, 
+  .             envir = .GlobalEnv, output_handler = oh, stop_on_error = 1L), 
+  .         evaluate_call(expr, parsed$src[[i]], envir = envir, enclos = enclos, 
+  .             debug = debug, last = i == length(out), use_try = stop_on_error != 
+  .                 2L, keep_warning = keep_warning, keep_message = keep_message, 
+  .             output_handler = output_handler, include_timing = include_timing), 
+  .         handle(pv <- withCallingHandlers(withVisible(value_fun(ev$value, 
+  .             ev$visible)), warning = wHandler, error = eHandler, 
+  .             message = mHandler)), try(f, silent = TRUE), tryCatch(expr, 
+  .             error = function(e) {
+  .                 call <- conditionCall(e)
+  .                 if (!is.null(call)) {
+  .                   if (identical(call[[1L]], quote(doTryCatch))) 
+  .                     call <- sys.call(-4L)
+  .                   dcall <- deparse(call, nlines = 1L)
+  .                   prefix <- paste("Error in", dcall, ": ")
+  .                   LONG <- 75L
+  .                   sm <- strsplit(conditionMessage(e), "\n")[[1L]]
+  .                   w <- 14L + nchar(dcall, type = "w") + nchar(sm[1L], 
+  .                     type = "w")
+  .                   if (is.na(w)) 
+  .                     w <- 14L + nchar(dcall, type = "b") + nchar(sm[1L], 
+  .                       type = "b")
+  .                   if (w > LONG) 
+  .                     prefix <- paste0(prefix, "\n  ")
+  .                 }
+  .                 else prefix <- "Error : "
+  .                 msg <- paste0(prefix, conditionMessage(e), "\n")
+  .                 .Internal(seterrmessage(msg[1L]))
+  .                 if (!silent && isTRUE(getOption("show.error.messages"))) {
+  .                   cat(msg, file = outFile)
+  .                   .Internal(printDeferredWarnings())
+  .                 }
+  .                 invisible(structure(msg, class = "try-error", 
+  .                   condition = e))
+  .             }), tryCatchList(expr, classes, parentenv, handlers), 
+  .         tryCatchOne(expr, names, parentenv, handlers[[1L]]), 
+  .         doTryCatch(return(expr), name, parentenv, handler), withCallingHandlers(withVisible(value_fun(ev$value, 
+  .             ev$visible)), warning = wHandler, error = eHandler, 
+  .             message = mHandler), withVisible(value_fun(ev$value, 
+  .             ev$visible)), value_fun(ev$value, ev$visible), prepare_mimebundle_kernel(obj, 
+  .             .self$handle_display_error), prepare_mimebundle(obj, 
+  .             "text/plain", error_handler = handle_display_error), 
+  .         filter_map(mimetypes, function(mime) {
+  .             tryCatch(withCallingHandlers({
+  .                 if (!mime %in% names(repr::mime2repr)) 
+  .                   stop("No repr_* for mimetype ", mime, " in repr::mime2repr")
+  .                 rpr <- repr::mime2repr[[mime]](obj)
+  .                 if (is.null(rpr)) 
+  .                   return(NULL)
+  .                 prepare_content(is.raw(rpr), rpr)
+  .             }, error = error_handler), error = outer_handler)
+  .         }), Filter(Negate(is.null), sapply(x, f, simplify = simplify)), 
+  .         unlist(lapply(x, f)), lapply(x, f), sapply(x, f, simplify = simplify), 
+  .         lapply(X = X, FUN = FUN, ...), FUN(X[[i]], ...), tryCatch(withCallingHandlers({
+  .             if (!mime %in% names(repr::mime2repr)) 
+  .                 stop("No repr_* for mimetype ", mime, " in repr::mime2repr")
+  .             rpr <- repr::mime2repr[[mime]](obj)
+  .             if (is.null(rpr)) 
+  .                 return(NULL)
+  .             prepare_content(is.raw(rpr), rpr)
+  .         }, error = error_handler), error = outer_handler), tryCatchList(expr, 
+  .             classes, parentenv, handlers), tryCatchOne(expr, 
+  .             names, parentenv, handlers[[1L]]), doTryCatch(return(expr), 
+  .             name, parentenv, handler), withCallingHandlers({
+  .             if (!mime %in% names(repr::mime2repr)) 
+  .                 stop("No repr_* for mimetype ", mime, " in repr::mime2repr")
+  .             rpr <- repr::mime2repr[[mime]](obj)
+  .             if (is.null(rpr)) 
+  .                 return(NULL)
+  .             prepare_content(is.raw(rpr), rpr)
+  .         }, error = error_handler), repr::mime2repr[[mime]](obj), 
+  .         repr_text.default(obj), paste(capture.output(print(obj)), 
+  .             collapse = "\n"), capture.output(print(obj)), withVisible(...elt(i)), 
+  .         print(obj), print.ggplot(obj), ggplot_build(x), ggplot_build.ggplot(x), 
+  .         by_layer(function(l, d) l$compute_aesthetics(d, plot), 
+  .             layers, data, "computing aesthetics"), try_fetch(for (i in seq_along(data)) {
+  .             out[[i]] <- f(l = layers[[i]], d = data[[i]])
+  .         }, error = function(cnd) {
+  .             cli::cli_abort(c("Problem while {step}.", i = "Error occurred in the {ordinal(i)} layer."), 
+  .                 call = layers[[i]]$constructor, parent = cnd)
+  .         }), tryCatch(withCallingHandlers(expr, condition = function(cnd) {
+  .             {
+  .                 .__handler_frame__. <- TRUE
+  .                 .__setup_frame__. <- frame
+  .                 if (inherits(cnd, "message")) {
+  .                   except <- c("warning", "error")
+  .                 }
+  .                 else if (inherits(cnd, "warning")) {
+  .                   except <- "error"
+  .                 }
+  .                 else {
+  .                   except <- ""
+  .                 }
+  .             }
+  .             while (!is_null(cnd)) {
+  .                 if (inherits(cnd, "error")) {
+  .                   out <- handlers[[1L]](cnd)
+  .                   if (!inherits(out, "rlang_zap")) 
+  .                     throw(out)
+  .                 }
+  .                 inherit <- .subset2(.subset2(cnd, "rlang"), "inherit")
+  .                 if (is_false(inherit)) {
+  .                   return()
+  .                 }
+  .                 cnd <- .subset2(cnd, "parent")
+  .             }
+  .         }), stackOverflowError = handlers[[1L]]), tryCatchList(expr, 
+  .             classes, parentenv, handlers), tryCatchOne(expr, 
+  .             names, parentenv, handlers[[1L]]), doTryCatch(return(expr), 
+  .             name, parentenv, handler), withCallingHandlers(expr, 
+  .             condition = function(cnd) {
+  .                 {
+  .                   .__handler_frame__. <- TRUE
+  .                   .__setup_frame__. <- frame
+  .                   if (inherits(cnd, "message")) {
+  .                     except <- c("warning", "error")
+  .                   }
+  .                   else if (inherits(cnd, "warning")) {
+  .                     except <- "error"
+  .                   }
+  .                   else {
+  .                     except <- ""
+  .                   }
+  .                 }
+  .                 while (!is_null(cnd)) {
+  .                   if (inherits(cnd, "error")) {
+  .                     out <- handlers[[1L]](cnd)
+  .                     if (!inherits(out, "rlang_zap")) 
+  .                       throw(out)
+  .                   }
+  .                   inherit <- .subset2(.subset2(cnd, "rlang"), 
+  .                     "inherit")
+  .                   if (is_false(inherit)) {
+  .                     return()
+  .                   }
+  .                   cnd <- .subset2(cnd, "parent")
+  .                 }
+  .             }), f(l = layers[[i]], d = data[[i]]), l$compute_aesthetics(d, 
+  .             plot), compute_aesthetics(..., self = self), cli::cli_abort(c("Aesthetics are not valid data columns.", 
+  .             x = "The following aesthetics are invalid:", issues, 
+  .             i = "Did you mistype the name of a data column or forget to add {.fn after_stat}?")), 
+  .         rlang::abort(message, ..., call = call, use_cli_format = TRUE, 
+  .             .frame = .frame)), parent = c(0L, 1L, 2L, 3L, 4L, 
+  .     5L, 6L, 7L, 6L, 9L, 10L, 4L, 12L, 13L, 14L, 15L, 16L, 17L, 
+  .     18L, 13L, 13L, 13L, 22L, 23L, 24L, 25L, 26L, 26L, 25L, 29L, 
+  .     30L, 31L, 32L, 33L, 34L, 31L, 31L, 31L, 38L, 38L, 40L, 38L, 
+  .     38L, 43L, 43L, 45L, 46L, 47L, 48L, 49L, 50L, 47L, 46L, 53L, 
+  .     54L, 55L, 56L), visible = c(TRUE, TRUE, TRUE, TRUE, TRUE, 
+  .     TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, 
+  .     TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, 
+  .     TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, 
+  .     TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, 
+  .     TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, 
+  .     FALSE, FALSE), namespace = c("IRkernel", NA, "IRkernel", 
+  .     NA, "base", "base", "base", "base", "base", "base", "base", 
+  .     "evaluate", "evaluate", "evaluate", "base", "base", "base", 
+  .     "base", "base", "base", "base", "IRkernel", "IRkernel", "IRdisplay", 
+  .     "IRdisplay", "base", "base", "base", "base", "base", "IRdisplay", 
+  .     "base", "base", "base", "base", "base", NA, "repr", "base", 
+  .     "utils", "base", "base", "ggplot2", "ggplot2", "ggplot2", 
+  .     "ggplot2", "rlang", "base", "base", "base", "base", "base", 
+  .     "ggplot2", NA, "ggplot2", "cli", "rlang"), scope = c("::", 
+  .     NA, "local", NA, "::", "local", "local", "local", "local", 
+  .     "local", "local", "::", ":::", "local", "::", "::", "local", 
+  .     "local", "local", "::", "::", "local", ":::", "::", ":::", 
+  .     "::", "::", "::", "::", "::", "local", "::", "local", "local", 
+  .     "local", "::", NA, ":::", "::", "::", "::", "::", ":::", 
+  .     "::", ":::", ":::", "::", "::", "local", "local", "local", 
+  .     "::", "local", NA, "local", "::", "::"), error_frame = c(FALSE, 
+  .     FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 
+  .     FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 
+  .     FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 
+  .     FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 
+  .     FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 
+  .     FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, 
+  .     FALSE, FALSE)), row.names = c(NA, -57L), version = 2L, class = c("rlang_trace", 
+  .     "rlib_trace", "tbl", "data.frame")), parent = NULL, body = c(x = "The following aesthetics are invalid:", 
+  .     x = "`x = time`", i = "Did you mistype the name of a data column or forget to add `after_stat()`?"
+  .     ), rlang = list(inherit = TRUE), call = compute_aesthetics(..., 
+  .         self = self), use_cli_format = TRUE), class = c("rlang_error", 
+  . "error", "condition")))
+30. handlers[[1L]](cnd)
+31. cli::cli_abort(c("Problem while {step}.", i = "Error occurred in the {ordinal(i)} layer."), 
+  .     call = layers[[i]]$constructor, parent = cnd)
+32. rlang::abort(message, ..., call = call, use_cli_format = TRUE, 
+  .     .frame = .frame)
+33. signal_abort(cnd, .file)
+Warning message in geom_line(aes(y = Melanoma), ylab = "Variable 2", axis.title.y = element_text(hjust = 1), :
+“Ignoring unknown parameters: `ylab` and `axis.title.y`”
+#+end_example
+# [goto error]
+#+begin_example
+Error:
+! Cannot add <ggproto> objects together
+ℹ Did you forget to add this object to a <ggplot> object?
+Traceback:
+
+1. `+.gg`(geom_line(aes(y = GNP), color = "red"), geom_line(aes(y = Melanoma), 
+ .     ylab = "Variable 2", axis.title.y = element_text(hjust = 1), 
+ .     color = "blue"))
+2. cli::cli_abort(c("Cannot add {.cls ggproto} objects together", 
+ .     i = "Did you forget to add this object to a {.cls ggplot} object?"))
+3. rlang::abort(message, ..., call = call, use_cli_format = TRUE, 
+ .     .frame = .frame)
+4. signal_abort(cnd, .file)
+#+end_example
+:END:
+
+
+
+
+#+BEGIN_SRC jupyter-R
+ggplot(data_frame) + 
+  geom_line(aes(x= date, y= GNP), color = 'dodgerblue') +
+  geom_line(aes(x= date, y = Melanoma), color = 'black')
+#+ 
+#  scale_y_continuous(sec.axis = sec_axis(~./scale_value, name = 'NEW'))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Don't know how to automatically pick scale for object of type <function>.
+Defaulting to continuous.
+ERROR while rich displaying an object: Error in `geom_line()`:
+! Problem while computing aesthetics.
+ℹ Error occurred in the 1st layer.
+Caused by error in `compute_aesthetics()`:
+! Aesthetics are not valid data columns.
+✖ The following aesthetics are invalid:
+✖ `x = date`
+ℹ Did you mistype the name of a data column or forget to add `after_stat()`?
+
+Traceback:
+1. tryCatch(withCallingHandlers({
+ .     if (!mime %in% names(repr::mime2repr)) 
+ .         stop("No repr_* for mimetype ", mime, " in repr::mime2repr")
+ .     rpr <- repr::mime2repr[[mime]](obj)
+ .     if (is.null(rpr)) 
+ .         return(NULL)
+ .     prepare_content(is.raw(rpr), rpr)
+ . }, error = error_handler), error = outer_handler)
+2. tryCatchList(expr, classes, parentenv, handlers)
+3. tryCatchOne(expr, names, parentenv, handlers[[1L]])
+4. doTryCatch(return(expr), name, parentenv, handler)
+5. withCallingHandlers({
+ .     if (!mime %in% names(repr::mime2repr)) 
+ .         stop("No repr_* for mimetype ", mime, " in repr::mime2repr")
+ .     rpr <- repr::mime2repr[[mime]](obj)
+ .     if (is.null(rpr)) 
+ .         return(NULL)
+ .     prepare_content(is.raw(rpr), rpr)
+ . }, error = error_handler)
+6. repr::mime2repr[[mime]](obj)
+7. repr_text.default(obj)
+8. paste(capture.output(print(obj)), collapse = "\n")
+9. capture.output(print(obj))
+10. withVisible(...elt(i))
+11. print(obj)
+12. print.ggplot(obj)
+13. ggplot_build(x)
+14. ggplot_build.ggplot(x)
+15. by_layer(function(l, d) l$compute_aesthetics(d, plot), layers, 
+  .     data, "computing aesthetics")
+16. try_fetch(for (i in seq_along(data)) {
+  .     out[[i]] <- f(l = layers[[i]], d = data[[i]])
+  . }, error = function(cnd) {
+  .     cli::cli_abort(c("Problem while {step}.", i = "Error occurred in the {ordinal(i)} layer."), 
+  .         call = layers[[i]]$constructor, parent = cnd)
+  . })
+17. tryCatch(withCallingHandlers(expr, condition = function(cnd) {
+  .     {
+  .         .__handler_frame__. <- TRUE
+  .         .__setup_frame__. <- frame
+  .         if (inherits(cnd, "message")) {
+  .             except <- c("warning", "error")
+  .         }
+  .         else if (inherits(cnd, "warning")) {
+  .             except <- "error"
+  .         }
+  .         else {
+  .             except <- ""
+  .         }
+  .     }
+  .     while (!is_null(cnd)) {
+  .         if (inherits(cnd, "error")) {
+  .             out <- handlers[[1L]](cnd)
+  .             if (!inherits(out, "rlang_zap")) 
+  .                 throw(out)
+  .         }
+  .         inherit <- .subset2(.subset2(cnd, "rlang"), "inherit")
+  .         if (is_false(inherit)) {
+  .             return()
+  .         }
+  .         cnd <- .subset2(cnd, "parent")
+  .     }
+  . }), stackOverflowError = handlers[[1L]])
+18. tryCatchList(expr, classes, parentenv, handlers)
+19. tryCatchOne(expr, names, parentenv, handlers[[1L]])
+20. doTryCatch(return(expr), name, parentenv, handler)
+21. withCallingHandlers(expr, condition = function(cnd) {
+  .     {
+  .         .__handler_frame__. <- TRUE
+  .         .__setup_frame__. <- frame
+  .         if (inherits(cnd, "message")) {
+  .             except <- c("warning", "error")
+  .         }
+  .         else if (inherits(cnd, "warning")) {
+  .             except <- "error"
+  .         }
+  .         else {
+  .             except <- ""
+  .         }
+  .     }
+  .     while (!is_null(cnd)) {
+  .         if (inherits(cnd, "error")) {
+  .             out <- handlers[[1L]](cnd)
+  .             if (!inherits(out, "rlang_zap")) 
+  .                 throw(out)
+  .         }
+  .         inherit <- .subset2(.subset2(cnd, "rlang"), "inherit")
+  .         if (is_false(inherit)) {
+  .             return()
+  .         }
+  .         cnd <- .subset2(cnd, "parent")
+  .     }
+  . })
+22. f(l = layers[[i]], d = data[[i]])
+23. l$compute_aesthetics(d, plot)
+24. compute_aesthetics(..., self = self)
+25. cli::cli_abort(c("Aesthetics are not valid data columns.", x = "The following aesthetics are invalid:", 
+  .     issues, i = "Did you mistype the name of a data column or forget to add {.fn after_stat}?"))
+26. rlang::abort(message, ..., call = call, use_cli_format = TRUE, 
+  .     .frame = .frame)
+27. signal_abort(cnd, .file)
+28. signalCondition(cnd)
+29. (function (cnd) 
+  . {
+  .     {
+  .         .__handler_frame__. <- TRUE
+  .         .__setup_frame__. <- frame
+  .         if (inherits(cnd, "message")) {
+  .             except <- c("warning", "error")
+  .         }
+  .         else if (inherits(cnd, "warning")) {
+  .             except <- "error"
+  .         }
+  .         else {
+  .             except <- ""
+  .         }
+  .     }
+  .     while (!is_null(cnd)) {
+  .         if (inherits(cnd, "error")) {
+  .             out <- handlers[[1L]](cnd)
+  .             if (!inherits(out, "rlang_zap")) 
+  .                 throw(out)
+  .         }
+  .         inherit <- .subset2(.subset2(cnd, "rlang"), "inherit")
+  .         if (is_false(inherit)) {
+  .             return()
+  .         }
+  .         cnd <- .subset2(cnd, "parent")
+  .     }
+  . })(structure(list(message = structure("Aesthetics are not valid data columns.", names = ""), 
+  .     trace = structure(list(call = list(IRkernel::main(), kernel$run(), 
+  .         handle_shell(), executor$execute(msg), tryCatch(evaluate(request$content$code, 
+  .             envir = .GlobalEnv, output_handler = oh, stop_on_error = 1L), 
+  .             interrupt = function(cond) {
+  .                 log_debug("Interrupt during execution")
+  .                 interrupted <<- TRUE
+  .             }, error = .self$handle_error), tryCatchList(expr, 
+  .             classes, parentenv, handlers), tryCatchOne(tryCatchList(expr, 
+  .             names[-nh], parentenv, handlers[-nh]), names[nh], 
+  .             parentenv, handlers[[nh]]), doTryCatch(return(expr), 
+  .             name, parentenv, handler), tryCatchList(expr, names[-nh], 
+  .             parentenv, handlers[-nh]), tryCatchOne(expr, names, 
+  .             parentenv, handlers[[1L]]), doTryCatch(return(expr), 
+  .             name, parentenv, handler), evaluate(request$content$code, 
+  .             envir = .GlobalEnv, output_handler = oh, stop_on_error = 1L), 
+  .         evaluate_call(expr, parsed$src[[i]], envir = envir, enclos = enclos, 
+  .             debug = debug, last = i == length(out), use_try = stop_on_error != 
+  .                 2L, keep_warning = keep_warning, keep_message = keep_message, 
+  .             output_handler = output_handler, include_timing = include_timing), 
+  .         handle(pv <- withCallingHandlers(withVisible(value_fun(ev$value, 
+  .             ev$visible)), warning = wHandler, error = eHandler, 
+  .             message = mHandler)), try(f, silent = TRUE), tryCatch(expr, 
+  .             error = function(e) {
+  .                 call <- conditionCall(e)
+  .                 if (!is.null(call)) {
+  .                   if (identical(call[[1L]], quote(doTryCatch))) 
+  .                     call <- sys.call(-4L)
+  .                   dcall <- deparse(call, nlines = 1L)
+  .                   prefix <- paste("Error in", dcall, ": ")
+  .                   LONG <- 75L
+  .                   sm <- strsplit(conditionMessage(e), "\n")[[1L]]
+  .                   w <- 14L + nchar(dcall, type = "w") + nchar(sm[1L], 
+  .                     type = "w")
+  .                   if (is.na(w)) 
+  .                     w <- 14L + nchar(dcall, type = "b") + nchar(sm[1L], 
+  .                       type = "b")
+  .                   if (w > LONG) 
+  .                     prefix <- paste0(prefix, "\n  ")
+  .                 }
+  .                 else prefix <- "Error : "
+  .                 msg <- paste0(prefix, conditionMessage(e), "\n")
+  .                 .Internal(seterrmessage(msg[1L]))
+  .                 if (!silent && isTRUE(getOption("show.error.messages"))) {
+  .                   cat(msg, file = outFile)
+  .                   .Internal(printDeferredWarnings())
+  .                 }
+  .                 invisible(structure(msg, class = "try-error", 
+  .                   condition = e))
+  .             }), tryCatchList(expr, classes, parentenv, handlers), 
+  .         tryCatchOne(expr, names, parentenv, handlers[[1L]]), 
+  .         doTryCatch(return(expr), name, parentenv, handler), withCallingHandlers(withVisible(value_fun(ev$value, 
+  .             ev$visible)), warning = wHandler, error = eHandler, 
+  .             message = mHandler), withVisible(value_fun(ev$value, 
+  .             ev$visible)), value_fun(ev$value, ev$visible), prepare_mimebundle_kernel(obj, 
+  .             .self$handle_display_error), prepare_mimebundle(obj, 
+  .             "text/plain", error_handler = handle_display_error), 
+  .         filter_map(mimetypes, function(mime) {
+  .             tryCatch(withCallingHandlers({
+  .                 if (!mime %in% names(repr::mime2repr)) 
+  .                   stop("No repr_* for mimetype ", mime, " in repr::mime2repr")
+  .                 rpr <- repr::mime2repr[[mime]](obj)
+  .                 if (is.null(rpr)) 
+  .                   return(NULL)
+  .                 prepare_content(is.raw(rpr), rpr)
+  .             }, error = error_handler), error = outer_handler)
+  .         }), Filter(Negate(is.null), sapply(x, f, simplify = simplify)), 
+  .         unlist(lapply(x, f)), lapply(x, f), sapply(x, f, simplify = simplify), 
+  .         lapply(X = X, FUN = FUN, ...), FUN(X[[i]], ...), tryCatch(withCallingHandlers({
+  .             if (!mime %in% names(repr::mime2repr)) 
+  .                 stop("No repr_* for mimetype ", mime, " in repr::mime2repr")
+  .             rpr <- repr::mime2repr[[mime]](obj)
+  .             if (is.null(rpr)) 
+  .                 return(NULL)
+  .             prepare_content(is.raw(rpr), rpr)
+  .         }, error = error_handler), error = outer_handler), tryCatchList(expr, 
+  .             classes, parentenv, handlers), tryCatchOne(expr, 
+  .             names, parentenv, handlers[[1L]]), doTryCatch(return(expr), 
+  .             name, parentenv, handler), withCallingHandlers({
+  .             if (!mime %in% names(repr::mime2repr)) 
+  .                 stop("No repr_* for mimetype ", mime, " in repr::mime2repr")
+  .             rpr <- repr::mime2repr[[mime]](obj)
+  .             if (is.null(rpr)) 
+  .                 return(NULL)
+  .             prepare_content(is.raw(rpr), rpr)
+  .         }, error = error_handler), repr::mime2repr[[mime]](obj), 
+  .         repr_text.default(obj), paste(capture.output(print(obj)), 
+  .             collapse = "\n"), capture.output(print(obj)), withVisible(...elt(i)), 
+  .         print(obj), print.ggplot(obj), ggplot_build(x), ggplot_build.ggplot(x), 
+  .         by_layer(function(l, d) l$compute_aesthetics(d, plot), 
+  .             layers, data, "computing aesthetics"), try_fetch(for (i in seq_along(data)) {
+  .             out[[i]] <- f(l = layers[[i]], d = data[[i]])
+  .         }, error = function(cnd) {
+  .             cli::cli_abort(c("Problem while {step}.", i = "Error occurred in the {ordinal(i)} layer."), 
+  .                 call = layers[[i]]$constructor, parent = cnd)
+  .         }), tryCatch(withCallingHandlers(expr, condition = function(cnd) {
+  .             {
+  .                 .__handler_frame__. <- TRUE
+  .                 .__setup_frame__. <- frame
+  .                 if (inherits(cnd, "message")) {
+  .                   except <- c("warning", "error")
+  .                 }
+  .                 else if (inherits(cnd, "warning")) {
+  .                   except <- "error"
+  .                 }
+  .                 else {
+  .                   except <- ""
+  .                 }
+  .             }
+  .             while (!is_null(cnd)) {
+  .                 if (inherits(cnd, "error")) {
+  .                   out <- handlers[[1L]](cnd)
+  .                   if (!inherits(out, "rlang_zap")) 
+  .                     throw(out)
+  .                 }
+  .                 inherit <- .subset2(.subset2(cnd, "rlang"), "inherit")
+  .                 if (is_false(inherit)) {
+  .                   return()
+  .                 }
+  .                 cnd <- .subset2(cnd, "parent")
+  .             }
+  .         }), stackOverflowError = handlers[[1L]]), tryCatchList(expr, 
+  .             classes, parentenv, handlers), tryCatchOne(expr, 
+  .             names, parentenv, handlers[[1L]]), doTryCatch(return(expr), 
+  .             name, parentenv, handler), withCallingHandlers(expr, 
+  .             condition = function(cnd) {
+  .                 {
+  .                   .__handler_frame__. <- TRUE
+  .                   .__setup_frame__. <- frame
+  .                   if (inherits(cnd, "message")) {
+  .                     except <- c("warning", "error")
+  .                   }
+  .                   else if (inherits(cnd, "warning")) {
+  .                     except <- "error"
+  .                   }
+  .                   else {
+  .                     except <- ""
+  .                   }
+  .                 }
+  .                 while (!is_null(cnd)) {
+  .                   if (inherits(cnd, "error")) {
+  .                     out <- handlers[[1L]](cnd)
+  .                     if (!inherits(out, "rlang_zap")) 
+  .                       throw(out)
+  .                   }
+  .                   inherit <- .subset2(.subset2(cnd, "rlang"), 
+  .                     "inherit")
+  .                   if (is_false(inherit)) {
+  .                     return()
+  .                   }
+  .                   cnd <- .subset2(cnd, "parent")
+  .                 }
+  .             }), f(l = layers[[i]], d = data[[i]]), l$compute_aesthetics(d, 
+  .             plot), compute_aesthetics(..., self = self), cli::cli_abort(c("Aesthetics are not valid data columns.", 
+  .             x = "The following aesthetics are invalid:", issues, 
+  .             i = "Did you mistype the name of a data column or forget to add {.fn after_stat}?")), 
+  .         rlang::abort(message, ..., call = call, use_cli_format = TRUE, 
+  .             .frame = .frame)), parent = c(0L, 1L, 2L, 3L, 4L, 
+  .     5L, 6L, 7L, 6L, 9L, 10L, 4L, 12L, 13L, 14L, 15L, 16L, 17L, 
+  .     18L, 13L, 13L, 13L, 22L, 23L, 24L, 25L, 26L, 26L, 25L, 29L, 
+  .     30L, 31L, 32L, 33L, 34L, 31L, 31L, 31L, 38L, 38L, 40L, 38L, 
+  .     38L, 43L, 43L, 45L, 46L, 47L, 48L, 49L, 50L, 47L, 46L, 53L, 
+  .     54L, 55L, 56L), visible = c(TRUE, TRUE, TRUE, TRUE, TRUE, 
+  .     TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, 
+  .     TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, 
+  .     TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, 
+  .     TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, 
+  .     TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, 
+  .     FALSE, FALSE), namespace = c("IRkernel", NA, "IRkernel", 
+  .     NA, "base", "base", "base", "base", "base", "base", "base", 
+  .     "evaluate", "evaluate", "evaluate", "base", "base", "base", 
+  .     "base", "base", "base", "base", "IRkernel", "IRkernel", "IRdisplay", 
+  .     "IRdisplay", "base", "base", "base", "base", "base", "IRdisplay", 
+  .     "base", "base", "base", "base", "base", NA, "repr", "base", 
+  .     "utils", "base", "base", "ggplot2", "ggplot2", "ggplot2", 
+  .     "ggplot2", "rlang", "base", "base", "base", "base", "base", 
+  .     "ggplot2", NA, "ggplot2", "cli", "rlang"), scope = c("::", 
+  .     NA, "local", NA, "::", "local", "local", "local", "local", 
+  .     "local", "local", "::", ":::", "local", "::", "::", "local", 
+  .     "local", "local", "::", "::", "local", ":::", "::", ":::", 
+  .     "::", "::", "::", "::", "::", "local", "::", "local", "local", 
+  .     "local", "::", NA, ":::", "::", "::", "::", "::", ":::", 
+  .     "::", ":::", ":::", "::", "::", "local", "local", "local", 
+  .     "::", "local", NA, "local", "::", "::"), error_frame = c(FALSE, 
+  .     FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 
+  .     FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 
+  .     FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 
+  .     FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 
+  .     FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, 
+  .     FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, 
+  .     FALSE, FALSE)), row.names = c(NA, -57L), version = 2L, class = c("rlang_trace", 
+  .     "rlib_trace", "tbl", "data.frame")), parent = NULL, body = c(x = "The following aesthetics are invalid:", 
+  .     x = "`x = date`", i = "Did you mistype the name of a data column or forget to add `after_stat()`?"
+  .     ), rlang = list(inherit = TRUE), call = compute_aesthetics(..., 
+  .         self = self), use_cli_format = TRUE), class = c("rlang_error", 
+  . "error", "condition")))
+30. handlers[[1L]](cnd)
+31. cli::cli_abort(c("Problem while {step}.", i = "Error occurred in the {ordinal(i)} layer."), 
+  .     call = layers[[i]]$constructor, parent = cnd)
+32. rlang::abort(message, ..., call = call, use_cli_format = TRUE, 
+  .     .frame = .frame)
+33. signal_abort(cnd, .file)
+#+end_example
+
+
+#+BEGIN_SRC jupyter-R
+#install.packages(c("ggfortify", "tfarima"))
+library(ggfortify)
+#+END_SRC
+
+#+RESULTS:
+: Installing packages into ‘/home/marcos/R/x86_64-pc-linux-gnu-library/4.2’
+: (as ‘lib’ is unspecified)
+: 
+
+#+BEGIN_SRC jupyter-R
+autoplot(ts( data ),
+         facets = FALSE)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/61c2344a53103fa616ce41035315f7c9e3d42841.png]]
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+# Plot a graph with time_data1
+plot(data,                           
+     data$GNP,
+     type = "l",
+     col = 2,
+     ylim = c(- 15, 40),
+     xlab = "Year",
+     ylab = "Values")
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/cd76a7ce844e5a0fb48003b6dd52fadb5553afb1.png]]
+:END:
+
+#+BEGIN_SRC jupyter-R
+plot(data,                           
+     type = "l",
+     col = 2,
+     ylim = c(- 15, 40),
+     xlab = "Year",
+     ylab = "Values")
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/cd76a7ce844e5a0fb48003b6dd52fadb5553afb1.png]]
+:END:
+
+
+
+
+* Internat. airline passengers: monthly totals in thousands. Jan 49 – Dec 60 
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+Cargamos famosa serie de /'líneas aéreas'/ en la variable =Z=
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-R :results silent :exports code
+Z <- AirPassengers
+#+END_SRC
+
+Representación de la serie temporal y su gráfico /rango-media/
+#+BEGIN_SRC jupyter-R :results file silent :output-dir ./img/ :file foo.png  :exports code
+ide(Z, graphs = c("plot", "rm"))
+#+END_SRC
+
+[[./img/foo.png]]
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+
+Más gráficos (en este caso voy a ocultar el código en la presentación
+=html=).
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-R :results file silent :output-dir ./img/ :file fuu.png  :exports code
+ide(Z, transf = list(list(bc = TRUE, S = TRUE), list(bc = TRUE, d = 1, D = 1)))
+#+END_SRC
+
+
+[[./img/fuu.png]]
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+name: ides_de_transformaciones
+#+BEGIN_SRC jupyter-R :file ./img/idesVarios.png :exports code :results silent
+options(repr.plot.width = 12, repr.plot.height = 8, repr.plot.res = 200)
+ide(Z, transf = list(list(bc = T), list(bc = T, S = 1), list(bc = T, D = 1), list(bc = T, D = 1, d = 1)))
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+
+[[file:./img/idesVarios.png]]
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-R 
+options(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
+ide(Z, transf = list(list(bc = TRUE, S = TRUE), list(bc = TRUE, d = 1, D = 1)))
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/8071a1e0a8f563db61554d1cdaa92919fa01f58d.png]]
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+um1 <- um(AirPassengers, bc = TRUE, i = list(1, c(1, 12)), ma = list(1, c(1, 12)))
+um1
+#+END_SRC
+
+#+RESULTS:
+:         Estimate Std. Error
+: theta1 0.4018464 0.07656434
+: theta2 0.5570393 0.07401700
+: 
+: log likelihood:  244.6965
+: Residual standard error:  0.03513935
+: aic: -3.70529
+
+#+BEGIN_SRC jupyter-R
+um2 <- um(i = list(1, c(1, 12)), ma = list(1, c(1, 12)), bc = TRUE)
+um2
+#+END_SRC
+
+#+RESULTS:
+: theta1 theta2   sig2 
+:    0.2    0.2    1.0 
+
+
+#+BEGIN_SRC jupyter-R
+um2 <- um(i = list(1, c(1, 12)), ma = list(1, c(1, 12)), bc = TRUE)
+fit(um2, AirPassengers)
+#+END_SRC
+
+#+RESULTS:
+:         Estimate Std. Error
+: theta1 0.4018464 0.07656434
+: theta2 0.5570393 0.07401700
+: 
+: log likelihood:  244.6965
+: Residual standard error:  0.03513935
+: aic: -3.70529
+
+
+#+BEGIN_SRC jupyter-R
+arima(log(AirPassengers), order = c(0,1,1), seasonal = list(order = c(0,1,1), frequency = 12))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+
+Call:
+arima(x = log(AirPassengers), order = c(0, 1, 1), seasonal = list(order = c(0, 
+    1, 1), frequency = 12))
+
+Coefficients:
+          ma1     sma1
+      -0.4018  -0.5569
+s.e.   0.0896   0.0731
+
+sigma^2 estimated as 0.001348:  log likelihood = 244.7,  aic = -483.4
+#+end_example
+
+
+#+BEGIN_SRC jupyter-R
+summary(um1)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+
+Model:
+ um1  <-  um(z = AirPassengers, i = list(1, c(1, 12)), ma = list(1, c(1, 12)), bc = TRUE) 
+
+Time series:
+AirPassengers 
+
+Maximum likelihood method:
+ exact 
+
+Coefficients:
+        Estimate  Gradient Std. Error z Value Pr(>|z|)    
+theta1 4.018e-01 6.544e-06  7.656e-02   5.248 1.53e-07 ***
+theta2 5.570e-01 2.775e-05  7.402e-02   7.526 5.24e-14 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Total nobs                  144 Effective nobs              131 
+log likelihood            244.7 Error variance         0.001348 
+Mean of residuals    -0.0004231 SD of the residuals     0.03514 
+z-test for residuals    -0.1445 p-value                  0.8851 
+Ljung-Box Q(1) st.        10.08 p-value                0.001495 
+Ljung-Box Q(32) st.        47.4 p-value                 0.03906 
+Barlett H(3) stat.        1.138 p-value                   0.566 
+AIC                      -3.705 BIC                      -3.661 
+#+end_example
+
+#+BEGIN_SRC jupyter-R
+diagchk(um1)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/6ea247164c82550b76a5f2c348042a4765f20c90.png]]
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+modify(um2, ar = list(2, c(2, 12)))
+#+END_SRC
+
+#+RESULTS:
+:   phi1   phi2   phi3   phi4 theta1 theta2   sig2 
+:   0.01   0.10   0.01   0.10   0.20   0.20   1.00 
+
+#+BEGIN_SRC jupyter-R
+printLagpolList(modify(um2, ar = list(2, c(2, 12)))$ar)
+#+END_SRC
+
+#+RESULTS:
+: [1] 1 - 0.01B - 0.1B^2   [2] 1 - 0.01B^12 - 0.1B^24 
+
+#+BEGIN_SRC jupyter-R
+printLagpolList(um2$ma)
+#+END_SRC
+
+#+RESULTS:
+: [1] 1 - 0.2B   [2] 1 - 0.2B^12 
+
+#+BEGIN_SRC jupyter-R
+printLagpolList(um2$i)
+#+END_SRC
+
+#+RESULTS:
+: [1] 1 - B   [2] 1 - B^12 
+
+
+#+BEGIN_SRC jupyter-R
+um3 <- modify(um1, ar = list(2, c(2, 12)))
+um3
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+          Estimate Std. Error
+phi1    0.55477214 0.08502302
+phi2    0.24975326 0.08322806
+phi3   -0.09466045 0.23810134
+phi4   -0.03393216 0.14198888
+theta1  0.96372038 0.04100168
+theta2  0.48331617 0.23071063
+
+log likelihood:  246.2311
+Residual standard error:  0.03447009
+aic: -3.66765
+#+end_example
+
+#+BEGIN_SRC jupyter-R
+printLagpolList(um3$ma)
+#+END_SRC
+
+#+RESULTS:
+: [1] 1 - 0.96B   [2] 1 - 0.48B^12 
+
+#+BEGIN_SRC jupyter-R
+printLagpolList(um3$i)
+#+END_SRC
+
+#+RESULTS:
+: [1] 1 - B   [2] 1 - B^12 
+
+#+BEGIN_SRC jupyter-R
+printLagpolList(um3$ar)
+#+END_SRC
+
+#+RESULTS:
+: [1] 1 - 0.55B - 0.25B^2   [2] 1 + 0.095B^12 + 0.034B^24 
+
+
+#+BEGIN_SRC jupyter-R
+modify(um1, ar = list(2, c(2, 12)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+          Estimate Std. Error
+phi1    0.55477214 0.08502302
+phi2    0.24975326 0.08322806
+phi3   -0.09466045 0.23810134
+phi4   -0.03393216 0.14198888
+theta1  0.96372038 0.04100168
+theta2  0.48331617 0.23071063
+
+log likelihood:  246.2311
+Residual standard error:  0.03447009
+aic: -3.66765
+#+end_example
+
+#+BEGIN_SRC jupyter-R
+um1
+#+END_SRC
+
+#+RESULTS:
+:         Estimate Std. Error
+: theta1 0.4018464 0.07656434
+: theta2 0.5570393 0.07401700
+: 
+: log likelihood:  244.6965
+: Residual standard error:  0.03513935
+: aic: -3.70529
+
+
+#+BEGIN_SRC jupyter-R
+um4 <- modify(um2, ma = list(-1, -2, 2, c(2, 12)))
+printLagpolList(um4$ma)
+#+END_SRC
+
+#+RESULTS:
+: [1] 1 - 0.02B - 0.2B^2   [2] 1 - 0.02B^12 - 0.2B^24 
+
+#+BEGIN_SRC jupyter-R
+theta(um2)
+
+theta(um4)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+: 1 - 0.2B - 0.2B^12 + 0.04B^13 
+: 1 - 0.02B - 0.2B^2 - 0.02B^12 + 4e-04B^13 + 0.004B^14 - 0.2B^24 + 0.004B^25 +  
+: 0.04B^26 
+:END:
+
+*** Forecast
+
+#+BEGIN_SRC jupyter-R
+p <- predict(um1, n.ahead = 12)
+plot(p, n.back = 48)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/295900ad40241e6381168a41555477c07e859693.png]]
+:END:
+
+
+*** uc
+
+#+BEGIN_SRC jupyter-R
+uc1 <- ucomp(um1)
+#plot(uc1)
+#library(RJDemetra)
+#ts1 <- tramoseats(AirPassengers, spec = "RSA5")
+#plot(ts1$final$series[,4], ylab = expression('S'[t]), col = "gray")
+plot(exp(uc1$seas), lty = 2)
+#lines(exp(uc1$seas), lty = 2)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/9832803fa1ce32459adcc26d39cb84c61f4f0ecf.png]]
+:END:
+
+
+*** con dummies
+
+
+
+#+BEGIN_SRC jupyter-R
+t <- 0:(length(AirPassengers) - 1)
+D <- as.factor(cycle(AirPassengers))
+reg <- lm(log(AirPassengers) ~ t + D)
+ima1 <- um(AirPassengers, , bc = TRUE, i = list(1, c(1, 12)), ma = "(1-B)(1-B12)", fit = FALSE)
+ima2 <- arima(log(AirPassengers), order = c(0,1,1), seasonal = list(order = c(0,1,1), frequency = 12), fixed = c(-1, -1), transform.pars = FALSE, method = "ML")
+res1 <- ts(residuals(reg), start = start(AirPassengers), frequency = 12)
+res2 <- residuals(ima1)
+res3 <- residuals(ima2)
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC jupyter-R
+ide(res1)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/5d59369842d7375a891af7376186d2e4086ea683.png]]
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+ide(res2)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/645fa849b67a69c46a31fac64bfe62f3124e644f.png]]
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+ide(res3)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/c82967fb69f8b1f4316d1000f563d7ddb5583fc5.png]]
+:END:
+
+#+BEGIN_SRC jupyter-R
+reg
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+
+Call:
+lm(formula = log(AirPassengers) ~ t + D)
+
+Coefficients:
+(Intercept)            t           D2           D3           D4           D5  
+   4.736849     0.010069    -0.022055     0.108172     0.076903     0.074531  
+         D6           D7           D8           D9          D10          D11  
+   0.196677     0.300619     0.291324     0.146690     0.008532    -0.135186  
+        D12  
+  -0.021321  
+#+end_example
+
+#+BEGIN_SRC jupyter-R
+D
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+1. 1
+2. 2
+3. 3
+4. 4
+5. 5
+6. 6
+7. 7
+8. 8
+9. 9
+10. 10
+11. 11
+12. 12
+13. 1
+14. 2
+15. 3
+16. 4
+17. 5
+18. 6
+19. 7
+20. 8
+21. 9
+22. 10
+23. 11
+24. 12
+25. 1
+26. 2
+27. 3
+28. 4
+29. 5
+30. 6
+31. 7
+32. 8
+33. 9
+34. 10
+35. 11
+36. 12
+37. 1
+38. 2
+39. 3
+40. 4
+41. 5
+42. 6
+43. 7
+44. 8
+45. 9
+46. 10
+47. 11
+48. 12
+49. 1
+50. 2
+51. 3
+52. 4
+53. 5
+54. 6
+55. 7
+56. 8
+57. 9
+58. 10
+59. 11
+60. 12
+61. 1
+62. 2
+63. 3
+64. 4
+65. 5
+66. 6
+67. 7
+68. 8
+69. 9
+70. 10
+71. 11
+72. 12
+73. 1
+74. 2
+75. 3
+76. 4
+77. 5
+78. 6
+79. 7
+80. 8
+81. 9
+82. 10
+83. 11
+84. 12
+85. 1
+86. 2
+87. 3
+88. 4
+89. 5
+90. 6
+91. 7
+92. 8
+93. 9
+94. 10
+95. 11
+96. 12
+97. 1
+98. 2
+99. 3
+100. 4
+101. 5
+102. 6
+103. 7
+104. 8
+105. 9
+106. 10
+107. 11
+108. 12
+109. 1
+110. 2
+111. 3
+112. 4
+113. 5
+114. 6
+115. 7
+116. 8
+117. 9
+118. 10
+119. 11
+120. 12
+121. 1
+122. 2
+123. 3
+124. 4
+125. 5
+126. 6
+127. 7
+128. 8
+129. 9
+130. 10
+131. 11
+132. 12
+133. 1
+134. 2
+135. 3
+136. 4
+137. 5
+138. 6
+139. 7
+140. 8
+141. 9
+142. 10
+143. 11
+144. 12
+
+*Levels*:
+
+1. '1'
+2. '2'
+3. '3'
+4. '4'
+5. '5'
+6. '6'
+7. '7'
+8. '8'
+9. '9'
+10. '10'
+11. '11'
+12. '12'
+:END:
+
+#+BEGIN_SRC jupyter-R
+t <- 0:(length(AirPassengers) - 1)
+t2 <- t*t
+D <- as.factor(cycle(AirPassengers))
+reg2 <- lm(log(AirPassengers) ~ t + t2 + D)
+res4 <- ts(residuals(reg2), start = start(AirPassengers), frequency = 12)
+reg2
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+
+Call:
+lm(formula = log(AirPassengers) ~ t + t2 + D)
+
+Coefficients:
+(Intercept)            t           t2           D2           D3           D4  
+  4.665e+00    1.314e-02   -2.148e-05   -2.227e-02    1.078e-01    7.639e-02  
+         D5           D6           D7           D8           D9          D10  
+  7.393e-02    1.960e-01    3.000e-01    2.907e-01    1.462e-01    8.145e-03  
+        D11          D12  
+ -1.354e-01   -2.132e-02  
+#+end_example
+
+#+BEGIN_SRC jupyter-R
+summary(reg2)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+
+Call:
+lm(formula = log(AirPassengers) ~ t + t2 + D)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-0.12748 -0.03709  0.00418  0.03197  0.11529 
+
+Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  4.665e+00  1.764e-02 264.458  < 2e-16 ***
+t            1.314e-02  3.841e-04  34.209  < 2e-16 ***
+t2          -2.148e-05  2.599e-06  -8.265 1.41e-13 ***
+D2          -2.227e-02  1.968e-02  -1.132 0.259839    
+D3           1.078e-01  1.968e-02   5.477 2.15e-07 ***
+D4           7.639e-02  1.968e-02   3.882 0.000164 ***
+D5           7.393e-02  1.968e-02   3.756 0.000259 ***
+D6           1.960e-01  1.968e-02   9.959  < 2e-16 ***
+D7           3.000e-01  1.969e-02  15.238  < 2e-16 ***
+D8           2.907e-01  1.969e-02  14.765  < 2e-16 ***
+D9           1.462e-01  1.969e-02   7.423 1.33e-11 ***
+D10          8.145e-03  1.970e-02   0.414 0.679912    
+D11         -1.354e-01  1.970e-02  -6.873 2.36e-10 ***
+D12         -2.132e-02  1.971e-02  -1.082 0.281286    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.0482 on 130 degrees of freedom
+Multiple R-squared:  0.9892,	Adjusted R-squared:  0.9881 
+F-statistic: 912.7 on 13 and 130 DF,  p-value: < 2.2e-16
+#+end_example
+
+
+#+BEGIN_SRC jupyter-R
+ide(res4)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/8df05aec1ebf5d2e1d58833299d0632352ce9a7d.png]]
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+res5 = residuals(um(AirPassengers, , bc = TRUE, i = list(1, c(1, 12)), ma = "(1-B)(1-B12)", fit = FALSE))
+ide(res5)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/b0132524d865d9fbc4439afcc9d14d2abe15a406.png]]
+:END:
+
+#+BEGIN_SRC jupyter-R
+res6 = residuals(um(AirPassengers, , bc = TRUE, i = "(1-B)(1-B12)", ma = "(1-B)(1-B12)", fit = FALSE))
+ide(res6)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/b25a3bc50a6f62490a446af656ead3e094e5491c.png]]
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+library(lmtest)
+#install.packages('lmtest')
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Loading required package: zoo
+
+
+Attaching package: ‘zoo’
+The following objects are masked from ‘package:base’:
+
+    as.Date, as.Date.numeric
+#+end_example
+
+
+#+BEGIN_SRC jupyter-R
+bgtest(reg2)
+#+END_SRC
+
+#+RESULTS:
+: 
+: 	Breusch-Godfrey test for serial correlation of order up to 1
+: 
+: data:  reg2
+: LM test = 64.862, df = 1, p-value = 8.034e-16
+: 
+
+#+BEGIN_SRC jupyter-R
+dwtest(res6 ~ t + t2 + D)
+#+END_SRC
+
+#+RESULTS:
+: 
+: 	Durbin-Watson test
+: 
+: data:  res6 ~ t + t2 + D
+: DW = 0.64792, p-value = 1.11e-15
+: alternative hypothesis: true autocorrelation is greater than 0
+: 
+
+
+
+
+#+BEGIN_SRC jupyter-R
+step(reg2, direction = "backward", test = "F")
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+: Start:  AIC=-860.06
+: log(AirPassengers) ~ t + t2 + D
+: 
+:        Df Sum of Sq     RSS     AIC  F value    Pr(>F)    
+: <none>              0.30202 -860.06                       
+: - t2    1   0.15869 0.46072 -801.25   68.307 1.409e-13 ***
+: - D    11   2.27793 2.57996 -573.17   89.136 < 2.2e-16 ***
+: - t     1   2.71886 3.02088 -530.45 1170.285 < 2.2e-16 ***
+: ---
+: Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+#+begin_example
+
+Call:
+lm(formula = log(AirPassengers) ~ t + t2 + D)
+
+Coefficients:
+(Intercept)            t           t2           D2           D3           D4  
+  4.665e+00    1.314e-02   -2.148e-05   -2.227e-02    1.078e-01    7.639e-02  
+         D5           D6           D7           D8           D9          D10  
+  7.393e-02    1.960e-01    3.000e-01    2.907e-01    1.462e-01    8.145e-03  
+        D11          D12  
+ -1.354e-01   -2.132e-02  
+#+end_example
+:END:
+
+**** dummies 
+
+** ECM
+
+
+#+BEGIN_SRC jupyter-R
+#install.packages("orcutt")
+library(orcutt)
+#+END_SRC
+
+#+RESULTS:
+: Installing package into ‘/home/marcos/R/x86_64-pc-linux-gnu-library/4.2’
+: (as ‘lib’ is unspecified)
+: 
+
+
+#+BEGIN_SRC jupyter-R
+summary(cochrane.orcutt(reg9))
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# [goto error]
+: Error in model.matrix(reg): objeto 'reg9' no encontrado
+: Traceback:
+: 
+: 1. summary(cochrane.orcutt(reg9))
+: 2. cochrane.orcutt(reg9)
+: 3. model.matrix(reg)
+:END:
+
+
+[[https://online.stat.psu.edu/stat510/lesson/8/8.1]]
+
+https://online.stat.psu.edu/stat510/lesson/14/14.1
+
+#+BEGIN_SRC jupyter-R
+DDD <- sdummies(AirPassengers, ref = 12)
+is.matrix(DDD)
+reg18 <- lm(log(AirPassengers) ~ t +t2 + ., data = as.data.frame(DDD))
+summary(reg18)
+#+END_SRC
+
+#+RESULTS:
+: bebb5aed-36fd-4207-a52f-1cc972ac0990
+
+#+BEGIN_SRC jupyter-R
+# DDD
+summary(cochrane.orcutt(reg18))
+#+END_SRC
+
+#+RESULTS:
+: 249b0d4f-4b26-4eff-a2c3-727ab9f9c13a
+
+#+BEGIN_SRC jupyter-R
+reg19 <- step(reg18, direction = "backward", test = "F")
+summary(reg19)
+
+#+END_SRC
+
+#+RESULTS:
+: d099518a-8529-477b-8ad9-df0a70c2f2cc
+
+
+
+
+
+**** Lectura datos: Internat. airline passengers. Monthly totals in thousands. Jan 49 – Dec 60
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :UNNUMBERED: t 
+   :END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :exports code  :results silent
+# Leemos los datos de un fichero csv y generamos un dataframe de pandas cuyo índice es el tiempo
+OrigData = pd.read_csv('./database/Datasets-master/airline-passengers.csv')
+OrigData['Month'] = pd.to_datetime(OrigData['Month'])
+OrigData = OrigData.set_index(['Month'])
+print(OrigData.head())
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :exports code  :results silent
+# Creamos un dataframe con el mismo índice temporal de los datos originales pero con los datos en logaritmos
+TransformedData = pd.DataFrame(index=OrigData.index)
+TransformedData['dataLog'] = np.log(OrigData['Passengers'])
+print(TransformedData.head())
+#+END_SRC
+
+
+* Descomposición estructural de una serie temporal
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+En la lección anterior vimos que una estrategia para analizar series
+temporales es transformar los datos para
+
+1) primero lograr que sean "*/estacionarios/*" y
+2) después, mediante más transformaciones, lograr una secuencia de
+   "*datos /i.i.d/*" (este segundo paso aún no lo hemos abordado)
+#+LATEX:  \newline \noindent
+(/recuerde que las expresiones "datos estacionarios" o "datos i.i.d." son un abuso del lenguaje/).
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+LATEX: \medskip \noindent
+Pero existe otro enfoque que pretende descomponer la serie temporal en
+los siguientes componentes /"no observables"/ (o en un subconjunto de
+ellos):
+
+$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{c} + \boldsymbol{s} + \boldsymbol{e}$$
+
+#+LATEX: \noindent
+donde:
+
+- La tendencia "$\boldsymbol{t}$" :: recoge la lenta evolución de la
+  media a /largo plazo/.
+
+- El componente estacional "$\boldsymbol{s}$" :: recoge las
+  oscilaciones periódicas que se repiten regularmente en ciclos
+  estacionales (de año en año, o de semana en semana, etc.).
+
+- El componente cíclico "$\boldsymbol{c}$" :: Cuando aparece
+  explícitamente en el modelo, $\boldsymbol{c}$ recoge las
+  oscilaciones a medio plazo. Es decir, aquellas de un plazo más largo
+  que las oscilaciones estacionales, pero más corto que la tendencia
+  de largo plazo. Si está ausente, dichas oscilaciones suelen aparecer
+  en el componente de la tendencia, que entonces también podemos
+  denominar /tendencia-ciclo/.
+
+- El componente irregular "$\boldsymbol{e}$" :: recoge las
+  oscilaciones no captadas por el resto de componentes, ya que debe
+  cumplir la siguiente identidad: $\boldsymbol{e} = \boldsymbol{y} -
+  \boldsymbol{t} - \boldsymbol{c} - \boldsymbol{s}$.
+
+Ajuste aceptable si (como poco) el componente irregular
+$\boldsymbol{e}$ parece "/estacionario/".
+
+
+** Tendencia determinista /lineal/
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+#+NAME: ajuste-tendencia-lineal
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python  :results silent
+# Ajustamos por MCO una tendencia linea. Para ello, primero creamos un DataFrame con el regresando y los regresores del modelo
+datosModelo1 = TransformedData[['dataLog']].copy()
+nsample = len(datosModelo1)
+datosModelo1['cte'] = [1]*nsample
+datosModelo1['time'] = np.linspace(1, nsample, nsample)
+model1 = sm.OLS(datosModelo1['dataLog'], datosModelo1[['cte', 'time']])
+results1 = model1.fit()
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results none
+#Añadimos al DataFrame =datosModelo1= la tendencia ajustada, los residuos y la diferencia estacional de los residuos.
+datosModelo1['yhat'] = datosModelo1['cte']*results1.params['cte']+datosModelo1['time']*results1.params['time']
+datosModelo1['ehat'] = results1.resid
+datosModelo1['ehatDiff12'] = datosModelo1['ehat'].diff(12)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+linearTrend.png
+# Dibujamos los datos junto a la tendencia estimada
+plt.plot(datosModelo1['dataLog'])
+plt.plot(results1.fittedvalues)
+plt.grid()  
+plt.ylabel(r"Log-Passengers, ($\ln\boldsymbol{x}$) ")
+#+END_SRC
+
+
+El modelo de tendencia más simple es la recta de regresión donde el
+regresor no constante es el propio índice $t$ de cada dato:
+
+$$\ln{y_t}=\underbrace{\beta_1+\beta_2\cdot t}_{\text{tendencia}} + e_t; \quad t=1:114$$
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+[[./img/lecc02/airlinepass+linearTrend.png]]
+
+
+#+RESULTS: my-latex-code-linear-trend
+:results:
+$$\widehat{\ln{y_t}}=4.8137+0.01\cdot\big(t\big), \qquad t=1:114$$
+:end:
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results none
+print(results1.summary()) 
+#+END_SRC
+
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_org: :width 650
+#+attr_html: :width 100px
+#+attr_latex: :width 250px
+[[./img/lecc02/resultsModel1.png]]
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+*_Componente irregular_*
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+irreg.png
+# Gráfico de los residuos del ajuste.
+plt.grid()  
+plt.plot(results1.resid)
+#+END_SRC
+[[file:./img/lecc02/airlinepass+irreg.png]]
+En este caso, el modelo 
+
+$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$
+
+@@latex:\noindent@@ donde $\boldsymbol{t}$ es una tendencia lineal no
+es un ajuste satisfactorio, pues el /componente irregular/
+$$\boldsymbol{e}=\boldsymbol{y}-\boldsymbol{t}$$
+no tiene la apariencia de realización de un proceso estacionario.
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent  :file ./img/lecc02/airlinepass+irregDiff12.png 
+# Gráfico de la diferencia estacional de los residuos del ajuste.
+plt.grid()  
+plt.plot(datosModelo1['ehatDiff12'])
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Adicionalmente podemos ver que diferencia de orden 12 del componente
+irregular parece mostrar un componente cíclico con un periodo de unos
+4 años.
+
+[[file:./img/lecc02/airlinepass+irregDiff12.png]]
+
+En el siguiente ejercicio probaremos con una tendencia cuadrática...
+
+
+**************  Codigo aux                                       :noexport:
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+~Los siguientes bloques de código muestran el valor de los parámetros estimados por MCO en el anterior modelo.~
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+NAME: Cte-ajuste-tendencia-lineal
+#+BEGIN_SRC jupyter-python :results value :results silent :exports results 
+round(results1.params['cte'],4)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+NAME: Pte-ajuste-tendencia-lineal
+#+BEGIN_SRC jupyter-python :results value :results silent :exports results 
+round(results1.params['time'],4)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+El siguiente código escribe la ecuación en \LaTeX{} con el valor de
+los parámetros estimados por MCO desde el fichero =orgmode=
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+name: my-latex-code-linear-trend
+#+BEGIN_SRC latex :noweb strip-export :exports result :results  drawer replace
+$$\widehat{\ln{y_t}}=<<Cte-ajuste-tendencia-lineal()>>+<<Pte-ajuste-tendencia-lineal()>>\cdot\big(t\big), \qquad t=1:114$$
+#+END_SRC
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+Generamos un fichero =png= con los resultados de la estimación MCO.
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results silent file :file ./img/lecc02/resultsModel1.png 
+# print(results.summary()) Esta es la forma habitual de ver los resultados
+repr_png(results1.summary().as_latex(),  "./img/lecc02/resultsModel1.png") # pero emplearé esta para importar los resultados como imagen png en el material de clase
+#+END_SRC
+
+
+
+** Tendencia determinista /cuadrática/
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+NAME: ajuste-tendencia-cuadratica
+#+BEGIN_SRC jupyter-python  :results silent
+# creamos un DataFrame con el regresando y los regresores del modelo.
+datosModelo2 = TransformedData[['dataLog']].copy()
+nsample = len(datosModelo1)
+datosModelo2['cte'] = [1]*nsample
+datosModelo2['time'] = np.linspace(1, nsample, nsample)
+datosModelo2['sq_time'] = [t**2 for t in datosModelo2['time']]
+# Ajustamos por MCO una tendencia cuadrática a los datos.
+model2 = sm.OLS(datosModelo1['dataLog'], datosModelo2[['cte', 'time', 'sq_time']])
+results2 = model2.fit()
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results none
+# Añadimos al DataFrame 'datosModelo2' la tendencia ajustada, los residuos y la diferencia estacional de los residuos.
+datosModelo2['yhat'] = results2.fittedvalues
+datosModelo2['ehat'] = results2.resid
+datosModelo2['ehatDiff12'] = datosModelo2['ehat'].diff(12)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+quadraticTrend.png
+# Dibujamos los datos junto a la tendencia estimada.
+plt.plot(datosModelo1['dataLog'])
+plt.plot(results2.fittedvalues)
+plt.grid()  
+plt.ylabel(r"Log-Passengers, ($\ln\boldsymbol{x}$) ")
+#+END_SRC
+
+$$\ln{y_t}=\underbrace{\beta_1+\beta_2\cdot t + \beta_3\cdot t^2}_{\text{tendencia}} + e_t; \quad t=1:114$$
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+[[./img/lecc02/airlinepass+quadraticTrend.png]]
+
+#+RESULTS: my-latex-code-quadratic-trend
+:results:
+$$\widehat{\ln{y_t}}=4.7364+(0.0132)\cdot t +(-2.191e-05)\cdot t^2, \qquad t=1:114$$
+:end:
+
+ 
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel2.png
+print(results2.summary()) 
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_org: :width 650
+#+attr_html: :width 100px
+#+attr_latex: :width 250px
+[[./img/lecc02/resultsModel2.png]]
+
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+*_Componente irregular_*
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+irreg2.png
+plt.grid()  
+plt.plot(results2.resid)
+#+END_SRC
+
+[[./img/lecc02/airlinepass+irreg2.png]]
+
+De manera análoga al caso anterior, el modelo
+
+$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$
+
+@@latex:\noindent@@ donde $\boldsymbol{t}$ ahora es una /tendencia
+cuadrática/ tampoco es un ajuste satisfactorio, pues el componente
+irregular $\boldsymbol{e}$ sigue sin parecerse a la realización de un
+proceso estacionario.
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+irregDiff12-2.png
+plt.grid()  
+plt.plot(datosModelo2['ehatDiff12'])
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+
+También en este modelo la diferencia de orden 12 del componente
+irregular muestra un componente cíclico con un periodo de unos 4 años.
+
+[[file:./img/lecc02/airlinepass+irregDiff12.png]]
+
+Para obtener una /tendencia-ciclo/ que capte este ciclo, son
+necesarios procedimientos más sofisticados (por ejemplo TRAMO-SEATS, o
+X13-ARIMA, o STAMP, o LDHR, o E4, etc.) que estiman tendencias y
+componentes estacionales estocásticos.
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+En el siguiente ejercicio estimaremos un *componente estacional
+determinista* (junto a una tendencia cuadrática determinista).
+
+**************  Codigo aux                                       :noexport:
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+Los siguientes bloques de código muestran el valor de los parámetros
+estimados por MCO.
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+NAME: Cte-ajuste-tendencia-cuadr
+#+BEGIN_SRC jupyter-python :results value :results silent :exports results 
+round(results2.params['cte'],4)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+NAME: beta2-tendencia-cuadr
+#+BEGIN_SRC jupyter-python :results value :results silent :exports results 
+round(results2.params['time'],4)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+NAME: beta3-tendencia-cuadr
+#+BEGIN_SRC jupyter-python :results value :results silent :exports results 
+round(results2.params['sq_time'],8)
+#+END_SRC
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+name: my-latex-code-quadratic-trend
+#+BEGIN_SRC latex :noweb strip-export :exports result :results drawer replace
+$$\widehat{\ln{y_t}}=<<Cte-ajuste-tendencia-cuadr()>>+(<<beta2-tendencia-cuadr()>>)\cdot t +(<<beta3-tendencia-cuadr()>>)\cdot t^2, \qquad t=1:114$$
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel2.png
+repr_png(results2.summary().as_latex(), "./img/lecc02/resultsModel2.png") 
+#+END_SRC
+
+
+** Tendencia cuadrática más estacionalidad determinista mediante /dummies/
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results silent
+# Creamos un dataframe con los datos y los regresores 'cte', 't' y 't^2'
+df = TransformedData[['dataLog']].copy()
+nsample = len(df)
+df['cte']     = [1]*nsample
+df['time']    = np.linspace(1, nsample, nsample)
+df['sq_time'] = [t**2 for t in df['time']]
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results none
+# Creamos las /dummies/ estacionales
+from statsmodels.tsa.deterministic import Seasonality
+seas_gen = Seasonality(12, initial_period=1)
+seasonalDummies = seas_gen.in_sample(df.index)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results none
+# Creamos un dataframe con el regresando y todos los regresores del modelo
+datosModelo3 = pd.concat([df, seasonalDummies],axis=1)
+# realizamos la regresión de la primera columna ('dataLog') sobre el resto de columnas del dataframe.
+model3 = sm.OLS(datosModelo3['dataLog'], datosModelo3.iloc[:,1:-1])
+results3 = model3.fit()
+#+END_SRC
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results none
+# La combinación lineal de los regresores 'cte', 'time' y 'sq_time' usando los correspondientes
+# parámetros estimados nos da el componente de tendencia (determinista) estimado. 
+TrendComp = datosModelo3[['cte','time','sq_time']].dot(results3.params[['cte','time','sq_time']])
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+TrendC.png
+rcParams['figure.figsize'] = 15,4
+plt.plot(datosModelo1['dataLog'])
+plt.plot(TrendComp)
+plt.grid()  
+plt.ylabel(r"Log-Passengers, ($\ln\boldsymbol{x}$) ")
+#+END_SRC
+
+
+[[./img/lecc02/airlinepass+TrendC.png]]
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+SeasonalC.png
+SeasonalComp = (seasonalDummies.iloc[:,:-1]).dot(results3.params[3:])
+plt.grid()  
+plt.plot(SeasonalComp)
+#+END_SRC
+
+[[file:./img/lecc02/airlinepass+SeasonalC.png]]
+
+
+*** Ajuste y componente irregular $\boldsymbol{e}=\boldsymbol{y}-\boldsymbol{t}-\boldsymbol{s}$
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+yhat.png
+plt.grid()  
+plt.plot(datosModelo3['dataLog'])
+plt.plot(TrendComp + SeasonalComp)
+#+END_SRC
+
+[[./img/lecc02/airlinepass+yhat.png]]
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+IrregC.png
+plt.grid()  
+plt.plot(results3.resid)
+#+END_SRC
+
+[[./img/lecc02/airlinepass+IrregC.png]]
+
+
+*** Valoración de modelos con componentes deterministas
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+- Estos modelos resultan útiles para realizar un análisis descriptivo.
+ 
+- Pero suelen funcionar bastante mal como herramienta de predicción:
+
+  - no tienen en cuenta la dependencia inter-temporal de los datos (se
+    han estimado mediante una regresión como si los datos hubieran
+    sido de sección cruzada)
+
+  - Por ejemplo, a la hora de prever el dato de enero de 1961, en este
+    modelo pesa tanto el dato de enero de 1949 como el dato de enero
+    de 1960.
+
+En general, para que los modelos funcionen bien en predicción deben
+/dar un mayor peso a los datos recientes/ frente a los datos alejados
+en el tiempo.
+@@latex:\smallskip@@
+
+Pero sigamos explorando este modelo...
+@@latex:\bigskip@@
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+*Hay parámetros no significativos...* (p-valores para dummies enero,
+febrero y octubre).
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel3.png
+repr_png(results3.summary().as_latex(), "./img/lecc02/resultsModel3.png")
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+attr_org: :width 650
+#+attr_html: :width 100px
+#+attr_latex: :width 250px
+[[./img/lecc02/resultsModel3.png]]1
+
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+<div>
+<img src="./img/lecc02/resultsModel3.png" width="450" class="center"/>
+</div>
+
+@@latex:\bigskip@@
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+*podemos eliminarlos secuencialmente* (quitando cada vez la variable de mayor p-valor)
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results none
+import operator
+def remove_most_insignificant(df, results):
+    # use operator to find the key which belongs to the maximum value in the dictionary:
+    max_p_value = max(results.pvalues.iteritems(), key=operator.itemgetter(1))[0]
+    # this is the feature you want to drop:
+    df.drop(columns = max_p_value, inplace = True)
+    return df
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results none
+y = datosModelo3['dataLog']
+X = datosModelo3.iloc[:,1:-1]
+significacion = 0.05
+insignificant_feature = True
+while insignificant_feature:
+        model4 = sm.OLS(y, X)
+        results4 = model4.fit()
+        significant = [p_value < significacion for p_value in results4.pvalues]
+        if all(significant):
+            insignificant_feature = False
+        else:
+            if X.shape[1] == 1:  # if there's only one insignificant variable left
+                print('No significant features found')
+                results4 = None
+                insignificant_feature = False
+            else:            
+                X = remove_most_insignificant(X, results4)
+
+print(results4.summary())
+#+END_SRC
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+attr_org: :width 650
+#+attr_html: :width 100px
+#+attr_latex: :width 250px
+[[file:./img/lecc02/resultsModel4.png]]
+
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+<div>
+<img src="./img/lecc02/resultsModel4.png" width="400" class="center"/>
+</div>
+
+@@latex:\bigskip@@
+
+Pero esta inferencia es incorrecta. Con auto-correlación la varianza
+del estimador MCO es diferente (*la estimación por defecto de las
+desviaciones típicas es incorrecta*)
+
+**************  Codigo aux                                       :noexport:
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel4.png
+repr_png(results4.summary().as_latex(), "./img/lecc02/resultsModel4.png") 
+#+END_SRC
+
+
+
+* Autocorrelación 
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+# [[https://www.statsmodels.org/dev/diagnostic.html]]
+
+Considere el modelo
+$\boldsymbol{Y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U}.\;$ Bajo
+los supuestos habituales
+
+$$E(\boldsymbol{U}\mid\boldsymbol{\mathsf{X}})=\boldsymbol{0},\quad
+Var(\boldsymbol{U}\mid\boldsymbol{\mathsf{X}})=\sigma^2\boldsymbol{\mathsf{I}}\quad
+\text{y} \quad E(\boldsymbol{\mathsf{X'X}}) \text{ es invertible}$$
+
+@@latex:\noindent@@ el estimador
+$\;\widehat{\boldsymbol{\beta}}=(\boldsymbol{\mathsf{X'X}})^{-1}\boldsymbol{\mathsf{X'}Y}\;$
+es insesgado y eficiente, con varianza
+
+$$\;Var(\widehat{\boldsymbol{\beta}}\mid\boldsymbol{\mathsf{X}})=\sigma^2(\boldsymbol{\mathsf{X'X}})^{-1}$$
+
+@@latex:\medskip@@
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Pero si las perturbaciones $\boldsymbol{U}$ del modelo son
+heterocedásticas y/o autocorreladas
+$$Var(\boldsymbol{U}\mid\boldsymbol{\mathsf{X}})=\boldsymbol{\Sigma}\ne\sigma^2\boldsymbol{\mathsf{I}}$$
+entonces el estimador $\widehat{\boldsymbol{\beta}}$, aunque
+insesgado, ya no es eficiente; y su varianza es
+
+$$Var(\widehat{\boldsymbol{\beta}}\mid\boldsymbol{\mathsf{X}})=Var(\widehat{\boldsymbol{\beta}}-\boldsymbol{\mathsf{I}}\boldsymbol{\beta}\mid\boldsymbol{\mathsf{X}})=
+(\boldsymbol{\mathsf{X'X}})^{-1}\boldsymbol{\mathsf{X'}}
+\boldsymbol{\Sigma}
+\boldsymbol{\mathsf{X}}(\boldsymbol{\mathsf{X'X}})^{-1}.$$
+@@latex:\medskip@@
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+El test de Durbin-Watson o el test de Breusch y Godfrey sirven para
+contrastar la $H_0$ de /no autocorrelación/....
+@@latex:\medskip@@
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+*El test de Durbin-Watson* contrasta la autocorrelación de orden
+uno. Para muestras grandes, el test es aproximadamente igual a
+$2(1-{\hat {\rho }})$, donde ${\hat{\rho}}$ es la autocorrelación de
+orden uno de los residuos. Por tanto, valores del test próximos a 2
+indican no autocorrelación, valores próximos a 0 indican fuerte
+autocorrelación positiva y valores próximos a 4 indican fuerte
+autocorrelación negativa.
+
+** Test de Breusch y Godfrey
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+Considere el /modelo de regresión lineal/ 
+
+$$Y_t = \beta_1+ \beta_2 X_{t,1} + \cdots +  \beta_k X_{t,k+1} + U_t$$
+
+@@latex:\noindent@@
+donde las perturbaciones $\boldsymbol{U}$ quizá siguen un esquema
+auto-regresivo $AR(p)$:
+# $\boldsymbol{U}=\{U_t \mid t\in \mathbb{Z}\}$
+
+$$U_t = \rho_1 U_{t-1} + \rho_2 U_{t-2}  + \cdots + \rho_p U_{t-p} + \varepsilon_t$$
+- *Paso 1*. Se obtienen los residuos del ajuste por MCO con una
+  muestra de tamaño $T$ del /modelo de regresión lineal/.
+- *Paso 2*. Se realiza un ajuste MCO de los residuos sobre los
+  regresores del modelo original y sobre los $p$ primeros retardos de
+  los residuos.
+  $$\hat{E}_t = \alpha_0 + \alpha_1 X_{t,1} + \cdots \alpha_k
+  X_{t,k} + \rho_1 \hat{E}_{t-1} + \rho_2 \hat{E}_{t-2} + \cdots +
+  \rho_p \hat{E}_{t-p} + \varepsilon_t$$
+
+asintóticamente y bajo la $H_0$ de /no autocorrelación/: ${\lbrace
+\rho_i = 0\text{ para todo }i\rbrace}$
+
+$$n R^2\,\sim\,\chi^2_p,$$
+
+donde $R^2$ es el coeficiente de determinación de la regresión
+auxiliar y $n=T-p$.
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python  :results silent
+import statsmodels.stats.diagnostic as dg
+#perform Breusch-Godfrey test of order p = 3
+arbg = dg.acorr_breusch_godfrey(results4, nlags=3, store=True)
+arbg[:1]
+repr_png(arbg[-1].resols.summary().as_latex(), "./img/lecc02/resultsBreusch-Godfrey.png") 
+#+END_SRC
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+attr_org: :width 650
+#+attr_html: :width 100px
+#+attr_latex: :width 250px
+[[./img/lecc02/resultsBreusch-Godfrey.png]]
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+
+
+#+label: Test-Breusch-Godfrey
+#+RESULTS: my-latex-code-Breusch-Godfrey
+:results:
+- Valor del estadístico: $\quad 62.7119\qquad$ (p-valor: $\; 1.55e-13$)
+- $x_{12}$ corresponde al primer retardo en la regresión auxiliar y es muy significativo
+:end:
+<div>
+<img src="./img/lecc02/resultsBreusch-Godfrey.png" width="450" class="center"/>
+</div>
+
+
+**************  Codigo aux                                       :noexport:
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+name: my-latex-code-Breusch-Godfrey
+#+BEGIN_SRC latex :noweb strip-export :exports result :results drawer
+- Valor del estadístico: $\quad <<Breusch-Godfrey test value()>>\qquad$ (p-valor: $\; <<Breusch-Godfrey test p-value()>>$)
+- $x_{12}$ corresponde al primer retardo en la regresión auxiliar y es muy significativo
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+NAME: Breusch-Godfrey test value
+#+BEGIN_SRC jupyter-python  :results value :results silent :exports results 
+# valor del estadístico del test
+round(arbg[0], 4)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+NAME: Breusch-Godfrey test p-value
+#+BEGIN_SRC jupyter-python  :results value :results silent :exports results 
+# pvalor del test
+round(arbg[1], 15)
+#+END_SRC
+
+
+** Errores estándar robustos
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+
+Un procedimiento adecuado en presencia de autocorrelación y muestras
+grandes consiste en usar errores estándar "/robustos/" al realizar
+inferencia con la estimación de los parámetros.
+
+1) las estimaciones serán insesgadas, consistentes pero ineficientes,
+
+2) los residuos son los mismos y, por tanto, estarán autocorrelados, aunque
+
+3) la inferencia a partir de errores estándar robustos será válida
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results silent
+y = datosModelo3['dataLog']
+X = datosModelo3.iloc[:,1:-1]
+model5 = sm.OLS(y, X)
+results5 = model5.fit()
+print(results5.get_robustcov_results(cov_type='HAC', maxlags=3, use_correction=True).summary())
+#+END_SRC
+
+ 
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel5.png
+repr_png(results5.get_robustcov_results(cov_type='HAC', maxlags=3, use_correction=True).summary().as_latex(), "./img/lecc02/resultsModel5.png")
+#+END_SRC
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+attr_org: :width 650
+#+attr_html: :width 100px
+#+attr_latex: :width 250px
+[[./img/lecc02/resultsModel5.png]]
+
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+<div>
+<img src="./img/lecc02/resultsModel5.png" width="400" class="center"/>
+</div>
+
+Ahora, y empleando errores estándar robustos, podemos reducir el
+modelo de manera más cuidadosa usando desviaciones típicas robustas. El modelo reducido es...
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel6.png
+y = datosModelo3['dataLog']
+X = datosModelo3.iloc[:,1:-1]
+
+significacion = 0.05
+
+insignificant_feature = True
+while insignificant_feature:
+        results6      = sm.OLS(y, X).fit()
+        robustResults = results6.get_robustcov_results(cov_type='HAC', maxlags=3, use_correction=True)
+        robustPvalues = pd.Series(index=results6.pvalues.index, data=robustResults.pvalues)
+
+        significant = [p_value < significacion for p_value in robustPvalues]
+
+        
+        if all(significant):
+            insignificant_feature = False
+        else:
+            if X.shape[1] == 1:  # if there's only one insignificant variable left
+                print('No significant features found')
+                results6 = None
+                insignificant_feature = False
+            else:            
+                X = remove_most_insignificant(X, results6)
+print(robustResults.summary())
+repr_png(robustResults.summary().as_latex(), "./img/lecc02/resultsModel6.png") 
+#+END_SRC
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+attr_org: :width 650
+#+attr_html: :width 100px
+#+attr_latex: :width 250px
+[[./img/lecc02/resultsModel6.png]]
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+<div>
+<img src="./img/lecc02/resultsModel6.png" width="400" class="center"/>
+</div>
+
+- Nótese que ahora se aprecia que enero y octubre son significativos al 5%
+- Pero la estimación MCO no es eficiente en presencia de
+  heterocedasticidad y/o auto-correlación
+
+
+**************  Codigo aux                                       :noexport:
+
+# [[https://towardsdatascience.com/solving-autocorrelation-problems-in-general-linear-model-on-a-real-world-application-0bd3eeda20a1]]
+
+# [[https://www.statsmodels.org/stable/generated/statsmodels.regression.linear_model.GLSAR.html]]
+
+** Modelo del errorg
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+En el modelo
+$\boldsymbol{Y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U},\;$ si las
+perturbaciones presentan heterocedasticidad y/o auto-correlación, y
+por tanto
+$$Var(\boldsymbol{U}\mid\boldsymbol{\mathsf{X}})=\boldsymbol{\Sigma}\ne\sigma^2\boldsymbol{\mathsf{I}},$$
+el Teorema de Gauss-Markov ya no es válido, ya que es posible explotar
+la estructura de la matriz $\boldsymbol{\Sigma}$ para minimizar la
+varianza del estimador.
+
+# https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.alph6.18.Alph1
+
+En particular, el estimador lineal de mínima varianza es el estimador
+MCG (mínimos cuadrados generalizados)
+
+$$\;\widehat{\boldsymbol{\beta}}=(\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\boldsymbol{\mathsf{X}})^{-1}\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\boldsymbol{Y}\;$$
+
+El problema es que, en general, la matriz $\boldsymbol{\Sigma}$ es
+desconocida.
+
+Una solución es aplicar un procedimiento iterativo en el que se estima
+la matriz $\boldsymbol{\Sigma}$ empleando los errores del ajuste de
+una primera regresión. Con dicha matriz
+$\widehat{\boldsymbol{\Sigma}}$ se re-estima el modelo por MCG... con
+los nuevos errores se re-estima $\boldsymbol{\Sigma}$... y vuelta a
+empezar...
+
+El algoritmo se detiene cuando las estimaciones convergen a valores
+estables.
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Cuando realizamos el Test de Breusch-Godfrey vimos que en la regresión
+auxiliar el primer retardo de los errores era significativo. Por
+tanto, vamos a indicar que las perturbaciones siguen un proceso AR(1).
+El decir, vamos a estimar el modelo
+
+$$\ln{y_t}=\underbrace{\beta_1+\beta_2\cdot t+\beta_3\cdot t^2}_{\text{tendencia}} + \underbrace{\alpha_1 S_{t1} + \alpha_3 S_{t3} + \cdots + \alpha_11 S_{t11}}_{\text{comp. estacional}} + \epsilon_t$$
+
+donde las perturbaciones $\boldsymbol{\epsilon}=\{\epsilon_t\}$ siguen
+el modelo
+
+$$\epsilon_t = \rho_1 \epsilon_{t-1} + e_t$$
+
+(/en este caso la estimación converge en 7 iteraciones/)
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results silent
+model = sm.GLSAR(y, X, rho=1) # rho=1 indica autocorrelación de orden uno
+for i in range(7):
+    results = model.fit()
+    print("AR coefficients: {0}".format(model.rho))
+    rho, sigma = sm.regression.yule_walker(results.resid,
+                                           order=model.order)
+    model = sm.GLSAR(y, X, rho)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results none
+print(results.summary())
+#+END_SRC
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+attr_org: :width 650
+#+attr_html: :width 100px
+#+attr_latex: :width 250px
+[[./img/lecc02/resultsModel7.png]]
+
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+<div>
+<img src="./img/lecc02/resultsModel7.png" width="600" class="center"/>
+</div>
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results none
+# este código realiza las mismas iteraciones que bloque de código de más arriba
+model2 = sm.GLSAR(y, X, rho=1)
+res = model2.iterative_fit(maxiter=7)
+model2.rho
+print(model2.fit().summary())
+#+END_SRC
+
+
+
+**************  Codigo aux                                       :noexport:
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel7.png
+repr_png(results.summary().as_latex(), "./img/lecc02/resultsModel7.png") 
+#+END_SRC
+
+
+# [[https://ninjakx.github.io/Introduction-to-Time-series/]]
+
+# [[https://www.kaggle.com/code/darpan25bajaj/air-passengers-forecasting]]
+
+# [[https://machinelearningmastery.com/time-series-forecasting-methods-in-python-cheat-sheet/]]
+

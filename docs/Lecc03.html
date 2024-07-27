@@ -1,0 +1,992 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2024-07-27 sáb 17:54 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Econometría Aplicada. Lección 3</title>
+<meta name="author" content="Marcos Bujosa" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Econometría Aplicada. Lección 3</h1>
+<div class="ABSTRACT" id="orgd03f646">
+<p>
+En esta lección voy a continuar pero con R y usaré la librería
+<code>tfarima</code> de José Luis Gallego siempre que pueda.
+</p>
+
+</div>
+<div id="outline-container-orgb3a72de" class="outline-4">
+<h4 id="orgb3a72de">Carga de algunas librerías de R</h4>
+<div class="outline-text-4" id="text-orgb3a72de">
+<p>
+Primero cargamos la librería <code>tfarima</code> (Repositorio Cran:
+<a href="https://cran.r-project.org/web/packages/tfarima/index.html">https://cran.r-project.org/web/packages/tfarima/index.html</a>;
+repositorio GitHub: <a href="https://github.com/gallegoj/tfarima">https://github.com/gallegoj/tfarima</a>)
+</p>
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">library</span>(tfarima)      <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">librer&#237;a de Jos&#233; Luis Gallego para Time Series</span>
+<span style="color: #D0372D;">library</span>(latticeExtra) <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para gr&#225;ficos con doble eje vertical (doubleYScale)</span>
+<span style="color: #D0372D;">library</span>(readr)        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para leer ficheros CSV</span>
+<span style="color: #D0372D;">library</span>(ggplot2)      <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para el scatterplot (alternaticamente library(tidyverse))</span>
+<span style="color: #D0372D;">library</span>(jtools)       <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para representaci&#243;n resultados estimaci&#243;n</span>
+<span style="color: #D0372D;">library</span>(zoo)          <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para generar objetos ts (time series)</span>
+</pre>
+</div>
+<p>
+y además fijamos los parámetros por defecto para las figuras en <code>png</code>
+del notebook
+</p>
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">fijamos el tama&#241;o de las figuras que se generan en el notebook</span>
+<span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org34eeaff" class="outline-2">
+<h2 id="org34eeaff">Correlación</h2>
+<div class="outline-text-2" id="text-org34eeaff">
+<p>
+La correlación entre dos muestras de tamaño \(N\) (dos vectores de datos
+de \(\mathbb{R}^N\)) es el <a href="https://mbujosab.github.io/Ectr/apuntes-Ectr-print.pdf#subsection.3.1"><b>coseno</b> del ángulo formado los vectores de
+dichos datos en desviaciones respecto a sus correspondientes medias</a>.
+\[\rho_{\boldsymbol{x}\boldsymbol{y}}=\frac{\sigma_{\boldsymbol{x}\boldsymbol{y}}}{\sigma_{\boldsymbol{x}}\sigma_{\boldsymbol{y}}}\]
+</p>
+
+<p>
+Por tanto la correlación es algún valor entre \(-1\) y \(1\).
+</p>
+<ul class="org-ul">
+<li>Si la correlación es \(1\) significa que
+\(\;\boldsymbol{y}-\boldsymbol{\bar{y}}\;\) es
+\(\;a(\boldsymbol{x}-\boldsymbol{\bar{x}})\;\) para algún \(a\) positivo</li>
+<li>Si la correlación es \(-1\) significa que
+\(\;\boldsymbol{y}-\boldsymbol{\bar{y}}\;\) es
+\(\;a(\boldsymbol{x}-\boldsymbol{\bar{x}})\;\) para algún \(a\) negativo</li>
+<li>Cuando la correlación es \(0\) el vector
+\(\;\boldsymbol{y}-\boldsymbol{\bar{y}}\;\) es perpendicular al vector
+\(\;\boldsymbol{x}-\boldsymbol{\bar{x}}\;\)</li>
+</ul>
+</div>
+<div id="outline-container-orgdc9982a" class="outline-3">
+<h3 id="orgdc9982a">La causalidad y correlación</h3>
+<div class="outline-text-3" id="text-orgdc9982a">
+<p>
+Cuando existe relación causal entre variables sus muestras suelen
+estar correladas.
+</p>
+<ul class="org-ul">
+<li>Número de horas de sol tiene correlación positiva con la temperatura ambiente</li>
+<li>La altitud de una localidad (o su latitud) tiene una correlación
+negativa con la temperatura ambiente</li>
+</ul>
+
+<p>
+Pero <b>correlaciones significativas no indican la existencia de relaciones causales</b>.
+</p>
+
+<ul class="org-ul">
+<li>En una playa: consumo de helados y ataques de tiburón a los bañistas</li>
+<li>Distancia entre galaxias lejanas y número de personas en la tierra</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9e0b5c8" class="outline-3">
+<h3 id="org9e0b5c8">Correlación espuria</h3>
+<div class="outline-text-3" id="text-org9e0b5c8">
+<p>
+La correlación entre variables sin relación causal se denomina
+<i>correlación espuria</i>.
+</p>
+
+<ul class="org-ul">
+<li>Que haya correlación espuria no significa que "en realidad no hay correlación"</li>
+<li>Que haya correlación espuria significa que es erróneo interpretar
+que dicha correlación se debe a una relación causal</li>
+</ul>
+
+<p>
+Puede ser que ambas variables tengan una causa común
+</p>
+<ul class="org-ul">
+<li>consumo de helados y venta de bañadores</li>
+</ul>
+
+<p>
+Puede ser que no exista relación alguna y aún así haya correlación
+</p>
+<ul class="org-ul">
+<li><a href="https://www.tylervigen.com/spurious/correlation/7591_the-distance-between-uranus-and-mercury_correlates-with_electricity-generation-in-japan">Un ejemplo</a></li>
+<li><a href="https://www.tylervigen.com/spurious/correlation/5905_frozen-yogurt-consumption_correlates-with_violent-crime-rates">Otro</a></li>
+</ul>
+
+<p>
+<a href="https://www.tylervigen.com/spurious-correlations">Encuentra más ejemplos aquí</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgaa2c054" class="outline-3">
+<h3 id="orgaa2c054">Las series con tendencia suelen presentar elevadas correlaciones.</h3>
+<div class="outline-text-3" id="text-orgaa2c054">
+</div>
+<div id="outline-container-org51e1cc9" class="outline-4">
+<h4 id="org51e1cc9">Ejemplo de correlación espuria: PNB vs incidencia de melanoma</h4>
+<div class="outline-text-4" id="text-org51e1cc9">
+<div class="org-src-container">
+<pre class="src src-jupyter-R">data_frame <span style="color: #D0372D;">&lt;-</span> read_csv(<span style="color: #008000;">'datos/GNPvsMelanoma.csv'</span>,show_col_types = <span style="color: #6434A3;">FALSE</span>)
+head(data_frame, 3)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">obs</th>
+<th scope="col" class="org-right">GNP</th>
+<th scope="col" class="org-right">Melanoma</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">&lt;dbl&gt;</td>
+<td class="org-right">&lt;dbl&gt;</td>
+<td class="org-right">&lt;dbl&gt;</td>
+</tr>
+
+<tr>
+<td class="org-right">1936</td>
+<td class="org-right">193.0</td>
+<td class="org-right">1.0</td>
+</tr>
+
+<tr>
+<td class="org-right">1937</td>
+<td class="org-right">203.2</td>
+<td class="org-right">0.8</td>
+</tr>
+
+<tr>
+<td class="org-right">1938</td>
+<td class="org-right">192.9</td>
+<td class="org-right">0.8</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">se pueden graficar dos columnas de un data_frame al mismo tiempo</span>
+kk <span style="color: #D0372D;">&lt;-</span> xyplot(GNP + Melanoma ~ obs, data_frame, type=<span style="color: #008000;">"l"</span>)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Se agrega dos ejes Y. Se construye cada serie por separado</span>
+obj1 <span style="color: #D0372D;">&lt;-</span> xyplot(GNP ~ obs, data_frame, type = <span style="color: #008000;">"l"</span> , lwd=2, ylab=<span style="color: #008000;">"GNP (miles de millones de $)"</span>,  xlab=<span style="color: #008000;">"Years"</span>)
+obj2 <span style="color: #D0372D;">&lt;-</span> xyplot(Melanoma ~ obs, data_frame, type = <span style="color: #008000;">"l"</span>, lwd=2, ylab=<span style="color: #008000;">"Casos de melanoma"</span>)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">--&gt; se realiza la grafica con el segundo eje Y</span>
+doubleYScale(obj1, obj2, add.ylab2 = <span style="color: #6434A3;">TRUE</span>)
+</pre>
+</div>
+
+
+<p>
+Serie anual (1936&#x2013;1972) del PNB anual USA en miles de millones de
+dólares corrientes e incidencia de melanoma en la población masculina
+de Connecticut.
+</p>
+
+
+<div id="org1db0ff0" class="figure">
+<p><img src="./img/lecc03/GNPvsMelanoma.png" alt="GNPvsMelanoma.png" />
+</p>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">transitoriamente cambio el tama&#241;o de la siguiente figura</span>
+<span style="color: #D0372D;">options</span>(repr.plot.width = 3, repr.plot.height = 3, repr.plot.res = 80)
+ggplot(data_frame, aes(x = Melanoma, y = GNP)) + geom_point()
+<span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
+</pre>
+</div>
+
+
+<p>
+<b>La correlación es \(0.93\)</b>
+(<i>debido a que ambas series presentan una tendencia creciente</i>)
+</p>
+
+
+<div id="orgd6ccdcc" class="figure">
+<p><img src="./img/lecc03/Scatter-GNPvsMelanoma.png" alt="Scatter-GNPvsMelanoma.png" width="50px" />
+</p>
+</div>
+
+<p>
+Si regresamos el PNB sobre la incidencia de casos de melanoma
+obtenemos un excelente ajuste (<i>coef. de determinación de \(0.87\) y
+coeficientes muy significativos</i>).
+</p>
+
+<p>
+<b>Ello no significa que el modelo tenga alguna capacidad explicativa o
+predictiva</b> (<i>pues la incidencia de melanoma en
+Connecticut no hace crecer la economía de EEUU</i>).
+</p>
+<pre class="example" id="orgedaabe8">
+[4mMODEL INFO:[24m
+[3mObservations:[23m 37
+[3mDependent Variable:[23m GNP
+[3mType:[23m OLS linear regression 
+
+[4mMODEL FIT:[24m
+[3mF[23m(1,35) = 231.84, [3mp[23m = 0.00
+[3mR² = [23m0.87
+[3mAdj. R² = [23m0.87 
+
+[3mStandard errors: OLS[23m
+--------------------------------------------------
+                      Est.    S.E.   t val.      p
+----------------- -------- ------- -------- ------
+(Intercept)         118.57   23.73     5.00   0.00
+Melanoma            118.98    7.81    15.23   0.00
+--------------------------------------------------
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org35b57f5" class="outline-3">
+<h3 id="org35b57f5">Una forma de verificar que no hay causalidad detrás de esta correlación (es decir, que la correlación es "espuria")</h3>
+<div class="outline-text-3" id="text-org35b57f5">
+<p>
+Si fuera cierto que 
+\[
+\boldsymbol{y}=\beta_1 \boldsymbol{1} + \beta_2 \boldsymbol{x} + \boldsymbol{u}
+\]
+Entonces también sería cierto que
+\[
+\nabla\boldsymbol{y}= \beta_2 \nabla\boldsymbol{x} + \nabla\boldsymbol{u}
+\]
+</p>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">creamos un objeto ts ("time series")</span>
+datos_ts <span style="color: #D0372D;">&lt;-</span> as.ts( read.zoo( data_frame ) )
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">creamos dos nuevas series temporales con las primeras diferencias de las columnas "GNP" y "Melanoma" de datos_ts</span>
+d_GNP      = diff(datos_ts[,<span style="color: #008000;">"GNP"</span>])
+d_Melanoma = diff(datos_ts[,<span style="color: #008000;">"Melanoma"</span>])
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">creamos un nuevo data frame con las primeras diferencias</span>
+DF.diferencias = data.frame(date = zoo::as.Date(time(d_GNP)),
+                            d_GNP = as.matrix(d_GNP),
+                            d_Melanoma = as.matrix(d_Melanoma))
+head(DF.diferencias, 2)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-right">date</th>
+<th scope="col" class="org-right">d_GNP</th>
+<th scope="col" class="org-right">d_Melanoma</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">&lt;date&gt;</td>
+<td class="org-right">&lt;dbl&gt;</td>
+<td class="org-right">&lt;dbl&gt;</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">1937-01-01</td>
+<td class="org-right">10.2</td>
+<td class="org-right">-0.2</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">1938-01-01</td>
+<td class="org-right">-10.3</td>
+<td class="org-right">0.0</td>
+</tr>
+</tbody>
+</table>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">gr&#225;fico conjunto con dos columnas del data frame DF.diferencias</span>
+kk <span style="color: #D0372D;">&lt;-</span> xyplot(d_GNP + d_Melanoma ~ date, DF.diferencias, type=<span style="color: #008000;">"l"</span>)
+obj1 <span style="color: #D0372D;">&lt;-</span> xyplot(d_GNP ~ date, DF.diferencias, type = <span style="color: #008000;">"l"</span> , lwd=2, ylab=<span style="color: #008000;">"Incremento GNP"</span>,  xlab=<span style="color: #008000;">"Years"</span>)
+obj2 <span style="color: #D0372D;">&lt;-</span> xyplot(d_Melanoma ~ date, DF.diferencias, type = <span style="color: #008000;">"l"</span>, lwd=2, ylab=<span style="color: #008000;">"Incremento casos de melanoma"</span>)
+doubleYScale(obj1, obj2, add.ylab2 = <span style="color: #6434A3;">TRUE</span>)
+</pre>
+</div>
+
+
+
+<div id="org99951d2" class="figure">
+<p><img src="./img/lecc03/d_GNPvsd_Melanoma.png" alt="d_GNPvsd_Melanoma.png" />
+</p>
+</div>
+
+<p>
+Sin embargo, al realizar la regresión de la primera diferencia de
+<code>GNP</code> sobre la primera diferencia de <code>Melanoma</code> obtenemos un ajuste
+pésimo (tan solo la constante es significativa&#x2026; ¡cuando en teoría \(\beta_1=0\)!).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">resultados del ajuste MCO entre d_GNP y d_Melanoma</span>
+summ( lm(d_GNP ~ d_Melanoma) )
+</pre>
+</div>
+
+<pre class="example" id="org4d9e9f6">
+MODEL INFO:
+Observations: 36
+Dependent Variable: d_GNP
+Type: OLS linear regression 
+
+MODEL FIT:
+F(1,34) = 0.01, p = 0.92
+R² = 0.00
+Adj. R² = -0.03 
+
+Standard errors: OLS
+------------------------------------------------
+                     Est.   S.E.   t val.      p
+----------------- ------- ------ -------- ------
+(Intercept)         16.57   3.18     5.21   0.00
+d_Melanoma           0.71   6.59     0.11   0.92
+------------------------------------------------
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8dc0b7a" class="outline-2">
+<h2 id="org8dc0b7a">Cointegración</h2>
+<div class="outline-text-2" id="text-org8dc0b7a">
+<ul class="org-ul">
+<li>Una serie temporal es <i>integrada de orden \(d\)</i>, (ó \(I(d)\)) si \(d\) es
+el mínimo número de diferencias ordinarias necesarias para lograr la
+estacionariedad en media.
+
+<ul class="org-ul">
+<li>Consecuentemente, una serie estacionaria en media es \(I(0)\).</li>
+</ul></li>
+
+<li><p>
+En ocasiones una combinación lineal de series \(I(d)\) (i.e., series
+con el mismo orden de integración) resulta ser integrada con un
+orden menor a \(d\); entonces se dice que están <i>cointegradas</i>:
+</p>
+
+<p>
+\(\boldsymbol{x}\), \(\boldsymbol{y}\) y \(\boldsymbol{z}\) <i>están
+cointegradas</i> si son \(I(d)\) y existen \(a\), \(b\), \(c\) tales que
+\[a\boldsymbol{x}+b\boldsymbol{y}+c\boldsymbol{z}\quad\text{es
+  cointegrada de orden $d-m$},\] con \(m>0\;\) (se dice que tienen \(m\)
+relaciones de integración).
+</p></li>
+</ul>
+
+<p>
+Para estimar la relación de cointegración, se ajusta una regresión
+lineal entre las variables potencialmente cointegradas y se evalúa la
+estacionariedad o el orden de integración de los residuos
+</p>
+
+<ul class="org-ul">
+<li>La situación más habitual es tener dos series \(\boldsymbol{x}\) e
+\(\boldsymbol{y}\) que son \(I(1)\) y encontrar por MCO un
+\(\hat{\alpha}\) tal que \(\boldsymbol{y}-\hat{\alpha}\boldsymbol{x}\)
+es \(I(0)\).</li>
+</ul>
+
+<p>
+La cointegración entre series temporales suele tener dos
+interpretaciones relacionadas entre sí:
+</p>
+
+<ol class="org-ol">
+<li>Las series poseen <i>una tendencia común</i> (pues hay una combinación
+lineal entre ellas que cancela dicha tendencia)</li>
+
+<li><i>Existe un equilibrio a largo plazo entre dichas series</i>, de manera
+que las desviaciones del equilibrio tienden a desaparecer a corto
+plazo</li>
+</ol>
+</div>
+<div id="outline-container-org35d0548" class="outline-4">
+<h4 id="org35d0548">Ejemplo de series cointegradas: tipos de interes en UK a corto y largo plazo</h4>
+<div class="outline-text-4" id="text-org35d0548">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">leemos los datos cuartrimestales como un objeto zoo</span>
+UK_zoo <span style="color: #D0372D;">&lt;-</span> read.csv.zoo(<span style="color: #008000;">"datos/UK_Interest_rates.csv"</span>, FUN = as.yearqtr, format = <span style="color: #008000;">"%YQ%q"</span>,
+  strip.white = <span style="color: #6434A3;">TRUE</span>)
+head(UK_zoo,3)
+</pre>
+</div>
+
+<pre class="example">
+        Long Short
+1952 Q2 4.23  2.32
+1952 Q3 4.36  2.47
+1952 Q4 4.19  2.42
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">creamos un data frame a partir de UK_zoo (data frame para la figura de doble eje)</span>
+UK_df = fortify.zoo(UK_zoo)
+head(UK_df,3)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">Index</th>
+<th scope="col" class="org-right">Long</th>
+<th scope="col" class="org-right">Short</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">&lt;yearqtr&gt;</td>
+<td class="org-right">&lt;dbl&gt;</td>
+<td class="org-right">&lt;dbl&gt;</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">1952 Q2</td>
+<td class="org-right">4.23</td>
+<td class="org-right">2.32</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">1952 Q3</td>
+<td class="org-right">4.36</td>
+<td class="org-right">2.47</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">1952 Q4</td>
+<td class="org-right">4.19</td>
+<td class="org-right">2.42</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">creamos un ts (time series) a partir de UK_zoo por conveniencia</span>
+UK_ts = as.ts(UK_zoo)
+head(UK_ts,3)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Long</th>
+<th scope="col" class="org-right">Short</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">4.23</td>
+<td class="org-right">2.32</td>
+</tr>
+
+<tr>
+<td class="org-right">4.36</td>
+<td class="org-right">2.47</td>
+</tr>
+
+<tr>
+<td class="org-right">4.19</td>
+<td class="org-right">2.42</td>
+</tr>
+</tbody>
+</table>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R">kk <span style="color: #D0372D;">&lt;-</span> xyplot(Long + Short ~ Index, UK_df, type=<span style="color: #008000;">"l"</span>)
+obj1 <span style="color: #D0372D;">&lt;-</span> xyplot(Long ~ Index, UK_df, type = <span style="color: #008000;">"l"</span> , lwd=2, ylab=<span style="color: #008000;">"Long"</span>,  xlab=<span style="color: #008000;">"Years"</span>)
+obj2 <span style="color: #D0372D;">&lt;-</span> xyplot(Short ~ Index, UK_df, type = <span style="color: #008000;">"l"</span>, lwd=2, ylab=<span style="color: #008000;">"Short"</span>)
+doubleYScale(obj1, obj2, add.ylab2 = <span style="color: #6434A3;">TRUE</span>)
+</pre>
+</div>
+<dl class="org-dl">
+<dt><code>Long</code></dt><dd>rendimiento porcentual a 20 años  de los bonos soberanos del Reino Unido</dd>
+<dt><code>Short</code></dt><dd>rendimiento de las letras del tesoro a 91 días</dd>
+</dl>
+<p>
+(Muestra: 1952Q2&#x2013;1979Q4)
+<img src="./img/lecc03/UK_Interest_rates.png" alt="UK_Interest_rates.png" />
+</p>
+
+<p>
+<b>La correlación es \(0.898\)</b> (<i>ambas series poseen una tendencia
+ creciente&#x2026; pero en este caso veremos es común</i>)
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R" id="orgbea275a">cor(UK_df$Long, UK_df$Short)
+</pre>
+</div>
+
+<p>
+0.89764827721203
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">creamos dos nuevas series temporales con las primeras diferencias</span>
+d_Long  = diff(UK_ts[,<span style="color: #008000;">"Long"</span>])
+d_Short = diff(UK_ts[,<span style="color: #008000;">"Short"</span>])
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">creamos un nuevo data frame con las primeras diferencias</span>
+UK_df.diferencias = data.frame(date = zoo::as.Date(time(d_Long)),
+                            d_Long  = as.matrix(d_Long),
+                            d_Short = as.matrix(d_Short))
+head(UK_df.diferencias, 2)
+</pre>
+</div>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-right">date</th>
+<th scope="col" class="org-right">d_Long</th>
+<th scope="col" class="org-right">d_Short</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-right">&lt;date&gt;</td>
+<td class="org-right">&lt;dbl&gt;</td>
+<td class="org-right">&lt;dbl&gt;</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">1952-07-01</td>
+<td class="org-right">0.13</td>
+<td class="org-right">0.15</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-right">1952-10-01</td>
+<td class="org-right">-0.17</td>
+<td class="org-right">-0.05</td>
+</tr>
+</tbody>
+</table>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">gr&#225;fico con las primeras diferencias de los tipos de inter&#233;sframe DF.diferencias</span>
+kk <span style="color: #D0372D;">&lt;-</span> xyplot(d_Long + d_Short ~ date, UK_df.diferencias, type=<span style="color: #008000;">"l"</span>)
+obj1 <span style="color: #D0372D;">&lt;-</span> xyplot(d_Long ~ date, UK_df.diferencias, type = <span style="color: #008000;">"l"</span> , lwd=2, ylab=<span style="color: #008000;">"First diff. Long"</span>,  xlab=<span style="color: #008000;">"Quarters"</span>)
+obj2 <span style="color: #D0372D;">&lt;-</span> xyplot(d_Short ~ date, UK_df.diferencias, type = <span style="color: #008000;">"l"</span>, lwd=2, ylab=<span style="color: #008000;">"First diff. Short"</span>)
+<span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+doubleYScale(obj1, obj2, add.ylab2 = <span style="color: #6434A3;">TRUE</span>)
+<span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
+</pre>
+</div>
+
+
+
+<div id="org90175be" class="figure">
+<p><img src="./img/lecc03/UK_Interest_ratesFirstDiff.png" alt="UK_Interest_ratesFirstDiff.png" />
+</p>
+</div>
+
+<p>
+La regresión de la primera diferencia de <code>Short</code> sobre la primera
+diferencia de <code>Long</code> <b>NO sugiere que la correlación sea espuria</b>:
+obtenemos un ajuste razonable con una pendiente es muy significativa y
+una constante NO significativa.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">resultados del ajuste MCO</span>
+summ( lm(d_Short ~ d_Long) )
+</pre>
+</div>
+
+<pre class="example" id="org18a05ee">
+MODEL INFO:
+Observations: 74
+Dependent Variable: d_Short
+Type: OLS linear regression 
+
+MODEL FIT:
+F(1,72) = 20.11, p = 0.00
+R² = 0.22
+Adj. R² = 0.21 
+
+Standard errors: OLS
+------------------------------------------------
+                     Est.   S.E.   t val.      p
+----------------- ------- ------ -------- ------
+(Intercept)         -0.03   0.08    -0.35   0.72
+d_Long               1.26   0.28     4.48   0.00
+------------------------------------------------
+</pre>
+
+<p>
+Hagamos la regresión de los tipos a corto plazo sobre los tipos a largo plazo (en niveles)
+</p>
+<div class="org-src-container">
+<pre class="src src-jupyter-R">modelo <span style="color: #D0372D;">&lt;-</span> lm(UK_df$Short ~ UK_df$Long) <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">ajuste MCO</span>
+summ( modelo )                         <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">resultados del ajuste</span>
+</pre>
+</div>
+
+<pre class="example" id="orge838bff">
+MODEL INFO:
+Observations: 75
+Dependent Variable: UK_df$Short
+Type: OLS linear regression 
+
+MODEL FIT:
+F(1,73) = 302.85, p = 0.00
+R² = 0.81
+Adj. R² = 0.80 
+
+Standard errors: OLS
+------------------------------------------------
+                     Est.   S.E.   t val.      p
+----------------- ------- ------ -------- ------
+(Intercept)         -1.17   0.35    -3.34   0.00
+UK_df$Long           1.00   0.06    17.40   0.00
+------------------------------------------------
+</pre>
+
+<p>
+El ajuste es muy bueno, y los parámetros muy significativos. Veamos si
+los residuos parecen la realización de un proceso estacionario (en la
+jerga habitual&#x2026; "<i>veamos si los residuos son estacionarios</i>")
+</p>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R">plot(as.ts(resid(modelo)))
+abline(0,0)
+</pre>
+</div>
+
+
+<div id="org6da8f1c" class="figure">
+<p><img src="./img/lecc03/UK_Interest_ratesResiduals.png" alt="UK_Interest_ratesResiduals.png" />
+</p>
+</div>
+
+<p>
+Aparentan ser "estacionarios en media" (i.e., no se aprecia una
+tendencia evidente); por lo que <b>los tipos de interés a corto y largo
+plazo podrían estar cointegrados</b>.
+</p>
+
+<p>
+Más adelante veremos test estadísticos para contrastar si son
+estacionarios.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Marcos Bujosa</p>
+<p class="date">Created: 2024-07-27 sáb 17:54</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

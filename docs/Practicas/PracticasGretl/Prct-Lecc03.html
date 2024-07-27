@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
+<head>
+<!-- 2024-07-27 sáb 17:54 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lección 3</title>
+<meta name="author" content="Marcos Bujosa" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Lección 3</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org117ef87">1. Correlación espuria entre la incidencia de melanoma en el estado de Connecticut y el PNB de EEUU</a>
+<ul>
+<li><a href="#org033f4f9">1.1. Actividad 1 - Dibujar ambas series en un mismo gráfico</a></li>
+<li><a href="#orgf835aee">1.2. Actividad 2 - Dibujar el diagrama de dispersión</a></li>
+<li><a href="#org4eda143">1.3. Actividad 3 - Calcular la correlación entre ambas series</a></li>
+<li><a href="#org66cbcb4">1.4. Actividad 4 - Regresar <code>GNP</code> sobre <code>Melanoma</code> y constatar que el ajuste es bueno</a></li>
+<li><a href="#orgb829277">1.5. Actividad 5 - Añadir la primera diferencia de los datos</a></li>
+<li><a href="#org4252351">1.6. Actividad 6 - Regresar <code>d_GNP</code> sobre <code>d_Melanoma</code> y constatar que el ajuste es horrible</a></li>
+</ul>
+</li>
+<li><a href="#org9e223ef">2. Tipos de interés a corto y largo plazo</a>
+<ul>
+<li><a href="#org3390c54">2.1. Actividad 1 - Dibujar ambas series en un mismo gráfico</a></li>
+<li><a href="#orge1948c3">2.2. Actividad 2 - Dibujar el diagrama de dispersión y calcule la correlación</a></li>
+<li><a href="#org7094c83">2.3. Actividad 3 - Regrese la primera diferencia de los tipos a corto sobre la diferencia de los tipos a largo</a></li>
+<li><a href="#orgf323557">2.4. Actividad 4 - Ajuste los tipos corto plazo en función de los tipos a largo</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org117ef87" class="outline-2">
+<h2 id="org117ef87"><span class="section-number-2">1.</span> Correlación espuria entre la incidencia de melanoma en el estado de Connecticut y el PNB de EEUU</h2>
+<div class="outline-text-2" id="text-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Guión:</td>
+<td class="org-left"><a href="https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/GNPvsMelanoma.inp">GNPvsMelanoma.inp</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol class="org-ol">
+<li><a id="orga222f2c"></a>Objetivo<br />
+<div class="outline-text-6" id="text-1-0-0-0-1">
+<p>
+Comprobar cómo la aparente relación entre ambas series temporales se
+desvanece al tomar primeras diferencias
+</p>
+</div>
+</li>
+<li><a id="org7f269c1"></a>Carga de datos<br />
+<div class="outline-text-6" id="text-1-0-0-0-2">
+<p>
+<b><i><code>Archivo --&gt; Abrir datos --&gt; Archivo de usuario</code></i></b> y buscar en el
+disco el fichero <code>GNPvsMelanoma.gdt</code>.
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl" id="orgb7eea44">open datos/GNPvsMelanoma.gdt
+</pre>
+</div>
+</div>
+</li>
+</ol>
+<div id="outline-container-org033f4f9" class="outline-3">
+<h3 id="org033f4f9"><span class="section-number-3">1.1.</span> Actividad 1 - Dibujar ambas series en un mismo gráfico</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Marque las series <code>GNP</code> y <code>Melanoma</code>. Pulse sobre ellas con el botón
+derecho del ratón. En el menú desplegable seleccione <b><i><code>Gráfico de
+Series Temporales</code></i></b> (indique representar en un único gráfico).
+</p>
+
+<p>
+Guarde el gráfico en la sesión como un icono.
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">      GraficoSeriesEnNiveles &lt;- gnuplot GNP Melanoma --time-series --with-lines
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf835aee" class="outline-3">
+<h3 id="orgf835aee"><span class="section-number-3">1.2.</span> Actividad 2 - Dibujar el diagrama de dispersión</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Marque las series <code>GNP</code> y <code>Melanoma</code>. Pulse sobre ellas con el botón
+derecho del ratón. En el menú desplegable seleccione <b><i><code>Gráfico de
+dispersión XY</code></i></b> (elija como variable del eje X <code>Melanoma</code> y marque
+suprimir la recta estimada).
+</p>
+
+<p>
+Guarde el gráfico en la sesión como un icono.
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">      DiagramDispersion &lt;- gnuplot GNP Melanoma --fit=none
+</pre>
+</div>
+<ol class="org-ol">
+<li>¿Tienen tendencia estas series temporales?</li>
+<li>¿Parece ser una tendencia común a ambas series?</li>
+<li>Pero&#x2026; ¿lo podemos saber con seguridad solo mirando el gráfico?</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org4eda143" class="outline-3">
+<h3 id="org4eda143"><span class="section-number-3">1.3.</span> Actividad 3 - Calcular la correlación entre ambas series</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Marque las series <code>GNP</code> y <code>Melanoma</code>. Pulse sobre ellas con el botón
+derecho del ratón. En el menú desplegable seleccione <b><i><code>Matriz de
+correlación</code></i></b>
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">corr GNP Melanoma
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org66cbcb4" class="outline-3">
+<h3 id="org66cbcb4"><span class="section-number-3">1.4.</span> Actividad 4 - Regresar <code>GNP</code> sobre <code>Melanoma</code> y constatar que el ajuste es bueno</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Estime el modelo mediante los menús desplegables: <b><i><code>Modelo -&gt; Mínimos
+  Cuadrados Ordinarios</code></i></b>; indique a <a href="https://gretl.sourceforge.net/es.html">Gretl</a> el regresando y regresor y
+  pulse <b><i><code>Aceptar</code></i></b>.
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">AjusteEnNiveles &lt;- ols GNP 0 Melanoma
+</pre>
+</div>
+<p>
+Aunque el coeficiente de determinación es muy elevado y los parámetros
+muy significativos, el modelo "<i>no vale una castaña</i>". Una forma de
+constatarlo es darse cuenta de que si fuera cierto que \[
+\boldsymbol{y}=\beta_1 \boldsymbol{1} + \beta_2 \boldsymbol{x} +
+\boldsymbol{u} \] Entonces también sería cierto que (y nótese que
+\(\nabla\boldsymbol{1}=\boldsymbol{0}\)) \[ \nabla\boldsymbol{y}=
+\beta_2 \nabla\boldsymbol{x} + \nabla\boldsymbol{u}\]
+</p>
+
+<p>
+Consecuentemente, si \(\boldsymbol{y}\) corresponde al <code>GNP</code> y
+\(\boldsymbol{x}\) a <code>Melanoma</code>, al regresar la primera diferencia de
+<code>GNP</code> sobre la primera diferencia de <code>Melanoma</code> el ajuste debería
+indicar que el parámetro de la constante (\(\beta_1\)) no es
+significativo, pero si la pendiente (\(\beta_2\)). Veamos que ocurre justo lo contrario&#x2026;
+</p>
+</div>
+</div>
+<div id="outline-container-orgb829277" class="outline-3">
+<h3 id="orgb829277"><span class="section-number-3">1.5.</span> Actividad 5 - Añadir la primera diferencia de los datos</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+Selecione con el ratón la variable <code>GNP</code> y <code>Melanoma</code>. Luego pulse en el menú desplegable <b><i><code>Añadir</code></i></b> que aparece arriba, en el centro de la
+ventana principal de <a href="https://gretl.sourceforge.net/es.html">Gretl</a>.
+</p>
+<ul class="org-ul">
+<li><b><i><code>Añadir -&gt; Primeras diferencias de las variables seleccionadas</code></i></b></li>
+</ul>
+
+<p>
+Haga un gráfico con ambas series (verá que la tendencia ha desaparecido y que ya no se parecen entre sí).
+</p>
+
+<p>
+Calcule también la correlación entre ambas series diferenciadas
+(recuerde que en un modelo lineal simple el cuadrado de dicha
+correlación es el coeficiente de determinación).
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>: 
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">diff GNP Melanoma
+GraficoSeriesEnDiferencias &lt;- gnuplot d_GNP d_Melanoma --time-series --with-lines
+corr d_GNP d_Melanoma
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4252351" class="outline-3">
+<h3 id="org4252351"><span class="section-number-3">1.6.</span> Actividad 6 - Regresar <code>d_GNP</code> sobre <code>d_Melanoma</code> y constatar que el ajuste es horrible</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+Estime el modelo mediante los menús desplegables: <b><i><code>Modelo -&gt; Mínimos
+  Cuadrados Ordinarios</code></i></b>; indique a <a href="https://gretl.sourceforge.net/es.html">Gretl</a> el regresando y regresor y
+  pulse <b><i><code>Aceptar</code></i></b>.
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">AjusteEnDiferencias &lt;- ols d_GNP 0 d_Melanoma
+</pre>
+</div>
+<p>
+<b>Conclusión.</b> Las variables <code>GNP</code> y <code>Melanoma</code> muestran una tendencia
+creciente, lo que conduce a un elevado coeficiente de correlación
+entre ellas; pero la tendencia ni es común, ni la correlación se puede
+atribuir a ningúna relación de causalidad entre ellas. La correlación
+en este caso es espuria (es decir, carece de sentido tartar de
+interpretarla).
+</p>
+
+<p>
+<b>Código completo de la práctica</b> <code>GNPvsMelanoma.inp</code>
+</p>
+<p>
+\lstinputlisting{scripts/GNPvsMelanoma.inp}
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org9e223ef" class="outline-2">
+<h2 id="org9e223ef"><span class="section-number-2">2.</span> Tipos de interés a corto y largo plazo</h2>
+<div class="outline-text-2" id="text-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Guión:</td>
+<td class="org-left"><a href="https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/UKinterestRates.inp">UKinterestRates.inp</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ol class="org-ol">
+<li><a id="org4092214"></a>Objetivo<br />
+<div class="outline-text-6" id="text-2-0-0-0-1">
+<p>
+Ver que probablemmente la correlación entre los tipos a corto y largo
+plazo no es espuria, y que ambas series probablemente están
+cointegrados.
+</p>
+</div>
+</li>
+<li><a id="org5c5dfe6"></a>Carga de datos<br />
+<div class="outline-text-6" id="text-2-0-0-0-2">
+<p>
+<b><i><code>Archivo --&gt; Abrir datos --&gt; Archivo de usuario</code></i></b> y buscar en el
+disco el fichero <code>UKinterestRates.gdt</code>.
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">open datos/UKinterestRates.gdt
+</pre>
+</div>
+</div>
+</li>
+</ol>
+<div id="outline-container-org3390c54" class="outline-3">
+<h3 id="org3390c54"><span class="section-number-3">2.1.</span> Actividad 1 - Dibujar ambas series en un mismo gráfico</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Marque las series <code>Long</code> y <code>Short</code>. Pulse sobre ellas con el botón
+derecho del ratón. En el menú desplegable seleccione <b><i><code>Gráfico de
+Series Temporales</code></i></b> (indique representar en un único gráfico).
+</p>
+
+<p>
+Guarde el gráfico en la sesión como un icono.
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">      GraficoSeriesEnNiveles &lt;- gnuplot Long Short --time-series --with-lines
+</pre>
+</div>
+<ol class="org-ol">
+<li>¿Tienen tendencia estas series temporales?</li>
+<li>¿Parece ser una tendencia común a ambas series?</li>
+<li>Pero&#x2026; ¿lo podemos saber con seguridad solo mirando el gráfico?</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orge1948c3" class="outline-3">
+<h3 id="orge1948c3"><span class="section-number-3">2.2.</span> Actividad 2 - Dibujar el diagrama de dispersión y calcule la correlación</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Marque las series <code>Long</code> y <code>Short</code>. Pulse sobre ellas con el botón
+derecho del ratón. En el menú desplegable seleccione <b><i><code>Gráfico de
+dispersión XY</code></i></b> (elija como variable del eje X <code>Long</code> y marque
+suprimir la recta estimada).
+</p>
+
+<p>
+Guarde el gráfico en la sesión como un icono.
+</p>
+
+<p>
+Calcule la correlación entre ambas series.
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">      DiagramDispersion &lt;- gnuplot Short Long --fit=none
+      corr Long Short
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org7094c83" class="outline-3">
+<h3 id="org7094c83"><span class="section-number-3">2.3.</span> Actividad 3 - Regrese la primera diferencia de los tipos a corto sobre la diferencia de los tipos a largo</h3>
+<div class="outline-text-3" id="text-2-3">
+<ol class="org-ol">
+<li>Incluya las primeras diferencias de <code>Short</code> y <code>Long</code></li>
+<li>Dibuje ambas series diferenciadas. ¿Parecen "ser estacionarias en
+media"? ¿Son <code>Short</code> y <code>Long</code> aparentemente \(I(1)?\)</li>
+<li>¿Están correladas?</li>
+<li>Regrese <code>d_Short</code> sobre <code>d_Long</code></li>
+<li>Observe los resultados de la regresión.
+<ul class="org-ul">
+<li>¿Son significativos los parámetros? ¿cuales sí y cuales no?
+(compare esto con lo que pasaba en el ejemplo anterior)</li>
+<li>¿Reproduce el modelo parte de la varianza de <code>d_Short</code>?</li>
+</ul></li>
+</ol>
+
+<p>
+Realice los pasos con la interfáz gráfica y los menús desplegables,
+</p>
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">diff Short Long
+GraficoSeriesEnDiferencias &lt;- gnuplot d_Short d_Long --time-series --with-lines
+corr d_Short d_Long
+AjusteEnDiferencias &lt;- ols d_Short 0 d_Long
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf323557" class="outline-3">
+<h3 id="orgf323557"><span class="section-number-3">2.4.</span> Actividad 4 - Ajuste los tipos corto plazo en función de los tipos a largo</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+Veamos si las series en niveles pueden estar cointegradas. Para ello
+debemos analizar los residuos de la regresión de <code>Short</code> sobre
+<code>Long</code>.
+</p>
+
+<ol class="org-ol">
+<li>Regrese <code>Short</code> sobre <code>Long</code></li>
+<li>Observe los resultados de la regresión.
+<ul class="org-ul">
+<li>¿Son significativos los parámetros?</li>
+<li>¿Reproduce el modelo parte de la varianza de <code>Short</code>?</li>
+</ul></li>
+<li>Dibuje los residuos de la regresión. ¿Parecen "estacionarios en
+media"? dicho de otra forma ¿muestran alguna tendencia?</li>
+</ol>
+
+<p>
+Realice los pasos con la interfáz gráfica y los menús desplegables,
+</p>
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">AjusteEnNiveles &lt;- ols Short 0 Long
+residuos = $uhat
+GraficoResiduos &lt;- gnuplot residuos --time-series --with-lines
+</pre>
+</div>
+<p>
+<b>Conclusión.</b> Las variables <code>Short</code> y <code>Long</code> son no estacionarias
+(tienen tendencia), lo que conduce a un elevado coeficiente de
+correlación entre ellas; sus primeras diferencias parecen
+"estacionarias" lo que sugiere que mabas series son \(I(1)\).
+</p>
+
+<p>
+La regresión de las series en diferencias y los residuos de la
+regresión en niveles parecen compatibles con que <code>Short</code> y <code>Long</code>
+estén cointegradas, es decir, que tengan una tendencia común.
+</p>
+
+<p>
+En este caso la correlación no parece ser espuria, por lo que cabe
+interpretar dicha correlación y pensar que hay relación entre los
+tipos a corto y a largo plazo.
+</p>
+
+<p>
+A este análisis le falta la realización de contrartes estadísticos que
+confirmen la estacionariedad de las series diferenciadas y de los
+residuos de la última regresión.
+</p>
+
+<p>
+<b>Código completo de la práctica</b> <code>UKinterestRates.inp</code>
+</p>
+<p>
+\lstinputlisting{scripts/UKinterestRates.inp}
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Marcos Bujosa</p>
+<p class="date">Created: 2024-07-27 sáb 17:54</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

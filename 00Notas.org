@@ -1,0 +1,404 @@
+#+TITLE: Notas de cómo hacer algunas cosas con R
+#+author: Marcos Bujosa
+
+#+OPTIONS: toc:nil
+
+# +EXCLUDE_TAGS: pngoutput noexport
+
+#+startup: shrink
+
+#+LATEX_HEADER_EXTRA: \usepackage{lmodern}
+#+LATEX_HEADER_EXTRA: \usepackage{tabularx}
+#+LATEX_HEADER_EXTRA: \usepackage{booktabs}
+# +LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=blue}
+
+#+LATEX: \maketitle
+
+# M-x jupyter-refresh-kernelspecs
+
+#+OX-IPYNB-LANGUAGE: jupyter-R
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC emacs-lisp :exports none :results silent
+(use-package ox-ipynb
+  :load-path (lambda () (expand-file-name "ox-ipynb" scimax-dir)))
+
+(setq org-babel-default-header-args:jupyter-R
+      '((:results . "value")
+	(:session . "jupyter-R")
+	(:kernel . "ir")
+	(:pandoc . "t")
+	(:exports . "both")
+	(:cache .   "no")
+	(:noweb . "no")
+	(:hlines . "no")
+	(:tangle . "no")
+	(:eval . "never-export")))
+
+(require 'jupyter-R)
+;(require 'jupyter)
+
+(org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+
+(add-to-list 'org-src-lang-modes '("jupyter-R" . R))
+#+END_SRC
+
+
+#+BEGIN_ABSTRACT
+Algunas notas de cómo hacer cosas en R.
+#+END_ABSTRACT
+
+***  Carga de algunas librerías de R que vamos a usar aquí
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :UNNUMBERED: t 
+   :END:
+
+# install.packages(c("readr", "latticeExtra", "tfarima"))
+   
+#+BEGIN_SRC jupyter-R :results silent :exports code
+library(readr)        # para leer ficheros CSV
+library(zoo)          # para leer datos con índices temporales
+library(ggplot2)
+library(jtools)       # para representación resultados estimación (summ)
+#+END_SRC
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+y además fijamos los parámetros por defecto para las figuras en =png=
+del notebook
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-R :results silent :exports code
+# fijamos el tamaño de las figuras que se generan en el notebook
+options(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
+#+END_SRC
+
+
+
+* De ~CSV~ a ~data_frame~
+
+#+BEGIN_SRC jupyter-R
+datos_df <- read_csv('datos/GNPvsMelanoma.csv',show_col_types = FALSE)
+head(datos_df, 3)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+| obs   | GNP   | Melanoma |
+|-------+-------+----------|
+| <dbl> | <dbl> | <dbl>    |
+| 1936  | 193.0 | 1.0      |
+| 1937  | 203.2 | 0.8      |
+| 1938  | 192.9 | 0.8      |
+#+caption: A tibble: 3 × 3
+:END:
+
+* De ~data_frame~ a ~ts~
+
+Este método permite volver al ~data_frame~
+
+#+BEGIN_SRC jupyter-R
+datos_ts   <- ts(data = datos_df,
+                 start = 1936,
+                 end = 1972,
+                 frequency = 1)
+head(datos_ts, 3)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+| obs  | GNP   | Melanoma |
+|------+-------+----------|
+| 1936 | 193.0 | 1.0      |
+| 1937 | 203.2 | 0.8      |
+| 1938 | 192.9 | 0.8      |
+#+caption: A matrix: 3 × 3 of type dbl
+:END:
+
+
+* De ~CSV~ a ~ts~ (vía ~zoo~)
+ 
+** Primero ~zoo~
+
+#+BEGIN_SRC jupyter-R
+data <- read.zoo('datos/GNPvsMelanoma.csv', header=TRUE, index.column = 1, sep=",", FUN = as.yearmon)
+class(data)
+head(data, 3)
+plot(data)
+plot(data[,'Melanoma'])
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+'zoo'
+:            GNP Melanoma
+: ene 1936 193.0      1.0
+: ene 1937 203.2      0.8
+: ene 1938 192.9      0.8
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/830f097ae96cace5d8551bab02d80b0909167ec8.png]]
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/36ee1e6970faaee38291f3c39058cbbca9d90da2.png]]
+:END:
+
+** Luego a ~ts~
+
+#+BEGIN_SRC jupyter-R
+data_ts = as.ts( data )
+class(data_ts)
+head(data_ts, 3)
+
+plot(data_ts[,'GNP'])
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+1. 'mts'
+2. 'ts'
+3. 'matrix'
+| GNP   | Melanoma |
+|-------+----------|
+| 193.0 | 1.0      |
+| 203.2 | 0.8      |
+| 192.9 | 0.8      |
+#+caption: A matrix: 3 × 2 of type dbl
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/2faba2bd21f48f6ca00f34a3db03dd81b8a2356d.png]]
+:END:
+
+
+
+* De dataframe a ts
+
+
+#+BEGIN_SRC jupyter-R
+,#+BEGIN_SRC jupyter-R
+tseries <- as.ts( read.zoo( datos_df ) )
+head(tseries)
+plot(tseries)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+| GNP   | Melanoma |
+|-------+----------|
+| 193.0 | 1.0      |
+| 203.2 | 0.8      |
+| 192.9 | 0.8      |
+| 209.4 | 1.4      |
+| 227.2 | 1.2      |
+| 263.7 | 1.0      |
+#+caption: A matrix: 6 × 2 of type dbl
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/5754f919bdc2564f8e6d8f8ee0681f5fe000ed0c.png]]
+:END:
+
+* De ~ts~ a ~data_frame~
+
+#+BEGIN_SRC jupyter-R
+DF = data.frame(date = zoo::as.Date(time(tseries[,"GNP"])),
+                GNP = as.matrix(tseries[,"GNP"]),
+                Melanoma = as.matrix(tseries[,"Melanoma"]))
+head(DF,3)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+|   | date       | GNP   | Melanoma |
+|---+------------+-------+----------|
+|   | <date>     | <dbl> | <dbl>    |
+| 1 | 1936-01-01 | 193.0 | 1.0      |
+| 2 | 1937-01-01 | 203.2 | 0.8      |
+| 3 | 1938-01-01 | 192.9 | 0.8      |
+#+caption: A data.frame: 3 × 3
+:END:
+
+* Resumen: dos formas de pasar de datos anuales en ~CSV~ a ~ts~
+
+Una forma
+#+BEGIN_SRC jupyter-R
+time_series <- ts(data = read_csv('datos/GNPvsMelanoma.csv',show_col_types = FALSE),
+                  start = 1936,
+                  end = 1972,
+                  frequency = 1)
+head(time_series, 2)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+|  obs |   GNP | Melanoma |
+|------+-------+----------|
+| 1936 | 193.0 |      1.0 |
+| 1937 | 203.2 |      0.8 |
+#+caption: A matrix: 2 × 3 of type dbl
+:END:
+
+donde =read_csv('datos/GNPvsMelanoma.csv',show_col_types = FALSE)= es un ~data_frame~
+
+
+Otra forma (vía ~zoo~)
+#+BEGIN_SRC jupyter-R
+# library(zoo)
+data_ts = as.ts( read.zoo('datos/GNPvsMelanoma.csv', header=TRUE, index.column = 1, sep=",", FUN = as.yearmon) )
+head(data_ts, 3)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+| GNP   | Melanoma |
+|-------+----------|
+| 193.0 | 1.0      |
+| 203.2 | 0.8      |
+| 192.9 | 0.8      |
+#+caption: A matrix: 3 × 2 of type dbl
+:END:
+
+
+* Gráfico de dos series temporales con sendos ejes verticales
+
+#+BEGIN_SRC jupyter-R
+# Mostrando la serie GNP
+p <- autoplot(as.zoo(data_ts[,'GNP']))
+p <- p + geom_line(aes(y = as.zoo(data_ts[,'GNP'])), colour="blue")
+
+# como tienen escalar distintas se requiere ajustar los datos
+sf<-max(data_ts[,'GNP'])/max(data_ts[,'Melanoma'])
+
+# Se agrega Melanoma a Y multiplicada por el factor
+p <- p + geom_line(aes(y = as.zoo(data_ts[,'Melanoma'])*sf), colour="red")
+p <- p + scale_y_continuous(sec.axis = sec_axis(~./sf, name = "Incidencia casos de melanoma"))
+p <- p + labs(y = "GNP",
+              x = "Fechas")
+
+# Se modifican los colores de los ejes
+p <- p + theme(
+    axis.title.y.left=element_text(color="blue"),
+    axis.text.y.left=element_text(color="blue"),
+    axis.ticks.y.left = element_line(color = "blue"),
+    axis.title.y.right=element_text(color="red"),
+    axis.text.y.right=element_text(color="red"),
+    axis.ticks.y.right = element_line(color = "red")
+  )
+p
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/b222b0f9346ec6bd7ee140e2bdaf4c330523f733.png]]
+:END:
+
+** Desde el dataframe
+
+#+BEGIN_SRC jupyter-R
+# Mostrando la serie GNP
+p <- ggplot(DF, aes(x = date))
+p <- p + geom_line(aes(y = GNP), colour="blue")
+
+# como tienen escalar distintas se requiere ajustar los datos
+sf<-max(DF['GNP'])/max(DF['Melanoma'])
+
+# Se agrega Melanoma a Y multiplicada por el factor
+p <- p + geom_line(aes(y = Melanoma*sf), colour="red")
+
+p <- p + scale_y_continuous(sec.axis = sec_axis(~./sf, name = "Casos de melanoma"))
+p <- p + labs(y = "GNP",
+              x = "Fechas")
+# Se modifican los colores de los ejes
+p <- p + theme(
+    axis.title.y.left=element_text(color="blue"),
+    axis.text.y.left=element_text(color="blue"),
+    axis.ticks.y.left = element_line(color = "blue"),
+    axis.title.y.right=element_text(color="red"),
+    axis.text.y.right=element_text(color="red"),
+    axis.ticks.y.right = element_line(color = "red")
+  )
+p
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/3be9906e34c3328f6897efbef175c3ed5e0e683b.png]]
+:END:
+
+
+*** Y otra manera con ~xyplot~ (de =latticeExtra=)
+
+Y ahora generamos el gráfico
+#+BEGIN_SRC jupyter-R
+library(latticeExtra) # alternativa para gráficos con doble eje vertical (doubleYScale)
+kk <- xyplot(GNP + Melanoma ~ date, DF, type="l")
+# se agrega dos ejes Y se construye cada serie por separado
+obj1 <- xyplot(GNP ~ date, DF, type = "l" , lwd=2, ylab="GNP (miles de millones de $)",  xlab="Years")
+obj2 <- xyplot(Melanoma ~ date, DF, type = "l", lwd=2, ylab="Casos de melanoma")
+# --> se realiza la grafica con el segundo eje Y
+doubleYScale(obj1, obj2, add.ylab2 = TRUE)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/33e057f85f65c733c486361f74b08bc1e8d2c473.png]]
+:END:
+
+
+
+
+* Añadir nueva columna a un ~ts~
+
+
+#+BEGIN_SRC jupyter-R
+d_GNP      = diff(datos_ts[,"GNP"])
+d_Melanoma = diff(datos_ts[,"Melanoma"])
+#+END_SRC
+
+#+RESULTS:
+: 5f061e65-c149-4dee-bc7d-a5338e092fb4
+
+este método cambia el nombre de las primeras columnas
+
+#+BEGIN_SRC jupyter-R
+serie = ts.union(data_ts, d_GNP, d_Melanoma)
+head(serie,3)
+#+END_SRC
+
+#+RESULTS:
+: 76659920-41c9-4bd6-a654-09e26c8b2a20
+
+Este método es mejor, pero es pesado
+#+BEGIN_SRC jupyter-R
+serie = ts.union(GNP = data_ts[,'GNP'], Melanoma = data_ts[,'Melanoma'], d_GNP, d_Melanoma)
+head(serie,3)
+#+END_SRC
+
+#+RESULTS:
+: db11562d-7198-478f-953f-40fdfaf12282
+
+#+BEGIN_SRC jupyter-R
+DF.diferencias = data.frame(date = zoo::as.Date(time(d_GNP)),
+                            d_GNP = as.matrix(d_GNP),
+                            d_Melanoma = as.matrix(d_Melanoma))
+head(DF.diferencias, 2)
+#+END_SRC
+
+#+RESULTS:
+: cd42271e-0f3a-4cd9-a1c4-1cdf0b4cb9c9
+
+
+* Otros
+
+#+BEGIN_SRC jupyter-R
+mal_modelo <- lm(d_GNP ~ d_Melanoma)
+summ( mal_modelo )
+#+END_SRC
+
+#+RESULTS:
+: 1ceafe33-19a8-41f8-885a-cec3987c19fa
+
+#+BEGIN_SRC jupyter-R
+plot(as.ts(resid(mal_modelo))) 
+abline(0,0) 
+#+END_SRC
+
+#+RESULTS:
+: 9fb7d7f2-2948-46c7-8240-ca2e9384cc2d
+

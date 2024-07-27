@@ -1,0 +1,15 @@
+open datos/UKinterestRates.gdt
+
+GraficoSeriesEnNiveles <- gnuplot Long Short --time-series --with-lines
+
+DiagramDispersion <- gnuplot Short Long --fit=none
+corr Long Short
+
+diff Short Long
+GraficoSeriesEnDiferencias <- gnuplot d_Short d_Long --time-series --with-lines
+corr d_Short d_Long
+AjusteEnDiferencias <- ols d_Short 0 d_Long
+
+AjusteEnNiveles <- ols Short 0 Long
+residuos = $uhat
+GraficoResiduos <- gnuplot residuos --time-series --with-lines

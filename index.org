@@ -1,15 +1,3 @@
-#+title:  Código fuente del material para un curso de Econometría Aplicada
-#+author: Marcos Bujosa 
-#+email:  mbujosab@ucm.es
-#+LANGUAGE: es-es
-
-# ###########
-# ESTO DA EL FORMATO FINAL DE LA PÁGINA WEB VÉASE [[https://olmon.gitlab.io/org-themes/]]
-#+SETUPFILE: simple_inlineUCM.theme  
-# +SETUPFILE: simple_inline.theme  
-# ###########
-
-#+attr_html: :width 320px
-https://www.ucm.es/data/cont/docs/3-2016-07-21-Marca%20UCM%20logo%20negro.png
-
-#+INCLUDE: "README.org::* Código fuente del material para un curso de Econometría Aplicada" :only-contents t 
+#+BEGIN_EXPORT html
+<meta http-equiv="refresh" content="0; url=README.html"/>
+#+END_EXPORT

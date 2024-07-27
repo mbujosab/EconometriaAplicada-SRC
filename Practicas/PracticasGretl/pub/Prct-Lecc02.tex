@@ -1,4 +1,4 @@
-% Created 2024-07-03 mié 19:10
+% Created 2024-07-26 vie 13:32
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -37,10 +37,10 @@
 
 
 \section{Componentes no observables del número de viajeros internacionales}
-\label{sec:org9335ee3}
+\label{sec:org2f5bd2f}
 \begin{center}
 \begin{tabular}{ll}
-Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/componentesAirlinePass.inp}{componentesAirlinePass.inp}\\
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/componentesAirlinePass.inp}{componentesAirlinePass.inp}\\[0pt]
 \end{tabular}
 \end{center}
 
@@ -52,14 +52,14 @@ Jenkins.
 
 \begin{enumerate}
 \item Objetivo
-\label{sec:orgb813899}
+\label{sec:orgb78925a}
 \begin{enumerate}
 \item Reproducir el ejemplo visto en la lección 2.
 \end{enumerate}
 
 \item Carga de datos
-\label{sec:org8849c0a}
-\textbf{\emph{\texttt{Archivo -{}-> Abrir datos -{}-> Archivo de muestra}}} y en la pestaña
+\label{sec:orgac67163}
+\textbf{\emph{\texttt{Archivo -{}-{}> Abrir datos -{}-{}> Archivo de muestra}}} y en la pestaña
 \textbf{\emph{\texttt{Gretl}}} seleccione \texttt{bjg}.
 
 {\vspace{0pt} \footnotesize \color{gray!70!black}
@@ -71,7 +71,7 @@ open bjg
 \end{enumerate}
 
 \subsection{Actividad 1 - generar una serie con el índice temporal y su cuadrado}
-\label{sec:orgff3658b}
+\label{sec:org82bb961}
 Pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
 ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
 \begin{itemize}
@@ -101,7 +101,7 @@ square time
 \vspace{-3pt}
 
 \subsection{Actividad 2 - Ajustar una tendencia lineal}
-\label{sec:orga0706bf}
+\label{sec:org2056c6b}
 \begin{itemize}
 \item Estime el modelo mediante los menús desplegables: \textbf{\emph{\texttt{Modelo ->
   Mínimos Cuadrados Ordinarios}}}; indique a \href{https://gretl.sourceforge.net/es.html}{Gretl} el regresando y los
@@ -131,7 +131,7 @@ TendenciaLineal.show
 
 \begin{enumerate}
 \item Recuperemos los valores ajustados
-\label{sec:orgaea6a1d}
+\label{sec:orge72a789}
 \begin{itemize}
 \item Desde la ventana del modelo ajustado (recupérese con su icono),
 ``pinche'' en \textbf{\emph{\texttt{guardar -> valores estimados}}}. Elija como nombre
@@ -150,7 +150,7 @@ series Comp_irregular =  $uhat
 
 
 \item Gráfico de la serie y la tendencia lineal
-\label{sec:org7faf5b0}
+\label{sec:orgc4517ab}
 \begin{itemize}
 \item Marque las variables \texttt{lg} y \texttt{Tendencia} (pulsando \texttt{ctrl}). Pinche
 con el botón derecho del ratón sobre ellas. Elija \textbf{\emph{\texttt{Gráfico de
@@ -170,7 +170,7 @@ serie de iconos. Uno de ellos es la \textbf{\emph{\texttt{vista de iconos de ses
 
 
 \item Gráfico del componente irregular
-\label{sec:orgd31f86e}
+\label{sec:org6a97ab4}
 
 \begin{itemize}
 \item Marque la variable correspondiente al componente irregular (pulsando
@@ -187,7 +187,7 @@ GraficoComponenteIrregular.show
 \end{itemize}
 
 \item Gráfico de la diferencia estacional del componente irregular
-\label{sec:org4b3668c}
+\label{sec:org054fb36}
 
 \begin{itemize}
 \item Selecione con el ratón la variable correspondiente al componente
@@ -219,7 +219,7 @@ GraficoComponenteIrregularD12.show
 
 
 \subsection{Actividad 3 - Ajustar una tendencia cuadrática}
-\label{sec:orgca6a3d1}
+\label{sec:org2b825ac}
 
 Repita el ejercicio anterior, pero ajustando una tendencia cuadrática
 
@@ -237,7 +237,7 @@ Repita el ejercicio anterior, pero ajustando una tendencia cuadrática
 
 
 \subsection{Actividad 4 - Ajustar una tendencia cuadrática y un componente estacional determinista}
-\label{sec:orgc29dbfc}
+\label{sec:orgbbdff31}
 
 Pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
 ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
@@ -271,7 +271,7 @@ ModeloCompleto.show
 
 \begin{enumerate}
 \item Genere una nueva serie con la tendencia y otra con el componente estacional estimados
-\label{sec:org0e028ca}
+\label{sec:org378ef14}
 \begin{itemize}
 \item Cálculo de la tendencia estimada: \Estmc{\beta_1} \texttt{const} + \Estmc{\beta_2} \texttt{time} + \Estmc{\beta_3} \texttt{sq\_time}
 
@@ -293,8 +293,8 @@ series Tendencia3 = $coeff(const) + $coeff(time)*time + $coeff(sq_time)*sq_time
 {\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
 \begin{verbatim}
 series Comp_Estacional3 = $coeff(S1)*S1 + $coeff(S2)*S2 + $coeff(S3)*S3 + $coeff(S4)*S4 \
-			+ $coeff(S5)*S5 + $coeff(S6)*S6 + $coeff(S7)*S7 + $coeff(S8)*S8 \
-			+ $coeff(S9)*S9 + $coeff(S10)*S10 + $coeff(S11)*S11 
+                        + $coeff(S5)*S5 + $coeff(S6)*S6 + $coeff(S7)*S7 + $coeff(S8)*S8 \
+                        + $coeff(S9)*S9 + $coeff(S10)*S10 + $coeff(S11)*S11 
 \end{verbatim}
 }
 
@@ -339,10 +339,10 @@ GraficoAjuste3.show
 
 
 \section{Componentes no observables del número de viajeros internacionales 2}
-\label{sec:org1195691}
+\label{sec:org3d954b6}
 \begin{center}
 \begin{tabular}{ll}
-Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/componentesAirlinePass2.inp}{componentesAirlinePass2.inp}\\
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/componentesAirlinePass2.inp}{componentesAirlinePass2.inp}\\[0pt]
 \end{tabular}
 \end{center}
 
@@ -350,7 +350,7 @@ Continuamos el ejemplo anterior, pero ahora vamos a reducir el modelo
 quitando variables no siginificativas.
 
 \subsection{Actividad 1 - Estime el modelo con tendencia cuadrática y estacionalidad determinista}
-\label{sec:org50846af}
+\label{sec:org09775a3}
 
 Repita la estimación del último modelo de la practica anterior
 
@@ -366,7 +366,7 @@ ModeloInicial.show
 }
 
 \subsection{Actividad 2 - Reducir el modelo eliminando secuencialmente variables no significativas}
-\label{sec:org50de869}
+\label{sec:org7359cb0}
 
 Los p-valores de algunos parametros indican que sus estimaciones son
 no significativas. En particular los correspondientes a las variables
@@ -377,7 +377,7 @@ Reduzca el modelo, eliminando aquellas variables no significativas al
 no significativo.
 
 \begin{itemize}
-\item Desde la ventana del modelo estimado ``pinche'' en \textbf{\emph{\texttt{contrastes -{}->
+\item Desde la ventana del modelo estimado ``pinche'' en \textbf{\emph{\texttt{contrastes -{}-{}>
   omitir variables}}} y marque la opción \emph{\texttt{Eliminación secuencial de
   variables utilizando el valor p a dos colas}}, indique una
 significación del 5\% y pulse en \textbf{\emph{\texttt{Aceptar}}}
@@ -390,12 +390,12 @@ PrimeraReduccion <- omit --auto=0.05
 
 
 \subsection{Actividad 3 - Contrastar la ausencia de autocorrelación}
-\label{sec:org8b29207}
+\label{sec:org2de6ca0}
 
 \begin{itemize}
 \item Observe bajo el valor de contraste de Durbin-Watson (0,691477).
 
-\item Desde la ventana del modelo estimado ``pinche'' en \textbf{\emph{\texttt{contrastes -{}->
+\item Desde la ventana del modelo estimado ``pinche'' en \textbf{\emph{\texttt{contrastes -{}-{}>
   valor p del estadistico Durbin-Watson}}}. 
 {\vspace{0pt} \footnotesize \color{gray!70!black}
 \emph{o bien teclee en linea de comandos}:
@@ -409,7 +409,7 @@ print PDW
 
 Claramente se rechaza la ausencia de autocorrelación de orden uno.
 
-\item Desde la ventana del modelo estimado ``pinche'' en \textbf{\emph{\texttt{contrastes -{}->
+\item Desde la ventana del modelo estimado ``pinche'' en \textbf{\emph{\texttt{contrastes -{}-{}>
   Autocrrelación}}}. E indique por ejemplo 3 retardos. 
 {\vspace{0pt} \footnotesize \color{gray!70!black}
 \emph{o bien teclee en linea de comandos}:
@@ -424,7 +424,7 @@ que el retardo de orden uno es muy siginificativo.
 
 
 \subsection{Actividad 4 - Estimación del modelo con errores estándar robustos}
-\label{sec:org01bf552}
+\label{sec:org6e22af7}
 
 Los test de autocorrelación indican que la inferencia empleada para
 reducir el modelo es incorrecta. A la hora de calcular las
@@ -452,7 +452,7 @@ dummie correspondeinte al mes de febrero.
 al 5\%. Verifique que el conjunto de variables excluidas es
 conjuntamente no significativo.
 
-Desde la ventana del modelo estimado ``pinche'' en \textbf{\emph{\texttt{contrastes -{}->
+Desde la ventana del modelo estimado ``pinche'' en \textbf{\emph{\texttt{contrastes -{}-{}>
   omitir variables}}} y marque la opción \emph{\texttt{Eliminación secuencial de
   variables utilizando el valor p a dos colas}}, indique una
 significación del 5\% y pulse en \textbf{\emph{\texttt{Aceptar}}}
@@ -468,7 +468,7 @@ febrero.
 \end{itemize}
 
 \subsection{Actividad 4 - Estimación incluyendo en el modelo la autocorrelación de orden uno en las perturbaciones}
-\label{sec:org063ea50}
+\label{sec:orgeda9629}
 
 \begin{itemize}
 \item Re-estime el modelo incluyendo en el modelo un AR(1) para las
@@ -501,18 +501,18 @@ marcada con el botón derecho del ratón seleccione \textbf{\emph{\texttt{Distri
 freq Residuos --show-plot
 \end{verbatim}
 }
-donde \texttt{-{}-show-plot} indica que se genere el gráfico en una
+donde \texttt{-{}-{}show-plot} indica que se genere el gráfico en una
 ventana. Observe que dicho comando también genera una ventana de texto
 con la distribución de frecuencias relativa y acumulada.
 
 \item Realice el contraste de normalidad de los residuos: Desde la ventana
-del modelo estimado ``pinche'' en \textbf{\emph{\texttt{contrastes -{}-> Normalidad de
+del modelo estimado ``pinche'' en \textbf{\emph{\texttt{contrastes -{}-{}> Normalidad de
   los residuos}}} y marque la opción \emph{\texttt{Eliminación secuencial de
   variables utilizando el valor p a dos colas}}, indique una
 significación del 5\% y pulse en \textbf{\emph{\texttt{Aceptar}}}
 
 O bien desde la ventana principal: marque la variable \texttt{Residuos} y
-``pinche'' en \textbf{\emph{\texttt{Variable -{}-> Contraste de Normalidad}}}
+``pinche'' en \textbf{\emph{\texttt{Variable -{}-{}> Contraste de Normalidad}}}
 
 {\vspace{3pt} \color{gray!70!black}
 \emph{O bien mediante el comando}

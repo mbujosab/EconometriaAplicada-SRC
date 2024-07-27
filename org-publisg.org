@@ -1,0 +1,109 @@
+
+** Org-publish                                                     :noexport:
+
+We need a small elisp script to setup and publish  it.
+
+# ~/CloudStation/ReposGH/Docencia/Econometria-SRC/
+# ~/CloudStation/Nextcloud/Docencia/Ectr/
+# ~/CloudStation/Nextcloud/Docencia/Ectr/
+
+
+#+BEGIN_SRC emacs-lisp  :tangle ~/publish.el
+(use-package htmlize)
+
+(require 'ox-publish)
+
+(let* ((base-directory "./")
+       (org-export-with-broken-links t)
+       (org-publish-project-alist `(("html"
+				     :base-directory ,base-directory
+				     :base-extension "org"
+				     :publishing-directory ,(concat base-directory "docs")
+				     :exclude "docs\\|ucarima.*\\|.ipynb_checkpoints\\|00Notas.*\\|org-publisg.*"
+				     :recursive t
+				     :publishing-function org-html-publish-to-html
+				     :auto-preamble t
+				     :auto-sitemap nil)
+				    
+				    ("static-html"
+				     :base-directory ,base-directory
+				     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|dat\\|mov\\|txt\\|svg\\|aiff\\|csv\\|gdt\\|inp\\|ipynb\\|html"
+				     :publishing-directory ,(concat base-directory "docs")
+				     :exclude "docs\\|ucarima.*\\|.ipynb_checkpoints\\|00Notas.*\\|org-publisg.*"
+				     :recursive t
+				     :publishing-function org-publish-attachment)
+
+				    ;; ... all the components ...
+				    ("scimax-eln" :components ("html" "static-html")))))
+
+  (org-publish "scimax-eln" t))
+#+END_SRC
+
+#+RESULTS:
+
+We can check out the local version.
+
+#+BEGIN_SRC emacs-lisp
+(browse-url "docs/index.html")
+#+END_SRC
+
+#+RESULTS:
+
+*** Commit and publish the html pages                              :noexport:
+
+To publish these we go into the html directory, commit all the files and push them to GitHUB.
+
+
+#+BEGIN_SRC sh 
+#git add docs
+git commit -m "update"
+git push
+#+END_SRC
+
+
+
+*** con pdfs
+
+#+BEGIN_SRC emacs-lisp
+(require 'ox-publish)
+
+(let* ((base-directory "~/repos/Ectr/")
+       (org-export-with-broken-links t)
+       (org-publish-project-alist `(("html"
+				     :base-directory ,base-directory
+				     :base-extension "org"
+				     :publishing-directory ,(concat base-directory "docs")
+				     :exclude "docs"
+				     :recursive t
+				     :publishing-function org-html-publish-to-html
+				     :auto-preamble t
+				     :auto-sitemap t)
+				    ("pdf"
+				     :base-directory ,base-directory
+				     :base-extension "org"
+				     :publishing-directory ,(concat base-directory "docs/pdfs")
+				     :exclude "docs"
+				     :recursive t
+
+				     :publishing-function org-latex-publish-to-pdf
+				     :auto-preamble t
+				     :auto-sitemap nil)
+				    
+				    ("static-html"
+				     :base-directory ,base-directory
+				     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|dat\\|mov\\|txt\\|svg\\|aiff\\|csv\\|gdt\\|inp\\|ipynb"
+				     :publishing-directory ,(concat base-directory "docs")
+				     :exclude "docs"
+				     :recursive t
+				     :publishing-function org-publish-attachment)
+
+				    ;; ... all the components ...
+				    ("scimax-eln" :components ("html" "static-html" "pdf")))))
+
+  (org-publish "scimax-eln" t))
+#+END_SRC
+
+#+RESULTS:
+
+
+
