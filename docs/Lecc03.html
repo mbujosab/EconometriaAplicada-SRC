@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-08-14 mié 10:54 -->
+<!-- 2024-08-14 mié 13:47 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 3</title>
@@ -258,7 +258,7 @@
 </ul>
 </div>
 </div>
-<div class="ABSTRACT" id="org3b46e0b">
+<div class="ABSTRACT" id="org2a8289a">
 <p>
 En esta lección voy a continuar pero con R y usaré la librería
 <code>tfarima</code> de José Luis Gallego siempre que pueda.
@@ -447,7 +447,7 @@ de Connecticut.
 </p>
 
 
-<div id="orgf85344b" class="figure">
+<div id="org44009de" class="figure">
 <p><img src="./img/lecc03/GNPvsMelanoma.png" alt="GNPvsMelanoma.png" />
 </p>
 </div>
@@ -467,7 +467,7 @@ ggplot(data_frame, aes(x = Melanoma, y = GNP)) + geom_point()
 </p>
 
 
-<div id="orgbd4491f" class="figure">
+<div id="orgbae4a63" class="figure">
 <p><img src="./img/lecc03/Scatter-GNPvsMelanoma.png" alt="Scatter-GNPvsMelanoma.png" width="50px" />
 </p>
 </div>
@@ -483,7 +483,7 @@ coeficientes muy significativos</i>).
 predictiva</b> (<i>pues la incidencia de melanoma en
 Connecticut no hace crecer la economía de EEUU</i>).
 </p>
-<pre class="example" id="org82d7df1">
+<pre class="example" id="org762d1a9">
 [4mMODEL INFO:[24m
 [3mObservations:[23m 37
 [3mDependent Variable:[23m GNP
@@ -593,7 +593,7 @@ doubleYScale(obj1, obj2, add.ylab2 = <span style="color: #6434A3;">TRUE</span>)
 
 
 
-<div id="org2aa3fc7" class="figure">
+<div id="org56f6bc4" class="figure">
 <p><img src="./img/lecc03/d_GNPvsd_Melanoma.png" alt="d_GNPvsd_Melanoma.png" />
 </p>
 </div>
@@ -610,7 +610,7 @@ summ( lm(d_GNP ~ d_Melanoma) )
 </pre>
 </div>
 
-<pre class="example" id="org2fff717">
+<pre class="example" id="orgd27c8d7">
 MODEL INFO:
 Observations: 36
 Dependent Variable: d_GNP
@@ -909,7 +909,7 @@ doubleYScale(obj1, obj2, add.ylab2 = <span style="color: #6434A3;">TRUE</span>)
 
 
 
-<div id="orgd646c70" class="figure">
+<div id="org86b0fa5" class="figure">
 <p><img src="./img/lecc03/UK_Interest_ratesFirstDiff.png" alt="UK_Interest_ratesFirstDiff.png" />
 </p>
 </div>
@@ -927,7 +927,7 @@ summ( lm(d_Short ~ d_Long) )
 </pre>
 </div>
 
-<pre class="example" id="orga84e6d4">
+<pre class="example" id="orgb73c61c">
 MODEL INFO:
 Observations: 74
 Dependent Variable: d_Short
@@ -956,7 +956,7 @@ summ( modelo )                         <span style="color: #8D8D84;"># </span><s
 </pre>
 </div>
 
-<pre class="example" id="org762d1a9">
+<pre class="example" id="org17cd94e">
 MODEL INFO:
 Observations: 75
 Dependent Variable: UK_df$Short
@@ -989,7 +989,7 @@ abline(0,0)
 </div>
 
 
-<div id="orgc744784" class="figure">
+<div id="org0cb57be" class="figure">
 <p><img src="./img/lecc03/UK_Interest_ratesResiduals.png" alt="UK_Interest_ratesResiduals.png" />
 </p>
 </div>
@@ -1010,7 +1010,7 @@ estacionarios.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-08-14 mié 10:54</p>
+<p class="date">Created: 2024-08-14 mié 13:47</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
