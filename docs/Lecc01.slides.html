@@ -14223,39 +14223,11 @@ variable aleatoria</em> $X_t$.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Datos-de-series-temporales-vs-datos-de-secci%C3%B3n-cruzada">Datos de series temporales vs datos de secci&#243;n cruzada<a class="anchor-link" href="#Datos-de-series-temporales-vs-datos-de-secci%C3%B3n-cruzada">&#182;</a></h3>
+<h3 id="Datos-de-secci%C3%B3n-cruzada-vs-datos-de-series-temporales">Datos de secci&#243;n cruzada vs datos de series temporales<a class="anchor-link" href="#Datos-de-secci%C3%B3n-cruzada-vs-datos-de-series-temporales">&#182;</a></h3>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li><p><strong>Series temporales:</strong> Corresponden a mediciones de un mismo objeto a
-lo largo del tiempo. El índice indica el instante de cada medición.
-<em>Es habitual que el orden cronológico de los datos sea fundamental</em>
-para explicar cada uno de ellos.</p>
-<ul>
-<li><p>El motivo es que con frecuencia la medición en un instante de
-tiempo está relacionada con otras mediciones próximas en el
-tiempo.</p>
-</li>
-<li><p>Si es así, no podremos asumir que las variables aleatorias del
-proceso estocástico subyacente, $\boldsymbol{X}=\{X_t\}$, sean
-independientes entre sí.</p>
-</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div>
-</div><div class="fragment">
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14272,6 +14244,34 @@ etc. que ha sido medido. Consecuentemente:</p>
 </li>
 <li><p>es decir, conocer únicamente el índice de un dato no permite
 deducir nada respecto de cualquier otro dato.</p>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li><p><strong>Series temporales:</strong> Corresponden a mediciones de un mismo objeto a
+lo largo del tiempo. El índice indica el instante de cada medición.
+<em>Es habitual que el orden cronológico de los datos sea importante</em>
+para explicar cada uno de ellos.</p>
+<ul>
+<li><p>El motivo es que con frecuencia la medición en un instante de
+tiempo está relacionada con otras mediciones próximas en el
+tiempo.</p>
+</li>
+<li><p>Si es así, no podremos asumir que las variables aleatorias del
+proceso estocástico subyacente, $\boldsymbol{X}=\{X_t\}$, sean
+independientes entre sí.</p>
 </li>
 </ul>
 </li>
@@ -14321,6 +14321,151 @@ una realización de un proceso estocástico estacionario</em>)</p>
 </li>
 <li>lo habitual es que, por distintos motivos, <strong>NO lo sea</strong></li>
 </ul>
+
+</div>
+</div>
+</div>
+</div><aside class="notes">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s1">'./datos/'</span>
+<span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s1">'PIB_UEM.csv'</span><span class="p">)</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s1">'ProduccionCemento.csv'</span><span class="p">)</span>
+<span class="n">df3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s1">'IBEX35.csv'</span><span class="p">)</span>
+<span class="n">df4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s1">'ExportacionDeAcero.csv'</span><span class="p">)</span>
+<span class="c1">#print(df1.head())</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+</aside><aside class="notes">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'obs'</span><span class="p">,</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">'PIB UEM'</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+</aside></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc01/PIB_UEM.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div><aside class="notes">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'obs'</span><span class="p">,</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">'Producción de cemento en España'</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+</aside>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc01/ProduccionCemento.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div><aside class="notes">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'obs'</span><span class="p">,</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">'Rendimiento porcentual diario del IBEX 35'</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+</aside></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc01/IBEX35.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div><aside class="notes">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'obs'</span><span class="p">,</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">'Exportaciones españolas de acero'</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+</aside><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc01/ExportacionDeAcero.png" alt="img"></p>
 
 </div>
 </div>
@@ -14552,10 +14697,10 @@ caerán fuera de la franja $\left(\mu-c\sigma, \mu+c\sigma\right)$.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Veamos ejemplos de series temporales para los que</p>
+<p>Veamos un ejemplo de serie temporal para la que</p>
 <ul>
-<li>no podemos asumir que son realizaciones de procesos estocásticos
-estacionarios</li>
+<li>no podemos asumir que sea realización de un proceso estocástico
+estacionario</li>
 <li><p>y algunos intentos de transformación para obtener datos
 "<strong>estacionarios</strong>" (*)</p>
 <p>(<em>recuerde que esta expresión, aunque extendida, es un abuso del
@@ -15074,7 +15219,7 @@ incremento es pequeño.</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <style>
-.reveal  td {font-size: 135%;}
+.reveal  td {font-size: 95%;}
 </style><table>
 <thead><tr>
 <th>Transformación  de la serie temporal $\displaystyle \boldsymbol{y}=\{y_t\},\; t=1:n$</th>

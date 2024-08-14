@@ -1,0 +1,311 @@
+#+TITLE: Econometría Aplicada. Lección 5
+#+author: Marcos Bujosa
+
+# +OPTIONS: toc:nil
+
+# +EXCLUDE_TAGS: pngoutput noexport
+
+#+startup: shrink
+
+#+LATEX_HEADER_EXTRA: \usepackage{lmodern}
+#+LATEX_HEADER_EXTRA: \usepackage{tabularx}
+#+LATEX_HEADER_EXTRA: \usepackage{booktabs}
+# +LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=blue}
+
+#+LaTeX_HEADER: \newcommand{\lag}{\mathsf{B}}
+#+LaTeX_HEADER: \newcommand{\Sec}[1]{\boldsymbol{#1}}
+#+LaTeX_HEADER: \newcommand{\Pol}[1]{\boldsymbol{#1}}
+
+#+LATEX: \maketitle
+
+# M-x jupyter-refresh-kernelspecs
+
+# C-c C-v C-b ejecuta el cuaderno electrónico
+
+#+OX-IPYNB-LANGUAGE: jupyter-R
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC emacs-lisp :exports none :results silent
+(use-package ox-ipynb
+  :load-path (lambda () (expand-file-name "ox-ipynb" scimax-dir)))
+
+(setq org-babel-default-header-args:jupyter-R
+      '((:results . "value")
+	(:session . "jupyter-R")
+	(:kernel . "ir")
+	(:pandoc . "t")
+	(:exports . "both")
+	(:cache .   "no")
+	(:noweb . "no")
+	(:hlines . "no")
+	(:tangle . "no")
+	(:eval . "never-export")))
+
+(require 'jupyter-R)
+;(require 'jupyter)
+
+(org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+
+(add-to-list 'org-src-lang-modes '("jupyter-R" . R))
+#+END_SRC
+
+
+#+BEGIN_ABSTRACT
+En esta lección veremos algunas herramientas estadísticas.
+#+END_ABSTRACT
+
+***** COMMENT para Jupyter-Notebook                               :noexports:
+\(
+\newcommand{\lag}{\mathsf{B}}
+\newcommand{\Sec}[1]{\boldsymbol{#1}}
+\newcommand{\Pol}[1]{\boldsymbol{#1}}
+\)
+
+
+***  Carga de algunas librerías de R
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :UNNUMBERED: t 
+   :END:
+
+# install.packages(c("readr", "latticeExtra", "tfarima"))
+# library(readr)
+# library(ggplot2)
+   
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+Primero cargamos la librería =tfarima= (Repositorio Cran:
+https://cran.r-project.org/web/packages/tfarima/index.html;
+repositorio GitHub: https://github.com/gallegoj/tfarima)
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-R :results silent :exports code
+library(tfarima)      # librería de José Luis Gallego para Time Series
+#library(latticeExtra) # para gráficos con doble eje vertical (doubleYScale)
+library(readr)        # para leer ficheros CSV
+library(ggplot2)      # para el scatterplot (alternaticamente library(tidyverse))
+library(ggfortify)    # para pintar series temporales
+library(jtools)       # para representación resultados estimación
+library(zoo)          # para generar objetos ts (time series)
+#+END_SRC
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+y además fijamos los parámetros por defecto para las figuras en =png=
+del notebook
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-R :results silent :exports code
+# fijamos el tamaño de las figuras que se generan en el notebook
+options(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
+#+END_SRC
+
+
+* Series temporales
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+Corresponden a mediciones de un mismo objeto a lo largo del tiempo. El
+índice indica el instante de cada medición.  /El orden cronológico de
+los datos puede ser fundamental/ para explicar cada uno de ellos.
+
+- El motivo es que con frecuencia la medición en un instante de tiempo
+  está relacionada con otras mediciones próximas en el tiempo
+  (/correlación serial/).
+
+- Si es así, no podremos asumir que las variables aleatorias del
+  proceso estocástico subyacente, $\boldsymbol{X}=(X_t\mid t\in\mathbb{Z})$, sean
+  independientes entre sí.
+
+Esto tiene importantes implicaciones en las técnicas de análisis a
+aplicar y el tipo de modelos a utilizar.
+
+
+**** Población en Australia
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file PoblacionAustralia.png :exports code :results silent
+PoblacionAustralia_ts = as.ts( read.zoo('datos/PoblacionAustralia.csv', 
+                                        header=TRUE,
+                                        index.column = 1, 
+                                        sep=",", 
+                                        FUN = as.yearmon))
+autoplot(PoblacionAustralia_ts)
+#+END_SRC
+
+
+[[./img/lecc05/PoblacionAustralia.png]]
+
+
+**** PIB UEM
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file PIB_UEM.png :exports code :results silent
+PIB_UEM_ts = as.ts( read.csv.zoo("datos/PIB_UEM.csv", 
+                                 FUN = as.yearqtr, 
+                                 format = "%YQ%q", 
+                                 strip.white = TRUE))
+autoplot(PIB_UEM_ts)
+#+END_SRC
+
+
+[[./img/lecc05/PIB_UEM.png]]
+
+**** Rendimiento porcentual diario del IBEX 35
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file IBEX35.png :exports code :results silent
+IBEX35_ts = as.ts( read.csv.zoo("datos/IBEX35.csv", 
+                                strip.white = TRUE))
+autoplot(IBEX35_ts)
+#+END_SRC
+
+
+[[./img/lecc05/IBEX35.png]]
+
+
+**** Producción de cemento
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file ProduccionCemento.png :exports code :results silent
+ProduccionCemento_ts = as.ts( read.csv.zoo("datos/ProduccionCemento.csv",
+                                           FUN = as.yearmon, 
+                                           format = "%YM%m",
+                                           strip.white = TRUE))
+autoplot(ProduccionCemento_ts)
+#+END_SRC
+
+
+[[./img/lecc05/ProduccionCemento.png]]
+
+
+
+
+**** COMMENT Exportación de Acero                                  :noexport:
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file ExportacionDeAcero.png :exports code :results silent
+ExportacionDeAcero_ts = as.ts( read.csv.zoo("datos/ExportacionDeAcero.csv",
+                                            FUN = as.yearmon,
+                                            format = "%YM%m",
+                                            strip.white = TRUE))
+autoplot(ExportacionDeAcero_ts)
+#+END_SRC
+
+
+[[./img/lecc05/ExportacionDeAcero.png]]
+
+
+
+* Correlación serial vs muestreo aleatorio simple
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :UNNUMBERED: t 
+   :ID:       59d7b543-b898-4cf8-8ca9-f0f5e4734121
+   :END:
+
+
+#  [[./Lecc01.slides.html#/1/1/0][Procesos estocásticos y datos de series temporales]]
+
+- Con datos de sección cruzada se asume muestreo aleatorio simple
+  + i.e., los datos son realizaciones de variables aleatorias i.i.d.
+
+- Con series temporales dicha asunción resulta generalmente errónea
+  + con frecuencia el valor esperado parece cambiar con $t$ 
+  + con frecuencia hay dependencia temporal correlación serial
+
+  *Ejemplo*: dada la evolución de los datos, no parece aceptable
+  asumir que $ProdCemento_{1960M01}$ tiene la misma distribución que
+  $ProdCemento_{2000M04}$
+
+
+Veamos por qué esto genera dificultades...
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+
+Consideremos el proceso estocástico $$\boldsymbol{X}=(X_t \mid
+t=0,\pm1,\pm2,\ldots).$$ Caracterizar su distribución conjunta es
+demasiado ambicioso. 
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Fijémonos solo en los dos primeros momentos:
+
+$$E(X_t)={\color{blue}{ \mu_t}}\qquad\text{ y } \qquad
+Cov(X_t,X_k)=E\big[(X_t-\mu_t)(X_k-\mu_k)\big]={\color{blue}{\lambda_{t,k}}}$$
+(si $\;k=t\;$ entonces $\;\lambda_{t,t}=Var(X_t)=\sigma^2_t$).
+
+Si las $X_t$ fueran gaussianas, conocer estos /parámetros/ bastaría
+para caracterizar la distribución conjunta. Pero
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+- Necesitaríamos una muestra suficiente de cada $X_t$ para estimar los parámetros 
+  + y en una serie temporal tenemos una única realización para cada $X_t$  
+
+- Fíjese que hay más parámetros que variables aleatorias
+
+** Casos que simplifican el escenario
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :UNNUMBERED: t 
+   :END:
+
+- Cuando el proceso es [[./Lecc01.slides.html#/3/1][débilmente estacionario (Lecc01)]] se reduce
+  drásticamente el número de parámetros.
+
+  # [[file:Lecc01.org::*Estacionariedad en sentido débil][Estacionariedad en sentido débil]]
+  \begin{eqnarray}
+  E(X_t)  & = \mu \\
+  Cov(X_t,X_{t-k}) & = \gamma_k
+  \end{eqnarray}
+
+- Si además pudiéramos asumir que el proceso es i.i.d. podríamos
+  interpretar la serie temporal como una realización de un muestreo
+  aleatorio simple (lo que habilita la inferencia estadística).
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+El desafío para el analista es (y nótese el abuso de lenguaje)
+- primero :: transformar los datos para lograr que sean "*/estacionarios/*"
+  - (Lo vimos en la lección 1)) 
+- después :: transformar los datos estacionarios en una secuencia de
+  "*datos /i.i.d/*"
+  - (es lo que nos falta por ver) 
+  #+LATEX: \newline  \noindent
+
+* Función de autocovarianzas y función de autocorrelación
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+- La secuencia $(\gamma_k)$ con $k\in\mathbb{Z}$ se denomina
+  /función de autocovarianzas/
+
+
+- La secuencia $\{\rho_k\}$ con $k\in\mathbb{Z}$, donde
+     
+  $$\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0} $$
+   
+  #+LATEX: \newline  \noindent
+  se denomina /función de autocorrelación/ (ACF).
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+#+LATEX: \newline  \noindent
+Debido a la estacionariedad, la correlación entre $X_t$ y $X_{t+k}$ no
+depende de $t$; tan solo depende de la distancia temporal $k$ entre
+ambas variables.
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+$$\Sec{\phi}(\lag) : \phi  $$
+#+BEGIN_EXPORT latex
+$\Sec{\phi}(\lag)$
+#+END_EXPORT

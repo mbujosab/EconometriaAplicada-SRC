@@ -41,7 +41,7 @@ We need a small elisp script to setup and publish  it.
 
 #+RESULTS:
 
-We can check out the local version.
+Podemos chequear la versión local ejecutando el siguiente bloque
 
 #+BEGIN_SRC emacs-lisp
 (browse-url "docs/index.html")

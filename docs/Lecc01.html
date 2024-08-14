@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
 <head>
-<!-- 2024-07-27 sáb 17:54 -->
+<!-- 2024-08-14 mié 10:54 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 1</title>
@@ -240,7 +240,7 @@
 </li>
 <li><a href="#org52621d1">1. Procesos estocásticos y datos de series temporales</a>
 <ul>
-<li><a href="#orgab8996e">1.1. Datos de series temporales vs datos de sección cruzada</a></li>
+<li><a href="#orgbe4068f">1.1. Datos de sección cruzada vs datos de series temporales</a></li>
 <li><a href="#org8864daf">1.2. El desafío</a></li>
 </ul>
 </li>
@@ -330,26 +330,9 @@ Consecuentemente, consideraremos que una <i>serie temporal</i> es una
 </ul></dd>
 </dl>
 </div>
-<div id="outline-container-orgab8996e" class="outline-3">
-<h3 id="orgab8996e"><span class="section-number-3">1.1.</span> Datos de series temporales vs datos de sección cruzada</h3>
+<div id="outline-container-orgbe4068f" class="outline-3">
+<h3 id="orgbe4068f"><span class="section-number-3">1.1.</span> Datos de sección cruzada vs datos de series temporales</h3>
 <div class="outline-text-3" id="text-1-1">
-<dl class="org-dl">
-<dt>Series temporales</dt><dd>Corresponden a mediciones de un mismo objeto a
-lo largo del tiempo. El índice indica el instante de cada medición.
-<i>Es habitual que el orden cronológico de los datos sea fundamental</i>
-para explicar cada uno de ellos.
-
-<ul class="org-ul">
-<li>El motivo es que con frecuencia la medición en un instante de
-tiempo está relacionada con otras mediciones próximas en el
-tiempo.</li>
-
-<li>Si es así, no podremos asumir que las variables aleatorias del
-proceso estocástico subyacente, \(\boldsymbol{X}=\{X_t\}\), sean
-independientes entre sí.</li>
-</ul></dd>
-</dl>
-
 <dl class="org-dl">
 <dt>Sección cruzada</dt><dd>el índice NO es cronológico. La numeración (la
 indexación) de cada dato es solo una asignación arbitraria de
@@ -361,6 +344,23 @@ etc. que ha sido medido. Consecuentemente:
 
 <li>es decir, conocer únicamente el índice de un dato no permite
 deducir nada respecto de cualquier otro dato.</li>
+</ul></dd>
+</dl>
+
+<dl class="org-dl">
+<dt>Series temporales</dt><dd>Corresponden a mediciones de un mismo objeto a
+lo largo del tiempo. El índice indica el instante de cada medición.
+<i>Es habitual que el orden cronológico de los datos sea importante</i>
+para explicar cada uno de ellos.
+
+<ul class="org-ul">
+<li>El motivo es que con frecuencia la medición en un instante de
+tiempo está relacionada con otras mediciones próximas en el
+tiempo.</li>
+
+<li>Si es así, no podremos asumir que las variables aleatorias del
+proceso estocástico subyacente, \(\boldsymbol{X}=\{X_t\}\), sean
+independientes entre sí.</li>
 </ul></dd>
 </dl>
 </div>
@@ -389,6 +389,69 @@ una realización de un proceso estocástico estacionario</i>)
 </p></li>
 <li>lo habitual es que, por distintos motivos, <b>NO lo sea</b></li>
 </ul>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-python"><span style="color: #0000FF;">import</span> pandas <span style="color: #0000FF;">as</span> pd
+<span style="color: #0000FF;">import</span> matplotlib.pyplot <span style="color: #0000FF;">as</span> plt
+<span style="color: #BA36A5;">path</span> = <span style="color: #008000;">'./datos/'</span>
+<span style="color: #BA36A5;">df1</span> = pd.read_csv(path+<span style="color: #008000;">'PIB_UEM.csv'</span>)
+<span style="color: #BA36A5;">df2</span> = pd.read_csv(path+<span style="color: #008000;">'ProduccionCemento.csv'</span>)
+<span style="color: #BA36A5;">df3</span> = pd.read_csv(path+<span style="color: #008000;">'IBEX35.csv'</span>)
+<span style="color: #BA36A5;">df4</span> = pd.read_csv(path+<span style="color: #008000;">'ExportacionDeAcero.csv'</span>)
+<span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">print(df1.head())</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-python">df1.plot(x=<span style="color: #008000;">'obs'</span>,xlabel=<span style="color: #008000;">''</span>,title=<span style="color: #008000;">'PIB UEM'</span>, figsize=(15,4))
+</pre>
+</div>
+
+
+<div id="orgb4919dd" class="figure">
+<p><img src="./img/lecc01/PIB_UEM.png" alt="PIB_UEM.png" />
+</p>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-python">df2.plot(x=<span style="color: #008000;">'obs'</span>,xlabel=<span style="color: #008000;">''</span>,title=<span style="color: #008000;">'Producci&#243;n de cemento en Espa&#241;a'</span>, figsize=(15,4))
+</pre>
+</div>
+
+
+
+
+<div id="orgc13c847" class="figure">
+<p><img src="./img/lecc01/ProduccionCemento.png" alt="ProduccionCemento.png" />
+</p>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-python">df3.plot(x=<span style="color: #008000;">'obs'</span>,xlabel=<span style="color: #008000;">''</span>,title=<span style="color: #008000;">'Rendimiento porcentual diario del IBEX 35'</span>, figsize=(15,4))
+</pre>
+</div>
+
+
+
+<div id="org592ce43" class="figure">
+<p><img src="./img/lecc01/IBEX35.png" alt="IBEX35.png" />
+</p>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-python">df4.plot(x=<span style="color: #008000;">'obs'</span>,xlabel=<span style="color: #008000;">''</span>,title=<span style="color: #008000;">'Exportaciones espa&#241;olas de acero'</span>, figsize=(15,4))
+</pre>
+</div>
+
+
+
+<div id="org9539524" class="figure">
+<p><img src="./img/lecc01/ExportacionDeAcero.png" alt="ExportacionDeAcero.png" />
+</p>
+</div>
+
+
 
 <p>
 El desafío para el analista es
@@ -511,7 +574,7 @@ plt.plot(y)
 </div>
 
 
-<div id="org9eff46f" class="figure">
+<div id="org89513f8" class="figure">
 <p><img src="./img/lecc01/stationaryTimeSeriesExample.png" alt="stationaryTimeSeriesExample.png" />
 </p>
 </div>
@@ -533,11 +596,11 @@ Separar o distinguir ambos tipos de no estacionariedad no es sencillo.
 </p>
 
 <p>
-Veamos ejemplos de series temporales para los que 
+Veamos un ejemplo de serie temporal para la que 
 </p>
 <ul class="org-ul">
-<li>no podemos asumir que son realizaciones de procesos estocásticos
-estacionarios</li>
+<li>no podemos asumir que sea realización de un proceso estocástico
+estacionario</li>
 <li><p>
 y algunos intentos de transformación para obtener datos
 "<b>estacionarios</b>" (*)
@@ -584,7 +647,7 @@ plt.tight_layout()
 
 
 
-<div id="orgdb8d147" class="figure">
+<div id="orgbaf7f1c" class="figure">
 <p><img src="./img/lecc01/airlinepass+hist.png" alt="airlinepass+hist.png" />
 </p>
 </div>
@@ -639,7 +702,7 @@ plt.legend()
 
 
 
-<div id="org3192f9e" class="figure">
+<div id="orgc431c49" class="figure">
 <p><img src="./img/lecc01/funcion_logaritmica.png" alt="funcion_logaritmica.png" />
 </p>
 </div>
@@ -672,7 +735,7 @@ plt.tight_layout()
 </p>
 
 
-<div id="org1ba1e95" class="figure">
+<div id="org0c76987" class="figure">
 <p><img src="./img/lecc01/airlinepass_log+hist.png" alt="airlinepass_log+hist.png" />
 </p>
 </div>
@@ -709,7 +772,7 @@ plt.tight_layout()
 
 
 
-<div id="org7229d67" class="figure">
+<div id="org8908a47" class="figure">
 <p><img src="./img/lecc01/airlinepass_logDiff+hist.png" alt="airlinepass_logDiff+hist.png" />
 </p>
 </div>
@@ -749,7 +812,7 @@ plt.tight_layout()
 
 
 
-<div id="org8434a78" class="figure">
+<div id="orga81f73e" class="figure">
 <p><img src="./img/lecc01/airlinepass_logDiffDiff12+hist.png" alt="airlinepass_logDiffDiff12+hist.png" />
 </p>
 </div>
@@ -801,7 +864,7 @@ incremento es pequeño.
 
 
 
-<div id="orgc181375" class="figure">
+<div id="orgf811c4c" class="figure">
 <p><img src="./img/lecc01/TasaLogCrecimiento.png" alt="TasaLogCrecimiento.png" width="250px" />
 </p>
 </div>
@@ -810,7 +873,7 @@ incremento es pequeño.
 <h4 id="org9149d23"><span class="section-number-4">3.2.1.</span> Observaciones sobre los datos transformados</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <style>
-.reveal  td {font-size: 135%;}
+.reveal  td {font-size: 95%;}
 </style>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -865,7 +928,7 @@ incremento es pequeño.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-07-27 sáb 17:54</p>
+<p class="date">Created: 2024-08-14 mié 10:54</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

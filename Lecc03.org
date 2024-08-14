@@ -1,7 +1,7 @@
 #+TITLE: Econometría Aplicada. Lección 3
 #+author: Marcos Bujosa
 
-#+OPTIONS: toc:nil
+# +OPTIONS: toc:nil
 
 # +EXCLUDE_TAGS: pngoutput noexport
 
@@ -86,7 +86,6 @@ options(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
 * Correlación 
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
-   :UNNUMBERED: t 
    :END:
 
 La correlación entre dos muestras de tamaño $N$ (dos vectores de datos
@@ -109,7 +108,6 @@ Por tanto la correlación es algún valor entre $-1$ y $1$.
 ** La causalidad y correlación
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
-   :UNNUMBERED: t 
    :END:
 
 Cuando existe relación causal entre variables sus muestras suelen
@@ -122,37 +120,34 @@ estar correladas.
 Pero *correlaciones significativas no indican la existencia de relaciones causales*.
 
 - En una playa: consumo de helados y ataques de tiburón a los bañistas
-- Distancia entre galaxias lejanas y número de personas en la tierra
+# - Distancia entre dos galaxias y número de personas en la tierra
 
 
 ** Correlación espuria
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
-   :UNNUMBERED: t 
    :END:
 
 La correlación entre variables sin relación causal se denomina
 /correlación espuria/.
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-- Que haya correlación espuria no significa que "en realidad no hay correlación"
-- Que haya correlación espuria significa que es erróneo interpretar
-  que dicha correlación se debe a una relación causal
+- Que haya correlación espuria no significa que "en realidad no hay correlación".
+- Que haya correlación espuria significa que /es erróneo interpretar/
+  que dicha correlación se debe a /una relación causal/.
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Puede ser que ambas variables tengan una causa común
+Puede ser que una causa común induzca la correlación entre ambas variables
 - consumo de helados y venta de bañadores
 
-Puede ser que no exista relación alguna y aún así haya correlación
+Puede ser que no exista causa alguna y aún así haya correlación
 - [[https://www.tylervigen.com/spurious/correlation/7591_the-distance-between-uranus-and-mercury_correlates-with_electricity-generation-in-japan][Un ejemplo]]
 - [[https://www.tylervigen.com/spurious/correlation/5905_frozen-yogurt-consumption_correlates-with_violent-crime-rates][Otro]]
-  
-[[https://www.tylervigen.com/spurious-correlations][Encuentra más ejemplos aquí]]
+- Más ejemplos [[https://www.tylervigen.com/spurious-correlations][aquí]]
 
 ** Las series con tendencia suelen presentar elevadas correlaciones. 
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
-   :UNNUMBERED: t 
    :END:
   
 *** Ejemplo de correlación espuria: PNB vs incidencia de melanoma
@@ -246,10 +241,9 @@ Melanoma            118.98    7.81    15.23   0.00
 --------------------------------------------------
 #+end_example
 
-** Una forma de verificar que no hay causalidad detrás de esta correlación (es decir, que la correlación es "espuria")
+** Una manera de ver que la correlación del ejemplo es "espuria" (que no hay causalidad)
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
-   :UNNUMBERED: t 
    :END:
 
 Si fuera cierto que 
@@ -339,7 +333,6 @@ d_Melanoma           0.71   6.59     0.11   0.92
 * Cointegración 
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
-   :UNNUMBERED: t 
    :END:
 
 

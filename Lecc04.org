@@ -1,0 +1,584 @@
+#+TITLE: Econometría Aplicada. Lección 4
+#+author: Marcos Bujosa
+
+# +OPTIONS: toc:nil
+
+# +EXCLUDE_TAGS: pngoutput noexport
+
+#+startup: shrink
+
+#+LATEX_HEADER_EXTRA: \usepackage{lmodern}
+#+LATEX_HEADER_EXTRA: \usepackage{tabularx}
+#+LATEX_HEADER_EXTRA: \usepackage{booktabs}
+# +LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=blue}
+
+#+LaTeX_HEADER: \newcommand{\lag}{\mathsf{B}}
+#+LaTeX_HEADER: \newcommand{\Sec}[1]{\boldsymbol{#1}}
+#+LaTeX_HEADER: \newcommand{\Pol}[1]{\boldsymbol{#1}}
+
+#+LATEX: \maketitle
+
+# M-x jupyter-refresh-kernelspecs
+
+# C-c C-v C-b ejecuta el cuaderno electrónico
+
+#+OX-IPYNB-LANGUAGE: jupyter-R
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC emacs-lisp :exports none :results silent
+(use-package ox-ipynb
+  :load-path (lambda () (expand-file-name "ox-ipynb" scimax-dir)))
+
+(setq org-babel-default-header-args:jupyter-R
+      '((:results . "value")
+	(:session . "jupyter-R")
+	(:kernel . "ir")
+	(:pandoc . "t")
+	(:exports . "both")
+	(:cache .   "no")
+	(:noweb . "no")
+	(:hlines . "no")
+	(:tangle . "no")
+	(:eval . "never-export")))
+
+(require 'jupyter-R)
+;(require 'jupyter)
+
+(org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+
+(add-to-list 'org-src-lang-modes '("jupyter-R" . R))
+#+END_SRC
+
+
+#+BEGIN_ABSTRACT
+En esta lección veremos algunos conceptos algebraicos relacionados con
+la modelización de series temporales.
+#+END_ABSTRACT
+
+***** COMMENT para Jupyter-Notebook                               :noexports:
+\(
+\newcommand{\lag}{\mathsf{B}}
+\newcommand{\Sec}[1]{\boldsymbol{#1}}
+\newcommand{\Pol}[1]{\boldsymbol{#1}}
+\)
+
+
+
+* Secuencias de números
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+
+** El espacio vectorial de las secuencias infinitas $\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)$
+
+Consideremos el conjunto ${\mathbb{R}}^\mathbb{Z}$ de secuencias
+infinitas de números reales\\
+# @@latex:\noindent @@
+# (/por el momento puede asumir que son números reales/)
+
+$$
+\boldsymbol{x} 
+\quad = \quad
+(\ldots,\ x_{-2},\ x_{-1},\ x_{0},\ x_{1},\ x_{2},\ldots) 
+\quad = \quad
+(x_t \mid t\in\mathbb{Z}) 
+$$
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Las secuencias se pueden sumar y también se pueden multiplicar por
+escalares. 
+
+Si $\;\boldsymbol{x},\boldsymbol{y}\in{\mathbb{R}}^\mathbb{Z}\;$ y
+$\;a\in\mathbb{R}$, entonces
+$$\boldsymbol{x}+\boldsymbol{y}=(x_t+y_t \mid t\in\mathbb{Z})$$ y
+$$a\boldsymbol{x}=\big(a(x_t) \mid t\in\mathbb{Z}\big).$$ El conjunto
+${\mathbb{R}}^\mathbb{Z}$ junto con la suma elemento a elemento y el
+producto por escalares constituyen un espacio vectorial.
+
+
+*** *Notación mediante funciones generatrices*
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+En la expresión $\;\boldsymbol{x} \quad = \quad (\ldots,\ x_{-2},\
+x_{-1},\ x_{0},\ x_{1},\ x_{2},\ldots)\;$ separamos los elementos por
+comas, e indicamos la posición con un subíndice. Pero en
+$$\boldsymbol{a} \quad = \quad (\ldots,\ 0,\ 1,\ 4,\ 9,\ 2,
+0,\ldots) $$ ¿qué posición ocupan estos números en la secuencia?
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Las funciones generatrices resuelven este problema. En ellas los
+elementos se separan con el símbolo "$+$" y la posición es indicada
+con la potencia del símbolo "$z$"
+
+$$
+\boldsymbol{a} 
+\quad = \quad
+\cdots + 0z^{-2} + 1z^{-1} + 4z^{0}+ 9z + 0z^{2}+\cdots
+$$ 
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Así, podemos denotar la secuencia $\boldsymbol{x}$ de manera muy
+compacta del siguiente modo $$\boldsymbol{x} \quad = \quad
+\sum_{t=-\infty}^\infty x_t z^t \quad\equiv\quad \boldsymbol{x}(z)$$
+*¡Pero esta expresión no es una suma!* es solo un modo de expresar una
+secuencia denominada /función generatriz/.
+
+*** *Características de algunas secuencias*
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+En una sucesión $\boldsymbol{a}$ no nula llamamos
+- Grado :: al menor índice entero que verifica la propiedad: $$j >
+  grado(\boldsymbol{a}) \Rightarrow a_j=0$$
+
+  Para la sucesión, $\boldsymbol{0}$, diremos que su grado es menos
+  infinito $\;(grado(\boldsymbol{0}) = -\infty)$.
+
+- Cogrado :: al mayor índice entero que verifica la propiedad: $$j <
+  grado(\boldsymbol{a}) \Rightarrow a_j=0$$
+
+  Para la sucesión, $\boldsymbol{0}$, diremos que su cogrado es
+  infinito $\;(cogrado(\boldsymbol{0}) = \infty)$.
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Una sucesión $\boldsymbol{a}$ es 
+- Absolutamente sumable ($l_1$) :: si $\quad\sum_{t=-\infty}^\infty |a_t| < \infty$
+
+- De cuadrado sumable ($l_2$) ::   si $\quad\sum_{t=-\infty}^\infty a_t^2 < \infty$
+Una sucesión absolutamente sumable siempre es de cuadrado sumable,
+$l_1\subset l_2$.
+
+
+*** *Subespacios de $\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)$*
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+- Secuencias con final :: tienen grado (a partir de cierto índice son
+  cero).  $$\boldsymbol{a}(z) = (\ldots,\ a_{p-3},\ a_{p-2},\ a_{p-1},\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=-\infty}^p a_t z^t$$
+- Secuencias con principio :: tienen cogrado (antes de cierto índice
+  son cero).  $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2},\ a_{k+3},\ldots) = \sum_{t=k}^\infty a_t z^t$$
+
+  + Secuencias o [[https://en.wikipedia.org/wiki/Formal_power_series][sucesiones formales]] :: tienen cogrado $\geq 0$.
+    $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ a_{2},\ a_{3},\ldots) = \sum_{t=k}^\infty a_t z^t\qquad k\geq0$$
+
+- Polinomios :: son sucesiones formales con grado 
+  $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ldots,\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=k}^p a_t z^t\qquad k\geq0$$
+  (p.e. $\;a_0+a_1z+a_2z^2\;$ es un polinomio de grado 2).
+
+
+** Producto convolución
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+Sean $\boldsymbol{a}$ y $\boldsymbol{b}$ sucesiones _con principio_ (con cogrado).
+
+Definimos la sucesión producto convolución ($∗$) de $\boldsymbol{a}$ con $\boldsymbol{b}$ como:
+$$(\boldsymbol{a}*\boldsymbol{b})_t=\sum_{r+s=t} a_rb_s$$
+
+El producto convolución entre dos sucesiones con cogrado está bien
+definido. 
+
+El cogrado de $\boldsymbol{a}*\boldsymbol{b}$ es la suma de los
+respectivos cogrados.
+
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Además, _el producto convolución está bien definido entre dos sucesiones_:
+- _con final_ (con grado). El grado del producto es la suma de los
+  respectivos grados.
+
+- _absolutamente sumables_.
+
+** Anillos conmutativos y cuerpos
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+Un *anillo conmutativo* es un conjunto $\mathsf{S}$ equipado con dos
+operaciones binarias, la suma $+$ y el producto $*$ que satisfacen
+tres conjuntos de axiomas.
+
+En cuanto a la suma 
+ - $(\boldsymbol{a} + \boldsymbol{b}) + \boldsymbol{c} = \boldsymbol{a} + (\boldsymbol{b} + \boldsymbol{c})\;$ para todo $\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}$ en $\mathsf{S}\qquad$ (i.e. $+$ es asociativa).
+ - $\boldsymbol{a} + \boldsymbol{b} = \boldsymbol{b} + \boldsymbol{a}\;$ para todo $\boldsymbol{a}, \boldsymbol{b}$ en $\mathsf{S}\qquad$ (i.e. $+$ es conmutativa).
+ - Existe un elemento $\boldsymbol{0}$ tal que $\boldsymbol{a} + \boldsymbol{0} = \boldsymbol{a}$ para todo $\boldsymbol{a}\in \mathsf{S}$.
+ - Para cada $\boldsymbol{a}\in \mathsf{S}$ existe $-\boldsymbol{a}\in \mathsf{S}$ tal que $\boldsymbol{a} + (−\boldsymbol{a}) = \boldsymbol{0}$.
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+En cuanto al producto 
+ - $(\boldsymbol{a} * \boldsymbol{b}) * \boldsymbol{c} = \boldsymbol{a} * (\boldsymbol{b} * \boldsymbol{c})\;$ para todo $\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}$ en $\mathsf{S}\qquad$ (i.e. $*$ es asociativo). 
+ - $\boldsymbol{a} * \boldsymbol{b} = \boldsymbol{b} * \boldsymbol{a}\;$ para todo $\boldsymbol{a}, \boldsymbol{b}$ en $\mathsf{S}\qquad$ (i.e. $*$ es conmutativo).
+ - Existe un elemento $\boldsymbol{1}$ tal que $\boldsymbol{a} * \boldsymbol{1} = \boldsymbol{a}$ para todo $\boldsymbol{a}\in \mathsf{S}$.
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+El producto es distributivo respecto de la suma: Para todo $\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}$ en $\mathsf{S}$
+ - \(\boldsymbol{a}*(\boldsymbol{b}+\boldsymbol{c})=(\boldsymbol{a}*\boldsymbol{b})+(\boldsymbol{a}*\boldsymbol{c})\;\) 
+ - \((\boldsymbol{b}+\boldsymbol{c})*\boldsymbol{a}=(\boldsymbol{b}*\boldsymbol{a})+(\boldsymbol{c}*\boldsymbol{a})\;\)
+
+# https://en.wikipedia.org/wiki/Ring_(mathematics)
+
+# https://math.stackexchange.com/questions/141249/what-is-difference-between-a-ring-and-a-field
+
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Un *cuerpo* es un anillo conmutativo que adicionalmente satisface:
+
+# - $\boldsymbol{1}\ne\boldsymbol{0}$
+- Para cada $\boldsymbol{a}\in \mathsf{S}$ no nulo
+  ($\boldsymbol{a}\ne\boldsymbol{0}$), existe $\boldsymbol{b}\in \mathsf{S}$
+  tal que $\boldsymbol{a}*\boldsymbol{b}=\boldsymbol{1}$.
+
+  (/Todo elemento no nulo del conjunto tiene una inversa en dicho
+  conjunto/)
+
+*** *Clasificación de algunos subconjuntos de sucesiones* 
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . fragment)))
+   :END:
+
+- Son anillos el conjunto de :: sucesiones formales (cogrado $\geq0$), polinomios y
+  $l_1$.
+
+  Para algunas sucesiones (no nulas) de estos subconjuntos o no existe
+  inversa o, cuando existe, es una sucesión de otro tipo (p.e. las
+  inversas de un polinomio no son polinomios en general).
+
+- Son cuerpos el conjunto de :: secuencias con principio, secuencias
+  con final (y el [[id:d636ae1f-28b8-470a-9001-b05f1321d5b0][Cuerpo de fracciones de polinomios]])
+
+*** *Inversas de secuencias con principio*
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+Supongamos que $\boldsymbol{a}\ne\boldsymbol{0}$ y que $k =
+cogrado(\boldsymbol{a})$. Definimos $\boldsymbol{b}$ del siguiente modo:
+
+$$b_j=
+\begin{cases}
+0 & \text{ si } j<-k\\
+\frac{1}{a_k} & \text{ si } j=-k\\
+\frac{-1}{a_k}\sum_{r=-k}^{j-1}b_r a_{j+k-r} & \text{ si } j>-k
+\end{cases}$$
+
+Por construcción, $cogrado(\boldsymbol{b})=-k$ y en consecuencia si
+$j<0$, $(\boldsymbol{a}*\boldsymbol{b})_j=0$. Obviamente,
+$(\boldsymbol{a}*\boldsymbol{b})_0=1$; y si $j>0$,
+$(\boldsymbol{a}*\boldsymbol{b})_j=0$.
+
+#+BEGIN_EXPORT latex
+\medskip 
+
+Ya que
+\begin{align*}
+(\boldsymbol{a}*\boldsymbol{b})_j 
+= & \sum_{r+s=j}a_ rb_s = \sum_{r=-k}^{j-k}a_{j-r}b_r \\
+= & \sum_{r=-k}^{j-k-1}a_{j-r}b_r + a_k b_{j-k} \\ 
+= & \sum_{r=-k}^{j-k-1}a_{j-r}b_r + a_k \Big(\frac{-1}{a_k}\sum_{r=-k}^{j-k-1}b_r a_{j-k+k-r}\big) \\
+= & \sum_{r=-k}^{j-k-1}a_{j-r}b_r - \sum_{r=-k}^{j-k-1}b_r a_{j-r} = 0
+\end{align*}
+\medskip
+
+#+END_EXPORT
+
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+*Ejemplo*: Para el polinomio $1-az$
+
+$$(1-az)^{-\triangleright}=\text{inversa con principio de }(1-az)=
+\begin{cases}
+0 & \text{ si } j<0\\
+1 & \text{ si } j=0\\
+a^{-1} & \text{ si } j>0
+\end{cases}$$
+es decir
+$(\ldots,0,\ \fbox{1},\ a,\ a^2,\ a^3,\ldots)=\sum_{j=0}^\infty a^j z^j$
+
+#+BEGIN_EXPORT latex
+\medskip
+
+Comprobación: 
+\begin{align*}
+(1-az)\sum_{j=0}^\infty a^j z^j 
+= & \sum_{j=0}^\infty a^j z^j-az\sum_{j=0}^\infty a^j z^j \\
+= & \sum_{j=0}^\infty a^j z^j - \sum_{j=1}^\infty a^j z^j \\
+= & a^0 z^0 + \sum_{j=1}^\infty (a^j-a^j) z^j \\
+= & 1z^0 + \sum_{j=1}^\infty 0 z^j = \boldsymbol{1}
+\end{align*}
+% $$(1-az)\sum_{j=0}^\infty a^j z^j=\sum_{j=0}^\infty a^j z^j-az\sum_{j=0}^\infty a^j z^j=\sum_{j=0}^\infty a^j z^j-\sum_{j=1}^\infty a^j z^j=a^0 z^0+\sum_{j=1}^\infty (a^j-a^j) z^j=1z^0+\sum_{j=1}^\infty 0 z^j=\boldsymbol{1}$$
+\medskip
+
+#+END_EXPORT
+
+
+*** *Inversas de secuencias con final*
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+Supongamos que $\boldsymbol{a}\ne\boldsymbol{0}$ y que $p =
+grado(\boldsymbol{a})$. Definimos $\boldsymbol{b}$ del siguiente modo:
+$$b_j=
+\begin{cases}
+0 & \text{ si } j>-p\\
+\frac{1}{a_p} & \text{ si } j=-p\\
+\frac{-1}{a_p}\sum_{r=j-1}^{-p}b_r a_{j+p-r} & \text{ si } j<-p
+\end{cases}$$
+Por construcción, $grado(\boldsymbol{b}) = -p$.
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+*Ejemplo*: Para el polinomio $1-az$
+
+$$(1-az)^{\blacktriangleleft-}=\text{inversa con final de }(1-az)=
+\begin{cases}
+0 & \text{ si } j>-1\\
+\frac{-1}{a} & \text{ si } j=-1\\
+\frac{-1}{a^j} & \text{ si } j<-1
+\end{cases}$$
+es decir
+$(\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{0},\ldots)=\sum_{j=-\infty}^{-1} -a^j z^j$
+
+#+BEGIN_EXPORT latex
+\medskip
+
+Comprobación: 
+\begin{align*}
+(1-az)\sum_{j=-\infty}^{-1} -a^j z^j 
+= & \sum_{j=-\infty}^{-1} -a^j z^j + (-az)\sum_{j=-\infty}^{-1} -a^j z^j \\
+= & \sum_{j=-\infty}^{-1} -a^j z^j + \sum_{j=-\infty}^{0} a^j z^j \\
+= & \sum_{j=-\infty}^{-1} -a^j z^j + \sum_{j=-\infty}^{-1} a^j z^j +a^0 z^0 \\
+= & \sum_{j=-\infty}^{-1} (a^j-a^j) z^j + 1 z^0=\boldsymbol{1}
+\end{align*}
+% $$(1-az)\sum_{j=-\infty}^{-1} -a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + (-az)\sum_{j=-\infty}^{-1} -a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + \sum_{j=-\infty}^{0} a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + \sum_{j=-\infty}^{-1} a^j z^j +a^0 z^0=\sum_{j=-\infty}^{-1} (a^j-a^j) z^j + 1 z^0=\boldsymbol{1}$$
+#+END_EXPORT
+
+*** *Inversas de polinomios*
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+Ahora sabemos que todo polinomio
+- por tener cogrado :: tiene una inversa con cogrado (con principio)
+- por tener grado :: tiene una inversa con grado (con final)
+y generalmente dichas inversas no son polinomios.
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Por el ejemplo anterior sabemos que para $\;1-az\;$ ambas inversas son
+
+- $(1-az)^{-\triangleright}=\sum_{j=0}^\infty a^j z^j \quad=\quad (\ldots,0,\ \fbox{1},\ a,\ a^2,\ a^3,\ldots)$
+
+- $(1-az)^{\blacktriangleleft-}=\sum_{j=-\infty}^{-1} -a^j z^j \quad=\quad (\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{0},\ldots)$
+
+Es evidente que si $|a|\ne1$ una de las inversas está en $l_1$ y la
+otra no.
+
+Y si $|a|=1$ ninguna de las inversas pertenece a $l_1$
+
+#+BEGIN_EXPORT latex
+Además, por el \href{https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra}{Teorema fundamental del Álgebra} también sabemos que:
+
+\begin{quote}
+\em
+Todo polinomio univariante no nulo con coeficientes reales puede factorizarse como
+$${\displaystyle c\cdot\boldsymbol{p}_{1}*\cdots* \boldsymbol{p}_{k},}$$ 
+donde $c$ es un número real y cada ${\displaystyle \boldsymbol{p}_{i}}$ es un polinomio mónico (i.e., el coeficiente de $z^0$ es $1$) de grado 
+a lo sumo dos con coeficientes reales. 
+Más aún, se puede suponer que los factores de grado dos no tienen ninguna raíz real.
+\end{quote}
+#+END_EXPORT
+# https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra#Equivalent_statements
+
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Considere que un polinomio $\boldsymbol{a}$ sin raíces de módulo $1$;
+lo podemos factorizar
+$$\boldsymbol{a}=\boldsymbol{b}*\boldsymbol{c}$$ donde
+- $\boldsymbol{b}$ es un polinomio con las raíces de módulo menor que $1$ y
+  # (raíces dentro del círculo unidad) y
+- $\boldsymbol{c}$ es un polinomio con las raíces de módulo mayor que $1$
+  # (raíces fuera del círculo unidad).
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Como tanto los polinomios $\boldsymbol{a}$, $\boldsymbol{b}$ y
+$\boldsymbol{c}$ como las inversas
+$\boldsymbol{b}^{\blacktriangleleft-}$ y
+$\boldsymbol{c}^{-\triangleright}$ pertenecen al anillo $l_1$,
+$$\boldsymbol{a}*(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})
+=(\boldsymbol{b}*\boldsymbol{c})*(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})
+=\boldsymbol{b}*\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}*\boldsymbol{c}^{-\triangleright}=\boldsymbol{1}*\boldsymbol{1}=\boldsymbol{1}.$$
+La secuencia
+$\;(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})\;$
+es "la" inversa de $\boldsymbol{a}$ en $l_1$.
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+En general, dicha inversa no tiene grado ni cogrado y se denota
+con $\boldsymbol{a}^{-1}=\frac{1}{\boldsymbol{a}}$.\\
+@@latex:\noindent @@
+(/es la inversa que aparece en los libros de series temporales/)
+
+Evidentemente dicha inversa no existe si $\boldsymbol{a}$ tiene alguna raíz de módulo $1$.
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+En series temporales de un polinomio $\boldsymbol{a}$ se dice que *es invertible* si 
+# la inversa con cogrado pertenece a $l_1$; es decir, si 
+$$\boldsymbol{a}^{-\triangleright}=\boldsymbol{a}^{-1}.$$
+(/si sus raíces están fuera del círculo unidad./)
+# +attr_ipynb: (slideshow . ((slide_type . fragment)))
+
+*** *Cuerpo de fracciones de polinomios*
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :ID:       d636ae1f-28b8-470a-9001-b05f1321d5b0
+   :END:
+   
+El cuerpo más importante en la modelización ARIMA es el /cuerpo de
+fracciones de polinomios/
+$$\left\{\boldsymbol{p}*\boldsymbol{q}^{-\triangleright} \mid
+\boldsymbol{p} \text{ y } \boldsymbol{q} \text{ son polinomios y }
+\boldsymbol{q}\ne\boldsymbol{0} \right\};$$ es un subcuerpo del cuerpo
+de las sucesiones con principio (con cogrado)
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+/Toda fracción de sucesiones con grado y cogrado (con principio y
+final) pertenece al cuerpo de fracciones de polinomios/.
+
+El razonamiento es simple: Toda sucesión con grado $−k$ y cogrado es
+de la forma $\boldsymbol{p}*(z^k)^{-\triangleright}$, donde
+$\boldsymbol{p}$ es un polinomio.
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Cuando las raíces del polinomio $\boldsymbol{q}$ están fuera del
+circulo unidad (i.e.,
+$\;\boldsymbol{q}^{-\triangleright}=\boldsymbol{q}^{-1}$) es habitual
+denotar la secuencia $\boldsymbol{p}*\boldsymbol{q}^{-\triangleright}$
+así $$\frac{\boldsymbol{p}(z)}{\boldsymbol{q}(z)}$$
+
+** Operador retardo $\lag{}$ y suma de los elementos de una secuencia.
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+Por conveniencia se usa el operador retardo $\lag$ en la notación:
+$$\lag x_t = x_{t−1},\quad \text{para } t\in\mathbb{Z}.$$
+
+Aplicando el operador $\lag{}$ repetidamente tenemos $$\lag^k x_t =
+x_{t−k},\quad \text{para } t,z\in\mathbb{Z}$$ 
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Así, si la secuencia $\Sec{x}(z)=\sum_{t=-\infty}^\infty x_t z^t$ es
+sumable, entonces la expresión 
+$$\Sec{x}(\lag)=\sum_{t=-\infty}^\infty x_t \lag^t\;=\;\cdots+x_{-2}+x_{-1}+x_{0}+x_{1}+\cdots$$ tiene sentido como suma.
+
+*** *Polinomios y secuencias en el operador retardo $\Pol{a}(\lag{})$ actuando sobre secuencias*
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+Así, para el polinomio $\Pol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3$, y la
+secuencia $\Sec{y}$, tenemos
+\begin{align*}
+\Pol{a}(\lag)y_t 
+& = (a_0+a_1\lag+a_2\lag^2+a_3\lag^3) y_t \\
+& = a_0 y_t + a_1 \lag^1 y_t + a_2 \lag^2 y_t + a_3 \lag^3 y_t \\
+& = a_0y_t+a_1y_{t-1}+a_2y_{t-2}+a_3y_{t-3} \\
+& =\sum\nolimits_{r=0}^3 a_r y_{t-r} \\
+& =(\Pol{a}*\Sec{y})_t
+\end{align*}
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Y en general, si $\Sec{a}$ e $\Sec{y}$ son secuencias sumables, entonces
+\begin{align*}
+\Sec{a}(\lag)y_t 
+& = (\cdots+a_{-2}\lag^{-2},a_{-1}\lag^{-1},a_0+a_1\lag+a_2\lag^2+\cdots) y_t \\
+% & = a_0 y_t + a_1 \lag^1 y_t + a_2 \lag^2 y_t + a_3 \lag^3 y_t \\
+& = \cdots+a_{-2}y_{t-2}+a_{-1}y_{t-1}+a_0y_t+a_1y_{t-1}+a_2y_{t-2}+\cdots \\
+% & =\sum\nolimits_{r=0}^3 a_r y_{t-r} \\
+& =(\Pol{a}*\Sec{y})_t
+\end{align*}
+
+* Procesos estocásticos
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+
+Las procesos estocásticos se pueden sumar y se pueden multiplicar por
+escalares.
+
+Si $\Sec{X}$ e $\Sec{Y}$ son dos procesos estocásticos y
+$\;a\in\mathbb{R}$, entonces $$\Sec{X}+\Sec{Y}=(X_t+Y_t \mid
+t\in\mathbb{Z})$$ y $$a\Sec{X}=\big(a(X_t) \mid t\in\mathbb{Z}\big).$$
+El conjunto de procesos estocásticos junto con la suma elemento a
+elemento y el producto por escalares constituyen un espacio vectorial.
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Consideremos el proceso estocástico 
+$$\Sec{X}=(X_t \mid t=0,\pm1,\pm2,\ldots).$$
+
+Al igual que con las secuencias, podemos denotar el proceso
+estocástico con una función generatriz 
+$$\Sec{X} \quad = \quad \sum_{t=-\infty}^\infty X_t z^t \quad\equiv\quad \Sec{X}(z)$$
+Recuerde que la expresión de más arriba no es una suma, es una secuencia de variables aleatorias
+$$\sum_{t=-\infty}^\infty X_t z^t = (\ldots,\ X_{-2},\ X_{-1},\ X_{0},\ X_{1},\ X_{2},\ldots)$$
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Sea $\Sec{a}\in l_1$ (_una secuencia absolutamente sumable_) y $\Sec{X}$
+un proceso estocástico.
+
+Definimos el producto convolución ($∗$) de $\Sec{a}$ con $\Sec{X}$ como el proceso estocástico:
+$$\Sec{a}*\Sec{X}=\left(\left.\sum_{r+s=t} a_r X_s \right| t\in\mathbb{Z}\right)$$
+es decir
+$$(\Sec{a}*\Sec{X})_t=\sum_{r+s=t} a_r X_s,\quad \text{para } t\in\mathbb{Z}.$$
+Por tanto, cada elemento de $(\Sec{a}*\Sec{X})$ es una combinación de variables aleatorias de $\Sec{X}$
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Podemos aplicar el operador $\lag$ sobre los elementos de un proceso estocástico $\Sec{X}$.
+$$\lag X_t = X_{t−1},\quad \text{para } t\in\mathbb{Z}.$$
+
+Aplicando el operador $\lag$ repetidamente tenemos $$\lag^k X_t =
+X_{t−k},\quad \text{para } t,z\in\mathbb{Z}$$ 
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Así, para el polinomio $\Pol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3$, y el proceso estocástico $\Sec{Y}$
+\begin{align*}
+\Pol{a}(\lag)Y_t 
+& = (a_0+a_1\lag+a_2\lag^2+a_3\lag^3) Y_t \\
+% & = a_0 Y_t + a_1 \lag^1 Y_t + a_2 \lag^2 Y_t + a_3 \lag^3 Y_t \\
+& = a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+a_3Y_{t-3} \\
+% & =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
+& =(\Pol{a}*\Sec{Y})_t,\quad \text{para } t\in\mathbb{Z}
+\end{align*}
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Y en general, si \(\fbox{$\Sec{a}\in l_1$}\), entonces
+\begin{align*}
+\Sec{a}(\lag)Y_t 
+& = (\cdots+a_{-2}\lag^{-2},a_{-1}\lag^{-1},a_0+a_1\lag+a_2\lag^2+\cdots) Y_t \\
+% & = a_0 Y_t + a_1 \lag^1 Y_t + a_2 \lag^2 Y_t + a_3 \lag^3 Y_t \\
+& = \cdots+a_{-2}Y_{t-2}+a_{-1}Y_{t-1}+a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+\cdots \\
+% & =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
+& =(\Pol{a}*\Sec{y})_t,\quad \text{para } t\in\mathbb{Z}
+\end{align*}
+
+
+** Función de autocovarianzas y función de autocorrelación
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+- La secuencia $(\gamma_k)$ con $k\in\mathbb{Z}$ se denomina
+  /función de autocovarianzas/
+
+
+- La secuencia $\{\rho_k\}$ con $k\in\mathbb{Z}$, donde
+     
+  $$\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0} $$
+   
+  #+LATEX: \newline  \noindent
+  se denomina /función de autocorrelación/ (ACF).
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+#+LATEX: \newline  \noindent
+Debido a la estacionariedad, la correlación entre $X_t$ y $X_{t+k}$ no
+depende de $t$; tan solo depende de la distancia temporal $k$ entre
+ambas variables.

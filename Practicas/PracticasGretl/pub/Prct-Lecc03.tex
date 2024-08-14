@@ -1,0 +1,351 @@
+% Created 2024-07-26 vie 15:58
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[spanish, ]{babel}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[svgnames,x11names]{xcolor}
+\hypersetup{linktoc = all, colorlinks = true, urlcolor = DodgerBlue4, citecolor = PaleGreen1, linkcolor = SpringGreen4}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{nacal}
+\usepackage{framed}
+\usepackage{listings}
+\input{hansl.tex}
+\lstnewenvironment{hansl-gretl}
+{\lstset{language={hansl},basicstyle={\ttfamily\footnotesize},numbers,rame=single,breaklines=true}}
+{}
+\newcommand{\hansl}[1]{\lstset{language={hansl},basicstyle={\ttfamily\small}}\lstinline{#1}}
+\lstset{backgroundcolor=\color{lightgray!20}, }
+\author{Marcos Bujosa}
+\date{\today}
+\title{Lección 3}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+
+\section{Correlación espuria entre la incidencia de melanoma en el estado de Connecticut y el PNB de EEUU}
+\label{sec:org862f110}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/GNPvsMelanoma.inp}{GNPvsMelanoma.inp}\\[0pt]
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+\item Objetivo
+\label{sec:orge63afff}
+Comprobar cómo la aparente relación entre ambas series temporales se
+desvanece al tomar primeras diferencias
+
+\item Carga de datos
+\label{sec:org7bcc780}
+\textbf{\emph{\texttt{Archivo -{}-{}> Abrir datos -{}-{}> Archivo de usuario}}} y buscar en el
+disco el fichero \texttt{GNPvsMelanoma.gdt}.
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+open datos/GNPvsMelanoma.gdt
+\end{verbatim}
+}
+\end{enumerate}
+
+\subsection{Actividad 1 - Dibujar ambas series en un mismo gráfico}
+\label{sec:orgd7841f6}
+Marque las series \texttt{GNP} y \texttt{Melanoma}. Pulse sobre ellas con el botón
+derecho del ratón. En el menú desplegable seleccione \textbf{\emph{\texttt{Gráfico de
+Series Temporales}}} (indique representar en un único gráfico).
+
+Guarde el gráfico en la sesión como un icono.
+
+{\vspace{1pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+GraficoSeriesEnNiveles <- gnuplot GNP Melanoma --time-series --with-lines
+\end{verbatim}
+}
+
+\vspace{-3pt}
+
+\subsection{Actividad 2 - Dibujar el diagrama de dispersión}
+\label{sec:org2838ff8}
+Marque las series \texttt{GNP} y \texttt{Melanoma}. Pulse sobre ellas con el botón
+derecho del ratón. En el menú desplegable seleccione \textbf{\emph{\texttt{Gráfico de
+dispersión XY}}} (elija como variable del eje X \texttt{Melanoma} y marque
+suprimir la recta estimada).
+
+Guarde el gráfico en la sesión como un icono.
+
+{\vspace{1pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+DiagramDispersion <- gnuplot GNP Melanoma --fit=none
+\end{verbatim}
+}
+
+\vspace{-3pt}
+
+\begin{enumerate}
+\item ¿Tienen tendencia estas series temporales?
+\item ¿Parece ser una tendencia común a ambas series?
+\item Pero\ldots{} ¿lo podemos saber con seguridad solo mirando el gráfico?
+\end{enumerate}
+
+\subsection{Actividad 3 - Calcular la correlación entre ambas series}
+\label{sec:org0ed41c3}
+Marque las series \texttt{GNP} y \texttt{Melanoma}. Pulse sobre ellas con el botón
+derecho del ratón. En el menú desplegable seleccione \textbf{\emph{\texttt{Matriz de
+correlación}}}
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+corr GNP Melanoma
+\end{verbatim}
+}
+
+\subsection{Actividad 4 - Regresar \texttt{GNP} sobre \texttt{Melanoma} y constatar que el ajuste es bueno}
+\label{sec:org70554fa}
+Estime el modelo mediante los menús desplegables: \textbf{\emph{\texttt{Modelo -> Mínimos
+  Cuadrados Ordinarios}}}; indique a \href{https://gretl.sourceforge.net/es.html}{Gretl} el regresando y regresor y
+  pulse \textbf{\emph{\texttt{Aceptar}}}.
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+AjusteEnNiveles <- ols GNP 0 Melanoma
+\end{verbatim}
+}
+
+Aunque el coeficiente de determinación es muy elevado y los parámetros
+muy significativos, el modelo "\emph{no vale una castaña}". Una forma de
+constatarlo es darse cuenta de que si fuera cierto que $$
+\boldsymbol{y}=\beta_1 \boldsymbol{1} + \beta_2 \boldsymbol{x} +
+\boldsymbol{u} $$ Entonces también sería cierto que (y nótese que
+\(\nabla\boldsymbol{1}=\boldsymbol{0}\)) $$ \nabla\boldsymbol{y}=
+\beta_2 \nabla\boldsymbol{x} + \nabla\boldsymbol{u}$$
+
+Consecuentemente, si \(\boldsymbol{y}\) corresponde al \texttt{GNP} y
+\(\boldsymbol{x}\) a \texttt{Melanoma}, al regresar la primera diferencia de
+\texttt{GNP} sobre la primera diferencia de \texttt{Melanoma} el ajuste debería
+indicar que el parámetro de la constante (\(\beta_1\)) no es
+significativo, pero si la pendiente (\(\beta_2\)). Veamos que ocurre justo lo contrario\ldots{}
+
+\subsection{Actividad 5 - Añadir la primera diferencia de los datos}
+\label{sec:org9501b93}
+
+Selecione con el ratón la variable \texttt{GNP} y \texttt{Melanoma}. Luego pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
+ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
+\begin{itemize}
+\item \textbf{\emph{\texttt{Añadir -> Primeras diferencias de las variables seleccionadas}}}
+\end{itemize}
+
+Haga un gráfico con ambas series (verá que la tendencia ha desaparecido y que ya no se parecen entre sí).
+
+Calcule también la correlación entre ambas series diferenciadas
+(recuerde que en un modelo lineal simple el cuadrado de dicha
+correlación es el coeficiente de determinación).
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}: 
+\begin{verbatim}
+diff GNP Melanoma
+GraficoSeriesEnDiferencias <- gnuplot d_GNP d_Melanoma --time-series --with-lines
+corr d_GNP d_Melanoma
+\end{verbatim}
+}
+
+\subsection{Actividad 6 - Regresar \texttt{d\_GNP} sobre \texttt{d\_Melanoma} y constatar que el ajuste es horrible}
+\label{sec:org2530cb2}
+
+Estime el modelo mediante los menús desplegables: \textbf{\emph{\texttt{Modelo -> Mínimos
+  Cuadrados Ordinarios}}}; indique a \href{https://gretl.sourceforge.net/es.html}{Gretl} el regresando y regresor y
+  pulse \textbf{\emph{\texttt{Aceptar}}}.
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+AjusteEnDiferencias <- ols d_GNP 0 d_Melanoma
+\end{verbatim}
+}
+
+\textbf{Conclusión.} Las variables \texttt{GNP} y \texttt{Melanoma} muestran una tendencia
+creciente, lo que conduce a un elevado coeficiente de correlación
+entre ellas; pero la tendencia ni es común, ni la correlación se puede
+atribuir a ningúna relación de causalidad entre ellas. La correlación
+en este caso es espuria (es decir, carece de sentido tartar de
+interpretarla).
+
+\vspace{10pt}
+\noindent
+\textbf{Código completo de la práctica} \texttt{GNPvsMelanoma.inp}
+\vspace{10pt}
+\lstinputlisting{scripts/GNPvsMelanoma.inp}
+\clearpage
+
+
+\section{Tipos de interés a corto y largo plazo}
+\label{sec:orge3912a0}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/UKinterestRates.inp}{UKinterestRates.inp}\\[0pt]
+\end{tabular}
+\end{center}
+
+\begin{enumerate}
+\item Objetivo
+\label{sec:org6e55aaa}
+Ver que probablemmente la correlación entre los tipos a corto y largo
+plazo no es espuria, y que ambas series probablemente están
+cointegrados.
+
+\item Carga de datos
+\label{sec:orgff467b8}
+\textbf{\emph{\texttt{Archivo -{}-{}> Abrir datos -{}-{}> Archivo de usuario}}} y buscar en el
+disco el fichero \texttt{UKinterestRates.gdt}.
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+open datos/UKinterestRates.gdt
+\end{verbatim}
+}
+\end{enumerate}
+
+\subsection{Actividad 1 - Dibujar ambas series en un mismo gráfico}
+\label{sec:org1afe996}
+Marque las series \texttt{Long} y \texttt{Short}. Pulse sobre ellas con el botón
+derecho del ratón. En el menú desplegable seleccione \textbf{\emph{\texttt{Gráfico de
+Series Temporales}}} (indique representar en un único gráfico).
+
+Guarde el gráfico en la sesión como un icono.
+
+{\vspace{1pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+GraficoSeriesEnNiveles <- gnuplot Long Short --time-series --with-lines
+\end{verbatim}
+}
+
+\vspace{-3pt}
+
+\begin{enumerate}
+\item ¿Tienen tendencia estas series temporales?
+\item ¿Parece ser una tendencia común a ambas series?
+\item Pero\ldots{} ¿lo podemos saber con seguridad solo mirando el gráfico?
+\end{enumerate}
+
+\subsection{Actividad 2 - Dibujar el diagrama de dispersión y calcule la correlación}
+\label{sec:org5c00e52}
+Marque las series \texttt{Long} y \texttt{Short}. Pulse sobre ellas con el botón
+derecho del ratón. En el menú desplegable seleccione \textbf{\emph{\texttt{Gráfico de
+dispersión XY}}} (elija como variable del eje X \texttt{Long} y marque
+suprimir la recta estimada).
+
+Guarde el gráfico en la sesión como un icono.
+
+Calcule la correlación entre ambas series.
+
+{\vspace{1pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+DiagramDispersion <- gnuplot Short Long --fit=none
+corr Long Short
+\end{verbatim}
+}
+
+\vspace{-3pt}
+
+\subsection{Actividad 3 - Regrese la primera diferencia de los tipos a corto sobre la diferencia de los tipos a largo}
+\label{sec:orgcdc0785}
+\begin{enumerate}
+\item Incluya las primeras diferencias de \texttt{Short} y \texttt{Long}
+\item Dibuje ambas series diferenciadas. ¿Parecen "ser estacionarias en
+media"? ¿Son \texttt{Short} y \texttt{Long} aparentemente \(I(1)?\)
+\item ¿Están correladas?
+\item Regrese \texttt{d\_Short} sobre \texttt{d\_Long}
+\item Observe los resultados de la regresión.
+\begin{itemize}
+\item ¿Son significativos los parámetros? ¿cuales sí y cuales no?
+(compare esto con lo que pasaba en el ejemplo anterior)
+\item ¿Reproduce el modelo parte de la varianza de \texttt{d\_Short}?
+\end{itemize}
+\end{enumerate}
+
+Realice los pasos con la interfáz gráfica y los menús desplegables,
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+diff Short Long
+GraficoSeriesEnDiferencias <- gnuplot d_Short d_Long --time-series --with-lines
+corr d_Short d_Long
+AjusteEnDiferencias <- ols d_Short 0 d_Long
+\end{verbatim}
+}
+
+\subsection{Actividad 4 - Ajuste los tipos corto plazo en función de los tipos a largo}
+\label{sec:org70bb74e}
+
+Veamos si las series en niveles pueden estar cointegradas. Para ello
+debemos analizar los residuos de la regresión de \texttt{Short} sobre
+\texttt{Long}.
+
+\begin{enumerate}
+\item Regrese \texttt{Short} sobre \texttt{Long}
+\item Observe los resultados de la regresión.
+\begin{itemize}
+\item ¿Son significativos los parámetros?
+\item ¿Reproduce el modelo parte de la varianza de \texttt{Short}?
+\end{itemize}
+\item Dibuje los residuos de la regresión. ¿Parecen "estacionarios en
+media"? dicho de otra forma ¿muestran alguna tendencia?
+\end{enumerate}
+
+Realice los pasos con la interfáz gráfica y los menús desplegables,
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+AjusteEnNiveles <- ols Short 0 Long
+residuos = $uhat
+GraficoResiduos <- gnuplot residuos --time-series --with-lines
+\end{verbatim}
+}
+
+
+\textbf{Conclusión.} Las variables \texttt{Short} y \texttt{Long} son no estacionarias
+(tienen tendencia), lo que conduce a un elevado coeficiente de
+correlación entre ellas; sus primeras diferencias parecen
+"estacionarias" lo que sugiere que mabas series son \(I(1)\).
+
+La regresión de las series en diferencias y los residuos de la
+regresión en niveles parecen compatibles con que \texttt{Short} y \texttt{Long}
+estén cointegradas, es decir, que tengan una tendencia común.
+
+En este caso la correlación no parece ser espuria, por lo que cabe
+interpretar dicha correlación y pensar que hay relación entre los
+tipos a corto y a largo plazo.
+
+A este análisis le falta la realización de contrartes estadísticos que
+confirmen la estacionariedad de las series diferenciadas y de los
+residuos de la última regresión.
+
+\vspace{10pt}
+\noindent
+\textbf{Código completo de la práctica} \texttt{UKinterestRates.inp}
+\vspace{10pt}
+\lstinputlisting{scripts/UKinterestRates.inp}
+\clearpage
+\end{document}

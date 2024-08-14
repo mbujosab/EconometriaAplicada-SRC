@@ -58,6 +58,7 @@ def repr_png(tex, ImgFile):
 * Procesos estocásticos y datos de series temporales
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
+   :ID:       a53c2b86-04b8-4907-9526-202bd71e8c2a
    :END:
 
 - Proceso estocástico :: es una secuencia de variables aleatorias $X_t$
@@ -80,25 +81,12 @@ def repr_png(tex, ImgFile):
    $$(x_1, x_2,\ldots x_n) \text{ es una realización de }\{X_t \mid t=1,2,\ldots n\}.$$
 
 
-** Datos de series temporales vs datos de sección cruzada
+** Datos de sección cruzada vs datos de series temporales
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
 
-- Series temporales :: Corresponden a mediciones de un mismo objeto a
-  lo largo del tiempo. El índice indica el instante de cada medición.
-  /Es habitual que el orden cronológico de los datos sea fundamental/
-  para explicar cada uno de ellos.
 
-  - El motivo es que con frecuencia la medición en un instante de
-    tiempo está relacionada con otras mediciones próximas en el
-    tiempo.
-
-  - Si es así, no podremos asumir que las variables aleatorias del
-    proceso estocástico subyacente, $\boldsymbol{X}=\{X_t\}$, sean
-    independientes entre sí.
-
-#+attr_ipynb: (slideshow . ((slide_type . fragment)))
 - Sección cruzada ::  el índice NO es cronológico. La numeración (la
   indexación) de cada dato es solo una asignación arbitraria de
   /etiquetas/ que identifican a cada individuo, empresa, objeto,
@@ -109,6 +97,19 @@ def repr_png(tex, ImgFile):
   - es decir, conocer únicamente el índice de un dato no permite
     deducir nada respecto de cualquier otro dato.
 
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+- Series temporales :: Corresponden a mediciones de un mismo objeto a
+  lo largo del tiempo. El índice indica el instante de cada medición.
+  /Es habitual que el orden cronológico de los datos sea importante/
+  para explicar cada uno de ellos.
+
+  - El motivo es que con frecuencia la medición en un instante de
+    tiempo está relacionada con otras mediciones próximas en el
+    tiempo.
+
+  - Si es así, no podremos asumir que las variables aleatorias del
+    proceso estocástico subyacente, $\boldsymbol{X}=\{X_t\}$, sean
+    independientes entre sí.
 
 ** El desafío
    :PROPERTIES:
@@ -128,6 +129,61 @@ Además,
   (/abuso del lenguaje que expresa que podemos asumir que la serie es
   una realización de un proceso estocástico estacionario/)
 - lo habitual es que, por distintos motivos, *NO lo sea*
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python
+import pandas as pd
+import matplotlib.pyplot as plt
+path = './datos/'
+df1 = pd.read_csv(path+'PIB_UEM.csv')
+df2 = pd.read_csv(path+'ProduccionCemento.csv')
+df3 = pd.read_csv(path+'IBEX35.csv')
+df4 = pd.read_csv(path+'ExportacionDeAcero.csv')
+#print(df1.head())
+#+END_SRC
+
+#+RESULTS:
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc01/PIB_UEM.png :results silent
+df1.plot(x='obs',xlabel='',title='PIB UEM', figsize=(15,4))
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+
+[[./img/lecc01/PIB_UEM.png]]
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc01/ProduccionCemento.png :results silent
+df2.plot(x='obs',xlabel='',title='Producción de cemento en España', figsize=(15,4))
+#+END_SRC
+
+
+
+[[./img/lecc01/ProduccionCemento.png]]
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc01/IBEX35.png  :results silent
+df3.plot(x='obs',xlabel='',title='Rendimiento porcentual diario del IBEX 35', figsize=(15,4))
+#+END_SRC
+
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+
+[[./img/lecc01/IBEX35.png]]
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc01/ExportacionDeAcero.png  :results silent
+df4.plot(x='obs',xlabel='',title='Exportaciones españolas de acero', figsize=(15,4))
+#+END_SRC
+
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+
+[[./img/lecc01/ExportacionDeAcero.png]]
+
+
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 El desafío para el analista es
@@ -162,6 +218,7 @@ necesaria.
 ** Estacionariedad en sentido débil
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
+   :ID:       47044916-d502-4a21-b8ae-f237b34dd757
    :END:
 Un proceso estocástico $\boldsymbol{X}=\{X_t\}$ se dice *estacionario*
 (/en sentido débil/) si para todo $t$ y $k$ de $\mathbb{Z}$
@@ -240,9 +297,9 @@ Un proceso estocástico $\mathbf{X}=\{X_t\}$ puede ser
 Separar o distinguir ambos tipos de no estacionariedad no es sencillo.
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Veamos ejemplos de series temporales para los que 
-- no podemos asumir que son realizaciones de procesos estocásticos
-  estacionarios
+Veamos un ejemplo de serie temporal para la que 
+- no podemos asumir que sea realización de un proceso estocástico
+  estacionario
 - y algunos intentos de transformación para obtener datos
   "*estacionarios*" (*)
   #+LATEX: \newline  \noindent
@@ -496,7 +553,7 @@ incremento es pequeño.
 
 #+begin_export html
 <style>
-.reveal  td {font-size: 135%;}
+.reveal  td {font-size: 95%;}
 </style>
 #+end_export
 #+ATTR_LATEX: :align |p{3.8cm}|p{11.9cm}|

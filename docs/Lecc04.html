@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2024-08-14 mié 10:54 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Econometría Aplicada. Lección 4</title>
+<meta name="author" content="Marcos Bujosa" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Econometría Aplicada. Lección 4</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org2ce2fb4">1. Secuencias de números</a>
+<ul>
+<li><a href="#org9eb2348">1.1. El espacio vectorial de las secuencias infinitas \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a>
+<ul>
+<li><a href="#orgcb981c7">1.1.1. <b>Notación mediante funciones generatrices</b></a></li>
+<li><a href="#org699c312">1.1.2. <b>Características de algunas secuencias</b></a></li>
+<li><a href="#orgb22fe15">1.1.3. <b>Subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</b></a></li>
+</ul>
+</li>
+<li><a href="#org679e527">1.2. Producto convolución</a></li>
+<li><a href="#org1817ae9">1.3. Anillos conmutativos y cuerpos</a>
+<ul>
+<li><a href="#org93d93c0">1.3.1. <b>Clasificación de algunos subconjuntos de sucesiones</b></a></li>
+<li><a href="#orge57109e">1.3.2. <b>Inversas de secuencias con principio</b></a></li>
+<li><a href="#org29a3cf6">1.3.3. <b>Inversas de secuencias con final</b></a></li>
+<li><a href="#org377e572">1.3.4. <b>Inversas de polinomios</b></a></li>
+<li><a href="#orgc7516fd">1.3.5. <b>Cuerpo de fracciones de polinomios</b></a></li>
+</ul>
+</li>
+<li><a href="#orga7eb5e8">1.4. Operador retardo \(\lag{}\) y suma de los elementos de una secuencia.</a>
+<ul>
+<li><a href="#orgeda4258">1.4.1. <b>Polinomios y secuencias en el operador retardo \(\Pol{a}(\lag{})\) actuando sobre secuencias</b></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgfa89f86">2. Procesos estocásticos</a>
+<ul>
+<li><a href="#orgac07de4">2.1. Función de autocovarianzas y función de autocorrelación</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="ABSTRACT" id="org397c62a">
+<p>
+En esta lección veremos algunos conceptos algebraicos relacionados con
+la modelización de series temporales.
+</p>
+
+</div>
+<div id="outline-container-org2ce2fb4" class="outline-2">
+<h2 id="org2ce2fb4"><span class="section-number-2">1.</span> Secuencias de números</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-org9eb2348" class="outline-3">
+<h3 id="org9eb2348"><span class="section-number-3">1.1.</span> El espacio vectorial de las secuencias infinitas \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Consideremos el conjunto \({\mathbb{R}}^\mathbb{Z}\) de secuencias
+infinitas de números reales<br />
+</p>
+
+<p>
+\[
+\boldsymbol{x} 
+\quad = \quad
+(\ldots,\ x_{-2},\ x_{-1},\ x_{0},\ x_{1},\ x_{2},\ldots) 
+\quad = \quad
+(x_t \mid t\in\mathbb{Z}) 
+\]
+</p>
+
+<p>
+Las secuencias se pueden sumar y también se pueden multiplicar por
+escalares. 
+</p>
+
+<p>
+Si \(\;\boldsymbol{x},\boldsymbol{y}\in{\mathbb{R}}^\mathbb{Z}\;\) y
+\(\;a\in\mathbb{R}\), entonces
+\[\boldsymbol{x}+\boldsymbol{y}=(x_t+y_t \mid t\in\mathbb{Z})\] y
+\[a\boldsymbol{x}=\big(a(x_t) \mid t\in\mathbb{Z}\big).\] El conjunto
+\({\mathbb{R}}^\mathbb{Z}\) junto con la suma elemento a elemento y el
+producto por escalares constituyen un espacio vectorial.
+</p>
+</div>
+<div id="outline-container-orgcb981c7" class="outline-4">
+<h4 id="orgcb981c7"><span class="section-number-4">1.1.1.</span> <b>Notación mediante funciones generatrices</b></h4>
+<div class="outline-text-4" id="text-1-1-1">
+<p>
+En la expresión \(\;\boldsymbol{x} \quad = \quad (\ldots,\ x_{-2},\
+x_{-1},\ x_{0},\ x_{1},\ x_{2},\ldots)\;\) separamos los elementos por
+comas, e indicamos la posición con un subíndice. Pero en
+\[\boldsymbol{a} \quad = \quad (\ldots,\ 0,\ 1,\ 4,\ 9,\ 2,
+0,\ldots) \] ¿qué posición ocupan estos números en la secuencia?
+</p>
+
+<p>
+Las funciones generatrices resuelven este problema. En ellas los
+elementos se separan con el símbolo "\(+\)" y la posición es indicada
+con la potencia del símbolo "\(z\)"
+</p>
+
+<p>
+\[
+\boldsymbol{a} 
+\quad = \quad
+\cdots + 0z^{-2} + 1z^{-1} + 4z^{0}+ 9z + 0z^{2}+\cdots
+\] 
+</p>
+
+<p>
+Así, podemos denotar la secuencia \(\boldsymbol{x}\) de manera muy
+compacta del siguiente modo \[\boldsymbol{x} \quad = \quad
+\sum_{t=-\infty}^\infty x_t z^t \quad\equiv\quad \boldsymbol{x}(z)\]
+<b>¡Pero esta expresión no es una suma!</b> es solo un modo de expresar una
+secuencia denominada <i>función generatriz</i>.
+</p>
+</div>
+</div>
+<div id="outline-container-org699c312" class="outline-4">
+<h4 id="org699c312"><span class="section-number-4">1.1.2.</span> <b>Características de algunas secuencias</b></h4>
+<div class="outline-text-4" id="text-1-1-2">
+<p>
+En una sucesión \(\boldsymbol{a}\) no nula llamamos
+</p>
+<dl class="org-dl">
+<dt>Grado</dt><dd><p>
+al menor índice entero que verifica la propiedad: \[j >
+  grado(\boldsymbol{a}) \Rightarrow a_j=0\]
+</p>
+
+<p>
+Para la sucesión, \(\boldsymbol{0}\), diremos que su grado es menos
+infinito \(\;(grado(\boldsymbol{0}) = -\infty)\).
+</p></dd>
+
+<dt>Cogrado</dt><dd><p>
+al mayor índice entero que verifica la propiedad: \[j <
+  grado(\boldsymbol{a}) \Rightarrow a_j=0\]
+</p>
+
+<p>
+Para la sucesión, \(\boldsymbol{0}\), diremos que su cogrado es
+infinito \(\;(cogrado(\boldsymbol{0}) = \infty)\).
+</p></dd>
+</dl>
+
+<p>
+Una sucesión \(\boldsymbol{a}\) es 
+</p>
+<dl class="org-dl">
+<dt>Absolutamente sumable (\(l_1\))</dt><dd>si \(\quad\sum_{t=-\infty}^\infty |a_t| < \infty\)</dd>
+
+<dt>De cuadrado sumable (\(l_2\))</dt><dd>si \(\quad\sum_{t=-\infty}^\infty a_t^2 < \infty\)</dd>
+</dl>
+<p>
+Una sucesión absolutamente sumable siempre es de cuadrado sumable,
+\(l_1\subset l_2\).
+</p>
+</div>
+</div>
+<div id="outline-container-orgb22fe15" class="outline-4">
+<h4 id="orgb22fe15"><span class="section-number-4">1.1.3.</span> <b>Subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</b></h4>
+<div class="outline-text-4" id="text-1-1-3">
+<dl class="org-dl">
+<dt>Secuencias con final</dt><dd>tienen grado (a partir de cierto índice son
+cero).  \[\boldsymbol{a}(z) = (\ldots,\ a_{p-3},\ a_{p-2},\ a_{p-1},\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=-\infty}^p a_t z^t\]</dd>
+<dt>Secuencias con principio</dt><dd>tienen cogrado (antes de cierto índice
+son cero).  \[\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2},\ a_{k+3},\ldots) = \sum_{t=k}^\infty a_t z^t\]
+
+<dl class="org-dl">
+<dt>Secuencias o <a href="https://en.wikipedia.org/wiki/Formal_power_series">sucesiones formales</a></dt><dd>tienen cogrado \(\geq 0\).
+\[\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ a_{2},\ a_{3},\ldots) = \sum_{t=k}^\infty a_t z^t\qquad k\geq0\]</dd>
+</dl></dd>
+
+<dt>Polinomios</dt><dd>son sucesiones formales con grado 
+\[\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ldots,\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=k}^p a_t z^t\qquad k\geq0\]
+(p.e. \(\;a_0+a_1z+a_2z^2\;\) es un polinomio de grado 2).</dd>
+</dl>
+</div>
+</div>
+</div>
+<div id="outline-container-org679e527" class="outline-3">
+<h3 id="org679e527"><span class="section-number-3">1.2.</span> Producto convolución</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+Sean \(\boldsymbol{a}\) y \(\boldsymbol{b}\) sucesiones <span class="underline">con principio</span> (con cogrado).
+</p>
+
+<p>
+Definimos la sucesión producto convolución (\(∗\)) de \(\boldsymbol{a}\) con \(\boldsymbol{b}\) como:
+\[(\boldsymbol{a}*\boldsymbol{b})_t=\sum_{r+s=t} a_rb_s\]
+</p>
+
+<p>
+El producto convolución entre dos sucesiones con cogrado está bien
+definido. 
+</p>
+
+<p>
+El cogrado de \(\boldsymbol{a}*\boldsymbol{b}\) es la suma de los
+respectivos cogrados.
+</p>
+
+
+<p>
+Además, <span class="underline">el producto convolución está bien definido entre dos sucesiones</span>:
+</p>
+<ul class="org-ul">
+<li><span class="underline">con final</span> (con grado). El grado del producto es la suma de los
+respectivos grados.</li>
+
+<li><span class="underline">absolutamente sumables</span>.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org1817ae9" class="outline-3">
+<h3 id="org1817ae9"><span class="section-number-3">1.3.</span> Anillos conmutativos y cuerpos</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Un <b>anillo conmutativo</b> es un conjunto \(\mathsf{S}\) equipado con dos
+operaciones binarias, la suma \(+\) y el producto \(*\) que satisfacen
+tres conjuntos de axiomas.
+</p>
+
+<p>
+En cuanto a la suma 
+</p>
+<ul class="org-ul">
+<li>\((\boldsymbol{a} + \boldsymbol{b}) + \boldsymbol{c} = \boldsymbol{a} + (\boldsymbol{b} + \boldsymbol{c})\;\) para todo \(\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}\) en \(\mathsf{S}\qquad\) (i.e. \(+\) es asociativa).</li>
+<li>\(\boldsymbol{a} + \boldsymbol{b} = \boldsymbol{b} + \boldsymbol{a}\;\) para todo \(\boldsymbol{a}, \boldsymbol{b}\) en \(\mathsf{S}\qquad\) (i.e. \(+\) es conmutativa).</li>
+<li>Existe un elemento \(\boldsymbol{0}\) tal que \(\boldsymbol{a} + \boldsymbol{0} = \boldsymbol{a}\) para todo \(\boldsymbol{a}\in \mathsf{S}\).</li>
+<li>Para cada \(\boldsymbol{a}\in \mathsf{S}\) existe \(-\boldsymbol{a}\in \mathsf{S}\) tal que \(\boldsymbol{a} + (−\boldsymbol{a}) = \boldsymbol{0}\).</li>
+</ul>
+
+<p>
+En cuanto al producto 
+</p>
+<ul class="org-ul">
+<li>\((\boldsymbol{a} * \boldsymbol{b}) * \boldsymbol{c} = \boldsymbol{a} * (\boldsymbol{b} * \boldsymbol{c})\;\) para todo \(\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}\) en \(\mathsf{S}\qquad\) (i.e. \(*\) es asociativo).</li>
+<li>\(\boldsymbol{a} * \boldsymbol{b} = \boldsymbol{b} * \boldsymbol{a}\;\) para todo \(\boldsymbol{a}, \boldsymbol{b}\) en \(\mathsf{S}\qquad\) (i.e. \(*\) es conmutativo).</li>
+<li>Existe un elemento \(\boldsymbol{1}\) tal que \(\boldsymbol{a} * \boldsymbol{1} = \boldsymbol{a}\) para todo \(\boldsymbol{a}\in \mathsf{S}\).</li>
+</ul>
+
+<p>
+El producto es distributivo respecto de la suma: Para todo \(\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}\) en \(\mathsf{S}\)
+</p>
+<ul class="org-ul">
+<li>\(\boldsymbol{a}*(\boldsymbol{b}+\boldsymbol{c})=(\boldsymbol{a}*\boldsymbol{b})+(\boldsymbol{a}*\boldsymbol{c})\;\)</li>
+<li>\((\boldsymbol{b}+\boldsymbol{c})*\boldsymbol{a}=(\boldsymbol{b}*\boldsymbol{a})+(\boldsymbol{c}*\boldsymbol{a})\;\)</li>
+</ul>
+
+
+<p>
+Un <b>cuerpo</b> es un anillo conmutativo que adicionalmente satisface:
+</p>
+
+<ul class="org-ul">
+<li><p>
+Para cada \(\boldsymbol{a}\in \mathsf{S}\) no nulo
+(\(\boldsymbol{a}\ne\boldsymbol{0}\)), existe \(\boldsymbol{b}\in \mathsf{S}\)
+tal que \(\boldsymbol{a}*\boldsymbol{b}=\boldsymbol{1}\).
+</p>
+
+<p>
+(<i>Todo elemento no nulo del conjunto tiene una inversa en dicho
+conjunto</i>)
+</p></li>
+</ul>
+</div>
+<div id="outline-container-org93d93c0" class="outline-4">
+<h4 id="org93d93c0"><span class="section-number-4">1.3.1.</span> <b>Clasificación de algunos subconjuntos de sucesiones</b></h4>
+<div class="outline-text-4" id="text-1-3-1">
+<dl class="org-dl">
+<dt>Son anillos el conjunto de</dt><dd><p>
+sucesiones formales (cogrado \(\geq0\)), polinomios y
+\(l_1\).
+</p>
+
+<p>
+Para algunas sucesiones (no nulas) de estos subconjuntos o no existe
+inversa o, cuando existe, es una sucesión de otro tipo (p.e. las
+inversas de un polinomio no son polinomios en general).
+</p></dd>
+
+<dt>Son cuerpos el conjunto de</dt><dd>secuencias con principio, secuencias
+con final (y el <a href="#orgc7516fd">Cuerpo de fracciones de polinomios</a>)</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-orge57109e" class="outline-4">
+<h4 id="orge57109e"><span class="section-number-4">1.3.2.</span> <b>Inversas de secuencias con principio</b></h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+Supongamos que \(\boldsymbol{a}\ne\boldsymbol{0}\) y que \(k =
+cogrado(\boldsymbol{a})\). Definimos \(\boldsymbol{b}\) del siguiente modo:
+</p>
+
+<p>
+\[b_j=
+\begin{cases}
+0 & \text{ si } j<-k\\
+\frac{1}{a_k} & \text{ si } j=-k\\
+\frac{-1}{a_k}\sum_{r=-k}^{j-1}b_r a_{j+k-r} & \text{ si } j>-k
+\end{cases}\]
+</p>
+
+<p>
+Por construcción, \(cogrado(\boldsymbol{b})=-k\) y en consecuencia si
+\(j<0\), \((\boldsymbol{a}*\boldsymbol{b})_j=0\). Obviamente,
+\((\boldsymbol{a}*\boldsymbol{b})_0=1\); y si \(j>0\),
+\((\boldsymbol{a}*\boldsymbol{b})_j=0\).
+</p>
+
+<p>
+<b>Ejemplo</b>: Para el polinomio \(1-az\)
+</p>
+
+<p>
+\[(1-az)^{-\triangleright}=\text{inversa con principio de }(1-az)=
+\begin{cases}
+0 & \text{ si } j<0\\
+1 & \text{ si } j=0\\
+a^{-1} & \text{ si } j>0
+\end{cases}\]
+es decir
+\((\ldots,0,\ \fbox{1},\ a,\ a^2,\ a^3,\ldots)=\sum_{j=0}^\infty a^j z^j\)
+</p>
+</div>
+</div>
+<div id="outline-container-org29a3cf6" class="outline-4">
+<h4 id="org29a3cf6"><span class="section-number-4">1.3.3.</span> <b>Inversas de secuencias con final</b></h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+Supongamos que \(\boldsymbol{a}\ne\boldsymbol{0}\) y que \(p =
+grado(\boldsymbol{a})\). Definimos \(\boldsymbol{b}\) del siguiente modo:
+\[b_j=
+\begin{cases}
+0 & \text{ si } j>-p\\
+\frac{1}{a_p} & \text{ si } j=-p\\
+\frac{-1}{a_p}\sum_{r=j-1}^{-p}b_r a_{j+p-r} & \text{ si } j<-p
+\end{cases}\]
+Por construcción, \(grado(\boldsymbol{b}) = -p\).
+</p>
+
+<p>
+<b>Ejemplo</b>: Para el polinomio \(1-az\)
+</p>
+
+<p>
+\[(1-az)^{\blacktriangleleft-}=\text{inversa con final de }(1-az)=
+\begin{cases}
+0 & \text{ si } j>-1\\
+\frac{-1}{a} & \text{ si } j=-1\\
+\frac{-1}{a^j} & \text{ si } j<-1
+\end{cases}\]
+es decir
+\((\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{0},\ldots)=\sum_{j=-\infty}^{-1} -a^j z^j\)
+</p>
+</div>
+</div>
+<div id="outline-container-org377e572" class="outline-4">
+<h4 id="org377e572"><span class="section-number-4">1.3.4.</span> <b>Inversas de polinomios</b></h4>
+<div class="outline-text-4" id="text-1-3-4">
+<p>
+Ahora sabemos que todo polinomio
+</p>
+<dl class="org-dl">
+<dt>por tener cogrado</dt><dd>tiene una inversa con cogrado (con principio)</dd>
+<dt>por tener grado</dt><dd>tiene una inversa con grado (con final)</dd>
+</dl>
+<p>
+y generalmente dichas inversas no son polinomios.
+</p>
+
+<p>
+Por el ejemplo anterior sabemos que para \(\;1-az\;\) ambas inversas son
+</p>
+
+<ul class="org-ul">
+<li>\((1-az)^{-\triangleright}=\sum_{j=0}^\infty a^j z^j \quad=\quad (\ldots,0,\ \fbox{1},\ a,\ a^2,\ a^3,\ldots)\)</li>
+
+<li>\((1-az)^{\blacktriangleleft-}=\sum_{j=-\infty}^{-1} -a^j z^j \quad=\quad (\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{0},\ldots)\)</li>
+</ul>
+
+<p>
+Es evidente que si \(|a|\ne1\) una de las inversas está en \(l_1\) y la
+otra no.
+</p>
+
+<p>
+Y si \(|a|=1\) ninguna de las inversas pertenece a \(l_1\)
+</p>
+
+<p>
+Considere que un polinomio \(\boldsymbol{a}\) sin raíces de módulo \(1\);
+lo podemos factorizar
+\[\boldsymbol{a}=\boldsymbol{b}*\boldsymbol{c}\] donde
+</p>
+<ul class="org-ul">
+<li>\(\boldsymbol{b}\) es un polinomio con las raíces de módulo menor que \(1\) y</li>
+<li>\(\boldsymbol{c}\) es un polinomio con las raíces de módulo mayor que \(1\)</li>
+</ul>
+
+<p>
+Como tanto los polinomios \(\boldsymbol{a}\), \(\boldsymbol{b}\) y
+\(\boldsymbol{c}\) como las inversas
+\(\boldsymbol{b}^{\blacktriangleleft-}\) y
+\(\boldsymbol{c}^{-\triangleright}\) pertenecen al anillo \(l_1\),
+\[\boldsymbol{a}*(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})
+=(\boldsymbol{b}*\boldsymbol{c})*(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})
+=\boldsymbol{b}*\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}*\boldsymbol{c}^{-\triangleright}=\boldsymbol{1}*\boldsymbol{1}=\boldsymbol{1}.\]
+La secuencia
+\(\;(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})\;\)
+es "la" inversa de \(\boldsymbol{a}\) en \(l_1\).
+</p>
+
+<p>
+En general, dicha inversa no tiene grado ni cogrado y se denota
+con \(\boldsymbol{a}^{-1}=\frac{1}{\boldsymbol{a}}\).<br />
+
+(<i>es la inversa que aparece en los libros de series temporales</i>)
+</p>
+
+<p>
+Evidentemente dicha inversa no existe si \(\boldsymbol{a}\) tiene alguna raíz de módulo \(1\).
+</p>
+
+<p>
+En series temporales de un polinomio \(\boldsymbol{a}\) se dice que <b>es invertible</b> si 
+</p>
+
+<p>
+\[\boldsymbol{a}^{-\triangleright}=\boldsymbol{a}^{-1}.\]
+(<i>si sus raíces están fuera del círculo unidad.</i>)
+</p>
+</div>
+</div>
+<div id="outline-container-orgc7516fd" class="outline-4">
+<h4 id="orgc7516fd"><span class="section-number-4">1.3.5.</span> <b>Cuerpo de fracciones de polinomios</b></h4>
+<div class="outline-text-4" id="text-1-3-5">
+<p>
+El cuerpo más importante en la modelización ARIMA es el <i>cuerpo de
+fracciones de polinomios</i>
+\[\left\{\boldsymbol{p}*\boldsymbol{q}^{-\triangleright} \mid
+\boldsymbol{p} \text{ y } \boldsymbol{q} \text{ son polinomios y }
+\boldsymbol{q}\ne\boldsymbol{0} \right\};\] es un subcuerpo del cuerpo
+de las sucesiones con principio (con cogrado)
+</p>
+
+<p>
+<i>Toda fracción de sucesiones con grado y cogrado (con principio y
+final) pertenece al cuerpo de fracciones de polinomios</i>.
+</p>
+
+<p>
+El razonamiento es simple: Toda sucesión con grado \(−k\) y cogrado es
+de la forma \(\boldsymbol{p}*(z^k)^{-\triangleright}\), donde
+\(\boldsymbol{p}\) es un polinomio.
+</p>
+
+<p>
+Cuando las raíces del polinomio \(\boldsymbol{q}\) están fuera del
+circulo unidad (i.e.,
+\(\;\boldsymbol{q}^{-\triangleright}=\boldsymbol{q}^{-1}\)) es habitual
+denotar la secuencia \(\boldsymbol{p}*\boldsymbol{q}^{-\triangleright}\)
+así \[\frac{\boldsymbol{p}(z)}{\boldsymbol{q}(z)}\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orga7eb5e8" class="outline-3">
+<h3 id="orga7eb5e8"><span class="section-number-3">1.4.</span> Operador retardo \(\lag{}\) y suma de los elementos de una secuencia.</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Por conveniencia se usa el operador retardo \(\lag\) en la notación:
+\[\lag x_t = x_{t−1},\quad \text{para } t\in\mathbb{Z}.\]
+</p>
+
+<p>
+Aplicando el operador \(\lag{}\) repetidamente tenemos \[\lag^k x_t =
+x_{t−k},\quad \text{para } t,z\in\mathbb{Z}\] 
+</p>
+<p>
+Así, si la secuencia \(\Sec{x}(z)=\sum_{t=-\infty}^\infty x_t z^t\) es
+sumable, entonces la expresión 
+\[\Sec{x}(\lag)=\sum_{t=-\infty}^\infty x_t \lag^t\;=\;\cdots+x_{-2}+x_{-1}+x_{0}+x_{1}+\cdots\] tiene sentido como suma.
+</p>
+</div>
+<div id="outline-container-orgeda4258" class="outline-4">
+<h4 id="orgeda4258"><span class="section-number-4">1.4.1.</span> <b>Polinomios y secuencias en el operador retardo \(\Pol{a}(\lag{})\) actuando sobre secuencias</b></h4>
+<div class="outline-text-4" id="text-1-4-1">
+<p>
+Así, para el polinomio \(\Pol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3\), y la
+secuencia \(\Sec{y}\), tenemos
+</p>
+\begin{align*}
+\Pol{a}(\lag)y_t 
+& = (a_0+a_1\lag+a_2\lag^2+a_3\lag^3) y_t \\
+& = a_0 y_t + a_1 \lag^1 y_t + a_2 \lag^2 y_t + a_3 \lag^3 y_t \\
+& = a_0y_t+a_1y_{t-1}+a_2y_{t-2}+a_3y_{t-3} \\
+& =\sum\nolimits_{r=0}^3 a_r y_{t-r} \\
+& =(\Pol{a}*\Sec{y})_t
+\end{align*}
+<p>
+Y en general, si \(\Sec{a}\) e \(\Sec{y}\) son secuencias sumables, entonces
+</p>
+\begin{align*}
+\Sec{a}(\lag)y_t 
+& = (\cdots+a_{-2}\lag^{-2},a_{-1}\lag^{-1},a_0+a_1\lag+a_2\lag^2+\cdots) y_t \\
+% & = a_0 y_t + a_1 \lag^1 y_t + a_2 \lag^2 y_t + a_3 \lag^3 y_t \\
+& = \cdots+a_{-2}y_{t-2}+a_{-1}y_{t-1}+a_0y_t+a_1y_{t-1}+a_2y_{t-2}+\cdots \\
+% & =\sum\nolimits_{r=0}^3 a_r y_{t-r} \\
+& =(\Pol{a}*\Sec{y})_t
+\end{align*}
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfa89f86" class="outline-2">
+<h2 id="orgfa89f86"><span class="section-number-2">2.</span> Procesos estocásticos</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Las procesos estocásticos se pueden sumar y se pueden multiplicar por
+escalares.
+</p>
+
+<p>
+Si \(\Sec{X}\) e \(\Sec{Y}\) son dos procesos estocásticos y
+\(\;a\in\mathbb{R}\), entonces \[\Sec{X}+\Sec{Y}=(X_t+Y_t \mid
+t\in\mathbb{Z})\] y \[a\Sec{X}=\big(a(X_t) \mid t\in\mathbb{Z}\big).\]
+El conjunto de procesos estocásticos junto con la suma elemento a
+elemento y el producto por escalares constituyen un espacio vectorial.
+</p>
+
+<p>
+Consideremos el proceso estocástico 
+\[\Sec{X}=(X_t \mid t=0,\pm1,\pm2,\ldots).\]
+</p>
+
+<p>
+Al igual que con las secuencias, podemos denotar el proceso
+estocástico con una función generatriz 
+\[\Sec{X} \quad = \quad \sum_{t=-\infty}^\infty X_t z^t \quad\equiv\quad \Sec{X}(z)\]
+Recuerde que la expresión de más arriba no es una suma, es una secuencia de variables aleatorias
+\[\sum_{t=-\infty}^\infty X_t z^t = (\ldots,\ X_{-2},\ X_{-1},\ X_{0},\ X_{1},\ X_{2},\ldots)\]
+</p>
+
+<p>
+Sea \(\Sec{a}\in l_1\) (<span class="underline">una secuencia absolutamente sumable</span>) y \(\Sec{X}\)
+un proceso estocástico.
+</p>
+
+<p>
+Definimos el producto convolución (\(∗\)) de \(\Sec{a}\) con \(\Sec{X}\) como el proceso estocástico:
+\[\Sec{a}*\Sec{X}=\left(\left.\sum_{r+s=t} a_r X_s \right| t\in\mathbb{Z}\right)\]
+es decir
+\[(\Sec{a}*\Sec{X})_t=\sum_{r+s=t} a_r X_s,\quad \text{para } t\in\mathbb{Z}.\]
+Por tanto, cada elemento de \((\Sec{a}*\Sec{X})\) es una combinación de variables aleatorias de \(\Sec{X}\)
+</p>
+
+<p>
+Podemos aplicar el operador \(\lag\) sobre los elementos de un proceso estocástico \(\Sec{X}\).
+\[\lag X_t = X_{t−1},\quad \text{para } t\in\mathbb{Z}.\]
+</p>
+
+<p>
+Aplicando el operador \(\lag\) repetidamente tenemos \[\lag^k X_t =
+X_{t−k},\quad \text{para } t,z\in\mathbb{Z}\] 
+</p>
+<p>
+Así, para el polinomio \(\Pol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3\), y el proceso estocástico \(\Sec{Y}\)
+</p>
+\begin{align*}
+\Pol{a}(\lag)Y_t 
+& = (a_0+a_1\lag+a_2\lag^2+a_3\lag^3) Y_t \\
+% & = a_0 Y_t + a_1 \lag^1 Y_t + a_2 \lag^2 Y_t + a_3 \lag^3 Y_t \\
+& = a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+a_3Y_{t-3} \\
+% & =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
+& =(\Pol{a}*\Sec{Y})_t,\quad \text{para } t\in\mathbb{Z}
+\end{align*}
+<p>
+Y en general, si \(\fbox{$\Sec{a}\in l_1$}\), entonces
+</p>
+\begin{align*}
+\Sec{a}(\lag)Y_t 
+& = (\cdots+a_{-2}\lag^{-2},a_{-1}\lag^{-1},a_0+a_1\lag+a_2\lag^2+\cdots) Y_t \\
+% & = a_0 Y_t + a_1 \lag^1 Y_t + a_2 \lag^2 Y_t + a_3 \lag^3 Y_t \\
+& = \cdots+a_{-2}Y_{t-2}+a_{-1}Y_{t-1}+a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+\cdots \\
+% & =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
+& =(\Pol{a}*\Sec{y})_t,\quad \text{para } t\in\mathbb{Z}
+\end{align*}
+</div>
+<div id="outline-container-orgac07de4" class="outline-3">
+<h3 id="orgac07de4"><span class="section-number-3">2.1.</span> Función de autocovarianzas y función de autocorrelación</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>La secuencia \((\gamma_k)\) con \(k\in\mathbb{Z}\) se denomina
+<i>función de autocovarianzas</i></li>
+</ul>
+
+
+<ul class="org-ul">
+<li><p>
+La secuencia \(\{\rho_k\}\) con \(k\in\mathbb{Z}\), donde
+</p>
+
+<p>
+\[\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0} \]
+</p>
+
+<p>
+se denomina <i>función de autocorrelación</i> (ACF).
+</p></li>
+</ul>
+
+<p>
+Debido a la estacionariedad, la correlación entre \(X_t\) y \(X_{t+k}\) no
+depende de \(t\); tan solo depende de la distancia temporal \(k\) entre
+ambas variables.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Marcos Bujosa</p>
+<p class="date">Created: 2024-08-14 mié 10:54</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
