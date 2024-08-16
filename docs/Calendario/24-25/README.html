@@ -196,16 +196,16 @@
 </head>
 <body>
 <div id="content" class="content">
-<ol class="org-ol">
-<li>Los .org de este directorio son para trabajar con ellos con emacs,
-no con scimax</li>
+<p>
+Para compilar y publicar el calendario
+</p>
 
-<li>Los guiones se extraen con C-c C-v C-t</li>
-
-<li>Los pdfs se crean con C-c C-e l o</li>
-
-<li>La versión screen es para ser exporada con beamer C-c C-e l O</li>
-</ol>
+<div class="org-src-container">
+<pre class="src src-sh">latexmk -silent -pdflua Calendario-Econometria-Aplicada.tex
+latexmk -c calendario-Econometria-Aplicada.tex
+mv Calendario-Econometria-Aplicada.pdf ../../
+</pre>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>

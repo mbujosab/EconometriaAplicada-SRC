@@ -14096,7 +14096,7 @@ div.jp-OutputPrompt {
     init_mathjax();
     </script>
     <!-- End of mathjax configuration --><!-- Reveal Theme -->
-<link rel="stylesheet" href="reveal.js/dist/theme/simple.css" id="theme">
+<link rel="stylesheet" href="reveal.js/dist/theme/solarized.css" id="theme">
 
 </head>
 
@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="org8ca308a">
+<div class="ABSTRACT" id="orgd999c34">
 <p>
 En esta lección voy a continuar pero con R y usaré la librería
 <code>tfarima</code> de José Luis Gallego siempre que pueda.
@@ -14426,12 +14426,12 @@ que dicha correlación se debe a <em>una relación causal</em>.</li>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>| obs   | GNP   | Melanoma |
+<pre>|   obs |   GNP | Melanoma |
 |-------+-------+----------|
-| &lt;dbl&gt; | &lt;dbl&gt; | &lt;dbl&gt;    |
-| 1936  | 193.0 | 1.0      |
-| 1937  | 203.2 | 0.8      |
-| 1938  | 192.9 | 0.8      |
+| &lt;dbl&gt; | &lt;dbl&gt; |    &lt;dbl&gt; |
+|  1936 | 193.0 |      1.0 |
+|  1937 | 203.2 |      0.8 |
+|  1938 | 192.9 |      0.8 |
 #+caption: A tibble: 3 × 3</pre>
 </div>
 </div>
@@ -14564,12 +14564,12 @@ Connecticut no hace crecer la economía de EEUU</em>).</p>
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>#+begin_example
-<span class="ansi-underline">MODEL INFO:</span>
+MODEL INFO:
 Observations: 37
 Dependent Variable: GNP
 Type: OLS linear regression 
 
-<span class="ansi-underline">MODEL FIT:</span>
+MODEL FIT:
 F(1,35) = 231.84, p = 0.00
 R² = 0.87
 Adj. R² = 0.87 
@@ -14676,11 +14676,11 @@ $$</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>|   | date       | d_GNP | d_Melanoma |
+<pre>|   |       date | d_GNP | d_Melanoma |
 |---+------------+-------+------------|
-|   | &lt;date&gt;     | &lt;dbl&gt; | &lt;dbl&gt;      |
-| 1 | 1937-01-01 | 10.2  | -0.2       |
-| 2 | 1938-01-01 | -10.3 | 0.0        |
+|   |     &lt;date&gt; | &lt;dbl&gt; |      &lt;dbl&gt; |
+| 1 | 1937-01-01 |  10.2 |       -0.2 |
+| 2 | 1938-01-01 | -10.3 |        0.0 |
 #+caption: A data.frame: 2 × 3</pre>
 </div>
 </div>
@@ -14770,12 +14770,12 @@ pésimo (tan solo la constante es significativa&#x2026; ¡cuando en teoría $\be
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>#+begin_example
-<span class="ansi-underline">MODEL INFO:</span>
+MODEL INFO:
 Observations: 36
 Dependent Variable: d_GNP
 Type: OLS linear regression 
 
-<span class="ansi-underline">MODEL FIT:</span>
+MODEL FIT:
 F(1,34) = 0.01, p = 0.92
 R² = 0.00
 Adj. R² = -0.03 
@@ -15452,7 +15452,7 @@ require(
         Reveal.addEventListener('slidechanged', update);
 
         function setScrollingSlide() {
-            var scroll = false
+            var scroll = true
             if (scroll === true) {
               var h = $('.reveal').height() * 0.95;
               $('section.present').find('section')

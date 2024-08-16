@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-08-14 mié 13:47 -->
+<!-- 2024-08-16 vie 16:57 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 4</title>
@@ -237,24 +237,24 @@
 <ul>
 <li><a href="#org9eb2348">1.1. El espacio vectorial de las secuencias infinitas \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a>
 <ul>
-<li><a href="#orgcb981c7">1.1.1. <b>Notación mediante funciones generatrices</b></a></li>
-<li><a href="#org699c312">1.1.2. <b>Características de algunas secuencias</b></a></li>
-<li><a href="#orgb22fe15">1.1.3. <b>Subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</b></a></li>
+<li><a href="#org0818254">1.1.1. Notación mediante funciones generatrices</a></li>
+<li><a href="#org463a81c">1.1.2. Características de algunas secuencias</a></li>
+<li><a href="#orgeba5081">1.1.3. Subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a></li>
 </ul>
 </li>
 <li><a href="#org679e527">1.2. Producto convolución</a></li>
 <li><a href="#org1817ae9">1.3. Anillos conmutativos y cuerpos</a>
 <ul>
-<li><a href="#org93d93c0">1.3.1. <b>Clasificación de algunos subconjuntos de sucesiones</b></a></li>
-<li><a href="#orge57109e">1.3.2. <b>Inversas de secuencias con principio</b></a></li>
-<li><a href="#org29a3cf6">1.3.3. <b>Inversas de secuencias con final</b></a></li>
-<li><a href="#org377e572">1.3.4. <b>Inversas de polinomios</b></a></li>
-<li><a href="#orgc7516fd">1.3.5. <b>Cuerpo de fracciones de polinomios</b></a></li>
+<li><a href="#orgf83b98b">1.3.1. Clasificación de algunos subconjuntos de sucesiones</a></li>
+<li><a href="#org82b8dbf">1.3.2. Inversas de secuencias con principio</a></li>
+<li><a href="#org8d2bc7f">1.3.3. Inversas de secuencias con final</a></li>
+<li><a href="#org3c9766b">1.3.4. Inversas de polinomios</a></li>
+<li><a href="#org4d7231a">1.3.5. Cuerpo de fracciones de polinomios</a></li>
 </ul>
 </li>
 <li><a href="#orga7eb5e8">1.4. Operador retardo \(\lag{}\) y suma de los elementos de una secuencia.</a>
 <ul>
-<li><a href="#orgeda4258">1.4.1. <b>Polinomios y secuencias en el operador retardo \(\Pol{a}(\lag{})\) actuando sobre secuencias</b></a></li>
+<li><a href="#orge29004a">1.4.1. Polinomios y secuencias en el operador retardo \(\Pol{a}(\lag{})\) actuando sobre secuencias</a></li>
 </ul>
 </li>
 </ul>
@@ -267,7 +267,7 @@
 </ul>
 </div>
 </div>
-<div class="ABSTRACT" id="orgb59c8ed">
+<div class="ABSTRACT" id="org98ebd2e">
 <p>
 En esta lección veremos algunos conceptos algebraicos relacionados con
 la modelización de series temporales.
@@ -310,8 +310,8 @@ Si \(\;\boldsymbol{x},\boldsymbol{y}\in{\mathbb{R}}^\mathbb{Z}\;\) y
 producto por escalares constituyen un espacio vectorial.
 </p>
 </div>
-<div id="outline-container-orgcb981c7" class="outline-4">
-<h4 id="orgcb981c7"><span class="section-number-4">1.1.1.</span> <b>Notación mediante funciones generatrices</b></h4>
+<div id="outline-container-org0818254" class="outline-4">
+<h4 id="org0818254"><span class="section-number-4">1.1.1.</span> Notación mediante funciones generatrices</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 En la expresión \(\;\boldsymbol{x} \quad = \quad (\ldots,\ x_{-2},\
@@ -344,40 +344,27 @@ secuencia denominada <i>función generatriz</i>.
 </p>
 </div>
 </div>
-<div id="outline-container-org699c312" class="outline-4">
-<h4 id="org699c312"><span class="section-number-4">1.1.2.</span> <b>Características de algunas secuencias</b></h4>
+<div id="outline-container-org463a81c" class="outline-4">
+<h4 id="org463a81c"><span class="section-number-4">1.1.2.</span> Características de algunas secuencias</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 En una sucesión \(\boldsymbol{a}\) no nula llamamos
 </p>
 <dl class="org-dl">
-<dt>Grado</dt><dd><p>
-al menor índice entero que verifica la propiedad: \[j >
-  grado(\boldsymbol{a}) \Rightarrow a_j=0\]
-</p>
-
-<p>
-Para la sucesión, \(\boldsymbol{0}\), diremos que su grado es menos
-infinito \(\;(grado(\boldsymbol{0}) = -\infty)\).
-</p></dd>
-
-<dt>Cogrado</dt><dd><p>
-al mayor índice entero que verifica la propiedad: \[j <
-  grado(\boldsymbol{a}) \Rightarrow a_j=0\]
-</p>
-
-<p>
-Para la sucesión, \(\boldsymbol{0}\), diremos que su cogrado es
-infinito \(\;(cogrado(\boldsymbol{0}) = \infty)\).
-</p></dd>
+<dt>Grado</dt><dd>al menor índice entero que verifica la propiedad: \[j >
+  grado(\boldsymbol{a}) \Rightarrow a_j=0\] Para la sucesión,
+\(\boldsymbol{0}\), diremos que su grado es menos infinito
+\(\;(grado(\boldsymbol{0}) = -\infty)\).</dd>
+<dt>Cogrado</dt><dd>al mayor índice entero que verifica la propiedad: \[j <
+  grado(\boldsymbol{a}) \Rightarrow a_j=0\] Para la sucesión,
+\(\boldsymbol{0}\), diremos que su cogrado es infinito
+\(\;(cogrado(\boldsymbol{0}) = \infty)\).</dd>
 </dl>
-
 <p>
 Una sucesión \(\boldsymbol{a}\) es 
 </p>
 <dl class="org-dl">
 <dt>Absolutamente sumable (\(l_1\))</dt><dd>si \(\quad\sum_{t=-\infty}^\infty |a_t| < \infty\)</dd>
-
 <dt>De cuadrado sumable (\(l_2\))</dt><dd>si \(\quad\sum_{t=-\infty}^\infty a_t^2 < \infty\)</dd>
 </dl>
 <p>
@@ -386,20 +373,18 @@ Una sucesión absolutamente sumable siempre es de cuadrado sumable,
 </p>
 </div>
 </div>
-<div id="outline-container-orgb22fe15" class="outline-4">
-<h4 id="orgb22fe15"><span class="section-number-4">1.1.3.</span> <b>Subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</b></h4>
+<div id="outline-container-orgeba5081" class="outline-4">
+<h4 id="orgeba5081"><span class="section-number-4">1.1.3.</span> Subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</h4>
 <div class="outline-text-4" id="text-1-1-3">
 <dl class="org-dl">
 <dt>Secuencias con final</dt><dd>tienen grado (a partir de cierto índice son
 cero).  \[\boldsymbol{a}(z) = (\ldots,\ a_{p-3},\ a_{p-2},\ a_{p-1},\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=-\infty}^p a_t z^t\]</dd>
 <dt>Secuencias con principio</dt><dd>tienen cogrado (antes de cierto índice
 son cero).  \[\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2},\ a_{k+3},\ldots) = \sum_{t=k}^\infty a_t z^t\]
-
 <dl class="org-dl">
 <dt>Secuencias o <a href="https://en.wikipedia.org/wiki/Formal_power_series">sucesiones formales</a></dt><dd>tienen cogrado \(\geq 0\).
 \[\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ a_{2},\ a_{3},\ldots) = \sum_{t=k}^\infty a_t z^t\qquad k\geq0\]</dd>
 </dl></dd>
-
 <dt>Polinomios</dt><dd>son sucesiones formales con grado 
 \[\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ldots,\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=k}^p a_t z^t\qquad k\geq0\]
 (p.e. \(\;a_0+a_1z+a_2z^2\;\) es un polinomio de grado 2).</dd>
@@ -459,7 +444,6 @@ En cuanto a la suma
 <li>Existe un elemento \(\boldsymbol{0}\) tal que \(\boldsymbol{a} + \boldsymbol{0} = \boldsymbol{a}\) para todo \(\boldsymbol{a}\in \mathsf{S}\).</li>
 <li>Para cada \(\boldsymbol{a}\in \mathsf{S}\) existe \(-\boldsymbol{a}\in \mathsf{S}\) tal que \(\boldsymbol{a} + (−\boldsymbol{a}) = \boldsymbol{0}\).</li>
 </ul>
-
 <p>
 En cuanto al producto 
 </p>
@@ -468,7 +452,6 @@ En cuanto al producto
 <li>\(\boldsymbol{a} * \boldsymbol{b} = \boldsymbol{b} * \boldsymbol{a}\;\) para todo \(\boldsymbol{a}, \boldsymbol{b}\) en \(\mathsf{S}\qquad\) (i.e. \(*\) es conmutativo).</li>
 <li>Existe un elemento \(\boldsymbol{1}\) tal que \(\boldsymbol{a} * \boldsymbol{1} = \boldsymbol{a}\) para todo \(\boldsymbol{a}\in \mathsf{S}\).</li>
 </ul>
-
 <p>
 El producto es distributivo respecto de la suma: Para todo \(\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}\) en \(\mathsf{S}\)
 </p>
@@ -495,8 +478,8 @@ conjunto</i>)
 </p></li>
 </ul>
 </div>
-<div id="outline-container-org93d93c0" class="outline-4">
-<h4 id="org93d93c0"><span class="section-number-4">1.3.1.</span> <b>Clasificación de algunos subconjuntos de sucesiones</b></h4>
+<div id="outline-container-orgf83b98b" class="outline-4">
+<h4 id="orgf83b98b"><span class="section-number-4">1.3.1.</span> Clasificación de algunos subconjuntos de sucesiones</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <dl class="org-dl">
 <dt>Son anillos el conjunto de</dt><dd><p>
@@ -511,12 +494,12 @@ inversas de un polinomio no son polinomios en general).
 </p></dd>
 
 <dt>Son cuerpos el conjunto de</dt><dd>secuencias con principio, secuencias
-con final (y el <a href="#orgc7516fd">Cuerpo de fracciones de polinomios</a>)</dd>
+con final (y el <a href="#org4d7231a">Cuerpo de fracciones de polinomios</a>)</dd>
 </dl>
 </div>
 </div>
-<div id="outline-container-orge57109e" class="outline-4">
-<h4 id="orge57109e"><span class="section-number-4">1.3.2.</span> <b>Inversas de secuencias con principio</b></h4>
+<div id="outline-container-org82b8dbf" class="outline-4">
+<h4 id="org82b8dbf"><span class="section-number-4">1.3.2.</span> Inversas de secuencias con principio</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 Supongamos que \(\boldsymbol{a}\ne\boldsymbol{0}\) y que \(k =
@@ -555,8 +538,8 @@ es decir
 </p>
 </div>
 </div>
-<div id="outline-container-org29a3cf6" class="outline-4">
-<h4 id="org29a3cf6"><span class="section-number-4">1.3.3.</span> <b>Inversas de secuencias con final</b></h4>
+<div id="outline-container-org8d2bc7f" class="outline-4">
+<h4 id="org8d2bc7f"><span class="section-number-4">1.3.3.</span> Inversas de secuencias con final</h4>
 <div class="outline-text-4" id="text-1-3-3">
 <p>
 Supongamos que \(\boldsymbol{a}\ne\boldsymbol{0}\) y que \(p =
@@ -586,8 +569,8 @@ es decir
 </p>
 </div>
 </div>
-<div id="outline-container-org377e572" class="outline-4">
-<h4 id="org377e572"><span class="section-number-4">1.3.4.</span> <b>Inversas de polinomios</b></h4>
+<div id="outline-container-org3c9766b" class="outline-4">
+<h4 id="org3c9766b"><span class="section-number-4">1.3.4.</span> Inversas de polinomios</h4>
 <div class="outline-text-4" id="text-1-3-4">
 <p>
 Ahora sabemos que todo polinomio
@@ -620,13 +603,12 @@ Y si \(|a|=1\) ninguna de las inversas pertenece a \(l_1\)
 </p>
 
 <p>
-Considere que un polinomio \(\boldsymbol{a}\) sin raíces de módulo \(1\);
-lo podemos factorizar
-\[\boldsymbol{a}=\boldsymbol{b}*\boldsymbol{c}\] donde
+Podemos factorizar un polinomio \(\boldsymbol{a}\) sin raíces de módulo \(1\) como
+\[\boldsymbol{a}=\boldsymbol{b}*\boldsymbol{c}\]
 </p>
 <ul class="org-ul">
-<li>\(\boldsymbol{b}\) es un polinomio con las raíces de módulo menor que \(1\) y</li>
-<li>\(\boldsymbol{c}\) es un polinomio con las raíces de módulo mayor que \(1\)</li>
+<li>donde \(\boldsymbol{b}\) es un polinomio con las raíces de módulo menor que \(1\) y</li>
+<li>donde \(\boldsymbol{c}\) es un polinomio con las raíces de módulo mayor que \(1\)</li>
 </ul>
 
 <p>
@@ -663,8 +645,8 @@ En series temporales de un polinomio \(\boldsymbol{a}\) se dice que <b>es invert
 </p>
 </div>
 </div>
-<div id="outline-container-orgc7516fd" class="outline-4">
-<h4 id="orgc7516fd"><span class="section-number-4">1.3.5.</span> <b>Cuerpo de fracciones de polinomios</b></h4>
+<div id="outline-container-org4d7231a" class="outline-4">
+<h4 id="org4d7231a"><span class="section-number-4">1.3.5.</span> Cuerpo de fracciones de polinomios</h4>
 <div class="outline-text-4" id="text-1-3-5">
 <p>
 El cuerpo más importante en la modelización ARIMA es el <i>cuerpo de
@@ -714,8 +696,8 @@ sumable, entonces la expresión
 \[\Sec{x}(\lag)=\sum_{t=-\infty}^\infty x_t \lag^t\;=\;\cdots+x_{-2}+x_{-1}+x_{0}+x_{1}+\cdots\] tiene sentido como suma.
 </p>
 </div>
-<div id="outline-container-orgeda4258" class="outline-4">
-<h4 id="orgeda4258"><span class="section-number-4">1.4.1.</span> <b>Polinomios y secuencias en el operador retardo \(\Pol{a}(\lag{})\) actuando sobre secuencias</b></h4>
+<div id="outline-container-orge29004a" class="outline-4">
+<h4 id="orge29004a"><span class="section-number-4">1.4.1.</span> Polinomios y secuencias en el operador retardo \(\Pol{a}(\lag{})\) actuando sobre secuencias</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <p>
 Así, para el polinomio \(\Pol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3\), y la
@@ -852,7 +834,7 @@ ambas variables.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-08-14 mié 13:47</p>
+<p class="date">Created: 2024-08-16 vie 16:57</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
