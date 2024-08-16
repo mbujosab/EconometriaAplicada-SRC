@@ -97,7 +97,7 @@ ${\mathbb{R}}^\mathbb{Z}$ junto con la suma elemento a elemento y el
 producto por escalares constituyen un espacio vectorial.
 
 
-*** *Notación mediante funciones generatrices*
+*** Notación mediante funciones generatrices
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
@@ -126,34 +126,29 @@ compacta del siguiente modo $$\boldsymbol{x} \quad = \quad
 *¡Pero esta expresión no es una suma!* es solo un modo de expresar una
 secuencia denominada /función generatriz/.
 
-*** *Características de algunas secuencias*
+*** Características de algunas secuencias
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
 
 En una sucesión $\boldsymbol{a}$ no nula llamamos
 - Grado :: al menor índice entero que verifica la propiedad: $$j >
-  grado(\boldsymbol{a}) \Rightarrow a_j=0$$
-
-  Para la sucesión, $\boldsymbol{0}$, diremos que su grado es menos
-  infinito $\;(grado(\boldsymbol{0}) = -\infty)$.
-
+  grado(\boldsymbol{a}) \Rightarrow a_j=0$$ Para la sucesión,
+  $\boldsymbol{0}$, diremos que su grado es menos infinito
+  $\;(grado(\boldsymbol{0}) = -\infty)$.
 - Cogrado :: al mayor índice entero que verifica la propiedad: $$j <
-  grado(\boldsymbol{a}) \Rightarrow a_j=0$$
-
-  Para la sucesión, $\boldsymbol{0}$, diremos que su cogrado es
-  infinito $\;(cogrado(\boldsymbol{0}) = \infty)$.
-
+  grado(\boldsymbol{a}) \Rightarrow a_j=0$$ Para la sucesión,
+  $\boldsymbol{0}$, diremos que su cogrado es infinito
+  $\;(cogrado(\boldsymbol{0}) = \infty)$.
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 Una sucesión $\boldsymbol{a}$ es 
 - Absolutamente sumable ($l_1$) :: si $\quad\sum_{t=-\infty}^\infty |a_t| < \infty$
-
 - De cuadrado sumable ($l_2$) ::   si $\quad\sum_{t=-\infty}^\infty a_t^2 < \infty$
 Una sucesión absolutamente sumable siempre es de cuadrado sumable,
 $l_1\subset l_2$.
 
 
-*** *Subespacios de $\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)$*
+*** Subespacios de $\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)$
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
@@ -162,10 +157,8 @@ $l_1\subset l_2$.
   cero).  $$\boldsymbol{a}(z) = (\ldots,\ a_{p-3},\ a_{p-2},\ a_{p-1},\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=-\infty}^p a_t z^t$$
 - Secuencias con principio :: tienen cogrado (antes de cierto índice
   son cero).  $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2},\ a_{k+3},\ldots) = \sum_{t=k}^\infty a_t z^t$$
-
   + Secuencias o [[https://en.wikipedia.org/wiki/Formal_power_series][sucesiones formales]] :: tienen cogrado $\geq 0$.
     $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ a_{2},\ a_{3},\ldots) = \sum_{t=k}^\infty a_t z^t\qquad k\geq0$$
-
 - Polinomios :: son sucesiones formales con grado 
   $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ldots,\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=k}^p a_t z^t\qquad k\geq0$$
   (p.e. $\;a_0+a_1z+a_2z^2\;$ es un polinomio de grado 2).
@@ -173,7 +166,7 @@ $l_1\subset l_2$.
 
 ** Producto convolución
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
+   :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
 Sean $\boldsymbol{a}$ y $\boldsymbol{b}$ sucesiones _con principio_ (con cogrado).
@@ -197,7 +190,7 @@ Además, _el producto convolución está bien definido entre dos sucesiones_:
 
 ** Anillos conmutativos y cuerpos
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
+   :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
 Un *anillo conmutativo* es un conjunto $\mathsf{S}$ equipado con dos
@@ -209,13 +202,11 @@ En cuanto a la suma
  - $\boldsymbol{a} + \boldsymbol{b} = \boldsymbol{b} + \boldsymbol{a}\;$ para todo $\boldsymbol{a}, \boldsymbol{b}$ en $\mathsf{S}\qquad$ (i.e. $+$ es conmutativa).
  - Existe un elemento $\boldsymbol{0}$ tal que $\boldsymbol{a} + \boldsymbol{0} = \boldsymbol{a}$ para todo $\boldsymbol{a}\in \mathsf{S}$.
  - Para cada $\boldsymbol{a}\in \mathsf{S}$ existe $-\boldsymbol{a}\in \mathsf{S}$ tal que $\boldsymbol{a} + (−\boldsymbol{a}) = \boldsymbol{0}$.
-
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 En cuanto al producto 
  - $(\boldsymbol{a} * \boldsymbol{b}) * \boldsymbol{c} = \boldsymbol{a} * (\boldsymbol{b} * \boldsymbol{c})\;$ para todo $\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}$ en $\mathsf{S}\qquad$ (i.e. $*$ es asociativo). 
  - $\boldsymbol{a} * \boldsymbol{b} = \boldsymbol{b} * \boldsymbol{a}\;$ para todo $\boldsymbol{a}, \boldsymbol{b}$ en $\mathsf{S}\qquad$ (i.e. $*$ es conmutativo).
  - Existe un elemento $\boldsymbol{1}$ tal que $\boldsymbol{a} * \boldsymbol{1} = \boldsymbol{a}$ para todo $\boldsymbol{a}\in \mathsf{S}$.
-
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 El producto es distributivo respecto de la suma: Para todo $\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}$ en $\mathsf{S}$
  - \(\boldsymbol{a}*(\boldsymbol{b}+\boldsymbol{c})=(\boldsymbol{a}*\boldsymbol{b})+(\boldsymbol{a}*\boldsymbol{c})\;\) 
@@ -237,7 +228,7 @@ Un *cuerpo* es un anillo conmutativo que adicionalmente satisface:
   (/Todo elemento no nulo del conjunto tiene una inversa en dicho
   conjunto/)
 
-*** *Clasificación de algunos subconjuntos de sucesiones* 
+*** Clasificación de algunos subconjuntos de sucesiones 
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . fragment)))
    :END:
@@ -252,7 +243,7 @@ Un *cuerpo* es un anillo conmutativo que adicionalmente satisface:
 - Son cuerpos el conjunto de :: secuencias con principio, secuencias
   con final (y el [[id:d636ae1f-28b8-470a-9001-b05f1321d5b0][Cuerpo de fracciones de polinomios]])
 
-*** *Inversas de secuencias con principio*
+*** Inversas de secuencias con principio
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
@@ -317,7 +308,7 @@ Comprobación:
 #+END_EXPORT
 
 
-*** *Inversas de secuencias con final*
+*** Inversas de secuencias con final
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
@@ -357,7 +348,7 @@ Comprobación:
 % $$(1-az)\sum_{j=-\infty}^{-1} -a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + (-az)\sum_{j=-\infty}^{-1} -a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + \sum_{j=-\infty}^{0} a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + \sum_{j=-\infty}^{-1} a^j z^j +a^0 z^0=\sum_{j=-\infty}^{-1} (a^j-a^j) z^j + 1 z^0=\boldsymbol{1}$$
 #+END_EXPORT
 
-*** *Inversas de polinomios*
+*** Inversas de polinomios
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
@@ -395,13 +386,10 @@ Más aún, se puede suponer que los factores de grado dos no tienen ninguna raí
 
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-Considere que un polinomio $\boldsymbol{a}$ sin raíces de módulo $1$;
-lo podemos factorizar
-$$\boldsymbol{a}=\boldsymbol{b}*\boldsymbol{c}$$ donde
-- $\boldsymbol{b}$ es un polinomio con las raíces de módulo menor que $1$ y
-  # (raíces dentro del círculo unidad) y
-- $\boldsymbol{c}$ es un polinomio con las raíces de módulo mayor que $1$
-  # (raíces fuera del círculo unidad).
+Podemos factorizar un polinomio $\boldsymbol{a}$ sin raíces de módulo $1$ como
+$$\boldsymbol{a}=\boldsymbol{b}*\boldsymbol{c}$$
+- donde $\boldsymbol{b}$ es un polinomio con las raíces de módulo menor que $1$ y
+- donde $\boldsymbol{c}$ es un polinomio con las raíces de módulo mayor que $1$
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 Como tanto los polinomios $\boldsymbol{a}$, $\boldsymbol{b}$ y
@@ -430,9 +418,9 @@ $$\boldsymbol{a}^{-\triangleright}=\boldsymbol{a}^{-1}.$$
 (/si sus raíces están fuera del círculo unidad./)
 # +attr_ipynb: (slideshow . ((slide_type . fragment)))
 
-*** *Cuerpo de fracciones de polinomios*
+*** Cuerpo de fracciones de polinomios
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
+   :metadata: (slideshow . ((slide_type . slide)))
    :ID:       d636ae1f-28b8-470a-9001-b05f1321d5b0
    :END:
    
@@ -460,7 +448,7 @@ así $$\frac{\boldsymbol{p}(z)}{\boldsymbol{q}(z)}$$
 
 ** Operador retardo $\lag{}$ y suma de los elementos de una secuencia.
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
+   :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
 Por conveniencia se usa el operador retardo $\lag$ en la notación:
@@ -473,7 +461,7 @@ Así, si la secuencia $\Sec{x}(z)=\sum_{t=-\infty}^\infty x_t z^t$ es
 sumable, entonces la expresión 
 $$\Sec{x}(\lag)=\sum_{t=-\infty}^\infty x_t \lag^t\;=\;\cdots+x_{-2}+x_{-1}+x_{0}+x_{1}+\cdots$$ tiene sentido como suma.
 
-*** *Polinomios y secuencias en el operador retardo $\Pol{a}(\lag{})$ actuando sobre secuencias*
+*** Polinomios y secuencias en el operador retardo $\Pol{a}(\lag{})$ actuando sobre secuencias
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:

@@ -7,10 +7,10 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-<title>Lecc04 slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Lecc04 slides</title><script src="file:///usr/share/javascript/jquery/jquery.min.js"></script><script src="file:///usr/share/javascript/requirejs/require.min.js"></script>
 
 <!-- General and theme style sheets -->
-<link rel="stylesheet" href="reveal.js/dist/reveal.css">
+<link rel="stylesheet" href="https://unpkg.com/reveal.js@4.0.2/dist/reveal.css">
 
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
 <script>
@@ -14063,7 +14063,7 @@ div.jp-OutputPrompt {
 </style>
 
 <!-- Load mathjax -->
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"> </script>
+    <script src="file:///usr/share/javascript/mathjax/MathJax.js?config=TeX-AMS_CHTML-full,Safe"> </script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     init_mathjax = function() {
@@ -14096,7 +14096,7 @@ div.jp-OutputPrompt {
     init_mathjax();
     </script>
     <!-- End of mathjax configuration --><!-- Reveal Theme -->
-<link rel="stylesheet" href="reveal.js/dist/theme/simple.css" id="theme">
+<link rel="stylesheet" href="https://unpkg.com/reveal.js@4.0.2/dist/theme/solarized.css" id="theme">
 
 </head>
 
@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="org849a771">
+<div class="ABSTRACT" id="orgfd982ca">
 <p>
 En esta lección veremos algunos conceptos algebraicos relacionados con
 la modelización de series temporales.
@@ -14215,7 +14215,7 @@ producto por escalares constituyen un espacio vectorial.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Notaci%C3%B3n-mediante-funciones-generatrices"><strong>Notaci&#243;n mediante funciones generatrices</strong><a class="anchor-link" href="#Notaci%C3%B3n-mediante-funciones-generatrices">&#182;</a></h4>
+<h4 id="Notaci%C3%B3n-mediante-funciones-generatrices">Notaci&#243;n mediante funciones generatrices<a class="anchor-link" href="#Notaci%C3%B3n-mediante-funciones-generatrices">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -14277,7 +14277,7 @@ secuencia denominada <em>función generatriz</em>.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Caracter%C3%ADsticas-de-algunas-secuencias"><strong>Caracter&#237;sticas de algunas secuencias</strong><a class="anchor-link" href="#Caracter%C3%ADsticas-de-algunas-secuencias">&#182;</a></h4>
+<h4 id="Caracter%C3%ADsticas-de-algunas-secuencias">Caracter&#237;sticas de algunas secuencias<a class="anchor-link" href="#Caracter%C3%ADsticas-de-algunas-secuencias">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -14290,16 +14290,14 @@ secuencia denominada <em>función generatriz</em>.</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>En una sucesión $\boldsymbol{a}$ no nula llamamos</p>
 <ul>
-<li><p><strong>Grado:</strong> al menor índice entero que verifica la propiedad: $$j &gt;
-  grado(\boldsymbol{a}) \Rightarrow a_j=0$$</p>
-<p>Para la sucesión, $\boldsymbol{0}$, diremos que su grado es menos
-infinito $\;(grado(\boldsymbol{0}) = -\infty)$.</p>
-</li>
-<li><p><strong>Cogrado:</strong> al mayor índice entero que verifica la propiedad: $$j &lt;
-  grado(\boldsymbol{a}) \Rightarrow a_j=0$$</p>
-<p>Para la sucesión, $\boldsymbol{0}$, diremos que su cogrado es
-infinito $\;(cogrado(\boldsymbol{0}) = \infty)$.</p>
-</li>
+<li><strong>Grado:</strong> al menor índice entero que verifica la propiedad: $$j &gt;
+  grado(\boldsymbol{a}) \Rightarrow a_j=0$$ Para la sucesión,
+$\boldsymbol{0}$, diremos que su grado es menos infinito
+$\;(grado(\boldsymbol{0}) = -\infty)$.</li>
+<li><strong>Cogrado:</strong> al mayor índice entero que verifica la propiedad: $$j &lt;
+  grado(\boldsymbol{a}) \Rightarrow a_j=0$$ Para la sucesión,
+$\boldsymbol{0}$, diremos que su cogrado es infinito
+$\;(cogrado(\boldsymbol{0}) = \infty)$.</li>
 </ul>
 
 </div>
@@ -14314,10 +14312,8 @@ infinito $\;(cogrado(\boldsymbol{0}) = \infty)$.</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Una sucesión $\boldsymbol{a}$ es</p>
 <ul>
-<li><p><strong>Absolutamente sumable ($l_1$):</strong> si $\quad\sum_{t=-\infty}^\infty |a_t| &lt; \infty$</p>
-</li>
-<li><p><strong>De cuadrado sumable ($l_2$):</strong> si $\quad\sum_{t=-\infty}^\infty a_t^2 &lt; \infty$</p>
-</li>
+<li><strong>Absolutamente sumable ($l_1$):</strong> si $\quad\sum_{t=-\infty}^\infty |a_t| &lt; \infty$</li>
+<li><strong>De cuadrado sumable ($l_2$):</strong> si $\quad\sum_{t=-\infty}^\infty a_t^2 &lt; \infty$</li>
 </ul>
 <p>Una sucesión absolutamente sumable siempre es de cuadrado sumable,
 $l_1\subset l_2$.</p>
@@ -14332,7 +14328,7 @@ $l_1\subset l_2$.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Subespacios-de-$%5Cbig(%7B%5Cmathbb%7BR%7D%7D%5E%5Cmathbb%7BZ%7D,+,%5Ccdot%5Cbig)$"><strong>Subespacios de $\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)$</strong><a class="anchor-link" href="#Subespacios-de-$%5Cbig(%7B%5Cmathbb%7BR%7D%7D%5E%5Cmathbb%7BZ%7D,+,%5Ccdot%5Cbig)$">&#182;</a></h4>
+<h4 id="Subespacios-de-$%5Cbig(%7B%5Cmathbb%7BR%7D%7D%5E%5Cmathbb%7BZ%7D,+,%5Ccdot%5Cbig)$">Subespacios de $\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)$<a class="anchor-link" href="#Subespacios-de-$%5Cbig(%7B%5Cmathbb%7BR%7D%7D%5E%5Cmathbb%7BZ%7D,+,%5Ccdot%5Cbig)$">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -14346,23 +14342,21 @@ $l_1\subset l_2$.</p>
 <ul>
 <li><strong>Secuencias con final:</strong> tienen grado (a partir de cierto índice son
 cero).  $$\boldsymbol{a}(z) = (\ldots,\ a_{p-3},\ a_{p-2},\ a_{p-1},\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=-\infty}^p a_t z^t$$</li>
-<li><p><strong>Secuencias con principio:</strong> tienen cogrado (antes de cierto índice
-son cero).  $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2},\ a_{k+3},\ldots) = \sum_{t=k}^\infty a_t z^t$$</p>
-<ul>
+<li><strong>Secuencias con principio:</strong> tienen cogrado (antes de cierto índice
+son cero).  $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2},\ a_{k+3},\ldots) = \sum_{t=k}^\infty a_t z^t$$<ul>
 <li><strong>Secuencias o <a href="https://en.wikipedia.org/wiki/Formal_power_series">sucesiones formales</a>:</strong> tienen cogrado $\geq 0$.
 $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ a_{2},\ a_{3},\ldots) = \sum_{t=k}^\infty a_t z^t\qquad k\geq0$$</li>
 </ul>
 </li>
-<li><p><strong>Polinomios:</strong> son sucesiones formales con grado 
+<li><strong>Polinomios:</strong> son sucesiones formales con grado 
 $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ldots,\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=k}^p a_t z^t\qquad k\geq0$$
-(p.e. $\;a_0+a_1z+a_2z^2\;$ es un polinomio de grado 2).</p>
-</li>
+(p.e. $\;a_0+a_1z+a_2z^2\;$ es un polinomio de grado 2).</li>
 </ul>
 
 </div>
 </div>
 </div>
-</div></section><section>
+</div></section></section><section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14410,7 +14404,7 @@ respectivos grados.</p>
 </div>
 </div>
 </div>
-</div></div></section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14502,7 +14496,7 @@ conjunto</em>)</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Clasificaci%C3%B3n-de-algunos-subconjuntos-de-sucesiones"><strong>Clasificaci&#243;n de algunos subconjuntos de sucesiones</strong><a class="anchor-link" href="#Clasificaci%C3%B3n-de-algunos-subconjuntos-de-sucesiones">&#182;</a></h4>
+<h4 id="Clasificaci%C3%B3n-de-algunos-subconjuntos-de-sucesiones">Clasificaci&#243;n de algunos subconjuntos de sucesiones<a class="anchor-link" href="#Clasificaci%C3%B3n-de-algunos-subconjuntos-de-sucesiones">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -14535,7 +14529,7 @@ con final (y el <a href="Lecc04.md">Cuerpo de fracciones de polinomios</a>)</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Inversas-de-secuencias-con-principio"><strong>Inversas de secuencias con principio</strong><a class="anchor-link" href="#Inversas-de-secuencias-con-principio">&#182;</a></h4>
+<h4 id="Inversas-de-secuencias-con-principio">Inversas de secuencias con principio<a class="anchor-link" href="#Inversas-de-secuencias-con-principio">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -14587,7 +14581,7 @@ $(\ldots,0,\ \fbox{1},\ a,\ a^2,\ a^3,\ldots)=\sum_{j=0}^\infty a^j z^j$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Inversas-de-secuencias-con-final"><strong>Inversas de secuencias con final</strong><a class="anchor-link" href="#Inversas-de-secuencias-con-final">&#182;</a></h4>
+<h4 id="Inversas-de-secuencias-con-final">Inversas de secuencias con final<a class="anchor-link" href="#Inversas-de-secuencias-con-final">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -14637,7 +14631,7 @@ $(\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{0},\ldots)=\sum_
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Inversas-de-polinomios"><strong>Inversas de polinomios</strong><a class="anchor-link" href="#Inversas-de-polinomios">&#182;</a></h4>
+<h4 id="Inversas-de-polinomios">Inversas de polinomios<a class="anchor-link" href="#Inversas-de-polinomios">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -14686,12 +14680,11 @@ otra no.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Considere que un polinomio $\boldsymbol{a}$ sin raíces de módulo $1$;
-lo podemos factorizar
-$$\boldsymbol{a}=\boldsymbol{b}*\boldsymbol{c}$$ donde</p>
+<p>Podemos factorizar un polinomio $\boldsymbol{a}$ sin raíces de módulo $1$ como
+$$\boldsymbol{a}=\boldsymbol{b}*\boldsymbol{c}$$</p>
 <ul>
-<li>$\boldsymbol{b}$ es un polinomio con las raíces de módulo menor que $1$ y</li>
-<li>$\boldsymbol{c}$ es un polinomio con las raíces de módulo mayor que $1$</li>
+<li>donde $\boldsymbol{b}$ es un polinomio con las raíces de módulo menor que $1$ y</li>
+<li>donde $\boldsymbol{c}$ es un polinomio con las raíces de módulo mayor que $1$</li>
 </ul>
 
 </div>
@@ -14746,14 +14739,14 @@ $$\boldsymbol{a}^{-\triangleright}=\boldsymbol{a}^{-1}.$$<p>(<em>si sus raíces 
 </div>
 </div>
 </div>
-</div></div></section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Cuerpo-de-fracciones-de-polinomios"><strong>Cuerpo de fracciones de polinomios</strong><a class="anchor-link" href="#Cuerpo-de-fracciones-de-polinomios">&#182;</a></h4>
+<h4 id="Cuerpo-de-fracciones-de-polinomios">Cuerpo de fracciones de polinomios<a class="anchor-link" href="#Cuerpo-de-fracciones-de-polinomios">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -14806,7 +14799,7 @@ así $$\frac{\boldsymbol{p}(z)}{\boldsymbol{q}(z)}$$</p>
 </div>
 </div>
 </div>
-</div></div></section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14853,7 +14846,7 @@ $$\Sec{x}(\lag)=\sum_{t=-\infty}^\infty x_t \lag^t\;=\;\cdots+x_{-2}+x_{-1}+x_{0
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Polinomios-y-secuencias-en-el-operador-retardo-$%5CPol%7Ba%7D(%5Clag%7B%7D)$-actuando-sobre-secuencias"><strong>Polinomios y secuencias en el operador retardo $\Pol{a}(\lag{})$ actuando sobre secuencias</strong><a class="anchor-link" href="#Polinomios-y-secuencias-en-el-operador-retardo-$%5CPol%7Ba%7D(%5Clag%7B%7D)$-actuando-sobre-secuencias">&#182;</a></h4>
+<h4 id="Polinomios-y-secuencias-en-el-operador-retardo-$%5CPol%7Ba%7D(%5Clag%7B%7D)$-actuando-sobre-secuencias">Polinomios y secuencias en el operador retardo $\Pol{a}(\lag{})$ actuando sobre secuencias<a class="anchor-link" href="#Polinomios-y-secuencias-en-el-operador-retardo-$%5CPol%7Ba%7D(%5Clag%7B%7D)$-actuando-sobre-secuencias">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -15078,8 +15071,8 @@ require(
       waitSeconds: 15
     },
     [
-      "reveal.js/dist/reveal.js",
-      "reveal.js/plugin/notes/notes.js"
+      "https://unpkg.com/reveal.js@4.0.2/dist/reveal.js",
+      "https://unpkg.com/reveal.js@4.0.2/plugin/notes/notes.js"
     ],
 
     function(Reveal, RevealNotes){
@@ -15102,7 +15095,7 @@ require(
         Reveal.addEventListener('slidechanged', update);
 
         function setScrollingSlide() {
-            var scroll = false
+            var scroll = true
             if (scroll === true) {
               var h = $('.reveal').height() * 0.95;
               $('section.present').find('section')

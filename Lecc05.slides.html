@@ -7,10 +7,10 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-<title>Lecc05 slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Lecc05 slides</title><script src="file:///usr/share/javascript/jquery/jquery.min.js"></script><script src="file:///usr/share/javascript/requirejs/require.min.js"></script>
 
 <!-- General and theme style sheets -->
-<link rel="stylesheet" href="reveal.js/dist/reveal.css">
+<link rel="stylesheet" href="https://unpkg.com/reveal.js@4.0.2/dist/reveal.css">
 
 <!-- If the query includes 'print-pdf', include the PDF print sheet -->
 <script>
@@ -14063,7 +14063,7 @@ div.jp-OutputPrompt {
 </style>
 
 <!-- Load mathjax -->
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"> </script>
+    <script src="file:///usr/share/javascript/mathjax/MathJax.js?config=TeX-AMS_CHTML-full,Safe"> </script>
     <!-- MathJax configuration -->
     <script type="text/x-mathjax-config">
     init_mathjax = function() {
@@ -14096,7 +14096,7 @@ div.jp-OutputPrompt {
     init_mathjax();
     </script>
     <!-- End of mathjax configuration --><!-- Reveal Theme -->
-<link rel="stylesheet" href="reveal.js/dist/theme/simple.css" id="theme">
+<link rel="stylesheet" href="https://unpkg.com/reveal.js@4.0.2/dist/theme/solarized.css" id="theme">
 
 </head>
 
@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="orgb377140">
+<div class="ABSTRACT" id="orgf795550">
 <p>
 En esta lección veremos algunas herramientas estadísticas.
 </p>
@@ -14497,8 +14497,8 @@ $ProdCemento_{2000M04}$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Consideremos el proceso estocástico $$\boldsymbol{X}=(X_t \mid
-t=0,\pm1,\pm2,\ldots).$$ Caracterizar su distribución conjunta es
-demasiado ambicioso.</p>
+t=0,\pm1,\pm2,\ldots).$$ Caracterizar su distribución conjunta (todos
+los momentos) es demasiado ambicioso.</p>
 
 </div>
 </div>
@@ -14510,11 +14510,11 @@ demasiado ambicioso.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Fijémonos solo en los dos primeros momentos:</p>
+<p>Tentativamente vamos a fijarnos únicamente en los dos primeros momentos:</p>
 $$E(X_t)={\color{blue}{ \mu_t}}\qquad\text{ y } \qquad
 Cov(X_t,X_k)=E\big[(X_t-\mu_t)(X_k-\mu_k)\big]={\color{blue}{\lambda_{t,k}}}$$<p>(si $\;k=t\;$ entonces $\;\lambda_{t,t}=Var(X_t)=\sigma^2_t$).</p>
 <p>Si las $X_t$ fueran gaussianas, conocer estos <em>parámetros</em> bastaría
-para caracterizar la distribución conjunta. Pero</p>
+para caracterizar la distribución conjunta. Pero aún así&#x2026;</p>
 
 </div>
 </div>
@@ -14527,12 +14527,12 @@ para caracterizar la distribución conjunta. Pero</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li><p>Necesitaríamos una muestra suficiente de cada $X_t$ para estimar los parámetros</p>
+<li><p>necesitaríamos una muestra suficiente de cada $X_t$ para estimar los parámetros</p>
 <ul>
 <li>y en una serie temporal tenemos una única realización para cada $X_t$</li>
 </ul>
 </li>
-<li><p>Fíjese que hay más parámetros que variables aleatorias</p>
+<li><p>y además hay más parámetros que variables aleatorias</p>
 </li>
 </ul>
 
@@ -14643,7 +14643,18 @@ ambas variables.</p>
 </div>
 </div>
 </div>
-</div></div></section></section>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\Sec{\phi}(\lag) : \phi  $$
+</div>
+</div>
+</div>
+</div></section></section>
 </div>
 </div>
 </body>
@@ -14662,8 +14673,8 @@ require(
       waitSeconds: 15
     },
     [
-      "reveal.js/dist/reveal.js",
-      "reveal.js/plugin/notes/notes.js"
+      "https://unpkg.com/reveal.js@4.0.2/dist/reveal.js",
+      "https://unpkg.com/reveal.js@4.0.2/plugin/notes/notes.js"
     ],
 
     function(Reveal, RevealNotes){
@@ -14686,7 +14697,7 @@ require(
         Reveal.addEventListener('slidechanged', update);
 
         function setScrollingSlide() {
-            var scroll = false
+            var scroll = true
             if (scroll === true) {
               var h = $('.reveal').height() * 0.95;
               $('section.present').find('section')

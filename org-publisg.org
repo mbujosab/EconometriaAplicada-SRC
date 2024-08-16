@@ -106,4 +106,89 @@ git push
 #+RESULTS:
 
 
+* slides
 
+[[https://nbconvert.readthedocs.io/en/latest/config_options.html][Configuración para nbconvert]] (las slides usan ficheros locales)
+
+#+BEGIN_SRC python :tangle mycfg.py
+c = get_config()
+c.NbConvertApp.notebooks = ["Lecc01.ipynb",
+                            "Lecc02.ipynb",
+                            "Lecc03.ipynb",
+                            "Lecc04.ipynb",
+                            "Lecc05.ipynb"]
+c.SlidesExporter.reveal_theme = 'solarized'
+c.SlidesExporter.reveal_scroll = True
+c.SlidesExporter.language_code = 'es'
+#+END_SRC
+
+# :tangle custom.css
+#+BEGIN_SRC css 
+.slides {
+  width: 90% !important;
+}
+#+END_SRC
+
+#+BEGIN_SRC sh :results none
+jupyter nbconvert --config mycfg.py --to slides 
+#+END_SRC
+
+# omite las celdas de código
+#+BEGIN_SRC sh :results none
+jupyter nbconvert --config mycfg.py --to slides --no-input
+#+END_SRC
+
+
+# emacs --batch  --eval "(require 'org)(use-package ox-ipynb)" Lecc02.org --funcall ox-ipynb-export-org-file-to-ipynb-file
+
+# emacsclient -e '(progn (switch-to-buffer "my-presentation.org") (org-beamer-export-to-pdf))'
+
+# emacs --batch --load=plugin.el --load=my-funcs.el --eval=my-func file.v
+
+# c.SlidesExporter.reveal_theme = 'beige'
+# c.SlidesExporter.SlidesExporter.reveal_number = 'c/t'
+# c.SlidesExporter.slideNumber = True
+# c.SlidesExporter.reveal_width = 5500
+# c.SlidesExporter.reveal_height = 800
+
+
+* slides para GitHubpages
+
+
+[[https://nbconvert.readthedocs.io/en/latest/config_options.html][Configuración para nbconvert]] (las slides usan ficheros de la web para poder funcionar en GitHubPages)
+
+[[https://dbafromthecold.com/2021/02/21/creating-presentations-with-reveal-and-github-pages/][creating-presentations-with-reveal-and-github-pages]]
+
+https://github.com/RichardAfolabi/Presentation_js
+
+https://emasuriano.com/til/2024-07-01-create-presentations-from-notebook/
+
+https://github.com/yjwen/org-reveal
+https://github.com/hexmode/ox-reveal
+
+#+BEGIN_SRC python :tangle mycfg-GitHubPages.py
+c = get_config()
+c.NbConvertApp.notebooks = ["Lecc01.ipynb",
+                            "Lecc02.ipynb",
+                            "Lecc03.ipynb",
+                            "Lecc04.ipynb",
+                            "Lecc05.ipynb"]
+
+c.SlidesExporter.reveal_theme = 'solarized'
+c.SlidesExporter.reveal_scroll = True
+c.SlidesExporter.language_code = 'es'
+
+c.SlidesExporter.mathjax_url = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"
+
+c.SlidesExporter.jquery_url = "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"
+
+c.SlidesExporter.require_js_url = "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"
+#+END_SRC
+
+#+BEGIN_SRC sh :results silent
+jupyter nbconvert --config mycfg-GitHubPages.py --to slides --reveal-prefix reveal.js
+#+END_SRC
+
+# jupyter nbconvert --config mycfg.py
+# jupyter nbconvert --config mycfg.py  --to slides --reveal-prefix reveal.js
+# jupyter nbconvert --config mycfg.py  --to slides --offline embed --reveal-prefix reveal.js

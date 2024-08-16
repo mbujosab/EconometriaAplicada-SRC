@@ -236,24 +236,24 @@ Veamos por qué esto genera dificultades...
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 
 Consideremos el proceso estocástico $$\boldsymbol{X}=(X_t \mid
-t=0,\pm1,\pm2,\ldots).$$ Caracterizar su distribución conjunta es
-demasiado ambicioso. 
+t=0,\pm1,\pm2,\ldots).$$ Caracterizar su distribución conjunta (todos
+los momentos) es demasiado ambicioso.
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Fijémonos solo en los dos primeros momentos:
+Tentativamente vamos a fijarnos únicamente en los dos primeros momentos:
 
 $$E(X_t)={\color{blue}{ \mu_t}}\qquad\text{ y } \qquad
 Cov(X_t,X_k)=E\big[(X_t-\mu_t)(X_k-\mu_k)\big]={\color{blue}{\lambda_{t,k}}}$$
 (si $\;k=t\;$ entonces $\;\lambda_{t,t}=Var(X_t)=\sigma^2_t$).
 
 Si las $X_t$ fueran gaussianas, conocer estos /parámetros/ bastaría
-para caracterizar la distribución conjunta. Pero
+para caracterizar la distribución conjunta. Pero aún así...
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-- Necesitaríamos una muestra suficiente de cada $X_t$ para estimar los parámetros 
+- necesitaríamos una muestra suficiente de cada $X_t$ para estimar los parámetros 
   + y en una serie temporal tenemos una única realización para cada $X_t$  
 
-- Fíjese que hay más parámetros que variables aleatorias
+- y además hay más parámetros que variables aleatorias
 
 ** Casos que simplifican el escenario
    :PROPERTIES:
