@@ -17,7 +17,10 @@
 - Enlaces :: 
   - [[https://mbujosab.github.io/EconometriaAplicada-SRC/][Web]] con el material
   - [[https://github.com/mbujosab/EconometriaAplicada-SRC][Repositorio]] con el material
+
   - [[https://drive.google.com/open?id=0Bwa1A30pN0IwWUtNNzRQRFRJUTQ][Ficha]] de la asignatura
+
+[[file:Calendario-Econometria-Aplicada.pdf][Calendario tentativo]] (solo clases M. Bujosa)
 
 * Regresión con series temporales
     :PROPERTIES:  
