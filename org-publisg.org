@@ -119,7 +119,6 @@ c.NbConvertApp.notebooks = ["Lecc01.ipynb",
                             "Lecc05.ipynb"]
 c.SlidesExporter.reveal_theme = 'solarized'
 c.SlidesExporter.reveal_scroll = True
-c.SlidesExporter.language_code = 'es'
 #+END_SRC
 
 # :tangle custom.css
@@ -129,12 +128,15 @@ c.SlidesExporter.language_code = 'es'
 }
 #+END_SRC
 
+
 #+BEGIN_SRC sh :results none
+jupyter nbconvert --config mycfg.py --to notebook
 jupyter nbconvert --config mycfg.py --to slides 
 #+END_SRC
 
 # omite las celdas de código
-#+BEGIN_SRC sh :results none
+#+BEGIN_SRC sh :results silent
+jupyter nbconvert --config mycfg.py --to notebook
 jupyter nbconvert --config mycfg.py --to slides --no-input
 #+END_SRC
 
@@ -186,8 +188,22 @@ c.SlidesExporter.require_js_url = "https://cdnjs.cloudflare.com/ajax/libs/requir
 #+END_SRC
 
 #+BEGIN_SRC sh :results silent
-jupyter nbconvert --config mycfg-GitHubPages.py --to slides --reveal-prefix reveal.js
+jupyter nbconvert --config mycfg-GitHubPages.py --to slides --reveal-prefix reveal.js --no-input
 #+END_SRC
+
+
+#+BEGIN_SRC emacs-lisp
+(require 'ox-ipynb)
+(ox-ipynb-export-org-file-to-ipynb-file "Lecc01.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc02.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc03.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc04.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc05.org")
+#+END_SRC
+
+#+RESULTS:
+: Lecc01.ipynb
+
 
 # jupyter nbconvert --config mycfg.py
 # jupyter nbconvert --config mycfg.py  --to slides --reveal-prefix reveal.js

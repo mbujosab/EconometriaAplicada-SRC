@@ -6,4 +6,3 @@ c.NbConvertApp.notebooks = ["Lecc01.ipynb",
                             "Lecc05.ipynb"]
 c.SlidesExporter.reveal_theme = 'solarized'
 c.SlidesExporter.reveal_scroll = True
-c.SlidesExporter.language_code = 'es'

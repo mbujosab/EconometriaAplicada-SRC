@@ -14108,81 +14108,38 @@ div.jp-OutputPrompt {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Econometr%C3%ADa-Aplicada.-Lecci%C3%B3n-1">Econometr&#237;a Aplicada. Lecci&#243;n 1<a class="anchor-link" href="#Econometr%C3%ADa-Aplicada.-Lecci%C3%B3n-1">&#182;</a></h1><p><strong>Author:</strong> Marcos Bujosa</p>
 
 </div>
 </div>
 </div>
-</div><aside class="notes">
-
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Carga-de-algunos-m%C3%B3dulos-de-python">Carga de algunos m&#243;dulos de python<a class="anchor-link" href="#Carga-de-algunos-m%C3%B3dulos-de-python">&#182;</a></h4>
-</div>
-</div>
-</div>
-</div>
-</aside><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Para trabajar con los datos y dibujarlos necesitamos cargar algunos módulos de python</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> <span class="c1"># linear algebra</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> <span class="c1"># data processing, CSV file I/O (e.g. pd.read_csv)</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">'text'</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">'text.latex'</span><span class="p">,</span> <span class="n">preamble</span><span class="o">=</span><span class="sa">r</span><span class="s1">'\usepackage</span><span class="si">{amsmath}</span><span class="s1">'</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>   <span class="c1"># data visualization</span>
-<span class="kn">import</span> <span class="nn">dataframe_image</span> <span class="k">as</span> <span class="nn">dfi</span>
-</pre></div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="ABSTRACT" id="orge6613f5">
+<p>
+En esta lección veremos algunos transformaciones de los datos para
+<i>"hacerlos estacionarios"</i>.
+</p>
 
-     </div>
-</div>
-</div>
-</div>
+</div><ul>
+<li><a href="https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc01.html">lección en html</a></li>
+<li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/master?labpath=Lecc01.ipynb">lección en mybinder</a></li>
+</ul>
 
 </div>
-</aside><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sympy.printing.preview</span> <span class="kn">import</span> <span class="n">preview</span>
-
-<span class="k">def</span> <span class="nf">repr_png</span><span class="p">(</span><span class="n">tex</span><span class="p">,</span> <span class="n">ImgFile</span><span class="p">):</span>
-    <span class="n">preamble</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\\</span><span class="s2">documentclass[preview]</span><span class="si">{standalone}</span><span class="se">\n</span><span class="s2">"</span> \
-        <span class="s2">"</span><span class="se">\\</span><span class="s2">usepackage{booktabs,amsmath,amsfonts}</span><span class="se">\\</span><span class="s2">begin</span><span class="si">{document}</span><span class="s2">"</span>    
-    <span class="n">preview</span><span class="p">(</span><span class="n">tex</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">ImgFile</span><span class="p">,</span> <span class="n">viewer</span><span class="o">=</span><span class="s1">'file'</span><span class="p">,</span> <span class="n">preamble</span><span class="o">=</span><span class="n">preamble</span><span class="p">,</span> <span class="n">dvioptions</span><span class="o">=</span><span class="p">[</span><span class="s1">'-D'</span><span class="p">,</span><span class="s1">'250'</span><span class="p">])</span>
-</pre></div>
-
-     </div>
 </div>
 </div>
-</div>
-
-</div>
-</aside></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Procesos-estoc%C3%A1sticos-y-datos-de-series-temporales">Procesos estoc&#225;sticos y datos de series temporales<a class="anchor-link" href="#Procesos-estoc%C3%A1sticos-y-datos-de-series-temporales">&#182;</a></h2>
 </div>
 </div>
@@ -14192,22 +14149,23 @@ div.jp-OutputPrompt {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li><p><strong>Proceso estocástico:</strong> es una secuencia de variables aleatorias $X_t$</p>
-<p>$$\boldsymbol{X}=\{X_t \mid t=0,\pm1,\pm2,\ldots\};$$</p>
-<p>donde el conjunto de índices $t$ recorre el conjunto de números enteros $(\mathbb{Z})$.</p>
+<li><p><strong>Proceso estocástico:</strong> es una secuencia de variables aleatorias,
+$X_t$ donde el índice $t$ recorre el conjunto de números enteros
+$(\mathbb{Z})$.  $$\boldsymbol{X}\;=\;
+  (\ldots,X_{-2},X_{-1},X_0,X_1,\ldots)\;=\; 
+  (X_t \mid t\in\mathbb{Z});$$</p>
 </li>
-<li><p><strong>Serie temporal:</strong> es una secuencia de datos tomados a lo largo del tiempo</p>
+<li><p><strong>Serie temporal:</strong> es una secuencia finita de datos tomados a lo
+largo del tiempo</p>
 <p>$$\boldsymbol{x} = (x_1, x_2,\ldots x_n)$$</p>
 <ul>
-<li><p>Consideraremos cada dato $x_t$ como una <em>realización de una
-variable aleatoria</em> $X_t$.</p>
+<li><p>Consideraremos cada dato $x_t$ como una <em>realización de</em> $X_t$.</p>
 </li>
 <li><p>Consecuentemente, consideraremos que una <em>serie temporal</em> es una
-<em>realización de un tramo</em> de un proceso estocástico:</p>
-<p>$$(x_1, x_2,\ldots x_n) \text{ es una realización de }\{X_t \mid t=1,2,\ldots n\}.$$</p>
+<em>realización de un tramo finito</em> de un proceso estocástico:</p>
+<p>$$(x_1, x_2,\ldots x_n) \text{ es una realización de }(X_t \mid t=1:n).$$</p>
 </li>
 </ul>
 </li>
@@ -14221,8 +14179,7 @@ variable aleatoria</em> $X_t$.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Datos-de-secci%C3%B3n-cruzada-vs-datos-de-series-temporales">Datos de secci&#243;n cruzada vs datos de series temporales<a class="anchor-link" href="#Datos-de-secci%C3%B3n-cruzada-vs-datos-de-series-temporales">&#182;</a></h3>
 </div>
 </div>
@@ -14232,8 +14189,7 @@ variable aleatoria</em> $X_t$.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li><p><strong>Sección cruzada:</strong> el índice NO es cronológico. La numeración (la
 indexación) de cada dato es solo una asignación arbitraria de
@@ -14257,21 +14213,21 @@ deducir nada respecto de cualquier otro dato.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li><p><strong>Series temporales:</strong> Corresponden a mediciones de un mismo objeto a
 lo largo del tiempo. El índice indica el instante de cada medición.
 <em>Es habitual que el orden cronológico de los datos sea importante</em>
 para explicar cada uno de ellos.</p>
 <ul>
-<li><p>El motivo es que con frecuencia la medición en un instante de
-tiempo está relacionada con otras mediciones próximas en el
-tiempo.</p>
+<li><p>con frecuencia la medición en un instante de tiempo está
+relacionada con otras mediciones próximas en el tiempo. En tal
+caso&#x2026;</p>
 </li>
-<li><p>Si es así, no podremos asumir que las variables aleatorias del
-proceso estocástico subyacente, $\boldsymbol{X}=\{X_t\}$, sean
-independientes entre sí.</p>
+<li><p>no debemos asumir que las variables aleatorias del
+proceso estocástico subyacente, 
+$\boldsymbol{X}=(X_t \mid t\in\mathbb{Z})$, 
+sean independientes entre sí.</p>
 </li>
 </ul>
 </li>
@@ -14285,8 +14241,7 @@ independientes entre sí.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="El-desaf%C3%ADo">El desaf&#237;o<a class="anchor-link" href="#El-desaf%C3%ADo">&#182;</a></h3>
 </div>
 </div>
@@ -14296,8 +14251,7 @@ independientes entre sí.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>El análisis de <em>series temporales</em> trata sobre la inferencia
 estadística de muestras que <strong>frecuentemente NO podemos asumir que sean
 realizaciones</strong> de variables aleatorias <em>i.i.d.</em> (<em>independientes e
@@ -14311,8 +14265,7 @@ idénticamente distribuidas</em>).</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Además,</p>
 <ul>
 <li><p>Aunque el marco ideal es que la serie temporal analizada "<strong>sea estacionaria</strong>"</p>
@@ -14325,146 +14278,45 @@ una realización de un proceso estocástico estacionario</em>)</p>
 </div>
 </div>
 </div>
-</div><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">path</span> <span class="o">=</span> <span class="s1">'./datos/'</span>
-<span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s1">'PIB_UEM.csv'</span><span class="p">)</span>
-<span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s1">'ProduccionCemento.csv'</span><span class="p">)</span>
-<span class="n">df3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s1">'IBEX35.csv'</span><span class="p">)</span>
-<span class="n">df4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="o">+</span><span class="s1">'ExportacionDeAcero.csv'</span><span class="p">)</span>
-<span class="c1">#print(df1.head())</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-</aside><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'obs'</span><span class="p">,</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">'PIB UEM'</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-</aside></div></section><section>
+</div></div></section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc01/PIB_UEM.png" alt="img"></p>
 
 </div>
 </div>
 </div>
-</div><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'obs'</span><span class="p">,</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">'Producción de cemento en España'</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-</aside>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc01/ProduccionCemento.png" alt="img"></p>
 
 </div>
 </div>
 </div>
-</div><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'obs'</span><span class="p">,</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">'Rendimiento porcentual diario del IBEX 35'</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-</aside></section><section>
+</div></section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc01/IBEX35.png" alt="img"></p>
 
 </div>
 </div>
 </div>
-</div><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df4</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">'obs'</span><span class="p">,</span><span class="n">xlabel</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">'Exportaciones españolas de acero'</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-</aside><div class="fragment">
+</div><div class="fragment">
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc01/ExportacionDeAcero.png" alt="img"></p>
 
 </div>
@@ -14475,8 +14327,7 @@ una realización de un proceso estocástico estacionario</em>)</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>El desafío para el analista es</p>
 <ul>
 <li><strong>primero:</strong> transformar los datos para lograr que sean "<strong><em>estacionarios</em></strong>"</li>
@@ -14495,8 +14346,7 @@ datos son realizaciones de variables aleatorias i.i.d.</em>)</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Estacionariedad">Estacionariedad<a class="anchor-link" href="#Estacionariedad">&#182;</a></h2>
 </div>
 </div>
@@ -14506,11 +14356,11 @@ datos son realizaciones de variables aleatorias i.i.d.</em>)</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>El mayor objetivo del <em>análisis de series temporales</em> es inferir la
-distribución de un proceso $\boldsymbol{X}=\{X_t\}$ usando una muestra
-(serie temporal) $\boldsymbol{x}=(x_1, x_2,\ldots x_n)$. Así podremos</p>
+distribución de $\boldsymbol{X}=(X_t \mid t\in\mathbb{Z})$ usando una
+muestra finita (serie temporal) $\boldsymbol{x}=(x_t \mid t=1:n)$.</p>
+<p>Así podremos</p>
 <ul>
 <li><strong>Predecir:</strong> datos futuros</li>
 <li><strong>Controlar:</strong> datos futuros</li>
@@ -14528,8 +14378,7 @@ necesaria.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Estacionariedad-en-sentido-d%C3%A9bil">Estacionariedad en sentido d&#233;bil<a class="anchor-link" href="#Estacionariedad-en-sentido-d%C3%A9bil">&#182;</a></h3>
 </div>
 </div>
@@ -14539,20 +14388,22 @@ necesaria.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Un proceso estocástico $\boldsymbol{X}=\{X_t\}$ se dice <strong>estacionario</strong>
-(<em>en sentido débil</em>) si para todo $t$ y $k$ de $\mathbb{Z}$</p>
-\begin{eqnarray}
-E(X_t)  &amp; = \mu \\
-Cov(X_t,X_{t-k}) &amp; = \gamma_k
-\end{eqnarray}<ul>
-<li><p>La primera igualdad sugiere que las realizaciones de $\{X_t\}$
-generalmente oscilan entorno a $\mu$.</p>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Un proceso estocástico $\boldsymbol{X}$ se dice <strong>estacionario</strong> (<em>en
+sentido débil</em>) si para todo $t,k\in\mathbb{Z}$</p>
+\begin{equation}
+\label{orgaf42b96}
+E(X_t)  = \mu
+\end{equation}\begin{equation}
+\label{orgb1b0cd8}
+Cov(X_t,X_{t-k}) = \gamma_k 
+\end{equation}<ul>
+<li><p>(<a href="#orgaf42b96">1</a>) sugiere que las realizaciones de
+$\boldsymbol{X}$ generalmente oscilan entorno a $\mu$.</p>
 </li>
-<li><p>La segunda sugiere que la variabilidad de las realizaciones de
-$\{X_t\}$ entorno a $\mu$ es constante, pues para el caso particular
-$k=0$</p>
+<li><p>(<a href="#orgb1b0cd8">2</a>) sugiere que la variabilidad de las
+realizaciones de $\boldsymbol{X}$ entorno a $\mu$ es constante, pues
+para el caso particular $k=0$</p>
 <p>$$Cov(X_t,X_{t-0})=Var(X_t) = \gamma_0\quad\text{ para todo } t$$</p>
 <p>Es decir, $\gamma_0$ es la varianza común a todas las variables
 aleatorias del proceso.</p>
@@ -14567,8 +14418,33 @@ aleatorias del proceso.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Es más, la desigualdad de Chebyshev
+$$P\left(|X_t-\mu|\geq c\sigma\right)\leq\frac{1}{c^2},\quad\text{ donde } \sigma=\sqrt{\gamma_0}$$
+sugiere que para cualquier proceso estacionario (y un $c$ grande), al
+pintar una realización, tan solo un pequeño porcentaje de los datos
+caerán fuera de la franja $\left(\mu-c\sigma, \mu+c\sigma\right)$.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc01/stationaryTimeSeriesExample.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Funci%C3%B3n-de-autocovarianzas-y-funci%C3%B3n-de-autocorrelaci%C3%B3n">Funci&#243;n de autocovarianzas y funci&#243;n de autocorrelaci&#243;n<a class="anchor-link" href="#Funci%C3%B3n-de-autocovarianzas-y-funci%C3%B3n-de-autocorrelaci%C3%B3n">&#182;</a></h3>
 </div>
 </div>
@@ -14578,16 +14454,12 @@ aleatorias del proceso.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Cuando $\boldsymbol{X}$ es un proceso estocástico (débilmente) <strong>estacionario</strong></p>
 <ul>
-<li><p>La secuencia $\{\gamma_k\}$ con $k\in\mathbb{Z}$ se denomina
-<em>función de autocovarianzas</em></p>
-</li>
-<li><p>La secuencia $\{\rho_k\}$ con $k\in\mathbb{Z}$, donde</p>
-<p>$$\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0} $$</p>
-<p>se denomina <em>función de autocorrelación</em> (ACF).</p>
-</li>
+<li>La secuencia $\;(\gamma_k \mid k\in\mathbb{Z}),\;$ donde 
+$\;\gamma_k = Cov(X_t,X_{t-k})\;$
+se denomina <em>función de autocovarianzas</em></li>
 </ul>
 
 </div>
@@ -14598,77 +14470,25 @@ aleatorias del proceso.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Debido a la estacionariedad, la correlación entre $X_t$ y $X_{t+k}$ no
 depende de $t$; tan solo depende de la distancia temporal $k$ entre
 ambas variables.</p>
+<ul>
+<li>La secuencia $\;(\rho_k \mid k\in\mathbb{Z}),\;$ donde
+$\;\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0}\;$
+se denomina <em>función de autocorrelación</em> (ACF).</li>
+</ul>
 
 </div>
 </div>
 </div>
-</div></div></section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Es más, la desigualdad de Chebyshev
-$$P\left(|X_t-\mu|\geq c\sigma\right)\leq\frac{1}{c^2},\quad\text{ donde } \sigma=\sqrt{\gamma_0}$$
-sugiere que para cualquier proceso estacionario (y un $c$ grande), al
-pintar una realización, tan solo un pequeño porcentaje de los datos
-caerán fuera de la franja $\left(\mu-c\sigma, \mu+c\sigma\right)$.</p>
-
-</div>
-</div>
-</div>
-</div><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
-<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
-<span class="n">arparams</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">.75</span><span class="p">,</span> <span class="o">-</span><span class="mf">.25</span><span class="p">])</span>
-<span class="n">maparams</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">.65</span><span class="p">,</span> <span class="mf">.35</span><span class="p">])</span>
-<span class="n">ar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">arparams</span><span class="p">]</span> <span class="c1"># add zero-lag and negate</span>
-<span class="n">ma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">r_</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">maparams</span><span class="p">]</span> <span class="c1"># add zero-lag</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">tsa</span><span class="o">.</span><span class="n">arma_generate_sample</span><span class="p">(</span><span class="n">ar</span><span class="p">,</span> <span class="n">ma</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<span class="c1">#plt.savefig("./img/lecc01/stationaryTimeSeriesExample.png")</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-</aside>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="./img/lecc01/stationaryTimeSeriesExample.png" alt="img"></p>
-
-</div>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Transformaciones-de-realizaciones-de-procesos-estoc%C3%A1sticos-NO-estacionarios">Transformaciones de realizaciones de procesos estoc&#225;sticos NO estacionarios<a class="anchor-link" href="#Transformaciones-de-realizaciones-de-procesos-estoc%C3%A1sticos-NO-estacionarios">&#182;</a></h2>
 </div>
 </div>
@@ -14678,12 +14498,13 @@ caerán fuera de la franja $\left(\mu-c\sigma, \mu+c\sigma\right)$.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Un proceso estocástico $\mathbf{X}=\{X_t\}$ puede ser</p>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Un proceso estocástico $\boldsymbol{X}=(X_t \mid t\in\mathbb{Z})$ puede ser</p>
 <ul>
-<li><strong>NO estacionario en media:</strong> porque $E(X_t)$ depende de $t$.</li>
-<li><strong>NO estacionario en covarianza:</strong> porque $Cov(X_t,X_{t-k})$ depende de $t$.</li>
+<li><p><strong>NO estacionario en media:</strong> porque $E(X_t)$ depende de $t$.</p>
+</li>
+<li><p><strong>NO estacionario en covarianza:</strong> porque $Cov(X_t,X_{t-k})$ depende de $t$.</p>
+</li>
 </ul>
 <p>Separar o distinguir ambos tipos de no estacionariedad no es sencillo.</p>
 
@@ -14695,8 +14516,7 @@ caerán fuera de la franja $\left(\mu-c\sigma, \mu+c\sigma\right)$.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Veamos un ejemplo de serie temporal para la que</p>
 <ul>
 <li>no podemos asumir que sea realización de un proceso estocástico
@@ -14716,121 +14536,19 @@ lenguaje</em>).</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Internat.-airline-passengers:-monthly-totals-in-thousands.-Jan-49-%E2%80%93-Dec-60">Internat. airline passengers: monthly totals in thousands. Jan 49 &#8211; Dec 60<a class="anchor-link" href="#Internat.-airline-passengers:-monthly-totals-in-thousands.-Jan-49-%E2%80%93-Dec-60">&#182;</a></h3>
 </div>
 </div>
 </div>
-</div><aside class="notes">
-
+</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Leemos los datos de un fichero <code>csv</code> y generamos un <code>dataframe</code> de pandas.</p>
-
-</div>
-</div>
-</div>
-</div>
-</aside><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">OrigData</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./database/Datasets-master/airline-passengers.csv'</span><span class="p">)</span>
-<span class="n">OrigData</span><span class="p">[</span><span class="s1">'Month'</span><span class="p">]</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">OrigData</span><span class="p">[</span><span class="s1">'Month'</span><span class="p">])</span>
-<span class="n">OrigData</span><span class="o">=</span><span class="n">OrigData</span><span class="o">.</span><span class="n">set_index</span><span class="p">([</span><span class="s1">'Month'</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">OrigData</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Passengers
-Month                 
-1949-01-01         112
-1949-02-01         118
-1949-03-01         132
-1949-04-01         129
-1949-05-01         121</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-</aside>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-$$\boldsymbol{x}=(x_1,\ldots x_{114})$$
-</div>
-</div>
-</div>
-</div><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">OrigData</span><span class="p">[</span><span class="s1">'Passengers'</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Month"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Number of Air Passengers, ($\boldsymbol</span><span class="si">{x}</span><span class="s2">$)"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">OrigData</span><span class="p">[</span><span class="s1">'Passengers'</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">'white'</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="c1">#plt.savefig("./img/lecc01/airlinepass+hist.png")</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-</aside>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc01/airlinepass+hist.png" alt="img"></p>
-<p>Serie <em>"no estacionaria"</em> (*):</p>
+$$\boldsymbol{x}=(x_1,\ldots x_{114})$$<p>Serie <em>"no estacionaria"</em> (*):</p>
 <ul>
 <li>La media crece de año en año</li>
 <li>La variabilidad estacional crece de año en año (fíjese en la
@@ -14845,8 +14563,7 @@ diferencia entre el verano y el otoño de cada año)</li>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="Trasformaci%C3%B3n-logar%C3%ADtmica-de-los-datos">Trasformaci&#243;n logar&#237;tmica de los datos<a class="anchor-link" href="#Trasformaci%C3%B3n-logar%C3%ADtmica-de-los-datos">&#182;</a></h4>
 </div>
 </div>
@@ -14856,8 +14573,7 @@ diferencia entre el verano y el otoño de cada año)</li>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li><p>Al aplicar la función logarítmica transformamos <strong>monótonamente</strong> los
 datos estabilizando la varianza cuando los valores son mayores que
@@ -14874,111 +14590,25 @@ $\lim\limits_{x\to0} \ln(x)=-\infty$.</p>
 </div>
 </div>
 </div>
-</div><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Definir el rango de valores para x (empezando desde un número positivo ya que log(0) no está definido)</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>  <span class="c1"># Valores de 0.1 a 10</span>
-
-<span class="c1"># Calcular y = log(x)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-<span class="c1"># Crear el gráfico</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">'y = ln(x)'</span><span class="p">)</span>
-
-<span class="c1"># Añadir etiquetas y título</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'x'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'ln(x)'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Gráfico de la función logarítmica y = ln(x)'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">'gray'</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s1">'--'</span><span class="p">,</span> <span class="n">linewidth</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="c1">#plt.savefig("./img/lecc01/funcion_logaritmica.png")</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-</aside>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc01/funcion_logaritmica.png" alt="img"></p>
 
 </div>
 </div>
 </div>
-</div><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Creamos un nuevo dataframe con los datos originales y varias transformaciones de los mismos</span>
-<span class="n">TransformedData</span> <span class="o">=</span> <span class="n">OrigData</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">TransformedData</span><span class="p">[</span><span class="s1">'dataLog'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">OrigData</span><span class="p">[</span><span class="s1">'Passengers'</span><span class="p">])</span>
-<span class="n">TransformedData</span><span class="p">[</span><span class="s1">'dataLogDiff'</span><span class="p">]</span> <span class="o">=</span> <span class="n">TransformedData</span><span class="p">[</span><span class="s1">'dataLog'</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">TransformedData</span><span class="p">[</span><span class="s1">'dataLogDiffDiff12'</span><span class="p">]</span> <span class="o">=</span> <span class="n">TransformedData</span><span class="p">[</span><span class="s1">'dataLogDiff'</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-</aside><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">TransformedData</span><span class="p">[</span><span class="s1">'dataLog'</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Month"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"Log-Passengers, ($\ln\boldsymbol</span><span class="si">{x}</span><span class="s2">$) "</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">TransformedData</span><span class="p">[</span><span class="s1">'dataLog'</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">'white'</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="c1">#plt.savefig("./img/lecc01/airlinepass_log+hist.png")</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-</aside></section><section>
+</div></section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-$$\ln\boldsymbol{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$<p><img src="./img/lecc01/airlinepass_log+hist.png" alt="img"></p>
-<p>Ésta tampoco parece la realización de un proceso estocástico <em>estacionario</em></p>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc01/airlinepass_log+hist.png" alt="img"></p>
+$$\ln\boldsymbol{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$<p>Ésta tampoco parece la realización de un proceso estocástico <em>estacionario</em></p>
 <ul>
 <li>Ahora la variabilidad estacional parece mantenerse de año en año</li>
 <li>Pero la media sigue creciendo de año en año</li>
@@ -14992,8 +14622,7 @@ $$\ln\boldsymbol{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$<p><img src="./img/l
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="Primera-diferencia-del-logar%C3%ADtmo-de-los-datos">Primera diferencia del logar&#237;tmo de los datos<a class="anchor-link" href="#Primera-diferencia-del-logar%C3%ADtmo-de-los-datos">&#182;</a></h4>
 </div>
 </div>
@@ -15003,47 +14632,9 @@ $$\ln\boldsymbol{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$<p><img src="./img/l
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-$$\boldsymbol{y}=\nabla\ln\boldsymbol{x}=\Big(\big[\ln(x_2)-\ln(x_1)\big],\ldots\; \big[\ln(x_{114})-\ln(x_{113})\big]\Big)$$
-</div>
-</div>
-</div>
-</div><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">TransformedData</span><span class="p">[</span><span class="s1">'dataLogDiff'</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Month"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\nabla\ln\boldsymbol</span><span class="si">{x}</span><span class="s2">$"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">TransformedData</span><span class="p">[</span><span class="s1">'dataLogDiff'</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">'white'</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="c1">#plt.savefig("./img/lecc01/airlinepass_logDiff+hist.png")</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-</aside>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc01/airlinepass_logDiff+hist.png" alt="img"></p>
-<p>Esta serie tampoco parece <em>"estacionaria"</em> (*)</p>
+$$\boldsymbol{y}=\nabla\ln\boldsymbol{x}=\Big(\big[\ln(x_2)-\ln(x_1)\big],\ldots\; \big[\ln(x_{114})-\ln(x_{113})\big]\Big)$$<p>Esta serie tampoco parece <em>"estacionaria"</em> (*)</p>
 <ul>
 <li>Hay un componente periódico (de naturaleza estacional), debido a que
 hay pocos viajes en otoño y muchos en Navidad, Semana Santa y verano
@@ -15059,8 +14650,7 @@ mes o estación del año).</li>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="Diferencia-estacional-de-la-primera-diferencia-del-logar%C3%ADtmo-de-los-datos">Diferencia estacional de la primera diferencia del logar&#237;tmo de los datos<a class="anchor-link" href="#Diferencia-estacional-de-la-primera-diferencia-del-logar%C3%ADtmo-de-los-datos">&#182;</a></h4>
 </div>
 </div>
@@ -15070,47 +14660,9 @@ mes o estación del año).</li>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-$$\boldsymbol{z}=\nabla_{12}(\nabla\ln\boldsymbol{x})=\nabla_{12}(\boldsymbol{y})=\Big((y_{13}-y_{1}),\ldots\; (y_{113}-y_{101})\Big)$$
-</div>
-</div>
-</div>
-</div><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">TransformedData</span><span class="p">[</span><span class="s1">'dataLogDiffDiff12'</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"Month"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">"$\nabla_</span><span class="si">{12}</span><span class="s2">(\nabla\ln\boldsymbol</span><span class="si">{x}</span><span class="s2">)$"</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">TransformedData</span><span class="p">[</span><span class="s1">'dataLogDiffDiff12'</span><span class="p">],</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">'white'</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="c1">#plt.savefig("./img/lecc01/airlinepass_logDiffDiff12+hist.png")</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-</aside>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc01/airlinepass_logDiffDiff12+hist.png" alt="img"></p>
-<p>Esta serie se aproxima más al aspecto de la realización de un proceso <em>estacionario</em></p>
+$$\boldsymbol{z}=\nabla_{12}(\nabla\ln\boldsymbol{x})=\nabla_{12}(\boldsymbol{y})=\Big((y_{13}-y_{1}),\ldots\; (y_{113}-y_{101})\Big)$$<p>Esta serie se aproxima más al aspecto de la realización de un proceso <em>estacionario</em></p>
 <ul>
 <li>Aunque parece haber más varianza a principios de los 50 que a finales</li>
 <li>De propina, el histograma sugiere una distribución aproximadamente Gaussiana</li>
@@ -15124,62 +14676,17 @@ $$\boldsymbol{z}=\nabla_{12}(\nabla\ln\boldsymbol{x})=\nabla_{12}(\boldsymbol{y}
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Tasa-logar%C3%ADtmica-de-crecimiento">Tasa logar&#237;tmica de crecimiento<a class="anchor-link" href="#Tasa-logar%C3%ADtmica-de-crecimiento">&#182;</a></h3>
 </div>
 </div>
 </div>
-</div><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">START</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="n">UnoPorCiento</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n0</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="n">n0</span> <span class="k">if</span> <span class="n">t</span><span class="o">&lt;=</span><span class="mi">1</span> <span class="k">else</span> <span class="mf">1.01</span> <span class="o">*</span> <span class="n">UnoPorCiento</span><span class="p">(</span><span class="n">n0</span><span class="p">,</span> <span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">TasaLogCrecimiento</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">'$y_t$'</span><span class="p">:[</span><span class="n">UnoPorCiento</span><span class="p">(</span><span class="n">START</span><span class="p">,</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]})</span>
-<span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">'$</span><span class="se">\\</span><span class="s1">frac{y_t-y_{t-1}}{y_{t-1}}$'</span><span class="p">]</span> <span class="o">=</span> <span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">'$y_t$'</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
-<span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">'$</span><span class="se">\\</span><span class="s1">ln y_t$'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">'$y_t$'</span><span class="p">])</span>
-<span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">'$</span><span class="se">\\</span><span class="s1">nabla</span><span class="se">\\</span><span class="s1">ln</span><span class="se">\\</span><span class="s1">boldsymbol</span><span class="si">{y}</span><span class="s1">$'</span><span class="p">]</span> <span class="o">=</span> <span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">'$</span><span class="se">\\</span><span class="s1">ln y_t$'</span><span class="p">]</span> <span class="o">-</span> <span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">'$</span><span class="se">\\</span><span class="s1">ln y_t$'</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">'$</span><span class="se">\\</span><span class="s1">frac{y_t-y_</span><span class="si">{0}</span><span class="s1">}{y_</span><span class="si">{0}</span><span class="s1">}$'</span><span class="p">]</span> <span class="o">=</span> <span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">'$y_t$'</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">((</span><span class="n">x</span><span class="o">/</span><span class="n">START</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">'$</span><span class="se">\\</span><span class="s1">ln y_t- </span><span class="se">\\</span><span class="s1">ln y_</span><span class="si">{0}</span><span class="s1">$'</span><span class="p">]</span> <span class="o">=</span> <span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">'$</span><span class="se">\\</span><span class="s1">ln y_t$'</span><span class="p">]</span> <span class="o">-</span> <span class="n">TasaLogCrecimiento</span><span class="p">[</span><span class="s1">'$</span><span class="se">\\</span><span class="s1">ln y_t$'</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-</aside><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dfi</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="n">TasaLogCrecimiento</span><span class="p">,</span> <span class="s2">"./img/lecc01/TasaLogCrecimiento.png"</span><span class="p">,</span> <span class="n">use_mathjax</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">table_conversion</span><span class="o">=</span><span class="s2">"matplotlib"</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div>
-</aside>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>La tasa logarítmica de variación de $\boldsymbol{y}$ se define como
 $z_t=\ln{y_t}-\ln{y_{t-1}};$ es decir</p>
 $$\boldsymbol{z}=\nabla\ln\boldsymbol{y} = \Big(\big[\ln(y_2)-\ln(y_1)\big],\ldots\; \big[\ln(y_{n})-\ln(y_{n-1})\big]\Big)$$<p>y se <em>aproxima</em> a la tasa de crecimiento (en tanto por uno) si el
@@ -15193,8 +14700,7 @@ incremento es pequeño.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc01/TasaLogCrecimiento.png" alt="img"></p>
 
 </div>
@@ -15205,8 +14711,7 @@ incremento es pequeño.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="Observaciones-sobre-los-datos-transformados">Observaciones sobre los datos transformados<a class="anchor-link" href="#Observaciones-sobre-los-datos-transformados">&#182;</a></h4>
 </div>
 </div>
@@ -15216,8 +14721,7 @@ incremento es pequeño.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <style>
 .reveal  td {font-size: 95%;}
 </style><table>

@@ -14108,8 +14108,7 @@ div.jp-OutputPrompt {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Econometr%C3%ADa-Aplicada.-Lecci%C3%B3n-3">Econometr&#237;a Aplicada. Lecci&#243;n 3<a class="anchor-link" href="#Econometr%C3%ADa-Aplicada.-Lecci%C3%B3n-3">&#182;</a></h1><p><strong>Author:</strong> Marcos Bujosa</p>
 
 </div>
@@ -14120,9 +14119,8 @@ div.jp-OutputPrompt {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="orgd999c34">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="ABSTRACT" id="org3bb9358">
 <p>
 En esta lección voy a continuar pero con R y usaré la librería
 <code>tfarima</code> de José Luis Gallego siempre que pueda.
@@ -14138,8 +14136,7 @@ En esta lección voy a continuar pero con R y usaré la librería
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="Carga-de-algunas-librer%C3%ADas-de-R">Carga de algunas librer&#237;as de R<a class="anchor-link" href="#Carga-de-algunas-librer%C3%ADas-de-R">&#182;</a></h4>
 </div>
 </div>
@@ -14151,8 +14148,7 @@ En esta lección voy a continuar pero con R y usaré la librería
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Primero cargamos la librería <code>tfarima</code> (Repositorio Cran:
 <a href="https://cran.r-project.org/web/packages/tfarima/index.html">https://cran.r-project.org/web/packages/tfarima/index.html</a>;
 repositorio GitHub: <a href="https://github.com/gallegoj/tfarima">https://github.com/gallegoj/tfarima</a>)</p>
@@ -14162,26 +14158,7 @@ repositorio GitHub: <a href="https://github.com/gallegoj/tfarima">https://github
 </div>
 </div>
 </aside><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">tfarima</span><span class="p">)</span><span class="w">      </span><span class="c1"># librería de José Luis Gallego para Time Series</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">latticeExtra</span><span class="p">)</span><span class="w"> </span><span class="c1"># para gráficos con doble eje vertical (doubleYScale)</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">readr</span><span class="p">)</span><span class="w">        </span><span class="c1"># para leer ficheros CSV</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">      </span><span class="c1"># para el scatterplot (alternaticamente library(tidyverse))</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">jtools</span><span class="p">)</span><span class="w">       </span><span class="c1"># para representación resultados estimación</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">zoo</span><span class="p">)</span><span class="w">          </span><span class="c1"># para generar objetos ts (time series)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput ">
 
 </div>
 </aside><aside class="notes">
@@ -14190,8 +14167,7 @@ repositorio GitHub: <a href="https://github.com/gallegoj/tfarima">https://github
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>y además fijamos los parámetros por defecto para las figuras en <code>png</code>
 del notebook</p>
 
@@ -14200,22 +14176,7 @@ del notebook</p>
 </div>
 </div>
 </aside><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># fijamos el tamaño de las figuras que se generan en el notebook</span>
-<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput ">
 
 </div>
 </aside></section></section><section><section>
@@ -14223,8 +14184,7 @@ del notebook</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Correlaci%C3%B3n">Correlaci&#243;n<a class="anchor-link" href="#Correlaci%C3%B3n">&#182;</a></h2>
 </div>
 </div>
@@ -14234,8 +14194,7 @@ del notebook</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>La correlación entre dos muestras de tamaño $N$ (dos vectores de datos
 de $\mathbb{R}^N$) es el <a href="https://mbujosab.github.io/Ectr/apuntes-Ectr-print.pdf#subsection.3.1"><strong>coseno</strong> del ángulo formado los vectores de
 dichos datos en desviaciones respecto a sus correspondientes medias</a>.
@@ -14249,8 +14208,7 @@ $$\rho_{\boldsymbol{x}\boldsymbol{y}}=\frac{\sigma_{\boldsymbol{x}\boldsymbol{y}
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Por tanto la correlación es algún valor entre $-1$ y $1$.</p>
 <ul>
 <li>Si la correlación es $1$ significa que
@@ -14272,8 +14230,7 @@ $\;\boldsymbol{x}-\boldsymbol{\bar{x}}\;$</li>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="La-causalidad-y-correlaci%C3%B3n">La causalidad y correlaci&#243;n<a class="anchor-link" href="#La-causalidad-y-correlaci%C3%B3n">&#182;</a></h3>
 </div>
 </div>
@@ -14283,8 +14240,7 @@ $\;\boldsymbol{x}-\boldsymbol{\bar{x}}\;$</li>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Cuando existe relación causal entre variables sus muestras suelen
 estar correladas.</p>
 <ul>
@@ -14301,8 +14257,7 @@ negativa con la temperatura ambiente</li>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Pero <strong>correlaciones significativas no indican la existencia de relaciones causales</strong>.</p>
 <ul>
 <li>En una playa: consumo de helados y ataques de tiburón a los bañistas</li>
@@ -14316,8 +14271,7 @@ negativa con la temperatura ambiente</li>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Correlaci%C3%B3n-espuria">Correlaci&#243;n espuria<a class="anchor-link" href="#Correlaci%C3%B3n-espuria">&#182;</a></h3>
 </div>
 </div>
@@ -14327,8 +14281,7 @@ negativa con la temperatura ambiente</li>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>La correlación entre variables sin relación causal se denomina
 <em>correlación espuria</em>.</p>
 
@@ -14340,8 +14293,7 @@ negativa con la temperatura ambiente</li>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Que haya correlación espuria no significa que "en realidad no hay correlación".</li>
 <li>Que haya correlación espuria significa que <em>es erróneo interpretar</em>
@@ -14356,8 +14308,7 @@ que dicha correlación se debe a <em>una relación causal</em>.</li>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Puede ser que una causa común induzca la correlación entre ambas variables</p>
 <ul>
 <li>consumo de helados y venta de bañadores</li>
@@ -14377,8 +14328,7 @@ que dicha correlación se debe a <em>una relación causal</em>.</li>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Las-series-con-tendencia-suelen-presentar-elevadas-correlaciones.">Las series con tendencia suelen presentar elevadas correlaciones.<a class="anchor-link" href="#Las-series-con-tendencia-suelen-presentar-elevadas-correlaciones.">&#182;</a></h3>
 </div>
 </div>
@@ -14388,42 +14338,21 @@ que dicha correlación se debe a <em>una relación causal</em>.</li>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="Ejemplo-de-correlaci%C3%B3n-espuria:-PNB-vs-incidencia-de-melanoma">Ejemplo de correlaci&#243;n espuria: PNB vs incidencia de melanoma<a class="anchor-link" href="#Ejemplo-de-correlaci%C3%B3n-espuria:-PNB-vs-incidencia-de-melanoma">&#182;</a></h4>
 </div>
 </div>
 </div>
 </div><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">data_frame</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read_csv</span><span class="p">(</span><span class="s">'datos/GNPvsMelanoma.csv'</span><span class="p">,</span><span class="n">show_col_types</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">data_frame</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell  jp-mod-noInput ">
 
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>|   obs |   GNP | Melanoma |
@@ -14442,27 +14371,7 @@ que dicha correlación se debe a <em>una relación causal</em>.</li>
 
 </div>
 </aside><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># se pueden graficar dos columnas de un data_frame al mismo tiempo</span>
-<span class="n">kk</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">xyplot</span><span class="p">(</span><span class="n">GNP</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Melanoma</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">obs</span><span class="p">,</span><span class="w"> </span><span class="n">data_frame</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">"l"</span><span class="p">)</span>
-<span class="c1"># Se agrega dos ejes Y. Se construye cada serie por separado</span>
-<span class="n">obj1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">xyplot</span><span class="p">(</span><span class="n">GNP</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">obs</span><span class="p">,</span><span class="w"> </span><span class="n">data_frame</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"l"</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">"GNP (miles de millones de $)"</span><span class="p">,</span><span class="w">  </span><span class="n">xlab</span><span class="o">=</span><span class="s">"Years"</span><span class="p">)</span>
-<span class="n">obj2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">xyplot</span><span class="p">(</span><span class="n">Melanoma</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">obs</span><span class="p">,</span><span class="w"> </span><span class="n">data_frame</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">"Casos de melanoma"</span><span class="p">)</span>
-<span class="c1"># --&gt; se realiza la grafica con el segundo eje Y</span>
-<span class="nf">doubleYScale</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span><span class="w"> </span><span class="n">obj2</span><span class="p">,</span><span class="w"> </span><span class="n">add.ylab2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput ">
 
 </div>
 </aside>
@@ -14470,8 +14379,7 @@ que dicha correlación se debe a <em>una relación causal</em>.</li>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Serie anual (1936&#x2013;1972) del PNB anual USA en miles de millones de
 dólares corrientes e incidencia de melanoma en la población masculina
 de Connecticut.</p>
@@ -14481,24 +14389,7 @@ de Connecticut.</p>
 </div>
 </div>
 </div><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># transitoriamente cambio el tamaño de la siguiente figura</span>
-<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">3</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">80</span><span class="p">)</span>
-<span class="nf">ggplot</span><span class="p">(</span><span class="n">data_frame</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Melanoma</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GNP</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_point</span><span class="p">()</span>
-<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput ">
 
 </div>
 </aside></section><section>
@@ -14506,8 +14397,7 @@ de Connecticut.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>La correlación es $0.93$</strong>
 (<em>debido a que ambas series presentan una tendencia creciente</em>)</p>
 <p><img src="./img/lecc03/Scatter-GNPvsMelanoma.png" alt="img"></p>
@@ -14520,8 +14410,7 @@ de Connecticut.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Si regresamos el PNB sobre la incidencia de casos de melanoma
 obtenemos un excelente ajuste (<em>coef. de determinación de $0.87$ y
 coeficientes muy significativos</em>).</p>
@@ -14532,35 +14421,15 @@ Connecticut no hace crecer la economía de EEUU</em>).</p>
 </div>
 </div>
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># regresión de la variable GNP sobre la variable Melanoma del data_frame</span>
-<span class="nf">summ</span><span class="p">(</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">GNP</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Melanoma</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">data_frame</span><span class="p">)</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="c1"># summ from jtools cambia la representación de resultados</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell  jp-mod-noInput ">
 
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>#+begin_example
@@ -14594,8 +14463,7 @@ Melanoma            118.98    7.81    15.23   0.00
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Una-manera-de-ver-que-la-correlaci%C3%B3n-del-ejemplo-es-%22espuria%22-(que-no-hay-causalidad)">Una manera de ver que la correlaci&#243;n del ejemplo es "espuria" (que no hay causalidad)<a class="anchor-link" href="#Una-manera-de-ver-que-la-correlaci%C3%B3n-del-ejemplo-es-%22espuria%22-(que-no-hay-causalidad)">&#182;</a></h3>
 </div>
 </div>
@@ -14605,8 +14473,7 @@ Melanoma            118.98    7.81    15.23   0.00
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Si fuera cierto que 
 $$
 \boldsymbol{y}=\beta_1 \boldsymbol{1} + \beta_2 \boldsymbol{x} + \boldsymbol{u}
@@ -14620,60 +14487,19 @@ $$</p>
 </div>
 </div>
 </div><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># creamos un objeto ts ("time series")</span>
-<span class="n">datos_ts</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.ts</span><span class="p">(</span><span class="w"> </span><span class="nf">read.zoo</span><span class="p">(</span><span class="w"> </span><span class="n">data_frame</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
-<span class="c1"># creamos dos nuevas series temporales con las primeras diferencias de las columnas "GNP" y "Melanoma" de datos_ts</span>
-<span class="n">d_GNP</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nf">diff</span><span class="p">(</span><span class="n">datos_ts</span><span class="p">[,</span><span class="s">"GNP"</span><span class="p">])</span>
-<span class="n">d_Melanoma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">diff</span><span class="p">(</span><span class="n">datos_ts</span><span class="p">[,</span><span class="s">"Melanoma"</span><span class="p">])</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput ">
 
 </div>
 </aside><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># creamos un nuevo data frame con las primeras diferencias</span>
-<span class="n">DF.diferencias</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zoo</span><span class="o">::</span><span class="nf">as.Date</span><span class="p">(</span><span class="nf">time</span><span class="p">(</span><span class="n">d_GNP</span><span class="p">)),</span>
-<span class="w">                            </span><span class="n">d_GNP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">d_GNP</span><span class="p">),</span>
-<span class="w">                            </span><span class="n">d_Melanoma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">d_Melanoma</span><span class="p">))</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">DF.diferencias</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell  jp-mod-noInput ">
 
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>|   |       date | d_GNP | d_Melanoma |
@@ -14691,25 +14517,7 @@ $$</p>
 
 </div>
 </aside><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># gráfico conjunto con dos columnas del data frame DF.diferencias</span>
-<span class="n">kk</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">xyplot</span><span class="p">(</span><span class="n">d_GNP</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">d_Melanoma</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">DF.diferencias</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">"l"</span><span class="p">)</span>
-<span class="n">obj1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">xyplot</span><span class="p">(</span><span class="n">d_GNP</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">DF.diferencias</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"l"</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">"Incremento GNP"</span><span class="p">,</span><span class="w">  </span><span class="n">xlab</span><span class="o">=</span><span class="s">"Years"</span><span class="p">)</span>
-<span class="n">obj2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">xyplot</span><span class="p">(</span><span class="n">d_Melanoma</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">DF.diferencias</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">"Incremento casos de melanoma"</span><span class="p">)</span>
-<span class="nf">doubleYScale</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span><span class="w"> </span><span class="n">obj2</span><span class="p">,</span><span class="w"> </span><span class="n">add.ylab2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput ">
 
 </div>
 </aside>
@@ -14717,8 +14525,7 @@ $$</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc03/d_GNPvsd_Melanoma.png" alt="img"></p>
 
 </div>
@@ -14729,8 +14536,7 @@ $$</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Sin embargo, al realizar la regresión de la primera diferencia de
 <code>GNP</code> sobre la primera diferencia de <code>Melanoma</code> obtenemos un ajuste
 pésimo (tan solo la constante es significativa&#x2026; ¡cuando en teoría $\beta_1=0$!).</p>
@@ -14738,35 +14544,15 @@ pésimo (tan solo la constante es significativa&#x2026; ¡cuando en teoría $\be
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># resultados del ajuste MCO entre d_GNP y d_Melanoma</span>
-<span class="nf">summ</span><span class="p">(</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">d_GNP</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">d_Melanoma</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell  jp-mod-noInput ">
 
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>#+begin_example
@@ -14800,8 +14586,7 @@ d_Melanoma           0.71   6.59     0.11   0.92
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Cointegraci%C3%B3n">Cointegraci&#243;n<a class="anchor-link" href="#Cointegraci%C3%B3n">&#182;</a></h2>
 </div>
 </div>
@@ -14811,8 +14596,7 @@ d_Melanoma           0.71   6.59     0.11   0.92
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li><p>Una serie temporal es <em>integrada de orden $d$</em>, (ó $I(d)$) si $d$ es
 el mínimo número de diferencias ordinarias necesarias para lograr la
@@ -14840,8 +14624,7 @@ relaciones de integración).</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Para estimar la relación de cointegración, se ajusta una regresión
 lineal entre las variables potencialmente cointegradas y se evalúa la
 estacionariedad o el orden de integración de los residuos</p>
@@ -14860,8 +14643,7 @@ es $I(0)$.</li>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>La cointegración entre series temporales suele tener dos
 interpretaciones relacionadas entre sí:</p>
 <ol>
@@ -14882,44 +14664,21 @@ plazo</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="Ejemplo-de-series-cointegradas:-tipos-de-interes-en-UK-a-corto-y-largo-plazo">Ejemplo de series cointegradas: tipos de interes en UK a corto y largo plazo<a class="anchor-link" href="#Ejemplo-de-series-cointegradas:-tipos-de-interes-en-UK-a-corto-y-largo-plazo">&#182;</a></h4>
 </div>
 </div>
 </div>
 </div><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># leemos los datos cuartrimestales como un objeto zoo</span>
-<span class="n">UK_zoo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">read.csv.zoo</span><span class="p">(</span><span class="s">"datos/UK_Interest_rates.csv"</span><span class="p">,</span><span class="w"> </span><span class="n">FUN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">as.yearqtr</span><span class="p">,</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"%YQ%q"</span><span class="p">,</span>
-<span class="w">  </span><span class="n">strip.white</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">UK_zoo</span><span class="p">,</span><span class="m">3</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell  jp-mod-noInput ">
 
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Long Short
@@ -14935,36 +14694,15 @@ plazo</p>
 
 </div>
 </aside><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># creamos un data frame a partir de UK_zoo (data frame para la figura de doble eje)</span>
-<span class="n">UK_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">fortify.zoo</span><span class="p">(</span><span class="n">UK_zoo</span><span class="p">)</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">UK_df</span><span class="p">,</span><span class="m">3</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell  jp-mod-noInput ">
 
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>|   | Index     | Long  | Short |
@@ -14983,36 +14721,15 @@ plazo</p>
 
 </div>
 </aside><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># creamos un ts (time series) a partir de UK_zoo por conveniencia</span>
-<span class="n">UK_ts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.ts</span><span class="p">(</span><span class="n">UK_zoo</span><span class="p">)</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">UK_ts</span><span class="p">,</span><span class="m">3</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell  jp-mod-noInput ">
 
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>| Long | Short |
@@ -15030,24 +14747,7 @@ plazo</p>
 
 </div>
 </aside><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">kk</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">xyplot</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Short</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Index</span><span class="p">,</span><span class="w"> </span><span class="n">UK_df</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">"l"</span><span class="p">)</span>
-<span class="n">obj1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">xyplot</span><span class="p">(</span><span class="n">Long</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Index</span><span class="p">,</span><span class="w"> </span><span class="n">UK_df</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"l"</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">"Long"</span><span class="p">,</span><span class="w">  </span><span class="n">xlab</span><span class="o">=</span><span class="s">"Years"</span><span class="p">)</span>
-<span class="n">obj2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">xyplot</span><span class="p">(</span><span class="n">Short</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">Index</span><span class="p">,</span><span class="w"> </span><span class="n">UK_df</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">"Short"</span><span class="p">)</span>
-<span class="nf">doubleYScale</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span><span class="w"> </span><span class="n">obj2</span><span class="p">,</span><span class="w"> </span><span class="n">add.ylab2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput ">
 
 </div>
 </aside>
@@ -15055,8 +14755,7 @@ plazo</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li><strong><code>Long</code>:</strong> rendimiento porcentual a 20 años  de los bonos soberanos del Reino Unido</li>
 <li><strong><code>Short</code>:</strong> rendimiento de las letras del tesoro a 91 días</li>
@@ -15070,34 +14769,15 @@ plazo</p>
 </div>
 </div>
 </div><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="nf">cor</span><span class="p">(</span><span class="n">UK_df</span><span class="o">$</span><span class="n">Long</span><span class="p">,</span><span class="w"> </span><span class="n">UK_df</span><span class="o">$</span><span class="n">Short</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell  jp-mod-noInput ">
 
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>CorrelacionUKinterestRates
@@ -15112,58 +14792,19 @@ plazo</p>
 
 </div>
 </aside><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># creamos dos nuevas series temporales con las primeras diferencias</span>
-<span class="n">d_Long</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nf">diff</span><span class="p">(</span><span class="n">UK_ts</span><span class="p">[,</span><span class="s">"Long"</span><span class="p">])</span>
-<span class="n">d_Short</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">diff</span><span class="p">(</span><span class="n">UK_ts</span><span class="p">[,</span><span class="s">"Short"</span><span class="p">])</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput ">
 
 </div>
 </aside><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># creamos un nuevo data frame con las primeras diferencias</span>
-<span class="n">UK_df.diferencias</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">data.frame</span><span class="p">(</span><span class="n">date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zoo</span><span class="o">::</span><span class="nf">as.Date</span><span class="p">(</span><span class="nf">time</span><span class="p">(</span><span class="n">d_Long</span><span class="p">)),</span>
-<span class="w">                            </span><span class="n">d_Long</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">d_Long</span><span class="p">),</span>
-<span class="w">                            </span><span class="n">d_Short</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.matrix</span><span class="p">(</span><span class="n">d_Short</span><span class="p">))</span>
-<span class="nf">head</span><span class="p">(</span><span class="n">UK_df.diferencias</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell  jp-mod-noInput ">
 
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>|   | date       | d_Long | d_Short |
@@ -15181,27 +14822,7 @@ plazo</p>
 
 </div>
 </aside><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># gráfico con las primeras diferencias de los tipos de interésframe DF.diferencias</span>
-<span class="n">kk</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">xyplot</span><span class="p">(</span><span class="n">d_Long</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">d_Short</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">UK_df.diferencias</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">"l"</span><span class="p">)</span>
-<span class="n">obj1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">xyplot</span><span class="p">(</span><span class="n">d_Long</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">UK_df.diferencias</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"l"</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">"First diff. Long"</span><span class="p">,</span><span class="w">  </span><span class="n">xlab</span><span class="o">=</span><span class="s">"Quarters"</span><span class="p">)</span>
-<span class="n">obj2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">xyplot</span><span class="p">(</span><span class="n">d_Short</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">UK_df.diferencias</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">"First diff. Short"</span><span class="p">)</span>
-<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200</span><span class="p">)</span>
-<span class="nf">doubleYScale</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span><span class="w"> </span><span class="n">obj2</span><span class="p">,</span><span class="w"> </span><span class="n">add.ylab2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
-<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput ">
 
 </div>
 </aside><aside class="notes">
@@ -15210,8 +14831,7 @@ plazo</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc03/UK_Interest_ratesFirstDiff.png" alt="img"></p>
 
 </div>
@@ -15223,8 +14843,7 @@ plazo</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>La regresión de la primera diferencia de <code>Short</code> sobre la primera
 diferencia de <code>Long</code> <strong>NO sugiere que la correlación sea espuria</strong>:
 obtenemos un ajuste razonable con una pendiente es muy significativa y
@@ -15233,35 +14852,15 @@ una constante NO significativa.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1"># resultados del ajuste MCO</span>
-<span class="nf">summ</span><span class="p">(</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">d_Short</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">d_Long</span><span class="p">)</span><span class="w"> </span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell  jp-mod-noInput ">
 
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>#+begin_example
@@ -15295,42 +14894,21 @@ d_Long               1.26   0.28     4.48   0.00
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Hagamos la regresión de los tipos a corto plazo sobre los tipos a largo plazo (en niveles)</p>
 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">modelo</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">lm</span><span class="p">(</span><span class="n">UK_df</span><span class="o">$</span><span class="n">Short</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">UK_df</span><span class="o">$</span><span class="n">Long</span><span class="p">)</span><span class="w"> </span><span class="c1"># ajuste MCO</span>
-<span class="nf">summ</span><span class="p">(</span><span class="w"> </span><span class="n">modelo</span><span class="w"> </span><span class="p">)</span><span class="w">                         </span><span class="c1"># resultados del ajuste</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell  jp-mod-noInput ">
 
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>#+begin_example
@@ -15364,8 +14942,7 @@ UK_df$Long           1.00   0.06    17.40   0.00
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>El ajuste es muy bueno, y los parámetros muy significativos. Veamos si
 los residuos parecen la realización de un proceso estacionario (en la
 jerga habitual&#x2026; "<em>veamos si los residuos son estacionarios</em>")</p>
@@ -15374,22 +14951,7 @@ jerga habitual&#x2026; "<em>veamos si los residuos son estacionarios</em>")</p>
 </div>
 </div>
 </div><aside class="notes">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="nf">plot</span><span class="p">(</span><span class="nf">as.ts</span><span class="p">(</span><span class="nf">resid</span><span class="p">(</span><span class="n">modelo</span><span class="p">)))</span>
-<span class="nf">abline</span><span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">0</span><span class="p">)</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput ">
 
 </div>
 </aside><div class="fragment">
@@ -15397,8 +14959,7 @@ jerga habitual&#x2026; "<em>veamos si los residuos son estacionarios</em>")</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc03/UK_Interest_ratesResiduals.png" alt="img"></p>
 <p>Aparentan ser "estacionarios en media" (i.e., no se aprecia una
 tendencia evidente); por lo que <strong>los tipos de interés a corto y largo

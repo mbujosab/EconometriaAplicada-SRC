@@ -1,12 +1,11 @@
-.projectile
-.gitignore
 
 *~
 
-datos
+EnlacesAMateriales.org
+Lecc*.tex
+reveal.js
 .ipynb_checkpoints
 .ob-jupyter
-EnlacesAMateriales.org
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

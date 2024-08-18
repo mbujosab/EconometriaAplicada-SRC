@@ -1,13 +1,15 @@
 #+TITLE: Econometría Aplicada. Lección 2
 #+author: Marcos Bujosa
+#+LANGUAGE: es-es
 
 # +OPTIONS: toc:nil
 
-#+EXCLUDE_TAGS: pngoutput noexport
+#+EXCLUDE_TAGS: noexport
 
 #+startup: shrink
 
 
+#+LATEX_HEADER_EXTRA: \usepackage[spanish]{babel}
 #+LATEX_HEADER_EXTRA: \usepackage{lmodern}
 #+LATEX_HEADER_EXTRA: \usepackage{tabularx}
 #+LATEX_HEADER_EXTRA: \usepackage{booktabs}
