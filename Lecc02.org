@@ -15,9 +15,12 @@
 #+LATEX_HEADER_EXTRA: \usepackage{booktabs}
 # +LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=blue}
 
+#+LaTeX_HEADER: \newcommand{\lag}{\mathsf{B}}
+#+LaTeX_HEADER: \newcommand{\Sec}[1]{\boldsymbol{#1}}
+#+LaTeX_HEADER: \newcommand{\Pol}[1]{\boldsymbol{#1}}
+
 #+LATEX: \maketitle
 
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC emacs-lisp :exports none :results silent
 (use-package ox-ipynb
   :load-path (lambda () (expand-file-name "ox-ipynb" scimax-dir)))
@@ -29,7 +32,14 @@ de componentes (no observables) con modelos deterministas.
 #+END_ABSTRACT
 
 - [[https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc02.html][lección en html]]
-- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc02.ipynb][lección en mybinder]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc02.ipynb][lección en mybinder]]
+
+***** COMMENT para Jupyter-Notebook                               :noexports:
+\(
+\newcommand{\lag}{\mathsf{B}}
+\newcommand{\Sec}[1]{\boldsymbol{#1}}
+\newcommand{\Pol}[1]{\boldsymbol{#1}}
+\)
 
 
 ***  Carga de algunos módulos de python
@@ -55,7 +65,8 @@ rcParams['figure.figsize'] = 15,5
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results none
-# Usaré la siguiente función para transformar salidas en \LaTeX{} de statsmodels a ficheros png (que usaré en las transparencias)
+# Usaré la siguiente función para transformar salidas en \LaTeX{} de statsmodels a ficheros png 
+# que incluiré en las transparencias
 from sympy.printing.preview import preview
 def repr_png(tex, ImgFile):
     preamble = "\\documentclass[10pt,preview]{standalone}\n" \
@@ -66,13 +77,12 @@ def repr_png(tex, ImgFile):
 
 ***** Datos                                                        :noexport:
 
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results replace silent output table
-
 # import os
 # for dirname, _, filenames in os.walk('./database'):
 #     for filename in filenames:
 #         print(os.path.join(dirname, filename))
-
 #+END_SRC
 
 
@@ -121,33 +131,33 @@ Pero existe otro enfoque que pretende descomponer la serie temporal en
 los siguientes componentes /"no observables"/ (o en un subconjunto de
 ellos):
 
-$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{c} + \boldsymbol{s} + \boldsymbol{e}$$
+$$\Sec{y} = \Sec{t} + \Sec{c} + \Sec{s} + \Sec{e}$$
 
 #+LATEX: \noindent
 donde:
 
-- La tendencia "$\boldsymbol{t}$" :: recoge la lenta evolución de la
+- La tendencia "$\Sec{t}$" :: recoge la lenta evolución de la
   media a /largo plazo/.
 
-- El componente estacional "$\boldsymbol{s}$" :: recoge las
+- El componente estacional "$\Sec{s}$" :: recoge las
   oscilaciones periódicas que se repiten regularmente en ciclos
   estacionales (de año en año, o de semana en semana, etc.).
 
-- El componente cíclico "$\boldsymbol{c}$" :: Cuando aparece
-  explícitamente en el modelo, $\boldsymbol{c}$ recoge las
+- El componente cíclico "$\Sec{c}$" :: Cuando aparece
+  explícitamente en el modelo, $\Sec{c}$ recoge las
   oscilaciones a medio plazo. Es decir, aquellas de un plazo más largo
   que las oscilaciones estacionales, pero más corto que la tendencia
   de largo plazo. Si está ausente, dichas oscilaciones suelen aparecer
   en el componente de la tendencia, que entonces también podemos
   denominar /tendencia-ciclo/.
 
-- El componente irregular "$\boldsymbol{e}$" :: recoge las
+- El componente irregular "$\Sec{e}$" :: recoge las
   oscilaciones no captadas por el resto de componentes, ya que debe
-  cumplir la siguiente identidad: $\boldsymbol{e} = \boldsymbol{y} -
-  \boldsymbol{t} - \boldsymbol{c} - \boldsymbol{s}$.
+  cumplir la siguiente identidad: $\Sec{e} = \Sec{y} -
+  \Sec{t} - \Sec{c} - \Sec{s}$.
 
 Ajuste aceptable si (como poco) el componente irregular
-$\boldsymbol{e}$ parece "/estacionario/".
+$\Sec{e}$ parece "/estacionario/".
 
 
 ** Tendencia determinista /lineal/
@@ -158,7 +168,8 @@ $\boldsymbol{e}$ parece "/estacionario/".
 #+NAME: ajuste-tendencia-lineal
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python  :results silent
-# Ajustamos por MCO una tendencia linea. Para ello, primero creamos un DataFrame con el regresando y los regresores del modelo
+# Ajustamos por MCO una tendencia linea. 
+# Para ello, primero creamos un DataFrame con el regresando y los regresores del modelo
 datosModelo1 = TransformedData[['dataLog']].copy()
 nsample = len(datosModelo1)
 datosModelo1['cte'] = [1]*nsample
@@ -224,13 +235,14 @@ plt.grid()
 plt.plot(results1.resid)
 #+END_SRC
 [[file:./img/lecc02/airlinepass+irreg.png]]
+
 En este caso, el modelo 
 
-$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$
+$$\Sec{y} = \Sec{t} + \Sec{e}$$
 
-@@latex:\noindent@@ donde $\boldsymbol{t}$ es una tendencia lineal no
+@@latex:\noindent@@ donde $\Sec{t}$ es una tendencia lineal no
 es un ajuste satisfactorio, pues el /componente irregular/
-$$\boldsymbol{e}=\boldsymbol{y}-\boldsymbol{t}$$
+$$\Sec{e}=\Sec{y}-\Sec{t}$$
 no tiene la apariencia de realización de un proceso estacionario.
 
 
@@ -359,11 +371,11 @@ plt.plot(results2.resid)
 
 De manera análoga al caso anterior, el modelo
 
-$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$
+$$\Sec{y} = \Sec{t} + \Sec{e}$$
 
-@@latex:\noindent@@ donde $\boldsymbol{t}$ ahora es una /tendencia
+@@latex:\noindent@@ donde $\Sec{t}$ ahora es una /tendencia
 cuadrática/ tampoco es un ajuste satisfactorio, pues el componente
-irregular $\boldsymbol{e}$ sigue sin parecerse a la realización de un
+irregular $\Sec{e}$ sigue sin parecerse a la realización de un
 proceso estacionario.
 
 
@@ -487,7 +499,7 @@ plt.plot(SeasonalComp)
 [[file:./img/lecc02/airlinepass+SeasonalC.png]]
 
 
-*** Ajuste y componente irregular $\boldsymbol{e}=\boldsymbol{y}-\boldsymbol{t}-\boldsymbol{s}$
+*** Ajuste y componente irregular $\Sec{e}=\Sec{y}-\Sec{t}-\Sec{s}$
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
@@ -545,11 +557,17 @@ febrero y octubre).
 repr_png(results3.summary().as_latex(), "./img/lecc02/resultsModel3.png")
 #+END_SRC
 
-#+attr_ipynb: (slideshow . ((slide_type . fragment)))
-#+attr_org: :width 650
-#+attr_html: :width 100px
-#+attr_latex: :width 250px
-[[./img/lecc02/resultsModel3.png]]
+#+BEGIN_EXPORT latex
+\begin{center}
+  \includegraphics[width=.55\textwidth]{./img/lecc02/resultsModel3.png}
+\end{center}
+#+END_EXPORT
+
+# +attr_ipynb: (slideshow . ((slide_type . fragment)))
+# +attr_org: :width 650
+# +attr_html: :width 100px
+# +attr_latex: :width 250px
+# [[./img/lecc02/resultsModel3.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 <div>
@@ -565,7 +583,7 @@ repr_png(results3.summary().as_latex(), "./img/lecc02/resultsModel3.png")
 import operator
 def remove_most_insignificant(df, results):
     # use operator to find the key which belongs to the maximum value in the dictionary:
-    max_p_value = max(results.pvalues.iteritems(), key=operator.itemgetter(1))[0]
+    max_p_value = max(results.pvalues.items(), key=operator.itemgetter(1))[0]
     # this is the feature you want to drop:
     df.drop(columns = max_p_value, inplace = True)
     return df
@@ -595,12 +613,17 @@ print(results4.summary())
 #+END_SRC
 
 
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+attr_org: :width 650
-#+attr_html: :width 100px
-#+attr_latex: :width 250px
-[[file:./img/lecc02/resultsModel4.png]]
+#+BEGIN_EXPORT latex
+\begin{center}
+  \includegraphics[width=.55\textwidth]{./img/lecc02/resultsModel4.png}
+\end{center}
+#+END_EXPORT
 
+# +attr_ipynb: (slideshow . ((slide_type . skip)))
+# +attr_org: :width 650
+# +attr_html: :width 100px
+# +attr_latex: :width 250px
+# [[file:./img/lecc02/resultsModel4.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 <div>
@@ -630,7 +653,7 @@ repr_png(results4.summary().as_latex(), "./img/lecc02/resultsModel4.png")
 # [[https://www.statsmodels.org/dev/diagnostic.html]]
 
 Considere el modelo
-$\boldsymbol{Y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U}.\;$ Bajo
+$\Sec{y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U}.\;$ Bajo
 los supuestos habituales
 
 $$E(\boldsymbol{U}\mid\boldsymbol{\mathsf{X}})=\boldsymbol{0},\quad
@@ -714,13 +737,17 @@ arbg[:1]
 repr_png(arbg[-1].resols.summary().as_latex(), "./img/lecc02/resultsBreusch-Godfrey.png") 
 #+END_SRC
 
+#+BEGIN_EXPORT latex
+\begin{center}
+  \includegraphics[width=.55\textwidth]{./img/lecc02/resultsBreusch-Godfrey.png}
+\end{center}
+#+END_EXPORT
 
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+attr_org: :width 650
-#+attr_html: :width 100px
-#+attr_latex: :width 250px
-[[./img/lecc02/resultsBreusch-Godfrey.png]]
-
+# +attr_ipynb: (slideshow . ((slide_type . skip)))
+# +attr_org: :width 650
+# +attr_html: :width 100px
+# +attr_latex: :width 250px
+# [[./img/lecc02/resultsBreusch-Godfrey.png]]
 
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
@@ -792,13 +819,17 @@ print(results5.get_robustcov_results(cov_type='HAC', maxlags=3, use_correction=T
 repr_png(results5.get_robustcov_results(cov_type='HAC', maxlags=3, use_correction=True).summary().as_latex(), "./img/lecc02/resultsModel5.png")
 #+END_SRC
 
+#+BEGIN_EXPORT latex
+\begin{center}
+  \includegraphics[width=.55\textwidth]{./img/lecc02/resultsModel5.png}
+\end{center}
+#+END_EXPORT
 
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+attr_org: :width 650
-#+attr_html: :width 100px
-#+attr_latex: :width 250px
-[[./img/lecc02/resultsModel5.png]]
-
+# +attr_ipynb: (slideshow . ((slide_type . skip)))
+# +attr_org: :width 650
+# +attr_html: :width 100px
+# +attr_latex: :width 250px
+# [[./img/lecc02/resultsModel5.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 <div>
@@ -837,12 +868,17 @@ print(robustResults.summary())
 repr_png(robustResults.summary().as_latex(), "./img/lecc02/resultsModel6.png") 
 #+END_SRC
 
+#+BEGIN_EXPORT latex
+\begin{center}
+  \includegraphics[width=.55\textwidth]{./img/lecc02/resultsModel6.png}
+\end{center}
+#+END_EXPORT
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+attr_org: :width 650
 #+attr_html: :width 100px
 #+attr_latex: :width 250px
-[[./img/lecc02/resultsModel6.png]]
+# [[./img/lecc02/resultsModel6.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 <div>
@@ -866,7 +902,7 @@ repr_png(robustResults.summary().as_latex(), "./img/lecc02/resultsModel6.png")
    :END:
 
 En el modelo
-$\boldsymbol{Y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U},\;$ si las
+$\Sec{y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U},\;$ si las
 perturbaciones presentan heterocedasticidad y/o auto-correlación, y
 por tanto
 $$Var(\boldsymbol{U}\mid\boldsymbol{\mathsf{X}})=\boldsymbol{\Sigma}\ne\sigma^2\boldsymbol{\mathsf{I}},$$
@@ -879,7 +915,7 @@ varianza del estimador.
 En particular, el estimador lineal de mínima varianza es el estimador
 MCG (mínimos cuadrados generalizados)
 
-$$\;\widehat{\boldsymbol{\beta}}=(\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\boldsymbol{\mathsf{X}})^{-1}\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\boldsymbol{Y}\;$$
+$$\;\widehat{\boldsymbol{\beta}}=(\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\boldsymbol{\mathsf{X}})^{-1}\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\Sec{y}\;$$
 
 El problema es que, en general, la matriz $\boldsymbol{\Sigma}$ es
 desconocida.
@@ -910,7 +946,7 @@ $$\epsilon_t = \rho_1 \epsilon_{t-1} + e_t$$
 (/en este caso la estimación converge en 7 iteraciones/)
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results silent
+#+BEGIN_SRC jupyter-python :results silent :file ./img/lecc02/resultsModel7.png
 model = sm.GLSAR(y, X, rho=1) # rho=1 indica autocorrelación de orden uno
 for i in range(7):
     results = model.fit()
@@ -925,13 +961,17 @@ for i in range(7):
 print(results.summary())
 #+END_SRC
 
+#+BEGIN_EXPORT latex
+\begin{center}
+  \includegraphics[width=.55\textwidth]{./img/lecc02/resultsModel7.png}
+\end{center}
+#+END_EXPORT
 
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+attr_org: :width 650
-#+attr_html: :width 100px
-#+attr_latex: :width 250px
-[[./img/lecc02/resultsModel7.png]]
-
+# +attr_ipynb: (slideshow . ((slide_type . skip)))
+# +attr_org: :width 650
+# +attr_html: :width 100px
+# +attr_latex: :width 250px
+# [[./img/lecc02/resultsModel7.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 <div>
@@ -948,7 +988,6 @@ res = model2.iterative_fit(maxiter=7)
 model2.rho
 print(model2.fit().summary())
 #+END_SRC
-
 
 
 **************  Codigo aux                                       :noexport:

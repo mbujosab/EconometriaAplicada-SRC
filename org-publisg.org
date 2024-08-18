@@ -1,4 +1,21 @@
 
+
+#+BEGIN_SRC emacs-lisp :results silent
+(require 'ox-ipynb)
+(ox-ipynb-export-org-file-to-ipynb-file "Lecc01.org")
+(ox-ipynb-export-org-file-to-ipynb-file "Lecc02.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc03.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc04.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc05.org")
+#+END_SRC
+
+
+#+BEGIN_SRC sh :results silent
+jupyter nbconvert --config mycfg-GitHubPages.py --to slides --reveal-prefix reveal.js --no-input
+#+END_SRC
+
+
+
 ** Org-publish                                                     :noexport:
 
 We need a small elisp script to setup and publish  it.
@@ -195,7 +212,7 @@ jupyter nbconvert --config mycfg-GitHubPages.py --to slides --reveal-prefix reve
 #+BEGIN_SRC emacs-lisp
 (require 'ox-ipynb)
 (ox-ipynb-export-org-file-to-ipynb-file "Lecc01.org")
-;(ox-ipynb-export-org-file-to-ipynb-file "Lecc02.org")
+(ox-ipynb-export-org-file-to-ipynb-file "Lecc02.org")
 ;(ox-ipynb-export-org-file-to-ipynb-file "Lecc03.org")
 ;(ox-ipynb-export-org-file-to-ipynb-file "Lecc04.org")
 ;(ox-ipynb-export-org-file-to-ipynb-file "Lecc05.org")

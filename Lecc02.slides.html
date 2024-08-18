@@ -14120,7 +14120,7 @@ div.jp-OutputPrompt {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="orgd394d55">
+<div class="ABSTRACT" id="org627c85c">
 <p>
 En esta lección veremos regresión con series temporales y estimación
 de componentes (no observables) con modelos deterministas.
@@ -14128,8 +14128,23 @@ de componentes (no observables) con modelos deterministas.
 
 </div><ul>
 <li><a href="https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc02.html">lección en html</a></li>
-<li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/master?labpath=Lecc02.ipynb">lección en mybinder</a></li>
+<li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc02.ipynb">lección en mybinder</a></li>
 </ul>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>$
+\newcommand{\lag}{\mathsf{B}}
+\newcommand{\Sec}[1]{\boldsymbol{#1}}
+\newcommand{\Pol}[1]{\boldsymbol{#1}}
+$</p>
 
 </div>
 </div>
@@ -14171,31 +14186,31 @@ temporales es transformar los datos para</p>
 <p>Pero existe otro enfoque que pretende descomponer la serie temporal en
 los siguientes componentes <em>"no observables"</em> (o en un subconjunto de
 ellos):</p>
-$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{c} + \boldsymbol{s} + \boldsymbol{e}$$<p>donde:</p>
+$$\Sec{y} = \Sec{t} + \Sec{c} + \Sec{s} + \Sec{e}$$<p>donde:</p>
 <ul>
-<li><p><strong>La tendencia "$\boldsymbol{t}$":</strong> recoge la lenta evolución de la
+<li><p><strong>La tendencia "$\Sec{t}$":</strong> recoge la lenta evolución de la
 media a <em>largo plazo</em>.</p>
 </li>
-<li><p><strong>El componente estacional "$\boldsymbol{s}$":</strong> recoge las
+<li><p><strong>El componente estacional "$\Sec{s}$":</strong> recoge las
 oscilaciones periódicas que se repiten regularmente en ciclos
 estacionales (de año en año, o de semana en semana, etc.).</p>
 </li>
-<li><p><strong>El componente cíclico "$\boldsymbol{c}$":</strong> Cuando aparece
-explícitamente en el modelo, $\boldsymbol{c}$ recoge las
+<li><p><strong>El componente cíclico "$\Sec{c}$":</strong> Cuando aparece
+explícitamente en el modelo, $\Sec{c}$ recoge las
 oscilaciones a medio plazo. Es decir, aquellas de un plazo más largo
 que las oscilaciones estacionales, pero más corto que la tendencia
 de largo plazo. Si está ausente, dichas oscilaciones suelen aparecer
 en el componente de la tendencia, que entonces también podemos
 denominar <em>tendencia-ciclo</em>.</p>
 </li>
-<li><p><strong>El componente irregular "$\boldsymbol{e}$":</strong> recoge las
+<li><p><strong>El componente irregular "$\Sec{e}$":</strong> recoge las
 oscilaciones no captadas por el resto de componentes, ya que debe
-cumplir la siguiente identidad: $\boldsymbol{e} = \boldsymbol{y} -
-  \boldsymbol{t} - \boldsymbol{c} - \boldsymbol{s}$.</p>
+cumplir la siguiente identidad: $\Sec{e} = \Sec{y} -
+  \Sec{t} - \Sec{c} - \Sec{s}$.</p>
 </li>
 </ul>
 <p>Ajuste aceptable si (como poco) el componente irregular
-$\boldsymbol{e}$ parece "<em>estacionario</em>".</p>
+$\Sec{e}$ parece "<em>estacionario</em>".</p>
 
 </div>
 </div>
@@ -14261,11 +14276,11 @@ $$\widehat{\ln{y_t}}=4.8137+0.01\cdot\big(t\big), \qquad t=1:114$$
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="./img/lecc02/airlinepass+irreg.png" alt="img">
-En este caso, el modelo</p>
-$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$<p>donde $\boldsymbol{t}$ es una tendencia lineal no
+<p><img src="./img/lecc02/airlinepass+irreg.png" alt="img"></p>
+<p>En este caso, el modelo</p>
+$$\Sec{y} = \Sec{t} + \Sec{e}$$<p>donde $\Sec{t}$ es una tendencia lineal no
 es un ajuste satisfactorio, pues el <em>componente irregular</em>
-$$\boldsymbol{e}=\boldsymbol{y}-\boldsymbol{t}$$
+$$\Sec{e}=\Sec{y}-\Sec{t}$$
 no tiene la apariencia de realización de un proceso estacionario.</p>
 
 </div>
@@ -14347,9 +14362,9 @@ $$\widehat{\ln{y_t}}=4.7364+(0.0132)\cdot t +(-2.191e-05)\cdot t^2, \qquad t=1:1
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc02/airlinepass+irreg2.png" alt="img"></p>
 <p>De manera análoga al caso anterior, el modelo</p>
-$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$<p>donde $\boldsymbol{t}$ ahora es una <em>tendencia
+$$\Sec{y} = \Sec{t} + \Sec{e}$$<p>donde $\Sec{t}$ ahora es una <em>tendencia
 cuadrática</em> tampoco es un ajuste satisfactorio, pues el componente
-irregular $\boldsymbol{e}$ sigue sin parecerse a la realización de un
+irregular $\Sec{e}$ sigue sin parecerse a la realización de un
 proceso estacionario.</p>
 
 </div>
@@ -14422,7 +14437,7 @@ determinista</strong> (junto a una tendencia cuadrática determinista).</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Ajuste-y-componente-irregular-$%5Cboldsymbol%7Be%7D=%5Cboldsymbol%7By%7D-%5Cboldsymbol%7Bt%7D-%5Cboldsymbol%7Bs%7D$">Ajuste y componente irregular $\boldsymbol{e}=\boldsymbol{y}-\boldsymbol{t}-\boldsymbol{s}$<a class="anchor-link" href="#Ajuste-y-componente-irregular-$%5Cboldsymbol%7Be%7D=%5Cboldsymbol%7By%7D-%5Cboldsymbol%7Bt%7D-%5Cboldsymbol%7Bs%7D$">&#182;</a></h4>
+<h4 id="Ajuste-y-componente-irregular-$%5CSec%7Be%7D=%5CSec%7By%7D-%5CSec%7Bt%7D-%5CSec%7Bs%7D$">Ajuste y componente irregular $\Sec{e}=\Sec{y}-\Sec{t}-\Sec{s}$<a class="anchor-link" href="#Ajuste-y-componente-irregular-$%5CSec%7Be%7D=%5CSec%7By%7D-%5CSec%7Bt%7D-%5CSec%7Bs%7D$">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -14506,17 +14521,6 @@ febrero y octubre).</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="./img/lecc02/resultsModel3.png" alt="img"></p>
-
-</div>
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div>
 <img src="./img/lecc02/resultsModel3.png" width="400" class="center"/>
 </div>
@@ -14566,7 +14570,7 @@ desviaciones típicas es incorrecta</strong>)</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Considere el modelo
-$\boldsymbol{Y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U}.\;$ Bajo
+$\Sec{y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U}.\;$ Bajo
 los supuestos habituales</p>
 $$E(\boldsymbol{U}\mid\boldsymbol{\mathsf{X}})=\boldsymbol{0},\quad
 Var(\boldsymbol{U}\mid\boldsymbol{\mathsf{X}})=\sigma^2\boldsymbol{\mathsf{I}}\quad
@@ -14758,7 +14762,7 @@ heterocedasticidad y/o auto-correlación</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>En el modelo
-$\boldsymbol{Y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U},\;$ si las
+$\Sec{y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U},\;$ si las
 perturbaciones presentan heterocedasticidad y/o auto-correlación, y
 por tanto
 $$Var(\boldsymbol{U}\mid\boldsymbol{\mathsf{X}})=\boldsymbol{\Sigma}\ne\sigma^2\boldsymbol{\mathsf{I}},$$
@@ -14767,7 +14771,7 @@ la estructura de la matriz $\boldsymbol{\Sigma}$ para minimizar la
 varianza del estimador.</p>
 <p>En particular, el estimador lineal de mínima varianza es el estimador
 MCG (mínimos cuadrados generalizados)</p>
-$$\;\widehat{\boldsymbol{\beta}}=(\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\boldsymbol{\mathsf{X}})^{-1}\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\boldsymbol{Y}\;$$<p>El problema es que, en general, la matriz $\boldsymbol{\Sigma}$ es
+$$\;\widehat{\boldsymbol{\beta}}=(\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\boldsymbol{\mathsf{X}})^{-1}\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\Sec{y}\;$$<p>El problema es que, en general, la matriz $\boldsymbol{\Sigma}$ es
 desconocida.</p>
 <p>Una solución es aplicar un procedimiento iterativo en el que se estima
 la matriz $\boldsymbol{\Sigma}$ empleando los errores del ajuste de
