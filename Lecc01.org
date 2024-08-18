@@ -29,7 +29,7 @@ En esta lección veremos algunos transformaciones de los datos para
 #+END_ABSTRACT
 
 - [[https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc01.html][lección en html]]
-- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/master?labpath=Lecc01.ipynb][lección en mybinder]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc01.ipynb][lección en mybinder]]
 
 ***  Carga de algunos módulos de python
    :PROPERTIES:
@@ -137,8 +137,6 @@ Además,
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results silent
-import pandas as pd
-import matplotlib.pyplot as plt
 path = './datos/'
 df1 = pd.read_csv(path+'PIB_UEM.csv')
 df2 = pd.read_csv(path+'ProduccionCemento.csv')

@@ -23,6 +23,15 @@
   :load-path (lambda () (expand-file-name "ox-ipynb" scimax-dir)))
 #+END_SRC
 
+#+BEGIN_ABSTRACT
+En esta lección veremos regresión con series temporales y estimación
+de componentes (no observables) con modelos deterministas.
+#+END_ABSTRACT
+
+- [[https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc02.html][lección en html]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc02.ipynb][lección en mybinder]
+
+
 ***  Carga de algunos módulos de python
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . skip)))
