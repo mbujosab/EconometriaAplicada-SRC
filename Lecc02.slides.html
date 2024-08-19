@@ -14120,7 +14120,7 @@ div.jp-OutputPrompt {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="org627c85c">
+<div class="ABSTRACT" id="orge712a4d">
 <p>
 En esta lección veremos regresión con series temporales y estimación
 de componentes (no observables) con modelos deterministas.
@@ -14130,21 +14130,6 @@ de componentes (no observables) con modelos deterministas.
 <li><a href="https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc02.html">lección en html</a></li>
 <li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc02.ipynb">lección en mybinder</a></li>
 </ul>
-
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$
-\newcommand{\lag}{\mathsf{B}}
-\newcommand{\Sec}[1]{\boldsymbol{#1}}
-\newcommand{\Pol}[1]{\boldsymbol{#1}}
-$</p>
 
 </div>
 </div>
@@ -14186,31 +14171,31 @@ temporales es transformar los datos para</p>
 <p>Pero existe otro enfoque que pretende descomponer la serie temporal en
 los siguientes componentes <em>"no observables"</em> (o en un subconjunto de
 ellos):</p>
-$$\Sec{y} = \Sec{t} + \Sec{c} + \Sec{s} + \Sec{e}$$<p>donde:</p>
+$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{c} + \boldsymbol{s} + \boldsymbol{e}$$<p>donde:</p>
 <ul>
-<li><p><strong>La tendencia "$\Sec{t}$":</strong> recoge la lenta evolución de la
+<li><p><strong>La tendencia "$\boldsymbol{t}$":</strong> recoge la lenta evolución de la
 media a <em>largo plazo</em>.</p>
 </li>
-<li><p><strong>El componente estacional "$\Sec{s}$":</strong> recoge las
+<li><p><strong>El componente estacional "$\boldsymbol{s}$":</strong> recoge las
 oscilaciones periódicas que se repiten regularmente en ciclos
 estacionales (de año en año, o de semana en semana, etc.).</p>
 </li>
-<li><p><strong>El componente cíclico "$\Sec{c}$":</strong> Cuando aparece
-explícitamente en el modelo, $\Sec{c}$ recoge las
+<li><p><strong>El componente cíclico "$\boldsymbol{c}$":</strong> Cuando aparece
+explícitamente en el modelo, $\boldsymbol{c}$ recoge las
 oscilaciones a medio plazo. Es decir, aquellas de un plazo más largo
 que las oscilaciones estacionales, pero más corto que la tendencia
 de largo plazo. Si está ausente, dichas oscilaciones suelen aparecer
 en el componente de la tendencia, que entonces también podemos
 denominar <em>tendencia-ciclo</em>.</p>
 </li>
-<li><p><strong>El componente irregular "$\Sec{e}$":</strong> recoge las
+<li><p><strong>El componente irregular "$\boldsymbol{e}$":</strong> recoge las
 oscilaciones no captadas por el resto de componentes, ya que debe
-cumplir la siguiente identidad: $\Sec{e} = \Sec{y} -
-  \Sec{t} - \Sec{c} - \Sec{s}$.</p>
+cumplir la siguiente identidad: $\boldsymbol{e} = \boldsymbol{y} -
+  \boldsymbol{t} - \boldsymbol{c} - \boldsymbol{s}$.</p>
 </li>
 </ul>
 <p>Ajuste aceptable si (como poco) el componente irregular
-$\Sec{e}$ parece "<em>estacionario</em>".</p>
+$\boldsymbol{e}$ parece "<em>estacionario</em>".</p>
 
 </div>
 </div>
@@ -14231,8 +14216,8 @@ $\Sec{e}$ parece "<em>estacionario</em>".</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>El modelo de tendencia más simple es la recta de regresión donde el
-regresor no constante es el propio índice $t$ de cada dato:</p>
+<p>El modelo de tendencia más simple es la recta de regresión (el
+regresor no constante es el índice $t$):</p>
 $$\ln{y_t}=\underbrace{\beta_1+\beta_2\cdot t}_{\text{tendencia}} + e_t; \quad t=1:114$$
 </div>
 </div>
@@ -14278,9 +14263,9 @@ $$\widehat{\ln{y_t}}=4.8137+0.01\cdot\big(t\big), \qquad t=1:114$$
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc02/airlinepass+irreg.png" alt="img"></p>
 <p>En este caso, el modelo</p>
-$$\Sec{y} = \Sec{t} + \Sec{e}$$<p>donde $\Sec{t}$ es una tendencia lineal no
+$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$<p>donde $\boldsymbol{t}$ es una tendencia lineal no
 es un ajuste satisfactorio, pues el <em>componente irregular</em>
-$$\Sec{e}=\Sec{y}-\Sec{t}$$
+$$\boldsymbol{e}=\boldsymbol{y}-\boldsymbol{t}$$
 no tiene la apariencia de realización de un proceso estacionario.</p>
 
 </div>
@@ -14362,9 +14347,9 @@ $$\widehat{\ln{y_t}}=4.7364+(0.0132)\cdot t +(-2.191e-05)\cdot t^2, \qquad t=1:1
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc02/airlinepass+irreg2.png" alt="img"></p>
 <p>De manera análoga al caso anterior, el modelo</p>
-$$\Sec{y} = \Sec{t} + \Sec{e}$$<p>donde $\Sec{t}$ ahora es una <em>tendencia
+$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$<p>donde $\boldsymbol{t}$ ahora es una <em>tendencia
 cuadrática</em> tampoco es un ajuste satisfactorio, pues el componente
-irregular $\Sec{e}$ sigue sin parecerse a la realización de un
+irregular $\boldsymbol{e}$ sigue sin parecerse a la realización de un
 proceso estacionario.</p>
 
 </div>
@@ -14437,7 +14422,7 @@ determinista</strong> (junto a una tendencia cuadrática determinista).</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Ajuste-y-componente-irregular-$%5CSec%7Be%7D=%5CSec%7By%7D-%5CSec%7Bt%7D-%5CSec%7Bs%7D$">Ajuste y componente irregular $\Sec{e}=\Sec{y}-\Sec{t}-\Sec{s}$<a class="anchor-link" href="#Ajuste-y-componente-irregular-$%5CSec%7Be%7D=%5CSec%7By%7D-%5CSec%7Bt%7D-%5CSec%7Bs%7D$">&#182;</a></h4>
+<h4 id="Ajuste-y-componente-irregular-$%5Cboldsymbol%7Be%7D=%5Cboldsymbol%7By%7D-%5Cboldsymbol%7Bt%7D-%5Cboldsymbol%7Bs%7D$">Ajuste y componente irregular $\boldsymbol{e}=\boldsymbol{y}-\boldsymbol{t}-\boldsymbol{s}$<a class="anchor-link" href="#Ajuste-y-componente-irregular-$%5Cboldsymbol%7Be%7D=%5Cboldsymbol%7By%7D-%5Cboldsymbol%7Bt%7D-%5Cboldsymbol%7Bs%7D$">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -14559,7 +14544,7 @@ desviaciones típicas es incorrecta</strong>)</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Autocorrelaci%C3%B3n">Autocorrelaci&#243;n<a class="anchor-link" href="#Autocorrelaci%C3%B3n">&#182;</a></h2>
+<h2 id="Perturbaciones-no-esf%C3%A9ricas">Perturbaciones no esf&#233;ricas<a class="anchor-link" href="#Perturbaciones-no-esf%C3%A9ricas">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -14570,7 +14555,7 @@ desviaciones típicas es incorrecta</strong>)</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Considere el modelo
-$\Sec{y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U}.\;$ Bajo
+$\boldsymbol{y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U}.\;$ Bajo
 los supuestos habituales</p>
 $$E(\boldsymbol{U}\mid\boldsymbol{\mathsf{X}})=\boldsymbol{0},\quad
 Var(\boldsymbol{U}\mid\boldsymbol{\mathsf{X}})=\sigma^2\boldsymbol{\mathsf{I}}\quad
@@ -14599,14 +14584,52 @@ $$Var(\widehat{\boldsymbol{\beta}}\mid\boldsymbol{\mathsf{X}})=Var(\widehat{\bol
 </div>
 </div>
 </div>
-</div></div><div class="fragment">
+</div></div></section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>El test de Durbin-Watson o el test de Breusch y Godfrey sirven para
-contrastar la $H_0$ de <em>no autocorrelación</em>&#x2026;.</p>
+<h3 id="Test-de-autocorrelaci%C3%B3n-de-Breusch-y-Godfrey">Test de autocorrelaci&#243;n de Breusch y Godfrey<a class="anchor-link" href="#Test-de-autocorrelaci%C3%B3n-de-Breusch-y-Godfrey">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>El tests el de Breusch y Godfrey (y el de Durbin-Watson) contrastan la $H_0$ de <em>no autocorrelación</em>.</p>
+
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Considere el <em>modelo de regresión lineal</em></p>
+\begin{equation}
+\label{org4d95d17}
+Y_t = \beta_1+ \beta_2 X_{t,1} + \cdots +  \beta_k X_{t,k+1} + U_t 
+\end{equation}<p>donde las perturbaciones $\boldsymbol{U}$ quizá siguen un esquema
+auto-regresivo $AR(p)$:</p>
+$$U_t = \rho_1 U_{t-1} + \rho_2 U_{t-2}  + \cdots + \rho_p U_{t-p} + \varepsilon_t$$<ul>
+<li><strong>Paso 1</strong>. Se obtienen los residuos MCO del modelo
+(<a href="#org4d95d17">1</a>) con una muestra de tamaño $T$.</li>
+<li><strong>Paso 2</strong>. Se realiza un ajuste MCO de los residuos $\hat{E}_t$ sobre
+los regresores del modelo original y sobre los $p$ primeros retardos
+de los residuos.
+$$\hat{E}_t = \alpha_0 + \alpha_1 X_{t,1} + \cdots \alpha_k
+  X_{t,k} + \rho_1 \hat{E}_{t-1} + \rho_2 \hat{E}_{t-2} + \cdots +
+  \rho_p \hat{E}_{t-p} + \varepsilon_t$$</li>
+</ul>
+<p>Asintóticamente y bajo la $H_0$ de <em>no autocorrelación</em>: $\quad\rho_i = 0\text{ para todo }i$</p>
+$$n R^2\,\sim\,\chi^2_p,$$<p>donde $R^2$ es el coeficiente de determinación de la regresión
+auxiliar y $n=T-p$.</p>
 
 </div>
 </div>
@@ -14631,43 +14654,6 @@ autocorrelación negativa.</p>
 </div>
 </div>
 </aside></div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Test-de-Breusch-y-Godfrey">Test de Breusch y Godfrey<a class="anchor-link" href="#Test-de-Breusch-y-Godfrey">&#182;</a></h3>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Considere el <em>modelo de regresión lineal</em></p>
-$$Y_t = \beta_1+ \beta_2 X_{t,1} + \cdots +  \beta_k X_{t,k+1} + U_t$$<p>donde las perturbaciones $\boldsymbol{U}$ quizá siguen un esquema
-auto-regresivo $AR(p)$:</p>
-$$U_t = \rho_1 U_{t-1} + \rho_2 U_{t-2}  + \cdots + \rho_p U_{t-p} + \varepsilon_t$$<ul>
-<li><strong>Paso 1</strong>. Se obtienen los residuos del ajuste por MCO con una
-muestra de tamaño $T$ del <em>modelo de regresión lineal</em>.</li>
-<li><strong>Paso 2</strong>. Se realiza un ajuste MCO de los residuos sobre los
-regresores del modelo original y sobre los $p$ primeros retardos de
-los residuos.
-$$\hat{E}_t = \alpha_0 + \alpha_1 X_{t,1} + \cdots \alpha_k
-  X_{t,k} + \rho_1 \hat{E}_{t-1} + \rho_2 \hat{E}_{t-2} + \cdots +
-  \rho_p \hat{E}_{t-p} + \varepsilon_t$$</li>
-</ul>
-<p>asintóticamente y bajo la $H_0$ de <em>no autocorrelación</em>: ${\lbrace
-\rho_i = 0\text{ para todo }i\rbrace}$</p>
-$$n R^2\,\sim\,\chi^2_p,$$<p>donde $R^2$ es el coeficiente de determinación de la regresión
-auxiliar y $n=T-p$.</p>
-
-</div>
-</div>
-</div>
-</div></section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14700,8 +14686,9 @@ auxiliar y $n=T-p$.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Un procedimiento adecuado en presencia de autocorrelación y muestras
-grandes consiste en usar errores estándar "<em>robustos</em>" al realizar
-inferencia con la estimación de los parámetros.</p>
+grandes consiste en usar errores estándar <em>robustos</em> (<strong>HAC</strong> -
+heteroscedasticity and autocorrelation robust covariance matrix) al
+realizar inferencia con la estimación de los parámetros.</p>
 <ol>
 <li><p>las estimaciones serán insesgadas, consistentes pero ineficientes,</p>
 </li>
@@ -14720,10 +14707,14 @@ inferencia con la estimación de los parámetros.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li><strong>Covariance type</strong>: HAC (heteroscedasticity and autocorrelation robust covariance matrix)</li>
+</ul>
 <div>
 <img src="./img/lecc02/resultsModel5.png" width="400" class="center"/>
-</div><p>Ahora, y empleando errores estándar robustos, podemos reducir el
-modelo de manera más cuidadosa usando desviaciones típicas robustas. El modelo reducido es&#x2026;</p>
+</div><p>Ahora, y empleando errores estándar robustos (HAC), podemos reducir el
+modelo de manera más cuidadosa usando desviaciones típicas
+robustas. El modelo reducido es&#x2026;</p>
 
 </div>
 </div>
@@ -14737,9 +14728,8 @@ modelo de manera más cuidadosa usando desviaciones típicas robustas. El modelo
 <div>
 <img src="./img/lecc02/resultsModel6.png" width="400" class="center"/>
 </div><ul>
-<li>Nótese que ahora se aprecia que enero y octubre son significativos al 5%</li>
-<li>Pero la estimación MCO no es eficiente en presencia de
-heterocedasticidad y/o auto-correlación</li>
+<li>Nótese que ahora (HAC) se aprecia que enero y octubre son significativos al 5%</li>
+<li>Pero la estimación MCO no es eficiente en presencia de auto-correlación</li>
 </ul>
 
 </div>
@@ -14762,7 +14752,7 @@ heterocedasticidad y/o auto-correlación</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>En el modelo
-$\Sec{y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U},\;$ si las
+$\boldsymbol{y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U},\;$ si las
 perturbaciones presentan heterocedasticidad y/o auto-correlación, y
 por tanto
 $$Var(\boldsymbol{U}\mid\boldsymbol{\mathsf{X}})=\boldsymbol{\Sigma}\ne\sigma^2\boldsymbol{\mathsf{I}},$$
@@ -14771,7 +14761,7 @@ la estructura de la matriz $\boldsymbol{\Sigma}$ para minimizar la
 varianza del estimador.</p>
 <p>En particular, el estimador lineal de mínima varianza es el estimador
 MCG (mínimos cuadrados generalizados)</p>
-$$\;\widehat{\boldsymbol{\beta}}=(\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\boldsymbol{\mathsf{X}})^{-1}\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\Sec{y}\;$$<p>El problema es que, en general, la matriz $\boldsymbol{\Sigma}$ es
+$$\;\widehat{\boldsymbol{\beta}}=(\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\boldsymbol{\mathsf{X}})^{-1}\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\boldsymbol{y}\;$$<p>El problema es que, en general, la matriz $\boldsymbol{\Sigma}$ es
 desconocida.</p>
 <p>Una solución es aplicar un procedimiento iterativo en el que se estima
 la matriz $\boldsymbol{\Sigma}$ empleando los errores del ajuste de
@@ -14797,7 +14787,7 @@ tanto, vamos a indicar que las perturbaciones siguen un proceso AR(1).
 El decir, vamos a estimar el modelo</p>
 $$\ln{y_t}=\underbrace{\beta_1+\beta_2\cdot t+\beta_3\cdot t^2}_{\text{tendencia}} + \underbrace{\alpha_1 S_{t1} + \alpha_3 S_{t3} + \cdots + \alpha_11 S_{t11}}_{\text{comp. estacional}} + \epsilon_t$$<p>donde las perturbaciones $\boldsymbol{\epsilon}=\{\epsilon_t\}$ siguen
 el modelo</p>
-$$\epsilon_t = \rho_1 \epsilon_{t-1} + e_t$$<p>(<em>en este caso la estimación converge en 7 iteraciones</em>)</p>
+$$\epsilon_t = \rho_1 \epsilon_{t-1} + e_t$$<p>(<em>en este caso la estimación (<strong>GLSAR</strong>) converge en 7 iteraciones</em>)</p>
 
 </div>
 </div>

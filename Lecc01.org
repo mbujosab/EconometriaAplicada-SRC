@@ -8,15 +8,10 @@
 
 #+startup: shrink
 
-
 #+LATEX_HEADER_EXTRA: \usepackage[spanish]{babel}
 #+LATEX_HEADER_EXTRA: \usepackage{lmodern}
 #+LATEX_HEADER_EXTRA: \usepackage{tabularx}
 #+LATEX_HEADER_EXTRA: \usepackage{booktabs}
-
-#+LaTeX_HEADER: \newcommand{\lag}{\mathsf{B}}
-#+LaTeX_HEADER: \newcommand{\Sec}[1]{\boldsymbol{#1}}
-#+LaTeX_HEADER: \newcommand{\Pol}[1]{\boldsymbol{#1}}
 
 #+LATEX: \maketitle
 
@@ -32,13 +27,6 @@ En esta lección veremos algunos transformaciones de los datos para
 
 - [[https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc01.html][lección en html]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc01.ipynb][lección en mybinder]]
-
-***** COMMENT para Jupyter-Notebook                               :noexports:
-\(
-\newcommand{\lag}{\mathsf{B}}
-\newcommand{\Sec}[1]{\boldsymbol{#1}}
-\newcommand{\Pol}[1]{\boldsymbol{#1}}
-\)
 
 
 ***  Carga de algunos módulos de python
@@ -78,14 +66,14 @@ def repr_png(tex, ImgFile):
 
 - Proceso estocástico :: es una secuencia de variables aleatorias,
   $X_t$ donde el índice $t$ recorre el conjunto de números enteros
-  $(\mathbb{Z})$.  $$\Sec{X}\;=\;
+  $(\mathbb{Z})$.  $$\boldsymbol{X}\;=\;
   (\ldots,X_{-2},X_{-1},X_0,X_1,\ldots)\;=\; 
   (X_t \mid t\in\mathbb{Z});$$
 
 - Serie temporal :: es una secuencia finita de datos tomados a lo
   largo del tiempo
   
-  $$\Sec{x} = (x_1, x_2,\ldots x_n)$$
+  $$\boldsymbol{x} = (x_1, x_2,\ldots x_n)$$
 
   - Consideraremos cada dato $x_t$ como una /realización de/ $X_t$.
 
@@ -122,7 +110,7 @@ def repr_png(tex, ImgFile):
 
   - no debemos asumir que las variables aleatorias del
     proceso estocástico subyacente, 
-    $\Sec{X}=(X_t \mid t\in\mathbb{Z})$, 
+    $\boldsymbol{X}=(X_t \mid t\in\mathbb{Z})$, 
     sean independientes entre sí.
 
 ** El desafío
@@ -161,6 +149,9 @@ df1.plot(x='obs',xlabel='',title='PIB UEM', figsize=(15,4))
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[./img/lecc01/PIB_UEM.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
@@ -168,6 +159,9 @@ df1.plot(x='obs',xlabel='',title='PIB UEM', figsize=(15,4))
 df2.plot(x='obs',xlabel='',title='Producción de cemento en España', figsize=(15,4))
 #+END_SRC
 
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[./img/lecc01/ProduccionCemento.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
@@ -176,6 +170,9 @@ df3.plot(x='obs',xlabel='',title='Rendimiento porcentual diario del IBEX 35', fi
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[./img/lecc01/IBEX35.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
@@ -184,6 +181,9 @@ df4.plot(x='obs',xlabel='',title='Exportaciones españolas de acero', figsize=(1
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[./img/lecc01/ExportacionDeAcero.png]]
 
 
@@ -206,8 +206,8 @@ El desafío para el analista es
    :END:
 
 El mayor objetivo del /análisis de series temporales/ es inferir la
-distribución de $\Sec{X}=(X_t \mid t\in\mathbb{Z})$ usando una
-muestra finita (serie temporal) $\Sec{x}=(x_t \mid t=1:n)$.  
+distribución de $\boldsymbol{X}=(X_t \mid t\in\mathbb{Z})$ usando una
+muestra finita (serie temporal) $\boldsymbol{x}=(x_t \mid t=1:n)$.  
 
 Así podremos
 - Predecir :: datos futuros
@@ -225,7 +225,7 @@ necesaria.
    :metadata: (slideshow . ((slide_type . subslide)))
    :ID:       47044916-d502-4a21-b8ae-f237b34dd757
    :END:
-Un proceso estocástico $\Sec{X}$ se dice *estacionario* (/en
+Un proceso estocástico $\boldsymbol{X}$ se dice *estacionario* (/en
 sentido débil/) si para todo $t,k\in\mathbb{Z}$
 
 #+name: estacionario_media
@@ -239,10 +239,10 @@ Cov(X_t,X_{t-k}) = \gamma_k
 \end{equation}
 
 - ([[estacionario_media]]) sugiere que las realizaciones de
-  $\Sec{X}$ generalmente oscilan entorno a $\mu$.
+  $\boldsymbol{X}$ generalmente oscilan entorno a $\mu$.
 
 - ([[estacionario_covarianza]]) sugiere que la variabilidad de las
-  realizaciones de $\Sec{X}$ entorno a $\mu$ es constante, pues
+  realizaciones de $\boldsymbol{X}$ entorno a $\mu$ es constante, pues
   para el caso particular $k=0$
 
   $$Cov(X_t,X_{t-0})=Var(X_t) = \gamma_0\quad\text{ para todo } t$$
@@ -272,6 +272,9 @@ plt.plot(y)
 #plt.savefig("./img/lecc01/stationaryTimeSeriesExample.png")
 #+END_SRC
 
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[./img/lecc01/stationaryTimeSeriesExample.png]]
 
 
@@ -280,7 +283,7 @@ plt.plot(y)
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
 
-Cuando $\Sec{X}$ es un proceso estocástico (débilmente) *estacionario* 
+Cuando $\boldsymbol{X}$ es un proceso estocástico (débilmente) *estacionario* 
 - La secuencia $\;(\gamma_k \mid k\in\mathbb{Z}),\;$ donde 
   $\;\gamma_k = Cov(X_t,X_{t-k})\;$
   se denomina /función de autocovarianzas/
@@ -299,7 +302,7 @@ ambas variables.
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
-Un proceso estocástico $\Sec{X}=(X_t \mid t\in\mathbb{Z})$ puede ser
+Un proceso estocástico $\boldsymbol{X}=(X_t \mid t\in\mathbb{Z})$ puede ser
 - NO estacionario en media :: porque $E(X_t)$ depende de $t$.
 
 - NO estacionario en covarianza :: porque $Cov(X_t,X_{t-k})$ depende de $t$.
@@ -353,9 +356,12 @@ plt.tight_layout()
 #plt.savefig("./img/lecc01/airlinepass+hist.png")
 #+END_SRC
 
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[./img/lecc01/airlinepass+hist.png]]
 
-$$\Sec{x}=(x_1,\ldots x_{114})$$
+$$\boldsymbol{x}=(x_1,\ldots x_{114})$$
 
 Serie /"no estacionaria"/ (*):
 - La media crece de año en año
@@ -407,7 +413,9 @@ plt.legend()
 # Mostrar el gráfico
 # #plt.show()
 
-
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[./img/lecc01/funcion_logaritmica.png]]
 
 
@@ -435,10 +443,12 @@ plt.tight_layout()
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[./img/lecc01/airlinepass_log+hist.png]]
 
-$$\ln\Sec{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$
+$$\ln\boldsymbol{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$
 
 Ésta tampoco parece la realización de un proceso estocástico /estacionario/
 - Ahora la variabilidad estacional parece mantenerse de año en año
@@ -463,10 +473,12 @@ plt.tight_layout()
 #plt.savefig("./img/lecc01/airlinepass_logDiff+hist.png")
 #+END_SRC
 
-
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[./img/lecc01/airlinepass_logDiff+hist.png]]
 
-$$\Sec{y}=\nabla\ln\Sec{x}=\Big(\big[\ln(x_2)-\ln(x_1)\big],\ldots\; \big[\ln(x_{114})-\ln(x_{113})\big]\Big)$$
+$$\boldsymbol{y}=\nabla\ln\boldsymbol{x}=\Big(\big[\ln(x_2)-\ln(x_1)\big],\ldots\; \big[\ln(x_{114})-\ln(x_{113})\big]\Big)$$
 
 Esta serie tampoco parece /"estacionaria"/ (*)
 - Hay un componente periódico (de naturaleza estacional), debido a que
@@ -494,10 +506,12 @@ plt.tight_layout()
 #plt.savefig("./img/lecc01/airlinepass_logDiffDiff12+hist.png")
 #+END_SRC
 
-
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[./img/lecc01/airlinepass_logDiffDiff12+hist.png]]
 
-$$\Sec{z}=\nabla_{12}(\nabla\ln\Sec{x})=\nabla_{12}(\Sec{y})=\Big((y_{13}-y_{1}),\ldots\; (y_{113}-y_{101})\Big)$$
+$$\boldsymbol{z}=\nabla_{12}(\nabla\ln\boldsymbol{x})=\nabla_{12}(\boldsymbol{y})=\Big((y_{13}-y_{1}),\ldots\; (y_{113}-y_{101})\Big)$$
 
 Esta serie se aproxima más al aspecto de la realización de un proceso /estacionario/
 - Aunque parece haber más varianza a principios de los 50 que a finales
@@ -525,22 +539,22 @@ TasaLogCrecimiento['$\\ln y_t- \\ln y_{0}$'] = TasaLogCrecimiento['$\\ln y_t$'] 
 dfi.export(TasaLogCrecimiento, "./img/lecc01/TasaLogCrecimiento.png", use_mathjax=True, dpi=200, table_conversion="matplotlib")
 #+END_SRC
 
-La tasa logarítmica de variación de $\Sec{y}$ se define como
+La tasa logarítmica de variación de $\boldsymbol{y}$ se define como
 $z_t=\ln{y_t}-\ln{y_{t-1}};$ es decir
 
-$$\Sec{z}=\nabla\ln\Sec{y} = \Big(\big[\ln(y_2)-\ln(y_1)\big],\ldots\; \big[\ln(y_{n})-\ln(y_{n-1})\big]\Big)$$
+$$\boldsymbol{z}=\nabla\ln\boldsymbol{y} = \Big(\big[\ln(y_2)-\ln(y_1)\big],\ldots\; \big[\ln(y_{n})-\ln(y_{n-1})\big]\Big)$$
 
 y se /aproxima/ a la tasa de crecimiento (en tanto por uno) si el
 incremento es pequeño.
 
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-#+attr_org: :width 700
-#+attr_html: :width 250px
+#+attr_org: :width 800
+#+attr_html: :width 500px
 #+attr_latex: :width 250px
 [[file:./img/lecc01/TasaLogCrecimiento.png]]
 
-*** Observaciones sobre los datos transformados
+*** Comentarios sobre los datos transformados
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
@@ -552,14 +566,14 @@ incremento es pequeño.
 </style>
 #+end_export
 #+ATTR_LATEX: :align |p{3.8cm}|p{11.9cm}|
-| Transformación  de la serie temporal @@latex:\newline@@ $\displaystyle \Sec{y}=\{y_t\},\; t=1:n$ | Observaciones                                                                                                                                                             |
+| Transformación  de la serie temporal @@latex:\newline@@ $\displaystyle \boldsymbol{y}=\{y_t\},\; t=1:n$ | Comentario                                                                                                                                                              |
 |--------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| $\Sec{z}=\ln\Sec{y}=\{\ln y_t\}$                                                                 | A veces independiza la volatilidad del nivel e induce normalidad.                                                                                                         |
-| $\Sec{z}=\nabla\Sec{y}=\{y_t-y_{t-1}\}$                                                          | Indica al crecimiento absoluto entre  periodos consecutivos.                                                                                                              |
-| $\Sec{z}=\nabla\ln\Sec{y}$                                                                       | Tasa logarítmica de crecimiento. Aproximación del crecimiento relativo entre periodos consecutivos.                                                                       |
-| $\Sec{z}=\nabla\nabla\ln\Sec{y}=\nabla^2\ln\Sec{y}$                                              | Cambio en la tasa log, de crecimiento. Indica la “aceleración” en el crecimiento relativo.                                                                                |
-| $\Sec{z}=\nabla_{s}\ln\Sec{y}=$ @@latex:\newline\;@@ $\{\ln{y_t}-\ln{y_{t-s}}\}$                 | Tasa de crecimiento acumulada en un ciclo estacional completo ($s$ períodos). Cuando el período estacional es de un año, se conoce como “tasa anual” o “tasa interanual”. |
-| $\Sec{z}=\nabla\nabla_{s}\ln\Sec{y}$                                                             | Cambio en la tasa de crecimiento acumulada en un ciclo estacional completo. Es un indicador de aceleración en el crecimiento acumulado.                                   |
+| $\boldsymbol{z}=\ln\boldsymbol{y}=\{\ln y_t\}$                                                                 | A veces independiza la volatilidad del nivel e induce normalidad.                                                                                                         |
+| $\boldsymbol{z}=\nabla\boldsymbol{y}=\{y_t-y_{t-1}\}$                                                          | Indica al crecimiento absoluto entre  periodos consecutivos.                                                                                                              |
+| $\boldsymbol{z}=\nabla\ln\boldsymbol{y}$                                                                       | Tasa logarítmica de crecimiento. Aproximación del crecimiento relativo entre periodos consecutivos.                                                                       |
+| $\boldsymbol{z}=\nabla\nabla\ln\boldsymbol{y}=\nabla^2\ln\boldsymbol{y}$                                              | Cambio en la tasa log, de crecimiento. Indica la “aceleración” en el crecimiento relativo.                                                                                |
+| $\boldsymbol{z}=\nabla_{s}\ln\boldsymbol{y}=$ @@latex:\newline\;@@ $\{\ln{y_t}-\ln{y_{t-s}}\}$                 | Tasa de crecimiento acumulada en un ciclo estacional completo ($s$ períodos). Cuando el período estacional es de un año, se conoce como “tasa anual” o “tasa interanual”. |
+| $\boldsymbol{z}=\nabla\nabla_{s}\ln\boldsymbol{y}$                                                             | Cambio en la tasa de crecimiento acumulada en un ciclo estacional completo. Es un indicador de aceleración en el crecimiento acumulado.                                   |
 # :float sideways 
 
 
@@ -575,7 +589,7 @@ incremento es pequeño.
 </style>
 #+end_export
 #+ATTR_LATEX: :align |c|l|p{2.4cm}|l|p{2.3cm}|p{3.4cm}|l|
-|   | $t$ |     $y_t$ | Incremento en tanto por uno | $\ln y_t$ | Primera dife@@latex:\-@@rencia de $\ln\Sec{y}$ | Incremento en tanto por uno desde $t=1$ | $\ln y_t- \ln y_{1}$ |
+|   | $t$ |     $y_t$ | Incremento en tanto por uno | $\ln y_t$ | Primera dife@@latex:\-@@rencia de $\ln\boldsymbol{y}$ | Incremento en tanto por uno desde $t=1$ | $\ln y_t- \ln y_{1}$ |
 |---+-----+-----------+-----------------------------+-----------+-------------------------------------------------------+-----------------------------------------+----------------------|
 | # |   1 |      100. |                             |  4.605170 |                                                       |                                         |                      |
 | # |   2 | 101.00000 |                        0.01 |  4.615120 |                                                0.0100 |                                  0.0100 |               0.0100 |

@@ -14120,7 +14120,7 @@ div.jp-OutputPrompt {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="orgf9a8efb">
+<div class="ABSTRACT" id="org57c0886">
 <p>
 En esta lección veremos algunos transformaciones de los datos para
 <i>"hacerlos estacionarios"</i>.
@@ -14130,21 +14130,6 @@ En esta lección veremos algunos transformaciones de los datos para
 <li><a href="https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc01.html">lección en html</a></li>
 <li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc01.ipynb">lección en mybinder</a></li>
 </ul>
-
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>$
-\newcommand{\lag}{\mathsf{B}}
-\newcommand{\Sec}[1]{\boldsymbol{#1}}
-\newcommand{\Pol}[1]{\boldsymbol{#1}}
-$</p>
 
 </div>
 </div>
@@ -14168,13 +14153,13 @@ $</p>
 <ul>
 <li><p><strong>Proceso estocástico:</strong> es una secuencia de variables aleatorias,
 $X_t$ donde el índice $t$ recorre el conjunto de números enteros
-$(\mathbb{Z})$.  $$\Sec{X}\;=\;
+$(\mathbb{Z})$.  $$\boldsymbol{X}\;=\;
   (\ldots,X_{-2},X_{-1},X_0,X_1,\ldots)\;=\; 
   (X_t \mid t\in\mathbb{Z});$$</p>
 </li>
 <li><p><strong>Serie temporal:</strong> es una secuencia finita de datos tomados a lo
 largo del tiempo</p>
-<p>$$\Sec{x} = (x_1, x_2,\ldots x_n)$$</p>
+<p>$$\boldsymbol{x} = (x_1, x_2,\ldots x_n)$$</p>
 <ul>
 <li><p>Consideraremos cada dato $x_t$ como una <em>realización de</em> $X_t$.</p>
 </li>
@@ -14241,7 +14226,7 @@ caso&#x2026;</p>
 </li>
 <li><p>no debemos asumir que las variables aleatorias del
 proceso estocástico subyacente, 
-$\Sec{X}=(X_t \mid t\in\mathbb{Z})$, 
+$\boldsymbol{X}=(X_t \mid t\in\mathbb{Z})$, 
 sean independientes entre sí.</p>
 </li>
 </ul>
@@ -14373,8 +14358,8 @@ datos son realizaciones de variables aleatorias i.i.d.</em>)</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>El mayor objetivo del <em>análisis de series temporales</em> es inferir la
-distribución de $\Sec{X}=(X_t \mid t\in\mathbb{Z})$ usando una
-muestra finita (serie temporal) $\Sec{x}=(x_t \mid t=1:n)$.</p>
+distribución de $\boldsymbol{X}=(X_t \mid t\in\mathbb{Z})$ usando una
+muestra finita (serie temporal) $\boldsymbol{x}=(x_t \mid t=1:n)$.</p>
 <p>Así podremos</p>
 <ul>
 <li><strong>Predecir:</strong> datos futuros</li>
@@ -14404,20 +14389,20 @@ necesaria.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Un proceso estocástico $\Sec{X}$ se dice <strong>estacionario</strong> (<em>en
+<p>Un proceso estocástico $\boldsymbol{X}$ se dice <strong>estacionario</strong> (<em>en
 sentido débil</em>) si para todo $t,k\in\mathbb{Z}$</p>
 \begin{equation}
-\label{org8f7428b}
+\label{orgcb5e106}
 E(X_t)  = \mu
 \end{equation}\begin{equation}
-\label{org4e7ae00}
+\label{org5ee77d9}
 Cov(X_t,X_{t-k}) = \gamma_k 
 \end{equation}<ul>
-<li><p>(<a href="#org8f7428b">1</a>) sugiere que las realizaciones de
-$\Sec{X}$ generalmente oscilan entorno a $\mu$.</p>
+<li><p>(<a href="#orgcb5e106">1</a>) sugiere que las realizaciones de
+$\boldsymbol{X}$ generalmente oscilan entorno a $\mu$.</p>
 </li>
-<li><p>(<a href="#org4e7ae00">2</a>) sugiere que la variabilidad de las
-realizaciones de $\Sec{X}$ entorno a $\mu$ es constante, pues
+<li><p>(<a href="#org5ee77d9">2</a>) sugiere que la variabilidad de las
+realizaciones de $\boldsymbol{X}$ entorno a $\mu$ es constante, pues
 para el caso particular $k=0$</p>
 <p>$$Cov(X_t,X_{t-0})=Var(X_t) = \gamma_0\quad\text{ para todo } t$$</p>
 <p>Es decir, $\gamma_0$ es la varianza común a todas las variables
@@ -14470,7 +14455,7 @@ caerán fuera de la franja $\left(\mu-c\sigma, \mu+c\sigma\right)$.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Cuando $\Sec{X}$ es un proceso estocástico (débilmente) <strong>estacionario</strong></p>
+<p>Cuando $\boldsymbol{X}$ es un proceso estocástico (débilmente) <strong>estacionario</strong></p>
 <ul>
 <li>La secuencia $\;(\gamma_k \mid k\in\mathbb{Z}),\;$ donde 
 $\;\gamma_k = Cov(X_t,X_{t-k})\;$
@@ -14514,7 +14499,7 @@ se denomina <em>función de autocorrelación</em> (ACF).</li>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Un proceso estocástico $\Sec{X}=(X_t \mid t\in\mathbb{Z})$ puede ser</p>
+<p>Un proceso estocástico $\boldsymbol{X}=(X_t \mid t\in\mathbb{Z})$ puede ser</p>
 <ul>
 <li><p><strong>NO estacionario en media:</strong> porque $E(X_t)$ depende de $t$.</p>
 </li>
@@ -14563,7 +14548,7 @@ lenguaje</em>).</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc01/airlinepass+hist.png" alt="img"></p>
-$$\Sec{x}=(x_1,\ldots x_{114})$$<p>Serie <em>"no estacionaria"</em> (*):</p>
+$$\boldsymbol{x}=(x_1,\ldots x_{114})$$<p>Serie <em>"no estacionaria"</em> (*):</p>
 <ul>
 <li>La media crece de año en año</li>
 <li>La variabilidad estacional crece de año en año (fíjese en la
@@ -14623,7 +14608,7 @@ $\lim\limits_{x\to0} \ln(x)=-\infty$.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc01/airlinepass_log+hist.png" alt="img"></p>
-$$\ln\Sec{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$<p>Ésta tampoco parece la realización de un proceso estocástico <em>estacionario</em></p>
+$$\ln\boldsymbol{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$<p>Ésta tampoco parece la realización de un proceso estocástico <em>estacionario</em></p>
 <ul>
 <li>Ahora la variabilidad estacional parece mantenerse de año en año</li>
 <li>Pero la media sigue creciendo de año en año</li>
@@ -14649,7 +14634,7 @@ $$\ln\Sec{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$<p>Ésta tampoco parece la 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc01/airlinepass_logDiff+hist.png" alt="img"></p>
-$$\Sec{y}=\nabla\ln\Sec{x}=\Big(\big[\ln(x_2)-\ln(x_1)\big],\ldots\; \big[\ln(x_{114})-\ln(x_{113})\big]\Big)$$<p>Esta serie tampoco parece <em>"estacionaria"</em> (*)</p>
+$$\boldsymbol{y}=\nabla\ln\boldsymbol{x}=\Big(\big[\ln(x_2)-\ln(x_1)\big],\ldots\; \big[\ln(x_{114})-\ln(x_{113})\big]\Big)$$<p>Esta serie tampoco parece <em>"estacionaria"</em> (*)</p>
 <ul>
 <li>Hay un componente periódico (de naturaleza estacional), debido a que
 hay pocos viajes en otoño y muchos en Navidad, Semana Santa y verano
@@ -14677,7 +14662,7 @@ mes o estación del año).</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc01/airlinepass_logDiffDiff12+hist.png" alt="img"></p>
-$$\Sec{z}=\nabla_{12}(\nabla\ln\Sec{x})=\nabla_{12}(\Sec{y})=\Big((y_{13}-y_{1}),\ldots\; (y_{113}-y_{101})\Big)$$<p>Esta serie se aproxima más al aspecto de la realización de un proceso <em>estacionario</em></p>
+$$\boldsymbol{z}=\nabla_{12}(\nabla\ln\boldsymbol{x})=\nabla_{12}(\boldsymbol{y})=\Big((y_{13}-y_{1}),\ldots\; (y_{113}-y_{101})\Big)$$<p>Esta serie se aproxima más al aspecto de la realización de un proceso <em>estacionario</em></p>
 <ul>
 <li>Aunque parece haber más varianza a principios de los 50 que a finales</li>
 <li>De propina, el histograma sugiere una distribución aproximadamente Gaussiana</li>
@@ -14702,9 +14687,9 @@ $$\Sec{z}=\nabla_{12}(\nabla\ln\Sec{x})=\nabla_{12}(\Sec{y})=\Big((y_{13}-y_{1})
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>La tasa logarítmica de variación de $\Sec{y}$ se define como
+<p>La tasa logarítmica de variación de $\boldsymbol{y}$ se define como
 $z_t=\ln{y_t}-\ln{y_{t-1}};$ es decir</p>
-$$\Sec{z}=\nabla\ln\Sec{y} = \Big(\big[\ln(y_2)-\ln(y_1)\big],\ldots\; \big[\ln(y_{n})-\ln(y_{n-1})\big]\Big)$$<p>y se <em>aproxima</em> a la tasa de crecimiento (en tanto por uno) si el
+$$\boldsymbol{z}=\nabla\ln\boldsymbol{y} = \Big(\big[\ln(y_2)-\ln(y_1)\big],\ldots\; \big[\ln(y_{n})-\ln(y_{n-1})\big]\Big)$$<p>y se <em>aproxima</em> a la tasa de crecimiento (en tanto por uno) si el
 incremento es pequeño.</p>
 
 </div>
@@ -14727,7 +14712,7 @@ incremento es pequeño.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Observaciones-sobre-los-datos-transformados">Observaciones sobre los datos transformados<a class="anchor-link" href="#Observaciones-sobre-los-datos-transformados">&#182;</a></h4>
+<h4 id="Comentarios-sobre-los-datos-transformados">Comentarios sobre los datos transformados<a class="anchor-link" href="#Comentarios-sobre-los-datos-transformados">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -14741,33 +14726,33 @@ incremento es pequeño.</p>
 .reveal  td {font-size: 95%;}
 </style><table>
 <thead><tr>
-<th>Transformación  de la serie temporal $\displaystyle \Sec{y}=\{y_t\},\; t=1:n$</th>
-<th>Observaciones</th>
+<th>Transformación  de la serie temporal $\displaystyle \boldsymbol{y}=\{y_t\},\; t=1:n$</th>
+<th>Comentario</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>$\Sec{z}=\ln\Sec{y}=\{\ln y_t\}$</td>
+<td>$\boldsymbol{z}=\ln\boldsymbol{y}=\{\ln y_t\}$</td>
 <td>A veces independiza la volatilidad del nivel e induce normalidad.</td>
 </tr>
 <tr>
-<td>$\Sec{z}=\nabla\Sec{y}=\{y_t-y_{t-1}\}$</td>
+<td>$\boldsymbol{z}=\nabla\boldsymbol{y}=\{y_t-y_{t-1}\}$</td>
 <td>Indica al crecimiento absoluto entre  periodos consecutivos.</td>
 </tr>
 <tr>
-<td>$\Sec{z}=\nabla\ln\Sec{y}$</td>
+<td>$\boldsymbol{z}=\nabla\ln\boldsymbol{y}$</td>
 <td>Tasa logarítmica de crecimiento. Aproximación del crecimiento relativo entre periodos consecutivos.</td>
 </tr>
 <tr>
-<td>$\Sec{z}=\nabla\nabla\ln\Sec{y}=\nabla^2\ln\Sec{y}$</td>
+<td>$\boldsymbol{z}=\nabla\nabla\ln\boldsymbol{y}=\nabla^2\ln\boldsymbol{y}$</td>
 <td>Cambio en la tasa log, de crecimiento. Indica la “aceleración” en el crecimiento relativo.</td>
 </tr>
 <tr>
-<td>$\Sec{z}=\nabla_{s}\ln\Sec{y}=$ $\{\ln{y_t}-\ln{y_{t-s}}\}$</td>
+<td>$\boldsymbol{z}=\nabla_{s}\ln\boldsymbol{y}=$ $\{\ln{y_t}-\ln{y_{t-s}}\}$</td>
 <td>Tasa de crecimiento acumulada en un ciclo estacional completo ($s$ períodos). Cuando el período estacional es de un año, se conoce como “tasa anual” o “tasa interanual”.</td>
 </tr>
 <tr>
-<td>$\Sec{z}=\nabla\nabla_{s}\ln\Sec{y}$</td>
+<td>$\boldsymbol{z}=\nabla\nabla_{s}\ln\boldsymbol{y}$</td>
 <td>Cambio en la tasa de crecimiento acumulada en un ciclo estacional completo. Es un indicador de aceleración en el crecimiento acumulado.</td>
 </tr>
 </tbody>

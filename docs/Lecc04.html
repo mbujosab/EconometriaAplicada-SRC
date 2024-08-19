@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-08-16 vie 17:17 -->
+<!-- 2024-08-19 lun 17:27 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 4</title>
@@ -233,53 +233,53 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2ce2fb4">1. Secuencias de números</a>
+<li><a href="#orgf05ca61">1. Secuencias de números</a>
 <ul>
-<li><a href="#org9eb2348">1.1. El espacio vectorial de las secuencias infinitas \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a>
+<li><a href="#org6218120">1.1. El espacio vectorial de las secuencias infinitas \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a>
 <ul>
-<li><a href="#org0818254">1.1.1. Notación mediante funciones generatrices</a></li>
-<li><a href="#org463a81c">1.1.2. Características de algunas secuencias</a></li>
-<li><a href="#orgeba5081">1.1.3. Subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a></li>
+<li><a href="#org5796935">1.1.1. Notación mediante funciones generatrices</a></li>
+<li><a href="#orgfac73e3">1.1.2. Características de algunas secuencias</a></li>
+<li><a href="#org7b929e9">1.1.3. Subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a></li>
 </ul>
 </li>
-<li><a href="#org679e527">1.2. Producto convolución</a></li>
-<li><a href="#org1817ae9">1.3. Anillos conmutativos y cuerpos</a>
+<li><a href="#org309c4ae">1.2. Producto convolución</a></li>
+<li><a href="#org713b98d">1.3. Anillos conmutativos y cuerpos</a>
 <ul>
-<li><a href="#orgf83b98b">1.3.1. Clasificación de algunos subconjuntos de sucesiones</a></li>
-<li><a href="#org82b8dbf">1.3.2. Inversas de secuencias con principio</a></li>
-<li><a href="#org8d2bc7f">1.3.3. Inversas de secuencias con final</a></li>
-<li><a href="#org3c9766b">1.3.4. Inversas de polinomios</a></li>
-<li><a href="#org4d7231a">1.3.5. Cuerpo de fracciones de polinomios</a></li>
+<li><a href="#org754f6a9">1.3.1. Clasificación de algunos subconjuntos de sucesiones</a></li>
+<li><a href="#orgfeb366f">1.3.2. Inversas de secuencias con principio</a></li>
+<li><a href="#org62b0d6e">1.3.3. Inversas de secuencias con final</a></li>
+<li><a href="#org452d463">1.3.4. Inversas de polinomios</a></li>
+<li><a href="#org07ef923">1.3.5. Cuerpo de fracciones de polinomios</a></li>
 </ul>
 </li>
-<li><a href="#orga7eb5e8">1.4. Operador retardo \(\lag{}\) y suma de los elementos de una secuencia.</a>
+<li><a href="#org362fe19">1.4. Operador retardo \(\mathsf{B}{}\) y suma de los elementos de una secuencia.</a>
 <ul>
-<li><a href="#orge29004a">1.4.1. Polinomios y secuencias en el operador retardo \(\Pol{a}(\lag{})\) actuando sobre secuencias</a></li>
+<li><a href="#org057bcab">1.4.1. Polinomios y secuencias en el operador retardo \(\boldsymbol{a}(\mathsf{B}{})\) actuando sobre secuencias</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgfa89f86">2. Procesos estocásticos</a>
+<li><a href="#orgd030e1f">2. Procesos estocásticos</a>
 <ul>
-<li><a href="#orgac07de4">2.1. Función de autocovarianzas y función de autocorrelación</a></li>
+<li><a href="#org1b64a61">2.1. Función de autocovarianzas y función de autocorrelación</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div class="ABSTRACT" id="org7b027ea">
+<div class="ABSTRACT" id="orga6bf7b1">
 <p>
 En esta lección veremos algunos conceptos algebraicos relacionados con
 la modelización de series temporales.
 </p>
 
 </div>
-<div id="outline-container-org2ce2fb4" class="outline-2">
-<h2 id="org2ce2fb4"><span class="section-number-2">1.</span> Secuencias de números</h2>
+<div id="outline-container-orgf05ca61" class="outline-2">
+<h2 id="orgf05ca61"><span class="section-number-2">1.</span> Secuencias de números</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org9eb2348" class="outline-3">
-<h3 id="org9eb2348"><span class="section-number-3">1.1.</span> El espacio vectorial de las secuencias infinitas \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</h3>
+<div id="outline-container-org6218120" class="outline-3">
+<h3 id="org6218120"><span class="section-number-3">1.1.</span> El espacio vectorial de las secuencias infinitas \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Consideremos el conjunto \({\mathbb{R}}^\mathbb{Z}\) de secuencias
@@ -310,8 +310,8 @@ Si \(\;\boldsymbol{x},\boldsymbol{y}\in{\mathbb{R}}^\mathbb{Z}\;\) y
 producto por escalares constituyen un espacio vectorial.
 </p>
 </div>
-<div id="outline-container-org0818254" class="outline-4">
-<h4 id="org0818254"><span class="section-number-4">1.1.1.</span> Notación mediante funciones generatrices</h4>
+<div id="outline-container-org5796935" class="outline-4">
+<h4 id="org5796935"><span class="section-number-4">1.1.1.</span> Notación mediante funciones generatrices</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 En la expresión \(\;\boldsymbol{x} \quad = \quad (\ldots,\ x_{-2},\
@@ -344,8 +344,8 @@ secuencia denominada <i>función generatriz</i>.
 </p>
 </div>
 </div>
-<div id="outline-container-org463a81c" class="outline-4">
-<h4 id="org463a81c"><span class="section-number-4">1.1.2.</span> Características de algunas secuencias</h4>
+<div id="outline-container-orgfac73e3" class="outline-4">
+<h4 id="orgfac73e3"><span class="section-number-4">1.1.2.</span> Características de algunas secuencias</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 En una sucesión \(\boldsymbol{a}\) no nula llamamos
@@ -373,8 +373,8 @@ Una sucesión absolutamente sumable siempre es de cuadrado sumable,
 </p>
 </div>
 </div>
-<div id="outline-container-orgeba5081" class="outline-4">
-<h4 id="orgeba5081"><span class="section-number-4">1.1.3.</span> Subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</h4>
+<div id="outline-container-org7b929e9" class="outline-4">
+<h4 id="org7b929e9"><span class="section-number-4">1.1.3.</span> Subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</h4>
 <div class="outline-text-4" id="text-1-1-3">
 <dl class="org-dl">
 <dt>Secuencias con final</dt><dd>tienen grado (a partir de cierto índice son
@@ -392,8 +392,8 @@ son cero).  \[\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2
 </div>
 </div>
 </div>
-<div id="outline-container-org679e527" class="outline-3">
-<h3 id="org679e527"><span class="section-number-3">1.2.</span> Producto convolución</h3>
+<div id="outline-container-org309c4ae" class="outline-3">
+<h3 id="org309c4ae"><span class="section-number-3">1.2.</span> Producto convolución</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Sean \(\boldsymbol{a}\) y \(\boldsymbol{b}\) sucesiones <span class="underline">con principio</span> (con cogrado).
@@ -426,8 +426,8 @@ respectivos grados.</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org1817ae9" class="outline-3">
-<h3 id="org1817ae9"><span class="section-number-3">1.3.</span> Anillos conmutativos y cuerpos</h3>
+<div id="outline-container-org713b98d" class="outline-3">
+<h3 id="org713b98d"><span class="section-number-3">1.3.</span> Anillos conmutativos y cuerpos</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Un <b>anillo conmutativo</b> es un conjunto \(\mathsf{S}\) equipado con dos
@@ -478,8 +478,8 @@ conjunto</i>)
 </p></li>
 </ul>
 </div>
-<div id="outline-container-orgf83b98b" class="outline-4">
-<h4 id="orgf83b98b"><span class="section-number-4">1.3.1.</span> Clasificación de algunos subconjuntos de sucesiones</h4>
+<div id="outline-container-org754f6a9" class="outline-4">
+<h4 id="org754f6a9"><span class="section-number-4">1.3.1.</span> Clasificación de algunos subconjuntos de sucesiones</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <dl class="org-dl">
 <dt>Son anillos el conjunto de</dt><dd><p>
@@ -494,12 +494,12 @@ inversas de un polinomio no son polinomios en general).
 </p></dd>
 
 <dt>Son cuerpos el conjunto de</dt><dd>secuencias con principio, secuencias
-con final (y el <a href="#org4d7231a">Cuerpo de fracciones de polinomios</a>)</dd>
+con final (y el <a href="#org07ef923">Cuerpo de fracciones de polinomios</a>)</dd>
 </dl>
 </div>
 </div>
-<div id="outline-container-org82b8dbf" class="outline-4">
-<h4 id="org82b8dbf"><span class="section-number-4">1.3.2.</span> Inversas de secuencias con principio</h4>
+<div id="outline-container-orgfeb366f" class="outline-4">
+<h4 id="orgfeb366f"><span class="section-number-4">1.3.2.</span> Inversas de secuencias con principio</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 Supongamos que \(\boldsymbol{a}\ne\boldsymbol{0}\) y que \(k =
@@ -538,8 +538,8 @@ es decir
 </p>
 </div>
 </div>
-<div id="outline-container-org8d2bc7f" class="outline-4">
-<h4 id="org8d2bc7f"><span class="section-number-4">1.3.3.</span> Inversas de secuencias con final</h4>
+<div id="outline-container-org62b0d6e" class="outline-4">
+<h4 id="org62b0d6e"><span class="section-number-4">1.3.3.</span> Inversas de secuencias con final</h4>
 <div class="outline-text-4" id="text-1-3-3">
 <p>
 Supongamos que \(\boldsymbol{a}\ne\boldsymbol{0}\) y que \(p =
@@ -569,8 +569,8 @@ es decir
 </p>
 </div>
 </div>
-<div id="outline-container-org3c9766b" class="outline-4">
-<h4 id="org3c9766b"><span class="section-number-4">1.3.4.</span> Inversas de polinomios</h4>
+<div id="outline-container-org452d463" class="outline-4">
+<h4 id="org452d463"><span class="section-number-4">1.3.4.</span> Inversas de polinomios</h4>
 <div class="outline-text-4" id="text-1-3-4">
 <p>
 Ahora sabemos que todo polinomio
@@ -645,8 +645,8 @@ En series temporales de un polinomio \(\boldsymbol{a}\) se dice que <b>es invert
 </p>
 </div>
 </div>
-<div id="outline-container-org4d7231a" class="outline-4">
-<h4 id="org4d7231a"><span class="section-number-4">1.3.5.</span> Cuerpo de fracciones de polinomios</h4>
+<div id="outline-container-org07ef923" class="outline-4">
+<h4 id="org07ef923"><span class="section-number-4">1.3.5.</span> Cuerpo de fracciones de polinomios</h4>
 <div class="outline-text-4" id="text-1-3-5">
 <p>
 El cuerpo más importante en la modelización ARIMA es el <i>cuerpo de
@@ -678,56 +678,56 @@ así \[\frac{\boldsymbol{p}(z)}{\boldsymbol{q}(z)}\]
 </div>
 </div>
 </div>
-<div id="outline-container-orga7eb5e8" class="outline-3">
-<h3 id="orga7eb5e8"><span class="section-number-3">1.4.</span> Operador retardo \(\lag{}\) y suma de los elementos de una secuencia.</h3>
+<div id="outline-container-org362fe19" class="outline-3">
+<h3 id="org362fe19"><span class="section-number-3">1.4.</span> Operador retardo \(\mathsf{B}{}\) y suma de los elementos de una secuencia.</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
-Por conveniencia se usa el operador retardo \(\lag\) en la notación:
-\[\lag x_t = x_{t−1},\quad \text{para } t\in\mathbb{Z}.\]
+Por conveniencia se usa el operador retardo \(\mathsf{B}\) en la notación:
+\[\mathsf{B} x_t = x_{t−1},\quad \text{para } t\in\mathbb{Z}.\]
 </p>
 
 <p>
-Aplicando el operador \(\lag{}\) repetidamente tenemos \[\lag^k x_t =
+Aplicando el operador \(\mathsf{B}{}\) repetidamente tenemos \[\mathsf{B}^k x_t =
 x_{t−k},\quad \text{para } t,z\in\mathbb{Z}\] 
 </p>
 <p>
-Así, si la secuencia \(\Sec{x}(z)=\sum_{t=-\infty}^\infty x_t z^t\) es
+Así, si la secuencia \(\boldsymbol{x}(z)=\sum_{t=-\infty}^\infty x_t z^t\) es
 sumable, entonces la expresión 
-\[\Sec{x}(\lag)=\sum_{t=-\infty}^\infty x_t \lag^t\;=\;\cdots+x_{-2}+x_{-1}+x_{0}+x_{1}+\cdots\] tiene sentido como suma.
+\[\boldsymbol{x}(\mathsf{B})=\sum_{t=-\infty}^\infty x_t \mathsf{B}^t\;=\;\cdots+x_{-2}+x_{-1}+x_{0}+x_{1}+\cdots\] tiene sentido como suma.
 </p>
 </div>
-<div id="outline-container-orge29004a" class="outline-4">
-<h4 id="orge29004a"><span class="section-number-4">1.4.1.</span> Polinomios y secuencias en el operador retardo \(\Pol{a}(\lag{})\) actuando sobre secuencias</h4>
+<div id="outline-container-org057bcab" class="outline-4">
+<h4 id="org057bcab"><span class="section-number-4">1.4.1.</span> Polinomios y secuencias en el operador retardo \(\boldsymbol{a}(\mathsf{B}{})\) actuando sobre secuencias</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <p>
-Así, para el polinomio \(\Pol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3\), y la
-secuencia \(\Sec{y}\), tenemos
+Así, para el polinomio \(\boldsymbol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3\), y la
+secuencia \(\boldsymbol{y}\), tenemos
 </p>
 \begin{align*}
-\Pol{a}(\lag)y_t 
-& = (a_0+a_1\lag+a_2\lag^2+a_3\lag^3) y_t \\
-& = a_0 y_t + a_1 \lag^1 y_t + a_2 \lag^2 y_t + a_3 \lag^3 y_t \\
+\boldsymbol{a}(\mathsf{B})y_t 
+& = (a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+a_3\mathsf{B}^3) y_t \\
+& = a_0 y_t + a_1 \mathsf{B}^1 y_t + a_2 \mathsf{B}^2 y_t + a_3 \mathsf{B}^3 y_t \\
 & = a_0y_t+a_1y_{t-1}+a_2y_{t-2}+a_3y_{t-3} \\
 & =\sum\nolimits_{r=0}^3 a_r y_{t-r} \\
-& =(\Pol{a}*\Sec{y})_t
+& =(\boldsymbol{a}*\boldsymbol{y})_t
 \end{align*}
 <p>
-Y en general, si \(\Sec{a}\) e \(\Sec{y}\) son secuencias sumables, entonces
+Y en general, si \(\boldsymbol{a}\) e \(\boldsymbol{y}\) son secuencias sumables, entonces
 </p>
 \begin{align*}
-\Sec{a}(\lag)y_t 
-& = (\cdots+a_{-2}\lag^{-2},a_{-1}\lag^{-1},a_0+a_1\lag+a_2\lag^2+\cdots) y_t \\
-% & = a_0 y_t + a_1 \lag^1 y_t + a_2 \lag^2 y_t + a_3 \lag^3 y_t \\
+\boldsymbol{a}(\mathsf{B})y_t 
+& = (\cdots+a_{-2}\mathsf{B}^{-2},a_{-1}\mathsf{B}^{-1},a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) y_t \\
+% & = a_0 y_t + a_1 \mathsf{B}^1 y_t + a_2 \mathsf{B}^2 y_t + a_3 \mathsf{B}^3 y_t \\
 & = \cdots+a_{-2}y_{t-2}+a_{-1}y_{t-1}+a_0y_t+a_1y_{t-1}+a_2y_{t-2}+\cdots \\
 % & =\sum\nolimits_{r=0}^3 a_r y_{t-r} \\
-& =(\Pol{a}*\Sec{y})_t
+& =(\boldsymbol{a}*\boldsymbol{y})_t
 \end{align*}
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-orgfa89f86" class="outline-2">
-<h2 id="orgfa89f86"><span class="section-number-2">2.</span> Procesos estocásticos</h2>
+<div id="outline-container-orgd030e1f" class="outline-2">
+<h2 id="orgd030e1f"><span class="section-number-2">2.</span> Procesos estocásticos</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Las procesos estocásticos se pueden sumar y se pueden multiplicar por
@@ -735,73 +735,73 @@ escalares.
 </p>
 
 <p>
-Si \(\Sec{X}\) e \(\Sec{Y}\) son dos procesos estocásticos y
-\(\;a\in\mathbb{R}\), entonces \[\Sec{X}+\Sec{Y}=(X_t+Y_t \mid
-t\in\mathbb{Z})\] y \[a\Sec{X}=\big(a(X_t) \mid t\in\mathbb{Z}\big).\]
+Si \(\boldsymbol{X}\) e \(\boldsymbol{Y}\) son dos procesos estocásticos y
+\(\;a\in\mathbb{R}\), entonces \[\boldsymbol{X}+\boldsymbol{Y}=(X_t+Y_t \mid
+t\in\mathbb{Z})\] y \[a\boldsymbol{X}=\big(a(X_t) \mid t\in\mathbb{Z}\big).\]
 El conjunto de procesos estocásticos junto con la suma elemento a
 elemento y el producto por escalares constituyen un espacio vectorial.
 </p>
 
 <p>
 Consideremos el proceso estocástico 
-\[\Sec{X}=(X_t \mid t=0,\pm1,\pm2,\ldots).\]
+\[\boldsymbol{X}=(X_t \mid t=0,\pm1,\pm2,\ldots).\]
 </p>
 
 <p>
 Al igual que con las secuencias, podemos denotar el proceso
 estocástico con una función generatriz 
-\[\Sec{X} \quad = \quad \sum_{t=-\infty}^\infty X_t z^t \quad\equiv\quad \Sec{X}(z)\]
+\[\boldsymbol{X} \quad = \quad \sum_{t=-\infty}^\infty X_t z^t \quad\equiv\quad \boldsymbol{X}(z)\]
 Recuerde que la expresión de más arriba no es una suma, es una secuencia de variables aleatorias
 \[\sum_{t=-\infty}^\infty X_t z^t = (\ldots,\ X_{-2},\ X_{-1},\ X_{0},\ X_{1},\ X_{2},\ldots)\]
 </p>
 
 <p>
-Sea \(\Sec{a}\in l_1\) (<span class="underline">una secuencia absolutamente sumable</span>) y \(\Sec{X}\)
+Sea \(\boldsymbol{a}\in l_1\) (<span class="underline">una secuencia absolutamente sumable</span>) y \(\boldsymbol{X}\)
 un proceso estocástico.
 </p>
 
 <p>
-Definimos el producto convolución (\(∗\)) de \(\Sec{a}\) con \(\Sec{X}\) como el proceso estocástico:
-\[\Sec{a}*\Sec{X}=\left(\left.\sum_{r+s=t} a_r X_s \right| t\in\mathbb{Z}\right)\]
+Definimos el producto convolución (\(∗\)) de \(\boldsymbol{a}\) con \(\boldsymbol{X}\) como el proceso estocástico:
+\[\boldsymbol{a}*\boldsymbol{X}=\left(\left.\sum_{r+s=t} a_r X_s \right| t\in\mathbb{Z}\right)\]
 es decir
-\[(\Sec{a}*\Sec{X})_t=\sum_{r+s=t} a_r X_s,\quad \text{para } t\in\mathbb{Z}.\]
-Por tanto, cada elemento de \((\Sec{a}*\Sec{X})\) es una combinación de variables aleatorias de \(\Sec{X}\)
+\[(\boldsymbol{a}*\boldsymbol{X})_t=\sum_{r+s=t} a_r X_s,\quad \text{para } t\in\mathbb{Z}.\]
+Por tanto, cada elemento de \((\boldsymbol{a}*\boldsymbol{X})\) es una combinación de variables aleatorias de \(\boldsymbol{X}\)
 </p>
 
 <p>
-Podemos aplicar el operador \(\lag\) sobre los elementos de un proceso estocástico \(\Sec{X}\).
-\[\lag X_t = X_{t−1},\quad \text{para } t\in\mathbb{Z}.\]
+Podemos aplicar el operador \(\mathsf{B}\) sobre los elementos de un proceso estocástico \(\boldsymbol{X}\).
+\[\mathsf{B} X_t = X_{t−1},\quad \text{para } t\in\mathbb{Z}.\]
 </p>
 
 <p>
-Aplicando el operador \(\lag\) repetidamente tenemos \[\lag^k X_t =
+Aplicando el operador \(\mathsf{B}\) repetidamente tenemos \[\mathsf{B}^k X_t =
 X_{t−k},\quad \text{para } t,z\in\mathbb{Z}\] 
 </p>
 <p>
-Así, para el polinomio \(\Pol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3\), y el proceso estocástico \(\Sec{Y}\)
+Así, para el polinomio \(\boldsymbol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3\), y el proceso estocástico \(\boldsymbol{Y}\)
 </p>
 \begin{align*}
-\Pol{a}(\lag)Y_t 
-& = (a_0+a_1\lag+a_2\lag^2+a_3\lag^3) Y_t \\
-% & = a_0 Y_t + a_1 \lag^1 Y_t + a_2 \lag^2 Y_t + a_3 \lag^3 Y_t \\
+\boldsymbol{a}(\mathsf{B})Y_t 
+& = (a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+a_3\mathsf{B}^3) Y_t \\
+% & = a_0 Y_t + a_1 \mathsf{B}^1 Y_t + a_2 \mathsf{B}^2 Y_t + a_3 \mathsf{B}^3 Y_t \\
 & = a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+a_3Y_{t-3} \\
 % & =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
-& =(\Pol{a}*\Sec{Y})_t,\quad \text{para } t\in\mathbb{Z}
+& =(\boldsymbol{a}*\boldsymbol{Y})_t,\quad \text{para } t\in\mathbb{Z}
 \end{align*}
 <p>
-Y en general, si \(\fbox{$\Sec{a}\in l_1$}\), entonces
+Y en general, si \(\fbox{$\boldsymbol{a}\in l_1$}\), entonces
 </p>
 \begin{align*}
-\Sec{a}(\lag)Y_t 
-& = (\cdots+a_{-2}\lag^{-2},a_{-1}\lag^{-1},a_0+a_1\lag+a_2\lag^2+\cdots) Y_t \\
-% & = a_0 Y_t + a_1 \lag^1 Y_t + a_2 \lag^2 Y_t + a_3 \lag^3 Y_t \\
+\boldsymbol{a}(\mathsf{B})Y_t 
+& = (\cdots+a_{-2}\mathsf{B}^{-2},a_{-1}\mathsf{B}^{-1},a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) Y_t \\
+% & = a_0 Y_t + a_1 \mathsf{B}^1 Y_t + a_2 \mathsf{B}^2 Y_t + a_3 \mathsf{B}^3 Y_t \\
 & = \cdots+a_{-2}Y_{t-2}+a_{-1}Y_{t-1}+a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+\cdots \\
 % & =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
-& =(\Pol{a}*\Sec{y})_t,\quad \text{para } t\in\mathbb{Z}
+& =(\boldsymbol{a}*\boldsymbol{y})_t,\quad \text{para } t\in\mathbb{Z}
 \end{align*}
 </div>
-<div id="outline-container-orgac07de4" class="outline-3">
-<h3 id="orgac07de4"><span class="section-number-3">2.1.</span> Función de autocovarianzas y función de autocorrelación</h3>
+<div id="outline-container-org1b64a61" class="outline-3">
+<h3 id="org1b64a61"><span class="section-number-3">2.1.</span> Función de autocovarianzas y función de autocorrelación</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>La secuencia \((\gamma_k)\) con \(k\in\mathbb{Z}\) se denomina
@@ -834,7 +834,7 @@ ambas variables.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-08-16 vie 17:17</p>
+<p class="date">Created: 2024-08-19 lun 17:27</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

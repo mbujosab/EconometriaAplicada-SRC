@@ -4,28 +4,19 @@
 (require 'ox-ipynb)
 (ox-ipynb-export-org-file-to-ipynb-file "Lecc01.org")
 (ox-ipynb-export-org-file-to-ipynb-file "Lecc02.org")
-;(ox-ipynb-export-org-file-to-ipynb-file "Lecc03.org")
-;(ox-ipynb-export-org-file-to-ipynb-file "Lecc04.org")
-;(ox-ipynb-export-org-file-to-ipynb-file "Lecc05.org")
+(ox-ipynb-export-org-file-to-ipynb-file "Lecc03.org")
+(ox-ipynb-export-org-file-to-ipynb-file "Lecc04.org")
+(ox-ipynb-export-org-file-to-ipynb-file "Lecc05.org")
 #+END_SRC
-
 
 #+BEGIN_SRC sh :results silent
 jupyter nbconvert --config mycfg-GitHubPages.py --to slides --reveal-prefix reveal.js --no-input
 #+END_SRC
 
-
-
 ** Org-publish                                                     :noexport:
 
 We need a small elisp script to setup and publish  it.
-
-# ~/CloudStation/ReposGH/Docencia/Econometria-SRC/
-# ~/CloudStation/Nextcloud/Docencia/Ectr/
-# ~/CloudStation/Nextcloud/Docencia/Ectr/
-
-
-#+BEGIN_SRC emacs-lisp  :tangle ~/publish.el
+#+BEGIN_SRC emacs-lisp  :tangle ~/publish.el :results silent
 (use-package htmlize)
 
 (require 'ox-publish)
@@ -36,7 +27,7 @@ We need a small elisp script to setup and publish  it.
 				     :base-directory ,base-directory
 				     :base-extension "org"
 				     :publishing-directory ,(concat base-directory "docs")
-				     :exclude "docs\\|ucarima.*\\|.ipynb_checkpoints\\|00Notas.*\\|org-publisg.*"
+				     :exclude "Almacen\\|docs\\|Calendario\\|ucarima.*\\|.ipynb_checkpoints\\|00Notas.*\\|org-publisg.*\\|*.txt\\|kk.*"
 				     :recursive t
 				     :publishing-function org-html-publish-to-html
 				     :auto-preamble t
@@ -44,9 +35,9 @@ We need a small elisp script to setup and publish  it.
 				    
 				    ("static-html"
 				     :base-directory ,base-directory
-				     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|dat\\|mov\\|txt\\|svg\\|aiff\\|csv\\|gdt\\|inp\\|ipynb\\|html"
+				     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|dat\\|mov\\|svg\\|aiff\\|csv\\|gdt\\|inp\\|ipynb\\|html"
 				     :publishing-directory ,(concat base-directory "docs")
-				     :exclude "docs\\|ucarima.*\\|.ipynb_checkpoints\\|00Notas.*\\|org-publisg.*"
+				     :exclude "Almacen\\|docs\\|ucarima.*\\|.ipynb_checkpoints\\|org-publisg.*\\|*.txt\\|kk.*"
 				     :recursive t
 				     :publishing-function org-publish-attachment)
 
@@ -56,7 +47,9 @@ We need a small elisp script to setup and publish  it.
   (org-publish "scimax-eln" t))
 #+END_SRC
 
-#+RESULTS:
+# ~/CloudStation/ReposGH/Docencia/Econometria-SRC/
+# ~/CloudStation/Nextcloud/Docencia/Ectr/
+# ~/CloudStation/Nextcloud/Docencia/Ectr/
 
 Podemos chequear la versión local ejecutando el siguiente bloque
 
@@ -147,13 +140,13 @@ c.SlidesExporter.reveal_scroll = True
 
 
 #+BEGIN_SRC sh :results none
-jupyter nbconvert --config mycfg.py --to notebook
+#jupyter nbconvert --config mycfg.py --to notebook
 jupyter nbconvert --config mycfg.py --to slides 
 #+END_SRC
 
 # omite las celdas de código
 #+BEGIN_SRC sh :results silent
-jupyter nbconvert --config mycfg.py --to notebook
+#jupyter nbconvert --config mycfg.py --to notebook
 jupyter nbconvert --config mycfg.py --to slides --no-input
 #+END_SRC
 

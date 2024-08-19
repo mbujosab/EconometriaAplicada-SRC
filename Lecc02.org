@@ -15,10 +15,6 @@
 #+LATEX_HEADER_EXTRA: \usepackage{booktabs}
 # +LATEX_HEADER: \hypersetup{colorlinks=true, linkcolor=blue}
 
-#+LaTeX_HEADER: \newcommand{\lag}{\mathsf{B}}
-#+LaTeX_HEADER: \newcommand{\Sec}[1]{\boldsymbol{#1}}
-#+LaTeX_HEADER: \newcommand{\Pol}[1]{\boldsymbol{#1}}
-
 #+LATEX: \maketitle
 
 #+BEGIN_SRC emacs-lisp :exports none :results silent
@@ -33,13 +29,6 @@ de componentes (no observables) con modelos deterministas.
 
 - [[https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc02.html][lección en html]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc02.ipynb][lección en mybinder]]
-
-***** COMMENT para Jupyter-Notebook                               :noexports:
-\(
-\newcommand{\lag}{\mathsf{B}}
-\newcommand{\Sec}[1]{\boldsymbol{#1}}
-\newcommand{\Pol}[1]{\boldsymbol{#1}}
-\)
 
 
 ***  Carga de algunos módulos de python
@@ -131,33 +120,33 @@ Pero existe otro enfoque que pretende descomponer la serie temporal en
 los siguientes componentes /"no observables"/ (o en un subconjunto de
 ellos):
 
-$$\Sec{y} = \Sec{t} + \Sec{c} + \Sec{s} + \Sec{e}$$
+$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{c} + \boldsymbol{s} + \boldsymbol{e}$$
 
 #+LATEX: \noindent
 donde:
 
-- La tendencia "$\Sec{t}$" :: recoge la lenta evolución de la
+- La tendencia "$\boldsymbol{t}$" :: recoge la lenta evolución de la
   media a /largo plazo/.
 
-- El componente estacional "$\Sec{s}$" :: recoge las
+- El componente estacional "$\boldsymbol{s}$" :: recoge las
   oscilaciones periódicas que se repiten regularmente en ciclos
   estacionales (de año en año, o de semana en semana, etc.).
 
-- El componente cíclico "$\Sec{c}$" :: Cuando aparece
-  explícitamente en el modelo, $\Sec{c}$ recoge las
+- El componente cíclico "$\boldsymbol{c}$" :: Cuando aparece
+  explícitamente en el modelo, $\boldsymbol{c}$ recoge las
   oscilaciones a medio plazo. Es decir, aquellas de un plazo más largo
   que las oscilaciones estacionales, pero más corto que la tendencia
   de largo plazo. Si está ausente, dichas oscilaciones suelen aparecer
   en el componente de la tendencia, que entonces también podemos
   denominar /tendencia-ciclo/.
 
-- El componente irregular "$\Sec{e}$" :: recoge las
+- El componente irregular "$\boldsymbol{e}$" :: recoge las
   oscilaciones no captadas por el resto de componentes, ya que debe
-  cumplir la siguiente identidad: $\Sec{e} = \Sec{y} -
-  \Sec{t} - \Sec{c} - \Sec{s}$.
+  cumplir la siguiente identidad: $\boldsymbol{e} = \boldsymbol{y} -
+  \boldsymbol{t} - \boldsymbol{c} - \boldsymbol{s}$.
 
 Ajuste aceptable si (como poco) el componente irregular
-$\Sec{e}$ parece "/estacionario/".
+$\boldsymbol{e}$ parece "/estacionario/".
 
 
 ** Tendencia determinista /lineal/
@@ -196,16 +185,15 @@ plt.ylabel(r"Log-Passengers, ($\ln\boldsymbol{x}$) ")
 #+END_SRC
 
 
-El modelo de tendencia más simple es la recta de regresión donde el
-regresor no constante es el propio índice $t$ de cada dato:
+El modelo de tendencia más simple es la recta de regresión (el
+regresor no constante es el índice $t$):
 
 $$\ln{y_t}=\underbrace{\beta_1+\beta_2\cdot t}_{\text{tendencia}} + e_t; \quad t=1:114$$
-
-
-
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[./img/lecc02/airlinepass+linearTrend.png]]
-
 
 #+RESULTS: my-latex-code-linear-trend
 :results:
@@ -219,9 +207,9 @@ print(results1.summary())
 
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-#+attr_org: :width 650
-#+attr_html: :width 100px
-#+attr_latex: :width 250px
+#+attr_org: :width 600
+#+attr_html: :width 600px
+#+attr_latex: :width 300px
 [[./img/lecc02/resultsModel1.png]]
 
 
@@ -234,15 +222,19 @@ print(results1.summary())
 plt.grid()  
 plt.plot(results1.resid)
 #+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[file:./img/lecc02/airlinepass+irreg.png]]
 
 En este caso, el modelo 
 
-$$\Sec{y} = \Sec{t} + \Sec{e}$$
+$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$
 
-@@latex:\noindent@@ donde $\Sec{t}$ es una tendencia lineal no
+@@latex:\noindent@@ donde $\boldsymbol{t}$ es una tendencia lineal no
 es un ajuste satisfactorio, pues el /componente irregular/
-$$\Sec{e}=\Sec{y}-\Sec{t}$$
+$$\boldsymbol{e}=\boldsymbol{y}-\boldsymbol{t}$$
 no tiene la apariencia de realización de un proceso estacionario.
 
 
@@ -258,6 +250,9 @@ Adicionalmente podemos ver que diferencia de orden 12 del componente
 irregular parece mostrar un componente cíclico con un periodo de unos
 4 años.
 
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[file:./img/lecc02/airlinepass+irregDiff12.png]]
 
 En el siguiente ejercicio probaremos con una tendencia cuadrática...
@@ -338,6 +333,9 @@ plt.ylabel(r"Log-Passengers, ($\ln\boldsymbol{x}$) ")
 $$\ln{y_t}=\underbrace{\beta_1+\beta_2\cdot t + \beta_3\cdot t^2}_{\text{tendencia}} + e_t; \quad t=1:114$$
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[./img/lecc02/airlinepass+quadraticTrend.png]]
 
 #+RESULTS: my-latex-code-quadratic-trend
@@ -353,9 +351,9 @@ print(results2.summary())
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-#+attr_org: :width 650
-#+attr_html: :width 100px
-#+attr_latex: :width 250px
+#+attr_org: :width 600
+#+attr_html: :width 600px
+#+attr_latex: :width 300px
 [[./img/lecc02/resultsModel2.png]]
 
 
@@ -367,15 +365,18 @@ plt.grid()
 plt.plot(results2.resid)
 #+END_SRC
 
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[./img/lecc02/airlinepass+irreg2.png]]
 
 De manera análoga al caso anterior, el modelo
 
-$$\Sec{y} = \Sec{t} + \Sec{e}$$
+$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$
 
-@@latex:\noindent@@ donde $\Sec{t}$ ahora es una /tendencia
+@@latex:\noindent@@ donde $\boldsymbol{t}$ ahora es una /tendencia
 cuadrática/ tampoco es un ajuste satisfactorio, pues el componente
-irregular $\Sec{e}$ sigue sin parecerse a la realización de un
+irregular $\boldsymbol{e}$ sigue sin parecerse a la realización de un
 proceso estacionario.
 
 
@@ -390,6 +391,9 @@ plt.plot(datosModelo2['ehatDiff12'])
 También en este modelo la diferencia de orden 12 del componente
 irregular muestra un componente cíclico con un periodo de unos 4 años.
 
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[file:./img/lecc02/airlinepass+irregDiff12.png]]
 
 Para obtener una /tendencia-ciclo/ que capte este ciclo, son
@@ -486,7 +490,9 @@ plt.grid()
 plt.ylabel(r"Log-Passengers, ($\ln\boldsymbol{x}$) ")
 #+END_SRC
 
-
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[./img/lecc02/airlinepass+TrendC.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
@@ -496,10 +502,13 @@ plt.grid()
 plt.plot(SeasonalComp)
 #+END_SRC
 
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[file:./img/lecc02/airlinepass+SeasonalC.png]]
 
 
-*** Ajuste y componente irregular $\Sec{e}=\Sec{y}-\Sec{t}-\Sec{s}$
+*** Ajuste y componente irregular $\boldsymbol{e}=\boldsymbol{y}-\boldsymbol{t}-\boldsymbol{s}$
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
@@ -512,6 +521,9 @@ plt.plot(datosModelo3['dataLog'])
 plt.plot(TrendComp + SeasonalComp)
 #+END_SRC
 
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[./img/lecc02/airlinepass+yhat.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
@@ -520,6 +532,9 @@ plt.grid()
 plt.plot(results3.resid)
 #+END_SRC
 
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
 [[./img/lecc02/airlinepass+IrregC.png]]
 
 
@@ -564,15 +579,17 @@ repr_png(results3.summary().as_latex(), "./img/lecc02/resultsModel3.png")
 #+END_EXPORT
 
 # +attr_ipynb: (slideshow . ((slide_type . fragment)))
-# +attr_org: :width 650
+# +attr_org: :width 600
 # +attr_html: :width 100px
 # +attr_latex: :width 250px
 # [[./img/lecc02/resultsModel3.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
+#+BEGIN_EXPORT html
 <div>
 <img src="./img/lecc02/resultsModel3.png" width="400" class="center"/>
 </div>
+#+END_EXPORT
 
 @@latex:\bigskip@@
 
@@ -620,15 +637,17 @@ print(results4.summary())
 #+END_EXPORT
 
 # +attr_ipynb: (slideshow . ((slide_type . skip)))
-# +attr_org: :width 650
+# +attr_org: :width 600
 # +attr_html: :width 100px
 # +attr_latex: :width 250px
 # [[file:./img/lecc02/resultsModel4.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
+#+BEGIN_EXPORT html
 <div>
 <img src="./img/lecc02/resultsModel4.png" width="400" class="center"/>
 </div>
+#+END_EXPORT
 
 @@latex:\bigskip@@
 
@@ -645,7 +664,7 @@ repr_png(results4.summary().as_latex(), "./img/lecc02/resultsModel4.png")
 
 
 
-* Autocorrelación 
+* Perturbaciones no esféricas
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
@@ -653,7 +672,7 @@ repr_png(results4.summary().as_latex(), "./img/lecc02/resultsModel4.png")
 # [[https://www.statsmodels.org/dev/diagnostic.html]]
 
 Considere el modelo
-$\Sec{y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U}.\;$ Bajo
+$\boldsymbol{y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U}.\;$ Bajo
 los supuestos habituales
 
 $$E(\boldsymbol{U}\mid\boldsymbol{\mathsf{X}})=\boldsymbol{0},\quad
@@ -681,9 +700,46 @@ $$Var(\widehat{\boldsymbol{\beta}}\mid\boldsymbol{\mathsf{X}})=Var(\widehat{\bol
 \boldsymbol{\mathsf{X}}(\boldsymbol{\mathsf{X'X}})^{-1}.$$
 @@latex:\medskip@@
 
+** Test de autocorrelación de Breusch y Godfrey
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+El tests el de Breusch y Godfrey (y el de Durbin-Watson) contrastan la $H_0$ de /no autocorrelación/.
+
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-El test de Durbin-Watson o el test de Breusch y Godfrey sirven para
-contrastar la $H_0$ de /no autocorrelación/....
+@@latex:\noindent@@
+Considere el /modelo de regresión lineal/ 
+
+#+name: ModeloRegresionLineal
+\begin{equation}
+Y_t = \beta_1+ \beta_2 X_{t,1} + \cdots +  \beta_k X_{t,k+1} + U_t 
+\end{equation}
+# \label{eq:ModeloRegresionLineal}
+
+@@latex:\noindent@@
+donde las perturbaciones $\boldsymbol{U}$ quizá siguen un esquema
+auto-regresivo $AR(p)$:
+# $\boldsymbol{U}=\{U_t \mid t\in \mathbb{Z}\}$
+
+$$U_t = \rho_1 U_{t-1} + \rho_2 U_{t-2}  + \cdots + \rho_p U_{t-p} + \varepsilon_t$$
+- *Paso 1*. Se obtienen los residuos MCO del modelo
+  ([[ModeloRegresionLineal]]) con una muestra de tamaño $T$.
+  # \ref{eq:ModeloRegresionLineal}
+- *Paso 2*. Se realiza un ajuste MCO de los residuos $\hat{E}_t$ sobre
+  los regresores del modelo original y sobre los $p$ primeros retardos
+  de los residuos.
+  $$\hat{E}_t = \alpha_0 + \alpha_1 X_{t,1} + \cdots \alpha_k
+  X_{t,k} + \rho_1 \hat{E}_{t-1} + \rho_2 \hat{E}_{t-2} + \cdots +
+  \rho_p \hat{E}_{t-p} + \varepsilon_t$$
+
+Asintóticamente y bajo la $H_0$ de /no autocorrelación/: $\quad\rho_i = 0\text{ para todo }i$
+
+$$n R^2\,\sim\,\chi^2_p,$$
+
+@@latex:\noindent@@
+donde $R^2$ es el coeficiente de determinación de la regresión
+auxiliar y $n=T-p$.
 @@latex:\medskip@@
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
@@ -694,39 +750,6 @@ orden uno de los residuos. Por tanto, valores del test próximos a 2
 indican no autocorrelación, valores próximos a 0 indican fuerte
 autocorrelación positiva y valores próximos a 4 indican fuerte
 autocorrelación negativa.
-
-** Test de Breusch y Godfrey
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
-   :END:
-
-Considere el /modelo de regresión lineal/ 
-
-$$Y_t = \beta_1+ \beta_2 X_{t,1} + \cdots +  \beta_k X_{t,k+1} + U_t$$
-
-@@latex:\noindent@@
-donde las perturbaciones $\boldsymbol{U}$ quizá siguen un esquema
-auto-regresivo $AR(p)$:
-# $\boldsymbol{U}=\{U_t \mid t\in \mathbb{Z}\}$
-
-$$U_t = \rho_1 U_{t-1} + \rho_2 U_{t-2}  + \cdots + \rho_p U_{t-p} + \varepsilon_t$$
-- *Paso 1*. Se obtienen los residuos del ajuste por MCO con una
-  muestra de tamaño $T$ del /modelo de regresión lineal/.
-- *Paso 2*. Se realiza un ajuste MCO de los residuos sobre los
-  regresores del modelo original y sobre los $p$ primeros retardos de
-  los residuos.
-  $$\hat{E}_t = \alpha_0 + \alpha_1 X_{t,1} + \cdots \alpha_k
-  X_{t,k} + \rho_1 \hat{E}_{t-1} + \rho_2 \hat{E}_{t-2} + \cdots +
-  \rho_p \hat{E}_{t-p} + \varepsilon_t$$
-
-asintóticamente y bajo la $H_0$ de /no autocorrelación/: ${\lbrace
-\rho_i = 0\text{ para todo }i\rbrace}$
-
-$$n R^2\,\sim\,\chi^2_p,$$
-
-donde $R^2$ es el coeficiente de determinación de la regresión
-auxiliar y $n=T-p$.
-
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python  :results silent
@@ -744,7 +767,7 @@ repr_png(arbg[-1].resols.summary().as_latex(), "./img/lecc02/resultsBreusch-Godf
 #+END_EXPORT
 
 # +attr_ipynb: (slideshow . ((slide_type . skip)))
-# +attr_org: :width 650
+# +attr_org: :width 600
 # +attr_html: :width 100px
 # +attr_latex: :width 250px
 # [[./img/lecc02/resultsBreusch-Godfrey.png]]
@@ -759,10 +782,12 @@ repr_png(arbg[-1].resols.summary().as_latex(), "./img/lecc02/resultsBreusch-Godf
 - Valor del estadístico: $\quad 62.7119\qquad$ (p-valor: $\; 1.55e-13$)
 - $x_{12}$ corresponde al primer retardo en la regresión auxiliar y es muy significativo
 :end:
+
+#+BEGIN_EXPORT html
 <div>
 <img src="./img/lecc02/resultsBreusch-Godfrey.png" width="450" class="center"/>
 </div>
-
+#+END_EXPORT
 
 **************  Codigo aux                                       :noexport:
 
@@ -795,14 +820,17 @@ round(arbg[1], 15)
 
 
 Un procedimiento adecuado en presencia de autocorrelación y muestras
-grandes consiste en usar errores estándar "/robustos/" al realizar
-inferencia con la estimación de los parámetros.
+grandes consiste en usar errores estándar /robustos/ (*HAC* -
+heteroscedasticity and autocorrelation robust covariance matrix) al
+realizar inferencia con la estimación de los parámetros.
 
 1) las estimaciones serán insesgadas, consistentes pero ineficientes,
 
 2) los residuos son los mismos y, por tanto, estarán autocorrelados, aunque
 
 3) la inferencia a partir de errores estándar robustos será válida
+
+# https://stats.stackexchange.com/questions/523952/estimate-hac-covariance-matrix-from-data-by-hand-newey-west
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results silent
@@ -826,18 +854,23 @@ repr_png(results5.get_robustcov_results(cov_type='HAC', maxlags=3, use_correctio
 #+END_EXPORT
 
 # +attr_ipynb: (slideshow . ((slide_type . skip)))
-# +attr_org: :width 650
+# +attr_org: :width 600
 # +attr_html: :width 100px
 # +attr_latex: :width 250px
 # [[./img/lecc02/resultsModel5.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
+- *Covariance type*: HAC (heteroscedasticity and autocorrelation robust covariance matrix)
+#+BEGIN_EXPORT html
 <div>
 <img src="./img/lecc02/resultsModel5.png" width="400" class="center"/>
 </div>
+#+END_EXPORT
 
-Ahora, y empleando errores estándar robustos, podemos reducir el
-modelo de manera más cuidadosa usando desviaciones típicas robustas. El modelo reducido es...
+Ahora, y empleando errores estándar robustos (HAC), podemos reducir el
+modelo de manera más cuidadosa usando desviaciones típicas
+robustas. El modelo reducido es...
+
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel6.png
@@ -874,20 +907,15 @@ repr_png(robustResults.summary().as_latex(), "./img/lecc02/resultsModel6.png")
 \end{center}
 #+END_EXPORT
 
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+attr_org: :width 650
-#+attr_html: :width 100px
-#+attr_latex: :width 250px
-# [[./img/lecc02/resultsModel6.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+BEGIN_EXPORT html
 <div>
 <img src="./img/lecc02/resultsModel6.png" width="400" class="center"/>
 </div>
-
-- Nótese que ahora se aprecia que enero y octubre son significativos al 5%
-- Pero la estimación MCO no es eficiente en presencia de
-  heterocedasticidad y/o auto-correlación
+#+END_EXPORT
+- Nótese que ahora (HAC) se aprecia que enero y octubre son significativos al 5%
+- Pero la estimación MCO no es eficiente en presencia de auto-correlación
 
 
 **************  Codigo aux                                       :noexport:
@@ -902,7 +930,7 @@ repr_png(robustResults.summary().as_latex(), "./img/lecc02/resultsModel6.png")
    :END:
 
 En el modelo
-$\Sec{y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U},\;$ si las
+$\boldsymbol{y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U},\;$ si las
 perturbaciones presentan heterocedasticidad y/o auto-correlación, y
 por tanto
 $$Var(\boldsymbol{U}\mid\boldsymbol{\mathsf{X}})=\boldsymbol{\Sigma}\ne\sigma^2\boldsymbol{\mathsf{I}},$$
@@ -915,7 +943,7 @@ varianza del estimador.
 En particular, el estimador lineal de mínima varianza es el estimador
 MCG (mínimos cuadrados generalizados)
 
-$$\;\widehat{\boldsymbol{\beta}}=(\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\boldsymbol{\mathsf{X}})^{-1}\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\Sec{y}\;$$
+$$\;\widehat{\boldsymbol{\beta}}=(\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\boldsymbol{\mathsf{X}})^{-1}\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\Sigma}}^{-1}\boldsymbol{y}\;$$
 
 El problema es que, en general, la matriz $\boldsymbol{\Sigma}$ es
 desconocida.
@@ -943,7 +971,7 @@ el modelo
 
 $$\epsilon_t = \rho_1 \epsilon_{t-1} + e_t$$
 
-(/en este caso la estimación converge en 7 iteraciones/)
+(/en este caso la estimación (*GLSAR*) converge en 7 iteraciones/)
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results silent :file ./img/lecc02/resultsModel7.png
@@ -968,15 +996,18 @@ print(results.summary())
 #+END_EXPORT
 
 # +attr_ipynb: (slideshow . ((slide_type . skip)))
-# +attr_org: :width 650
+# +attr_org: :width 600
 # +attr_html: :width 100px
 # +attr_latex: :width 250px
 # [[./img/lecc02/resultsModel7.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+BEGIN_EXPORT html
 <div>
 <img src="./img/lecc02/resultsModel7.png" width="600" class="center"/>
 </div>
+#+END_EXPORT
+
 
 
 
