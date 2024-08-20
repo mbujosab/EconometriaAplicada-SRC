@@ -13,6 +13,42 @@
 jupyter nbconvert --config mycfg-GitHubPages.py --to slides --reveal-prefix reveal.js --no-input
 #+END_SRC
 
+#+BEGIN_SRC sh :results none
+jupyter nbconvert --config mycfg.py --to slides 
+#+END_SRC
+
+** USB-publish
+#+BEGIN_SRC emacs-lisp  :tangle ~/publish.el :results silent
+(use-package htmlize)
+
+(require 'ox-publish)
+
+(let* ((base-directory "./")
+       (org-export-with-broken-links t)
+       (org-publish-project-alist `(("html"
+				     :base-directory ,base-directory
+				     :base-extension "org"
+				     :publishing-directory ,(concat base-directory "USB")
+				     :exclude "Almacen\\|USB\\|docs\\|Calendario\\|ucarima.*\\|.ipynb_checkpoints\\|00Notas.*\\|org-publisg.*\\|*.txt\\|kk.*"
+				     :recursive t
+				     :publishing-function org-html-publish-to-html
+				     :auto-preamble t
+				     :auto-sitemap nil)
+				    
+				    ("static-html"
+				     :base-directory ,base-directory
+				     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|dat\\|mov\\|svg\\|aiff\\|csv\\|gdt\\|inp\\|ipynb\\|html"
+				     :publishing-directory ,(concat base-directory "USB")
+				     :exclude "Almacen\\|USB\\|docs\\|ucarima.*\\|.ipynb_checkpoints\\|org-publisg.*\\|*.txt\\|kk.*"
+				     :recursive t
+				     :publishing-function org-publish-attachment)
+
+				    ;; ... all the components ...
+				    ("scimax-eln" :components ("html" "static-html")))))
+
+  (org-publish "scimax-eln" t))
+#+END_SRC
+
 
 ** Org-publish                                                     :noexport:
 
@@ -28,7 +64,7 @@ We need a small elisp script to setup and publish  it.
 				     :base-directory ,base-directory
 				     :base-extension "org"
 				     :publishing-directory ,(concat base-directory "docs")
-				     :exclude "Almacen\\|docs\\|Calendario\\|ucarima.*\\|.ipynb_checkpoints\\|00Notas.*\\|org-publisg.*\\|*.txt\\|kk.*"
+				     :exclude "Almacen\\|USB\\|docs\\|Calendario\\|ucarima.*\\|.ipynb_checkpoints\\|00Notas.*\\|org-publisg.*\\|*.txt\\|kk.*"
 				     :recursive t
 				     :publishing-function org-html-publish-to-html
 				     :auto-preamble t
@@ -38,7 +74,7 @@ We need a small elisp script to setup and publish  it.
 				     :base-directory ,base-directory
 				     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|dat\\|mov\\|svg\\|aiff\\|csv\\|gdt\\|inp\\|ipynb\\|html"
 				     :publishing-directory ,(concat base-directory "docs")
-				     :exclude "Almacen\\|docs\\|ucarima.*\\|.ipynb_checkpoints\\|org-publisg.*\\|*.txt\\|kk.*"
+				     :exclude "Almacen\\|USB\\|docs\\|ucarima.*\\|.ipynb_checkpoints\\|org-publisg.*\\|*.txt\\|kk.*"
 				     :recursive t
 				     :publishing-function org-publish-attachment)
 

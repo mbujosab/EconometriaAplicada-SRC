@@ -5,6 +5,7 @@ EnlacesAMateriales.org
 Lecc*.tex
 .ipynb_checkpoints
 .ob-jupyter
+USB
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
