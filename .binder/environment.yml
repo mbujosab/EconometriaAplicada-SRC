@@ -1,0 +1,10 @@
+channels:
+  - conda-forge
+
+dependencies:
+  - numpy
+  - pandas
+  - matplotlib
+  - seaborn
+  - dataframe_image
+  - sympy

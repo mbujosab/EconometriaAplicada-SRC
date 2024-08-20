@@ -13,6 +13,7 @@
 jupyter nbconvert --config mycfg-GitHubPages.py --to slides --reveal-prefix reveal.js --no-input
 #+END_SRC
 
+
 ** Org-publish                                                     :noexport:
 
 We need a small elisp script to setup and publish  it.

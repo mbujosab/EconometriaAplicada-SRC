@@ -30,10 +30,10 @@
 ** Transformación de los datos (Lecc01)
 
 - [[file:./Lecc01.slides.html][slides]]
-- [[https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc01.html][html]]
+- [[file:./Lecc01.html][html]]
 - [[file:./Lecc01.pdf][pdf]]
-- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc01.ipynb][notebook en mybinder]]
 - [[file:./Lecc01.ipynb][notebook]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc01.ipynb][notebook en mybinder]]
 
 *** Practicas
 
@@ -44,10 +44,10 @@
 ** Regresión con series temporales - Modelos con componentes deterministas (Lecc02)
 
 - [[file:./Lecc02.slides.html][slides]]
-- [[https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc02.html][html]]
+- [[file:./Lecc02.html][html]]
 - [[file:./Lecc02.pdf][pdf]]
-- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc02.ipynb][notebook en mybinder]]
 - [[file:./Lecc02.ipynb][notebook]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc02.ipynb][notebook en mybinder]]
 
 
 *** Practicas
@@ -61,10 +61,10 @@
 ** Correlación y cointegración (Lecc03)
 
 - [[file:./Lecc03.slides.html][slides]]
-- [[https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc03.html][html]]
+- [[file:./Lecc03.html][html]]
 - [[file:./Lecc03.pdf][pdf]]
-- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc03.ipynb][notebook en mybinder]]
 - [[file:./Lecc03.ipynb][notebook]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc03.ipynb][notebook en mybinder]]
 
 
 *** Practicas
@@ -83,19 +83,19 @@
 ** Conceptos algebraicos (Lecc04)
 
 - [[file:./Lecc04.slides.html][slides]]
-- [[https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc04.html][html]]
+- [[file:./Lecc04.html][html]]
 - [[file:./Lecc04.pdf][pdf]]
-- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc04.ipynb][notebook en mybinder]]
 - [[file:./Lecc04.ipynb][notebook]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc04.ipynb][notebook en mybinder]]
 
 
 ** Herramientas estadísticas (Lecc05)
 
 - [[file:./Lecc05.slides.html][slides]]
-- [[https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc05.html][html]]
+- [[file:./Lecc05.html][html]]
 - [[file:./Lecc05.pdf][pdf]]
-- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc05.ipynb][notebook en mybinder]]
 - [[file:./Lecc05.ipynb][notebook]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc05.ipynb][notebook en mybinder]]
 
 *** Practicas
 
