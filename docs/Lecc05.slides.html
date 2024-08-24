@@ -14120,7 +14120,7 @@ div.jp-OutputPrompt {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="org3426b19">
+<div class="abstract" id="orge52c081">
 <p>
 En esta lección veremos algunas herramientas estadísticas.
 </p>
@@ -14199,7 +14199,7 @@ del notebook</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Series-temporales">Series temporales<a class="anchor-link" href="#Series-temporales">&#182;</a></h2>
+<h2 id="Introducci%C3%B3n-a-la-modelizaci%C3%B3n-de-series-temporales">Introducci&#243;n a la modelizaci&#243;n de series temporales<a class="anchor-link" href="#Introducci%C3%B3n-a-la-modelizaci%C3%B3n-de-series-temporales">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -14209,21 +14209,21 @@ del notebook</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Corresponden a mediciones de un mismo objeto a lo largo del tiempo. El
-índice indica el instante de cada medición.  <em>El orden cronológico de
-los datos puede ser fundamental</em> para explicar cada uno de ellos.</p>
+<p>Corresponden a observaciones de un mismo objeto a lo largo del
+tiempo. El índice indica el instante de cada medición. <em>El orden
+cronológico puede ser crucial</em> al modelar los datos.</p>
 <ul>
-<li><p>El motivo es que con frecuencia la medición en un instante de tiempo
-está relacionada con otras mediciones próximas en el tiempo
+<li><p>El motivo es que frecuentemente el valor medido en un instante de
+tiempo está relacionado con otras mediciones próximas en el tiempo
 (<em>correlación serial</em>).</p>
 </li>
-<li><p>Si es así, no podremos asumir que las variables aleatorias del
-proceso estocástico subyacente, $\boldsymbol{X}=(X_t\mid t\in\mathbb{Z})$, sean
-independientes entre sí.</p>
+<li><p>Si es así, ya no deberíamos asumir que las variables aleatorias del
+proceso estocástico subyacente, $\boldsymbol{X}=(X_t\mid
+  t\in\mathbb{Z})$, son independientes entre sí.</p>
 </li>
 </ul>
-<p>Esto tiene importantes implicaciones en las técnicas de análisis a
-aplicar y el tipo de modelos a utilizar.</p>
+<p>Esto tiene importantes implicaciones en las técnicas de análisis y
+los modelos a utilizar.</p>
 
 </div>
 </div>
@@ -14284,7 +14284,28 @@ aplicar y el tipo de modelos a utilizar.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h5 id="Rendimiento-porcentual-diario-del-IBEX-35">Rendimiento porcentual diario del IBEX 35<a class="anchor-link" href="#Rendimiento-porcentual-diario-del-IBEX-35">&#182;</a></h5>
+<h5 id="Temperatura-media-en-el-Parque-del-Retiro.-Madrid">Temperatura media en el Parque del Retiro. Madrid<a class="anchor-link" href="#Temperatura-media-en-el-Parque-del-Retiro.-Madrid">&#182;</a></h5>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc05/TemperaturaReriro.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h5 id="Rendimiento-porcentual-diario-del-IBEX-35-(std)">Rendimiento porcentual diario del IBEX 35 (std)<a class="anchor-link" href="#Rendimiento-porcentual-diario-del-IBEX-35-(std)">&#182;</a></h5>
 </div>
 </div>
 </div>
@@ -14299,6 +14320,10 @@ aplicar y el tipo de modelos a utilizar.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc05/IBEX35.png" alt="img"></p>
+<ul>
+<li>Datos centrados y estandarizados, i.e. el eje vertical está en desviaciones típicas.</li>
+<li>Los <em>volatility clustering</em> son característicos de series financieras de alta frecuencia.</li>
+</ul>
 
 </div>
 </div>
@@ -14344,20 +14369,23 @@ aplicar y el tipo de modelos a utilizar.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Con datos de</p>
 <ul>
-<li><p>Con datos de sección cruzada se asume muestreo aleatorio simple</p>
+<li><p><strong>sección cruzada:</strong> solemos asumir que el muestreo es aleatorio
+simple</p>
 <ul>
 <li>i.e., los datos son realizaciones de variables aleatorias i.i.d.</li>
 </ul>
 </li>
-<li><p>Con series temporales dicha asunción resulta generalmente errónea</p>
+<li><p><strong>series temporales:</strong> dicha asunción resulta generalmente errónea</p>
 <ul>
-<li>con frecuencia el valor esperado parece cambiar con $t$</li>
-<li>con frecuencia hay dependencia temporal correlación serial</li>
+<li>con frecuencia el nivel esperado (o la volatilidad) parece cambiar con $t$</li>
+<li>con frecuencia hay dependencia temporal (correlación serial).</li>
 </ul>
 <p><strong>Ejemplo</strong>: dada la evolución de los datos, no parece aceptable
 asumir que $ProdCemento_{1960M01}$ tiene la misma distribución que
-$ProdCemento_{2000M04}$</p>
+$ProdCemento_{2000M04}$ (ni que sea independiente de
+$ProdCemento_{1959M01}$).</p>
 </li>
 </ul>
 <p>Veamos por qué esto genera dificultades&#x2026;</p>
@@ -14384,11 +14412,13 @@ los momentos) es demasiado ambicioso.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Tentativamente vamos a fijarnos únicamente en los dos primeros momentos:</p>
-$$E(X_t)={\color{blue}{ \mu_t}}\qquad\text{ y } \qquad
-Cov(X_t,X_k)=E\big[(X_t-\mu_t)(X_k-\mu_k)\big]={\color{blue}{\lambda_{t,k}}}$$<p>(si $\;k=t\;$ entonces $\;\lambda_{t,t}=Var(X_t)=\sigma^2_t$).</p>
-<p>Si las $X_t$ fueran gaussianas, conocer estos <em>parámetros</em> bastaría
-para caracterizar la distribución conjunta. Pero aún así&#x2026;</p>
+<p>Así que, tentativamente, vamos a fijarnos <em>solo</em> en los dos primeros
+momentos:</p>
+$$E(X_t)={\color{blue}{ \mu_t}}\quad\text{ y }\quad
+Cov(X_t,X_k)=E\big[(X_t-\mu_t)(X_k-\mu_k)\big]={\color{blue}{\lambda_{t,k}}};\quad t,k\in\mathbb{Z}$$<p>(si $\;k=t\;$ entonces $\;\lambda_{t,t}=Var(X_t)=\sigma^2_t$).</p>
+<p>Si el proceso $\boldsymbol{X}$ fuera gaussiano, conocer estos
+<em>parámetros</em> bastaría para caracterizar la distribución conjunta. Pero
+aún así&#x2026;</p>
 
 </div>
 </div>
@@ -14400,12 +14430,12 @@ para caracterizar la distribución conjunta. Pero aún así&#x2026;</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li><p>necesitaríamos una muestra suficiente de cada $X_t$ para estimar los parámetros</p>
+<li><p>necesitaríamos para cada $X_t$ una muestra suficiente para estimar los parámetros</p>
 <ul>
-<li>y en una serie temporal tenemos una única realización para cada $X_t$</li>
+<li>pero en una serie temporal tenemos una sola realización de cada $X_t$.</li>
 </ul>
 </li>
-<li><p>y además hay más parámetros que variables aleatorias</p>
+<li><p>Además&#x2026; para cada variable aleatoria $X_t$ hay infinitos parámetros.</p>
 </li>
 </ul>
 
@@ -14429,17 +14459,16 @@ para caracterizar la distribución conjunta. Pero aún así&#x2026;</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li><p>Cuando el proceso es <a href="./Lecc01.slides.html#/3/1">débilmente estacionario (Lecc01)</a> se reduce
-drásticamente el número de parámetros.</p>
+<li><p>Si el proceso es <a href="./Lecc01.slides.html#/3/1">débilmente estacionario</a> se reduce drásticamente el
+número de parámetros:</p>
 <p>\begin{eqnarray}
 E(X_t)  &amp; = \mu \\
 Cov(X_t,X_{t-k}) &amp; = \gamma_k
 \end{eqnarray}</p>
 </li>
-<li><p>Si además pudiéramos asumir que el proceso es i.i.d. podríamos
+<li>Si además pudiéramos asumir que el proceso es i.i.d. podríamos
 interpretar la serie temporal como una realización de un muestreo
-aleatorio simple (lo que habilita la inferencia estadística).</p>
-</li>
+aleatorio simple (lo que habilita la inferencia estadística).</li>
 </ul>
 
 </div>
@@ -14453,22 +14482,360 @@ aleatorio simple (lo que habilita la inferencia estadística).</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>El desafío para el analista es (y nótese el abuso de lenguaje)</p>
 <ul>
-<li><strong>primero:</strong> transformar los datos para lograr que sean "<strong><em>estacionarios</em></strong>"<ul>
+<li><strong>primero:</strong> transformar los datos para lograr que sean "<strong><em>estacionarios</em></strong>".<ul>
 <li>(Lo vimos en la lección 1))</li>
 </ul>
 </li>
-<li><p><strong>después:</strong> transformar los datos estacionarios en una secuencia de
-"<strong>datos <em>i.i.d</em></strong>"</p>
-<ul>
-<li>(es lo que nos falta por ver)</li>
+<li><strong>después:</strong> transformar los datos estacionarios en una secuencia de
+"<strong>datos <em>i.i.d</em></strong>" <ul>
+<li>(Aún no visto)</li>
 </ul>
 </li>
+</ul>
+<p>Todo este proceso constituye la especificación y ajuste de un modelo a
+la serie temporal.</p>
+
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="La-especificaci%C3%B3n-del-modelo-se-escoge-seg%C3%BAn-las-caracter%C3%ADsticas-de-los-datos.">La especificaci&#243;n del modelo se escoge seg&#250;n las caracter&#237;sticas de los datos.<a class="anchor-link" href="#La-especificaci%C3%B3n-del-modelo-se-escoge-seg%C3%BAn-las-caracter%C3%ADsticas-de-los-datos.">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>¿Es la serie</p>
+<ul>
+<li>"<strong><em>estacionaria en media</em></strong>"<ul>
+<li>(y si lo es, ¿cuál es su media?)</li>
+<li>(y si no lo es, ¿cómo cambia o evoluciona su media?)</li>
+</ul>
+</li>
+<li>"<strong><em>estacionaria en varianza</em></strong>" (<em>homocedástica</em>)<ul>
+<li>(y si lo es, ¿cuál es su varianza?)</li>
+<li>(y si es <em>heterocedástica</em>, ¿cómo cambia o evoluciona su varianza?)?</li>
+</ul>
+</li>
+</ul>
+<p>¿Están sus valores correlados con su historia pasada (autocorrelados)?</p>
+<p>¿Están correlados con los valores presentes o pasados de otras series?</p>
+<p>Veamos algunas herramientas estadísticas para poder desvelar estas
+características.</p>
+
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="An%C3%A1lisis-gr%C3%A1fico">An&#225;lisis gr&#225;fico<a class="anchor-link" href="#An%C3%A1lisis-gr%C3%A1fico">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="Gr%C3%A1fico-de-la-serie-temporal">Gr&#225;fico de la serie temporal<a class="anchor-link" href="#Gr%C3%A1fico-de-la-serie-temporal">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Representa sus valores en el eje vertical ($y$) frente a una escala
+temporal en el horizontal ($x$). Es útil para detectar visualmente:</p>
+<ul>
+<li>tendencias y/o estacionalidad</li>
+<li>cambios de variabilidad</li>
+<li><p>valores atípicos (<em>outliers</em>)</p>
+<ul>
+<li>el 95% aprox. de una muestra de valores generados por una
+distribución normal debería estar comprendido entre
+$\mu\pm2\sigma$</li>
+<li><p>la probabilidad de que una variable normal genere un valor fuera
+de las bandas de $\mu\pm3\sigma$ es $0.0023$</p>
+<p>(<a href="./img/lecc05/IBEX35.png">véase gráfico IBEX 35</a>)</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>En es importante escalar y rotular adecuadamente los ejes y asegurar
+la comparabilidad entre series y gráficos distintos (si los hubiere).</p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="Gr%C3%A1fico-rango-media">Gr&#225;fico rango-media<a class="anchor-link" href="#Gr%C3%A1fico-rango-media">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Cambios de variabilidad de una serie pueden evidenciarse en su gráfico
+temporal.</p>
+<p>Pero también suelen verse bien en un gráfico rango-media, donde se
+representa:</p>
+<ul>
+<li><strong>en el eje $x$:</strong> un indicador del nivel de la serie calculado para
+distintas submuestras no solapadas (normalmente la media).</li>
+<li><strong>en el eje $y$:</strong> un indicador de la dispersión de la serie
+calculado para las mismas submuestras (normalmente el rango.)</li>
 </ul>
 
 </div>
 </div>
 </div>
-</div></div></section></section><section><section>
+</div><aside class="notes">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Veamos el gráfico de la serie de pasajeros de líneas aéreas junto a su
+gráfico de rango media:</p>
+
+</div>
+</div>
+</div>
+</div>
+</aside>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc05/rango-mediaAirPass.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div><aside class="notes">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>El gráfico de rango media a veces se acompaña de una regresión de la
+dispersión sobre los niveles para medir la relación nivel-dispersión.</p>
+
+</div>
+</div>
+</div>
+</div>
+</aside></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Determinaci%C3%B3n-del-orden-de-integraci%C3%B3n">Determinaci&#243;n del orden de integraci&#243;n<a class="anchor-link" href="#Determinaci%C3%B3n-del-orden-de-integraci%C3%B3n">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Decidir adecuadamente el orden de integración es crucial en el
+análisis de series temporales.</p>
+<p>Las herramientas utilizadas para tomar la decisión son</p>
+<ul>
+<li>el análisis gráfico</li>
+<li>los contrastes formales</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="An%C3%A1lisis-gr%C3%A1fico">An&#225;lisis gr&#225;fico<a class="anchor-link" href="#An%C3%A1lisis-gr%C3%A1fico">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc05/diferenciasPoblacion.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div><aside class="notes">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>La serie de población $\boldsymbol{y}$ tiene una clara tendencia
+creciente (primer gráfico), que desaparece al tomar una diferencia
+ordinaria, $$\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y}$$
+(segundo gráfico). Bastar con tomar una primera diferencia de la serie
+de población para obtener una nueva serie que se asemeja a la
+realización de un proceso estacionario.</p>
+<p>No obstante, ¿qué pasa si tomamos una segunda diferencia ordinaria?
+$$\nabla\nabla\boldsymbol{y}=\nabla^2\boldsymbol{y}=(1-\mathsf{B})^2*\boldsymbol{y}$$
+(segundo gráfico). Pues que la serie obtenida también es estacionaria,
+pero ojo, es un grave error tomar más diferencias de las necesarias al
+modelizar los datos. Se debe tomar el mínimo número de
+transformaciones que arrojen una serie ``estacionaria'' (recuerde que
+decir que una serie temporal es <em>estacionaria</em> es un abuso del
+lenguaje).</p>
+
+</div>
+</div>
+</div>
+</div>
+</aside></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc05/diferenciasPasajeros.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div><aside class="notes">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Como ya vimos, la serie pasajeros en logaritmos tiene tendencia y
+estacionalidad muy evidentes. No basta con tomar solo una diferencia
+ordinaria $$\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y};$$ pues
+el resultado muestra una pauta estacional. Ni tampoco basta con tomar
+solo una diferencia estacional
+$$\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B^{12}})*\boldsymbol{y};$$ pues
+resulta una serie que ``deambula'', i.e., que no es <em>``estacionaria''</em>
+en media.</p>
+<p>Tomar una diferencia ordinaria y otra estacional
+$$\nabla\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B})*(1-\mathsf{B^{12}})*\boldsymbol{y}$$
+arroja una serie que sí parece ser <em>``estacionaria''</em>.</p>
+
+</div>
+</div>
+</div>
+</div>
+</aside></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc05/diferenciasTemperaturasRetiro.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div><aside class="notes">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>En el caso de la serie de temperaturas en el Parque del Retiro, parece
+que es suficiente con tomar solo una diferencia estacional.</p>
+
+</div>
+</div>
+</div>
+</div>
+</aside></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="Contrastes-formales-sobre-el-orden-de-integraci%C3%B3n">Contrastes formales sobre el orden de integraci&#243;n<a class="anchor-link" href="#Contrastes-formales-sobre-el-orden-de-integraci%C3%B3n">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h5 id="Test-de-Dickey-Fuller-(DF)">Test de Dickey-Fuller (DF)<a class="anchor-link" href="#Test-de-Dickey-Fuller-(DF)">&#182;</a></h5>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li><strong>$H_0$:</strong> la serie es $I(1)$</li>
+<li><strong>$H_1$:</strong> la serie es $I(0)$.</li>
+</ul>
+<p>Consideremos el modelo $$y_{t}=\rho y_{t-1}+u_{t},$$ donde $y_{t}$ es
+la variable de interés, $\rho$ es un coeficiente, y $u_{t}$ es un
+proceso de ruido blanco. Una raíz unitaria estará presente si $\rho
+=1$. En tal caso el modelo será no-estacionario.</p>
+<p>El modelo de regresión se puede escribir como</p>
+$$\nabla y_{t}=(\rho -1)y_{t-1}+u_{t}=\delta y_{t-1}+u_{t}$$
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h5 id="Test-de-Dickey-Fuller-aumentado-(ADF)">Test de Dickey-Fuller aumentado (ADF)<a class="anchor-link" href="#Test-de-Dickey-Fuller-aumentado-(ADF)">&#182;</a></h5>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14485,9 +14852,8 @@ aleatorio simple (lo que habilita la inferencia estadística).</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li><p>La secuencia $(\gamma_k)$ con $k\in\mathbb{Z}$ se denomina
-<em>función de autocovarianzas</em></p>
-</li>
+<li>La secuencia $(\gamma_k)$ con $k\in\mathbb{Z}$ se denomina
+<em>función de autocovarianzas</em></li>
 <li><p>La secuencia $\{\rho_k\}$ con $k\in\mathbb{Z}$, donde</p>
 <p>$$\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0} $$</p>
 <p>se denomina <em>función de autocorrelación</em> (ACF).</p>
@@ -14520,6 +14886,90 @@ $$\boldsymbol{\phi}(\mathsf{B}) : \phi  $$
 </div>
 </div>
 </div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Otras-herramientas-estad%C3%ADsticas">Otras herramientas estad&#237;sticas<a class="anchor-link" href="#Otras-herramientas-estad%C3%ADsticas">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><a href="https://en.wikipedia.org/wiki/Jarque%E2%80%93Bera_test">Jarque-Vera test (Wikipedia)</a></p>
+<p>Podemos calcularlo con la librería <a href="https://cran.r-project.org/web/packages/moments/index.html">momments</a>:</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell  jp-mod-noInput ">
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Jarque-Bera Normality Test
+
+data:  as.numeric(Z)
+JB = 8.9225, p-value = 0.01155
+alternative hypothesis: greater</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Otra librería alternativa para calcularlo: <a href="https://cran.r-project.org/web/packages/tseries/index.html">tseries</a></p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell  jp-mod-noInput ">
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>#+begin_example
+Registered S3 method overwritten by &#39;quantmod&#39;:
+  method            from
+  as.zoo.data.frame zoo 
+
+	Jarque Bera Test
+
+data:  Z
+X-squared = 8.9225, df = 2, p-value = 0.01155
+#+end_example</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div></section></section>
 </div>
 </div>

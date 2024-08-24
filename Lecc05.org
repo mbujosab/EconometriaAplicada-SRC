@@ -51,9 +51,9 @@
 #+END_SRC
 
 
-#+BEGIN_ABSTRACT
+#+begin_abstract
 En esta lección veremos algunas herramientas estadísticas.
-#+END_ABSTRACT
+#+end_abstract
 
 ***** COMMENT para Jupyter-Notebook                               :noexports:
 \(
@@ -72,7 +72,8 @@ En esta lección veremos algunas herramientas estadísticas.
 # install.packages(c("readr", "latticeExtra", "tfarima"))
 # library(readr)
 # library(ggplot2)
-   
+# install.packages("pastecs")
+
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 Primero cargamos la librería =tfarima= (Repositorio Cran:
 https://cran.r-project.org/web/packages/tfarima/index.html;
@@ -80,7 +81,6 @@ repositorio GitHub: https://github.com/gallegoj/tfarima)
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+BEGIN_SRC jupyter-R :results silent :exports code
 library(tfarima)      # librería de José Luis Gallego para Time Series
-#library(latticeExtra) # para gráficos con doble eje vertical (doubleYScale)
 library(readr)        # para leer ficheros CSV
 library(ggplot2)      # para el scatterplot (alternaticamente library(tidyverse))
 library(ggfortify)    # para pintar series temporales
@@ -97,25 +97,25 @@ options(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
 #+END_SRC
 
 
-* Series temporales
+* Introducción a la modelización de series temporales
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
-Corresponden a mediciones de un mismo objeto a lo largo del tiempo. El
-índice indica el instante de cada medición.  /El orden cronológico de
-los datos puede ser fundamental/ para explicar cada uno de ellos.
+Corresponden a observaciones de un mismo objeto a lo largo del
+tiempo. El índice indica el instante de cada medición. /El orden
+cronológico puede ser crucial/ al modelar los datos.
 
-- El motivo es que con frecuencia la medición en un instante de tiempo
-  está relacionada con otras mediciones próximas en el tiempo
+- El motivo es que frecuentemente el valor medido en un instante de
+  tiempo está relacionado con otras mediciones próximas en el tiempo
   (/correlación serial/).
 
-- Si es así, no podremos asumir que las variables aleatorias del
-  proceso estocástico subyacente, $\boldsymbol{X}=(X_t\mid t\in\mathbb{Z})$, sean
-  independientes entre sí.
+- Si es así, ya no deberíamos asumir que las variables aleatorias del
+  proceso estocástico subyacente, $\boldsymbol{X}=(X_t\mid
+  t\in\mathbb{Z})$, son independientes entre sí.
 
-Esto tiene importantes implicaciones en las técnicas de análisis a
-aplicar y el tipo de modelos a utilizar.
+Esto tiene importantes implicaciones en las técnicas de análisis y
+los modelos a utilizar.
 
 
 **** Población en Australia
@@ -131,7 +131,10 @@ PoblacionAustralia_ts = as.ts( read.zoo('datos/PoblacionAustralia.csv',
                                         index.column = 1, 
                                         sep=",", 
                                         FUN = as.yearmon))
-autoplot(PoblacionAustralia_ts)
+p <- autoplot(PoblacionAustralia_ts)
+p <- p + labs(y = "Habitantes", x = "Años") + ggtitle("Población australiana (datos anuales)")
+p <- p + scale_x_continuous(breaks = scales::pretty_breaks(n = 20))
+p 
 #+END_SRC
 
 #+attr_org: :width 800
@@ -147,28 +150,62 @@ autoplot(PoblacionAustralia_ts)
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file PIB_UEM.png :exports code :results silent
-PIB_UEM_ts = as.ts( read.csv.zoo("datos/PIB_UEM.csv", 
-                                 FUN = as.yearqtr, 
-                                 format = "%YQ%q", 
-                                 strip.white = TRUE))
-autoplot(PIB_UEM_ts)
+PIB_UEM_df <- read_csv("datos/PIB_UEM.csv",
+                     show_col_types = FALSE)
+fmt <- "%YQ%q"
+PIB_UEM_df$Time <- as.yearqtr(PIB_UEM_df$obs, format = fmt)
+# head(PIB_UEM_df,3)
+P <- ggplot(PIB_UEM_df, aes(Time, PIB))
+P <- P + geom_point() + geom_line()
+P <- P + scale_x_continuous(breaks = scales::pretty_breaks(n = 15))
+P <- P + labs(y = "Miles de millones de euros", x = "Años") + ggtitle("PIB UEM a precios corrientes (datos trimestrales). Fuente Banco de España")
+P
 #+END_SRC
+# p <- p +scale_x_yearqtr(format = fmt)
 
 #+attr_org: :width 800
 #+attr_html: :width 900px
 #+attr_latex: :width 425px
 [[./img/lecc05/PIB_UEM.png]]
 
-**** Rendimiento porcentual diario del IBEX 35
+
+**** Temperatura media en el Parque del Retiro. Madrid
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
+   :Metadata: (slideshow . ((slide_type . subslide)))
+   :ID:       2bfa7ff3-6149-4abb-9623-6b939381ea7e
+   :END:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file TemperaturaReriro.png :exports code :results silent
+TemperaturaRetiro_df <- read_csv("datos/Retiro.txt", show_col_types = FALSE)
+# Añadimos fechas
+TemperaturaRetiro_df$Time <- as.yearmon(1985 + seq(0, nrow(TemperaturaRetiro_df)-1)/12)
+
+P <- ggplot(TemperaturaRetiro_df, aes(Time, TemperaturaMedia))
+P <- P + geom_line() # + geom_point() 
+P <- P + scale_x_continuous(breaks = scales::pretty_breaks(n = 25))
+P <- P + labs(y = "Grados Celsius", x = "Años") + ggtitle("Temperatura media mensual en el Parque del Retiro. Fuente: Comunidad de Madrid")
+P
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc05/TemperaturaReriro.png]]
+
+**** Rendimiento porcentual diario del IBEX 35 (std)
+   :PROPERTIES:
+   :Metadata: (slideshow . ((slide_type . subslide)))
+   :ID:       2bfa7ff3-6149-4abb-9623-6b939381ea7e
    :END:
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file IBEX35.png :exports code :results silent
 IBEX35_ts = as.ts( read.csv.zoo("datos/IBEX35.csv", 
                                 strip.white = TRUE))
-autoplot(IBEX35_ts)
+P <- autoplot(IBEX35_ts) + scale_y_continuous(breaks = scales::pretty_breaks(n = 12))
+p <- P + labs(y = "Desviaciones tipicas", x = "Días") + ggtitle("Rendimiento porcentual diario del IBEX 35 (std.). Fuente: Archivo Prof. Miguel Jerez")
+p 
 #+END_SRC
 
 #+attr_org: :width 800
@@ -176,6 +213,8 @@ autoplot(IBEX35_ts)
 #+attr_latex: :width 425px
 [[./img/lecc05/IBEX35.png]]
 
+- Datos centrados y estandarizados, i.e. el eje vertical está en desviaciones típicas.
+- Los /volatility clustering/ son característicos de series financieras de alta frecuencia.
 
 **** Producción de cemento
    :PROPERTIES:
@@ -184,39 +223,22 @@ autoplot(IBEX35_ts)
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file ProduccionCemento.png :exports code :results silent
-ProduccionCemento_ts = as.ts( read.csv.zoo("datos/ProduccionCemento.csv",
-                                           FUN = as.yearmon, 
-                                           format = "%YM%m",
-                                           strip.white = TRUE))
-autoplot(ProduccionCemento_ts)
+ProduccionCemento_df <- read_csv("datos/ProduccionCemento.csv",
+                     show_col_types = FALSE)
+fmt <- "%YM%m"
+ProduccionCemento_df$Time <- as.yearmon(ProduccionCemento_df$obs, format = fmt)
+# head(ProduccionCemento_df,3)
+P <- ggplot(ProduccionCemento_df, aes(Time, ProduccionCemento))
+P <- P + geom_line() # + geom_point() 
+P <- P + scale_x_continuous(breaks = scales::pretty_breaks(n = 25))
+P <- P + labs(y = "Miles de Toneladas métricas", x = "Años") + ggtitle("Produccion de cemento (Datos mensuales). Fuente Banco de España")
+P
 #+END_SRC
 
 #+attr_org: :width 800
 #+attr_html: :width 900px
 #+attr_latex: :width 425px
 [[./img/lecc05/ProduccionCemento.png]]
-
-
-
-
-**** COMMENT Exportación de Acero                                  :noexport:
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
-   :END:
-
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file ExportacionDeAcero.png :exports code :results silent
-ExportacionDeAcero_ts = as.ts( read.csv.zoo("datos/ExportacionDeAcero.csv",
-                                            FUN = as.yearmon,
-                                            format = "%YM%m",
-                                            strip.white = TRUE))
-autoplot(ExportacionDeAcero_ts)
-#+END_SRC
-
-#+attr_org: :width 800
-#+attr_html: :width 900px
-#+attr_latex: :width 425px
-[[./img/lecc05/ExportacionDeAcero.png]]
 
 
 
@@ -230,41 +252,49 @@ autoplot(ExportacionDeAcero_ts)
 
 #  [[./Lecc01.slides.html#/1/1/0][Procesos estocásticos y datos de series temporales]]
 
-- Con datos de sección cruzada se asume muestreo aleatorio simple
+Con datos de
+- sección cruzada :: solemos asumir que el muestreo es aleatorio
+  simple
   + i.e., los datos son realizaciones de variables aleatorias i.i.d.
 
-- Con series temporales dicha asunción resulta generalmente errónea
-  + con frecuencia el valor esperado parece cambiar con $t$ 
-  + con frecuencia hay dependencia temporal correlación serial
+- series temporales :: dicha asunción resulta generalmente errónea
+  + con frecuencia el nivel esperado (o la volatilidad) parece cambiar con $t$
+  + con frecuencia hay dependencia temporal (correlación serial).
 
   *Ejemplo*: dada la evolución de los datos, no parece aceptable
   asumir que $ProdCemento_{1960M01}$ tiene la misma distribución que
-  $ProdCemento_{2000M04}$
-
+  $ProdCemento_{2000M04}$ (ni que sea independiente de
+  $ProdCemento_{1959M01}$).
+#+LATEX: \medskip
 
 Veamos por qué esto genera dificultades...
+#+LATEX: \bigskip
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-
 Consideremos el proceso estocástico $$\boldsymbol{X}=(X_t \mid
 t=0,\pm1,\pm2,\ldots).$$ Caracterizar su distribución conjunta (todos
 los momentos) es demasiado ambicioso.
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Tentativamente vamos a fijarnos únicamente en los dos primeros momentos:
+Así que, tentativamente, vamos a fijarnos /solo/ en los dos primeros
+momentos:
 
-$$E(X_t)={\color{blue}{ \mu_t}}\qquad\text{ y } \qquad
-Cov(X_t,X_k)=E\big[(X_t-\mu_t)(X_k-\mu_k)\big]={\color{blue}{\lambda_{t,k}}}$$
+$$E(X_t)={\color{blue}{ \mu_t}}\quad\text{ y }\quad
+Cov(X_t,X_k)=E\big[(X_t-\mu_t)(X_k-\mu_k)\big]={\color{blue}{\lambda_{t,k}}};\quad t,k\in\mathbb{Z}$$
+
+#+LATEX: \noindent
 (si $\;k=t\;$ entonces $\;\lambda_{t,t}=Var(X_t)=\sigma^2_t$).
+#+LATEX: \medskip
 
-Si las $X_t$ fueran gaussianas, conocer estos /parámetros/ bastaría
-para caracterizar la distribución conjunta. Pero aún así...
+Si el proceso $\boldsymbol{X}$ fuera gaussiano, conocer estos
+/parámetros/ bastaría para caracterizar la distribución conjunta. Pero
+aún así...
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-- necesitaríamos una muestra suficiente de cada $X_t$ para estimar los parámetros 
-  + y en una serie temporal tenemos una única realización para cada $X_t$  
+- necesitaríamos para cada $X_t$ una muestra suficiente para estimar los parámetros 
+  + pero en una serie temporal tenemos una sola realización de cada $X_t$.  
 
-- y además hay más parámetros que variables aleatorias
+- Además... para cada variable aleatoria $X_t$ hay infinitos parámetros.
 
 ** Casos que simplifican el escenario
    :PROPERTIES:
@@ -272,45 +302,256 @@ para caracterizar la distribución conjunta. Pero aún así...
    :UNNUMBERED: t 
    :END:
 
-- Cuando el proceso es [[./Lecc01.slides.html#/3/1][débilmente estacionario (Lecc01)]] se reduce
-  drásticamente el número de parámetros.
-
-  # [[file:Lecc01.org::*Estacionariedad en sentido débil][Estacionariedad en sentido débil]]
+- Si el proceso es [[./Lecc01.slides.html#/3/1][débilmente estacionario]] se reduce drásticamente el
+  número de parámetros:
   \begin{eqnarray}
   E(X_t)  & = \mu \\
   Cov(X_t,X_{t-k}) & = \gamma_k
   \end{eqnarray}
-
 - Si además pudiéramos asumir que el proceso es i.i.d. podríamos
   interpretar la serie temporal como una realización de un muestreo
   aleatorio simple (lo que habilita la inferencia estadística).
-
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 El desafío para el analista es (y nótese el abuso de lenguaje)
-- primero :: transformar los datos para lograr que sean "*/estacionarios/*"
+- primero :: transformar los datos para lograr que sean "*/estacionarios/*".
   - (Lo vimos en la lección 1)) 
 - después :: transformar los datos estacionarios en una secuencia de
-  "*datos /i.i.d/*"
-  - (es lo que nos falta por ver) 
-  #+LATEX: \newline  \noindent
+  "*datos /i.i.d/*" 
+  - (Aún no visto)
+
+Todo este proceso constituye la especificación y ajuste de un modelo a
+la serie temporal.
+
+** La especificación del modelo se escoge según las características de los datos.
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :UNNUMBERED: t 
+   :END:
+
+¿Es la serie 
+- "*/estacionaria en media/*"
+  + (y si lo es, ¿cuál es su media?)
+  + (y si no lo es, ¿cómo cambia o evoluciona su media?)
+- "*/estacionaria en varianza/*" (/homocedástica/)
+  + (y si lo es, ¿cuál es su varianza?)
+  + (y si es /heterocedástica/, ¿cómo cambia o evoluciona su varianza?)? 
+
+¿Están sus valores correlados con su historia pasada (autocorrelados)?
+
+#+LATEX: \noindent
+¿Están correlados con los valores presentes o pasados de otras series?
+#+LATEX: \bigskip
+
+Veamos algunas herramientas estadísticas para poder desvelar estas
+características.
+
+
+* Herramientas para desvelar propiedades de una serie temporal
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . skip)))
+   :END:
+
+** Análisis gráfico
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+*** Gráfico de la serie temporal 
+
+Representa sus valores en el eje vertical ($y$) frente a una escala
+temporal en el horizontal ($x$). Es útil para detectar visualmente:
+ - tendencias y/o estacionalidad 
+ - cambios de variabilidad
+ - valores atípicos (/outliers/)
+   + el 95% aprox. de una muestra de valores generados por una
+     distribución normal debería estar comprendido entre
+     $\mu\pm2\sigma$
+   + la probabilidad de que una variable normal genere un valor fuera
+     de las bandas de $\mu\pm3\sigma$ es $0.0023$
+    
+    ([[file:./img/lecc05/IBEX35.png][véase gráfico IBEX 35]])
+
+En es importante escalar y rotular adecuadamente los ejes y asegurar
+la comparabilidad entre series y gráficos distintos (si los hubiere).
+
+
+*** Gráfico rango-media
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+Cambios de variabilidad de una serie pueden evidenciarse en su gráfico
+temporal.
+
+Pero también suelen verse bien en un gráfico rango-media, donde se
+representa:
+  + en el eje $x$ :: un indicador del nivel de la serie calculado para
+    distintas submuestras no solapadas (normalmente la media).
+  + en el eje $y$ :: un indicador de la dispersión de la serie
+    calculado para las mismas submuestras (normalmente el rango.)
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+Veamos el gráfico de la serie de pasajeros de líneas aéreas junto a su
+gráfico de rango media:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file rango-mediaAirPass.png :exports code :results silent
+Z <- AirPassengers
+ide(Z, graphs = c("plot", "rm"), main="Pasajeros de líneas (aéreas en miles) y gráfico rango-media")
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc05/rango-mediaAirPass.png]]
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+El gráfico de rango media a veces se acompaña de una regresión de la
+dispersión sobre los niveles para medir la relación nivel-dispersión.
+
+
+** Determinación del orden de integración
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+Decidir adecuadamente el orden de integración es crucial en el
+análisis de series temporales.
+
+Las herramientas utilizadas para tomar la decisión son 
+ - el análisis gráfico
+ - los contrastes formales
+
+*** Análisis gráfico
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file diferenciasPoblacion.png :results silent 
+options(repr.plot.width = 12, repr.plot.height = 8, repr.plot.res = 200)
+ide(PoblacionAustralia_ts,
+    graphs = c("plot"),
+    transf = list(list(bc = F), list(bc = F, d = 1), list(bc = F, d = 2)),
+    main="Población australiana, primera diferencia y segunda diferencia" )
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc05/diferenciasPoblacion.png]]
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+La serie de población $\boldsymbol{y}$ tiene una clara tendencia
+creciente (primer gráfico), que desaparece al tomar una diferencia
+ordinaria, $$\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y}$$
+(segundo gráfico). Bastar con tomar una primera diferencia de la serie
+de población para obtener una nueva serie que se asemeja a la
+realización de un proceso estacionario.
+
+No obstante, ¿qué pasa si tomamos una segunda diferencia ordinaria?
+$$\nabla\nabla\boldsymbol{y}=\nabla^2\boldsymbol{y}=(1-\mathsf{B})^2*\boldsymbol{y}$$
+(segundo gráfico). Pues que la serie obtenida también es estacionaria,
+pero ojo, es un grave error tomar más diferencias de las necesarias al
+modelizar los datos. Se debe tomar el mínimo número de
+transformaciones que arrojen una serie ``estacionaria'' (recuerde que
+decir que una serie temporal es /estacionaria/ es un abuso del
+lenguaje).
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file diferenciasPasajeros.png :results silent
+options(repr.plot.width = 12, repr.plot.height =  10, repr.plot.res = 200)
+ide(Z,
+    graphs = c("plot"),
+    transf = list(list(bc=T), list(bc=T, d=1), list(bc=T, D=1), list(bc=T, D=1, d=1)),
+    main = "Log pasajeros aéreos, diferencia ordinaria, diferencia estacional y composición de ambas diferencias" )
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc05/diferenciasPasajeros.png]]
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+Como ya vimos, la serie pasajeros en logaritmos tiene tendencia y
+estacionalidad muy evidentes. No basta con tomar solo una diferencia
+ordinaria $$\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y};$$ pues
+el resultado muestra una pauta estacional. Ni tampoco basta con tomar
+solo una diferencia estacional
+$$\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B^{12}})*\boldsymbol{y};$$ pues
+resulta una serie que ``deambula'', i.e., que no es /``estacionaria''/
+en media.
+
+Tomar una diferencia ordinaria y otra estacional
+$$\nabla\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B})*(1-\mathsf{B^{12}})*\boldsymbol{y}$$
+arroja una serie que sí parece ser /``estacionaria''/.
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file diferenciasTemperaturasRetiro.png :results silent
+options(repr.plot.width = 12, repr.plot.height =  8, repr.plot.res = 200)
+TemperaturaRetiro_ts=ts(read.csv("datos/Retiro.txt"),start=c(1985, 1), end=c(2015,9), frequency=12)
+ide(TemperaturaRetiro_ts,
+    graphs = c("plot"),
+    transf = list(list(), list(D = 1)),
+    main="Temperatura media en el Retiro y diferencia estacional" )
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc05/diferenciasTemperaturasRetiro.png]]
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+En el caso de la serie de temperaturas en el Parque del Retiro, parece
+que es suficiente con tomar solo una diferencia estacional.
+
+
+*** Contrastes formales sobre el orden de integración
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+**** Test de Dickey-Fuller (DF)
+
+- $H_0$ :: la serie es $I(1)$
+- $H_1$ :: la serie es $I(0)$.
+
+Consideremos el modelo $$y_{t}=\rho y_{t-1}+u_{t},$$ donde $y_{t}$ es
+la variable de interés, $\rho$ es un coeficiente, y $u_{t}$ es un
+proceso de ruido blanco. Una raíz unitaria estará presente si $\rho
+=1$. En tal caso el modelo será no-estacionario.
+
+El modelo de regresión se puede escribir como
+
+$$\nabla y_{t}=(\rho -1)y_{t-1}+u_{t}=\delta y_{t-1}+u_{t}$$
+
+
+**** Test de Dickey-Fuller aumentado (ADF)
+
+
 
 * Función de autocovarianzas y función de autocorrelación
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
+
 - La secuencia $(\gamma_k)$ con $k\in\mathbb{Z}$ se denomina
   /función de autocovarianzas/
-
-
 - La secuencia $\{\rho_k\}$ con $k\in\mathbb{Z}$, donde
      
   $$\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0} $$
    
-  #+LATEX: \newline  \noindent
+  #+LATEX: \noindent
   se denomina /función de autocorrelación/ (ACF).
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-#+LATEX: \newline  \noindent
+#+LATEX: \noindent
 Debido a la estacionariedad, la correlación entre $X_t$ y $X_{t+k}$ no
 depende de $t$; tan solo depende de la distancia temporal $k$ entre
 ambas variables.
@@ -320,3 +561,235 @@ $$\boldsymbol{\phi}(\mathsf{B}) : \phi  $$
 #+BEGIN_EXPORT latex
 $\boldsymbol{\phi}(\mathsf{B})$
 #+END_EXPORT
+
+* Otras herramientas estadísticas                                 :CómoConR:
+
+** Estadísticos descriptivos
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . skip)))
+   :END:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results plain
+library(pastecs)      # resumen estadísticos descriptivos
+# https://cran.r-project.org/web/packages/pastecs/index.html (stat.desc)
+library(knitr)        # presentación de tabla resumen
+# https://cran.r-project.org/web/packages/knitr/index.html (kable)
+# https://bookdown.org/yihui/rmarkdown-cookbook/kable.html
+
+# estadísticos principales y test de normalidad
+kable(stat.desc(Z, basic=FALSE, norm=TRUE), 'rst')
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+
+
+============  =============
+\                         x
+============  =============
+median          265.5000000
+mean            280.2986111
+SE.mean           9.9971931
+CI.mean.0.95     19.7613736
+var           14391.9172009
+std.dev         119.9663169
+coef.var          0.4279947
+skewness          0.5710676
+skew.2SE          1.4132515
+kurtosis         -0.4298441
+kurt.2SE         -0.5353818
+normtest.W        0.9519577
+normtest.p        0.0000683
+============  =============
+#+end_example
+
+
+** Test de normalidad Jarque-Vera
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . skip)))
+   :END:
+
+[[https://en.wikipedia.org/wiki/Jarque%E2%80%93Bera_test][Jarque-Vera test (Wikipedia)]]
+
+Podemos calcularlo con la librería [[https://cran.r-project.org/web/packages/moments/index.html][momments]]:
+#+BEGIN_SRC jupyter-R :results plain
+#install.packages("moments")
+library(moments)
+# Perform the Jarque-Bera test
+jb_test <- jarque.test(as.numeric(Z))
+# Print the test result
+print(jb_test)
+#+END_SRC
+
+#+RESULTS:
+: 
+: 	Jarque-Bera Normality Test
+: 
+: data:  as.numeric(Z)
+: JB = 8.9225, p-value = 0.01155
+: alternative hypothesis: greater
+: 
+
+Otra librería alternativa para calcularlo: [[https://cran.r-project.org/web/packages/tseries/index.html][tseries]]
+#+BEGIN_SRC jupyter-R :results plain
+library(tseries)
+# Perform the Jarque-Bera test
+jb_test <- jarque.bera.test(Z)
+# Print the test result
+print(jb_test)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Registered S3 method overwritten by 'quantmod':
+  method            from
+  as.zoo.data.frame zoo 
+
+	Jarque Bera Test
+
+data:  Z
+X-squared = 8.9225, df = 2, p-value = 0.01155
+#+end_example
+
+
+
+
+* COMMENT Otro código                                              :noexport:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R 
+PIB_UEM_ts = as.ts( read.csv.zoo("datos/PIB_UEM.csv", 
+                                 FUN = as.yearqtr, 
+                                 format = "%YQ%q", 
+                                 strip.white = TRUE))
+p <- autoplot(PIB_UEM_ts)
+p <- p + labs(y = "Miles de millones de euros", x = "Años") + ggtitle("PIB UEM a precios corrientes (datos trimestrales). Fuente Banco de España")
+p 
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 800
+[[./.ob-jupyter/bb38d3b5fedcf743921e45e000873a00134cbd11.png]]
+:END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R 
+ProduccionCemento_ts = as.ts( read.csv.zoo("datos/ProduccionCemento.csv",
+                                           FUN = as.yearmon, 
+                                           format = "%YM%m",
+                                           strip.white = TRUE))
+autoplot(ProduccionCemento_ts)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 800
+[[./.ob-jupyter/77f5dea1afae26038646e090068fcefbd9b8daf6.png]]
+:END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file ExportacionDeAcero.png :exports code :results silent
+ExportacionDeAcero_ts = as.ts( read.csv.zoo("datos/ExportacionDeAcero.csv",
+                                            FUN = as.yearmon,
+                                            format = "%YM%m",
+                                            strip.white = TRUE))
+autoplot(ExportacionDeAcero_ts)
+#+END_SRC
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file rango-mediaLogAirPass.png :exports code :results silent
+Z <- AirPassengers
+ide(Z, transf=list(bc=T, d=1, D=1), graphs = c("plot", "rm"))
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc05/rango-mediaLogAirPass.png]]
+
+$$\nabla_{12}(\nabla\ln\boldsymbol{y})$$
+
+
+1985ene 
+2012sep
+
+#+BEGIN_SRC jupyter-R
+as.yearmon(1985 + seq(0, nrow(TemperaturaRetiro_df)-1)/12)
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+  [1] "ene 1985" "feb 1985" "mar 1985" "abr 1985" "may 1985" "jun 1985"
+  [7] "jul 1985" "ago 1985" "sep 1985" "oct 1985" "nov 1985" "dic 1985"
+ [13] "ene 1986" "feb 1986" "mar 1986" "abr 1986" "may 1986" "jun 1986"
+ [19] "jul 1986" "ago 1986" "sep 1986" "oct 1986" "nov 1986" "dic 1986"
+ [25] "ene 1987" "feb 1987" "mar 1987" "abr 1987" "may 1987" "jun 1987"
+ [31] "jul 1987" "ago 1987" "sep 1987" "oct 1987" "nov 1987" "dic 1987"
+ [37] "ene 1988" "feb 1988" "mar 1988" "abr 1988" "may 1988" "jun 1988"
+ [43] "jul 1988" "ago 1988" "sep 1988" "oct 1988" "nov 1988" "dic 1988"
+ [49] "ene 1989" "feb 1989" "mar 1989" "abr 1989" "may 1989" "jun 1989"
+ [55] "jul 1989" "ago 1989" "sep 1989" "oct 1989" "nov 1989" "dic 1989"
+ [61] "ene 1990" "feb 1990" "mar 1990" "abr 1990" "may 1990" "jun 1990"
+ [67] "jul 1990" "ago 1990" "sep 1990" "oct 1990" "nov 1990" "dic 1990"
+ [73] "ene 1991" "feb 1991" "mar 1991" "abr 1991" "may 1991" "jun 1991"
+ [79] "jul 1991" "ago 1991" "sep 1991" "oct 1991" "nov 1991" "dic 1991"
+ [85] "ene 1992" "feb 1992" "mar 1992" "abr 1992" "may 1992" "jun 1992"
+ [91] "jul 1992" "ago 1992" "sep 1992" "oct 1992" "nov 1992" "dic 1992"
+ [97] "ene 1993" "feb 1993" "mar 1993" "abr 1993" "may 1993" "jun 1993"
+[103] "jul 1993" "ago 1993" "sep 1993" "oct 1993" "nov 1993" "dic 1993"
+[109] "ene 1994" "feb 1994" "mar 1994" "abr 1994" "may 1994" "jun 1994"
+[115] "jul 1994" "ago 1994" "sep 1994" "oct 1994" "nov 1994" "dic 1994"
+[121] "ene 1995" "feb 1995" "mar 1995" "abr 1995" "may 1995" "jun 1995"
+[127] "jul 1995" "ago 1995" "sep 1995" "oct 1995" "nov 1995" "dic 1995"
+[133] "ene 1996" "feb 1996" "mar 1996" "abr 1996" "may 1996" "jun 1996"
+[139] "jul 1996" "ago 1996" "sep 1996" "oct 1996" "nov 1996" "dic 1996"
+[145] "ene 1997" "feb 1997" "mar 1997" "abr 1997" "may 1997" "jun 1997"
+[151] "jul 1997" "ago 1997" "sep 1997" "oct 1997" "nov 1997" "dic 1997"
+[157] "ene 1998" "feb 1998" "mar 1998" "abr 1998" "may 1998" "jun 1998"
+[163] "jul 1998" "ago 1998" "sep 1998" "oct 1998" "nov 1998" "dic 1998"
+[169] "ene 1999" "feb 1999" "mar 1999" "abr 1999" "may 1999" "jun 1999"
+[175] "jul 1999" "ago 1999" "sep 1999" "oct 1999" "nov 1999" "dic 1999"
+[181] "ene 2000" "feb 2000" "mar 2000" "abr 2000" "may 2000" "jun 2000"
+[187] "jul 2000" "ago 2000" "sep 2000" "oct 2000" "nov 2000" "dic 2000"
+[193] "ene 2001" "feb 2001" "mar 2001" "abr 2001" "may 2001" "jun 2001"
+[199] "jul 2001" "ago 2001" "sep 2001" "oct 2001" "nov 2001" "dic 2001"
+[205] "ene 2002" "feb 2002" "mar 2002" "abr 2002" "may 2002" "jun 2002"
+[211] "jul 2002" "ago 2002" "sep 2002" "oct 2002" "nov 2002" "dic 2002"
+[217] "ene 2003" "feb 2003" "mar 2003" "abr 2003" "may 2003" "jun 2003"
+[223] "jul 2003" "ago 2003" "sep 2003" "oct 2003" "nov 2003" "dic 2003"
+[229] "ene 2004" "feb 2004" "mar 2004" "abr 2004" "may 2004" "jun 2004"
+[235] "jul 2004" "ago 2004" "sep 2004" "oct 2004" "nov 2004" "dic 2004"
+[241] "ene 2005" "feb 2005" "mar 2005" "abr 2005" "may 2005" "jun 2005"
+[247] "jul 2005" "ago 2005" "sep 2005" "oct 2005" "nov 2005" "dic 2005"
+[253] "ene 2006" "feb 2006" "mar 2006" "abr 2006" "may 2006" "jun 2006"
+[259] "jul 2006" "ago 2006" "sep 2006" "oct 2006" "nov 2006" "dic 2006"
+[265] "ene 2007" "feb 2007" "mar 2007" "abr 2007" "may 2007" "jun 2007"
+[271] "jul 2007" "ago 2007" "sep 2007" "oct 2007" "nov 2007" "dic 2007"
+[277] "ene 2008" "feb 2008" "mar 2008" "abr 2008" "may 2008" "jun 2008"
+[283] "jul 2008" "ago 2008" "sep 2008" "oct 2008" "nov 2008" "dic 2008"
+[289] "ene 2009" "feb 2009" "mar 2009" "abr 2009" "may 2009" "jun 2009"
+[295] "jul 2009" "ago 2009" "sep 2009" "oct 2009" "nov 2009" "dic 2009"
+[301] "ene 2010" "feb 2010" "mar 2010" "abr 2010" "may 2010" "jun 2010"
+[307] "jul 2010" "ago 2010" "sep 2010" "oct 2010" "nov 2010" "dic 2010"
+[313] "ene 2011" "feb 2011" "mar 2011" "abr 2011" "may 2011" "jun 2011"
+[319] "jul 2011" "ago 2011" "sep 2011" "oct 2011" "nov 2011" "dic 2011"
+[325] "ene 2012" "feb 2012" "mar 2012" "abr 2012" "may 2012" "jun 2012"
+[331] "jul 2012" "ago 2012" "sep 2012"
+#+end_example
+
+
+#+BEGIN_SRC jupyter-R
+as.yearmon("mar07", "%b%y")
+#+END_SRC
+
+#+RESULTS:
+: [1] "mar 2007"
+
+

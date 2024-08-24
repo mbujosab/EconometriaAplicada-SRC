@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-08-20 mar 18:02 -->
+<!-- 2024-08-24 sáb 17:33 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 4</title>
@@ -239,22 +239,28 @@
 <ul>
 <li><a href="#org5796935">1.1.1. Notación mediante funciones generatrices</a></li>
 <li><a href="#orgfac73e3">1.1.2. Características de algunas secuencias</a></li>
-<li><a href="#org7b929e9">1.1.3. Subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a></li>
+<li><a href="#org0bc87b8">1.1.3. Algunos subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a></li>
 </ul>
 </li>
 <li><a href="#org309c4ae">1.2. Producto convolución</a></li>
 <li><a href="#org713b98d">1.3. Anillos conmutativos y cuerpos</a>
 <ul>
-<li><a href="#org754f6a9">1.3.1. Clasificación de algunos subconjuntos de sucesiones</a></li>
-<li><a href="#orgfeb366f">1.3.2. Inversas de secuencias con principio</a></li>
-<li><a href="#org62b0d6e">1.3.3. Inversas de secuencias con final</a></li>
-<li><a href="#org452d463">1.3.4. Inversas de polinomios</a></li>
-<li><a href="#org07ef923">1.3.5. Cuerpo de fracciones de polinomios</a></li>
+<li><a href="#orgfb8162c">1.3.1. Anillos conmutativos</a></li>
+<li><a href="#org83dcaa2">1.3.2. Cuerpos</a></li>
 </ul>
 </li>
-<li><a href="#org362fe19">1.4. Operador retardo \(\mathsf{B}{}\) y suma de los elementos de una secuencia.</a>
+<li><a href="#org754f6a9">1.4. Clasificación de algunos subconjuntos de sucesiones</a></li>
+<li><a href="#org99c3884">1.5. Inversas</a>
 <ul>
-<li><a href="#org057bcab">1.4.1. Polinomios y secuencias en el operador retardo \(\boldsymbol{a}(\mathsf{B}{})\) actuando sobre secuencias</a></li>
+<li><a href="#orgfeb366f">1.5.1. Inversas de secuencias con principio</a></li>
+<li><a href="#org62b0d6e">1.5.2. Inversas de secuencias con final</a></li>
+<li><a href="#org452d463">1.5.3. Inversas de polinomios</a></li>
+<li><a href="#org07ef923">1.5.4. Cuerpo de fracciones de polinomios</a></li>
+</ul>
+</li>
+<li><a href="#org362fe19">1.6. Operador retardo \(\mathsf{B}{}\) y suma de los elementos de una secuencia.</a>
+<ul>
+<li><a href="#org057bcab">1.6.1. Polinomios y secuencias en el operador retardo \(\boldsymbol{a}(\mathsf{B}{})\) actuando sobre secuencias</a></li>
 </ul>
 </li>
 </ul>
@@ -267,7 +273,7 @@
 </ul>
 </div>
 </div>
-<div class="ABSTRACT" id="org6c7ae4f">
+<div class="ABSTRACT" id="org29ff99e">
 <p>
 En esta lección veremos algunos conceptos algebraicos relacionados con
 la modelización de series temporales.
@@ -336,17 +342,21 @@ con la potencia del símbolo "\(z\)"
 </p>
 
 <p>
-Así, podemos denotar la secuencia \(\boldsymbol{x}\) de manera muy
+Así podemos denotar la secuencia \(\boldsymbol{x}\) de manera muy
 compacta del siguiente modo \[\boldsymbol{x} \quad = \quad
 \sum_{t=-\infty}^\infty x_t z^t \quad\equiv\quad \boldsymbol{x}(z)\]
 <b>¡Pero esta expresión no es una suma!</b> es solo un modo de expresar una
-secuencia denominada <i>función generatriz</i>.
+secuencia. Dicha expresión se denomina <i>función generatriz</i>.
 </p>
 </div>
 </div>
 <div id="outline-container-orgfac73e3" class="outline-4">
 <h4 id="orgfac73e3"><span class="section-number-4">1.1.2.</span> Características de algunas secuencias</h4>
 <div class="outline-text-4" id="text-1-1-2">
+<p>
+La sucesión \(\;\boldsymbol{0}=\sum_{t=-\infty}^\infty 0 z^t\;\) se denomina <i>sucesión nula</i>.
+</p>
+
 <p>
 En una sucesión \(\boldsymbol{a}\) no nula llamamos
 </p>
@@ -373,16 +383,16 @@ Una sucesión absolutamente sumable siempre es de cuadrado sumable,
 </p>
 </div>
 </div>
-<div id="outline-container-org7b929e9" class="outline-4">
-<h4 id="org7b929e9"><span class="section-number-4">1.1.3.</span> Subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</h4>
+<div id="outline-container-org0bc87b8" class="outline-4">
+<h4 id="org0bc87b8"><span class="section-number-4">1.1.3.</span> Algunos subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</h4>
 <div class="outline-text-4" id="text-1-1-3">
 <dl class="org-dl">
-<dt>Secuencias con final</dt><dd>tienen grado (a partir de cierto índice son
+<dt>Secuencias con final</dt><dd>si tienen grado (a partir de cierto índice son
 cero).  \[\boldsymbol{a}(z) = (\ldots,\ a_{p-3},\ a_{p-2},\ a_{p-1},\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=-\infty}^p a_t z^t\]</dd>
-<dt>Secuencias con principio</dt><dd>tienen cogrado (antes de cierto índice
-son cero).  \[\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2},\ a_{k+3},\ldots) = \sum_{t=k}^\infty a_t z^t\]
+<dt>Secuencias con principio</dt><dd>si tienen cogrado (antes de cierto índice
+son cero).  \[\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2},\ a_{k+3},\ldots) = \sum_{t=k}^\infty a_t z^t\qquad k\in\mathbb{Z}\]
 <dl class="org-dl">
-<dt>Secuencias o <a href="https://en.wikipedia.org/wiki/Formal_power_series">sucesiones formales</a></dt><dd>tienen cogrado \(\geq 0\).
+<dt>Secuencias o <a href="https://en.wikipedia.org/wiki/Formal_power_series">sucesiones formales</a></dt><dd>si su cogrado \(\geq 0\).
 \[\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ a_{2},\ a_{3},\ldots) = \sum_{t=k}^\infty a_t z^t\qquad k\geq0\]</dd>
 </dl></dd>
 <dt>Polinomios</dt><dd>son sucesiones formales con grado 
@@ -422,13 +432,21 @@ Además, <span class="underline">el producto convolución está bien definido en
 <li><span class="underline">con final</span> (con grado). El grado del producto es la suma de los
 respectivos grados.</li>
 
-<li><span class="underline">absolutamente sumables</span>.</li>
+<li><span class="underline">absolutamente sumables</span> (\(l_1\)).</li>
 </ul>
+
+<div class="inlinetask">
+<b><span class="todo TODO">TODO</span> Incluir las demos en los apuntes</b><br />
+</div>
 </div>
 </div>
 <div id="outline-container-org713b98d" class="outline-3">
 <h3 id="org713b98d"><span class="section-number-3">1.3.</span> Anillos conmutativos y cuerpos</h3>
 <div class="outline-text-3" id="text-1-3">
+</div>
+<div id="outline-container-orgfb8162c" class="outline-4">
+<h4 id="orgfb8162c"><span class="section-number-4">1.3.1.</span> Anillos conmutativos</h4>
+<div class="outline-text-4" id="text-1-3-1">
 <p>
 Un <b>anillo conmutativo</b> es un conjunto \(\mathsf{S}\) equipado con dos
 operaciones binarias, la suma \(+\) y el producto \(*\) que satisfacen
@@ -452,6 +470,7 @@ En cuanto al producto
 <li>\(\boldsymbol{a} * \boldsymbol{b} = \boldsymbol{b} * \boldsymbol{a}\;\) para todo \(\boldsymbol{a}, \boldsymbol{b}\) en \(\mathsf{S}\qquad\) (i.e. \(*\) es conmutativo).</li>
 <li>Existe un elemento \(\boldsymbol{1}\) tal que \(\boldsymbol{a} * \boldsymbol{1} = \boldsymbol{a}\) para todo \(\boldsymbol{a}\in \mathsf{S}\).</li>
 </ul>
+
 <p>
 El producto es distributivo respecto de la suma: Para todo \(\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}\) en \(\mathsf{S}\)
 </p>
@@ -459,8 +478,11 @@ El producto es distributivo respecto de la suma: Para todo \(\boldsymbol{a}, \bo
 <li>\(\boldsymbol{a}*(\boldsymbol{b}+\boldsymbol{c})=(\boldsymbol{a}*\boldsymbol{b})+(\boldsymbol{a}*\boldsymbol{c})\;\)</li>
 <li>\((\boldsymbol{b}+\boldsymbol{c})*\boldsymbol{a}=(\boldsymbol{b}*\boldsymbol{a})+(\boldsymbol{c}*\boldsymbol{a})\;\)</li>
 </ul>
-
-
+</div>
+</div>
+<div id="outline-container-org83dcaa2" class="outline-4">
+<h4 id="org83dcaa2"><span class="section-number-4">1.3.2.</span> Cuerpos</h4>
+<div class="outline-text-4" id="text-1-3-2">
 <p>
 Un <b>cuerpo</b> es un anillo conmutativo que adicionalmente satisface:
 </p>
@@ -478,9 +500,11 @@ conjunto</i>)
 </p></li>
 </ul>
 </div>
-<div id="outline-container-org754f6a9" class="outline-4">
-<h4 id="org754f6a9"><span class="section-number-4">1.3.1.</span> Clasificación de algunos subconjuntos de sucesiones</h4>
-<div class="outline-text-4" id="text-1-3-1">
+</div>
+</div>
+<div id="outline-container-org754f6a9" class="outline-3">
+<h3 id="org754f6a9"><span class="section-number-3">1.4.</span> Clasificación de algunos subconjuntos de sucesiones</h3>
+<div class="outline-text-3" id="text-1-4">
 <dl class="org-dl">
 <dt>Son anillos el conjunto de</dt><dd><p>
 sucesiones formales (cogrado \(\geq0\)), polinomios y
@@ -498,9 +522,13 @@ con final (y el <a href="#org07ef923">Cuerpo de fracciones de polinomios</a>)</d
 </dl>
 </div>
 </div>
+<div id="outline-container-org99c3884" class="outline-3">
+<h3 id="org99c3884"><span class="section-number-3">1.5.</span> Inversas</h3>
+<div class="outline-text-3" id="text-1-5">
+</div>
 <div id="outline-container-orgfeb366f" class="outline-4">
-<h4 id="orgfeb366f"><span class="section-number-4">1.3.2.</span> Inversas de secuencias con principio</h4>
-<div class="outline-text-4" id="text-1-3-2">
+<h4 id="orgfeb366f"><span class="section-number-4">1.5.1.</span> Inversas de secuencias con principio</h4>
+<div class="outline-text-4" id="text-1-5-1">
 <p>
 Supongamos que \(\boldsymbol{a}\ne\boldsymbol{0}\) y que \(k =
 cogrado(\boldsymbol{a})\). Definimos \(\boldsymbol{b}\) del siguiente modo:
@@ -516,10 +544,10 @@ cogrado(\boldsymbol{a})\). Definimos \(\boldsymbol{b}\) del siguiente modo:
 </p>
 
 <p>
-Por construcción, \(cogrado(\boldsymbol{b})=-k\) y en consecuencia si
-\(j<0\), \((\boldsymbol{a}*\boldsymbol{b})_j=0\). Obviamente,
-\((\boldsymbol{a}*\boldsymbol{b})_0=1\); y si \(j>0\),
-\((\boldsymbol{a}*\boldsymbol{b})_j=0\).
+Por construcción, \(cogrado(\boldsymbol{b})=-k\) y en consecuencia
+\((\boldsymbol{a}*\boldsymbol{b})_j=0\) si \(j<0\). Obviamente,
+\((\boldsymbol{a}*\boldsymbol{b})_0=1\); y además
+\((\boldsymbol{a}*\boldsymbol{b})_j=0\) si \(j>0\).
 </p>
 
 <p>
@@ -539,8 +567,8 @@ es decir
 </div>
 </div>
 <div id="outline-container-org62b0d6e" class="outline-4">
-<h4 id="org62b0d6e"><span class="section-number-4">1.3.3.</span> Inversas de secuencias con final</h4>
-<div class="outline-text-4" id="text-1-3-3">
+<h4 id="org62b0d6e"><span class="section-number-4">1.5.2.</span> Inversas de secuencias con final</h4>
+<div class="outline-text-4" id="text-1-5-2">
 <p>
 Supongamos que \(\boldsymbol{a}\ne\boldsymbol{0}\) y que \(p =
 grado(\boldsymbol{a})\). Definimos \(\boldsymbol{b}\) del siguiente modo:
@@ -570,8 +598,8 @@ es decir
 </div>
 </div>
 <div id="outline-container-org452d463" class="outline-4">
-<h4 id="org452d463"><span class="section-number-4">1.3.4.</span> Inversas de polinomios</h4>
-<div class="outline-text-4" id="text-1-3-4">
+<h4 id="org452d463"><span class="section-number-4">1.5.3.</span> Inversas de polinomios</h4>
+<div class="outline-text-4" id="text-1-5-3">
 <p>
 Ahora sabemos que todo polinomio
 </p>
@@ -580,7 +608,8 @@ Ahora sabemos que todo polinomio
 <dt>por tener grado</dt><dd>tiene una inversa con grado (con final)</dd>
 </dl>
 <p>
-y generalmente dichas inversas no son polinomios.
+y que dichas inversas no son de la forma \(\;\sum_{t=k}^p a_t z^t\;\)
+con \(k\geq0\) (i.e., no son polinomios).
 </p>
 
 <p>
@@ -599,7 +628,7 @@ otra no.
 </p>
 
 <p>
-Y si \(|a|=1\) ninguna de las inversas pertenece a \(l_1\)
+Pero si \(|a|=1\) ninguna de las inversas pertenece a \(l_1\)
 </p>
 
 <p>
@@ -636,18 +665,18 @@ Evidentemente dicha inversa no existe si \(\boldsymbol{a}\) tiene alguna raíz d
 </p>
 
 <p>
-En series temporales de un polinomio \(\boldsymbol{a}\) se dice que <b>es invertible</b> si 
+En los manuales de <i>series temporales</i> se dice que un polinomio \(\boldsymbol{a}\) <b>es invertible</b> si 
 </p>
 
 <p>
-\[\boldsymbol{a}^{-\triangleright}=\boldsymbol{a}^{-1}.\]
+\[\text{(la inversa con principio) }\;\boldsymbol{a}^{-\triangleright}=\boldsymbol{a}^{-1}\; \text{ (la inversa absolutamente sumable)}.\]
 (<i>si sus raíces están fuera del círculo unidad.</i>)
 </p>
 </div>
 </div>
 <div id="outline-container-org07ef923" class="outline-4">
-<h4 id="org07ef923"><span class="section-number-4">1.3.5.</span> Cuerpo de fracciones de polinomios</h4>
-<div class="outline-text-4" id="text-1-3-5">
+<h4 id="org07ef923"><span class="section-number-4">1.5.4.</span> Cuerpo de fracciones de polinomios</h4>
+<div class="outline-text-4" id="text-1-5-4">
 <p>
 El cuerpo más importante en la modelización ARIMA es el <i>cuerpo de
 fracciones de polinomios</i>
@@ -673,14 +702,15 @@ Cuando las raíces del polinomio \(\boldsymbol{q}\) están fuera del
 circulo unidad (i.e.,
 \(\;\boldsymbol{q}^{-\triangleright}=\boldsymbol{q}^{-1}\)) es habitual
 denotar la secuencia \(\boldsymbol{p}*\boldsymbol{q}^{-\triangleright}\)
-así \[\frac{\boldsymbol{p}(z)}{\boldsymbol{q}(z)}\]
+así \(\frac{\boldsymbol{p}}{\boldsymbol{q}}\)
+ \[(\boldsymbol{p}*\boldsymbol{q}^{-\triangleright})(z)=\frac{\boldsymbol{p}(z)}{\boldsymbol{q}(z)}\]
 </p>
 </div>
 </div>
 </div>
 <div id="outline-container-org362fe19" class="outline-3">
-<h3 id="org362fe19"><span class="section-number-3">1.4.</span> Operador retardo \(\mathsf{B}{}\) y suma de los elementos de una secuencia.</h3>
-<div class="outline-text-3" id="text-1-4">
+<h3 id="org362fe19"><span class="section-number-3">1.6.</span> Operador retardo \(\mathsf{B}{}\) y suma de los elementos de una secuencia.</h3>
+<div class="outline-text-3" id="text-1-6">
 <p>
 Por conveniencia se usa el operador retardo \(\mathsf{B}\) en la notación:
 \[\mathsf{B} x_t = x_{t−1},\quad \text{para } t\in\mathbb{Z}.\]
@@ -697,8 +727,8 @@ sumable, entonces la expresión
 </p>
 </div>
 <div id="outline-container-org057bcab" class="outline-4">
-<h4 id="org057bcab"><span class="section-number-4">1.4.1.</span> Polinomios y secuencias en el operador retardo \(\boldsymbol{a}(\mathsf{B}{})\) actuando sobre secuencias</h4>
-<div class="outline-text-4" id="text-1-4-1">
+<h4 id="org057bcab"><span class="section-number-4">1.6.1.</span> Polinomios y secuencias en el operador retardo \(\boldsymbol{a}(\mathsf{B}{})\) actuando sobre secuencias</h4>
+<div class="outline-text-4" id="text-1-6-1">
 <p>
 Así, para el polinomio \(\boldsymbol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3\), y la
 secuencia \(\boldsymbol{y}\), tenemos
@@ -718,7 +748,7 @@ Y en general, si \(\boldsymbol{a}\) e \(\boldsymbol{y}\) son secuencias sumables
 \boldsymbol{a}(\mathsf{B})y_t 
 & = (\cdots+a_{-2}\mathsf{B}^{-2},a_{-1}\mathsf{B}^{-1},a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) y_t \\
 % & = a_0 y_t + a_1 \mathsf{B}^1 y_t + a_2 \mathsf{B}^2 y_t + a_3 \mathsf{B}^3 y_t \\
-& = \cdots+a_{-2}y_{t-2}+a_{-1}y_{t-1}+a_0y_t+a_1y_{t-1}+a_2y_{t-2}+\cdots \\
+& = \cdots+a_{-2}y_{t+2}+a_{-1}y_{t+1}+a_0y_t+a_1y_{t-1}+a_2y_{t-2}+\cdots \\
 % & =\sum\nolimits_{r=0}^3 a_r y_{t-r} \\
 & =(\boldsymbol{a}*\boldsymbol{y})_t
 \end{align*}
@@ -730,7 +760,7 @@ Y en general, si \(\boldsymbol{a}\) e \(\boldsymbol{y}\) son secuencias sumables
 <h2 id="orgd030e1f"><span class="section-number-2">2.</span> Procesos estocásticos</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-Las procesos estocásticos se pueden sumar y se pueden multiplicar por
+Los procesos estocásticos se pueden sumar y se pueden multiplicar por
 escalares.
 </p>
 
@@ -756,8 +786,9 @@ Recuerde que la expresión de más arriba no es una suma, es una secuencia de va
 </p>
 
 <p>
-Sea \(\boldsymbol{a}\in l_1\) (<span class="underline">una secuencia absolutamente sumable</span>) y \(\boldsymbol{X}\)
-un proceso estocástico.
+Sea \(\boldsymbol{a}\) una secuecia y \(\boldsymbol{X}\) un proceso
+estocástico tales que \(\sum_{k=-\infty}^{\infty}a_kX_{t-k}\) converge
+para todo \(t\).
 </p>
 
 <p>
@@ -789,13 +820,15 @@ Así, para el polinomio \(\boldsymbol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3\), y el proce
 & =(\boldsymbol{a}*\boldsymbol{Y})_t,\quad \text{para } t\in\mathbb{Z}
 \end{align*}
 <p>
-Y en general, si \(\fbox{$\boldsymbol{a}\in l_1$}\), entonces
+Y en general, si \(\sum_{k=-\infty}^{\infty}a_kY_{t-k}\) converge para
+todo \(t\), entonces
 </p>
+
 \begin{align*}
 \boldsymbol{a}(\mathsf{B})Y_t 
-& = (\cdots+a_{-2}\mathsf{B}^{-2},a_{-1}\mathsf{B}^{-1},a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) Y_t \\
+& = (\cdots+a_{-2}\mathsf{B}^{-2}+a_{-1}\mathsf{B}^{-1}+a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) Y_t \\
 % & = a_0 Y_t + a_1 \mathsf{B}^1 Y_t + a_2 \mathsf{B}^2 Y_t + a_3 \mathsf{B}^3 Y_t \\
-& = \cdots+a_{-2}Y_{t-2}+a_{-1}Y_{t-1}+a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+\cdots \\
+& = \cdots+a_{-2}Y_{t+2}+a_{-1}Y_{t+1}+a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+\cdots \\
 % & =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
 & =(\boldsymbol{a}*\boldsymbol{y})_t,\quad \text{para } t\in\mathbb{Z}
 \end{align*}
@@ -834,7 +867,7 @@ ambas variables.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-08-20 mar 18:02</p>
+<p class="date">Created: 2024-08-24 sáb 17:33</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

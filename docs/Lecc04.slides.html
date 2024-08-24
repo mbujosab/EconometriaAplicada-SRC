@@ -14120,7 +14120,7 @@ div.jp-OutputPrompt {
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="org1cb905f">
+<div class="ABSTRACT" id="org0a97b13">
 <p>
 En esta lección veremos algunos conceptos algebraicos relacionados con
 la modelización de series temporales.
@@ -14250,11 +14250,11 @@ $$<p></p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Así, podemos denotar la secuencia $\boldsymbol{x}$ de manera muy
+<p>Así podemos denotar la secuencia $\boldsymbol{x}$ de manera muy
 compacta del siguiente modo $$\boldsymbol{x} \quad = \quad
 \sum_{t=-\infty}^\infty x_t z^t \quad\equiv\quad \boldsymbol{x}(z)$$
 <strong>¡Pero esta expresión no es una suma!</strong> es solo un modo de expresar una
-secuencia denominada <em>función generatriz</em>.</p>
+secuencia. Dicha expresión se denomina <em>función generatriz</em>.</p>
 
 </div>
 </div>
@@ -14275,6 +14275,7 @@ secuencia denominada <em>función generatriz</em>.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>La sucesión $\;\boldsymbol{0}=\sum_{t=-\infty}^\infty 0 z^t\;$ se denomina <em>sucesión nula</em>.</p>
 <p>En una sucesión $\boldsymbol{a}$ no nula llamamos</p>
 <ul>
 <li><strong>Grado:</strong> al menor índice entero que verifica la propiedad: $$j &gt;
@@ -14313,7 +14314,7 @@ $l_1\subset l_2$.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Subespacios-de-$%5Cbig(%7B%5Cmathbb%7BR%7D%7D%5E%5Cmathbb%7BZ%7D,+,%5Ccdot%5Cbig)$">Subespacios de $\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)$<a class="anchor-link" href="#Subespacios-de-$%5Cbig(%7B%5Cmathbb%7BR%7D%7D%5E%5Cmathbb%7BZ%7D,+,%5Ccdot%5Cbig)$">&#182;</a></h4>
+<h4 id="Algunos-subespacios-de-$%5Cbig(%7B%5Cmathbb%7BR%7D%7D%5E%5Cmathbb%7BZ%7D,+,%5Ccdot%5Cbig)$">Algunos subespacios de $\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)$<a class="anchor-link" href="#Algunos-subespacios-de-$%5Cbig(%7B%5Cmathbb%7BR%7D%7D%5E%5Cmathbb%7BZ%7D,+,%5Ccdot%5Cbig)$">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -14324,11 +14325,11 @@ $l_1\subset l_2$.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li><strong>Secuencias con final:</strong> tienen grado (a partir de cierto índice son
+<li><strong>Secuencias con final:</strong> si tienen grado (a partir de cierto índice son
 cero).  $$\boldsymbol{a}(z) = (\ldots,\ a_{p-3},\ a_{p-2},\ a_{p-1},\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=-\infty}^p a_t z^t$$</li>
-<li><strong>Secuencias con principio:</strong> tienen cogrado (antes de cierto índice
-son cero).  $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2},\ a_{k+3},\ldots) = \sum_{t=k}^\infty a_t z^t$$<ul>
-<li><strong>Secuencias o <a href="https://en.wikipedia.org/wiki/Formal_power_series">sucesiones formales</a>:</strong> tienen cogrado $\geq 0$.
+<li><strong>Secuencias con principio:</strong> si tienen cogrado (antes de cierto índice
+son cero).  $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2},\ a_{k+3},\ldots) = \sum_{t=k}^\infty a_t z^t\qquad k\in\mathbb{Z}$$<ul>
+<li><strong>Secuencias o <a href="https://en.wikipedia.org/wiki/Formal_power_series">sucesiones formales</a>:</strong> si su cogrado $\geq 0$.
 $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ a_{2},\ a_{3},\ldots) = \sum_{t=k}^\infty a_t z^t\qquad k\geq0$$</li>
 </ul>
 </li>
@@ -14378,10 +14379,22 @@ respectivos cogrados.</p>
 <li><p><u>con final</u> (con grado). El grado del producto es la suma de los
 respectivos grados.</p>
 </li>
-<li><p><u>absolutamente sumables</u>.</p>
+<li><p><u>absolutamente sumables</u> ($l_1$).</p>
 </li>
 </ul>
 
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="inlinetask">
+<b><span class="todo TODO">TODO</span> Incluir las demos en los apuntes</b><br />
+</div>
 </div>
 </div>
 </div>
@@ -14391,7 +14404,7 @@ respectivos grados.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Anillos-conmutativos-y-cuerpos">Anillos conmutativos y cuerpos<a class="anchor-link" href="#Anillos-conmutativos-y-cuerpos">&#182;</a></h3>
+<h4 id="Anillos-conmutativos">Anillos conmutativos<a class="anchor-link" href="#Anillos-conmutativos">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -14452,6 +14465,16 @@ tres conjuntos de axiomas.</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="Cuerpos">Cuerpos<a class="anchor-link" href="#Cuerpos">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Un <strong>cuerpo</strong> es un anillo conmutativo que adicionalmente satisface:</p>
 <ul>
 <li><p>Para cada $\boldsymbol{a}\in \mathsf{S}$ no nulo
@@ -14471,7 +14494,7 @@ conjunto</em>)</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Clasificaci%C3%B3n-de-algunos-subconjuntos-de-sucesiones">Clasificaci&#243;n de algunos subconjuntos de sucesiones<a class="anchor-link" href="#Clasificaci%C3%B3n-de-algunos-subconjuntos-de-sucesiones">&#182;</a></h4>
+<h3 id="Clasificaci%C3%B3n-de-algunos-subconjuntos-de-sucesiones">Clasificaci&#243;n de algunos subconjuntos de sucesiones<a class="anchor-link" href="#Clasificaci%C3%B3n-de-algunos-subconjuntos-de-sucesiones">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14519,10 +14542,10 @@ $$b_j=
 0 &amp; \text{ si } j&lt;-k\\
 \frac{1}{a_k} &amp; \text{ si } j=-k\\
 \frac{-1}{a_k}\sum_{r=-k}^{j-1}b_r a_{j+k-r} &amp; \text{ si } j&gt;-k
-\end{cases}$$<p>Por construcción, $cogrado(\boldsymbol{b})=-k$ y en consecuencia si
-$j&lt;0$, $(\boldsymbol{a}*\boldsymbol{b})_j=0$. Obviamente,
-$(\boldsymbol{a}*\boldsymbol{b})_0=1$; y si $j&gt;0$,
-$(\boldsymbol{a}*\boldsymbol{b})_j=0$.</p>
+\end{cases}$$<p>Por construcción, $cogrado(\boldsymbol{b})=-k$ y en consecuencia
+$(\boldsymbol{a}*\boldsymbol{b})_j=0$ si $j&lt;0$. Obviamente,
+$(\boldsymbol{a}*\boldsymbol{b})_0=1$; y además
+$(\boldsymbol{a}*\boldsymbol{b})_j=0$ si $j&gt;0$.</p>
 
 </div>
 </div>
@@ -14613,7 +14636,8 @@ $(\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{0},\ldots)=\sum_
 <li><strong>por tener cogrado:</strong> tiene una inversa con cogrado (con principio)</li>
 <li><strong>por tener grado:</strong> tiene una inversa con grado (con final)</li>
 </ul>
-<p>y generalmente dichas inversas no son polinomios.</p>
+<p>y que dichas inversas no son de la forma $\;\sum_{t=k}^p a_t z^t\;$
+con $k\geq0$ (i.e., no son polinomios).</p>
 
 </div>
 </div>
@@ -14633,7 +14657,7 @@ $(\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{0},\ldots)=\sum_
 </ul>
 <p>Es evidente que si $|a|\ne1$ una de las inversas está en $l_1$ y la
 otra no.</p>
-<p>Y si $|a|=1$ ninguna de las inversas pertenece a $l_1$</p>
+<p>Pero si $|a|=1$ ninguna de las inversas pertenece a $l_1$</p>
 
 </div>
 </div>
@@ -14694,8 +14718,8 @@ con $\boldsymbol{a}^{-1}=\frac{1}{\boldsymbol{a}}$.<br>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>En series temporales de un polinomio $\boldsymbol{a}$ se dice que <strong>es invertible</strong> si</p>
-$$\boldsymbol{a}^{-\triangleright}=\boldsymbol{a}^{-1}.$$<p>(<em>si sus raíces están fuera del círculo unidad.</em>)</p>
+<p>En los manuales de <em>series temporales</em> se dice que un polinomio $\boldsymbol{a}$ <strong>es invertible</strong> si</p>
+$$\text{(la inversa con principio) }\;\boldsymbol{a}^{-\triangleright}=\boldsymbol{a}^{-1}\; \text{ (la inversa absolutamente sumable)}.$$<p>(<em>si sus raíces están fuera del círculo unidad.</em>)</p>
 
 </div>
 </div>
@@ -14751,7 +14775,8 @@ $\boldsymbol{p}$ es un polinomio.</p>
 circulo unidad (i.e.,
 $\;\boldsymbol{q}^{-\triangleright}=\boldsymbol{q}^{-1}$) es habitual
 denotar la secuencia $\boldsymbol{p}*\boldsymbol{q}^{-\triangleright}$
-así $$\frac{\boldsymbol{p}(z)}{\boldsymbol{q}(z)}$$</p>
+así $\frac{\boldsymbol{p}}{\boldsymbol{q}}$
+ $$(\boldsymbol{p}*\boldsymbol{q}^{-\triangleright})(z)=\frac{\boldsymbol{p}(z)}{\boldsymbol{q}(z)}$$</p>
 
 </div>
 </div>
@@ -14833,7 +14858,7 @@ secuencia $\boldsymbol{y}$, tenemos</p>
 \boldsymbol{a}(\mathsf{B})y_t 
 &amp; = (\cdots+a_{-2}\mathsf{B}^{-2},a_{-1}\mathsf{B}^{-1},a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) y_t \\
 % &amp; = a_0 y_t + a_1 \mathsf{B}^1 y_t + a_2 \mathsf{B}^2 y_t + a_3 \mathsf{B}^3 y_t \\
-&amp; = \cdots+a_{-2}y_{t-2}+a_{-1}y_{t-1}+a_0y_t+a_1y_{t-1}+a_2y_{t-2}+\cdots \\
+&amp; = \cdots+a_{-2}y_{t+2}+a_{-1}y_{t+1}+a_0y_t+a_1y_{t-1}+a_2y_{t-2}+\cdots \\
 % &amp; =\sum\nolimits_{r=0}^3 a_r y_{t-r} \\
 &amp; =(\boldsymbol{a}*\boldsymbol{y})_t
 \end{align*}
@@ -14856,7 +14881,7 @@ secuencia $\boldsymbol{y}$, tenemos</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Las procesos estocásticos se pueden sumar y se pueden multiplicar por
+<p>Los procesos estocásticos se pueden sumar y se pueden multiplicar por
 escalares.</p>
 <p>Si $\boldsymbol{X}$ e $\boldsymbol{Y}$ son dos procesos estocásticos y
 $\;a\in\mathbb{R}$, entonces $$\boldsymbol{X}+\boldsymbol{Y}=(X_t+Y_t \mid
@@ -14890,8 +14915,9 @@ $$\sum_{t=-\infty}^\infty X_t z^t = (\ldots,\ X_{-2},\ X_{-1},\ X_{0},\ X_{1},\ 
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Sea $\boldsymbol{a}\in l_1$ (<u>una secuencia absolutamente sumable</u>) y $\boldsymbol{X}$
-un proceso estocástico.</p>
+<p>Sea $\boldsymbol{a}$ una secuecia y $\boldsymbol{X}$ un proceso
+estocástico tales que $\sum_{k=-\infty}^{\infty}a_kX_{t-k}$ converge
+para todo $t$.</p>
 <p>Definimos el producto convolución ($∗$) de $\boldsymbol{a}$ con $\boldsymbol{X}$ como el proceso estocástico:
 $$\boldsymbol{a}*\boldsymbol{X}=\left(\left.\sum_{r+s=t} a_r X_s \right| t\in\mathbb{Z}\right)$$
 es decir
@@ -14939,12 +14965,13 @@ X_{t−k},\quad \text{para } t,z\in\mathbb{Z}$$</p>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Y en general, si $\fbox{$\boldsymbol{a}\in l_1$}$, entonces</p>
+<p>Y en general, si $\sum_{k=-\infty}^{\infty}a_kY_{t-k}$ converge para
+todo $t$, entonces</p>
 \begin{align*}
 \boldsymbol{a}(\mathsf{B})Y_t 
-&amp; = (\cdots+a_{-2}\mathsf{B}^{-2},a_{-1}\mathsf{B}^{-1},a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) Y_t \\
+&amp; = (\cdots+a_{-2}\mathsf{B}^{-2}+a_{-1}\mathsf{B}^{-1}+a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) Y_t \\
 % &amp; = a_0 Y_t + a_1 \mathsf{B}^1 Y_t + a_2 \mathsf{B}^2 Y_t + a_3 \mathsf{B}^3 Y_t \\
-&amp; = \cdots+a_{-2}Y_{t-2}+a_{-1}Y_{t-1}+a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+\cdots \\
+&amp; = \cdots+a_{-2}Y_{t+2}+a_{-1}Y_{t+1}+a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+\cdots \\
 % &amp; =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
 &amp; =(\boldsymbol{a}*\boldsymbol{y})_t,\quad \text{para } t\in\mathbb{Z}
 \end{align*}

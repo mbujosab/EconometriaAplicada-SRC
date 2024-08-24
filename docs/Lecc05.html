@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
 <head>
-<!-- 2024-08-20 mar 18:02 -->
+<!-- 2024-08-24 sáb 17:33 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 5</title>
@@ -238,15 +238,36 @@
 </li>
 </ul>
 </li>
-<li><a href="#org22a50ef">1. Series temporales</a></li>
+<li><a href="#org0826560">1. Introducción a la modelización de series temporales</a></li>
 <li><a href="#org16cfdb9">Correlación serial vs muestreo aleatorio simple</a>
 <ul>
 <li><a href="#org6a8aa38">Casos que simplifican el escenario</a></li>
+<li><a href="#orgc97c326">La especificación del modelo se escoge según las características de los datos.</a></li>
 </ul>
 </li>
-<li><a href="#org4c251cf">2. Función de autocovarianzas y función de autocorrelación</a></div>
+<li><a href="#org2635d30">2. Herramientas para desvelar propiedades de una serie temporal</a>
+<ul>
+<li><a href="#orgfafb46e">2.1. Análisis gráfico</a>
+<ul>
+<li><a href="#org8ab96a4">2.1.1. Gráfico de la serie temporal</a></li>
+<li><a href="#org9b68f3c">2.1.2. Gráfico rango-media</a></li>
+</ul>
+</li>
+<li><a href="#org2a6c8f7">2.2. Determinación del orden de integración</a>
+<ul>
+<li><a href="#orgbd4c22d">2.2.1. Análisis gráfico</a></li>
+<li><a href="#org7b23697">2.2.2. Contrastes formales sobre el orden de integración</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org4c251cf">3. Función de autocovarianzas y función de autocorrelación</a></li>
+<li><a href="#org92adcf0">4. Otras herramientas estadísticas&#xa0;&#xa0;&#xa0;<span class="tag"><span class="C_moConR">CómoConR</span></span></a>
+<ul>
+<li><a href="#org0e5fc85">4.1. Estadísticos descriptivos</a></li>
+<li><a href="#org1165584">4.2. Test de normalidad Jarque-Vera</a></div>
 </div>
-<div class="ABSTRACT" id="org2892f7f">
+<div class="abstract" id="orgb350aab">
 <p>
 En esta lección veremos algunas herramientas estadísticas.
 </p>
@@ -262,7 +283,6 @@ repositorio GitHub: <a href="https://github.com/gallegoj/tfarima">https://github
 </p>
 <div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #D0372D;">library</span>(tfarima)      <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">librer&#237;a de Jos&#233; Luis Gallego para Time Series</span>
-<span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">library(latticeExtra) # para gr&#225;ficos con doble eje vertical (doubleYScale)</span>
 <span style="color: #D0372D;">library</span>(readr)        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para leer ficheros CSV</span>
 <span style="color: #D0372D;">library</span>(ggplot2)      <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para el scatterplot (alternaticamente library(tidyverse))</span>
 <span style="color: #D0372D;">library</span>(ggfortify)    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para pintar series temporales</span>
@@ -281,28 +301,28 @@ del notebook
 </div>
 </div>
 </div>
-<div id="outline-container-org22a50ef" class="outline-2">
-<h2 id="org22a50ef"><span class="section-number-2">1.</span> Series temporales</h2>
+<div id="outline-container-org0826560" class="outline-2">
+<h2 id="org0826560"><span class="section-number-2">1.</span> Introducción a la modelización de series temporales</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-Corresponden a mediciones de un mismo objeto a lo largo del tiempo. El
-índice indica el instante de cada medición.  <i>El orden cronológico de
-los datos puede ser fundamental</i> para explicar cada uno de ellos.
+Corresponden a observaciones de un mismo objeto a lo largo del
+tiempo. El índice indica el instante de cada medición. <i>El orden
+cronológico puede ser crucial</i> al modelar los datos.
 </p>
 
 <ul class="org-ul">
-<li>El motivo es que con frecuencia la medición en un instante de tiempo
-está relacionada con otras mediciones próximas en el tiempo
+<li>El motivo es que frecuentemente el valor medido en un instante de
+tiempo está relacionado con otras mediciones próximas en el tiempo
 (<i>correlación serial</i>).</li>
 
-<li>Si es así, no podremos asumir que las variables aleatorias del
-proceso estocástico subyacente, \(\boldsymbol{X}=(X_t\mid t\in\mathbb{Z})\), sean
-independientes entre sí.</li>
+<li>Si es así, ya no deberíamos asumir que las variables aleatorias del
+proceso estocástico subyacente, \(\boldsymbol{X}=(X_t\mid
+  t\in\mathbb{Z})\), son independientes entre sí.</li>
 </ul>
 
 <p>
-Esto tiene importantes implicaciones en las técnicas de análisis a
-aplicar y el tipo de modelos a utilizar.
+Esto tiene importantes implicaciones en las técnicas de análisis y
+los modelos a utilizar.
 </p>
 </div>
 <ol class="org-ol">
@@ -314,12 +334,15 @@ aplicar y el tipo de modelos a utilizar.
                                         index.column = 1, 
                                         sep=<span style="color: #008000;">","</span>, 
                                         FUN = as.yearmon))
-autoplot(PoblacionAustralia_ts)
+p <span style="color: #D0372D;">&lt;-</span> autoplot(PoblacionAustralia_ts)
+p <span style="color: #D0372D;">&lt;-</span> p + labs(y = <span style="color: #008000;">"Habitantes"</span>, x = <span style="color: #008000;">"A&#241;os"</span>) + ggtitle(<span style="color: #008000;">"Poblaci&#243;n australiana (datos anuales)"</span>)
+p <span style="color: #D0372D;">&lt;-</span> p + scale_x_continuous(breaks = scales::pretty_breaks(n = 20))
+p 
 </pre>
 </div>
 
 
-<div id="org03d259e" class="figure">
+<div id="orgd2cf82e" class="figure">
 <p><img src="./img/lecc05/PoblacionAustralia.png" alt="PoblacionAustralia.png" width="900px" />
 </p>
 </div>
@@ -328,50 +351,89 @@ autoplot(PoblacionAustralia_ts)
 <li><a id="org0772233"></a>PIB UEM<br />
 <div class="outline-text-5" id="text-1-0-0-2">
 <div class="org-src-container">
-<pre class="src src-jupyter-R">PIB_UEM_ts = as.ts( read.csv.zoo(<span style="color: #008000;">"datos/PIB_UEM.csv"</span>, 
-                                 FUN = as.yearqtr, 
-                                 format = <span style="color: #008000;">"%YQ%q"</span>, 
-                                 strip.white = <span style="color: #6434A3;">TRUE</span>))
-autoplot(PIB_UEM_ts)
+<pre class="src src-jupyter-R">PIB_UEM_df <span style="color: #D0372D;">&lt;-</span> read_csv(<span style="color: #008000;">"datos/PIB_UEM.csv"</span>,
+                     show_col_types = <span style="color: #6434A3;">FALSE</span>)
+fmt <span style="color: #D0372D;">&lt;-</span> <span style="color: #008000;">"%YQ%q"</span>
+PIB_UEM_df$Time <span style="color: #D0372D;">&lt;-</span> as.yearqtr(PIB_UEM_df$obs, format = fmt)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">head(PIB_UEM_df,3)</span>
+P <span style="color: #D0372D;">&lt;-</span> ggplot(PIB_UEM_df, aes(Time, PIB))
+P <span style="color: #D0372D;">&lt;-</span> P + geom_point() + geom_line()
+P <span style="color: #D0372D;">&lt;-</span> P + scale_x_continuous(breaks = scales::pretty_breaks(n = 15))
+P <span style="color: #D0372D;">&lt;-</span> P + labs(y = <span style="color: #008000;">"Miles de millones de euros"</span>, x = <span style="color: #008000;">"A&#241;os"</span>) + ggtitle(<span style="color: #008000;">"PIB UEM a precios corrientes (datos trimestrales). Fuente Banco de Espa&#241;a"</span>)
+P
 </pre>
 </div>
 
 
-<div id="org454166d" class="figure">
+<div id="org05c79ac" class="figure">
 <p><img src="./img/lecc05/PIB_UEM.png" alt="PIB_UEM.png" width="900px" />
 </p>
 </div>
 </div>
 </li>
-<li><a id="org3067fac"></a>Rendimiento porcentual diario del IBEX 35<br />
+<li><a id="org7821e6f"></a>Temperatura media en el Parque del Retiro. Madrid<br />
 <div class="outline-text-5" id="text-1-0-0-3">
 <div class="org-src-container">
-<pre class="src src-jupyter-R">IBEX35_ts = as.ts( read.csv.zoo(<span style="color: #008000;">"datos/IBEX35.csv"</span>, 
-                                strip.white = <span style="color: #6434A3;">TRUE</span>))
-autoplot(IBEX35_ts)
+<pre class="src src-jupyter-R">TemperaturaRetiro_df <span style="color: #D0372D;">&lt;-</span> read_csv(<span style="color: #008000;">"datos/Retiro.txt"</span>, show_col_types = <span style="color: #6434A3;">FALSE</span>)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">A&#241;adimos fechas</span>
+TemperaturaRetiro_df$Time <span style="color: #D0372D;">&lt;-</span> as.yearmon(1985 + seq(0, nrow(TemperaturaRetiro_df)-1)/12)
+
+P <span style="color: #D0372D;">&lt;-</span> ggplot(TemperaturaRetiro_df, aes(Time, TemperaturaMedia))
+P <span style="color: #D0372D;">&lt;-</span> P + geom_line() <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">+ geom_point() </span>
+P <span style="color: #D0372D;">&lt;-</span> P + scale_x_continuous(breaks = scales::pretty_breaks(n = 25))
+P <span style="color: #D0372D;">&lt;-</span> P + labs(y = <span style="color: #008000;">"Grados Celsius"</span>, x = <span style="color: #008000;">"A&#241;os"</span>) + ggtitle(<span style="color: #008000;">"Temperatura media mensual en el Parque del Retiro. Fuente: Comunidad de Madrid"</span>)
+P
 </pre>
 </div>
 
 
-<div id="orgf99abd4" class="figure">
-<p><img src="./img/lecc05/IBEX35.png" alt="IBEX35.png" width="900px" />
+<div id="org0421a3d" class="figure">
+<p><img src="./img/lecc05/TemperaturaReriro.png" alt="TemperaturaReriro.png" width="900px" />
 </p>
 </div>
 </div>
 </li>
-<li><a id="org6344b7f"></a>Producción de cemento<br />
+<li><a id="org722dbda"></a>Rendimiento porcentual diario del IBEX 35 (std)<br />
 <div class="outline-text-5" id="text-1-0-0-4">
 <div class="org-src-container">
-<pre class="src src-jupyter-R">ProduccionCemento_ts = as.ts( read.csv.zoo(<span style="color: #008000;">"datos/ProduccionCemento.csv"</span>,
-                                           FUN = as.yearmon, 
-                                           format = <span style="color: #008000;">"%YM%m"</span>,
-                                           strip.white = <span style="color: #6434A3;">TRUE</span>))
-autoplot(ProduccionCemento_ts)
+<pre class="src src-jupyter-R">IBEX35_ts = as.ts( read.csv.zoo(<span style="color: #008000;">"datos/IBEX35.csv"</span>, 
+                                strip.white = <span style="color: #6434A3;">TRUE</span>))
+P <span style="color: #D0372D;">&lt;-</span> autoplot(IBEX35_ts) + scale_y_continuous(breaks = scales::pretty_breaks(n = 12))
+p <span style="color: #D0372D;">&lt;-</span> P + labs(y = <span style="color: #008000;">"Desviaciones tipicas"</span>, x = <span style="color: #008000;">"D&#237;as"</span>) + ggtitle(<span style="color: #008000;">"Rendimiento porcentual diario del IBEX 35 (std.). Fuente: Archivo Prof. Miguel Jerez"</span>)
+p 
 </pre>
 </div>
 
 
-<div id="org86501f0" class="figure">
+<div id="org64a8888" class="figure">
+<p><img src="./img/lecc05/IBEX35.png" alt="IBEX35.png" width="900px" />
+</p>
+</div>
+
+<ul class="org-ul">
+<li>Datos centrados y estandarizados, i.e. el eje vertical está en desviaciones típicas.</li>
+<li>Los <i>volatility clustering</i> son característicos de series financieras de alta frecuencia.</li>
+</ul>
+</div>
+</li>
+<li><a id="org6344b7f"></a>Producción de cemento<br />
+<div class="outline-text-5" id="text-1-0-0-5">
+<div class="org-src-container">
+<pre class="src src-jupyter-R">ProduccionCemento_df <span style="color: #D0372D;">&lt;-</span> read_csv(<span style="color: #008000;">"datos/ProduccionCemento.csv"</span>,
+                     show_col_types = <span style="color: #6434A3;">FALSE</span>)
+fmt <span style="color: #D0372D;">&lt;-</span> <span style="color: #008000;">"%YM%m"</span>
+ProduccionCemento_df$Time <span style="color: #D0372D;">&lt;-</span> as.yearmon(ProduccionCemento_df$obs, format = fmt)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">head(ProduccionCemento_df,3)</span>
+P <span style="color: #D0372D;">&lt;-</span> ggplot(ProduccionCemento_df, aes(Time, ProduccionCemento))
+P <span style="color: #D0372D;">&lt;-</span> P + geom_line() <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">+ geom_point() </span>
+P <span style="color: #D0372D;">&lt;-</span> P + scale_x_continuous(breaks = scales::pretty_breaks(n = 25))
+P <span style="color: #D0372D;">&lt;-</span> P + labs(y = <span style="color: #008000;">"Miles de Toneladas m&#233;tricas"</span>, x = <span style="color: #008000;">"A&#241;os"</span>) + ggtitle(<span style="color: #008000;">"Produccion de cemento (Datos mensuales). Fuente Banco de Espa&#241;a"</span>)
+P
+</pre>
+</div>
+
+
+<div id="orgf8f2089" class="figure">
 <p><img src="./img/lecc05/ProduccionCemento.png" alt="ProduccionCemento.png" width="900px" />
 </p>
 </div>
@@ -382,32 +444,34 @@ autoplot(ProduccionCemento_ts)
 <div id="outline-container-org16cfdb9" class="outline-2">
 <h2 id="org16cfdb9">Correlación serial vs muestreo aleatorio simple</h2>
 <div class="outline-text-2" id="text-org16cfdb9">
-<ul class="org-ul">
-<li>Con datos de sección cruzada se asume muestreo aleatorio simple
+<p>
+Con datos de
+</p>
+<dl class="org-dl">
+<dt>sección cruzada</dt><dd>solemos asumir que el muestreo es aleatorio
+simple
 <ul class="org-ul">
 <li>i.e., los datos son realizaciones de variables aleatorias i.i.d.</li>
-</ul></li>
+</ul></dd>
 
-<li><p>
-Con series temporales dicha asunción resulta generalmente errónea
+<dt>series temporales</dt><dd><p>
+dicha asunción resulta generalmente errónea
 </p>
 <ul class="org-ul">
-<li>con frecuencia el valor esperado parece cambiar con \(t\)</li>
-<li>con frecuencia hay dependencia temporal correlación serial</li>
+<li>con frecuencia el nivel esperado (o la volatilidad) parece cambiar con \(t\)</li>
+<li>con frecuencia hay dependencia temporal (correlación serial).</li>
 </ul>
 
 <p>
 <b>Ejemplo</b>: dada la evolución de los datos, no parece aceptable
 asumir que \(ProdCemento_{1960M01}\) tiene la misma distribución que
-\(ProdCemento_{2000M04}\)
-</p></li>
-</ul>
-
-
+\(ProdCemento_{2000M04}\) (ni que sea independiente de
+\(ProdCemento_{1959M01}\)).
+</p></dd>
+</dl>
 <p>
 Veamos por qué esto genera dificultades&#x2026;
 </p>
-
 <p>
 Consideremos el proceso estocástico \[\boldsymbol{X}=(X_t \mid
 t=0,\pm1,\pm2,\ldots).\] Caracterizar su distribución conjunta (todos
@@ -415,27 +479,31 @@ los momentos) es demasiado ambicioso.
 </p>
 
 <p>
-Tentativamente vamos a fijarnos únicamente en los dos primeros momentos:
+Así que, tentativamente, vamos a fijarnos <i>solo</i> en los dos primeros
+momentos:
 </p>
 
 <p>
-\[E(X_t)={\color{blue}{ \mu_t}}\qquad\text{ y } \qquad
-Cov(X_t,X_k)=E\big[(X_t-\mu_t)(X_k-\mu_k)\big]={\color{blue}{\lambda_{t,k}}}\]
+\[E(X_t)={\color{blue}{ \mu_t}}\quad\text{ y }\quad
+Cov(X_t,X_k)=E\big[(X_t-\mu_t)(X_k-\mu_k)\big]={\color{blue}{\lambda_{t,k}}};\quad t,k\in\mathbb{Z}\]
+</p>
+
+<p>
 (si \(\;k=t\;\) entonces \(\;\lambda_{t,t}=Var(X_t)=\sigma^2_t\)).
 </p>
-
 <p>
-Si las \(X_t\) fueran gaussianas, conocer estos <i>parámetros</i> bastaría
-para caracterizar la distribución conjunta. Pero aún así&#x2026;
+Si el proceso \(\boldsymbol{X}\) fuera gaussiano, conocer estos
+<i>parámetros</i> bastaría para caracterizar la distribución conjunta. Pero
+aún así&#x2026;
 </p>
 
 <ul class="org-ul">
-<li>necesitaríamos una muestra suficiente de cada \(X_t\) para estimar los parámetros 
+<li>necesitaríamos para cada \(X_t\) una muestra suficiente para estimar los parámetros 
 <ul class="org-ul">
-<li>y en una serie temporal tenemos una única realización para cada \(X_t\)</li>
+<li>pero en una serie temporal tenemos una sola realización de cada \(X_t\).</li>
 </ul></li>
 
-<li>y además hay más parámetros que variables aleatorias</li>
+<li>Además&#x2026; para cada variable aleatoria \(X_t\) hay infinitos parámetros.</li>
 </ul>
 </div>
 <div id="outline-container-org6a8aa38" class="outline-3">
@@ -443,49 +511,305 @@ para caracterizar la distribución conjunta. Pero aún así&#x2026;
 <div class="outline-text-3" id="text-org6a8aa38">
 <ul class="org-ul">
 <li><p>
-Cuando el proceso es <a href="./Lecc01.slides.html#/3/1">débilmente estacionario (Lecc01)</a> se reduce
-drásticamente el número de parámetros.
+Si el proceso es <a href="./Lecc01.slides.html#/3/1">débilmente estacionario</a> se reduce drásticamente el
+número de parámetros:
 </p>
-
 \begin{eqnarray}
 E(X_t)  & = \mu \\
 Cov(X_t,X_{t-k}) & = \gamma_k
 \end{eqnarray}</li>
-
 <li>Si además pudiéramos asumir que el proceso es i.i.d. podríamos
 interpretar la serie temporal como una realización de un muestreo
 aleatorio simple (lo que habilita la inferencia estadística).</li>
 </ul>
-
 <p>
 El desafío para el analista es (y nótese el abuso de lenguaje)
 </p>
 <dl class="org-dl">
-<dt>primero</dt><dd>transformar los datos para lograr que sean "<b><i>estacionarios</i></b>"
+<dt>primero</dt><dd>transformar los datos para lograr que sean "<b><i>estacionarios</i></b>".
 <ul class="org-ul">
 <li>(Lo vimos en la lección 1))</li>
 </ul></dd>
-<dt>después</dt><dd><p>
-transformar los datos estacionarios en una secuencia de
-"<b>datos <i>i.i.d</i></b>"
-</p>
+<dt>después</dt><dd>transformar los datos estacionarios en una secuencia de
+"<b>datos <i>i.i.d</i></b>" 
 <ul class="org-ul">
-<li>(es lo que nos falta por ver)</li>
+<li>(Aún no visto)</li>
 </ul></dd>
 </dl>
+
+<p>
+Todo este proceso constituye la especificación y ajuste de un modelo a
+la serie temporal.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc97c326" class="outline-3">
+<h3 id="orgc97c326">La especificación del modelo se escoge según las características de los datos.</h3>
+<div class="outline-text-3" id="text-orgc97c326">
+<p>
+¿Es la serie 
+</p>
+<ul class="org-ul">
+<li>"<b><i>estacionaria en media</i></b>"
+<ul class="org-ul">
+<li>(y si lo es, ¿cuál es su media?)</li>
+<li>(y si no lo es, ¿cómo cambia o evoluciona su media?)</li>
+</ul></li>
+<li>"<b><i>estacionaria en varianza</i></b>" (<i>homocedástica</i>)
+<ul class="org-ul">
+<li>(y si lo es, ¿cuál es su varianza?)</li>
+<li>(y si es <i>heterocedástica</i>, ¿cómo cambia o evoluciona su varianza?)?</li>
+</ul></li>
+</ul>
+
+<p>
+¿Están sus valores correlados con su historia pasada (autocorrelados)?
+</p>
+
+<p>
+¿Están correlados con los valores presentes o pasados de otras series?
+</p>
+<p>
+Veamos algunas herramientas estadísticas para poder desvelar estas
+características.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org2635d30" class="outline-2">
+<h2 id="org2635d30"><span class="section-number-2">2.</span> Herramientas para desvelar propiedades de una serie temporal</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgfafb46e" class="outline-3">
+<h3 id="orgfafb46e"><span class="section-number-3">2.1.</span> Análisis gráfico</h3>
+<div class="outline-text-3" id="text-2-1">
+</div>
+<div id="outline-container-org8ab96a4" class="outline-4">
+<h4 id="org8ab96a4"><span class="section-number-4">2.1.1.</span> Gráfico de la serie temporal</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<p>
+Representa sus valores en el eje vertical (\(y\)) frente a una escala
+temporal en el horizontal (\(x\)). Es útil para detectar visualmente:
+</p>
+<ul class="org-ul">
+<li>tendencias y/o estacionalidad</li>
+<li>cambios de variabilidad</li>
+<li>valores atípicos (<i>outliers</i>)
+<ul class="org-ul">
+<li>el 95% aprox. de una muestra de valores generados por una
+distribución normal debería estar comprendido entre
+\(\mu\pm2\sigma\)</li>
+<li><p>
+la probabilidad de que una variable normal genere un valor fuera
+de las bandas de \(\mu\pm3\sigma\) es \(0.0023\)
+</p>
+
+<p>
+(<a href="./img/lecc05/IBEX35.png">véase gráfico IBEX 35</a>)
+</p></li>
+</ul></li>
+</ul>
+
+<p>
+En es importante escalar y rotular adecuadamente los ejes y asegurar
+la comparabilidad entre series y gráficos distintos (si los hubiere).
+</p>
+</div>
+</div>
+<div id="outline-container-org9b68f3c" class="outline-4">
+<h4 id="org9b68f3c"><span class="section-number-4">2.1.2.</span> Gráfico rango-media</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<p>
+Cambios de variabilidad de una serie pueden evidenciarse en su gráfico
+temporal.
+</p>
+
+<p>
+Pero también suelen verse bien en un gráfico rango-media, donde se
+representa:
+</p>
+<dl class="org-dl">
+<dt>en el eje \(x\)</dt><dd>un indicador del nivel de la serie calculado para
+distintas submuestras no solapadas (normalmente la media).</dd>
+<dt>en el eje \(y\)</dt><dd>un indicador de la dispersión de la serie
+calculado para las mismas submuestras (normalmente el rango.)</dd>
+</dl>
+
+<p>
+Veamos el gráfico de la serie de pasajeros de líneas aéreas junto a su
+gráfico de rango media:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R">Z <span style="color: #D0372D;">&lt;-</span> AirPassengers
+ide(Z, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"rm"</span>), main=<span style="color: #008000;">"Pasajeros de l&#237;neas (a&#233;reas en miles) y gr&#225;fico rango-media"</span>)
+</pre>
+</div>
+
+
+<div id="orgb076a08" class="figure">
+<p><img src="./img/lecc05/rango-mediaAirPass.png" alt="rango-mediaAirPass.png" width="900px" />
+</p>
+</div>
+
+<p>
+El gráfico de rango media a veces se acompaña de una regresión de la
+dispersión sobre los niveles para medir la relación nivel-dispersión.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org2a6c8f7" class="outline-3">
+<h3 id="org2a6c8f7"><span class="section-number-3">2.2.</span> Determinación del orden de integración</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Decidir adecuadamente el orden de integración es crucial en el
+análisis de series temporales.
+</p>
+
+<p>
+Las herramientas utilizadas para tomar la decisión son 
+</p>
+<ul class="org-ul">
+<li>el análisis gráfico</li>
+<li>los contrastes formales</li>
+</ul>
+</div>
+<div id="outline-container-orgbd4c22d" class="outline-4">
+<h4 id="orgbd4c22d"><span class="section-number-4">2.2.1.</span> Análisis gráfico</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 8, repr.plot.res = 200)
+ide(PoblacionAustralia_ts,
+    graphs = c(<span style="color: #008000;">"plot"</span>),
+    transf = list(list(bc = F), list(bc = F, d = 1), list(bc = F, d = 2)),
+    main=<span style="color: #008000;">"Poblaci&#243;n australiana, primera diferencia y segunda diferencia"</span> )
+</pre>
+</div>
+
+
+<div id="org722e2d6" class="figure">
+<p><img src="./img/lecc05/diferenciasPoblacion.png" alt="diferenciasPoblacion.png" width="900px" />
+</p>
+</div>
+
+
+
+<p>
+La serie de población \(\boldsymbol{y}\) tiene una clara tendencia
+creciente (primer gráfico), que desaparece al tomar una diferencia
+ordinaria, \[\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y}\]
+(segundo gráfico). Bastar con tomar una primera diferencia de la serie
+de población para obtener una nueva serie que se asemeja a la
+realización de un proceso estacionario.
+</p>
+
+<p>
+No obstante, ¿qué pasa si tomamos una segunda diferencia ordinaria?
+\[\nabla\nabla\boldsymbol{y}=\nabla^2\boldsymbol{y}=(1-\mathsf{B})^2*\boldsymbol{y}\]
+(segundo gráfico). Pues que la serie obtenida también es estacionaria,
+pero ojo, es un grave error tomar más diferencias de las necesarias al
+modelizar los datos. Se debe tomar el mínimo número de
+transformaciones que arrojen una serie ``estacionaria'' (recuerde que
+decir que una serie temporal es <i>estacionaria</i> es un abuso del
+lenguaje).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height =  10, repr.plot.res = 200)
+ide(Z,
+    graphs = c(<span style="color: #008000;">"plot"</span>),
+    transf = list(list(bc=T), list(bc=T, d=1), list(bc=T, D=1), list(bc=T, D=1, d=1)),
+    main = <span style="color: #008000;">"Log pasajeros a&#233;reos, diferencia ordinaria, diferencia estacional y composici&#243;n de ambas diferencias"</span> )
+</pre>
+</div>
+
+
+<div id="orge4ba237" class="figure">
+<p><img src="./img/lecc05/diferenciasPasajeros.png" alt="diferenciasPasajeros.png" width="900px" />
+</p>
+</div>
+
+<p>
+Como ya vimos, la serie pasajeros en logaritmos tiene tendencia y
+estacionalidad muy evidentes. No basta con tomar solo una diferencia
+ordinaria \[\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y};\] pues
+el resultado muestra una pauta estacional. Ni tampoco basta con tomar
+solo una diferencia estacional
+\[\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B^{12}})*\boldsymbol{y};\] pues
+resulta una serie que ``deambula'', i.e., que no es <i>``estacionaria''</i>
+en media.
+</p>
+
+<p>
+Tomar una diferencia ordinaria y otra estacional
+\[\nabla\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B})*(1-\mathsf{B^{12}})*\boldsymbol{y}\]
+arroja una serie que sí parece ser <i>``estacionaria''</i>.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height =  8, repr.plot.res = 200)
+TemperaturaRetiro_ts=ts(read.csv(<span style="color: #008000;">"datos/Retiro.txt"</span>),start=c(1985, 1), end=c(2015,9), frequency=12)
+ide(TemperaturaRetiro_ts,
+    graphs = c(<span style="color: #008000;">"plot"</span>),
+    transf = list(list(), list(D = 1)),
+    main=<span style="color: #008000;">"Temperatura media en el Retiro y diferencia estacional"</span> )
+</pre>
+</div>
+
+
+<div id="orgf4e472e" class="figure">
+<p><img src="./img/lecc05/diferenciasTemperaturasRetiro.png" alt="diferenciasTemperaturasRetiro.png" width="900px" />
+</p>
+</div>
+
+
+<p>
+En el caso de la serie de temperaturas en el Parque del Retiro, parece
+que es suficiente con tomar solo una diferencia estacional.
+</p>
+</div>
+</div>
+<div id="outline-container-org7b23697" class="outline-4">
+<h4 id="org7b23697"><span class="section-number-4">2.2.2.</span> Contrastes formales sobre el orden de integración</h4>
+<div class="outline-text-4" id="text-2-2-2">
+</div>
+<ol class="org-ol">
+<li><a id="org082a1f4"></a>Test de Dickey-Fuller (DF)<br />
+<div class="outline-text-5" id="text-2-2-2-1">
+<dl class="org-dl">
+<dt>\(H_0\)</dt><dd>la serie es \(I(1)\)</dd>
+<dt>\(H_1\)</dt><dd>la serie es \(I(0)\).</dd>
+</dl>
+
+<p>
+Consideremos el modelo \[y_{t}=\rho y_{t-1}+u_{t},\] donde \(y_{t}\) es
+la variable de interés, \(\rho\) es un coeficiente, y \(u_{t}\) es un
+proceso de ruido blanco. Una raíz unitaria estará presente si \(\rho
+=1\). En tal caso el modelo será no-estacionario.
+</p>
+
+<p>
+El modelo de regresión se puede escribir como
+</p>
+
+<p>
+\[\nabla y_{t}=(\rho -1)y_{t-1}+u_{t}=\delta y_{t-1}+u_{t}\]
+</p>
+</div>
+</li>
+<li><a id="org07f1b79"></a>Test de Dickey-Fuller aumentado (ADF)<br /></li>
+</ol>
 </div>
 </div>
 </div>
 <div id="outline-container-org4c251cf" class="outline-2">
-<h2 id="org4c251cf"><span class="section-number-2">2.</span> Función de autocovarianzas y función de autocorrelación</h2>
-<div class="outline-text-2" id="text-2">
+<h2 id="org4c251cf"><span class="section-number-2">3.</span> Función de autocovarianzas y función de autocorrelación</h2>
+<div class="outline-text-2" id="text-3">
 <ul class="org-ul">
 <li>La secuencia \((\gamma_k)\) con \(k\in\mathbb{Z}\) se denomina
 <i>función de autocovarianzas</i></li>
-</ul>
-
-
-<ul class="org-ul">
 <li><p>
 La secuencia \(\{\rho_k\}\) con \(k\in\mathbb{Z}\), donde
 </p>
@@ -510,10 +834,108 @@ ambas variables.
 </p>
 </div>
 </div>
+<div id="outline-container-org92adcf0" class="outline-2">
+<h2 id="org92adcf0"><span class="section-number-2">4.</span> Otras herramientas estadísticas&#xa0;&#xa0;&#xa0;<span class="tag"><span class="C_moConR">CómoConR</span></span></h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org0e5fc85" class="outline-3">
+<h3 id="org0e5fc85"><span class="section-number-3">4.1.</span> Estadísticos descriptivos</h3>
+<div class="outline-text-3" id="text-4-1">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">library</span>(pastecs)      <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">resumen estad&#237;sticos descriptivos</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">https://cran.r-project.org/web/packages/pastecs/index.html (stat.desc)</span>
+<span style="color: #D0372D;">library</span>(knitr)        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">presentaci&#243;n de tabla resumen</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">https://cran.r-project.org/web/packages/knitr/index.html (kable)</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">https://bookdown.org/yihui/rmarkdown-cookbook/kable.html</span>
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">estad&#237;sticos principales y test de normalidad</span>
+kable(stat.desc(Z, basic=<span style="color: #6434A3;">FALSE</span>, norm=<span style="color: #6434A3;">TRUE</span>), <span style="color: #008000;">'rst'</span>)
+</pre>
+</div>
+
+<pre class="example" id="org9e3ce97">
+
+
+============  =============
+\                         x
+============  =============
+median          265.5000000
+mean            280.2986111
+SE.mean           9.9971931
+CI.mean.0.95     19.7613736
+var           14391.9172009
+std.dev         119.9663169
+coef.var          0.4279947
+skewness          0.5710676
+skew.2SE          1.4132515
+kurtosis         -0.4298441
+kurt.2SE         -0.5353818
+normtest.W        0.9519577
+normtest.p        0.0000683
+============  =============
+</pre>
+</div>
+</div>
+<div id="outline-container-org1165584" class="outline-3">
+<h3 id="org1165584"><span class="section-number-3">4.2.</span> Test de normalidad Jarque-Vera</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+<a href="https://en.wikipedia.org/wiki/Jarque%E2%80%93Bera_test">Jarque-Vera test (Wikipedia)</a>
+</p>
+
+<p>
+Podemos calcularlo con la librería <a href="https://cran.r-project.org/web/packages/moments/index.html">momments</a>:
+</p>
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">install.packages("moments")</span>
+<span style="color: #D0372D;">library</span>(moments)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Perform the Jarque-Bera test</span>
+jb_test <span style="color: #D0372D;">&lt;-</span> jarque.test(as.numeric(Z))
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Print the test result</span>
+print(jb_test)
+</pre>
+</div>
+
+<pre class="example">
+
+	Jarque-Bera Normality Test
+
+data:  as.numeric(Z)
+JB = 8.9225, p-value = 0.01155
+alternative hypothesis: greater
+
+</pre>
+
+
+<p>
+Otra librería alternativa para calcularlo: <a href="https://cran.r-project.org/web/packages/tseries/index.html">tseries</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">library</span>(tseries)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Perform the Jarque-Bera test</span>
+jb_test <span style="color: #D0372D;">&lt;-</span> jarque.bera.test(Z)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Print the test result</span>
+print(jb_test)
+</pre>
+</div>
+
+<pre class="example" id="org3765960">
+Registered S3 method overwritten by 'quantmod':
+  method            from
+  as.zoo.data.frame zoo 
+
+	Jarque Bera Test
+
+data:  Z
+X-squared = 8.9225, df = 2, p-value = 0.01155
+</pre>
+</div>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-08-20 mar 18:02</p>
+<p class="date">Created: 2024-08-24 sáb 17:33</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

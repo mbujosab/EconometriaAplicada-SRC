@@ -121,16 +121,18 @@ $$
 $$ 
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Así, podemos denotar la secuencia $\boldsymbol{x}$ de manera muy
+Así podemos denotar la secuencia $\boldsymbol{x}$ de manera muy
 compacta del siguiente modo $$\boldsymbol{x} \quad = \quad
 \sum_{t=-\infty}^\infty x_t z^t \quad\equiv\quad \boldsymbol{x}(z)$$
 *¡Pero esta expresión no es una suma!* es solo un modo de expresar una
-secuencia denominada /función generatriz/.
+secuencia. Dicha expresión se denomina /función generatriz/.
 
 *** Características de algunas secuencias
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
+
+La sucesión $\;\boldsymbol{0}=\sum_{t=-\infty}^\infty 0 z^t\;$ se denomina /sucesión nula/.
 
 En una sucesión $\boldsymbol{a}$ no nula llamamos
 - Grado :: al menor índice entero que verifica la propiedad: $$j >
@@ -149,16 +151,16 @@ Una sucesión absolutamente sumable siempre es de cuadrado sumable,
 $l_1\subset l_2$.
 
 
-*** Subespacios de $\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)$
+*** Algunos subespacios de $\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)$
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
 
-- Secuencias con final :: tienen grado (a partir de cierto índice son
+- Secuencias con final :: si tienen grado (a partir de cierto índice son
   cero).  $$\boldsymbol{a}(z) = (\ldots,\ a_{p-3},\ a_{p-2},\ a_{p-1},\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=-\infty}^p a_t z^t$$
-- Secuencias con principio :: tienen cogrado (antes de cierto índice
-  son cero).  $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2},\ a_{k+3},\ldots) = \sum_{t=k}^\infty a_t z^t$$
-  + Secuencias o [[https://en.wikipedia.org/wiki/Formal_power_series][sucesiones formales]] :: tienen cogrado $\geq 0$.
+- Secuencias con principio :: si tienen cogrado (antes de cierto índice
+  son cero).  $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2},\ a_{k+3},\ldots) = \sum_{t=k}^\infty a_t z^t\qquad k\in\mathbb{Z}$$
+  + Secuencias o [[https://en.wikipedia.org/wiki/Formal_power_series][sucesiones formales]] :: si su cogrado $\geq 0$.
     $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ a_{2},\ a_{3},\ldots) = \sum_{t=k}^\infty a_t z^t\qquad k\geq0$$
 - Polinomios :: son sucesiones formales con grado 
   $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ldots,\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=k}^p a_t z^t\qquad k\geq0$$
@@ -187,9 +189,16 @@ Además, _el producto convolución está bien definido entre dos sucesiones_:
 - _con final_ (con grado). El grado del producto es la suma de los
   respectivos grados.
 
-- _absolutamente sumables_.
+- _absolutamente sumables_ ($l_1$).
+
+*************** TODO Incluir las demos en los apuntes
 
 ** Anillos conmutativos y cuerpos
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . skip)))
+   :END:
+
+*** Anillos conmutativos
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
@@ -208,17 +217,29 @@ En cuanto al producto
  - $(\boldsymbol{a} * \boldsymbol{b}) * \boldsymbol{c} = \boldsymbol{a} * (\boldsymbol{b} * \boldsymbol{c})\;$ para todo $\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}$ en $\mathsf{S}\qquad$ (i.e. $*$ es asociativo). 
  - $\boldsymbol{a} * \boldsymbol{b} = \boldsymbol{b} * \boldsymbol{a}\;$ para todo $\boldsymbol{a}, \boldsymbol{b}$ en $\mathsf{S}\qquad$ (i.e. $*$ es conmutativo).
  - Existe un elemento $\boldsymbol{1}$ tal que $\boldsymbol{a} * \boldsymbol{1} = \boldsymbol{a}$ para todo $\boldsymbol{a}\in \mathsf{S}$.
+
+#+BEGIN_EXPORT latex
+\noindent
+El elemento $\boldsymbol{1}$ es la secuencia cuyos elementos son cero excepto un 1 en la posición cero:
+\begin{displaymath}
+\boldsymbol{1}\;=\;1z^0\;=\;(\ldots,0,0,\fbox{$1$},0,0,\ldots)
+\end{displaymath}
+#+END_EXPORT
+
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 El producto es distributivo respecto de la suma: Para todo $\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}$ en $\mathsf{S}$
  - \(\boldsymbol{a}*(\boldsymbol{b}+\boldsymbol{c})=(\boldsymbol{a}*\boldsymbol{b})+(\boldsymbol{a}*\boldsymbol{c})\;\) 
  - \((\boldsymbol{b}+\boldsymbol{c})*\boldsymbol{a}=(\boldsymbol{b}*\boldsymbol{a})+(\boldsymbol{c}*\boldsymbol{a})\;\)
 
 # https://en.wikipedia.org/wiki/Ring_(mathematics)
-
 # https://math.stackexchange.com/questions/141249/what-is-difference-between-a-ring-and-a-field
 
 
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+*** Cuerpos
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
 Un *cuerpo* es un anillo conmutativo que adicionalmente satisface:
 
 # - $\boldsymbol{1}\ne\boldsymbol{0}$
@@ -229,7 +250,7 @@ Un *cuerpo* es un anillo conmutativo que adicionalmente satisface:
   (/Todo elemento no nulo del conjunto tiene una inversa en dicho
   conjunto/)
 
-*** Clasificación de algunos subconjuntos de sucesiones 
+** Clasificación de algunos subconjuntos de sucesiones 
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . fragment)))
    :END:
@@ -243,6 +264,11 @@ Un *cuerpo* es un anillo conmutativo que adicionalmente satisface:
 
 - Son cuerpos el conjunto de :: secuencias con principio, secuencias
   con final (y el [[id:d636ae1f-28b8-470a-9001-b05f1321d5b0][Cuerpo de fracciones de polinomios]])
+
+** Inversas
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . skip)))
+   :END:
 
 *** Inversas de secuencias con principio
    :PROPERTIES:
@@ -259,15 +285,15 @@ $$b_j=
 \frac{-1}{a_k}\sum_{r=-k}^{j-1}b_r a_{j+k-r} & \text{ si } j>-k
 \end{cases}$$
 
-Por construcción, $cogrado(\boldsymbol{b})=-k$ y en consecuencia si
-$j<0$, $(\boldsymbol{a}*\boldsymbol{b})_j=0$. Obviamente,
-$(\boldsymbol{a}*\boldsymbol{b})_0=1$; y si $j>0$,
-$(\boldsymbol{a}*\boldsymbol{b})_j=0$.
+Por construcción, $cogrado(\boldsymbol{b})=-k$ y en consecuencia
+$(\boldsymbol{a}*\boldsymbol{b})_j=0$ si $j<0$. Obviamente,
+$(\boldsymbol{a}*\boldsymbol{b})_0=1$; y además
+$(\boldsymbol{a}*\boldsymbol{b})_j=0$ si $j>0$.
 
 #+BEGIN_EXPORT latex
 \medskip 
 
-Ya que
+Es así ya que
 \begin{align*}
 (\boldsymbol{a}*\boldsymbol{b})_j 
 = & \sum_{r+s=j}a_ rb_s = \sum_{r=-k}^{j-k}a_{j-r}b_r \\
@@ -307,7 +333,6 @@ Comprobación:
 \medskip
 
 #+END_EXPORT
-
 
 *** Inversas de secuencias con final
    :PROPERTIES:
@@ -357,7 +382,8 @@ Comprobación:
 Ahora sabemos que todo polinomio
 - por tener cogrado :: tiene una inversa con cogrado (con principio)
 - por tener grado :: tiene una inversa con grado (con final)
-y generalmente dichas inversas no son polinomios.
+y que dichas inversas no son de la forma $\;\sum_{t=k}^p a_t z^t\;$
+con $k\geq0$ (i.e., no son polinomios).
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 Por el ejemplo anterior sabemos que para $\;1-az\;$ ambas inversas son
@@ -369,7 +395,7 @@ Por el ejemplo anterior sabemos que para $\;1-az\;$ ambas inversas son
 Es evidente que si $|a|\ne1$ una de las inversas está en $l_1$ y la
 otra no.
 
-Y si $|a|=1$ ninguna de las inversas pertenece a $l_1$
+Pero si $|a|=1$ ninguna de las inversas pertenece a $l_1$
 
 #+BEGIN_EXPORT latex
 Además, por el \href{https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra}{Teorema fundamental del Álgebra} también sabemos que:
@@ -413,9 +439,9 @@ con $\boldsymbol{a}^{-1}=\frac{1}{\boldsymbol{a}}$.\\
 Evidentemente dicha inversa no existe si $\boldsymbol{a}$ tiene alguna raíz de módulo $1$.
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-En series temporales de un polinomio $\boldsymbol{a}$ se dice que *es invertible* si 
+En los manuales de /series temporales/ se dice que un polinomio $\boldsymbol{a}$ *es invertible* si 
 # la inversa con cogrado pertenece a $l_1$; es decir, si 
-$$\boldsymbol{a}^{-\triangleright}=\boldsymbol{a}^{-1}.$$
+$$\text{(la inversa con principio) }\;\boldsymbol{a}^{-\triangleright}=\boldsymbol{a}^{-1}\; \text{ (la inversa absolutamente sumable)}.$$
 (/si sus raíces están fuera del círculo unidad./)
 # +attr_ipynb: (slideshow . ((slide_type . fragment)))
 
@@ -445,7 +471,8 @@ Cuando las raíces del polinomio $\boldsymbol{q}$ están fuera del
 circulo unidad (i.e.,
 $\;\boldsymbol{q}^{-\triangleright}=\boldsymbol{q}^{-1}$) es habitual
 denotar la secuencia $\boldsymbol{p}*\boldsymbol{q}^{-\triangleright}$
-así $$\frac{\boldsymbol{p}(z)}{\boldsymbol{q}(z)}$$
+así $\frac{\boldsymbol{p}}{\boldsymbol{q}}$
+ $$(\boldsymbol{p}*\boldsymbol{q}^{-\triangleright})(z)=\frac{\boldsymbol{p}(z)}{\boldsymbol{q}(z)}$$
 
 ** Operador retardo $\mathsf{B}{}$ y suma de los elementos de una secuencia.
    :PROPERTIES:
@@ -483,7 +510,7 @@ Y en general, si $\boldsymbol{a}$ e $\boldsymbol{y}$ son secuencias sumables, en
 \boldsymbol{a}(\mathsf{B})y_t 
 & = (\cdots+a_{-2}\mathsf{B}^{-2},a_{-1}\mathsf{B}^{-1},a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) y_t \\
 % & = a_0 y_t + a_1 \mathsf{B}^1 y_t + a_2 \mathsf{B}^2 y_t + a_3 \mathsf{B}^3 y_t \\
-& = \cdots+a_{-2}y_{t-2}+a_{-1}y_{t-1}+a_0y_t+a_1y_{t-1}+a_2y_{t-2}+\cdots \\
+& = \cdots+a_{-2}y_{t+2}+a_{-1}y_{t+1}+a_0y_t+a_1y_{t-1}+a_2y_{t-2}+\cdots \\
 % & =\sum\nolimits_{r=0}^3 a_r y_{t-r} \\
 & =(\boldsymbol{a}*\boldsymbol{y})_t
 \end{align*}
@@ -494,7 +521,7 @@ Y en general, si $\boldsymbol{a}$ e $\boldsymbol{y}$ son secuencias sumables, en
    :END:
 
 
-Las procesos estocásticos se pueden sumar y se pueden multiplicar por
+Los procesos estocásticos se pueden sumar y se pueden multiplicar por
 escalares.
 
 Si $\boldsymbol{X}$ e $\boldsymbol{Y}$ son dos procesos estocásticos y
@@ -514,8 +541,9 @@ Recuerde que la expresión de más arriba no es una suma, es una secuencia de va
 $$\sum_{t=-\infty}^\infty X_t z^t = (\ldots,\ X_{-2},\ X_{-1},\ X_{0},\ X_{1},\ X_{2},\ldots)$$
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-Sea $\boldsymbol{a}\in l_1$ (_una secuencia absolutamente sumable_) y $\boldsymbol{X}$
-un proceso estocástico.
+Sea $\boldsymbol{a}$ una secuecia y $\boldsymbol{X}$ un proceso
+estocástico tales que $\sum_{k=-\infty}^{\infty}a_kX_{t-k}$ converge
+para todo $t$.
 
 Definimos el producto convolución ($∗$) de $\boldsymbol{a}$ con $\boldsymbol{X}$ como el proceso estocástico:
 $$\boldsymbol{a}*\boldsymbol{X}=\left(\left.\sum_{r+s=t} a_r X_s \right| t\in\mathbb{Z}\right)$$
@@ -540,12 +568,14 @@ Así, para el polinomio $\boldsymbol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3$, y el proceso
 & =(\boldsymbol{a}*\boldsymbol{Y})_t,\quad \text{para } t\in\mathbb{Z}
 \end{align*}
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Y en general, si \(\fbox{$\boldsymbol{a}\in l_1$}\), entonces
+Y en general, si $\sum_{k=-\infty}^{\infty}a_kY_{t-k}$ converge para
+todo $t$, entonces
+# si \(\fbox{$\boldsymbol{a}\in l_1$}\), entonces
 \begin{align*}
 \boldsymbol{a}(\mathsf{B})Y_t 
-& = (\cdots+a_{-2}\mathsf{B}^{-2},a_{-1}\mathsf{B}^{-1},a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) Y_t \\
+& = (\cdots+a_{-2}\mathsf{B}^{-2}+a_{-1}\mathsf{B}^{-1}+a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) Y_t \\
 % & = a_0 Y_t + a_1 \mathsf{B}^1 Y_t + a_2 \mathsf{B}^2 Y_t + a_3 \mathsf{B}^3 Y_t \\
-& = \cdots+a_{-2}Y_{t-2}+a_{-1}Y_{t-1}+a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+\cdots \\
+& = \cdots+a_{-2}Y_{t+2}+a_{-1}Y_{t+1}+a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+\cdots \\
 % & =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
 & =(\boldsymbol{a}*\boldsymbol{y})_t,\quad \text{para } t\in\mathbb{Z}
 \end{align*}

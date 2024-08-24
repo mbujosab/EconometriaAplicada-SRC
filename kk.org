@@ -44,12 +44,12 @@ head(capinfl,3)
 
 #+RESULTS:
 :RESULTS:
-|   |  capinst |       infla | index |
-|---+----------+-------------+-------|
-|   |    <dbl> |       <dbl> | <int> |
-| 1 | 93.45184 | 0.009721363 |     1 |
-| 2 | 70.16630 | 0.767510729 |     2 |
-| 3 | 75.57155 | 0.060896392 |     3 |
+|   |  capinst |     infla | index |
+|---+----------+-----------+-------|
+|   |    <dbl> |     <dbl> | <int> |
+| 1 | 67.34995 | 0.5020292 |     1 |
+| 2 | 82.58472 | 2.2084218 |     2 |
+| 3 | 72.70201 | 1.0789698 |     3 |
 #+caption: A data.frame: 3 × 3
 :END:
 
@@ -60,14 +60,14 @@ head(data_frame, 5)
 
 #+RESULTS:
 :RESULTS:
-|  obs |   GNP | Melanoma |
-|------+-------+----------|
-| 1936 | 193.0 |      1.0 |
-| 1937 | 203.2 |      0.8 |
-| 1938 | 192.9 |      0.8 |
-| 1939 | 209.4 |      1.4 |
-| 1940 | 227.2 |      1.2 |
-#+caption: A matrix: 5 × 3 of type dbl
+|   GNP | Melanoma |
+|-------+----------|
+| 193.0 |      1.0 |
+| 203.2 |      0.8 |
+| 192.9 |      0.8 |
+| 209.4 |      1.4 |
+| 227.2 |      1.2 |
+#+caption: A matrix: 5 × 2 of type dbl
 |   obs |   GNP | Melanoma |
 |-------+-------+----------|
 | <dbl> | <dbl> |    <dbl> |
@@ -87,8 +87,47 @@ data_frame['GNP']
 
 #+RESULTS:
 :RESULTS:
-#+attr_org: :width 1200 :height 400
-[[./.ob-jupyter/0fc71b38df2f16f7a7beb1142c331f61fde7c3c8.png]]
+|   GNP |
+|-------|
+| <dbl> |
+| 193.0 |
+| 203.2 |
+| 192.9 |
+| 209.4 |
+| 227.2 |
+| 263.7 |
+| 297.8 |
+| 337.1 |
+| 361.3 |
+| 355.2 |
+| 312.6 |
+| 309.9 |
+| 323.7 |
+| 324.1 |
+| 355.3 |
+| 383.4 |
+| 395.1 |
+| 412.8 |
+| 407.0 |
+| 438.0 |
+| 446.1 |
+| 452.5 |
+| 447.3 |
+| 475.9 |
+| 487.7 |
+| 497.2 |
+| 529.8 |
+| 551.0 |
+| 581.1 |
+| 617.8 |
+| 658.1 |
+| 675.2 |
+| 706.6 |
+| 725.6 |
+| 722.5 |
+| 746.3 |
+| 792.5 |
+#+caption: A tibble: 37 × 1
 :END:
 
 
@@ -111,7 +150,7 @@ doubleYScale(obj1, obj2, add.ylab2 = TRUE)
 #+RESULTS:
 :RESULTS:
 #+attr_org: :width 1200 :height 400
-[[./.ob-jupyter/5e4361de77bc86e0227d123f9abaeb87df7070c1.png]]
+[[./.ob-jupyter/67bf10804c559f5e646426645f2fd8fe74f8ead2.png]]
 :END:
 
 
@@ -121,12 +160,12 @@ head(capinfl,3)
 
 #+RESULTS:
 :RESULTS:
-|   |  capinst |       infla | index |
-|---+----------+-------------+-------|
-|   |    <dbl> |       <dbl> | <int> |
-| 1 | 93.45184 | 0.009721363 |     1 |
-| 2 | 70.16630 | 0.767510729 |     2 |
-| 3 | 75.57155 | 0.060896392 |     3 |
+|   |  capinst |     infla | index |
+|---+----------+-----------+-------|
+|   |    <dbl> |     <dbl> | <int> |
+| 1 | 67.34995 | 0.5020292 |     1 |
+| 2 | 82.58472 | 2.2084218 |     2 |
+| 3 | 72.70201 | 1.0789698 |     3 |
 #+caption: A data.frame: 3 × 3
 :END:
 
@@ -155,7 +194,7 @@ p
 #+RESULTS:
 :RESULTS:
 #+attr_org: :width 1200 :height 400
-[[./.ob-jupyter/a5e52ae62b2355e72c8275bc37bec5f489917048.png]]
+[[./.ob-jupyter/e3cd9af1d58dccf7c67ac0bcdc5bacdcb72da4d8.png]]
 :END:
 
 
@@ -179,6 +218,49 @@ data_frame %>%
   theme(legend.title=element_blank())
 #+END_SRC
 
+#+RESULTS:
+:RESULTS:
+#+begin_example
+yter-R
+grafico <- ggplot(datos_ts, aes(x = time)) +
+  geom_line(aes(y = GNP), color = "red") +
+  geom_line(aes(y = Melanoma), color = "blue")
+grafico
+,#+END_SRC
+
+
+
+,#+BEGIN_SRC jupyter-R
+plot(datos_ts[, "obs"], datos_ts[, "GNP"], type = "l", col = "red", ylab = "Variable 1")
+axis(side = 2, # Crea el eje y derecho
+     x = datos_ts[, "obs"], 
+     y = datos_ts[, "Melanoma"], 
+     col = "blue", 
+     ylab = "Variable 2")
+,#+END_SRC
+
+,#+RESULTS:
+:RESULTS:
+: Warning message in axis(side = 2, x = datos_ts[, "obs"], y = datos_ts[, "Melanoma"], :
+: “"x" is not a graphical parameter”
+: Warning message in axis(side = 2, x = datos_ts[, "obs"], y = datos_ts[, "Melanoma"], :
+: “"y" is not a graphical parameter”
+,#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/05ed965669d86e84f4e997edf33f80bd6df505af.png]]
+: Error in library(hrbrthemes): there is no package called ‘hrbrthemes’
+: Traceback:
+: 
+: 1. library(hrbrthemes)
+:END:
+
+
+,#+BEGIN_SRC jupyter-R
+plot(datos_ts[, "GNP"], datos_ts[, "Melanoma"], type = "l", col = "red", ylab = "Variable 1")
+lines(datos_ts[, "GNP"], datos_ts[, "
+#+end_example
+# [goto error]
+:END:
+
 
 #+BEGIN_SRC jupyter-R
 grafico <- ggplot(datos_ts, aes(x = time)) +
@@ -187,157 +269,11 @@ grafico <- ggplot(datos_ts, aes(x = time)) +
 grafico
 #+END_SRC
 
-
-
-#+BEGIN_SRC jupyter-R
-plot(datos_ts[, "obs"], datos_ts[, "GNP"], type = "l", col = "red", ylab = "Variable 1")
-axis(side = 2, # Crea el eje y derecho
-     x = datos_ts[, "obs"], 
-     y = datos_ts[, "Melanoma"], 
-     col = "blue", 
-     ylab = "Variable 2")
-#+END_SRC
-
 #+RESULTS:
-:RESULTS:
-: Warning message in axis(side = 2, x = datos_ts[, "obs"], y = datos_ts[, "Melanoma"], :
-: “"x" is not a graphical parameter”
-: Warning message in axis(side = 2, x = datos_ts[, "obs"], y = datos_ts[, "Melanoma"], :
-: “"y" is not a graphical parameter”
-#+attr_org: :width 1200 :height 400
-[[./.ob-jupyter/05ed965669d86e84f4e997edf33f80bd6df505af.png]]
-:END:
-
-
-#+BEGIN_SRC jupyter-R
-plot(datos_ts[, "GNP"], datos_ts[, "Melanoma"], type = "l", col = "red", ylab = "Variable 1")
-lines(datos_ts[, "GNP"], datos_ts[, "Melanoma"], col = "blue", ylab = "Variable 2")
-#+END_SRC
-
-#+RESULTS:
-:RESULTS:
-# [goto error]
-: Error in plot.xy(xy.coords(x, y), type = type, ...): invalid plot type
-: Traceback:
-: 
-: 1. lines(datos_ts[, "GNP"], datos_ts[, "Melanoma"], col = "blue", 
-:  .     ylab = "Variable 2")
-: 2. lines.ts(datos_ts[, "GNP"], datos_ts[, "Melanoma"], col = "blue", 
-:  .     ylab = "Variable 2")
-: 3. lines.default(time(as.ts(x)), x, ...)
-: 4. plot.xy(xy.coords(x, y), type = type, ...)
-: 5. stop(gettextf("invalid plot type"))
-#+attr_org: :width 1200 :height 400
-[[./.ob-jupyter/9c2b2fe611b2c5fb95ac6430cac47448204e7f0f.png]]
-:END:
-
-
-#+BEGIN_SRC jupyter-R
-scaleFactor <- max(data_frame$GNP) / max(data_frame$Melanoma)
-scaleFactor
-#ggplot(data) 
-#  geom_col() +
-#  geom_line(aes(y = a + Temp*b), color = "red") +
-#  scale_y_continuous("Precipitation", sec.axis = sec_axis(~ (. - a)/b, name = "Temperature")) +
-#  scale_x_continuous("Month", breaks = 1:12) +
-#  ggtitle("Climatogram for Oslo (1961-1990)")  
-#+END_SRC
-
-#+RESULTS:
-:RESULTS:
-149.528301886792
-:END:
-
-
-#+BEGIN_SRC jupyter-R
-library(ggplot2)
-library(scales)
-
-# Function factory for secondary axis transforms
-train_sec <- function(primary, secondary, na.rm = TRUE) {
-  # Thanks Henry Holm for including the na.rm argument!
-  from <- range(secondary, na.rm = na.rm)
-  to   <- range(primary, na.rm = na.rm)
-  # Forward transform for the data
-  forward <- function(x) {
-    rescale(x, from = from, to = to)
-  }
-  # Reverse transform for the secondary axis
-  reverse <- function(x) {
-    rescale(x, from = to, to = from)
-  }
-  list(fwd = forward, rev = reverse)
-}
-#+END_SRC
-
-#+RESULTS:
-
-#+BEGIN_SRC jupyter-R
-# Rescaling the maximum
-sec <- with(data, train_sec(c(0, max(data[,'GNP'])),
-                            c(0, max(data[,'Melanoma']))))
-sec
-#+END_SRC
-
-#+RESULTS:
-:RESULTS:
-# [goto error]
-: Error in eval(substitute(expr), data, enclos = parent.frame()): argumento 'envir' númerico no tiene longitud uno
-: Traceback:
-: 
-: 1. with(data, train_sec(c(0, max(data[, "GNP"])), c(0, max(data[, 
-:  .     "Melanoma"]))))
-: 2. with.default(data, train_sec(c(0, max(data[, "GNP"])), c(0, max(data[, 
-:  .     "Melanoma"]))))
-: 3. eval(substitute(expr), data, enclos = parent.frame())
-:END:
-
-
-#+BEGIN_SRC jupyter-R
-# Rescaling the maximum
-sec <- with(data, train_sec(c(0, max(data[,'GNP'])),
-                            c(0, max(data[,'Melanoma']))))
-
-ggplot(data, aes(date)) +
-  geom_line(aes(y = GNP), colour = "blue") +
-  geom_line(aes(y = sec$fwd(Melanoma)), colour = "red") +
-  scale_y_continuous(sec.axis = sec_axis(~sec$rev(.), name = "Melanoma"))
-
-#+END_SRC
-
-#+RESULTS:
-:RESULTS:
-# [goto error]
-: Error in eval(substitute(expr), data, enclos = parent.frame()): argumento 'envir' númerico no tiene longitud uno
-: Traceback:
-: 
-: 1. with(data, train_sec(c(0, max(data[, "GNP"])), c(0, max(data[, 
-:  .     "Melanoma"]))))
-: 2. with.default(data, train_sec(c(0, max(data[, "GNP"])), c(0, max(data[, 
-:  .     "Melanoma"]))))
-: 3. eval(substitute(expr), data, enclos = parent.frame())
-:END:
-
-
-
-#+BEGIN_SRC jupyter-R
-scaleFactor <- max(data[,'GNP']) / max(data[,'Melanoma'])
-scaleFactor
-
-ggplot(data, aes(x = time)) #+
-  geom_line(aes(y = GNP), color = "red") +
-  geom_line(aes(y = Melanoma), ylab = "Variable 2", axis.title.y = element_text(hjust = 1), color = "blue") #+
-  scaleYright(name = "Variable 1")
-
-#+END_SRC
-
-#+RESULTS:
-:RESULTS:
-149.528301886792
 #+begin_example
 Don't know how to automatically pick scale for object of type <function>.
 Defaulting to continuous.
-ERROR while rich displaying an object: Error in `geom_blank()`:
+ERROR while rich displaying an object: Error in `geom_line()`:
 ! Problem while computing aesthetics.
 ℹ Error occurred in the 1st layer.
 Caused by error in `compute_aesthetics()`:
@@ -678,25 +614,178 @@ Traceback:
 32. rlang::abort(message, ..., call = call, use_cli_format = TRUE, 
   .     .frame = .frame)
 33. signal_abort(cnd, .file)
-Warning message in geom_line(aes(y = Melanoma), ylab = "Variable 2", axis.title.y = element_text(hjust = 1), :
-“Ignoring unknown parameters: `ylab` and `axis.title.y`”
 #+end_example
-# [goto error]
-#+begin_example
-Error:
-! Cannot add <ggproto> objects together
-ℹ Did you forget to add this object to a <ggplot> object?
-Traceback:
 
-1. `+.gg`(geom_line(aes(y = GNP), color = "red"), geom_line(aes(y = Melanoma), 
- .     ylab = "Variable 2", axis.title.y = element_text(hjust = 1), 
- .     color = "blue"))
-2. cli::cli_abort(c("Cannot add {.cls ggproto} objects together", 
- .     i = "Did you forget to add this object to a {.cls ggplot} object?"))
-3. rlang::abort(message, ..., call = call, use_cli_format = TRUE, 
- .     .frame = .frame)
-4. signal_abort(cnd, .file)
+
+
+#+BEGIN_SRC jupyter-R
+plot(datos_ts[, "obs"], datos_ts[, "GNP"], type = "l", col = "red", ylab = "Variable 1")
+axis(side = 2, # Crea el eje y derecho
+     x = datos_ts[, "obs"], 
+     y = datos_ts[, "Melanoma"], 
+     col = "blue", 
+     ylab = "Variable 2")
+#+END_SRC
+
+#+RESULTS:
+: Error in `[.default`(datos_ts, , "obs"): subíndice fuera de  los límites
+: Traceback:
+: 
+: 1. plot(datos_ts[, "obs"], datos_ts[, "GNP"], type = "l", col = "red", 
+:  .     ylab = "Variable 1")
+: 2. datos_ts[, "obs"]
+: 3. `[.ts`(datos_ts, , "obs")
+:RESULTS:
+# [goto error]
+:END:
+:RESULTS:
+: Warning message in axis(side = 2, x = datos_ts[, "obs"], y = datos_ts[, "Melanoma"], :
+: “"x" is not a graphical parameter”
+: Warning message in axis(side = 2, x = datos_ts[, "obs"], y = datos_ts[, "Melanoma"], :
+: “"y" is not a graphical parameter”
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/05ed965669d86e84f4e997edf33f80bd6df505af.png]]
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+plot(datos_ts[, "GNP"], datos_ts[, "Melanoma"], type = "l", col = "red", ylab = "Variable 1")
+lines(datos_ts[, "GNP"], datos_ts[, "Melanoma"], col = "blue", ylab = "Variable 2")
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# [goto error]
+: Error in plot.xy(xy.coords(x, y), type = type, ...): invalid plot type
+: Traceback:
+: 
+: 1. lines(datos_ts[, "GNP"], datos_ts[, "Melanoma"], col = "blue", 
+:  .     ylab = "Variable 2")
+: 2. lines.ts(datos_ts[, "GNP"], datos_ts[, "Melanoma"], col = "blue", 
+:  .     ylab = "Variable 2")
+: 3. lines.default(time(as.ts(x)), x, ...)
+: 4. plot.xy(xy.coords(x, y), type = type, ...)
+: 5. stop(gettextf("invalid plot type"))
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/9c2b2fe611b2c5fb95ac6430cac47448204e7f0f.png]]
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+scaleFactor <- max(data_frame$GNP) / max(data_frame$Melanoma)
+scaleFactor
+#ggplot(data) 
+#  geom_col() +
+#  geom_line(aes(y = a + Temp*b), color = "red") +
+#  scale_y_continuous("Precipitation", sec.axis = sec_axis(~ (. - a)/b, name = "Temperature")) +
+#  scale_x_continuous("Month", breaks = 1:12) +
+#  ggtitle("Climatogram for Oslo (1961-1990)")  
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+149.528301886792
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+library(ggplot2)
+library(scales)
+
+# Function factory for secondary axis transforms
+train_sec <- function(primary, secondary, na.rm = TRUE) {
+  # Thanks Henry Holm for including the na.rm argument!
+  from <- range(secondary, na.rm = na.rm)
+  to   <- range(primary, na.rm = na.rm)
+  # Forward transform for the data
+  forward <- function(x) {
+    rescale(x, from = from, to = to)
+  }
+  # Reverse transform for the secondary axis
+  reverse <- function(x) {
+    rescale(x, from = to, to = from)
+  }
+  list(fwd = forward, rev = reverse)
+}
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+
+Attaching package: ‘scales’
+
+The following object is masked from ‘package:purrr’:
+
+    discard
+The following object is masked from ‘package:readr’:
+
+    col_factor
 #+end_example
+
+#+BEGIN_SRC jupyter-R
+# Rescaling the maximum
+sec <- with(data, train_sec(c(0, max(data[,'GNP'])),
+                            c(0, max(data[,'Melanoma']))))
+sec
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# [goto error]
+: Error in eval(substitute(expr), data, enclos = parent.frame()): invalid 'envir' argument of type 'closure'
+: Traceback:
+: 
+: 1. with(data, train_sec(c(0, max(data[, "GNP"])), c(0, max(data[, 
+:  .     "Melanoma"]))))
+: 2. with.default(data, train_sec(c(0, max(data[, "GNP"])), c(0, max(data[, 
+:  .     "Melanoma"]))))
+: 3. eval(substitute(expr), data, enclos = parent.frame())
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+# Rescaling the maximum
+sec <- with(data, train_sec(c(0, max(data[,'GNP'])),
+                            c(0, max(data[,'Melanoma']))))
+
+ggplot(data, aes(date)) +
+  geom_line(aes(y = GNP), colour = "blue") +
+  geom_line(aes(y = sec$fwd(Melanoma)), colour = "red") +
+  scale_y_continuous(sec.axis = sec_axis(~sec$rev(.), name = "Melanoma"))
+
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# [goto error]
+: Error in eval(substitute(expr), data, enclos = parent.frame()): invalid 'envir' argument of type 'closure'
+: Traceback:
+: 
+: 1. with(data, train_sec(c(0, max(data[, "GNP"])), c(0, max(data[, 
+:  .     "Melanoma"]))))
+: 2. with.default(data, train_sec(c(0, max(data[, "GNP"])), c(0, max(data[, 
+:  .     "Melanoma"]))))
+: 3. eval(substitute(expr), data, enclos = parent.frame())
+:END:
+
+
+
+#+BEGIN_SRC jupyter-R
+scaleFactor <- max(data[,'GNP']) / max(data[,'Melanoma'])
+scaleFactor
+
+ggplot(data, aes(x = time)) #+
+  geom_line(aes(y = GNP), color = "red") +
+  geom_line(aes(y = Melanoma), ylab = "Variable 2", axis.title.y = element_text(hjust = 1), color = "blue") #+
+  scaleYright(name = "Variable 1")
+
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# [goto error]
+: Error in data[, "GNP"]: objeto de tipo 'closure' no es subconjunto
+: Traceback:
 :END:
 
 
@@ -1064,9 +1153,6 @@ library(ggfortify)
 #+END_SRC
 
 #+RESULTS:
-: Installing packages into ‘/home/marcos/R/x86_64-pc-linux-gnu-library/4.2’
-: (as ‘lib’ is unspecified)
-: 
 
 #+BEGIN_SRC jupyter-R
 autoplot(ts( data ),
@@ -1075,8 +1161,12 @@ autoplot(ts( data ),
 
 #+RESULTS:
 :RESULTS:
-#+attr_org: :width 1200 :height 400
-[[./.ob-jupyter/61c2344a53103fa616ce41035315f7c9e3d42841.png]]
+# [goto error]
+: Error in attr(data, "tsp") <- c(start, end, frequency): objeto no es una matriz
+: Traceback:
+: 
+: 1. autoplot(ts(data), facets = FALSE)
+: 2. ts(data)
 :END:
 
 
@@ -1093,8 +1183,12 @@ plot(data,
 
 #+RESULTS:
 :RESULTS:
-#+attr_org: :width 1200 :height 400
-[[./.ob-jupyter/cd76a7ce844e5a0fb48003b6dd52fadb5553afb1.png]]
+# [goto error]
+: Error in data$GNP: objeto de tipo 'closure' no es subconjunto
+: Traceback:
+: 
+: 1. plot(data, data$GNP, type = "l", col = 2, ylim = c(-15, 40), 
+:  .     xlab = "Year", ylab = "Values")
 :END:
 
 #+BEGIN_SRC jupyter-R
@@ -1108,8 +1202,19 @@ plot(data,
 
 #+RESULTS:
 :RESULTS:
-#+attr_org: :width 1200 :height 400
-[[./.ob-jupyter/cd76a7ce844e5a0fb48003b6dd52fadb5553afb1.png]]
+: Warning message in x(x):
+: “data set ‘x’ not found”
+# [goto error]
+: Error in curve(expr = x, from = from, to = to, xlim = xlim, ylab = ylab, : 'expr' did not evaluate to an object of length 'n'
+: Traceback:
+: 
+: 1. plot(data, type = "l", col = 2, ylim = c(-15, 40), xlab = "Year", 
+:  .     ylab = "Values")
+: 2. plot.function(data, type = "l", col = 2, ylim = c(-15, 40), xlab = "Year", 
+:  .     ylab = "Values")
+: 3. curve(expr = x, from = from, to = to, xlim = xlim, ylab = ylab, 
+:  .     ...)
+: 4. stop("'expr' did not evaluate to an object of length 'n'")
 :END:
 
 
@@ -1128,31 +1233,45 @@ Z <- AirPassengers
 #+END_SRC
 
 Representación de la serie temporal y su gráfico /rango-media/
-#+BEGIN_SRC jupyter-R :results file silent :output-dir ./img/ :file foo.png  :exports code
+#+BEGIN_SRC jupyter-R 
 ide(Z, graphs = c("plot", "rm"))
 #+END_SRC
 
-[[./img/foo.png]]
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/68b9d7b5288c5bd341357a7204ac7c84ab2b4dd2.png]]
+:END:
+
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 
 Más gráficos (en este caso voy a ocultar el código en la presentación
 =html=).
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-R :results file silent :output-dir ./img/ :file fuu.png  :exports code
+#+BEGIN_SRC jupyter-R 
 ide(Z, transf = list(list(bc = TRUE, S = TRUE), list(bc = TRUE, d = 1, D = 1)))
 #+END_SRC
 
-
-[[./img/fuu.png]]
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 400
+[[./.ob-jupyter/8071a1e0a8f563db61554d1cdaa92919fa01f58d.png]]
+:END:
 
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 #+name: ides_de_transformaciones
-#+BEGIN_SRC jupyter-R :file ./img/idesVarios.png :exports code :results silent
+#+BEGIN_SRC jupyter-R 
 options(repr.plot.width = 12, repr.plot.height = 8, repr.plot.res = 200)
 ide(Z, transf = list(list(bc = T), list(bc = T, S = 1), list(bc = T, D = 1), list(bc = T, D = 1, d = 1)))
 #+END_SRC
+
+#+RESULTS: ides_de_transformaciones
+:RESULTS:
+#+attr_org: :width 1200 :height 800
+[[./.ob-jupyter/539c7e3a9fe10432b40e89102d75917f9c17c158.png]]
+:END:
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 
