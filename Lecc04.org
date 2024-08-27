@@ -52,9 +52,12 @@
 
 
 #+BEGIN_ABSTRACT
-En esta lección veremos algunos conceptos algebraicos relacionados con
-la modelización de series temporales.
+En esta lección veremos conceptos algebraicos usados en la
+modelización de series temporales.
 #+END_ABSTRACT
+
+# - [[https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc04.html][lección en html]]
+# - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc04.ipynb][lección en mybinder]]
 
 ***** COMMENT para Jupyter-Notebook                               :noexports:
 \(
@@ -64,12 +67,10 @@ la modelización de series temporales.
 \)
 
 
-
 * Secuencias de números
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
-
 
 ** El espacio vectorial de las secuencias infinitas $\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)$
 
@@ -96,7 +97,6 @@ $$\boldsymbol{x}+\boldsymbol{y}=(x_t+y_t \mid t\in\mathbb{Z})$$ y
 $$a\boldsymbol{x}=\big(a(x_t) \mid t\in\mathbb{Z}\big).$$ El conjunto
 ${\mathbb{R}}^\mathbb{Z}$ junto con la suma elemento a elemento y el
 producto por escalares constituyen un espacio vectorial.
-
 
 *** Notación mediante funciones generatrices
    :PROPERTIES:
@@ -145,11 +145,10 @@ En una sucesión $\boldsymbol{a}$ no nula llamamos
   $\;(cogrado(\boldsymbol{0}) = \infty)$.
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 Una sucesión $\boldsymbol{a}$ es 
-- Absolutamente sumable ($l_1$) :: si $\quad\sum_{t=-\infty}^\infty |a_t| < \infty$
-- De cuadrado sumable ($l_2$) ::   si $\quad\sum_{t=-\infty}^\infty a_t^2 < \infty$
+- Absolutamente sumable ($\ell^1$) :: si $\quad\sum_{t=-\infty}^\infty |a_t| < \infty$
+- De cuadrado sumable ($\ell^2$) ::   si $\quad\sum_{t=-\infty}^\infty a_t^2 < \infty$
 Una sucesión absolutamente sumable siempre es de cuadrado sumable,
-$l_1\subset l_2$.
-
+$\ell^1\subset \ell^2$.
 
 *** Algunos subespacios de $\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)$
    :PROPERTIES:
@@ -165,7 +164,6 @@ $l_1\subset l_2$.
 - Polinomios :: son sucesiones formales con grado 
   $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ldots,\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=k}^p a_t z^t\qquad k\geq0$$
   (p.e. $\;a_0+a_1z+a_2z^2\;$ es un polinomio de grado 2).
-
 
 ** Producto convolución
    :PROPERTIES:
@@ -189,7 +187,7 @@ Además, _el producto convolución está bien definido entre dos sucesiones_:
 - _con final_ (con grado). El grado del producto es la suma de los
   respectivos grados.
 
-- _absolutamente sumables_ ($l_1$).
+- _absolutamente sumables_ ($\ell^1$).
 
 *************** TODO Incluir las demos en los apuntes
 
@@ -234,7 +232,6 @@ El producto es distributivo respecto de la suma: Para todo $\boldsymbol{a}, \bol
 # https://en.wikipedia.org/wiki/Ring_(mathematics)
 # https://math.stackexchange.com/questions/141249/what-is-difference-between-a-ring-and-a-field
 
-
 *** Cuerpos
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
@@ -256,7 +253,7 @@ Un *cuerpo* es un anillo conmutativo que adicionalmente satisface:
    :END:
 
 - Son anillos el conjunto de :: sucesiones formales (cogrado $\geq0$), polinomios y
-  $l_1$.
+  $\ell^1$.
 
   Para algunas sucesiones (no nulas) de estos subconjuntos o no existe
   inversa o, cuando existe, es una sucesión de otro tipo (p.e. las
@@ -392,10 +389,10 @@ Por el ejemplo anterior sabemos que para $\;1-az\;$ ambas inversas son
 
 - $(1-az)^{\blacktriangleleft-}=\sum_{j=-\infty}^{-1} -a^j z^j \quad=\quad (\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{0},\ldots)$
 
-Es evidente que si $|a|\ne1$ una de las inversas está en $l_1$ y la
+Es evidente que si $|a|\ne1$ una de las inversas está en $\ell^1$ y la
 otra no.
 
-Pero si $|a|=1$ ninguna de las inversas pertenece a $l_1$
+Pero si $|a|=1$ ninguna de las inversas pertenece a $\ell^1$
 
 #+BEGIN_EXPORT latex
 Además, por el \href{https://en.wikipedia.org/wiki/Fundamental_theorem_of_algebra}{Teorema fundamental del Álgebra} también sabemos que:
@@ -422,13 +419,13 @@ $$\boldsymbol{a}=\boldsymbol{b}*\boldsymbol{c}$$
 Como tanto los polinomios $\boldsymbol{a}$, $\boldsymbol{b}$ y
 $\boldsymbol{c}$ como las inversas
 $\boldsymbol{b}^{\blacktriangleleft-}$ y
-$\boldsymbol{c}^{-\triangleright}$ pertenecen al anillo $l_1$,
+$\boldsymbol{c}^{-\triangleright}$ pertenecen al anillo $\ell^1$,
 $$\boldsymbol{a}*(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})
 =(\boldsymbol{b}*\boldsymbol{c})*(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})
 =\boldsymbol{b}*\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}*\boldsymbol{c}^{-\triangleright}=\boldsymbol{1}*\boldsymbol{1}=\boldsymbol{1}.$$
 La secuencia
 $\;(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})\;$
-es "la" inversa de $\boldsymbol{a}$ en $l_1$.
+es "la" inversa de $\boldsymbol{a}$ en $\ell^1$.
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 En general, dicha inversa no tiene grado ni cogrado y se denota
@@ -440,10 +437,29 @@ Evidentemente dicha inversa no existe si $\boldsymbol{a}$ tiene alguna raíz de 
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 En los manuales de /series temporales/ se dice que un polinomio $\boldsymbol{a}$ *es invertible* si 
-# la inversa con cogrado pertenece a $l_1$; es decir, si 
+# la inversa con cogrado pertenece a $\ell^1$; es decir, si 
 $$\text{(la inversa con principio) }\;\boldsymbol{a}^{-\triangleright}=\boldsymbol{a}^{-1}\; \text{ (la inversa absolutamente sumable)}.$$
 (/si sus raíces están fuera del círculo unidad./)
-# +attr_ipynb: (slideshow . ((slide_type . fragment)))
+#+latex:\bigskip
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+*Hay infinitas inversas.* Si una secuencia tiene dos inversas,
+entonces tiene infinitas.
+
+Sean $\boldsymbol{a}$, $\boldsymbol{b}$ y $\boldsymbol{d}$ secuencias
+tales que $\;\boldsymbol{a}*\boldsymbol{b}=\boldsymbol{1}\;$ y
+$\;\boldsymbol{a}*\boldsymbol{d}=\boldsymbol{1};\;$ y sean $\beta$ y
+$\delta$ dos escalares tales que $\beta+\delta=1$. Entonces
+
+$$\boldsymbol{a}*\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)=
+\beta(\boldsymbol{a}*\boldsymbol{b})+\delta(\boldsymbol{a}*\boldsymbol{d})=
+\beta\boldsymbol{1}+\delta\boldsymbol{1}=
+(\beta+\delta)\boldsymbol{1}=\boldsymbol{1}$$
+# \boldsymbol{a}*(\beta\boldsymbol{b})+\boldsymbol{a}*(\delta\boldsymbol{d})=
+
+Por tanto, para $\beta$ y $\delta$ tales que $\beta+\delta=1$, sabemos
+que $\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)$ es otra
+inversa de $\boldsymbol{a}$.
 
 *** Cuerpo de fracciones de polinomios
    :PROPERTIES:
@@ -515,7 +531,7 @@ Y en general, si $\boldsymbol{a}$ e $\boldsymbol{y}$ son secuencias sumables, en
 & =(\boldsymbol{a}*\boldsymbol{y})_t
 \end{align*}
 
-* Procesos estocásticos
+* Procesos estocásticos y notación
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
@@ -525,31 +541,37 @@ Los procesos estocásticos se pueden sumar y se pueden multiplicar por
 escalares.
 
 Si $\boldsymbol{X}$ e $\boldsymbol{Y}$ son dos procesos estocásticos y
-$\;a\in\mathbb{R}$, entonces $$\boldsymbol{X}+\boldsymbol{Y}=(X_t+Y_t \mid
-t\in\mathbb{Z})$$ y $$a\boldsymbol{X}=\big(a(X_t) \mid t\in\mathbb{Z}\big).$$
-El conjunto de procesos estocásticos junto con la suma elemento a
-elemento y el producto por escalares constituyen un espacio vectorial.
+$\;a\in\mathbb{R}$, entonces $$\boldsymbol{X}+\boldsymbol{Y}=(X_t+Y_t
+\mid t\in\mathbb{Z})\qquad\text{y}\qquad a\boldsymbol{X}=\big(a(X_t)
+\mid t\in\mathbb{Z}\big).$$ El conjunto de procesos estocásticos junto
+con la suma elemento a elemento y el producto por escalares
+constituyen un espacio vectorial.
+#+latex:\smallskip
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 Consideremos el proceso estocástico 
 $$\boldsymbol{X}=(X_t \mid t=0,\pm1,\pm2,\ldots).$$
 
-Al igual que con las secuencias, podemos denotar el proceso
-estocástico con una función generatriz 
-$$\boldsymbol{X} \quad = \quad \sum_{t=-\infty}^\infty X_t z^t \quad\equiv\quad \boldsymbol{X}(z)$$
-Recuerde que la expresión de más arriba no es una suma, es una secuencia de variables aleatorias
-$$\sum_{t=-\infty}^\infty X_t z^t = (\ldots,\ X_{-2},\ X_{-1},\ X_{0},\ X_{1},\ X_{2},\ldots)$$
+Lo podemos denotar con una función generatriz (como hicimos con las
+secuencias) $$\boldsymbol{X} \quad = \quad \sum_{t=-\infty}^\infty X_t
+z^t \quad\equiv\quad \boldsymbol{X}(z)$$ Recuerde que esto no es una
+suma; es una secuencia de variables aleatorias
+$$\sum_{t=-\infty}^\infty X_t z^t = (\ldots,\ X_{-2},\ X_{-1},\
+X_{0},\ X_{1},\ X_{2},\ldots)$$
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-Sea $\boldsymbol{a}$ una secuecia y $\boldsymbol{X}$ un proceso
-estocástico tales que $\sum_{k=-\infty}^{\infty}a_kX_{t-k}$ converge
-para todo $t$.
+Sea $\boldsymbol{a}$ una secuencia de números y $\boldsymbol{X}$ un
+proceso estocástico tales que _la suma_
+$\sum\limits_{k=-\infty}^{\infty}a_kX_{t-k}\;$ _converge_ para todo
+$t.\;$ Entonces:
+#+latex:\smallskip
 
 Definimos el producto convolución ($∗$) de $\boldsymbol{a}$ con $\boldsymbol{X}$ como el proceso estocástico:
 $$\boldsymbol{a}*\boldsymbol{X}=\left(\left.\sum_{r+s=t} a_r X_s \right| t\in\mathbb{Z}\right)$$
 es decir
 $$(\boldsymbol{a}*\boldsymbol{X})_t=\sum_{r+s=t} a_r X_s,\quad \text{para } t\in\mathbb{Z}.$$
 Por tanto, cada elemento de $(\boldsymbol{a}*\boldsymbol{X})$ es una combinación de variables aleatorias de $\boldsymbol{X}$
+#+latex:\smallskip
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 Podemos aplicar el operador $\mathsf{B}$ sobre los elementos de un proceso estocástico $\boldsymbol{X}$.
@@ -568,9 +590,9 @@ Así, para el polinomio $\boldsymbol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3$, y el proceso
 & =(\boldsymbol{a}*\boldsymbol{Y})_t,\quad \text{para } t\in\mathbb{Z}
 \end{align*}
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Y en general, si $\sum_{k=-\infty}^{\infty}a_kY_{t-k}$ converge para
-todo $t$, entonces
-# si \(\fbox{$\boldsymbol{a}\in l_1$}\), entonces
+Y en general, si la suma $\sum\limits_{k=-\infty}^{\infty}a_kY_{t-k}$
+converge para todo $t$, entonces
+# si \(\fbox{$\boldsymbol{a}\in \ell^1$}\), entonces
 \begin{align*}
 \boldsymbol{a}(\mathsf{B})Y_t 
 & = (\cdots+a_{-2}\mathsf{B}^{-2}+a_{-1}\mathsf{B}^{-1}+a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) Y_t \\
@@ -581,23 +603,3 @@ todo $t$, entonces
 \end{align*}
 
 
-** Función de autocovarianzas y función de autocorrelación
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . slide)))
-   :END:
-- La secuencia $(\gamma_k)$ con $k\in\mathbb{Z}$ se denomina
-  /función de autocovarianzas/
-
-
-- La secuencia $\{\rho_k\}$ con $k\in\mathbb{Z}$, donde
-     
-  $$\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0} $$
-   
-  #+LATEX: \newline  \noindent
-  se denomina /función de autocorrelación/ (ACF).
-
-#+attr_ipynb: (slideshow . ((slide_type . fragment)))
-#+LATEX: \newline  \noindent
-Debido a la estacionariedad, la correlación entre $X_t$ y $X_{t+k}$ no
-depende de $t$; tan solo depende de la distancia temporal $k$ entre
-ambas variables.

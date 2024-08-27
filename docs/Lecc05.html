@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
 <head>
-<!-- 2024-08-24 sáb 17:33 -->
+<!-- 2024-08-27 mar 22:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 5</title>
@@ -238,41 +238,44 @@
 </li>
 </ul>
 </li>
-<li><a href="#org0826560">1. Introducción a la modelización de series temporales</a></li>
-<li><a href="#org16cfdb9">Correlación serial vs muestreo aleatorio simple</a>
+<li><a href="#orgc044301">1. Series temporales vs datos de sección cruzada</a>
 <ul>
-<li><a href="#org6a8aa38">Casos que simplifican el escenario</a></li>
-<li><a href="#orgc97c326">La especificación del modelo se escoge según las características de los datos.</a></li>
+<li><a href="#org16cfdb9">1.1. Correlación serial vs muestreo aleatorio simple</a></li>
+<li><a href="#org134e133">1.2. Tipos de procesos estocásticos que simplifican el escenario</a></li>
 </ul>
 </li>
-<li><a href="#org2635d30">2. Herramientas para desvelar propiedades de una serie temporal</a>
+<li><a href="#org9e37ebf">2. Procesos estocásticos de segundo orden</a>
 <ul>
-<li><a href="#orgfafb46e">2.1. Análisis gráfico</a>
-<ul>
-<li><a href="#org8ab96a4">2.1.1. Gráfico de la serie temporal</a></li>
-<li><a href="#org9b68f3c">2.1.2. Gráfico rango-media</a></li>
+<li><a href="#org16c4241">2.1. Un poco de geometría</a></li>
+<li><a href="#org63c08ba">2.2. Función de covarianzas</a></li>
+<li><a href="#org1151717">2.3. Proceso estocástico (débilmente) estacionario y su ACF</a></li>
 </ul>
 </li>
-<li><a href="#org2a6c8f7">2.2. Determinación del orden de integración</a>
+<li><a href="#org9518e58">3. Ejemplos de procesos (débilmente) estacionarios</a>
 <ul>
-<li><a href="#orgbd4c22d">2.2.1. Análisis gráfico</a></li>
-<li><a href="#org7b23697">2.2.2. Contrastes formales sobre el orden de integración</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#org4c251cf">3. Función de autocovarianzas y función de autocorrelación</a></li>
-<li><a href="#org92adcf0">4. Otras herramientas estadísticas&#xa0;&#xa0;&#xa0;<span class="tag"><span class="C_moConR">CómoConR</span></span></a>
+<li><a href="#orgdb22662">3.1. Proceso de ruido blanco</a></li>
+<li><a href="#orgd970339">3.2. Procesos lineales</a>
 <ul>
-<li><a href="#org0e5fc85">4.1. Estadísticos descriptivos</a></li>
-<li><a href="#org1165584">4.2. Test de normalidad Jarque-Vera</a></div>
+<li><a href="#org669f097">3.2.1. Media móvil infinita. MA(\(\infty\))</a></li>
+<li><a href="#org25c2c70">3.2.2. Proceso de media móvil de orden \(q\). MA(\(q\))</a></li>
+<li><a href="#orgaba2b8b">3.2.3. Proceso autorregresivo de orden \(p\). AR(\(p\))</a></li>
+<li><a href="#orgc8eac17">3.2.4. Proceso Autorregresivo de media móvil. ARMA(\(p,q\))</a></li>
+</ul>
 </div>
-<div class="abstract" id="orgb350aab">
+</div>
+<div class="abstract" id="org745a5a6">
 <p>
-En esta lección veremos algunas herramientas estadísticas.
+Esta lección veremos las dificultades que ocasiona la correlación
+serial y algunos tipos de procesos débilmente estacionarios que nos
+permitirán lidiar con ella.
 </p>
 
 </div>
+
+<ul class="org-ul">
+<li><a href="https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc05.html">lección en html</a></li>
+<li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc05.ipynb">lección en mybinder</a></li>
+</ul>
 <div id="outline-container-orgf8c280e" class="outline-4">
 <h4 id="orgf8c280e">Carga de algunas librerías de R</h4>
 <div class="outline-text-4" id="text-orgf8c280e">
@@ -301,8 +304,8 @@ del notebook
 </div>
 </div>
 </div>
-<div id="outline-container-org0826560" class="outline-2">
-<h2 id="org0826560"><span class="section-number-2">1.</span> Introducción a la modelización de series temporales</h2>
+<div id="outline-container-orgc044301" class="outline-2">
+<h2 id="orgc044301"><span class="section-number-2">1.</span> Series temporales vs datos de sección cruzada</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Corresponden a observaciones de un mismo objeto a lo largo del
@@ -342,7 +345,7 @@ p
 </div>
 
 
-<div id="orgd2cf82e" class="figure">
+<div id="orgfdaa6d9" class="figure">
 <p><img src="./img/lecc05/PoblacionAustralia.png" alt="PoblacionAustralia.png" width="900px" />
 </p>
 </div>
@@ -365,7 +368,7 @@ P
 </div>
 
 
-<div id="org05c79ac" class="figure">
+<div id="org47a014e" class="figure">
 <p><img src="./img/lecc05/PIB_UEM.png" alt="PIB_UEM.png" width="900px" />
 </p>
 </div>
@@ -387,7 +390,7 @@ P
 </div>
 
 
-<div id="org0421a3d" class="figure">
+<div id="org2a19129" class="figure">
 <p><img src="./img/lecc05/TemperaturaReriro.png" alt="TemperaturaReriro.png" width="900px" />
 </p>
 </div>
@@ -405,7 +408,7 @@ p
 </div>
 
 
-<div id="org64a8888" class="figure">
+<div id="orgc5ff81d" class="figure">
 <p><img src="./img/lecc05/IBEX35.png" alt="IBEX35.png" width="900px" />
 </p>
 </div>
@@ -433,17 +436,16 @@ P
 </div>
 
 
-<div id="orgf8f2089" class="figure">
+<div id="orga24b544" class="figure">
 <p><img src="./img/lecc05/ProduccionCemento.png" alt="ProduccionCemento.png" width="900px" />
 </p>
 </div>
 </div>
 </li>
 </ol>
-</div>
-<div id="outline-container-org16cfdb9" class="outline-2">
-<h2 id="org16cfdb9">Correlación serial vs muestreo aleatorio simple</h2>
-<div class="outline-text-2" id="text-org16cfdb9">
+<div id="outline-container-org16cfdb9" class="outline-3">
+<h3 id="org16cfdb9"><span class="section-number-3">1.1.</span> Correlación serial vs muestreo aleatorio simple</h3>
+<div class="outline-text-3" id="text-1-1">
 <p>
 Con datos de
 </p>
@@ -463,10 +465,9 @@ dicha asunción resulta generalmente errónea
 </ul>
 
 <p>
-<b>Ejemplo</b>: dada la evolución de los datos, no parece aceptable
-asumir que \(ProdCemento_{1960M01}\) tiene la misma distribución que
-\(ProdCemento_{2000M04}\) (ni que sea independiente de
-\(ProdCemento_{1959M01}\)).
+<b>Ejemplo</b>: no parece aceptable asumir que \(ProdCemento_{1960M01}\) se
+distribuye igual que \(ProdCemento_{2000M04}\) (ni que sea
+independiente de \(ProdCemento_{1959M01}\)).
 </p></dd>
 </dl>
 <p>
@@ -506,21 +507,22 @@ aún así&#x2026;
 <li>Además&#x2026; para cada variable aleatoria \(X_t\) hay infinitos parámetros.</li>
 </ul>
 </div>
-<div id="outline-container-org6a8aa38" class="outline-3">
-<h3 id="org6a8aa38">Casos que simplifican el escenario</h3>
-<div class="outline-text-3" id="text-org6a8aa38">
+</div>
+<div id="outline-container-org134e133" class="outline-3">
+<h3 id="org134e133"><span class="section-number-3">1.2.</span> Tipos de procesos estocásticos que simplifican el escenario</h3>
+<div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li><p>
-Si el proceso es <a href="./Lecc01.slides.html#/3/1">débilmente estacionario</a> se reduce drásticamente el
-número de parámetros:
+Si es <a href="./Lecc01.slides.html#/3/1">débilmente estacionario</a> se reduce drásticamente el número de
+parámetros:
 </p>
 \begin{eqnarray}
 E(X_t)  & = \mu \\
 Cov(X_t,X_{t-k}) & = \gamma_k
 \end{eqnarray}</li>
-<li>Si además pudiéramos asumir que el proceso es i.i.d. podríamos
-interpretar la serie temporal como una realización de un muestreo
-aleatorio simple (lo que habilita la inferencia estadística).</li>
+<li>Si además es i.i.d. podemos interpretar la serie temporal como una
+realización de un muestreo aleatorio simple (lo que habilita la
+inferencia estadística).</li>
 </ul>
 <p>
 El desafío para el analista es (y nótese el abuso de lenguaje)
@@ -528,12 +530,12 @@ El desafío para el analista es (y nótese el abuso de lenguaje)
 <dl class="org-dl">
 <dt>primero</dt><dd>transformar los datos para lograr que sean "<b><i>estacionarios</i></b>".
 <ul class="org-ul">
-<li>(Lo vimos en la lección 1))</li>
+<li>(Algo vimos en la lección 1))</li>
 </ul></dd>
 <dt>después</dt><dd>transformar los datos estacionarios en una secuencia de
 "<b>datos <i>i.i.d</i></b>" 
 <ul class="org-ul">
-<li>(Aún no visto)</li>
+<li>(Aún no lo hemos visto)</li>
 </ul></dd>
 </dl>
 
@@ -541,401 +543,341 @@ El desafío para el analista es (y nótese el abuso de lenguaje)
 Todo este proceso constituye la especificación y ajuste de un modelo a
 la serie temporal.
 </p>
-</div>
-</div>
-<div id="outline-container-orgc97c326" class="outline-3">
-<h3 id="orgc97c326">La especificación del modelo se escoge según las características de los datos.</h3>
-<div class="outline-text-3" id="text-orgc97c326">
 <p>
-¿Es la serie 
-</p>
-<ul class="org-ul">
-<li>"<b><i>estacionaria en media</i></b>"
-<ul class="org-ul">
-<li>(y si lo es, ¿cuál es su media?)</li>
-<li>(y si no lo es, ¿cómo cambia o evoluciona su media?)</li>
-</ul></li>
-<li>"<b><i>estacionaria en varianza</i></b>" (<i>homocedástica</i>)
-<ul class="org-ul">
-<li>(y si lo es, ¿cuál es su varianza?)</li>
-<li>(y si es <i>heterocedástica</i>, ¿cómo cambia o evoluciona su varianza?)?</li>
-</ul></li>
-</ul>
-
-<p>
-¿Están sus valores correlados con su historia pasada (autocorrelados)?
-</p>
-
-<p>
-¿Están correlados con los valores presentes o pasados de otras series?
-</p>
-<p>
-Veamos algunas herramientas estadísticas para poder desvelar estas
-características.
+Antes de atacar los temas de especificación y ajuste de modelos,
+debemos estudiar un poco los procesos estocásticos débilmente
+estacionarios que vamos a utilizar.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org2635d30" class="outline-2">
-<h2 id="org2635d30"><span class="section-number-2">2.</span> Herramientas para desvelar propiedades de una serie temporal</h2>
+<div id="outline-container-org9e37ebf" class="outline-2">
+<h2 id="org9e37ebf"><span class="section-number-2">2.</span> Procesos estocásticos de segundo orden</h2>
 <div class="outline-text-2" id="text-2">
+<p>
+El ambiente natural para estudiar las propiedades de segundo orden de
+una colección de variables aleatorias es el espacio de variables
+aleatorias \(X\) definidas en un espacio de probabilidad tales que
+\[E(X)=0 \quad\text{y}\quad E(X^2)<\infty\] donde \(E\) es el operador
+esperanza. Denotaremos este espacio con \(H\).
+</p>
 </div>
-<div id="outline-container-orgfafb46e" class="outline-3">
-<h3 id="orgfafb46e"><span class="section-number-3">2.1.</span> Análisis gráfico</h3>
+<div id="outline-container-org16c4241" class="outline-3">
+<h3 id="org16c4241"><span class="section-number-3">2.1.</span> Un poco de geometría</h3>
 <div class="outline-text-3" id="text-2-1">
-</div>
-<div id="outline-container-org8ab96a4" class="outline-4">
-<h4 id="org8ab96a4"><span class="section-number-4">2.1.1.</span> Gráfico de la serie temporal</h4>
-<div class="outline-text-4" id="text-2-1-1">
 <p>
-Representa sus valores en el eje vertical (\(y\)) frente a una escala
-temporal en el horizontal (\(x\)). Es útil para detectar visualmente:
-</p>
-<ul class="org-ul">
-<li>tendencias y/o estacionalidad</li>
-<li>cambios de variabilidad</li>
-<li>valores atípicos (<i>outliers</i>)
-<ul class="org-ul">
-<li>el 95% aprox. de una muestra de valores generados por una
-distribución normal debería estar comprendido entre
-\(\mu\pm2\sigma\)</li>
-<li><p>
-la probabilidad de que una variable normal genere un valor fuera
-de las bandas de \(\mu\pm3\sigma\) es \(0.0023\)
+El espacio, dotado de producto escalar y norma \[\langle X \mid Y
+\rangle=E(XY),\qquad \lVert X \rVert= \sqrt{E(X^2)},\qquad X,Y \in
+H,\] es un espacio de Hilbert,
 </p>
 
 <p>
-(<a href="./img/lecc05/IBEX35.png">véase gráfico IBEX 35</a>)
-</p></li>
-</ul></li>
-</ul>
-
-<p>
-En es importante escalar y rotular adecuadamente los ejes y asegurar
-la comparabilidad entre series y gráficos distintos (si los hubiere).
-</p>
-</div>
-</div>
-<div id="outline-container-org9b68f3c" class="outline-4">
-<h4 id="org9b68f3c"><span class="section-number-4">2.1.2.</span> Gráfico rango-media</h4>
-<div class="outline-text-4" id="text-2-1-2">
-<p>
-Cambios de variabilidad de una serie pueden evidenciarse en su gráfico
-temporal.
+Nótese que como las variables de \(H\) tienen esperanza cero, el
+producto escalar entre \(X,Y\in H\) también es \[\langle X \mid Y
+\rangle=Cov(X,Y).\] Por tanto, en este espacio \(H\) la noción
+geométrica de ortogonalidad coincide con la noción estadística de <i>no
+correlación</i>. Por tanto, en este contexto los términos producto
+escalar y covarianza serán intercambiables.
 </p>
 
 <p>
-Pero también suelen verse bien en un gráfico rango-media, donde se
-representa:
-</p>
-<dl class="org-dl">
-<dt>en el eje \(x\)</dt><dd>un indicador del nivel de la serie calculado para
-distintas submuestras no solapadas (normalmente la media).</dd>
-<dt>en el eje \(y\)</dt><dd>un indicador de la dispersión de la serie
-calculado para las mismas submuestras (normalmente el rango.)</dd>
-</dl>
-
-<p>
-Veamos el gráfico de la serie de pasajeros de líneas aéreas junto a su
-gráfico de rango media:
-</p>
-
-<div class="org-src-container">
-<pre class="src src-jupyter-R">Z <span style="color: #D0372D;">&lt;-</span> AirPassengers
-ide(Z, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"rm"</span>), main=<span style="color: #008000;">"Pasajeros de l&#237;neas (a&#233;reas en miles) y gr&#225;fico rango-media"</span>)
-</pre>
-</div>
-
-
-<div id="orgb076a08" class="figure">
-<p><img src="./img/lecc05/rango-mediaAirPass.png" alt="rango-mediaAirPass.png" width="900px" />
-</p>
-</div>
-
-<p>
-El gráfico de rango media a veces se acompaña de una regresión de la
-dispersión sobre los niveles para medir la relación nivel-dispersión.
+Una colección de variables aleatorias pertenecientes a \(H\)
+\[\boldsymbol{X}=(X_t\mid t\in\mathbb{Z}) \;\text{ con }\; X_t\in H\]
+se denomina <i>proceso estocástico de segundo orden</i>.
 </p>
 </div>
 </div>
-</div>
-<div id="outline-container-org2a6c8f7" class="outline-3">
-<h3 id="org2a6c8f7"><span class="section-number-3">2.2.</span> Determinación del orden de integración</h3>
+<div id="outline-container-org63c08ba" class="outline-3">
+<h3 id="org63c08ba"><span class="section-number-3">2.2.</span> Función de covarianzas</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
-Decidir adecuadamente el orden de integración es crucial en el
-análisis de series temporales.
+La <i>función de covarianzas</i> de un proceso estocástico \(\boldsymbol{X}\)
+segundo orden es \[\boldsymbol{\gamma}=(\gamma_{s,t}\mid
+s,t\in\mathbb{Z})\] donde \(\gamma_{s,t}=Cov(X_s,X_t)\quad
+s,t\in\mathbb{Z}\).
 </p>
 
 <p>
-Las herramientas utilizadas para tomar la decisión son 
+Así, para cada par \((s,t)\), la covarianza \(\gamma_{s,t}\) mide la
+dependencia lineal entre \(X_s\) y \(X_t\).
+</p>
+
+<p>
+Esta función \(\boldsymbol{\gamma}\) es demasiado general, por eso nos
+restringiremos a la subclase de procesos estocásticos <i>débilmente
+estacionarios</i>; pues simplifican enormemente la <i>función de
+covarianzas</i> \(\boldsymbol{\gamma}\).
+</p>
+</div>
+</div>
+<div id="outline-container-org1151717" class="outline-3">
+<h3 id="org1151717"><span class="section-number-3">2.3.</span> Proceso estocástico (débilmente) estacionario y su ACF</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Un proceso estocástico de segundo orden \(\boldsymbol{X}\) se dice que
+es <i>débilmente estacionario</i> si la covarianza entre \(X_s\) y \(X_t\)
+solo depende de la diferencia \(s-t\) para todo \(s,t\in\mathbb{Z}\).
+</p>
+
+<p>
+En tal caso se denomina <i>función de <span class="underline">auto</span>-covarianzas</i> de
+\(\boldsymbol{X}\) a la secuencia
+\[\boldsymbol{\gamma}(z)\;=\;(\gamma_k\mid
+k\in\mathbb{Z})\;=\;\sum_{-\infty}^{\infty} \gamma_k z^k\] donde
+\(\;\gamma_k=Cov(X_{t+k}, X_{t})\;\) para \(k\in\mathbb{Z}\).
+</p>
+
+<p>
+<b>Propiedades</b> de la función de autocovarianzas \(\boldsymbol{\gamma}\) (ACF):
 </p>
 <ul class="org-ul">
-<li>el análisis gráfico</li>
-<li>los contrastes formales</li>
+<li>\(\gamma_0\geq0\)</li>
+<li>\(\boldsymbol{\gamma}\) <span class="underline">es definida positiva</span>; y por tanto,
+<ul class="org-ul">
+<li>\(\boldsymbol{\gamma}\) es simétrica: \(\gamma_k=\gamma_{-k}\)</li>
+<li>\(\boldsymbol{\gamma}\) es acotada: \(|\gamma_k|\leq\gamma_0\)</li>
+</ul></li>
 </ul>
-</div>
-<div id="outline-container-orgbd4c22d" class="outline-4">
-<h4 id="orgbd4c22d"><span class="section-number-4">2.2.1.</span> Análisis gráfico</h4>
-<div class="outline-text-4" id="text-2-2-1">
-<div class="org-src-container">
-<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 8, repr.plot.res = 200)
-ide(PoblacionAustralia_ts,
-    graphs = c(<span style="color: #008000;">"plot"</span>),
-    transf = list(list(bc = F), list(bc = F, d = 1), list(bc = F, d = 2)),
-    main=<span style="color: #008000;">"Poblaci&#243;n australiana, primera diferencia y segunda diferencia"</span> )
-</pre>
-</div>
-
-
-<div id="org722e2d6" class="figure">
-<p><img src="./img/lecc05/diferenciasPoblacion.png" alt="diferenciasPoblacion.png" width="900px" />
-</p>
-</div>
-
-
 
 <p>
-La serie de población \(\boldsymbol{y}\) tiene una clara tendencia
-creciente (primer gráfico), que desaparece al tomar una diferencia
-ordinaria, \[\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y}\]
-(segundo gráfico). Bastar con tomar una primera diferencia de la serie
-de población para obtener una nueva serie que se asemeja a la
-realización de un proceso estacionario.
-</p>
-
-<p>
-No obstante, ¿qué pasa si tomamos una segunda diferencia ordinaria?
-\[\nabla\nabla\boldsymbol{y}=\nabla^2\boldsymbol{y}=(1-\mathsf{B})^2*\boldsymbol{y}\]
-(segundo gráfico). Pues que la serie obtenida también es estacionaria,
-pero ojo, es un grave error tomar más diferencias de las necesarias al
-modelizar los datos. Se debe tomar el mínimo número de
-transformaciones que arrojen una serie ``estacionaria'' (recuerde que
-decir que una serie temporal es <i>estacionaria</i> es un abuso del
-lenguaje).
-</p>
-
-<div class="org-src-container">
-<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height =  10, repr.plot.res = 200)
-ide(Z,
-    graphs = c(<span style="color: #008000;">"plot"</span>),
-    transf = list(list(bc=T), list(bc=T, d=1), list(bc=T, D=1), list(bc=T, D=1, d=1)),
-    main = <span style="color: #008000;">"Log pasajeros a&#233;reos, diferencia ordinaria, diferencia estacional y composici&#243;n de ambas diferencias"</span> )
-</pre>
-</div>
-
-
-<div id="orge4ba237" class="figure">
-<p><img src="./img/lecc05/diferenciasPasajeros.png" alt="diferenciasPasajeros.png" width="900px" />
-</p>
-</div>
-
-<p>
-Como ya vimos, la serie pasajeros en logaritmos tiene tendencia y
-estacionalidad muy evidentes. No basta con tomar solo una diferencia
-ordinaria \[\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y};\] pues
-el resultado muestra una pauta estacional. Ni tampoco basta con tomar
-solo una diferencia estacional
-\[\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B^{12}})*\boldsymbol{y};\] pues
-resulta una serie que ``deambula'', i.e., que no es <i>``estacionaria''</i>
-en media.
-</p>
-
-<p>
-Tomar una diferencia ordinaria y otra estacional
-\[\nabla\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B})*(1-\mathsf{B^{12}})*\boldsymbol{y}\]
-arroja una serie que sí parece ser <i>``estacionaria''</i>.
-</p>
-
-
-<div class="org-src-container">
-<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height =  8, repr.plot.res = 200)
-TemperaturaRetiro_ts=ts(read.csv(<span style="color: #008000;">"datos/Retiro.txt"</span>),start=c(1985, 1), end=c(2015,9), frequency=12)
-ide(TemperaturaRetiro_ts,
-    graphs = c(<span style="color: #008000;">"plot"</span>),
-    transf = list(list(), list(D = 1)),
-    main=<span style="color: #008000;">"Temperatura media en el Retiro y diferencia estacional"</span> )
-</pre>
-</div>
-
-
-<div id="orgf4e472e" class="figure">
-<p><img src="./img/lecc05/diferenciasTemperaturasRetiro.png" alt="diferenciasTemperaturasRetiro.png" width="900px" />
-</p>
-</div>
-
-
-<p>
-En el caso de la serie de temperaturas en el Parque del Retiro, parece
-que es suficiente con tomar solo una diferencia estacional.
+llamamos <i>función de autocorrelación</i> (ACF) a la
+secuencia:
+\(\;\boldsymbol{\rho}=\frac{1}{\gamma_0}(\boldsymbol{\gamma})
+=\sum\limits_{k\in\mathbb{Z}}\frac{\gamma_k}{\gamma_0}z^k\).
 </p>
 </div>
 </div>
-<div id="outline-container-org7b23697" class="outline-4">
-<h4 id="org7b23697"><span class="section-number-4">2.2.2.</span> Contrastes formales sobre el orden de integración</h4>
-<div class="outline-text-4" id="text-2-2-2">
 </div>
-<ol class="org-ol">
-<li><a id="org082a1f4"></a>Test de Dickey-Fuller (DF)<br />
-<div class="outline-text-5" id="text-2-2-2-1">
-<dl class="org-dl">
-<dt>\(H_0\)</dt><dd>la serie es \(I(1)\)</dd>
-<dt>\(H_1\)</dt><dd>la serie es \(I(0)\).</dd>
-</dl>
-
-<p>
-Consideremos el modelo \[y_{t}=\rho y_{t-1}+u_{t},\] donde \(y_{t}\) es
-la variable de interés, \(\rho\) es un coeficiente, y \(u_{t}\) es un
-proceso de ruido blanco. Una raíz unitaria estará presente si \(\rho
-=1\). En tal caso el modelo será no-estacionario.
-</p>
-
-<p>
-El modelo de regresión se puede escribir como
-</p>
-
-<p>
-\[\nabla y_{t}=(\rho -1)y_{t-1}+u_{t}=\delta y_{t-1}+u_{t}\]
-</p>
-</div>
-</li>
-<li><a id="org07f1b79"></a>Test de Dickey-Fuller aumentado (ADF)<br /></li>
-</ol>
-</div>
-</div>
-</div>
-<div id="outline-container-org4c251cf" class="outline-2">
-<h2 id="org4c251cf"><span class="section-number-2">3.</span> Función de autocovarianzas y función de autocorrelación</h2>
+<div id="outline-container-org9518e58" class="outline-2">
+<h2 id="org9518e58"><span class="section-number-2">3.</span> Ejemplos de procesos (débilmente) estacionarios</h2>
 <div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgdb22662" class="outline-3">
+<h3 id="orgdb22662"><span class="section-number-3">3.1.</span> Proceso de ruido blanco</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+Una secuencia \(\boldsymbol{U}=(U_t\mid t\in\mathbb{Z})\) de variables
+aleatorias incorreladas y tales que \[E(U_t)=0\quad\text{ y }\quad
+Var(U_t)=E(U_t^2)=\sigma^2\] para \(\;t\in\mathbb{Z}\;\) y
+\(\;0<\sigma^2<\infty\;\) se llama <i>proceso de ruido blanco</i>.
+\(\quad\boldsymbol{U}\sim WN(0,\sigma^2)\).
+</p>
+<p>
+Al ser variables aleatorias incorreladas, su función de
+autocovarianzas es \[\boldsymbol{\gamma}(z)\;=\;\sigma^2
+z^0\;=\;(\ldots,0,0,\sigma^2,0,0,\ldots)\]
+</p>
+
 <ul class="org-ul">
-<li>La secuencia \((\gamma_k)\) con \(k\in\mathbb{Z}\) se denomina
-<i>función de autocovarianzas</i></li>
-<li><p>
-La secuencia \(\{\rho_k\}\) con \(k\in\mathbb{Z}\), donde
-</p>
-
-<p>
-\[\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0} \]
-</p>
-
-<p>
-se denomina <i>función de autocorrelación</i> (ACF).
-</p></li>
+<li>Es el proceso estacionario (no trivial) más sencillo.</li>
+<li>Este proceso es el pilar sobre el que definiremos el resto de
+ejemplos.</li>
 </ul>
-
+</div>
+</div>
+<div id="outline-container-orgd970339" class="outline-3">
+<h3 id="orgd970339"><span class="section-number-3">3.2.</span> Procesos lineales</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
-Debido a la estacionariedad, la correlación entre \(X_t\) y \(X_{t+k}\) no
-depende de \(t\); tan solo depende de la distancia temporal \(k\) entre
-ambas variables.
+Sea \(\boldsymbol{U}\sim WN(0,\sigma^2)\) y sea \(\boldsymbol{\theta}\in
+\ell^2\); una secuencia de <span class="underline">cuadrado sumable</span>
+\(\;\sum\limits_{j\in\mathbb{Z}}\theta_j^2<\infty\).
+</p>
+<p>
+Denominamos <i>proceso lineal</i> al proceso estocástico
+\(\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}\) cuyos elementos son \[X_t
+\;=\;(\boldsymbol{\theta}*\boldsymbol{U})_t
+\;=\;\boldsymbol{\theta}(B)U_t \;=\;\sum_{j=-\infty}^\infty \theta_j
+U_{t-j};\qquad t\in\mathbb{Z}.\]
 </p>
 
 <p>
-\[\boldsymbol{\phi}(\mathsf{B}) : \phi  \]
+El proceso lineal es <i>``causal''</i> si además \(\boldsymbol{\theta}\) es
+una <span class="underline">serie formal</span> (i.e.,
+\(cogrado(\boldsymbol{\theta})\geq{\color{blue}{0}}\))
+\[X_t=\sum_{\color{blue}{j=0}}^\infty \theta_j U_{t-j};\qquad
+t\in\mathbb{Z}\] \(\;\) (pues cada \(X_t\) es una suma de variables "<i>del
+presente y pasado</i>").
+</p>
+<p>
+La clase de procesos lineales incluye muchas e importantes subclases
+de procesos, algunas de las cuales son objeto principal de estudio de
+este curso.
+</p>
+</div>
+<div id="outline-container-org669f097" class="outline-4">
+<h4 id="org669f097"><span class="section-number-4">3.2.1.</span> Media móvil infinita. MA(\(\infty\))</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+Sea \(\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\) y sea
+\(\;\boldsymbol{\theta}\in \ell^2\;\) una serie formal con <span class="underline">infinitos
+términos NO nulos</span>; entonces el proceso estocástico
+\(\boldsymbol{\theta}*\boldsymbol{U}\), cuyos elementos son \[X_t
+\;=\;(\boldsymbol{\theta}*\boldsymbol{U})_t
+\;=\;\boldsymbol{\theta}(B)U_t \;=\;\sum_{j=0}^\infty \theta_j
+U_{t-j};\qquad t\in\mathbb{Z}\] se denomina proceso de <i>media móvil
+infinita</i> MA(\(\infty\)).
+</p>
+<p>
+Algunas clases de procesos lineales tienen una representación
+parsimoniosa, pues basta un número finito de parámetros para
+representarlos completamente. Por ejemplo, cuando
+\(\boldsymbol{\theta}\) tiene un número finito de términos no nulos&#x2026;
 </p>
 </div>
 </div>
-<div id="outline-container-org92adcf0" class="outline-2">
-<h2 id="org92adcf0"><span class="section-number-2">4.</span> Otras herramientas estadísticas&#xa0;&#xa0;&#xa0;<span class="tag"><span class="C_moConR">CómoConR</span></span></h2>
-<div class="outline-text-2" id="text-4">
-</div>
-<div id="outline-container-org0e5fc85" class="outline-3">
-<h3 id="org0e5fc85"><span class="section-number-3">4.1.</span> Estadísticos descriptivos</h3>
-<div class="outline-text-3" id="text-4-1">
-<div class="org-src-container">
-<pre class="src src-jupyter-R"><span style="color: #D0372D;">library</span>(pastecs)      <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">resumen estad&#237;sticos descriptivos</span>
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">https://cran.r-project.org/web/packages/pastecs/index.html (stat.desc)</span>
-<span style="color: #D0372D;">library</span>(knitr)        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">presentaci&#243;n de tabla resumen</span>
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">https://cran.r-project.org/web/packages/knitr/index.html (kable)</span>
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">https://bookdown.org/yihui/rmarkdown-cookbook/kable.html</span>
-
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">estad&#237;sticos principales y test de normalidad</span>
-kable(stat.desc(Z, basic=<span style="color: #6434A3;">FALSE</span>, norm=<span style="color: #6434A3;">TRUE</span>), <span style="color: #008000;">'rst'</span>)
-</pre>
-</div>
-
-<pre class="example" id="org9e3ce97">
-
-
-============  =============
-\                         x
-============  =============
-median          265.5000000
-mean            280.2986111
-SE.mean           9.9971931
-CI.mean.0.95     19.7613736
-var           14391.9172009
-std.dev         119.9663169
-coef.var          0.4279947
-skewness          0.5710676
-skew.2SE          1.4132515
-kurtosis         -0.4298441
-kurt.2SE         -0.5353818
-normtest.W        0.9519577
-normtest.p        0.0000683
-============  =============
-</pre>
-</div>
-</div>
-<div id="outline-container-org1165584" class="outline-3">
-<h3 id="org1165584"><span class="section-number-3">4.2.</span> Test de normalidad Jarque-Vera</h3>
-<div class="outline-text-3" id="text-4-2">
+<div id="outline-container-org25c2c70" class="outline-4">
+<h4 id="org25c2c70"><span class="section-number-4">3.2.2.</span> Proceso de media móvil de orden \(q\). MA(\(q\))</h4>
+<div class="outline-text-4" id="text-3-2-2">
 <p>
-<a href="https://en.wikipedia.org/wiki/Jarque%E2%80%93Bera_test">Jarque-Vera test (Wikipedia)</a>
+Sea \(\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\) y sea
+\(\;\boldsymbol{\theta}\;\) un <span class="underline">polinomio de grado \(q\)</span> con \(\theta_0=1\);
+entonces el proceso estocástico \(\boldsymbol{\theta}*\boldsymbol{U}\),
+cuyos elementos son \[X_t \;=\;(\boldsymbol{\theta}*\boldsymbol{U})_t
+\;=\;\boldsymbol{\theta}(B)U_t \;=\;\sum_{j=0}^q\theta_j
+U_{t-j};\qquad t\in\mathbb{Z}\] se denomina proceso de <i>media móvil</i>
+MA(\(q\)).
 </p>
 
 <p>
-Podemos calcularlo con la librería <a href="https://cran.r-project.org/web/packages/moments/index.html">momments</a>:
+Es decir:
+\[ X_t = U_t + \theta_1 U_{t-1} + \cdots + \theta_q U_{t-q}.\]
 </p>
-<div class="org-src-container">
-<pre class="src src-jupyter-R"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">install.packages("moments")</span>
-<span style="color: #D0372D;">library</span>(moments)
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Perform the Jarque-Bera test</span>
-jb_test <span style="color: #D0372D;">&lt;-</span> jarque.test(as.numeric(Z))
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Print the test result</span>
-print(jb_test)
-</pre>
-</div>
-
-<pre class="example">
-
-	Jarque-Bera Normality Test
-
-data:  as.numeric(Z)
-JB = 8.9225, p-value = 0.01155
-alternative hypothesis: greater
-
-</pre>
 
 
 <p>
-Otra librería alternativa para calcularlo: <a href="https://cran.r-project.org/web/packages/tseries/index.html">tseries</a>
+Hay otros procesos lineales con representación parsimoniosa.
 </p>
-<div class="org-src-container">
-<pre class="src src-jupyter-R"><span style="color: #D0372D;">library</span>(tseries)
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Perform the Jarque-Bera test</span>
-jb_test <span style="color: #D0372D;">&lt;-</span> jarque.bera.test(Z)
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Print the test result</span>
-print(jb_test)
-</pre>
 </div>
+</div>
+<div id="outline-container-orgaba2b8b" class="outline-4">
+<h4 id="orgaba2b8b"><span class="section-number-4">3.2.3.</span> Proceso autorregresivo de orden \(p\). AR(\(p\))</h4>
+<div class="outline-text-4" id="text-3-2-3">
+<p>
+Sea \(\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\), se denomina <i>proceso
+autorregresivo de orden \(p\)</i> a aquel proceso estocástico
+\(\;\boldsymbol{X}\;\) que es la solución de la siguiente ecuación en
+diferencias \[\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}\] donde
+\(\;\boldsymbol{\phi}\;\) un <span class="underline">polinomio de grado \(p\)</span> con \(\phi_0=1\);
+</p>
+<p>
+Por tanto, \[(\boldsymbol{\phi}*\boldsymbol{X})_t=
+\boldsymbol{\phi}(\mathsf{B})X_t= \sum_{j=0}^p \phi_j X_{t-j} = U_t.\]
+</p>
 
-<pre class="example" id="org3765960">
-Registered S3 method overwritten by 'quantmod':
-  method            from
-  as.zoo.data.frame zoo 
+<p>
+Es decir \(\boldsymbol{X}=(X_t\mid t\in\mathbb{Z})\) es una solución de
+la siguiente ecuación en diferencias: \[X_t + \phi_1 X_{t-1} +
+\cdots + \phi_q X_{t-q} = U_t.\]
+</p>
+<p>
+El problema con la anterior definición es que la solución
+\(\boldsymbol{X}\) de la ecuación
+\(\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}\) no es única. Para
+verlo basta despejar \(\boldsymbol{X}\).
+</p>
 
-	Jarque Bera Test
+<p>
+Multiplicando ambos lados de la igualdad por una inversa de
+\(\boldsymbol{\phi}\) lo logramos
+\[\boldsymbol{X}=inversa(\boldsymbol{\phi})*\boldsymbol{U}\] es decir,
+si \(\boldsymbol{a}=inversa(\boldsymbol{\phi})\) entonces
+\[X_t=\boldsymbol{a}(\mathsf{B})U_t=\sum_{j\in\mathbb{Z}} a_j
+U_{t-j}\] 
+</p>
+<p>
+Pero&#x2026; ¿Qué secuencia \(\boldsymbol{a}\) usamos como inversa de
+\(\boldsymbol{\phi}\)? Recuerde que hay infinitas y la mayoría no son
+sumables (si el polinomio \(\boldsymbol{\phi}\) tiene raíces unitarias
+ninguna lo es).
+</p>
 
-data:  Z
-X-squared = 8.9225, df = 2, p-value = 0.01155
-</pre>
+<div class="org-center">
+<p>
+En tal caso la expresión \(\;\boldsymbol{a}(\mathsf{B})U_t=\sum\limits_{j\in\mathbb{Z}} a_j U_{t-j}\;\) carece de sentido
+</p>
+</div>
+<p>
+<b>Requisitos</b> sobre el polinomio autorregresivo \(\boldsymbol{\phi}\)
+</p>
+
+<ol class="org-ol">
+<li><p>
+Para tener un <span class="underline">proceso lineal</span>, exigiremos que \(\boldsymbol{\phi}\)
+<span class="underline">no tenga raíces de módulo 1</span>.
+</p>
+
+<p>
+En tal caso sabemos que la inversa en \(\ell^1\subset\ell^2\) (la
+ abolutamente sumable) existe.
+</p>
+
+<p>
+Denotamos dicha inversa con \(\boldsymbol{\phi}^{-1}\)
+</p></li>
+</ol>
+
+<p>
+\[X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=-\infty}^\infty
+a_j U_{t-j}\]
+</p>
+
+<ol class="org-ol">
+<li>Para tener un <span class="underline">proceso lineal causal</span> exigiremos que las raíces de
+\(\boldsymbol{\phi}\) sean mayores que 1 en valor absoluto (<span class="underline">raíces
+fuera del círculo unidad</span>).</li>
+</ol>
+
+<p>
+\[X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=0}^\infty a_j
+U_{t-j}\]
+</p>
+<p>
+El siguiente modelo lineal es una combinación (o generalización) de
+los dos anteriores.
+</p>
+</div>
+</div>
+<div id="outline-container-orgc8eac17" class="outline-4">
+<h4 id="orgc8eac17"><span class="section-number-4">3.2.4.</span> Proceso Autorregresivo de media móvil. ARMA(\(p,q\))</h4>
+<div class="outline-text-4" id="text-3-2-4">
+<p>
+Sea \(\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\), se denomina <i>proceso
+autorregresivo de media móvil \((p,q)\)</i> a aquel proceso estocástico
+\(\;\boldsymbol{X}\;\) que es la solución de la siguiente ecuación en
+diferencias
+\[\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}\]
+donde el polinomio <i>autorregresivo</i> \(\;\boldsymbol{\phi}\;\) tiene
+<span class="underline">grado \(p\)</span> con \(\phi_0=1\) y con todas sus raíces fuera del círculo
+unidad (<i>por los motivos anteriormente vistos</i>); y el polinomio <i>de
+media móvil</i> \(\;\boldsymbol{\theta}\;\) es <span class="underline">de grado \(q\)</span> con
+\(\theta_0=1\);
+</p>
+<p>
+\[\text{Es decir}\quad
+\boldsymbol{X}=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}*\boldsymbol{U}
+\quad\text{donde}\quad
+\frac{1}{\boldsymbol{\phi}}\equiv\boldsymbol{\phi}^{-1}\in\ell^1\]
+</p>
+
+<p>
+Tanto \(\boldsymbol{\phi}^{-1}\) como \(\boldsymbol{\theta}\) son
+absolutamente sumables y como \(\ell^1\) es un anillo,
+\(\boldsymbol{\phi}^{-1}*\boldsymbol{\theta}\equiv\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}\in\ell^1\)
+(también es absolutamente sumable y por tanto de cuadrado sumable),
+consecuentemente el proceso estocástico es un proceso lineal.
+\[X_t=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}(\mathsf{B})U_t=\sum_{j=0}^\infty
+a_j U_{t-j}\] donde
+\(\boldsymbol{a}=\boldsymbol{\phi}^{-1}*\boldsymbol{\theta}\).
+</p>
+</div>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-08-24 sáb 17:33</p>
+<p class="date">Created: 2024-08-27 mar 22:29</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

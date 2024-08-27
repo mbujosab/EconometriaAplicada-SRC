@@ -46,9 +46,15 @@
 
 
 #+BEGIN_ABSTRACT
-En esta lección voy a continuar pero con R y usaré la librería
-=tfarima= de José Luis Gallego siempre que pueda.
+En esta lección se discutirá la posible relación entre correlación y
+causalidad. Veremos casos de correlación espuria (correlación sin
+causalidad) y una introducción a la cointegración (con un caso en el
+la correlación no desaparece al diferenciar las series). Como novedad
+usaremos R.
 #+END_ABSTRACT
+
+- [[https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc03.html][lección en html]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc03.ipynb][lección en mybinder]]
 
 
 ***  Carga de algunas librerías de R
@@ -123,7 +129,6 @@ Pero *correlaciones significativas no indican la existencia de relaciones causal
 - En una playa: consumo de helados y ataques de tiburón a los bañistas
 # - Distancia entre dos galaxias y número de personas en la tierra
 
-
 ** Correlación espuria
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
@@ -161,12 +166,12 @@ head(data_frame, 3)
 
 #+RESULTS:
 :RESULTS:
-| obs   | GNP   | Melanoma |
+|   obs |   GNP | Melanoma |
 |-------+-------+----------|
-| <dbl> | <dbl> | <dbl>    |
-| 1936  | 193.0 | 1.0      |
-| 1937  | 203.2 | 0.8      |
-| 1938  | 192.9 | 0.8      |
+| <dbl> | <dbl> |    <dbl> |
+|  1936 | 193.0 |      1.0 |
+|  1937 | 203.2 |      0.8 |
+|  1938 | 192.9 |      0.8 |
 #+caption: A tibble: 3 × 3
 :END:
 
@@ -219,24 +224,24 @@ coeficientes muy significativos/).
 predictiva* @@latex:\newline@@ (/pues la incidencia de melanoma en
 Connecticut no hace crecer la economía de EEUU/).
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-#+BEGIN_SRC jupyter-R :exports results :results raw
+#+BEGIN_SRC jupyter-R :exports results :results plain
 # regresión de la variable GNP sobre la variable Melanoma del data_frame
 summ( lm(GNP ~ Melanoma, data = data_frame) ) # summ from jtools cambia la representación de resultados
 #+END_SRC
 
 #+RESULTS:
 #+begin_example
-[4mMODEL INFO:[24m
-[3mObservations:[23m 37
-[3mDependent Variable:[23m GNP
-[3mType:[23m OLS linear regression 
+MODEL INFO:
+Observations: 37
+Dependent Variable: GNP
+Type: OLS linear regression 
 
-[4mMODEL FIT:[24m
-[3mF[23m(1,35) = 231.84, [3mp[23m = 0.00
-[3mR² = [23m0.87
-[3mAdj. R² = [23m0.87 
+MODEL FIT:
+F(1,35) = 231.84, p = 0.00
+R² = 0.87
+Adj. R² = 0.87 
 
-[3mStandard errors: OLS[23m
+Standard errors: OLS
 --------------------------------------------------
                       Est.    S.E.   t val.      p
 ----------------- -------- ------- -------- ------
@@ -245,7 +250,7 @@ Melanoma            118.98    7.81    15.23   0.00
 --------------------------------------------------
 #+end_example
 
-** Una manera de ver que la correlación del ejemplo es /espuria/ (que no hay causalidad)
+** Una manera de ver que la correlación del ejemplo es posiblemente /espuria/ (que no hay causalidad)
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
@@ -281,11 +286,11 @@ head(DF.diferencias, 2)
 
 #+RESULTS:
 :RESULTS:
-|   | date       | d_GNP | d_Melanoma |
+|   |       date | d_GNP | d_Melanoma |
 |---+------------+-------+------------|
-|   | <date>     | <dbl> | <dbl>      |
-| 1 | 1937-01-01 | 10.2  | -0.2       |
-| 2 | 1938-01-01 | -10.3 | 0.0        |
+|   |     <date> | <dbl> |      <dbl> |
+| 1 | 1937-01-01 |  10.2 |       -0.2 |
+| 2 | 1938-01-01 | -10.3 |        0.0 |
 #+caption: A data.frame: 2 × 3
 :END:
 
@@ -316,17 +321,17 @@ summ( lm(d_GNP ~ d_Melanoma) )
 
 #+RESULTS:
 #+begin_example
-[4mMODEL INFO:[24m
-[3mObservations:[23m 36
-[3mDependent Variable:[23m d_GNP
-[3mType:[23m OLS linear regression 
+MODEL INFO:
+Observations: 36
+Dependent Variable: d_GNP
+Type: OLS linear regression 
 
-[4mMODEL FIT:[24m
-[3mF[23m(1,34) = 0.01, [3mp[23m = 0.92
-[3mR² = [23m0.00
-[3mAdj. R² = [23m-0.03 
+MODEL FIT:
+F(1,34) = 0.01, p = 0.92
+R² = 0.00
+Adj. R² = -0.03 
 
-[3mStandard errors: OLS[23m
+Standard errors: OLS
 ------------------------------------------------
                      Est.   S.E.   t val.      p
 ----------------- ------- ------ -------- ------
@@ -334,7 +339,6 @@ summ( lm(d_GNP ~ d_Melanoma) )
 d_Melanoma           0.71   6.59     0.11   0.92
 ------------------------------------------------
 #+end_example
-
 
 * Cointegración 
    :PROPERTIES:
@@ -379,11 +383,9 @@ interpretaciones relacionadas entre sí:
    que las desviaciones del equilibrio tienden a desaparecer a corto
    plazo
 
-  
-*** Ejemplo de series cointegradas: tipos de interes en UK a corto y largo plazo
+** Ejemplo de series cointegradas: tipos de interes en UK a corto y largo plazo
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
-   :UNNUMBERED: t 
    :END:
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
@@ -453,7 +455,7 @@ doubleYScale(obj1, obj2, add.ylab2 = TRUE)
 [[./img/lecc03/UK_Interest_rates.png]]
 
 *La correlación es $0.898$* (/ambas series poseen una tendencia
- creciente... pero en este caso veremos es común/)
+ creciente... veamos si dicha tendencia es común a ambas/)
 
 
 #+name: CorrelacionUKinterestRates
@@ -518,7 +520,7 @@ options(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 La regresión de la primera diferencia de =Short= sobre la primera
 diferencia de =Long= *NO sugiere que la correlación sea espuria*:
-obtenemos un ajuste razonable con una pendiente es muy significativa y
+obtenemos un ajuste razonable con una pendiente muy significativa y
 una constante NO significativa.
 
 #+BEGIN_SRC jupyter-R
@@ -596,5 +598,5 @@ Aparentan ser "estacionarios en media" (i.e., no se aprecia una
 tendencia evidente); por lo que *los tipos de interés a corto y largo
 plazo podrían estar cointegrados*.
 
-Más adelante veremos test estadísticos para contrastar si son
-estacionarios.
+Más adelante veremos test estadísticos que contrastan la
+estacionariedad (si son $I(0)$).

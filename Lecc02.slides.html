@@ -14108,7 +14108,8 @@ div.jp-OutputPrompt {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Econometr%C3%ADa-Aplicada.-Lecci%C3%B3n-2">Econometr&#237;a Aplicada. Lecci&#243;n 2<a class="anchor-link" href="#Econometr%C3%ADa-Aplicada.-Lecci%C3%B3n-2">&#182;</a></h1><p><strong>Author:</strong> Marcos Bujosa</p>
 
 </div>
@@ -14119,11 +14120,13 @@ div.jp-OutputPrompt {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="org7563b82">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="ABSTRACT" id="org91fb47a">
 <p>
-En esta lección veremos regresión con series temporales y estimación
-de componentes (no observables) con modelos deterministas.
+En esta lección veremos algunos modelos de regresión con series
+temporales; en particular la estimación de componentes (no
+observables) con modelos deterministas.
 </p>
 
 </div><ul>
@@ -14139,7 +14142,8 @@ de componentes (no observables) con modelos deterministas.
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Descomposici%C3%B3n-estructural-de-una-serie-temporal">Descomposici&#243;n estructural de una serie temporal<a class="anchor-link" href="#Descomposici%C3%B3n-estructural-de-una-serie-temporal">&#182;</a></h2>
 </div>
 </div>
@@ -14149,7 +14153,8 @@ de componentes (no observables) con modelos deterministas.
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>En la lección anterior vimos que una estrategia para analizar series
 temporales es transformar los datos para</p>
 <ol>
@@ -14167,7 +14172,8 @@ temporales es transformar los datos para</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Pero existe otro enfoque que pretende descomponer la serie temporal en
 los siguientes componentes <em>"no observables"</em> (o en un subconjunto de
 ellos):</p>
@@ -14205,7 +14211,8 @@ $\boldsymbol{e}$ parece "<em>estacionario</em>".</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Tendencia-determinista-lineal">Tendencia determinista <em>lineal</em><a class="anchor-link" href="#Tendencia-determinista-lineal">&#182;</a></h3>
 </div>
 </div>
@@ -14215,7 +14222,8 @@ $\boldsymbol{e}$ parece "<em>estacionario</em>".</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>El modelo de tendencia más simple es la recta de regresión (el
 regresor no constante es el índice $t$):</p>
 $$\ln{y_t}=\underbrace{\beta_1+\beta_2\cdot t}_{\text{tendencia}} + e_t; \quad t=1:114$$
@@ -14227,7 +14235,8 @@ $$\ln{y_t}=\underbrace{\beta_1+\beta_2\cdot t}_{\text{tendencia}} + e_t; \quad t
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc02/airlinepass+linearTrend.png" alt="img"></p>
 $$\widehat{\ln{y_t}}=4.8137+0.01\cdot\big(t\big), \qquad t=1:114$$
 </div>
@@ -14238,7 +14247,8 @@ $$\widehat{\ln{y_t}}=4.8137+0.01\cdot\big(t\big), \qquad t=1:114$$
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc02/resultsModel1.png" alt="img"></p>
 
 </div>
@@ -14249,7 +14259,8 @@ $$\widehat{\ln{y_t}}=4.8137+0.01\cdot\big(t\big), \qquad t=1:114$$
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong><u>Componente irregular</u></strong></p>
 
 </div>
@@ -14260,7 +14271,8 @@ $$\widehat{\ln{y_t}}=4.8137+0.01\cdot\big(t\big), \qquad t=1:114$$
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc02/airlinepass+irreg.png" alt="img"></p>
 <p>En este caso, el modelo</p>
 $$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$<p>donde $\boldsymbol{t}$ es una tendencia lineal no
@@ -14276,7 +14288,8 @@ no tiene la apariencia de realización de un proceso estacionario.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Adicionalmente podemos ver que diferencia de orden 12 del componente
 irregular parece mostrar un componente cíclico con un periodo de unos
 4 años.</p>
@@ -14291,7 +14304,8 @@ irregular parece mostrar un componente cíclico con un periodo de unos
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Tendencia-determinista-cuadr%C3%A1tica">Tendencia determinista <em>cuadr&#225;tica</em><a class="anchor-link" href="#Tendencia-determinista-cuadr%C3%A1tica">&#182;</a></h3>
 </div>
 </div>
@@ -14301,7 +14315,8 @@ irregular parece mostrar un componente cíclico con un periodo de unos
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 $$\ln{y_t}=\underbrace{\beta_1+\beta_2\cdot t + \beta_3\cdot t^2}_{\text{tendencia}} + e_t; \quad t=1:114$$
 </div>
 </div>
@@ -14311,7 +14326,8 @@ $$\ln{y_t}=\underbrace{\beta_1+\beta_2\cdot t + \beta_3\cdot t^2}_{\text{tendenc
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc02/airlinepass+quadraticTrend.png" alt="img"></p>
 $$\widehat{\ln{y_t}}=4.7364+(0.0132)\cdot t +(-2.191e-05)\cdot t^2, \qquad t=1:114$$
 </div>
@@ -14322,7 +14338,8 @@ $$\widehat{\ln{y_t}}=4.7364+(0.0132)\cdot t +(-2.191e-05)\cdot t^2, \qquad t=1:1
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc02/resultsModel2.png" alt="img"></p>
 
 </div>
@@ -14333,7 +14350,8 @@ $$\widehat{\ln{y_t}}=4.7364+(0.0132)\cdot t +(-2.191e-05)\cdot t^2, \qquad t=1:1
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong><u>Componente irregular</u></strong></p>
 
 </div>
@@ -14344,7 +14362,8 @@ $$\widehat{\ln{y_t}}=4.7364+(0.0132)\cdot t +(-2.191e-05)\cdot t^2, \qquad t=1:1
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc02/airlinepass+irreg2.png" alt="img"></p>
 <p>De manera análoga al caso anterior, el modelo</p>
 $$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$<p>donde $\boldsymbol{t}$ ahora es una <em>tendencia
@@ -14360,7 +14379,8 @@ proceso estacionario.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>También en este modelo la diferencia de orden 12 del componente
 irregular muestra un componente cíclico con un periodo de unos 4 años.</p>
 <p><img src="./img/lecc02/airlinepass+irregDiff12.png" alt="img"></p>
@@ -14377,7 +14397,8 @@ componentes estacionales estocásticos.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>En el siguiente ejercicio estimaremos un <strong>componente estacional
 determinista</strong> (junto a una tendencia cuadrática determinista).</p>
 
@@ -14389,7 +14410,8 @@ determinista</strong> (junto a una tendencia cuadrática determinista).</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Tendencia-cuadr%C3%A1tica-m%C3%A1s-estacionalidad-determinista-mediante-dummies">Tendencia cuadr&#225;tica m&#225;s estacionalidad determinista mediante <em>dummies</em><a class="anchor-link" href="#Tendencia-cuadr%C3%A1tica-m%C3%A1s-estacionalidad-determinista-mediante-dummies">&#182;</a></h3>
 </div>
 </div>
@@ -14399,7 +14421,8 @@ determinista</strong> (junto a una tendencia cuadrática determinista).</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc02/airlinepass+TrendC.png" alt="img"></p>
 
 </div>
@@ -14410,7 +14433,8 @@ determinista</strong> (junto a una tendencia cuadrática determinista).</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc02/airlinepass+SeasonalC.png" alt="img"></p>
 
 </div>
@@ -14421,7 +14445,8 @@ determinista</strong> (junto a una tendencia cuadrática determinista).</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="Ajuste-y-componente-irregular-$%5Cboldsymbol%7Be%7D=%5Cboldsymbol%7By%7D-%5Cboldsymbol%7Bt%7D-%5Cboldsymbol%7Bs%7D$">Ajuste y componente irregular $\boldsymbol{e}=\boldsymbol{y}-\boldsymbol{t}-\boldsymbol{s}$<a class="anchor-link" href="#Ajuste-y-componente-irregular-$%5Cboldsymbol%7Be%7D=%5Cboldsymbol%7By%7D-%5Cboldsymbol%7Bt%7D-%5Cboldsymbol%7Bs%7D$">&#182;</a></h4>
 </div>
 </div>
@@ -14431,7 +14456,8 @@ determinista</strong> (junto a una tendencia cuadrática determinista).</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc02/airlinepass+yhat.png" alt="img"></p>
 
 </div>
@@ -14442,7 +14468,8 @@ determinista</strong> (junto a una tendencia cuadrática determinista).</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc02/airlinepass+IrregC.png" alt="img"></p>
 
 </div>
@@ -14453,7 +14480,8 @@ determinista</strong> (junto a una tendencia cuadrática determinista).</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="Valoraci%C3%B3n-de-modelos-con-componentes-deterministas">Valoraci&#243;n de modelos con componentes deterministas<a class="anchor-link" href="#Valoraci%C3%B3n-de-modelos-con-componentes-deterministas">&#182;</a></h4>
 </div>
 </div>
@@ -14463,7 +14491,8 @@ determinista</strong> (junto a una tendencia cuadrática determinista).</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li><p>Estos modelos resultan útiles para realizar un análisis descriptivo.</p>
 </li>
@@ -14493,7 +14522,8 @@ en el tiempo.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Hay parámetros no significativos&#x2026;</strong> (p-valores para dummies enero,
 febrero y octubre).</p>
 
@@ -14505,7 +14535,8 @@ febrero y octubre).</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div>
 <img src="./img/lecc02/resultsModel3.png" width="400" class="center"/>
 </div>
@@ -14517,7 +14548,8 @@ febrero y octubre).</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>podemos eliminarlos secuencialmente</strong> (quitando cada vez la variable de mayor p-valor)</p>
 
 </div>
@@ -14528,7 +14560,8 @@ febrero y octubre).</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div>
 <img src="./img/lecc02/resultsModel4.png" width="400" class="center"/>
 </div><p>Pero esta inferencia es incorrecta. Con auto-correlación la varianza
@@ -14543,7 +14576,8 @@ desviaciones típicas es incorrecta</strong>)</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Perturbaciones-no-esf%C3%A9ricas">Perturbaciones no esf&#233;ricas<a class="anchor-link" href="#Perturbaciones-no-esf%C3%A9ricas">&#182;</a></h2>
 </div>
 </div>
@@ -14553,7 +14587,8 @@ desviaciones típicas es incorrecta</strong>)</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Considere el modelo
 $\boldsymbol{y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U}.\;$ Bajo
 los supuestos habituales</p>
@@ -14571,7 +14606,8 @@ $$\;Var(\widehat{\boldsymbol{\beta}}\mid\boldsymbol{\mathsf{X}})=\sigma^2(\bolds
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Pero si las perturbaciones $\boldsymbol{U}$ del modelo son
 heterocedásticas y/o autocorreladas
 $$Var(\boldsymbol{U}\mid\boldsymbol{\mathsf{X}})=\boldsymbol{\Sigma}\ne\sigma^2\boldsymbol{\mathsf{I}}$$
@@ -14589,7 +14625,8 @@ $$Var(\widehat{\boldsymbol{\beta}}\mid\boldsymbol{\mathsf{X}})=Var(\widehat{\bol
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Test-de-autocorrelaci%C3%B3n-de-Breusch-y-Godfrey">Test de autocorrelaci&#243;n de Breusch y Godfrey<a class="anchor-link" href="#Test-de-autocorrelaci%C3%B3n-de-Breusch-y-Godfrey">&#182;</a></h3>
 </div>
 </div>
@@ -14599,7 +14636,8 @@ $$Var(\widehat{\boldsymbol{\beta}}\mid\boldsymbol{\mathsf{X}})=Var(\widehat{\bol
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>El tests el de Breusch y Godfrey (y el de Durbin-Watson) contrastan la $H_0$ de <em>no autocorrelación</em>.</p>
 
 </div>
@@ -14610,19 +14648,20 @@ $$Var(\widehat{\boldsymbol{\beta}}\mid\boldsymbol{\mathsf{X}})=Var(\widehat{\bol
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Considere el <em>modelo de regresión lineal</em></p>
 \begin{equation}
-\label{org6f3577b}
+\label{org68eda76}
 Y_t = \beta_1+ \beta_2 X_{t,1} + \cdots +  \beta_k X_{t,k+1} + U_t 
 \end{equation}<p>donde las perturbaciones $\boldsymbol{U}$ quizá siguen un esquema
 auto-regresivo $AR(p)$:</p>
 $$U_t = \rho_1 U_{t-1} + \rho_2 U_{t-2}  + \cdots + \rho_p U_{t-p} + \varepsilon_t$$<ul>
 <li><strong>Paso 1</strong>. Obtener los errores $\hat{\boldsymbol{e}}$ del ajuste MCO
-del modelo (<a href="#org6f3577b">1</a>) con una muestra de tamaño $T$.</li>
+del modelo (<a href="#org68eda76">1</a>) con una muestra de tamaño $T$.</li>
 <li><strong>Paso 2</strong>. Calcular el $R^2$ de la <em>regresión auxiliar</em> de los
 errores $\hat{\boldsymbol{e}}$ sobre los regresores del modelo
-original (<a href="#org6f3577b">1</a>) y sobre los $p$ primeros retardos
+original (<a href="#org68eda76">1</a>) y sobre los $p$ primeros retardos
 de $\hat{\boldsymbol{e}}$.  $$\hat{e}_t = \alpha_0 + \alpha_1
   X_{t,1} + \cdots \alpha_k X_{t,k} + \rho_1 \hat{e}_{t-1} + \rho_2
   \hat{e}_{t-2} + \cdots + \rho_p \hat{e}_{t-p} + \varepsilon_t$$</li>
@@ -14640,7 +14679,8 @@ auxiliar y $n=T-p$.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>El test de Durbin-Watson</strong> contrasta la autocorrelación <u>de orden
 uno</u>. Para muestras grandes, el test es aproximadamente igual a
 $2(1-{\hat {\rho }})$, donde ${\hat{\rho}}$ es la autocorrelación de
@@ -14658,7 +14698,8 @@ autocorrelación negativa.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Valor del estadístico: $\quad 62.7119\qquad$ (p-valor: $\; 1.55e-13$)</li>
 <li>$x_{12}$ corresponde al primer retardo en la regresión auxiliar y es muy significativo</li>
@@ -14674,7 +14715,8 @@ autocorrelación negativa.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Errores-est%C3%A1ndar-robustos">Errores est&#225;ndar robustos<a class="anchor-link" href="#Errores-est%C3%A1ndar-robustos">&#182;</a></h3>
 </div>
 </div>
@@ -14684,7 +14726,8 @@ autocorrelación negativa.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Un procedimiento adecuado en presencia de autocorrelación y muestras
 grandes consiste en usar errores estándar <em>robustos</em> (<strong>HAC</strong> -
 heteroscedasticity and autocorrelation robust covariance matrix) al
@@ -14706,7 +14749,8 @@ realizar inferencia con la estimación de los parámetros.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li><strong>Covariance type</strong>: HAC (heteroscedasticity and autocorrelation robust covariance matrix)</li>
 </ul>
@@ -14724,7 +14768,8 @@ robustas. El modelo reducido es&#x2026;</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div>
 <img src="./img/lecc02/resultsModel6.png" width="400" class="center"/>
 </div><ul>
@@ -14740,7 +14785,8 @@ robustas. El modelo reducido es&#x2026;</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Modelo-del-error">Modelo del error<a class="anchor-link" href="#Modelo-del-error">&#182;</a></h3>
 </div>
 </div>
@@ -14750,7 +14796,8 @@ robustas. El modelo reducido es&#x2026;</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>En el modelo
 $\boldsymbol{y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U},\;$ si las
 perturbaciones presentan heterocedasticidad y/o auto-correlación, y
@@ -14780,7 +14827,8 @@ estables.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Cuando realizamos el Test de Breusch-Godfrey vimos que en la regresión
 auxiliar el primer retardo de los errores era significativo. Por
 tanto, vamos a indicar que las perturbaciones siguen un proceso AR(1).
@@ -14797,7 +14845,8 @@ $$\epsilon_t = \rho_1 \epsilon_{t-1} + e_t$$<p>(<em>en este caso la estimación 
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div>
 <img src="./img/lecc02/resultsModel7.png" width="600" class="center"/>
 </div>

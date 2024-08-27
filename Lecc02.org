@@ -23,8 +23,9 @@
 #+END_SRC
 
 #+BEGIN_ABSTRACT
-En esta lección veremos regresión con series temporales y estimación
-de componentes (no observables) con modelos deterministas.
+En esta lección veremos algunos modelos de regresión con series
+temporales; en particular la estimación de componentes (no
+observables) con modelos deterministas.
 #+END_ABSTRACT
 
 - [[https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc02.html][lección en html]]

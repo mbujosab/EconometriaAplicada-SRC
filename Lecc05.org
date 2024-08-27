@@ -52,16 +52,13 @@
 
 
 #+begin_abstract
-En esta lección veremos algunas herramientas estadísticas.
+Esta lección veremos las dificultades que ocasiona la correlación
+serial y algunos tipos de procesos débilmente estacionarios que nos
+permitirán lidiar con ella.
 #+end_abstract
 
-***** COMMENT para Jupyter-Notebook                               :noexports:
-\(
-\newcommand{\lag}{\mathsf{B}}
-\newcommand{\Sec}[1]{\boldsymbol{#1}}
-\newcommand{\Pol}[1]{\boldsymbol{#1}}
-\)
-
+- [[https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc05.html][lección en html]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc05.ipynb][lección en mybinder]]
 
 ***  Carga de algunas librerías de R
    :PROPERTIES:
@@ -97,7 +94,7 @@ options(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
 #+END_SRC
 
 
-* Introducción a la modelización de series temporales
+* Series temporales vs datos de sección cruzada
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
@@ -116,7 +113,6 @@ cronológico puede ser crucial/ al modelar los datos.
 
 Esto tiene importantes implicaciones en las técnicas de análisis y
 los modelos a utilizar.
-
 
 **** Población en Australia
    :PROPERTIES:
@@ -142,7 +138,6 @@ p
 #+attr_latex: :width 425px
 [[./img/lecc05/PoblacionAustralia.png]]
 
-
 **** PIB UEM
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
@@ -167,7 +162,6 @@ P
 #+attr_html: :width 900px
 #+attr_latex: :width 425px
 [[./img/lecc05/PIB_UEM.png]]
-
 
 **** Temperatura media en el Parque del Retiro. Madrid
    :PROPERTIES:
@@ -241,11 +235,9 @@ P
 [[./img/lecc05/ProduccionCemento.png]]
 
 
-
-* Correlación serial vs muestreo aleatorio simple
+** Correlación serial vs muestreo aleatorio simple
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
-   :UNNUMBERED: t 
    :ID:       59d7b543-b898-4cf8-8ca9-f0f5e4734121
    :END:
 
@@ -261,10 +253,9 @@ Con datos de
   + con frecuencia el nivel esperado (o la volatilidad) parece cambiar con $t$
   + con frecuencia hay dependencia temporal (correlación serial).
 
-  *Ejemplo*: dada la evolución de los datos, no parece aceptable
-  asumir que $ProdCemento_{1960M01}$ tiene la misma distribución que
-  $ProdCemento_{2000M04}$ (ni que sea independiente de
-  $ProdCemento_{1959M01}$).
+  *Ejemplo*: no parece aceptable asumir que $ProdCemento_{1960M01}$ se
+  distribuye igual que $ProdCemento_{2000M04}$ (ni que sea
+  independiente de $ProdCemento_{1959M01}$).
 #+LATEX: \medskip
 
 Veamos por qué esto genera dificultades...
@@ -296,500 +287,367 @@ aún así...
 
 - Además... para cada variable aleatoria $X_t$ hay infinitos parámetros.
 
-** Casos que simplifican el escenario
+** Tipos de procesos estocásticos que simplifican el escenario
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
-   :UNNUMBERED: t 
    :END:
 
-- Si el proceso es [[./Lecc01.slides.html#/3/1][débilmente estacionario]] se reduce drásticamente el
-  número de parámetros:
+- Si es [[./Lecc01.slides.html#/3/1][débilmente estacionario]] se reduce drásticamente el número de
+  parámetros:
   \begin{eqnarray}
   E(X_t)  & = \mu \\
   Cov(X_t,X_{t-k}) & = \gamma_k
   \end{eqnarray}
-- Si además pudiéramos asumir que el proceso es i.i.d. podríamos
-  interpretar la serie temporal como una realización de un muestreo
-  aleatorio simple (lo que habilita la inferencia estadística).
+- Si además es i.i.d. podemos interpretar la serie temporal como una
+  realización de un muestreo aleatorio simple (lo que habilita la
+  inferencia estadística).
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 El desafío para el analista es (y nótese el abuso de lenguaje)
 - primero :: transformar los datos para lograr que sean "*/estacionarios/*".
-  - (Lo vimos en la lección 1)) 
+  - (Algo vimos en la lección 1)) 
 - después :: transformar los datos estacionarios en una secuencia de
   "*datos /i.i.d/*" 
-  - (Aún no visto)
+  - (Aún no lo hemos visto)
 
 Todo este proceso constituye la especificación y ajuste de un modelo a
 la serie temporal.
-
-** La especificación del modelo se escoge según las características de los datos.
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
-   :UNNUMBERED: t 
-   :END:
-
-¿Es la serie 
-- "*/estacionaria en media/*"
-  + (y si lo es, ¿cuál es su media?)
-  + (y si no lo es, ¿cómo cambia o evoluciona su media?)
-- "*/estacionaria en varianza/*" (/homocedástica/)
-  + (y si lo es, ¿cuál es su varianza?)
-  + (y si es /heterocedástica/, ¿cómo cambia o evoluciona su varianza?)? 
-
-¿Están sus valores correlados con su historia pasada (autocorrelados)?
-
-#+LATEX: \noindent
-¿Están correlados con los valores presentes o pasados de otras series?
-#+LATEX: \bigskip
-
-Veamos algunas herramientas estadísticas para poder desvelar estas
-características.
-
-
-* Herramientas para desvelar propiedades de una serie temporal
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . skip)))
-   :END:
-
-** Análisis gráfico
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . slide)))
-   :END:
-
-*** Gráfico de la serie temporal 
-
-Representa sus valores en el eje vertical ($y$) frente a una escala
-temporal en el horizontal ($x$). Es útil para detectar visualmente:
- - tendencias y/o estacionalidad 
- - cambios de variabilidad
- - valores atípicos (/outliers/)
-   + el 95% aprox. de una muestra de valores generados por una
-     distribución normal debería estar comprendido entre
-     $\mu\pm2\sigma$
-   + la probabilidad de que una variable normal genere un valor fuera
-     de las bandas de $\mu\pm3\sigma$ es $0.0023$
-    
-    ([[file:./img/lecc05/IBEX35.png][véase gráfico IBEX 35]])
-
-En es importante escalar y rotular adecuadamente los ejes y asegurar
-la comparabilidad entre series y gráficos distintos (si los hubiere).
-
-
-*** Gráfico rango-media
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
-   :END:
-Cambios de variabilidad de una serie pueden evidenciarse en su gráfico
-temporal.
-
-Pero también suelen verse bien en un gráfico rango-media, donde se
-representa:
-  + en el eje $x$ :: un indicador del nivel de la serie calculado para
-    distintas submuestras no solapadas (normalmente la media).
-  + en el eje $y$ :: un indicador de la dispersión de la serie
-    calculado para las mismas submuestras (normalmente el rango.)
-
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-Veamos el gráfico de la serie de pasajeros de líneas aéreas junto a su
-gráfico de rango media:
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file rango-mediaAirPass.png :exports code :results silent
-Z <- AirPassengers
-ide(Z, graphs = c("plot", "rm"), main="Pasajeros de líneas (aéreas en miles) y gráfico rango-media")
-#+END_SRC
-
-#+attr_org: :width 800
-#+attr_html: :width 900px
-#+attr_latex: :width 425px
-[[./img/lecc05/rango-mediaAirPass.png]]
-
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-El gráfico de rango media a veces se acompaña de una regresión de la
-dispersión sobre los niveles para medir la relación nivel-dispersión.
-
-
-** Determinación del orden de integración
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . slide)))
-   :END:
-
-Decidir adecuadamente el orden de integración es crucial en el
-análisis de series temporales.
-
-Las herramientas utilizadas para tomar la decisión son 
- - el análisis gráfico
- - los contrastes formales
-
-*** Análisis gráfico
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
-   :END:
-
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file diferenciasPoblacion.png :results silent 
-options(repr.plot.width = 12, repr.plot.height = 8, repr.plot.res = 200)
-ide(PoblacionAustralia_ts,
-    graphs = c("plot"),
-    transf = list(list(bc = F), list(bc = F, d = 1), list(bc = F, d = 2)),
-    main="Población australiana, primera diferencia y segunda diferencia" )
-#+END_SRC
-
-#+attr_org: :width 800
-#+attr_html: :width 900px
-#+attr_latex: :width 425px
-[[./img/lecc05/diferenciasPoblacion.png]]
-
-
-
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-La serie de población $\boldsymbol{y}$ tiene una clara tendencia
-creciente (primer gráfico), que desaparece al tomar una diferencia
-ordinaria, $$\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y}$$
-(segundo gráfico). Bastar con tomar una primera diferencia de la serie
-de población para obtener una nueva serie que se asemeja a la
-realización de un proceso estacionario.
-
-No obstante, ¿qué pasa si tomamos una segunda diferencia ordinaria?
-$$\nabla\nabla\boldsymbol{y}=\nabla^2\boldsymbol{y}=(1-\mathsf{B})^2*\boldsymbol{y}$$
-(segundo gráfico). Pues que la serie obtenida también es estacionaria,
-pero ojo, es un grave error tomar más diferencias de las necesarias al
-modelizar los datos. Se debe tomar el mínimo número de
-transformaciones que arrojen una serie ``estacionaria'' (recuerde que
-decir que una serie temporal es /estacionaria/ es un abuso del
-lenguaje).
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file diferenciasPasajeros.png :results silent
-options(repr.plot.width = 12, repr.plot.height =  10, repr.plot.res = 200)
-ide(Z,
-    graphs = c("plot"),
-    transf = list(list(bc=T), list(bc=T, d=1), list(bc=T, D=1), list(bc=T, D=1, d=1)),
-    main = "Log pasajeros aéreos, diferencia ordinaria, diferencia estacional y composición de ambas diferencias" )
-#+END_SRC
-
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
-#+attr_org: :width 800
-#+attr_html: :width 900px
-#+attr_latex: :width 425px
-[[./img/lecc05/diferenciasPasajeros.png]]
-
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-Como ya vimos, la serie pasajeros en logaritmos tiene tendencia y
-estacionalidad muy evidentes. No basta con tomar solo una diferencia
-ordinaria $$\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y};$$ pues
-el resultado muestra una pauta estacional. Ni tampoco basta con tomar
-solo una diferencia estacional
-$$\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B^{12}})*\boldsymbol{y};$$ pues
-resulta una serie que ``deambula'', i.e., que no es /``estacionaria''/
-en media.
-
-Tomar una diferencia ordinaria y otra estacional
-$$\nabla\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B})*(1-\mathsf{B^{12}})*\boldsymbol{y}$$
-arroja una serie que sí parece ser /``estacionaria''/.
-
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file diferenciasTemperaturasRetiro.png :results silent
-options(repr.plot.width = 12, repr.plot.height =  8, repr.plot.res = 200)
-TemperaturaRetiro_ts=ts(read.csv("datos/Retiro.txt"),start=c(1985, 1), end=c(2015,9), frequency=12)
-ide(TemperaturaRetiro_ts,
-    graphs = c("plot"),
-    transf = list(list(), list(D = 1)),
-    main="Temperatura media en el Retiro y diferencia estacional" )
-#+END_SRC
-
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
-#+attr_org: :width 800
-#+attr_html: :width 900px
-#+attr_latex: :width 425px
-[[./img/lecc05/diferenciasTemperaturasRetiro.png]]
-
-
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-En el caso de la serie de temperaturas en el Parque del Retiro, parece
-que es suficiente con tomar solo una diferencia estacional.
-
-
-*** Contrastes formales sobre el orden de integración
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
-   :END:
-
-**** Test de Dickey-Fuller (DF)
-
-- $H_0$ :: la serie es $I(1)$
-- $H_1$ :: la serie es $I(0)$.
-
-Consideremos el modelo $$y_{t}=\rho y_{t-1}+u_{t},$$ donde $y_{t}$ es
-la variable de interés, $\rho$ es un coeficiente, y $u_{t}$ es un
-proceso de ruido blanco. Una raíz unitaria estará presente si $\rho
-=1$. En tal caso el modelo será no-estacionario.
-
-El modelo de regresión se puede escribir como
-
-$$\nabla y_{t}=(\rho -1)y_{t-1}+u_{t}=\delta y_{t-1}+u_{t}$$
-
-
-**** Test de Dickey-Fuller aumentado (ADF)
-
-
-
-* Función de autocovarianzas y función de autocorrelación
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . slide)))
-   :END:
-
-- La secuencia $(\gamma_k)$ con $k\in\mathbb{Z}$ se denomina
-  /función de autocovarianzas/
-- La secuencia $\{\rho_k\}$ con $k\in\mathbb{Z}$, donde
-     
-  $$\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0} $$
-   
-  #+LATEX: \noindent
-  se denomina /función de autocorrelación/ (ACF).
+#+latex: \bigskip
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-#+LATEX: \noindent
-Debido a la estacionariedad, la correlación entre $X_t$ y $X_{t+k}$ no
-depende de $t$; tan solo depende de la distancia temporal $k$ entre
-ambas variables.
+Antes de atacar los temas de especificación y ajuste de modelos,
+debemos estudiar un poco los procesos estocásticos débilmente
+estacionarios que vamos a utilizar.
 
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
-$$\boldsymbol{\phi}(\mathsf{B}) : \phi  $$
+* Procesos estocásticos de segundo orden
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+# También se conocen como estacionarios en varianza o estacionarios de segundo orden.
+
+El ambiente natural para estudiar las propiedades de segundo orden de
+una colección de variables aleatorias es el espacio de variables
+aleatorias $X$ definidas en un espacio de probabilidad tales que
+$$E(X)=0 \quad\text{y}\quad E(X^2)<\infty$$ donde $E$ es el operador
+esperanza. Denotaremos este espacio con $H$.
+
+** Un poco de geometría
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+El espacio, dotado de producto escalar y norma $$\langle X \mid Y
+\rangle=E(XY),\qquad \lVert X \rVert= \sqrt{E(X^2)},\qquad X,Y \in
+H,$$ es un espacio de Hilbert,
+
+Nótese que como las variables de $H$ tienen esperanza cero, el
+producto escalar entre $X,Y\in H$ también es $$\langle X \mid Y
+\rangle=Cov(X,Y).$$ Por tanto, en este espacio $H$ la noción
+geométrica de ortogonalidad coincide con la noción estadística de /no
+correlación/. Por tanto, en este contexto los términos producto
+escalar y covarianza serán intercambiables.
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Una colección de variables aleatorias pertenecientes a $H$
+$$\boldsymbol{X}=(X_t\mid t\in\mathbb{Z}) \;\text{ con }\; X_t\in H$$
+se denomina /proceso estocástico de segundo orden/.
+
+** Función de covarianzas
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+
+La /función de covarianzas/ de un proceso estocástico $\boldsymbol{X}$
+segundo orden es $$\boldsymbol{\gamma}=(\gamma_{s,t}\mid
+s,t\in\mathbb{Z})$$ donde $\gamma_{s,t}=Cov(X_s,X_t)\quad
+s,t\in\mathbb{Z}$.
+
+Así, para cada par $(s,t)$, la covarianza $\gamma_{s,t}$ mide la
+dependencia lineal entre $X_s$ y $X_t$.
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Esta función $\boldsymbol{\gamma}$ es demasiado general, por eso nos
+restringiremos a la subclase de procesos estocásticos /débilmente
+estacionarios/; pues simplifican enormemente la /función de
+covarianzas/ $\boldsymbol{\gamma}$.
+
+** Proceso estocástico (débilmente) estacionario y su ACF
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+Un proceso estocástico de segundo orden $\boldsymbol{X}$ se dice que
+es /débilmente estacionario/ @@latex:(estacionario en covarianza o,
+sencillamente, estacionario)@@ si la covarianza entre $X_s$ y $X_t$
+solo depende de la diferencia $s-t$ para todo $s,t\in\mathbb{Z}$.
+
+En tal caso se denomina /función de _auto_-covarianzas/ de
+$\boldsymbol{X}$ a la secuencia
+$$\boldsymbol{\gamma}(z)\;=\;(\gamma_k\mid
+k\in\mathbb{Z})\;=\;\sum_{-\infty}^{\infty} \gamma_k z^k$$ donde
+$\;\gamma_k=Cov(X_{t+k}, X_{t})\;$ para $k\in\mathbb{Z}$.
+
 #+BEGIN_EXPORT latex
-$\boldsymbol{\phi}(\mathsf{B})$
+\medskip
+
+Y se denomina matriz de autocovarianzas de
+$\boldsymbol{X}$ a la matriz simétrica 
+$$\boldsymbol{\Gamma}= \begin{bmatrix}
+\gamma_{0}&\gamma_{1}&\gamma_{2}&\cdots\\ 
+\gamma_{1}&\gamma_{0}&\gamma_{1}&\cdots\\ 
+\gamma_{2}&\gamma_{1}&\gamma_{0}&\cdots\\ 
+\vdots&\vdots&\vdots&\ddots
+\end{bmatrix}.$$ 
+
+Tanto la secuencia $\boldsymbol{\gamma}$ como la matriz $\boldsymbol{\Gamma}$ son *definidas positivas*; es decir, para todos los enteros $n\geq1$ y escalares $c_1,c_2,\ldots,c_n$
+
+$$\sum_{i=1}^n\sum_{j=1}^n c_i c_j \gamma_{i-j}\geq0$$
+ya que
+$$%\sum_{i=1}^n\sum_{j=1}^n c_i c_j \gamma_{i-j}=
+\sum_{i=1}^n\sum_{j=1}^n c_i c_j Cov(X_i,X_j)=
+Cov
+\left(
+\sum_{i=1}^n c_i X_i,\;
+\sum_{j=1}^n c_j X_j
+\right)=
+\left< \sum_{i=1}^n c_i X_i \mid \sum_{i=1}^n c_i X_i \right>=
+\left\lVert \sum_{i=1}^n c_i X_i \right\rVert ^2\geq0.
+$$
+Esto es equivalente a que las submatrices principales de $\boldsymbol{\Gamma}$ son definidas positivas.
+\bigskip
+
+Es más, una secuencia $\boldsymbol{\gamma}$ es definida positiva si y solo si existe un espacio de Hilbert $H$ y un proceso estocástico estacionario $\boldsymbol{X}$ con $X_t\in H$ tales que $\gamma_k=Cov(X_t, X_{t-k})$ para todo $t,k\in\mathbb{Z}$ (Kolmogorov, 1941).
+\medskip
 #+END_EXPORT
 
-* Otras herramientas estadísticas                                 :CómoConR:
+*Propiedades* de la función de autocovarianzas $\boldsymbol{\gamma}$ (ACF):
+- $\gamma_0\geq0$
+- $\boldsymbol{\gamma}$ _es definida positiva_; y por tanto,
+  - $\boldsymbol{\gamma}$ es simétrica: $\gamma_k=\gamma_{-k}$
+  - $\boldsymbol{\gamma}$ es acotada: $|\gamma_k|\leq\gamma_0$
 
-** Estadísticos descriptivos
+@@latex:Si $\gamma_0>0$,@@ llamamos /función de autocorrelación/ (ACF) a la
+secuencia:
+$\;\boldsymbol{\rho}=\frac{1}{\gamma_0}(\boldsymbol{\gamma})
+=\sum\limits_{k\in\mathbb{Z}}\frac{\gamma_k}{\gamma_0}z^k$.
+
+* Ejemplos de procesos (débilmente) estacionarios
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . skip)))
+   :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results plain
-library(pastecs)      # resumen estadísticos descriptivos
-# https://cran.r-project.org/web/packages/pastecs/index.html (stat.desc)
-library(knitr)        # presentación de tabla resumen
-# https://cran.r-project.org/web/packages/knitr/index.html (kable)
-# https://bookdown.org/yihui/rmarkdown-cookbook/kable.html
+** Proceso de ruido blanco
 
-# estadísticos principales y test de normalidad
-kable(stat.desc(Z, basic=FALSE, norm=TRUE), 'rst')
-#+END_SRC
+Una secuencia $\boldsymbol{U}=(U_t\mid t\in\mathbb{Z})$ de variables
+aleatorias incorreladas y tales que $$E(U_t)=0\quad\text{ y }\quad
+Var(U_t)=E(U_t^2)=\sigma^2$$ para $\;t\in\mathbb{Z}\;$ y
+$\;0<\sigma^2<\infty\;$ se llama /proceso de ruido blanco/.
+$\quad\boldsymbol{U}\sim WN(0,\sigma^2)$.
+#+latex:\medskip
 
-#+RESULTS:
-#+begin_example
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Al ser variables aleatorias incorreladas, su función de
+autocovarianzas es $$\boldsymbol{\gamma}(z)\;=\;\sigma^2
+z^0\;=\;(\ldots,0,0,\sigma^2,0,0,\ldots)$$
 
-
-============  =============
-\                         x
-============  =============
-median          265.5000000
-mean            280.2986111
-SE.mean           9.9971931
-CI.mean.0.95     19.7613736
-var           14391.9172009
-std.dev         119.9663169
-coef.var          0.4279947
-skewness          0.5710676
-skew.2SE          1.4132515
-kurtosis         -0.4298441
-kurt.2SE         -0.5353818
-normtest.W        0.9519577
-normtest.p        0.0000683
-============  =============
-#+end_example
+- Es el proceso estacionario (no trivial) más sencillo.
+- Este proceso es el pilar sobre el que definiremos el resto de
+  ejemplos.
 
 
-** Test de normalidad Jarque-Vera
+** Procesos lineales
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . skip)))
+   :metadata: (slideshow . ((slide_type . subslide)))
    :END:
 
-[[https://en.wikipedia.org/wiki/Jarque%E2%80%93Bera_test][Jarque-Vera test (Wikipedia)]]
+Sea $\boldsymbol{U}\sim WN(0,\sigma^2)$ y sea $\boldsymbol{\theta}\in
+\ell^2$; @@latex: es decir,@@ una secuencia de _cuadrado sumable_
+$\;\sum\limits_{j\in\mathbb{Z}}\theta_j^2<\infty$.
+#+latex:\medskip
 
-Podemos calcularlo con la librería [[https://cran.r-project.org/web/packages/moments/index.html][momments]]:
-#+BEGIN_SRC jupyter-R :results plain
-#install.packages("moments")
-library(moments)
-# Perform the Jarque-Bera test
-jb_test <- jarque.test(as.numeric(Z))
-# Print the test result
-print(jb_test)
-#+END_SRC
+Denominamos /proceso lineal/ al proceso estocástico
+$\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$ cuyos elementos son $$X_t
+\;=\;(\boldsymbol{\theta}*\boldsymbol{U})_t
+\;=\;\boldsymbol{\theta}(B)U_t \;=\;\sum_{j=-\infty}^\infty \theta_j
+U_{t-j};\qquad t\in\mathbb{Z}.$$
 
-#+RESULTS:
-: 
-: 	Jarque-Bera Normality Test
-: 
-: data:  as.numeric(Z)
-: JB = 8.9225, p-value = 0.01155
-: alternative hypothesis: greater
-: 
+#+BEGIN_EXPORT latex
+El proceso está bien definido puesto que la serie infinita converge en norma por el Teorema de Riesz-Fisher (Pourahmadi, M. 2001, Teorema 9.7).
+Y el proceso es estacionario porque, usando la continuidad de los productos escalares (Pourahmadi, M. 2001, Teorema 9.2),
+\begin{align*}
+\gamma_k=Cov(X_{t+k},X_t)=\langle X_{t+k}\mid X_{t}\rangle 
+& = \lim_{m,n\to\infty} 
+\left\langle \sum_{i=-m}^m c_i U_{t+k-i}\mid \sum_{j=-n}^n c_j U_{t-j}\right\rangle\\
+& = \sum_{i=-\infty}^\infty \sum_{j=-\infty}^\infty c_i c_j \langle U_{t+k-i}\mid  U_{t-j} \rangle \\
+& = \sigma^2 \sum_{i=-\infty}^\infty \sum_{j=-\infty}^\infty c_i c_j \delta_{t+k-i,t-j} \; = \; \sigma^2 \sum_{i=-\infty}^\infty c_i c_{i+k}
+\end{align*}
+que solo depende de $k$ y donde $\delta_{p,q}$ es la delta de Kronecker.
+\medskip
 
-Otra librería alternativa para calcularlo: [[https://cran.r-project.org/web/packages/tseries/index.html][tseries]]
-#+BEGIN_SRC jupyter-R :results plain
-library(tseries)
-# Perform the Jarque-Bera test
-jb_test <- jarque.bera.test(Z)
-# Print the test result
-print(jb_test)
-#+END_SRC
+#+END_EXPORT
 
-#+RESULTS:
-#+begin_example
-Registered S3 method overwritten by 'quantmod':
-  method            from
-  as.zoo.data.frame zoo 
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+El proceso lineal es /``causal''/ si además $\boldsymbol{\theta}$ es
+una _serie formal_ (i.e.,
+$cogrado(\boldsymbol{\theta})\geq{\color{blue}{0}}$)
+$$X_t=\sum_{\color{blue}{j=0}}^\infty \theta_j U_{t-j};\qquad
+t\in\mathbb{Z}$$ $\;$ (pues cada $X_t$ es una suma de variables "/del
+presente y pasado/").
+#+latex:\medskip
 
-	Jarque Bera Test
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+La clase de procesos lineales incluye muchas e importantes subclases
+de procesos, algunas de las cuales son objeto principal de estudio de
+este curso.
 
-data:  Z
-X-squared = 8.9225, df = 2, p-value = 0.01155
-#+end_example
+*** Media móvil infinita. MA($\infty$)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
 
-
-
-
-* COMMENT Otro código                                              :noexport:
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R 
-PIB_UEM_ts = as.ts( read.csv.zoo("datos/PIB_UEM.csv", 
-                                 FUN = as.yearqtr, 
-                                 format = "%YQ%q", 
-                                 strip.white = TRUE))
-p <- autoplot(PIB_UEM_ts)
-p <- p + labs(y = "Miles de millones de euros", x = "Años") + ggtitle("PIB UEM a precios corrientes (datos trimestrales). Fuente Banco de España")
-p 
-#+END_SRC
-
-#+RESULTS:
-:RESULTS:
-#+attr_org: :width 1200 :height 800
-[[./.ob-jupyter/bb38d3b5fedcf743921e45e000873a00134cbd11.png]]
-:END:
-
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R 
-ProduccionCemento_ts = as.ts( read.csv.zoo("datos/ProduccionCemento.csv",
-                                           FUN = as.yearmon, 
-                                           format = "%YM%m",
-                                           strip.white = TRUE))
-autoplot(ProduccionCemento_ts)
-#+END_SRC
-
-#+RESULTS:
-:RESULTS:
-#+attr_org: :width 1200 :height 800
-[[./.ob-jupyter/77f5dea1afae26038646e090068fcefbd9b8daf6.png]]
-:END:
-
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file ExportacionDeAcero.png :exports code :results silent
-ExportacionDeAcero_ts = as.ts( read.csv.zoo("datos/ExportacionDeAcero.csv",
-                                            FUN = as.yearmon,
-                                            format = "%YM%m",
-                                            strip.white = TRUE))
-autoplot(ExportacionDeAcero_ts)
-#+END_SRC
-
-
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file rango-mediaLogAirPass.png :exports code :results silent
-Z <- AirPassengers
-ide(Z, transf=list(bc=T, d=1, D=1), graphs = c("plot", "rm"))
-#+END_SRC
+Sea $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y sea
+$\;\boldsymbol{\theta}\in \ell^2\;$ una serie formal con _infinitos
+términos NO nulos_; entonces el proceso estocástico
+$\boldsymbol{\theta}*\boldsymbol{U}$, cuyos elementos son $$X_t
+\;=\;(\boldsymbol{\theta}*\boldsymbol{U})_t
+\;=\;\boldsymbol{\theta}(B)U_t \;=\;\sum_{j=0}^\infty \theta_j
+U_{t-j};\qquad t\in\mathbb{Z}$$ se denomina proceso de /media móvil
+infinita/ MA($\infty$).
+#+latex:\bigskip
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-#+attr_org: :width 800
-#+attr_html: :width 900px
-#+attr_latex: :width 425px
-[[./img/lecc05/rango-mediaLogAirPass.png]]
+Algunas clases de procesos lineales tienen una representación
+parsimoniosa, pues basta un número finito de parámetros para
+representarlos completamente. Por ejemplo, cuando
+$\boldsymbol{\theta}$ tiene un número finito de términos no nulos...
 
-$$\nabla_{12}(\nabla\ln\boldsymbol{y})$$
+*** Proceso de media móvil de orden $q$. MA($q$)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . fragment)))
+   :END:
 
+Sea $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y sea
+$\;\boldsymbol{\theta}\;$ un _polinomio de grado $q$_ con $\theta_0=1$;
+entonces el proceso estocástico $\boldsymbol{\theta}*\boldsymbol{U}$,
+cuyos elementos son $$X_t \;=\;(\boldsymbol{\theta}*\boldsymbol{U})_t
+\;=\;\boldsymbol{\theta}(B)U_t \;=\;\sum_{j=0}^q\theta_j
+U_{t-j};\qquad t\in\mathbb{Z}$$ se denomina proceso de /media móvil/
+MA($q$).
 
-1985ene 
-2012sep
-
-#+BEGIN_SRC jupyter-R
-as.yearmon(1985 + seq(0, nrow(TemperaturaRetiro_df)-1)/12)
-#+END_SRC
-
-#+RESULTS:
-#+begin_example
-  [1] "ene 1985" "feb 1985" "mar 1985" "abr 1985" "may 1985" "jun 1985"
-  [7] "jul 1985" "ago 1985" "sep 1985" "oct 1985" "nov 1985" "dic 1985"
- [13] "ene 1986" "feb 1986" "mar 1986" "abr 1986" "may 1986" "jun 1986"
- [19] "jul 1986" "ago 1986" "sep 1986" "oct 1986" "nov 1986" "dic 1986"
- [25] "ene 1987" "feb 1987" "mar 1987" "abr 1987" "may 1987" "jun 1987"
- [31] "jul 1987" "ago 1987" "sep 1987" "oct 1987" "nov 1987" "dic 1987"
- [37] "ene 1988" "feb 1988" "mar 1988" "abr 1988" "may 1988" "jun 1988"
- [43] "jul 1988" "ago 1988" "sep 1988" "oct 1988" "nov 1988" "dic 1988"
- [49] "ene 1989" "feb 1989" "mar 1989" "abr 1989" "may 1989" "jun 1989"
- [55] "jul 1989" "ago 1989" "sep 1989" "oct 1989" "nov 1989" "dic 1989"
- [61] "ene 1990" "feb 1990" "mar 1990" "abr 1990" "may 1990" "jun 1990"
- [67] "jul 1990" "ago 1990" "sep 1990" "oct 1990" "nov 1990" "dic 1990"
- [73] "ene 1991" "feb 1991" "mar 1991" "abr 1991" "may 1991" "jun 1991"
- [79] "jul 1991" "ago 1991" "sep 1991" "oct 1991" "nov 1991" "dic 1991"
- [85] "ene 1992" "feb 1992" "mar 1992" "abr 1992" "may 1992" "jun 1992"
- [91] "jul 1992" "ago 1992" "sep 1992" "oct 1992" "nov 1992" "dic 1992"
- [97] "ene 1993" "feb 1993" "mar 1993" "abr 1993" "may 1993" "jun 1993"
-[103] "jul 1993" "ago 1993" "sep 1993" "oct 1993" "nov 1993" "dic 1993"
-[109] "ene 1994" "feb 1994" "mar 1994" "abr 1994" "may 1994" "jun 1994"
-[115] "jul 1994" "ago 1994" "sep 1994" "oct 1994" "nov 1994" "dic 1994"
-[121] "ene 1995" "feb 1995" "mar 1995" "abr 1995" "may 1995" "jun 1995"
-[127] "jul 1995" "ago 1995" "sep 1995" "oct 1995" "nov 1995" "dic 1995"
-[133] "ene 1996" "feb 1996" "mar 1996" "abr 1996" "may 1996" "jun 1996"
-[139] "jul 1996" "ago 1996" "sep 1996" "oct 1996" "nov 1996" "dic 1996"
-[145] "ene 1997" "feb 1997" "mar 1997" "abr 1997" "may 1997" "jun 1997"
-[151] "jul 1997" "ago 1997" "sep 1997" "oct 1997" "nov 1997" "dic 1997"
-[157] "ene 1998" "feb 1998" "mar 1998" "abr 1998" "may 1998" "jun 1998"
-[163] "jul 1998" "ago 1998" "sep 1998" "oct 1998" "nov 1998" "dic 1998"
-[169] "ene 1999" "feb 1999" "mar 1999" "abr 1999" "may 1999" "jun 1999"
-[175] "jul 1999" "ago 1999" "sep 1999" "oct 1999" "nov 1999" "dic 1999"
-[181] "ene 2000" "feb 2000" "mar 2000" "abr 2000" "may 2000" "jun 2000"
-[187] "jul 2000" "ago 2000" "sep 2000" "oct 2000" "nov 2000" "dic 2000"
-[193] "ene 2001" "feb 2001" "mar 2001" "abr 2001" "may 2001" "jun 2001"
-[199] "jul 2001" "ago 2001" "sep 2001" "oct 2001" "nov 2001" "dic 2001"
-[205] "ene 2002" "feb 2002" "mar 2002" "abr 2002" "may 2002" "jun 2002"
-[211] "jul 2002" "ago 2002" "sep 2002" "oct 2002" "nov 2002" "dic 2002"
-[217] "ene 2003" "feb 2003" "mar 2003" "abr 2003" "may 2003" "jun 2003"
-[223] "jul 2003" "ago 2003" "sep 2003" "oct 2003" "nov 2003" "dic 2003"
-[229] "ene 2004" "feb 2004" "mar 2004" "abr 2004" "may 2004" "jun 2004"
-[235] "jul 2004" "ago 2004" "sep 2004" "oct 2004" "nov 2004" "dic 2004"
-[241] "ene 2005" "feb 2005" "mar 2005" "abr 2005" "may 2005" "jun 2005"
-[247] "jul 2005" "ago 2005" "sep 2005" "oct 2005" "nov 2005" "dic 2005"
-[253] "ene 2006" "feb 2006" "mar 2006" "abr 2006" "may 2006" "jun 2006"
-[259] "jul 2006" "ago 2006" "sep 2006" "oct 2006" "nov 2006" "dic 2006"
-[265] "ene 2007" "feb 2007" "mar 2007" "abr 2007" "may 2007" "jun 2007"
-[271] "jul 2007" "ago 2007" "sep 2007" "oct 2007" "nov 2007" "dic 2007"
-[277] "ene 2008" "feb 2008" "mar 2008" "abr 2008" "may 2008" "jun 2008"
-[283] "jul 2008" "ago 2008" "sep 2008" "oct 2008" "nov 2008" "dic 2008"
-[289] "ene 2009" "feb 2009" "mar 2009" "abr 2009" "may 2009" "jun 2009"
-[295] "jul 2009" "ago 2009" "sep 2009" "oct 2009" "nov 2009" "dic 2009"
-[301] "ene 2010" "feb 2010" "mar 2010" "abr 2010" "may 2010" "jun 2010"
-[307] "jul 2010" "ago 2010" "sep 2010" "oct 2010" "nov 2010" "dic 2010"
-[313] "ene 2011" "feb 2011" "mar 2011" "abr 2011" "may 2011" "jun 2011"
-[319] "jul 2011" "ago 2011" "sep 2011" "oct 2011" "nov 2011" "dic 2011"
-[325] "ene 2012" "feb 2012" "mar 2012" "abr 2012" "may 2012" "jun 2012"
-[331] "jul 2012" "ago 2012" "sep 2012"
-#+end_example
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Es decir:
+$$ X_t = U_t + \theta_1 U_{t-1} + \cdots + \theta_q U_{t-q}.$$
 
 
-#+BEGIN_SRC jupyter-R
-as.yearmon("mar07", "%b%y")
-#+END_SRC
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Hay otros procesos lineales con representación parsimoniosa.
+#+latex:\bigskip
 
-#+RESULTS:
-: [1] "mar 2007"
+*** Proceso autorregresivo de orden $p$. AR($p$)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . fragment)))
+   :END:
 
+Sea $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, se denomina /proceso
+autorregresivo de orden $p$/ a aquel proceso estocástico
+$\;\boldsymbol{X}\;$ que es la solución de la siguiente ecuación en
+diferencias $$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$$ donde
+$\;\boldsymbol{\phi}\;$ un _polinomio de grado $p$_ con $\phi_0=1$;
+#+latex:\medskip
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Por tanto, $$(\boldsymbol{\phi}*\boldsymbol{X})_t=
+\boldsymbol{\phi}(\mathsf{B})X_t= \sum_{j=0}^p \phi_j X_{t-j} = U_t.$$
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Es decir $\boldsymbol{X}=(X_t\mid t\in\mathbb{Z})$ es una solución de
+la siguiente ecuación en diferencias: $$X_t + \phi_1 X_{t-1} +
+\cdots + \phi_q X_{t-q} = U_t.$$
+#+latex:\medskip
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+El problema con la anterior definición es que la solución
+$\boldsymbol{X}$ de la ecuación
+$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$ no es única. Para
+verlo basta despejar $\boldsymbol{X}$.
+
+Multiplicando ambos lados de la igualdad por una inversa de
+$\boldsymbol{\phi}$ lo logramos
+$$\boldsymbol{X}=inversa(\boldsymbol{\phi})*\boldsymbol{U}$$ es decir,
+si $\boldsymbol{a}=inversa(\boldsymbol{\phi})$ entonces
+$$X_t=\boldsymbol{a}(\mathsf{B})U_t=\sum_{j\in\mathbb{Z}} a_j
+U_{t-j}$$ 
+#+latex:\medskip
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Pero... ¿Qué secuencia $\boldsymbol{a}$ usamos como inversa de
+$\boldsymbol{\phi}$? Recuerde que hay infinitas y la mayoría no son
+sumables (si el polinomio $\boldsymbol{\phi}$ tiene raíces unitarias
+ninguna lo es).
+
+#+begin_center
+En tal caso la expresión $\;\boldsymbol{a}(\mathsf{B})U_t=\sum\limits_{j\in\mathbb{Z}} a_j U_{t-j}\;$ carece de sentido
+#+end_center
+#+latex:\medskip
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+*Requisitos* sobre el polinomio autorregresivo $\boldsymbol{\phi}$
+
+1) Para tener un _proceso lineal_, exigiremos que $\boldsymbol{\phi}$
+   _no tenga raíces de módulo 1_.
+
+  En tal caso sabemos que la inversa en $\ell^1\subset\ell^2$ (la
+   abolutamente sumable) existe.
+
+  Denotamos dicha inversa con $\boldsymbol{\phi}^{-1}$
+  
+$$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=-\infty}^\infty
+a_j U_{t-j}$$
+
+2) Para tener un _proceso lineal causal_ exigiremos que las raíces de
+   $\boldsymbol{\phi}$ sean mayores que 1 en valor absoluto (_raíces
+   fuera del círculo unidad_).
+
+$$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=0}^\infty a_j
+U_{t-j}$$
+#+latex:\bigskip
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+El siguiente modelo lineal es una combinación (o generalización) de
+los dos anteriores.
+
+*** Proceso Autorregresivo de media móvil. ARMA($p,q$)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+Sea $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, se denomina /proceso
+autorregresivo de media móvil $(p,q)$/ a aquel proceso estocástico
+$\;\boldsymbol{X}\;$ que es la solución de la siguiente ecuación en
+diferencias
+$$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$$
+donde el polinomio /autorregresivo/ $\;\boldsymbol{\phi}\;$ tiene
+_grado $p$_ con $\phi_0=1$ y con todas sus raíces fuera del círculo
+unidad (/por los motivos anteriormente vistos/); y el polinomio /de
+media móvil/ $\;\boldsymbol{\theta}\;$ es _de grado $q$_ con
+$\theta_0=1$;
+#+latex:\medskip
+
+
+$$\text{Es decir}\quad
+\boldsymbol{X}=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}*\boldsymbol{U}
+\quad\text{donde}\quad
+\frac{1}{\boldsymbol{\phi}}\equiv\boldsymbol{\phi}^{-1}\in\ell^1$$
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Tanto $\boldsymbol{\phi}^{-1}$ como $\boldsymbol{\theta}$ son
+absolutamente sumables y como $\ell^1$ es un anillo,
+$\boldsymbol{\phi}^{-1}*\boldsymbol{\theta}\equiv\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}\in\ell^1$
+(también es absolutamente sumable y por tanto de cuadrado sumable),
+consecuentemente el proceso estocástico es un proceso lineal.
+$$X_t=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}(\mathsf{B})U_t=\sum_{j=0}^\infty
+a_j U_{t-j}$$ donde
+$\boldsymbol{a}=\boldsymbol{\phi}^{-1}*\boldsymbol{\theta}$.
 

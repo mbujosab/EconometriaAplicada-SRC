@@ -1,0 +1,494 @@
+#+TITLE: Econometría Aplicada. Lección 6
+#+author: Marcos Bujosa
+#+LANGUAGE: es-es
+
+# +OPTIONS: toc:nil
+
+# +EXCLUDE_TAGS: pngoutput noexport
+
+#+startup: shrink
+
+#+LATEX_HEADER_EXTRA: \usepackage[spanish]{babel}
+#+LATEX_HEADER_EXTRA: \usepackage{lmodern}
+#+LATEX_HEADER_EXTRA: \usepackage{tabularx}
+#+LATEX_HEADER_EXTRA: \usepackage{booktabs}
+
+#+LaTeX_HEADER: \newcommand{\lag}{\mathsf{B}}
+#+LaTeX_HEADER: \newcommand{\Sec}[1]{\boldsymbol{#1}}
+#+LaTeX_HEADER: \newcommand{\Pol}[1]{\boldsymbol{#1}}
+
+#+LATEX: \maketitle
+
+# M-x jupyter-refresh-kernelspecs
+
+# C-c C-v C-b ejecuta el cuaderno electrónico
+
+#+OX-IPYNB-LANGUAGE: jupyter-R
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC emacs-lisp :exports none :results silent
+(use-package ox-ipynb
+  :load-path (lambda () (expand-file-name "ox-ipynb" scimax-dir)))
+
+(setq org-babel-default-header-args:jupyter-R
+      '((:results . "value")
+	(:session . "jupyter-R")
+	(:kernel . "ir")
+	(:pandoc . "t")
+	(:exports . "both")
+	(:cache .   "no")
+	(:noweb . "no")
+	(:hlines . "no")
+	(:tangle . "no")
+	(:eval . "never-export")))
+
+(require 'jupyter-R)
+;(require 'jupyter)
+
+(org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
+
+(add-to-list 'org-src-lang-modes '("jupyter-R" . R))
+#+END_SRC
+
+
+#+begin_abstract
+En esta lección veremos algunas herramientas estadísticas.
+ y usaré la librería =tfarima= de
+José Luis Gallego siempre que pueda.
+#+end_abstract
+
+***** COMMENT para Jupyter-Notebook                               :noexports:
+\(
+\newcommand{\lag}{\mathsf{B}}
+\newcommand{\Sec}[1]{\boldsymbol{#1}}
+\newcommand{\Pol}[1]{\boldsymbol{#1}}
+\)
+
+
+***  Carga de algunas librerías de R
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :UNNUMBERED: t 
+   :END:
+
+# install.packages(c("readr", "latticeExtra", "tfarima"))
+# library(readr)
+# library(ggplot2)
+# install.packages("pastecs")
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+Primero cargamos la librería =tfarima= (Repositorio Cran:
+https://cran.r-project.org/web/packages/tfarima/index.html;
+repositorio GitHub: https://github.com/gallegoj/tfarima)
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-R :results silent :exports code
+library(tfarima)      # librería de José Luis Gallego para Time Series
+library(readr)        # para leer ficheros CSV
+library(ggplot2)      # para el scatterplot (alternaticamente library(tidyverse))
+library(ggfortify)    # para pintar series temporales
+library(jtools)       # para representación resultados estimación
+library(zoo)          # para generar objetos ts (time series)
+#+END_SRC
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+y además fijamos los parámetros por defecto para las figuras en =png=
+del notebook
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+BEGIN_SRC jupyter-R :results silent :exports code
+# fijamos el tamaño de las figuras que se generan en el notebook
+options(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
+#+END_SRC
+
+
+* Función de autocovarianzas y función de autocorrelación
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+- La secuencia $(\gamma_k)$ con $k\in\mathbb{Z}$ se denomina
+  /función de autocovarianzas/
+
+
+- La secuencia $\{\rho_k\}$ con $k\in\mathbb{Z}$, donde
+     
+  $$\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0} $$
+   
+  #+LATEX: \newline  \noindent
+  se denomina /función de autocorrelación/ (ACF).
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+#+LATEX: \newline  \noindent
+Debido a la estacionariedad, la correlación entre $X_t$ y $X_{t+k}$ no
+depende de $t$; tan solo depende de la distancia temporal $k$ entre
+ambas variables.
+
+* La especificación del modelo se escoge según las características de los datos.
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+¿Es la serie 
+- "*/estacionaria en media/*"
+  + (y si lo es, ¿cuál es su media?)
+  + (y si no lo es, ¿cómo cambia o evoluciona su media?)
+- "*/estacionaria en varianza/*" (/homocedástica/)
+  + (y si lo es, ¿cuál es su varianza?)
+  + (y si es /heterocedástica/, ¿cómo cambia o evoluciona su varianza?)? 
+
+¿Están sus valores correlados con su historia pasada (autocorrelados)?
+
+#+LATEX: \noindent
+¿Están correlados con los valores presentes o pasados de otras series?
+#+LATEX: \bigskip
+
+Veamos algunas herramientas estadísticas para poder desvelar estas
+características.
+
+
+* Herramientas para desvelar propiedades de una serie temporal
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . skip)))
+   :END:
+
+** Análisis gráfico
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+*** Gráfico de la serie temporal 
+
+Representa sus valores en el eje vertical ($y$) frente a una escala
+temporal en el horizontal ($x$). Es útil para detectar visualmente:
+ - tendencias y/o estacionalidad 
+ - cambios de variabilidad
+ - valores atípicos (/outliers/)
+   + el 95% aprox. de una muestra de valores generados por una
+     distribución normal debería estar comprendido entre
+     $\mu\pm2\sigma$
+   + la probabilidad de que una variable normal genere un valor fuera
+     de las bandas de $\mu\pm3\sigma$ es $0.0023$
+    
+    ([[file:./img/lecc05/IBEX35.png][véase gráfico IBEX 35]])
+
+En es importante escalar y rotular adecuadamente los ejes y asegurar
+la comparabilidad entre series y gráficos distintos (si los hubiere).
+
+
+*** Gráfico rango-media
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+Cambios de variabilidad de una serie pueden evidenciarse en su gráfico
+temporal.
+
+Pero también suelen verse bien en un gráfico rango-media, donde se
+representa:
+  + en el eje $x$ :: un indicador del nivel de la serie calculado para
+    distintas submuestras no solapadas (normalmente la media).
+  + en el eje $y$ :: un indicador de la dispersión de la serie
+    calculado para las mismas submuestras (normalmente el rango.)
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+Veamos el gráfico de la serie de pasajeros de líneas aéreas junto a su
+gráfico de rango media:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file rango-mediaAirPass.png :exports code :results silent
+Z <- AirPassengers
+ide(Z, graphs = c("plot", "rm"), main="Pasajeros de líneas (aéreas en miles) y gráfico rango-media")
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc05/rango-mediaAirPass.png]]
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+El gráfico de rango media a veces se acompaña de una regresión de la
+dispersión sobre los niveles para medir la relación nivel-dispersión.
+
+
+** Determinación del orden de integración
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+Decidir adecuadamente el orden de integración es crucial en el
+análisis de series temporales.
+
+Las herramientas utilizadas para tomar la decisión son 
+ - el análisis gráfico
+ - los contrastes formales
+
+*** Análisis gráfico
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file diferenciasPoblacion.png :results silent 
+options(repr.plot.width = 12, repr.plot.height = 8, repr.plot.res = 200)
+ide(PoblacionAustralia_ts,
+    graphs = c("plot"),
+    transf = list(list(bc = F), list(bc = F, d = 1), list(bc = F, d = 2)),
+    main="Población australiana, primera diferencia y segunda diferencia" )
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc05/diferenciasPoblacion.png]]
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+La serie de población $\boldsymbol{y}$ tiene una clara tendencia
+creciente (primer gráfico), que desaparece al tomar una diferencia
+ordinaria, $$\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y}$$
+(segundo gráfico). Bastar con tomar una primera diferencia de la serie
+de población para obtener una nueva serie que se asemeja a la
+realización de un proceso estacionario.
+
+No obstante, ¿qué pasa si tomamos una segunda diferencia ordinaria?
+$$\nabla\nabla\boldsymbol{y}=\nabla^2\boldsymbol{y}=(1-\mathsf{B})^2*\boldsymbol{y}$$
+(segundo gráfico). Pues que la serie obtenida también es estacionaria,
+pero ojo, es un grave error tomar más diferencias de las necesarias al
+modelizar los datos. Se debe tomar el mínimo número de
+transformaciones que arrojen una serie ``estacionaria'' (recuerde que
+decir que una serie temporal es /estacionaria/ es un abuso del
+lenguaje).
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file diferenciasPasajeros.png :results silent
+options(repr.plot.width = 12, repr.plot.height =  10, repr.plot.res = 200)
+ide(Z,
+    graphs = c("plot"),
+    transf = list(list(bc=T), list(bc=T, d=1), list(bc=T, D=1), list(bc=T, D=1, d=1)),
+    main = "Log pasajeros aéreos, diferencia ordinaria, diferencia estacional y composición de ambas diferencias" )
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc05/diferenciasPasajeros.png]]
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+Como ya vimos, la serie pasajeros en logaritmos tiene tendencia y
+estacionalidad muy evidentes. No basta con tomar solo una diferencia
+ordinaria $$\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y};$$ pues
+el resultado muestra una pauta estacional. Ni tampoco basta con tomar
+solo una diferencia estacional
+$$\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B^{12}})*\boldsymbol{y};$$ pues
+resulta una serie que ``deambula'', i.e., que no es /``estacionaria''/
+en media.
+
+Tomar una diferencia ordinaria y otra estacional
+$$\nabla\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B})*(1-\mathsf{B^{12}})*\boldsymbol{y}$$
+arroja una serie que sí parece ser /``estacionaria''/.
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file diferenciasTemperaturasRetiro.png :results silent
+options(repr.plot.width = 12, repr.plot.height =  8, repr.plot.res = 200)
+TemperaturaRetiro_ts=ts(read.csv("datos/Retiro.txt"),start=c(1985, 1), end=c(2015,9), frequency=12)
+ide(TemperaturaRetiro_ts,
+    graphs = c("plot"),
+    transf = list(list(), list(D = 1)),
+    main="Temperatura media en el Retiro y diferencia estacional" )
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc05/diferenciasTemperaturasRetiro.png]]
+
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+En el caso de la serie de temperaturas en el Parque del Retiro, parece
+que es suficiente con tomar solo una diferencia estacional.
+
+
+*** Contrastes formales sobre el orden de integración
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+**** Test de Dickey-Fuller (DF)
+
+- $H_0$ :: la serie es $I(1)$
+- $H_1$ :: la serie es $I(0)$.
+
+Consideremos el modelo $$y_{t}=\rho y_{t-1}+u_{t},$$ donde $y_{t}$ es
+la variable de interés, $\rho$ es un coeficiente, y $u_{t}$ es un
+proceso de ruido blanco. Una raíz unitaria estará presente si $\rho
+=1$. En tal caso el modelo será no-estacionario.
+
+El modelo de regresión se puede escribir como
+
+$$\nabla y_{t}=(\rho -1)y_{t-1}+u_{t}=\delta y_{t-1}+u_{t}$$
+
+
+**** Test de Dickey-Fuller aumentado (ADF)
+
+
+
+* Función de autocovarianzas y función de autocorrelación
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+- La secuencia $(\gamma_k)$ con $k\in\mathbb{Z}$ se denomina
+  /función de autocovarianzas/
+- La secuencia $\{\rho_k\}$ con $k\in\mathbb{Z}$, donde
+     
+  $$\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0} $$
+   
+  #+LATEX: \noindent
+  se denomina /función de autocorrelación/ (ACF).
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+#+LATEX: \noindent
+Debido a la estacionariedad, la correlación entre $X_t$ y $X_{t+k}$ no
+depende de $t$; tan solo depende de la distancia temporal $k$ entre
+ambas variables.
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+$$\boldsymbol{\phi}(\mathsf{B}) : \phi  $$
+#+BEGIN_EXPORT latex
+$\boldsymbol{\phi}(\mathsf{B})$
+#+END_EXPORT
+
+* Otras herramientas estadísticas                                 :CómoHacerConR:
+
+** Estadísticos descriptivos
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . skip)))
+   :END:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results plain
+library(pastecs)      # resumen estadísticos descriptivos
+# https://cran.r-project.org/web/packages/pastecs/index.html (stat.desc)
+library(knitr)        # presentación de tabla resumen
+# https://cran.r-project.org/web/packages/knitr/index.html (kable)
+# https://bookdown.org/yihui/rmarkdown-cookbook/kable.html
+
+# estadísticos principales y test de normalidad
+kable(stat.desc(Z, basic=FALSE, norm=TRUE), 'rst')
+#+END_SRC
+
+#+RESULTS:
+: f6ceddca-b5f8-4351-b1fb-b4159e1969e7
+
+
+** Test de normalidad Jarque-Vera
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . skip)))
+   :END:
+
+[[https://en.wikipedia.org/wiki/Jarque%E2%80%93Bera_test][Jarque-Vera test (Wikipedia)]]
+
+Podemos calcularlo con la librería [[https://cran.r-project.org/web/packages/moments/index.html][momments]]:
+#+BEGIN_SRC jupyter-R :results plain
+#install.packages("moments")
+library(moments)
+# Perform the Jarque-Bera test
+jb_test <- jarque.test(as.numeric(Z))
+# Print the test result
+print(jb_test)
+#+END_SRC
+
+#+RESULTS:
+: 783d65e3-7022-4983-9b3c-f7faa8dfb7ba
+
+Otra librería alternativa para calcularlo: [[https://cran.r-project.org/web/packages/tseries/index.html][tseries]]
+#+BEGIN_SRC jupyter-R :results plain
+library(tseries)
+# Perform the Jarque-Bera test
+jb_test <- jarque.bera.test(Z)
+# Print the test result
+print(jb_test)
+#+END_SRC
+
+#+RESULTS:
+: ea0514ef-6614-42cc-837f-fed56c5bed55
+
+
+
+
+* COMMENT Otro código                                              :noexport:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R 
+PIB_UEM_ts = as.ts( read.csv.zoo("datos/PIB_UEM.csv", 
+                                 FUN = as.yearqtr, 
+                                 format = "%YQ%q", 
+                                 strip.white = TRUE))
+p <- autoplot(PIB_UEM_ts)
+p <- p + labs(y = "Miles de millones de euros", x = "Años") + ggtitle("PIB UEM a precios corrientes (datos trimestrales). Fuente Banco de España")
+p 
+#+END_SRC
+
+#+RESULTS:
+: 70c98a13-2153-4aa6-a6c1-a9a24569f55a
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R 
+ProduccionCemento_ts = as.ts( read.csv.zoo("datos/ProduccionCemento.csv",
+                                           FUN = as.yearmon, 
+                                           format = "%YM%m",
+                                           strip.white = TRUE))
+autoplot(ProduccionCemento_ts)
+#+END_SRC
+
+#+RESULTS:
+: 3fd228a2-252d-488f-923f-582ca6240611
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file ExportacionDeAcero.png :exports code :results silent
+ExportacionDeAcero_ts = as.ts( read.csv.zoo("datos/ExportacionDeAcero.csv",
+                                            FUN = as.yearmon,
+                                            format = "%YM%m",
+                                            strip.white = TRUE))
+autoplot(ExportacionDeAcero_ts)
+#+END_SRC
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc05/ :file rango-mediaLogAirPass.png :exports code :results silent
+Z <- AirPassengers
+ide(Z, transf=list(bc=T, d=1, D=1), graphs = c("plot", "rm"))
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc05/rango-mediaLogAirPass.png]]
+
+$$\nabla_{12}(\nabla\ln\boldsymbol{y})$$
+
+
+1985ene 
+2012sep
+
+#+BEGIN_SRC jupyter-R
+as.yearmon(1985 + seq(0, nrow(TemperaturaRetiro_df)-1)/12)
+#+END_SRC
+
+#+RESULTS:
+: b95825fe-39cd-457c-9780-ae573ef77628
+
+
+#+BEGIN_SRC jupyter-R
+as.yearmon("mar07", "%b%y")
+#+END_SRC
+
+#+RESULTS:
+: d76f82f6-9a68-4a78-826b-e9a1a7debefd
+
+

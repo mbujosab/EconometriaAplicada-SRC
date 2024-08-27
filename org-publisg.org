@@ -1,4 +1,67 @@
 
+#+BEGIN_SRC  makefile :noweb no-export :results silent :exports none :tangle makefile
+OUT_DIR=./
+# Using GNU Make-specific functions here
+FILES=$(patsubst Lecc%.org,$(OUT_DIR)/Lecc%.tex,$(wildcard *.org))
+PDF-FILES=$(patsubst Lecc%.tex,$(OUT_DIR)/Lecc%.pdf,$(wildcard *.tex))
+
+#.PHONY: all clean install-doc
+.PHONY: all install-doc
+
+Lecc01.pdf: %.tex
+	latexmk -c $@ 
+
+all: install-doc
+
+#install-doc: $(FILES)  $(PDF-FILES)
+install-doc: $(PDF-FILES)
+
+$(OUT_DIR):
+	mkdir -v -p $(OUT_DIR)
+
+#%.tex: %.org
+#	emacs -q -l ~/Software/scimax/init.el $< --batch -f org-latex-export-to-latex --kill
+
+%.pdf: %.tex
+	latexmk -pdf --shell-escape -interaction=batchmode $< 
+	latexmk -c
+
+pedeefes: %.pdf
+
+#$(OUT_DIR)/%.tex: %.tex
+#	install -v -m 644 -t $(OUT_DIR) $<
+#	rm $<
+$(OUT_DIR)/%.pdf: %.pdf
+	install -v -m 644 -t ./notas $<
+
+#clean:
+#	rm *.tex
+#+END_SRC
+
+
+
+#+BEGIN_SRC sh :results silent
+pdflatex --shell-escape  -interaction=batchmode Lecc01.tex
+pdflatex --shell-escape  -interaction=batchmode Lecc01.tex
+latexmk -c Lecc01.tex
+
+pdflatex --shell-escape  -interaction=batchmode Lecc02.tex
+pdflatex --shell-escape  -interaction=batchmode Lecc02.tex
+latexmk -c Lecc02.tex
+
+pdflatex --shell-escape  -interaction=batchmode Lecc03.tex
+pdflatex --shell-escape  -interaction=batchmode Lecc03.tex
+latexmk -c Lecc03.tex
+
+pdflatex --shell-escape  -interaction=batchmode Lecc04.tex
+pdflatex --shell-escape  -interaction=batchmode Lecc04.tex
+latexmk -c Lecc04.tex
+
+pdflatex --shell-escape  -interaction=batchmode Lecc05.tex
+pdflatex --shell-escape  -interaction=batchmode Lecc05.tex
+latexmk -c Lecc05.tex
+#+END_SRC
+
 
 #+BEGIN_SRC emacs-lisp :results silent
 (require 'ox-ipynb)
@@ -10,7 +73,7 @@
 #+END_SRC
 
 #+BEGIN_SRC sh :results silent
-jupyter nbconvert --config mycfg-GitHubPages.py --to slides --reveal-prefix reveal.js --no-input
+jupyter nbconvert --config mycfg-GitHubPages.py --to slides --reveal-prefix reveal.js 
 #+END_SRC
 
 #+BEGIN_SRC sh :results none
@@ -114,13 +177,18 @@ git push
 #+BEGIN_SRC emacs-lisp
 (require 'ox-publish)
 
-(let* ((base-directory "~/repos/Ectr/")
+(let* ((base-directory "./")
+       (public-directory "~/repos/Ectrkk/")
        (org-export-with-broken-links t)
        (org-publish-project-alist `(("html"
 				     :base-directory ,base-directory
 				     :base-extension "org"
-				     :publishing-directory ,(concat base-directory "docs")
+				     :publishing-directory ,(concat public-directory "docs")
 				     :exclude "docs"
+				     :exclude "Calendario"
+				     :exclude ".ipynb_checkpoints"
+				     :exclude "reveal.js.old"
+				     :exclude "USB"
 				     :recursive t
 				     :publishing-function org-html-publish-to-html
 				     :auto-preamble t
@@ -128,10 +196,13 @@ git push
 				    ("pdf"
 				     :base-directory ,base-directory
 				     :base-extension "org"
-				     :publishing-directory ,(concat base-directory "docs/pdfs")
+				     :publishing-directory ,(concat public-directory "docs/pdfs")
 				     :exclude "docs"
+				     :exclude "Calendario"
+				     :exclude ".ipynb_checkpoints"
+				     :exclude "reveal.js.old"
+				     :exclude "USB"
 				     :recursive t
-
 				     :publishing-function org-latex-publish-to-pdf
 				     :auto-preamble t
 				     :auto-sitemap nil)
@@ -139,8 +210,12 @@ git push
 				    ("static-html"
 				     :base-directory ,base-directory
 				     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|dat\\|mov\\|txt\\|svg\\|aiff\\|csv\\|gdt\\|inp\\|ipynb"
-				     :publishing-directory ,(concat base-directory "docs")
+				     :publishing-directory ,(concat public-directory "docs")
 				     :exclude "docs"
+				     :exclude "Calendario"
+				     :exclude ".ipynb_checkpoints"
+				     :exclude "reveal.js.old"
+				     :exclude "USB"
 				     :recursive t
 				     :publishing-function org-publish-attachment)
 

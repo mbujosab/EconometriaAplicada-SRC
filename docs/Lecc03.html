@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
 <head>
-<!-- 2024-08-24 sáb 17:33 -->
+<!-- 2024-08-27 mar 22:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 3</title>
@@ -247,24 +247,28 @@
 <li><a href="#org5943002">1.3.1. Ejemplo de correlación espuria: PNB vs incidencia de melanoma</a></li>
 </ul>
 </li>
-<li><a href="#orgecf8af3">1.4. Una manera de ver que la correlación del ejemplo es <i>espuria</i> (que no hay causalidad)</a></li>
+<li><a href="#orgbabd77a">1.4. Una manera de ver que la correlación del ejemplo es posiblemente <i>espuria</i> (que no hay causalidad)</a></li>
 </ul>
 </li>
 <li><a href="#org0edc1ae">2. Cointegración</a>
 <ul>
-<li>
-<ul>
-<li><a href="#org1d1f68c">Ejemplo de series cointegradas: tipos de interes en UK a corto y largo plazo</a></li>
-</ul>
+<li><a href="#org1d1f68c">2.1. Ejemplo de series cointegradas: tipos de interes en UK a corto y largo plazo</a></div>
 </div>
-</div>
-<div class="ABSTRACT" id="orgf90005f">
+<div class="ABSTRACT" id="orgad15cab">
 <p>
-En esta lección voy a continuar pero con R y usaré la librería
-<code>tfarima</code> de José Luis Gallego siempre que pueda.
+En esta lección se discutirá la posible relación entre correlación y
+causalidad. Veremos casos de correlación espuria (correlación sin
+causalidad) y una introducción a la cointegración (con un caso en el
+la correlación no desaparece al diferenciar las series). Como novedad
+usaremos R.
 </p>
 
 </div>
+
+<ul class="org-ul">
+<li><a href="https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc03.html">lección en html</a></li>
+<li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc03.ipynb">lección en mybinder</a></li>
+</ul>
 <div id="outline-container-org59f5828" class="outline-4">
 <h4 id="org59f5828">Carga de algunas librerías de R</h4>
 <div class="outline-text-4" id="text-org59f5828">
@@ -447,7 +451,7 @@ de Connecticut.
 </p>
 
 
-<div id="orgc189060" class="figure">
+<div id="org3e2524d" class="figure">
 <p><img src="./img/lecc03/GNPvsMelanoma.png" alt="GNPvsMelanoma.png" width="900px" />
 </p>
 </div>
@@ -467,7 +471,7 @@ ggplot(data_frame, aes(x = Melanoma, y = GNP)) + geom_point()
 </p>
 
 
-<div id="orgb40c874" class="figure">
+<div id="orgfe68c1f" class="figure">
 <p><img src="./img/lecc03/Scatter-GNPvsMelanoma.png" alt="Scatter-GNPvsMelanoma.png" width="250px" />
 </p>
 </div>
@@ -483,18 +487,18 @@ coeficientes muy significativos</i>).
 predictiva</b> (<i>pues la incidencia de melanoma en
 Connecticut no hace crecer la economía de EEUU</i>).
 </p>
-<pre class="example" id="org98785ed">
-[4mMODEL INFO:[24m
-[3mObservations:[23m 37
-[3mDependent Variable:[23m GNP
-[3mType:[23m OLS linear regression 
+<pre class="example" id="orga2a52e1">
+MODEL INFO:
+Observations: 37
+Dependent Variable: GNP
+Type: OLS linear regression 
 
-[4mMODEL FIT:[24m
-[3mF[23m(1,35) = 231.84, [3mp[23m = 0.00
-[3mR² = [23m0.87
-[3mAdj. R² = [23m0.87 
+MODEL FIT:
+F(1,35) = 231.84, p = 0.00
+R² = 0.87
+Adj. R² = 0.87 
 
-[3mStandard errors: OLS[23m
+Standard errors: OLS
 --------------------------------------------------
                       Est.    S.E.   t val.      p
 ----------------- -------- ------- -------- ------
@@ -505,8 +509,8 @@ Melanoma            118.98    7.81    15.23   0.00
 </div>
 </div>
 </div>
-<div id="outline-container-orgecf8af3" class="outline-3">
-<h3 id="orgecf8af3"><span class="section-number-3">1.4.</span> Una manera de ver que la correlación del ejemplo es <i>espuria</i> (que no hay causalidad)</h3>
+<div id="outline-container-orgbabd77a" class="outline-3">
+<h3 id="orgbabd77a"><span class="section-number-3">1.4.</span> Una manera de ver que la correlación del ejemplo es posiblemente <i>espuria</i> (que no hay causalidad)</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Si fuera cierto que 
@@ -592,7 +596,7 @@ doubleYScale(obj1, obj2, add.ylab2 = <span style="color: #6434A3;">TRUE</span>)
 </div>
 
 
-<div id="org3bcb4a3" class="figure">
+<div id="orgdb927e2" class="figure">
 <p><img src="./img/lecc03/d_GNPvsd_Melanoma.png" alt="d_GNPvsd_Melanoma.png" width="900px" />
 </p>
 </div>
@@ -609,7 +613,7 @@ summ( lm(d_GNP ~ d_Melanoma) )
 </pre>
 </div>
 
-<pre class="example" id="org06ac255">
+<pre class="example" id="orgaa6aa0a">
 MODEL INFO:
 Observations: 36
 Dependent Variable: d_GNP
@@ -685,9 +689,9 @@ que las desviaciones del equilibrio tienden a desaparecer a corto
 plazo</li>
 </ol>
 </div>
-<div id="outline-container-org1d1f68c" class="outline-4">
-<h4 id="org1d1f68c">Ejemplo de series cointegradas: tipos de interes en UK a corto y largo plazo</h4>
-<div class="outline-text-4" id="text-org1d1f68c">
+<div id="outline-container-org1d1f68c" class="outline-3">
+<h3 id="org1d1f68c"><span class="section-number-3">2.1.</span> Ejemplo de series cointegradas: tipos de interes en UK a corto y largo plazo</h3>
+<div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">leemos los datos cuartrimestales como un objeto zoo</span>
 UK_zoo <span style="color: #D0372D;">&lt;-</span> read.csv.zoo(<span style="color: #008000;">"datos/UK_Interest_rates.csv"</span>, FUN = as.yearqtr, format = <span style="color: #008000;">"%YQ%q"</span>,
@@ -817,14 +821,14 @@ doubleYScale(obj1, obj2, add.ylab2 = <span style="color: #6434A3;">TRUE</span>)
 (Muestra: 1952Q2&#x2013;1979Q4)
 </p>
 
-<div id="orgd30361b" class="figure">
+<div id="orgcf30721" class="figure">
 <p><img src="./img/lecc03/UK_Interest_rates.png" alt="UK_Interest_rates.png" width="900px" />
 </p>
 </div>
 
 <p>
 <b>La correlación es \(0.898\)</b> (<i>ambas series poseen una tendencia
- creciente&#x2026; pero en este caso veremos es común</i>)
+ creciente&#x2026; veamos si dicha tendencia es común a ambas</i>)
 </p>
 
 
@@ -912,7 +916,7 @@ doubleYScale(obj1, obj2, add.ylab2 = <span style="color: #6434A3;">TRUE</span>)
 
 
 
-<div id="org368d792" class="figure">
+<div id="orgd808cb4" class="figure">
 <p><img src="./img/lecc03/UK_Interest_ratesFirstDiff.png" alt="UK_Interest_ratesFirstDiff.png" width="900px" />
 </p>
 </div>
@@ -920,7 +924,7 @@ doubleYScale(obj1, obj2, add.ylab2 = <span style="color: #6434A3;">TRUE</span>)
 <p>
 La regresión de la primera diferencia de <code>Short</code> sobre la primera
 diferencia de <code>Long</code> <b>NO sugiere que la correlación sea espuria</b>:
-obtenemos un ajuste razonable con una pendiente es muy significativa y
+obtenemos un ajuste razonable con una pendiente muy significativa y
 una constante NO significativa.
 </p>
 
@@ -930,7 +934,7 @@ summ( lm(d_Short ~ d_Long) )
 </pre>
 </div>
 
-<pre class="example" id="org50a58a8">
+<pre class="example" id="org08e8c07">
 MODEL INFO:
 Observations: 74
 Dependent Variable: d_Short
@@ -959,7 +963,7 @@ summ( modelo )                         <span style="color: #8D8D84;"># </span><s
 </pre>
 </div>
 
-<pre class="example" id="orga817ed1">
+<pre class="example" id="org00e3f53">
 MODEL INFO:
 Observations: 75
 Dependent Variable: UK_df$Short
@@ -992,7 +996,7 @@ abline(0,0)
 </div>
 
 
-<div id="org8f6ea49" class="figure">
+<div id="orgb0e9986" class="figure">
 <p><img src="./img/lecc03/UK_Interest_ratesResiduals.png" alt="UK_Interest_ratesResiduals.png" width="900px" />
 </p>
 </div>
@@ -1004,8 +1008,8 @@ plazo podrían estar cointegrados</b>.
 </p>
 
 <p>
-Más adelante veremos test estadísticos para contrastar si son
-estacionarios.
+Más adelante veremos test estadísticos que contrastan la
+estacionariedad (si son \(I(0)\)).
 </p>
 </div>
 </div>
@@ -1013,7 +1017,7 @@ estacionarios.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-08-24 sáb 17:33</p>
+<p class="date">Created: 2024-08-27 mar 22:29</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

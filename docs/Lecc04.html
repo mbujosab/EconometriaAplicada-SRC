@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-08-24 sáb 17:33 -->
+<!-- 2024-08-27 mar 22:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 4</title>
@@ -265,18 +265,14 @@
 </li>
 </ul>
 </li>
-<li><a href="#orgd030e1f">2. Procesos estocásticos</a>
-<ul>
-<li><a href="#org1b64a61">2.1. Función de autocovarianzas y función de autocorrelación</a></li>
-</ul>
-</li>
+<li><a href="#orga184062">2. Procesos estocásticos y notación</a></li>
 </ul>
 </div>
 </div>
-<div class="ABSTRACT" id="org29ff99e">
+<div class="ABSTRACT" id="org82a6ef0">
 <p>
-En esta lección veremos algunos conceptos algebraicos relacionados con
-la modelización de series temporales.
+En esta lección veremos conceptos algebraicos usados en la
+modelización de series temporales.
 </p>
 
 </div>
@@ -374,12 +370,12 @@ En una sucesión \(\boldsymbol{a}\) no nula llamamos
 Una sucesión \(\boldsymbol{a}\) es 
 </p>
 <dl class="org-dl">
-<dt>Absolutamente sumable (\(l_1\))</dt><dd>si \(\quad\sum_{t=-\infty}^\infty |a_t| < \infty\)</dd>
-<dt>De cuadrado sumable (\(l_2\))</dt><dd>si \(\quad\sum_{t=-\infty}^\infty a_t^2 < \infty\)</dd>
+<dt>Absolutamente sumable (\(\ell^1\))</dt><dd>si \(\quad\sum_{t=-\infty}^\infty |a_t| < \infty\)</dd>
+<dt>De cuadrado sumable (\(\ell^2\))</dt><dd>si \(\quad\sum_{t=-\infty}^\infty a_t^2 < \infty\)</dd>
 </dl>
 <p>
 Una sucesión absolutamente sumable siempre es de cuadrado sumable,
-\(l_1\subset l_2\).
+\(\ell^1\subset \ell^2\).
 </p>
 </div>
 </div>
@@ -432,7 +428,7 @@ Además, <span class="underline">el producto convolución está bien definido en
 <li><span class="underline">con final</span> (con grado). El grado del producto es la suma de los
 respectivos grados.</li>
 
-<li><span class="underline">absolutamente sumables</span> (\(l_1\)).</li>
+<li><span class="underline">absolutamente sumables</span> (\(\ell^1\)).</li>
 </ul>
 
 <div class="inlinetask">
@@ -508,7 +504,7 @@ conjunto</i>)
 <dl class="org-dl">
 <dt>Son anillos el conjunto de</dt><dd><p>
 sucesiones formales (cogrado \(\geq0\)), polinomios y
-\(l_1\).
+\(\ell^1\).
 </p>
 
 <p>
@@ -623,12 +619,12 @@ Por el ejemplo anterior sabemos que para \(\;1-az\;\) ambas inversas son
 </ul>
 
 <p>
-Es evidente que si \(|a|\ne1\) una de las inversas está en \(l_1\) y la
+Es evidente que si \(|a|\ne1\) una de las inversas está en \(\ell^1\) y la
 otra no.
 </p>
 
 <p>
-Pero si \(|a|=1\) ninguna de las inversas pertenece a \(l_1\)
+Pero si \(|a|=1\) ninguna de las inversas pertenece a \(\ell^1\)
 </p>
 
 <p>
@@ -644,13 +640,13 @@ Podemos factorizar un polinomio \(\boldsymbol{a}\) sin raíces de módulo \(1\) 
 Como tanto los polinomios \(\boldsymbol{a}\), \(\boldsymbol{b}\) y
 \(\boldsymbol{c}\) como las inversas
 \(\boldsymbol{b}^{\blacktriangleleft-}\) y
-\(\boldsymbol{c}^{-\triangleright}\) pertenecen al anillo \(l_1\),
+\(\boldsymbol{c}^{-\triangleright}\) pertenecen al anillo \(\ell^1\),
 \[\boldsymbol{a}*(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})
 =(\boldsymbol{b}*\boldsymbol{c})*(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})
 =\boldsymbol{b}*\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}*\boldsymbol{c}^{-\triangleright}=\boldsymbol{1}*\boldsymbol{1}=\boldsymbol{1}.\]
 La secuencia
 \(\;(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})\;\)
-es "la" inversa de \(\boldsymbol{a}\) en \(l_1\).
+es "la" inversa de \(\boldsymbol{a}\) en \(\ell^1\).
 </p>
 
 <p>
@@ -671,6 +667,30 @@ En los manuales de <i>series temporales</i> se dice que un polinomio \(\boldsymb
 <p>
 \[\text{(la inversa con principio) }\;\boldsymbol{a}^{-\triangleright}=\boldsymbol{a}^{-1}\; \text{ (la inversa absolutamente sumable)}.\]
 (<i>si sus raíces están fuera del círculo unidad.</i>)
+</p>
+<p>
+<b>Hay infinitas inversas.</b> Si una secuencia tiene dos inversas,
+entonces tiene infinitas.
+</p>
+
+<p>
+Sean \(\boldsymbol{a}\), \(\boldsymbol{b}\) y \(\boldsymbol{d}\) secuencias
+tales que \(\;\boldsymbol{a}*\boldsymbol{b}=\boldsymbol{1}\;\) y
+\(\;\boldsymbol{a}*\boldsymbol{d}=\boldsymbol{1};\;\) y sean \(\beta\) y
+\(\delta\) dos escalares tales que \(\beta+\delta=1\). Entonces
+</p>
+
+<p>
+\[\boldsymbol{a}*\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)=
+\beta(\boldsymbol{a}*\boldsymbol{b})+\delta(\boldsymbol{a}*\boldsymbol{d})=
+\beta\boldsymbol{1}+\delta\boldsymbol{1}=
+(\beta+\delta)\boldsymbol{1}=\boldsymbol{1}\]
+</p>
+
+<p>
+Por tanto, para \(\beta\) y \(\delta\) tales que \(\beta+\delta=1\), sabemos
+que \(\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)\) es otra
+inversa de \(\boldsymbol{a}\).
 </p>
 </div>
 </div>
@@ -756,8 +776,8 @@ Y en general, si \(\boldsymbol{a}\) e \(\boldsymbol{y}\) son secuencias sumables
 </div>
 </div>
 </div>
-<div id="outline-container-orgd030e1f" class="outline-2">
-<h2 id="orgd030e1f"><span class="section-number-2">2.</span> Procesos estocásticos</h2>
+<div id="outline-container-orga184062" class="outline-2">
+<h2 id="orga184062"><span class="section-number-2">2.</span> Procesos estocásticos y notación</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Los procesos estocásticos se pueden sumar y se pueden multiplicar por
@@ -766,31 +786,32 @@ escalares.
 
 <p>
 Si \(\boldsymbol{X}\) e \(\boldsymbol{Y}\) son dos procesos estocásticos y
-\(\;a\in\mathbb{R}\), entonces \[\boldsymbol{X}+\boldsymbol{Y}=(X_t+Y_t \mid
-t\in\mathbb{Z})\] y \[a\boldsymbol{X}=\big(a(X_t) \mid t\in\mathbb{Z}\big).\]
-El conjunto de procesos estocásticos junto con la suma elemento a
-elemento y el producto por escalares constituyen un espacio vectorial.
+\(\;a\in\mathbb{R}\), entonces \[\boldsymbol{X}+\boldsymbol{Y}=(X_t+Y_t
+\mid t\in\mathbb{Z})\qquad\text{y}\qquad a\boldsymbol{X}=\big(a(X_t)
+\mid t\in\mathbb{Z}\big).\] El conjunto de procesos estocásticos junto
+con la suma elemento a elemento y el producto por escalares
+constituyen un espacio vectorial.
 </p>
-
 <p>
 Consideremos el proceso estocástico 
 \[\boldsymbol{X}=(X_t \mid t=0,\pm1,\pm2,\ldots).\]
 </p>
 
 <p>
-Al igual que con las secuencias, podemos denotar el proceso
-estocástico con una función generatriz 
-\[\boldsymbol{X} \quad = \quad \sum_{t=-\infty}^\infty X_t z^t \quad\equiv\quad \boldsymbol{X}(z)\]
-Recuerde que la expresión de más arriba no es una suma, es una secuencia de variables aleatorias
-\[\sum_{t=-\infty}^\infty X_t z^t = (\ldots,\ X_{-2},\ X_{-1},\ X_{0},\ X_{1},\ X_{2},\ldots)\]
+Lo podemos denotar con una función generatriz (como hicimos con las
+secuencias) \[\boldsymbol{X} \quad = \quad \sum_{t=-\infty}^\infty X_t
+z^t \quad\equiv\quad \boldsymbol{X}(z)\] Recuerde que esto no es una
+suma; es una secuencia de variables aleatorias
+\[\sum_{t=-\infty}^\infty X_t z^t = (\ldots,\ X_{-2},\ X_{-1},\
+X_{0},\ X_{1},\ X_{2},\ldots)\]
 </p>
 
 <p>
-Sea \(\boldsymbol{a}\) una secuecia y \(\boldsymbol{X}\) un proceso
-estocástico tales que \(\sum_{k=-\infty}^{\infty}a_kX_{t-k}\) converge
-para todo \(t\).
+Sea \(\boldsymbol{a}\) una secuencia de números y \(\boldsymbol{X}\) un
+proceso estocástico tales que <span class="underline">la suma</span>
+\(\sum\limits_{k=-\infty}^{\infty}a_kX_{t-k}\;\) <span class="underline">converge</span> para todo
+\(t.\;\) Entonces:
 </p>
-
 <p>
 Definimos el producto convolución (\(∗\)) de \(\boldsymbol{a}\) con \(\boldsymbol{X}\) como el proceso estocástico:
 \[\boldsymbol{a}*\boldsymbol{X}=\left(\left.\sum_{r+s=t} a_r X_s \right| t\in\mathbb{Z}\right)\]
@@ -798,7 +819,6 @@ es decir
 \[(\boldsymbol{a}*\boldsymbol{X})_t=\sum_{r+s=t} a_r X_s,\quad \text{para } t\in\mathbb{Z}.\]
 Por tanto, cada elemento de \((\boldsymbol{a}*\boldsymbol{X})\) es una combinación de variables aleatorias de \(\boldsymbol{X}\)
 </p>
-
 <p>
 Podemos aplicar el operador \(\mathsf{B}\) sobre los elementos de un proceso estocástico \(\boldsymbol{X}\).
 \[\mathsf{B} X_t = X_{t−1},\quad \text{para } t\in\mathbb{Z}.\]
@@ -820,8 +840,8 @@ Así, para el polinomio \(\boldsymbol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3\), y el proce
 & =(\boldsymbol{a}*\boldsymbol{Y})_t,\quad \text{para } t\in\mathbb{Z}
 \end{align*}
 <p>
-Y en general, si \(\sum_{k=-\infty}^{\infty}a_kY_{t-k}\) converge para
-todo \(t\), entonces
+Y en general, si la suma \(\sum\limits_{k=-\infty}^{\infty}a_kY_{t-k}\)
+converge para todo \(t\), entonces
 </p>
 
 \begin{align*}
@@ -833,41 +853,11 @@ todo \(t\), entonces
 & =(\boldsymbol{a}*\boldsymbol{y})_t,\quad \text{para } t\in\mathbb{Z}
 \end{align*}
 </div>
-<div id="outline-container-org1b64a61" class="outline-3">
-<h3 id="org1b64a61"><span class="section-number-3">2.1.</span> Función de autocovarianzas y función de autocorrelación</h3>
-<div class="outline-text-3" id="text-2-1">
-<ul class="org-ul">
-<li>La secuencia \((\gamma_k)\) con \(k\in\mathbb{Z}\) se denomina
-<i>función de autocovarianzas</i></li>
-</ul>
-
-
-<ul class="org-ul">
-<li><p>
-La secuencia \(\{\rho_k\}\) con \(k\in\mathbb{Z}\), donde
-</p>
-
-<p>
-\[\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0} \]
-</p>
-
-<p>
-se denomina <i>función de autocorrelación</i> (ACF).
-</p></li>
-</ul>
-
-<p>
-Debido a la estacionariedad, la correlación entre \(X_t\) y \(X_{t+k}\) no
-depende de \(t\); tan solo depende de la distancia temporal \(k\) entre
-ambas variables.
-</p>
-</div>
-</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-08-24 sáb 17:33</p>
+<p class="date">Created: 2024-08-27 mar 22:29</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
