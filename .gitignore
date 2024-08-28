@@ -1,8 +1,12 @@
 
 *~
 
+<<<<<<< HEAD
 EnlacesAMateriales.org
 Lecc*.tex
+=======
+datos
+>>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 .ipynb_checkpoints
 .ob-jupyter
 USB
