@@ -1,0 +1,726 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
+<head>
+<!-- 2024-08-28 mié 12:08 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Econometría Aplicada. Lección 6</title>
+<meta name="author" content="Marcos Bujosa" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Econometría Aplicada. Lección 6</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orge8d328c">Carga de algunas librerías de R</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org8ccf211">1. Función de autocovarianzas y función de autocorrelación</a></li>
+<li><a href="#orgaf51be7">2. La especificación del modelo se escoge según las características de los datos.</a></li>
+<li><a href="#org52f172d">3. Herramientas para desvelar propiedades de una serie temporal</a>
+<ul>
+<li><a href="#org24c4508">3.1. Análisis gráfico</a>
+<ul>
+<li><a href="#orgaf5e765">3.1.1. Gráfico de la serie temporal</a></li>
+<li><a href="#org0a93c56">3.1.2. Gráfico rango-media</a></li>
+</ul>
+</li>
+<li><a href="#orgf0cf647">3.2. Determinación del orden de integración</a>
+<ul>
+<li><a href="#org32f4aad">3.2.1. Análisis gráfico</a></li>
+<li><a href="#org48452d9">3.2.2. Contrastes formales sobre el orden de integración</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org56d5ae4">4. Función de autocovarianzas y función de autocorrelación</a></li>
+<li><a href="#org9aa4720">5. Otras herramientas estadísticas&#xa0;&#xa0;&#xa0;<span class="tag"><span class="C_moHacerConR">CómoHacerConR</span></span></a>
+<ul>
+<li><a href="#org3872e0d">5.1. Estadísticos descriptivos</a></li>
+<li><a href="#org38e20e5">5.2. Test de normalidad Jarque-Vera</a></div>
+</div>
+<div class="abstract" id="orgb15dcf2">
+<p>
+En esta lección veremos algunas herramientas estadísticas.
+ y usaré la librería <code>tfarima</code> de
+José Luis Gallego siempre que pueda.
+</p>
+
+</div>
+<div id="outline-container-orge8d328c" class="outline-4">
+<h4 id="orge8d328c">Carga de algunas librerías de R</h4>
+<div class="outline-text-4" id="text-orge8d328c">
+<p>
+Primero cargamos la librería <code>tfarima</code> (Repositorio Cran:
+<a href="https://cran.r-project.org/web/packages/tfarima/index.html">https://cran.r-project.org/web/packages/tfarima/index.html</a>;
+repositorio GitHub: <a href="https://github.com/gallegoj/tfarima">https://github.com/gallegoj/tfarima</a>)
+</p>
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">library</span>(tfarima)      <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">librer&#237;a de Jos&#233; Luis Gallego para Time Series</span>
+<span style="color: #D0372D;">library</span>(readr)        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para leer ficheros CSV</span>
+<span style="color: #D0372D;">library</span>(ggplot2)      <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para el scatterplot (alternaticamente library(tidyverse))</span>
+<span style="color: #D0372D;">library</span>(ggfortify)    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para pintar series temporales</span>
+<span style="color: #D0372D;">library</span>(jtools)       <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para representaci&#243;n resultados estimaci&#243;n</span>
+<span style="color: #D0372D;">library</span>(zoo)          <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para generar objetos ts (time series)</span>
+</pre>
+</div>
+<p>
+y además fijamos los parámetros por defecto para las figuras en <code>png</code>
+del notebook
+</p>
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">fijamos el tama&#241;o de las figuras que se generan en el notebook</span>
+<span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8ccf211" class="outline-2">
+<h2 id="org8ccf211"><span class="section-number-2">1.</span> Función de autocovarianzas y función de autocorrelación</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>La secuencia \((\gamma_k)\) con \(k\in\mathbb{Z}\) se denomina
+<i>función de autocovarianzas</i></li>
+</ul>
+
+
+<ul class="org-ul">
+<li><p>
+La secuencia \(\{\rho_k\}\) con \(k\in\mathbb{Z}\), donde
+</p>
+
+<p>
+\[\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0} \]
+</p>
+
+<p>
+se denomina <i>función de autocorrelación</i> (ACF).
+</p></li>
+</ul>
+
+<p>
+Debido a la estacionariedad, la correlación entre \(X_t\) y \(X_{t+k}\) no
+depende de \(t\); tan solo depende de la distancia temporal \(k\) entre
+ambas variables.
+</p>
+</div>
+</div>
+<div id="outline-container-orgaf51be7" class="outline-2">
+<h2 id="orgaf51be7"><span class="section-number-2">2.</span> La especificación del modelo se escoge según las características de los datos.</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+¿Es la serie 
+</p>
+<ul class="org-ul">
+<li>"<b><i>estacionaria en media</i></b>"
+<ul class="org-ul">
+<li>(y si lo es, ¿cuál es su media?)</li>
+<li>(y si no lo es, ¿cómo cambia o evoluciona su media?)</li>
+</ul></li>
+<li>"<b><i>estacionaria en varianza</i></b>" (<i>homocedástica</i>)
+<ul class="org-ul">
+<li>(y si lo es, ¿cuál es su varianza?)</li>
+<li>(y si es <i>heterocedástica</i>, ¿cómo cambia o evoluciona su varianza?)?</li>
+</ul></li>
+</ul>
+
+<p>
+¿Están sus valores correlados con su historia pasada (autocorrelados)?
+</p>
+
+<p>
+¿Están correlados con los valores presentes o pasados de otras series?
+</p>
+<p>
+Veamos algunas herramientas estadísticas para poder desvelar estas
+características.
+</p>
+</div>
+</div>
+<div id="outline-container-org52f172d" class="outline-2">
+<h2 id="org52f172d"><span class="section-number-2">3.</span> Herramientas para desvelar propiedades de una serie temporal</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-org24c4508" class="outline-3">
+<h3 id="org24c4508"><span class="section-number-3">3.1.</span> Análisis gráfico</h3>
+<div class="outline-text-3" id="text-3-1">
+</div>
+<div id="outline-container-orgaf5e765" class="outline-4">
+<h4 id="orgaf5e765"><span class="section-number-4">3.1.1.</span> Gráfico de la serie temporal</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<p>
+Representa sus valores en el eje vertical (\(y\)) frente a una escala
+temporal en el horizontal (\(x\)). Es útil para detectar visualmente:
+</p>
+<ul class="org-ul">
+<li>tendencias y/o estacionalidad</li>
+<li>cambios de variabilidad</li>
+<li>valores atípicos (<i>outliers</i>)
+<ul class="org-ul">
+<li>el 95% aprox. de una muestra de valores generados por una
+distribución normal debería estar comprendido entre
+\(\mu\pm2\sigma\)</li>
+<li><p>
+la probabilidad de que una variable normal genere un valor fuera
+de las bandas de \(\mu\pm3\sigma\) es \(0.0023\)
+</p>
+
+<p>
+(<a href="./img/lecc05/IBEX35.png">véase gráfico IBEX 35</a>)
+</p></li>
+</ul></li>
+</ul>
+
+<p>
+En es importante escalar y rotular adecuadamente los ejes y asegurar
+la comparabilidad entre series y gráficos distintos (si los hubiere).
+</p>
+</div>
+</div>
+<div id="outline-container-org0a93c56" class="outline-4">
+<h4 id="org0a93c56"><span class="section-number-4">3.1.2.</span> Gráfico rango-media</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<p>
+Cambios de variabilidad de una serie pueden evidenciarse en su gráfico
+temporal.
+</p>
+
+<p>
+Pero también suelen verse bien en un gráfico rango-media, donde se
+representa:
+</p>
+<dl class="org-dl">
+<dt>en el eje \(x\)</dt><dd>un indicador del nivel de la serie calculado para
+distintas submuestras no solapadas (normalmente la media).</dd>
+<dt>en el eje \(y\)</dt><dd>un indicador de la dispersión de la serie
+calculado para las mismas submuestras (normalmente el rango.)</dd>
+</dl>
+
+<p>
+Veamos el gráfico de la serie de pasajeros de líneas aéreas junto a su
+gráfico de rango media:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R">Z <span style="color: #D0372D;">&lt;-</span> AirPassengers
+ide(Z, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"rm"</span>), main=<span style="color: #008000;">"Pasajeros de l&#237;neas (a&#233;reas en miles) y gr&#225;fico rango-media"</span>)
+</pre>
+</div>
+
+
+<div id="org2faf8c4" class="figure">
+<p><img src="./img/lecc06/rango-mediaAirPass.png" alt="rango-mediaAirPass.png" width="900px" />
+</p>
+</div>
+
+<p>
+El gráfico de rango media a veces se acompaña de una regresión de la
+dispersión sobre los niveles para medir la relación nivel-dispersión.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf0cf647" class="outline-3">
+<h3 id="orgf0cf647"><span class="section-number-3">3.2.</span> Determinación del orden de integración</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+Decidir adecuadamente el orden de integración es crucial en el
+análisis de series temporales.
+</p>
+
+<p>
+Las herramientas utilizadas para tomar la decisión son 
+</p>
+<ul class="org-ul">
+<li>el análisis gráfico</li>
+<li>los contrastes formales</li>
+</ul>
+</div>
+<div id="outline-container-org32f4aad" class="outline-4">
+<h4 id="org32f4aad"><span class="section-number-4">3.2.1.</span> Análisis gráfico</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 8, repr.plot.res = 200)
+ide(PoblacionAustralia_ts,
+    graphs = c(<span style="color: #008000;">"plot"</span>),
+    transf = list(list(bc = F), list(bc = F, d = 1), list(bc = F, d = 2)),
+    main=<span style="color: #008000;">"Poblaci&#243;n australiana, primera diferencia y segunda diferencia"</span> )
+</pre>
+</div>
+
+
+<div id="orge8a2fff" class="figure">
+<p><img src="./img/lecc06/diferenciasPoblacion.png" alt="diferenciasPoblacion.png" width="900px" />
+</p>
+</div>
+
+
+
+<p>
+La serie de población \(\boldsymbol{y}\) tiene una clara tendencia
+creciente (primer gráfico), que desaparece al tomar una diferencia
+ordinaria, \[\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y}\]
+(segundo gráfico). Bastar con tomar una primera diferencia de la serie
+de población para obtener una nueva serie que se asemeja a la
+realización de un proceso estacionario.
+</p>
+
+<p>
+No obstante, ¿qué pasa si tomamos una segunda diferencia ordinaria?
+\[\nabla\nabla\boldsymbol{y}=\nabla^2\boldsymbol{y}=(1-\mathsf{B})^2*\boldsymbol{y}\]
+(segundo gráfico). Pues que la serie obtenida también es estacionaria,
+pero ojo, es un grave error tomar más diferencias de las necesarias al
+modelizar los datos. Se debe tomar el mínimo número de
+transformaciones que arrojen una serie ``estacionaria'' (recuerde que
+decir que una serie temporal es <i>estacionaria</i> es un abuso del
+lenguaje).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height =  10, repr.plot.res = 200)
+ide(Z,
+    graphs = c(<span style="color: #008000;">"plot"</span>),
+    transf = list(list(bc=T), list(bc=T, d=1), list(bc=T, D=1), list(bc=T, D=1, d=1)),
+    main = <span style="color: #008000;">"Log pasajeros a&#233;reos, diferencia ordinaria, diferencia estacional y composici&#243;n de ambas diferencias"</span> )
+</pre>
+</div>
+
+
+<div id="orgba5d38a" class="figure">
+<p><img src="./img/lecc06/diferenciasPasajeros.png" alt="diferenciasPasajeros.png" width="900px" />
+</p>
+</div>
+
+<p>
+Como ya vimos, la serie pasajeros en logaritmos tiene tendencia y
+estacionalidad muy evidentes. No basta con tomar solo una diferencia
+ordinaria \[\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y};\] pues
+el resultado muestra una pauta estacional. Ni tampoco basta con tomar
+solo una diferencia estacional
+\[\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B^{12}})*\boldsymbol{y};\] pues
+resulta una serie que ``deambula'', i.e., que no es <i>``estacionaria''</i>
+en media.
+</p>
+
+<p>
+Tomar una diferencia ordinaria y otra estacional
+\[\nabla\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B})*(1-\mathsf{B^{12}})*\boldsymbol{y}\]
+arroja una serie que sí parece ser <i>``estacionaria''</i>.
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height =  8, repr.plot.res = 200)
+TemperaturaRetiro_ts=ts(read.csv(<span style="color: #008000;">"datos/Retiro.txt"</span>),start=c(1985, 1), end=c(2015,9), frequency=12)
+ide(TemperaturaRetiro_ts,
+    graphs = c(<span style="color: #008000;">"plot"</span>),
+    transf = list(list(), list(D = 1)),
+    main=<span style="color: #008000;">"Temperatura media en el Retiro y diferencia estacional"</span> )
+</pre>
+</div>
+
+
+<div id="orgd0548d6" class="figure">
+<p><img src="./img/lecc06/diferenciasTemperaturasRetiro.png" alt="diferenciasTemperaturasRetiro.png" width="900px" />
+</p>
+</div>
+
+
+<p>
+En el caso de la serie de temperaturas en el Parque del Retiro, parece
+que es suficiente con tomar solo una diferencia estacional.
+</p>
+</div>
+</div>
+<div id="outline-container-org48452d9" class="outline-4">
+<h4 id="org48452d9"><span class="section-number-4">3.2.2.</span> Contrastes formales sobre el orden de integración</h4>
+<div class="outline-text-4" id="text-3-2-2">
+</div>
+<ol class="org-ol">
+<li><a id="orgaecdd75"></a>Test de Dickey-Fuller (DF)<br />
+<div class="outline-text-5" id="text-3-2-2-1">
+<dl class="org-dl">
+<dt>\(H_0\)</dt><dd>la serie es \(I(1)\)</dd>
+<dt>\(H_1\)</dt><dd>la serie es \(I(0)\).</dd>
+</dl>
+
+<p>
+Consideremos el modelo \[y_{t}=\rho y_{t-1}+u_{t},\] donde \(y_{t}\) es
+la variable de interés, \(\rho\) es un coeficiente, y \(u_{t}\) es un
+proceso de ruido blanco. Una raíz unitaria estará presente si \(\rho
+=1\). En tal caso el modelo será no-estacionario.
+</p>
+
+<p>
+El modelo de regresión se puede escribir como
+</p>
+
+<p>
+\[\nabla y_{t}=(\rho -1)y_{t-1}+u_{t}=\delta y_{t-1}+u_{t}\]
+</p>
+</div>
+</li>
+<li><a id="org2108ad0"></a>Test de Dickey-Fuller aumentado (ADF)<br /></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="outline-container-org56d5ae4" class="outline-2">
+<h2 id="org56d5ae4"><span class="section-number-2">4.</span> Función de autocovarianzas y función de autocorrelación</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>La secuencia \((\gamma_k)\) con \(k\in\mathbb{Z}\) se denomina
+<i>función de autocovarianzas</i></li>
+<li><p>
+La secuencia \(\{\rho_k\}\) con \(k\in\mathbb{Z}\), donde
+</p>
+
+<p>
+\[\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0} \]
+</p>
+
+<p>
+se denomina <i>función de autocorrelación</i> (ACF).
+</p></li>
+</ul>
+
+<p>
+Debido a la estacionariedad, la correlación entre \(X_t\) y \(X_{t+k}\) no
+depende de \(t\); tan solo depende de la distancia temporal \(k\) entre
+ambas variables.
+</p>
+
+<p>
+\[\boldsymbol{\phi}(\mathsf{B}) : \phi  \]
+</p>
+</div>
+</div>
+<div id="outline-container-org9aa4720" class="outline-2">
+<h2 id="org9aa4720"><span class="section-number-2">5.</span> Otras herramientas estadísticas&#xa0;&#xa0;&#xa0;<span class="tag"><span class="C_moHacerConR">CómoHacerConR</span></span></h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-org3872e0d" class="outline-3">
+<h3 id="org3872e0d"><span class="section-number-3">5.1.</span> Estadísticos descriptivos</h3>
+<div class="outline-text-3" id="text-5-1">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">library</span>(pastecs)      <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">resumen estad&#237;sticos descriptivos</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">https://cran.r-project.org/web/packages/pastecs/index.html (stat.desc)</span>
+<span style="color: #D0372D;">library</span>(knitr)        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">presentaci&#243;n de tabla resumen</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">https://cran.r-project.org/web/packages/knitr/index.html (kable)</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">https://bookdown.org/yihui/rmarkdown-cookbook/kable.html</span>
+
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">estad&#237;sticos principales y test de normalidad</span>
+kable(stat.desc(Z, basic=<span style="color: #6434A3;">FALSE</span>, norm=<span style="color: #6434A3;">TRUE</span>), <span style="color: #008000;">'rst'</span>)
+</pre>
+</div>
+
+<pre class="example" id="org00231a2">
+
+
+============  =============
+\                         x
+============  =============
+median          265.5000000
+mean            280.2986111
+SE.mean           9.9971931
+CI.mean.0.95     19.7613736
+var           14391.9172009
+std.dev         119.9663169
+coef.var          0.4279947
+skewness          0.5710676
+skew.2SE          1.4132515
+kurtosis         -0.4298441
+kurt.2SE         -0.5353818
+normtest.W        0.9519577
+normtest.p        0.0000683
+============  =============
+</pre>
+</div>
+</div>
+<div id="outline-container-org38e20e5" class="outline-3">
+<h3 id="org38e20e5"><span class="section-number-3">5.2.</span> Test de normalidad Jarque-Vera</h3>
+<div class="outline-text-3" id="text-5-2">
+<p>
+<a href="https://en.wikipedia.org/wiki/Jarque%E2%80%93Bera_test">Jarque-Vera test (Wikipedia)</a>
+</p>
+
+<p>
+Podemos calcularlo con la librería <a href="https://cran.r-project.org/web/packages/moments/index.html">momments</a>:
+</p>
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">install.packages("moments")</span>
+<span style="color: #D0372D;">library</span>(moments)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Perform the Jarque-Bera test</span>
+jb_test <span style="color: #D0372D;">&lt;-</span> jarque.test(as.numeric(Z))
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Print the test result</span>
+print(jb_test)
+</pre>
+</div>
+
+<pre class="example">
+
+	Jarque-Bera Normality Test
+
+data:  as.numeric(Z)
+JB = 8.9225, p-value = 0.01155
+alternative hypothesis: greater
+
+</pre>
+
+
+<p>
+Otra librería alternativa para calcularlo: <a href="https://cran.r-project.org/web/packages/tseries/index.html">tseries</a>
+</p>
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">library</span>(tseries)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Perform the Jarque-Bera test</span>
+jb_test <span style="color: #D0372D;">&lt;-</span> jarque.bera.test(Z)
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Print the test result</span>
+print(jb_test)
+</pre>
+</div>
+
+<pre class="example" id="org118aaa4">
+Registered S3 method overwritten by 'quantmod':
+  method            from
+  as.zoo.data.frame zoo 
+
+	Jarque Bera Test
+
+data:  Z
+X-squared = 8.9225, df = 2, p-value = 0.01155
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Marcos Bujosa</p>
+<p class="date">Created: 2024-08-28 mié 12:08</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
