@@ -14108,81 +14108,9 @@ div.jp-OutputPrompt {
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<<<<<<< HEAD
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Econometr%C3%ADa-Aplicada.-Lecci%C3%B3n-2">Econometr&#237;a Aplicada. Lecci&#243;n 2<a class="anchor-link" href="#Econometr%C3%ADa-Aplicada.-Lecci%C3%B3n-2">&#182;</a></h1><p><strong>Author:</strong> Marcos Bujosa</p>
-=======
-</div>
-</div><aside class="notes">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Carga-de-algunos-m&#243;dulos-de-python">Carga de algunos m&#243;dulos de python<a class="anchor-link" href="#Carga-de-algunos-m&#243;dulos-de-python">&#182;</a></h4>
-</div>
-</div>
-</div>
-</aside><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Para trabajar con los datos y dibujarlos necesitamos cargar algunos módulos de python</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> <span class="c1"># linear algebra</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> <span class="c1"># data processing, CSV file I/O (e.g. pd.read_csv)</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>   <span class="c1"># data visualization</span>
-<span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">,</span> <span class="n">usetex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">mpl</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;text.latex&#39;</span><span class="p">,</span> <span class="n">preamble</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;\usepackage</span><span class="si">{amsmath}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">dataframe_image</span> <span class="k">as</span> <span class="nn">dfi</span>
-<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-</aside><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sympy.printing.preview</span> <span class="kn">import</span> <span class="n">preview</span>
-
-<span class="k">def</span> <span class="nf">repr_png</span><span class="p">(</span><span class="n">tex</span><span class="p">,</span> <span class="n">ImgFile</span><span class="p">):</span>
-    <span class="n">preamble</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">documentclass[preview]</span><span class="si">{standalone}</span><span class="se">\n</span><span class="s2">&quot;</span> \
-        <span class="s2">&quot;</span><span class="se">\\</span><span class="s2">usepackage{booktabs,amsmath,amsfonts}</span><span class="se">\\</span><span class="s2">begin</span><span class="si">{document}</span><span class="s2">&quot;</span>    
-    <span class="n">preview</span><span class="p">(</span><span class="n">tex</span><span class="p">,</span> <span class="n">filename</span><span class="o">=</span><span class="n">ImgFile</span><span class="p">,</span> <span class="n">viewer</span><span class="o">=</span><span class="s1">&#39;file&#39;</span><span class="p">,</span> <span class="n">preamble</span><span class="o">=</span><span class="n">preamble</span><span class="p">,</span> <span class="n">dvioptions</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;-D&#39;</span><span class="p">,</span><span class="s1">&#39;250&#39;</span><span class="p">])</span>
-    <span class="c1">#return open(ImgFile,&#39;rb&#39;).read()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-</aside><aside class="notes">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Internat.-airline-passengers:-monthly-totals-in-thousands.-Jan-49-&#8211;-Dec-60">Internat. airline passengers: monthly totals in thousands. Jan 49 &#8211; Dec 60<a class="anchor-link" href="#Internat.-airline-passengers:-monthly-totals-in-thousands.-Jan-49-&#8211;-Dec-60">&#182;</a></h3>
-</div>
-</div>
-</div>
-</aside><aside class="notes">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Leemos los datos de un fichero <code>csv</code> y generamos un <code>dataframe</code> de pandas.</p>
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 
 </div>
 </div>
@@ -14294,32 +14222,11 @@ $\boldsymbol{e}$ parece "<em>estacionario</em>".</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<<<<<<< HEAD
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>El modelo de tendencia más simple es la recta de regresión (el
 regresor no constante es el índice $t$):</p>
 $$\ln{y_t}=\underbrace{\beta_1+\beta_2\cdot t}_{\text{tendencia}} + e_t; \quad t=1:114$$
-=======
-</aside><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
-<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span><span class="mi">5</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>  
-<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;dataLog&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">datosModelo1</span><span class="p">,</span>
-                 <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;black&quot;</span><span class="p">},</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;red&quot;</span><span class="p">})</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_figure</span><span class="p">()</span>
-<span class="c1">#fig.savefig(&quot;./img/airlinepass+linearTrend.png&quot;)</span>
-</pre></div>
-
-    </div>
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 </div>
 </div>
 </div>
@@ -14352,67 +14259,14 @@ $$\widehat{\ln{y_t}}=4.8137+0.01\cdot\big(t\big), \qquad t=1:114$$
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<<<<<<< HEAD
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong><u>Componente irregular</u></strong></p>
-=======
-
-</div>
-</aside><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">round</span><span class="p">(</span><span class="n">results1</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">],</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-</aside>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-<pre><code>$$\widehat{\ln{y_t}}=&lt;&lt;Cte-ajuste-tendencia-lineal()&gt;&gt;+&lt;&lt;Pte-ajuste-tendencia-lineal()&gt;&gt;\cdot\big(t\big), \qquad t=1:114$$
-
-</code></pre>
-$$\widehat{\ln{y_t}}=4.8137+0.01\cdot\big(t\big), \qquad t=1:114$$
-</div>
-</div>
-</div><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># print(results.summary()) Esta es la forma habitual de ver los resultados</span>
-<span class="n">repr_png</span><span class="p">(</span><span class="n">results1</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">as_latex</span><span class="p">(),</span>  <span class="s2">&quot;./img/resultsModel1.png&quot;</span><span class="p">)</span> <span class="c1"># pero emplearé esta para importar los resultados como imagen png en el material de clase</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-</aside></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="./img/resultsModel1.png" alt="img"></p>
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 
 </div>
 </div>
 </div>
 </div>
-<<<<<<< HEAD
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14420,50 +14274,6 @@ $$\widehat{\ln{y_t}}=4.8137+0.01\cdot\big(t\big), \qquad t=1:114$$
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc02/airlinepass+irreg.png" alt="img"></p>
-=======
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>cte     4.813668
-time    0.010048
-dtype: float64</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-</aside><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">datosModelo1</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">results1</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_figure</span><span class="p">()</span>
-<span class="c1">#fig.savefig(&quot;./img/airlinepass+irreg.png&quot;)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-</aside></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 <p>En este caso, el modelo</p>
 $$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$<p>donde $\boldsymbol{t}$ es una tendencia lineal no
 es un ajuste satisfactorio, pues el <em>componente irregular</em>
@@ -14487,34 +14297,6 @@ irregular parece mostrar un componente cíclico con un periodo de unos
 <p>En el siguiente ejercicio probaremos con una tendencia cuadrática&#x2026;</p>
 
 </div>
-<<<<<<< HEAD
-=======
-</aside><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">datosModelo1</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">datosModelo1</span><span class="p">[</span><span class="s1">&#39;ehatDiff12&#39;</span><span class="p">])</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_figure</span><span class="p">()</span>
-<span class="c1">#fig.savefig(&quot;./img/airlinepass+irregDiff12.png&quot;)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-</aside></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Diferencia de orden 12 del componente irregular parece mostrar un componente cíclico.
-<img src="./img/airlinepass+irregDiff12.png" alt="img"></p>
-<p>Probemos con una tendencia cuadrática</p>
-
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 </div>
 </div>
 </div></section></section><section><section>
@@ -14897,7 +14679,6 @@ auxiliar y $n=T-p$.</p>
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<<<<<<< HEAD
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>El test de Durbin-Watson</strong> contrasta la autocorrelación <u>de orden
@@ -14910,66 +14691,6 @@ autocorrelación negativa.</p>
 
 </div>
 </div>
-=======
-</div>
-
-</div>
-</aside><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;yhat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;cte&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">results2</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;cte&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">results2</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;sq_time&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">results2</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;sq_time&#39;</span><span class="p">]</span>
-<span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;ehat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results2</span><span class="o">.</span><span class="n">resid</span>
-<span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;ehatDiff12&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;ehat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-</aside><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">datosModelo2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;dataLog&quot;</span><span class="p">)</span>
-<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">datosModelo2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;yhat&quot;</span><span class="p">)</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_figure</span><span class="p">()</span>
-<span class="c1">#fig.savefig(&quot;./img/airlinepass+quadraticTrend.png&quot;)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-</aside>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-$$\ln{y_t}=\beta_1\cdot{1}+\beta_2\cdot t + \beta_3\cdot t^2 + e_t; \quad t=1:114$$<p><img src="./img/airlinepass+quadraticTrend.png" alt="img"></p>
-
-</div>
-</div>
-</div><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># print(results.summary()) Esta es la forma habitual de ver los resultados</span>
-<span class="n">repr_png</span><span class="p">(</span><span class="n">results2</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">as_latex</span><span class="p">(),</span> <span class="s2">&quot;./img/resultsModel2.png&quot;</span><span class="p">)</span> <span class="c1"># pero usaré esta</span>
-</pre></div>
-
-    </div>
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 </div>
 </div>
 </aside></div></section><section>
@@ -14987,68 +14708,6 @@ $$\ln{y_t}=\beta_1\cdot{1}+\beta_2\cdot t + \beta_3\cdot t^2 + e_t; \quad t=1:11
 <img src="./img/lecc02/resultsBreusch-Godfrey.png" width="450" class="center"/>
 </div>
 </div>
-<<<<<<< HEAD
-=======
-</div><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">datosModelo2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">results2</span><span class="o">.</span><span class="n">resid</span><span class="p">)</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_figure</span><span class="p">()</span>
-<span class="c1">#fig.savefig(&quot;./img/airlinepass+irreg2.png&quot;)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-</aside></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="./img/airlinepass+irreg2.png" alt="img"></p>
-<p>En este caso, el modelo</p>
-$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$<p>donde $\boldsymbol{t}$ es una tendencia cuadrática tampoco es un
-ajuste satisfactorio, pues el componente irregular $\boldsymbol{e}$
-sigue sin parecer la realización de un proceso estacionario.</p>
-
-</div>
-</div>
-</div><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">datosModelo2</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;ehatDiff12&#39;</span><span class="p">])</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_figure</span><span class="p">()</span>
-<span class="c1">#fig.savefig(&quot;./img/airlinepass+irregDiff12-2.png&quot;)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-</aside></section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>La diferencia de orden 12 del componente irregular de este segundo
-modelo sigue mostrando un componente cíclico.</p>
-<p><img src="./img/airlinepass+irregDiff12.png" alt="img"></p>
-<p>Para obtener una <em>tendencia-ciclo</em> que capte este ciclo, necesitamos
-procedimientos más sofisticados (TRAMO-SEATS, X13-ARIMA, STAMP, LDHR,
-etc.)&#x2026; y que estiman tendencias estocásticas (en lugar de tendencias
-deterministas con en los dos ejemplos vistos).</p>
-<p>Pasemos a estimar un componente estacional</p>
-
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 </div>
 </div>
 </div></section></section><section><section>
@@ -15194,92 +14853,7 @@ $$\epsilon_t = \rho_1 \epsilon_{t-1} + e_t$$<p>(<em>en este caso la estimación 
 </div>
 </div>
 </div>
-</div><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">datosModelo3</span> <span class="o">=</span> <span class="n">TransformedData</span><span class="p">[[</span><span class="s1">&#39;dataLog&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">nsample</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">datosModelo1</span><span class="p">)</span>
-<span class="n">datosModelo3</span><span class="p">[</span><span class="s1">&#39;cte&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">nsample</span>
-<span class="n">datosModelo3</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nsample</span><span class="p">,</span> <span class="n">nsample</span><span class="p">)</span>
-<span class="n">datosModelo3</span><span class="p">[</span><span class="s1">&#39;sq_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">datosModelo3</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]]</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-</aside><aside class="notes">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Creamos las <em>dummies</em> estacionales</p>
-
-</div>
-</div>
-</div>
-</aside><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.datasets</span> <span class="kn">import</span> <span class="n">sunspots</span>
-<span class="kn">from</span> <span class="nn">statsmodels.tsa.deterministic</span> <span class="kn">import</span> <span class="n">Seasonality</span>
-<span class="n">seas_gen</span> <span class="o">=</span> <span class="n">Seasonality</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">initial_period</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">seas_gen</span><span class="o">.</span><span class="n">in_sample</span><span class="p">(</span><span class="n">datosModelo3</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-</aside><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">datosModelo2</span> <span class="o">=</span> <span class="n">TransformedData</span><span class="p">[[</span><span class="s1">&#39;dataLog&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">nsample</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">datosModelo1</span><span class="p">)</span>
-<span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;cte&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">nsample</span>
-<span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nsample</span><span class="p">,</span> <span class="n">nsample</span><span class="p">)</span>
-<span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;sq_time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]]</span>
-<span class="n">model2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">datosModelo1</span><span class="p">[</span><span class="s1">&#39;dataLog&#39;</span><span class="p">],</span> <span class="n">datosModelo2</span><span class="p">[[</span><span class="s1">&#39;cte&#39;</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="s1">&#39;sq_time&#39;</span><span class="p">]])</span>
-<span class="n">results2</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-</aside><aside class="notes">
-
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;yhat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;cte&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">results2</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;cte&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">results2</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="o">+</span><span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;sq_time&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">results2</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;sq_time&#39;</span><span class="p">]</span>
-<span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;ehat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">results2</span><span class="o">.</span><span class="n">resid</span>
-<span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;ehatDiff12&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">datosModelo2</span><span class="p">[</span><span class="s1">&#39;ehat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-</aside></section></section>
+</div></section></section>
 </div>
 </div>
 </body>

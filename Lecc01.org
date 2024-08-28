@@ -256,13 +256,8 @@ sugiere que para cualquier proceso estacionario (y un $c$ grande), al
 pintar una realización, tan solo un pequeño porcentaje de los datos
 caerán fuera de la franja $\left(\mu-c\sigma, \mu+c\sigma\right)$.
 
-<<<<<<< HEAD
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/stationaryTimeSeriesExample.png
-=======
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/stationaryTimeSeriesExample.png
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 import statsmodels.api as sm
 np.random.seed(12345)
 arparams = np.array([.75, -.25])
@@ -272,11 +267,7 @@ ma = np.r_[1, maparams] # add zero-lag
 y = sm.tsa.arma_generate_sample(ar, ma, 250)
 plt.figure(figsize=(15,5))
 plt.plot(y)
-<<<<<<< HEAD
 #plt.savefig("./img/lecc01/stationaryTimeSeriesExample.png")
-=======
-#plt.savefig("./img/stationaryTimeSeriesExample.png")
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 #+END_SRC
 
 #+attr_org: :width 800
@@ -351,11 +342,7 @@ print(OrigData.head())
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: figura-airlinepass
-<<<<<<< HEAD
 #+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/airlinepass+hist.png
-=======
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass+hist.png
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
 plt.plot(OrigData['Passengers'])
@@ -364,11 +351,7 @@ plt.ylabel(r"Number of Air Passengers, ($\boldsymbol{x}$)")
 plt.subplot(1, 2, 2)
 plt.hist(OrigData['Passengers'], edgecolor='white', bins=11)
 plt.tight_layout()
-<<<<<<< HEAD
 #plt.savefig("./img/lecc01/airlinepass+hist.png")
-=======
-#plt.savefig("./img/airlinepass+hist.png")
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 #+END_SRC
 
 #+attr_org: :width 800
@@ -401,11 +384,7 @@ Serie /"no estacionaria"/ (*):
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: funcion_logaritmica
-<<<<<<< HEAD
 #+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/funcion_logaritmica.png
-=======
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/funcion_logaritmica.png
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 # Definir el rango de valores para x (empezando desde un número positivo ya que log(0) no está definido)
 x = np.linspace(0.01, 7, 400)  # Valores de 0.1 a 10
 
@@ -424,11 +403,7 @@ plt.axhline(0, color='black',linewidth=0.5)
 plt.axvline(0, color='black',linewidth=0.5)
 plt.grid(color = 'gray', linestyle = '--', linewidth = 0.5)
 plt.legend()
-<<<<<<< HEAD
 #plt.savefig("./img/lecc01/funcion_logaritmica.png")
-=======
-#plt.savefig("./img/funcion_logaritmica.png")
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 #+END_SRC
 # Establecer la escala logarítmica en el eje x
 # #plt.xscale('log')
@@ -453,11 +428,7 @@ TransformedData['dataLogDiffDiff12'] = TransformedData['dataLogDiff'].diff(12)
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: figura-airlinepass-log
-<<<<<<< HEAD
 #+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/airlinepass_log+hist.png
-=======
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass_log+hist.png
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
 plt.plot(TransformedData['dataLog'])
@@ -466,11 +437,7 @@ plt.ylabel(r"Log-Passengers, ($\ln\boldsymbol{x}$) ")
 plt.subplot(1, 2, 2)
 plt.hist(TransformedData['dataLog'], edgecolor='white', bins=11)
 plt.tight_layout()
-<<<<<<< HEAD
 #plt.savefig("./img/lecc01/airlinepass_log+hist.png")
-=======
-#plt.savefig("./img/airlinepass_log+hist.png")
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
@@ -492,11 +459,7 @@ $$\ln\boldsymbol{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: figura-airlinepass-log-diff
-<<<<<<< HEAD
 #+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/airlinepass_logDiff+hist.png
-=======
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass_logDiff+hist.png
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
 plt.plot(TransformedData['dataLogDiff'])
@@ -505,11 +468,7 @@ plt.ylabel(r"$\nabla\ln\boldsymbol{x}$")
 plt.subplot(1, 2, 2)
 plt.hist(TransformedData['dataLogDiff'], edgecolor='white', bins=11)
 plt.tight_layout()
-<<<<<<< HEAD
 #plt.savefig("./img/lecc01/airlinepass_logDiff+hist.png")
-=======
-#plt.savefig("./img/airlinepass_logDiff+hist.png")
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 #+END_SRC
 
 #+attr_org: :width 800
@@ -533,11 +492,7 @@ Esta serie tampoco parece /"estacionaria"/ (*)
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: figura-airlinepass-log-diff-diff12
-<<<<<<< HEAD
 #+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/airlinepass_logDiffDiff12+hist.png
-=======
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/airlinepass_logDiffDiff12+hist.png
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
 plt.plot(TransformedData['dataLogDiffDiff12'])
@@ -546,11 +501,7 @@ plt.ylabel(r"$\nabla_{12}(\nabla\ln\boldsymbol{x})$")
 plt.subplot(1, 2, 2)
 plt.hist(TransformedData['dataLogDiffDiff12'], edgecolor='white', bins=11)
 plt.tight_layout()
-<<<<<<< HEAD
 #plt.savefig("./img/lecc01/airlinepass_logDiffDiff12+hist.png")
-=======
-#plt.savefig("./img/airlinepass_logDiffDiff12+hist.png")
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 #+END_SRC
 
 #+attr_org: :width 800
@@ -581,15 +532,9 @@ TasaLogCrecimiento['$\\frac{y_t-y_{0}}{y_{0}}$'] = TasaLogCrecimiento['$y_t$'].a
 TasaLogCrecimiento['$\\ln y_t- \\ln y_{0}$'] = TasaLogCrecimiento['$\\ln y_t$'] - TasaLogCrecimiento['$\\ln y_t$'].iloc[0]
 #+END_SRC
 
-<<<<<<< HEAD
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/TasaLogCrecimiento.png
 dfi.export(TasaLogCrecimiento, "./img/lecc01/TasaLogCrecimiento.png", use_mathjax=True, dpi=200, table_conversion="matplotlib")
-=======
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/TasaLogCrecimiento.png
-dfi.export(TasaLogCrecimiento, "./img/TasaLogCrecimiento.png", use_mathjax=True, dpi=200)
->>>>>>> eab5f6c (modificacion en la generación de ficheros png)
 #+END_SRC
 
 La tasa logarítmica de variación de $\boldsymbol{y}$ se define como
