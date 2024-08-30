@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="org08fd57d">
+<div class="ABSTRACT" id="org7458bbb">
 <p>
 En esta lección se discutirá la posible relación entre correlación y
 causalidad. Veremos casos de correlación espuria (correlación sin
@@ -14974,12 +14974,12 @@ plazo</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>|   | Index     | Long  | Short |
+<pre>|   | Index     |  Long | Short |
 |---+-----------+-------+-------|
 |   | &lt;yearqtr&gt; | &lt;dbl&gt; | &lt;dbl&gt; |
-| 1 | 1952 Q2   | 4.23  | 2.32  |
-| 2 | 1952 Q3   | 4.36  | 2.47  |
-| 3 | 1952 Q4   | 4.19  | 2.42  |
+| 1 | 1952 Q2   |  4.23 |  2.32 |
+| 2 | 1952 Q3   |  4.36 |  2.47 |
+| 3 | 1952 Q4   |  4.19 |  2.42 |
 #+caption: A data.frame: 3 × 3</pre>
 </div>
 </div>
@@ -15024,9 +15024,9 @@ plazo</p>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>| Long | Short |
 |------+-------|
-| 4.23 | 2.32  |
-| 4.36 | 2.47  |
-| 4.19 | 2.42  |
+| 4.23 |  2.32 |
+| 4.36 |  2.47 |
+| 4.19 |  2.42 |
 #+caption: A matrix: 3 × 2 of type dbl</pre>
 </div>
 </div>
@@ -15173,11 +15173,11 @@ plazo</p>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>|   | date       | d_Long | d_Short |
+<pre>|   |       date | d_Long | d_Short |
 |---+------------+--------+---------|
-|   | &lt;date&gt;     | &lt;dbl&gt;  | &lt;dbl&gt;   |
-| 1 | 1952-07-01 | 0.13   | 0.15    |
-| 2 | 1952-10-01 | -0.17  | -0.05   |
+|   |     &lt;date&gt; |  &lt;dbl&gt; |   &lt;dbl&gt; |
+| 1 | 1952-07-01 |   0.13 |    0.15 |
+| 2 | 1952-10-01 |  -0.17 |   -0.05 |
 #+caption: A data.frame: 2 × 3</pre>
 </div>
 </div>
@@ -15200,9 +15200,7 @@ plazo</p>
 <span class="n">kk</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">xyplot</span><span class="p">(</span><span class="n">d_Long</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">d_Short</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">UK_df.diferencias</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="o">=</span><span class="s">"l"</span><span class="p">)</span>
 <span class="n">obj1</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">xyplot</span><span class="p">(</span><span class="n">d_Long</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">UK_df.diferencias</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"l"</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">"First diff. Long"</span><span class="p">,</span><span class="w">  </span><span class="n">xlab</span><span class="o">=</span><span class="s">"Quarters"</span><span class="p">)</span>
 <span class="n">obj2</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">xyplot</span><span class="p">(</span><span class="n">d_Short</span><span class="w"> </span><span class="o">~</span><span class="w"> </span><span class="n">date</span><span class="p">,</span><span class="w"> </span><span class="n">UK_df.diferencias</span><span class="p">,</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"l"</span><span class="p">,</span><span class="w"> </span><span class="n">lwd</span><span class="o">=</span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">ylab</span><span class="o">=</span><span class="s">"First diff. Short"</span><span class="p">)</span>
-<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200</span><span class="p">)</span>
 <span class="nf">doubleYScale</span><span class="p">(</span><span class="n">obj1</span><span class="p">,</span><span class="w"> </span><span class="n">obj2</span><span class="p">,</span><span class="w"> </span><span class="n">add.ylab2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span>
-<span class="nf">options</span><span class="p">(</span><span class="n">repr.plot.width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="n">repr.plot.res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">200</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15272,12 +15270,12 @@ una constante NO significativa.</p>
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>#+begin_example
-<span class="ansi-underline">MODEL INFO:</span>
+MODEL INFO:
 Observations: 74
 Dependent Variable: d_Short
 Type: OLS linear regression 
 
-<span class="ansi-underline">MODEL FIT:</span>
+MODEL FIT:
 F(1,72) = 20.11, p = 0.00
 R² = 0.22
 Adj. R² = 0.21 
@@ -15341,12 +15339,12 @@ d_Long               1.26   0.28     4.48   0.00
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>#+begin_example
-<span class="ansi-underline">MODEL INFO:</span>
+MODEL INFO:
 Observations: 75
 Dependent Variable: UK_df$Short
 Type: OLS linear regression 
 
-<span class="ansi-underline">MODEL FIT:</span>
+MODEL FIT:
 F(1,73) = 302.85, p = 0.00
 R² = 0.81
 Adj. R² = 0.80 

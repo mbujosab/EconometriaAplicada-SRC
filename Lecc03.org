@@ -411,12 +411,12 @@ head(UK_df,3)
 
 #+RESULTS:
 :RESULTS:
-|   | Index     | Long  | Short |
+|   | Index     |  Long | Short |
 |---+-----------+-------+-------|
 |   | <yearqtr> | <dbl> | <dbl> |
-| 1 | 1952 Q2   | 4.23  | 2.32  |
-| 2 | 1952 Q3   | 4.36  | 2.47  |
-| 3 | 1952 Q4   | 4.19  | 2.42  |
+| 1 | 1952 Q2   |  4.23 |  2.32 |
+| 2 | 1952 Q3   |  4.36 |  2.47 |
+| 3 | 1952 Q4   |  4.19 |  2.42 |
 #+caption: A data.frame: 3 × 3
 :END:
 
@@ -431,9 +431,9 @@ head(UK_ts,3)
 :RESULTS:
 | Long | Short |
 |------+-------|
-| 4.23 | 2.32  |
-| 4.36 | 2.47  |
-| 4.19 | 2.42  |
+| 4.23 |  2.32 |
+| 4.36 |  2.47 |
+| 4.19 |  2.42 |
 #+caption: A matrix: 3 × 2 of type dbl
 :END:
 
@@ -490,11 +490,11 @@ head(UK_df.diferencias, 2)
 
 #+RESULTS:
 :RESULTS:
-|   | date       | d_Long | d_Short |
+|   |       date | d_Long | d_Short |
 |---+------------+--------+---------|
-|   | <date>     | <dbl>  | <dbl>   |
-| 1 | 1952-07-01 | 0.13   | 0.15    |
-| 2 | 1952-10-01 | -0.17  | -0.05   |
+|   |     <date> |  <dbl> |   <dbl> |
+| 1 | 1952-07-01 |   0.13 |    0.15 |
+| 2 | 1952-10-01 |  -0.17 |   -0.05 |
 #+caption: A data.frame: 2 × 3
 :END:
 
@@ -505,9 +505,7 @@ head(UK_df.diferencias, 2)
 kk <- xyplot(d_Long + d_Short ~ date, UK_df.diferencias, type="l")
 obj1 <- xyplot(d_Long ~ date, UK_df.diferencias, type = "l" , lwd=2, ylab="First diff. Long",  xlab="Quarters")
 obj2 <- xyplot(d_Short ~ date, UK_df.diferencias, type = "l", lwd=2, ylab="First diff. Short")
-options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
 doubleYScale(obj1, obj2, add.ylab2 = TRUE)
-options(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
 #+END_SRC
 
 
@@ -530,17 +528,17 @@ summ( lm(d_Short ~ d_Long) )
 
 #+RESULTS:
 #+begin_example
-[4mMODEL INFO:[24m
-[3mObservations:[23m 74
-[3mDependent Variable:[23m d_Short
-[3mType:[23m OLS linear regression 
+MODEL INFO:
+Observations: 74
+Dependent Variable: d_Short
+Type: OLS linear regression 
 
-[4mMODEL FIT:[24m
-[3mF[23m(1,72) = 20.11, [3mp[23m = 0.00
-[3mR² = [23m0.22
-[3mAdj. R² = [23m0.21 
+MODEL FIT:
+F(1,72) = 20.11, p = 0.00
+R² = 0.22
+Adj. R² = 0.21 
 
-[3mStandard errors: OLS[23m
+Standard errors: OLS
 ------------------------------------------------
                      Est.   S.E.   t val.      p
 ----------------- ------- ------ -------- ------
@@ -558,17 +556,17 @@ summ( modelo )                         # resultados del ajuste
 
 #+RESULTS:
 #+begin_example
-[4mMODEL INFO:[24m
-[3mObservations:[23m 75
-[3mDependent Variable:[23m UK_df$Short
-[3mType:[23m OLS linear regression 
+MODEL INFO:
+Observations: 75
+Dependent Variable: UK_df$Short
+Type: OLS linear regression 
 
-[4mMODEL FIT:[24m
-[3mF[23m(1,73) = 302.85, [3mp[23m = 0.00
-[3mR² = [23m0.81
-[3mAdj. R² = [23m0.80 
+MODEL FIT:
+F(1,73) = 302.85, p = 0.00
+R² = 0.81
+Adj. R² = 0.80 
 
-[3mStandard errors: OLS[23m
+Standard errors: OLS
 ------------------------------------------------
                      Est.   S.E.   t val.      p
 ----------------- ------- ------ -------- ------

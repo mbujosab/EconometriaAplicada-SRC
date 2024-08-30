@@ -58,7 +58,7 @@
   + [[file:./Practicas/PracticasGretl/pub/scripts/componentesAirlinePass2.inp][componentesAirlinePass2.inp]]
 
 
-** Correlación y cointegración (Lecc03)
+** Correlación y causalidad. Introducción a la cointegración (Lecc03)
 
 - [[file:./Lecc03.slides.html][slides]]
 - [[file:./Lecc03.html][html]]
@@ -89,7 +89,7 @@
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc04.ipynb][notebook en mybinder]]
 
 
-** Herramientas estadísticas (Lecc05)
+** Procesos estocásticos débilmente estacionarios (Lecc05)
 
 - [[file:./Lecc05.slides.html][slides]]
 - [[file:./Lecc05.html][html]]
@@ -97,11 +97,13 @@
 - [[file:./Lecc05.ipynb][notebook]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc05.ipynb][notebook en mybinder]]
 
-*** Practicas
+** ACF, PACF y densidad espectral de algunos modelos lineales (Lecc06)
 
-- [[file:./Practicas/PracticasGretl/pub/Prct-Lecc03.pdf][pdf file]]
-- Guiones de gretl
-  + [[file:./Practicas/PracticasGretl/pub/scripts/GNPvsMelanoma.inp][GNPvsMelanoma.inp]]
-  + [[file:./Practicas/PracticasGretl/pub/scripts/UKinterestRates.inp][UKinterestRates.inp]]
+- [[file:./Lecc06.slides.html][slides]]
+- [[file:./Lecc06.html][html]]
+- [[file:./Lecc06.pdf][pdf]]
+- [[file:./Lecc06.ipynb][notebook]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc06.ipynb][notebook en mybinder]]
 
-    
+** Herramientas estadísticas (Lecc07)
+

@@ -257,7 +257,7 @@ pintar una realización, tan solo un pequeño porcentaje de los datos
 caerán fuera de la franja $\left(\mu-c\sigma, \mu+c\sigma\right)$.
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/stationaryTimeSeriesExample.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc01/stationaryTimeSeriesExample.png :results silent
 import statsmodels.api as sm
 np.random.seed(12345)
 arparams = np.array([.75, -.25])
@@ -342,7 +342,7 @@ print(OrigData.head())
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: figura-airlinepass
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/airlinepass+hist.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc01/airlinepass+hist.png :results silent
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
 plt.plot(OrigData['Passengers'])
@@ -384,7 +384,7 @@ Serie /"no estacionaria"/ (*):
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: funcion_logaritmica
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/funcion_logaritmica.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc01/funcion_logaritmica.png :results silent
 # Definir el rango de valores para x (empezando desde un número positivo ya que log(0) no está definido)
 x = np.linspace(0.01, 7, 400)  # Valores de 0.1 a 10
 
@@ -405,6 +405,7 @@ plt.grid(color = 'gray', linestyle = '--', linewidth = 0.5)
 plt.legend()
 #plt.savefig("./img/lecc01/funcion_logaritmica.png")
 #+END_SRC
+
 # Establecer la escala logarítmica en el eje x
 # #plt.xscale('log')
 
@@ -428,7 +429,7 @@ TransformedData['dataLogDiffDiff12'] = TransformedData['dataLogDiff'].diff(12)
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: figura-airlinepass-log
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/airlinepass_log+hist.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc01/airlinepass_log+hist.png :reslts silent 
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
 plt.plot(TransformedData['dataLog'])
@@ -459,7 +460,7 @@ $$\ln\boldsymbol{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: figura-airlinepass-log-diff
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/airlinepass_logDiff+hist.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc01/airlinepass_logDiff+hist.png :results  silent
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
 plt.plot(TransformedData['dataLogDiff'])
@@ -492,7 +493,7 @@ Esta serie tampoco parece /"estacionaria"/ (*)
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: figura-airlinepass-log-diff-diff12
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/airlinepass_logDiffDiff12+hist.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc01/airlinepass_logDiffDiff12+hist.png :results  silent
 plt.figure(figsize=(15,5))
 plt.subplot(1, 2, 1)
 plt.plot(TransformedData['dataLogDiffDiff12'])
@@ -533,7 +534,7 @@ TasaLogCrecimiento['$\\ln y_t- \\ln y_{0}$'] = TasaLogCrecimiento['$\\ln y_t$'] 
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc01/TasaLogCrecimiento.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc01/TasaLogCrecimiento.png :results silent
 dfi.export(TasaLogCrecimiento, "./img/lecc01/TasaLogCrecimiento.png", use_mathjax=True, dpi=200, table_conversion="matplotlib")
 #+END_SRC
 

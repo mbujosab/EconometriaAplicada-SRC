@@ -177,14 +177,13 @@ datosModelo1['ehatDiff12'] = datosModelo1['ehat'].diff(12)
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+linearTrend.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/airlinepass+linearTrend.png :results  silent
 # Dibujamos los datos junto a la tendencia estimada
 plt.plot(datosModelo1['dataLog'])
 plt.plot(results1.fittedvalues)
 plt.grid()  
 plt.ylabel(r"Log-Passengers, ($\ln\boldsymbol{x}$) ")
 #+END_SRC
-
 
 El modelo de tendencia más simple es la recta de regresión (el
 regresor no constante es el índice $t$):
@@ -218,7 +217,7 @@ print(results1.summary())
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 *_Componente irregular_*
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+irreg.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/airlinepass+irreg.png :results silent
 # Gráfico de los residuos del ajuste.
 plt.grid()  
 plt.plot(results1.resid)
@@ -240,7 +239,7 @@ no tiene la apariencia de realización de un proceso estacionario.
 
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file silent  :file ./img/lecc02/airlinepass+irregDiff12.png 
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/airlinepass+irregDiff12.png :results  silent
 # Gráfico de la diferencia estacional de los residuos del ajuste.
 plt.grid()  
 plt.plot(datosModelo1['ehatDiff12'])
@@ -265,18 +264,16 @@ En el siguiente ejercicio probaremos con una tendencia cuadrática...
 ~Los siguientes bloques de código muestran el valor de los parámetros estimados por MCO en el anterior modelo.~
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: Cte-ajuste-tendencia-lineal
-#+BEGIN_SRC jupyter-python :results value :results silent :exports results 
+#+BEGIN_SRC jupyter-python :results value :exports results :results silent 
 round(results1.params['cte'],4)
 #+END_SRC
 
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: Pte-ajuste-tendencia-lineal
-#+BEGIN_SRC jupyter-python :results value :results silent :exports results 
+#+BEGIN_SRC jupyter-python :results value :exports results  :results silent
 round(results1.params['time'],4)
 #+END_SRC
 
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-El siguiente código escribe la ecuación en \LaTeX{} con el valor de
+#+RESULTS: Pte-ajuste-tendencgo escribe la ecuación en \LaTeX{} con el valor de
 los parámetros estimados por MCO desde el fichero =orgmode=
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+name: my-latex-code-linear-trend
@@ -288,10 +285,12 @@ $$\widehat{\ln{y_t}}=<<Cte-ajuste-tendencia-lineal()>>+<<Pte-ajuste-tendencia-li
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 Generamos un fichero =png= con los resultados de la estimación MCO.
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results silent file :file ./img/lecc02/resultsModel1.png 
-# print(results.summary()) Esta es la forma habitual de ver los resultados
+#+BEGIN_SRC jupyter-python file :file ./img/lecc02/resultsModel1.png 
+# print(results.summary() :results silent) Esta es la forma habitual de ver los resultados
 repr_png(results1.summary().as_latex(),  "./img/lecc02/resultsModel1.png") # pero emplearé esta para importar los resultados como imagen png en el material de clase
 #+END_SRC
+
+#+RESULTS:
 
 
 
@@ -302,8 +301,8 @@ repr_png(results1.summary().as_latex(),  "./img/lecc02/resultsModel1.png") # per
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: ajuste-tendencia-cuadratica
-#+BEGIN_SRC jupyter-python  :results silent
-# creamos un DataFrame con el regresando y los regresores del modelo.
+#+BEGIN_SRC jupyter-python 
+# creamos un DataFrame con el regresando y los regresores del modelo :results silent.
 datosModelo2 = TransformedData[['dataLog']].copy()
 nsample = len(datosModelo1)
 datosModelo2['cte'] = [1]*nsample
@@ -314,6 +313,8 @@ model2 = sm.OLS(datosModelo1['dataLog'], datosModelo2[['cte', 'time', 'sq_time']
 results2 = model2.fit()
 #+END_SRC
 
+#+RESULTS: ajuste-tendencia-cuadratica
+
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results none
 # Añadimos al DataFrame 'datosModelo2' la tendencia ajustada, los residuos y la diferencia estacional de los residuos.
@@ -323,7 +324,7 @@ datosModelo2['ehatDiff12'] = datosModelo2['ehat'].diff(12)
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+quadraticTrend.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/airlinepass+quadraticTrend.png :results  silent
 # Dibujamos los datos junto a la tendencia estimada.
 plt.plot(datosModelo1['dataLog'])
 plt.plot(results2.fittedvalues)
@@ -347,9 +348,41 @@ $$\widehat{\ln{y_t}}=4.7364+(0.0132)\cdot t +(-2.191e-05)\cdot t^2, \qquad t=1:1
  
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel2.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/resultsModel2.png :resuts silent 
 print(results2.summary()) 
 #+END_SRC
+
+#+RESULTS:
+#+begin_example
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                dataLog   R-squared:                       0.907
+Model:                            OLS   Adj. R-squared:                  0.906
+Method:                 Least Squares   F-statistic:                     691.0
+Date:                Wed, 28 Aug 2024   Prob (F-statistic):           1.37e-73
+Time:                        12:00:44   Log-Likelihood:                 85.260
+No. Observations:                 144   AIC:                            -164.5
+Df Residuals:                     141   BIC:                            -155.6
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+cte            4.7364      0.034    138.117      0.000       4.669       4.804
+time           0.0132      0.001     12.112      0.000       0.011       0.015
+sq_time    -2.191e-05   7.29e-06     -3.004      0.003   -3.63e-05   -7.49e-06
+==============================================================================
+Omnibus:                        4.978   Durbin-Watson:                   0.624
+Prob(Omnibus):                  0.083   Jarque-Bera (JB):                3.317
+Skew:                           0.205   Prob(JB):                        0.190
+Kurtosis:                       2.380   Cond. No.                     2.85e+04
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.85e+04. This might indicate that there are
+strong multicollinearity or other numerical problems.
+#+end_example
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 #+attr_org: :width 600
@@ -361,10 +394,16 @@ print(results2.summary())
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 *_Componente irregular_*
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+irreg2.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/airlinepass+irreg2.png :resuts silent 
 plt.grid()  
 plt.plot(results2.resid)
 #+END_SRC
+
+#+RESULTS:
+:RESULTS:
+| <matplotlib.lines.Line2D | at | 0x7f70c61f9850> |
+[[./img/lecc02/airlinepass+irreg2.png]]
+:END:
 
 #+attr_org: :width 800
 #+attr_html: :width 900px
@@ -382,7 +421,7 @@ proceso estacionario.
 
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+irregDiff12-2.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/airlinepass+irregDiff12-2.png :results  silent
 plt.grid()  
 plt.plot(datosModelo2['ehatDiff12'])
 #+END_SRC
@@ -413,24 +452,33 @@ Los siguientes bloques de código muestran el valor de los parámetros
 estimados por MCO.
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: Cte-ajuste-tendencia-cuadr
-#+BEGIN_SRC jupyter-python :results value :results silent :exports results 
+#+BEGIN_SRC jupyter-python :results value :exports results 
 round(results2.params['cte'],4)
 #+END_SRC
 
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+RESULTS: Cte-ajuste-tendencia-cuadr
+: 4.7364
+
+#+attr_ :results silentipynb: (slideshow . ((slide_type . skip)))
 #+NAME: beta2-tendencia-cuadr
-#+BEGIN_SRC jupyter-python :results value :results silent :exports results 
+#+BEGIN_SRC jupyter-python :results value :exports results 
 round(results2.params['time'],4)
 #+END_SRC
 
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+RESULTS: beta2-tendencia-cuadr
+: 0.0132
+
+#+attr :results silent_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: beta3-tendencia-cuadr
-#+BEGIN_SRC jupyter-python :results value :results silent :exports results 
+#+BEGIN_SRC jupyter-python :results value :exports results 
 round(results2.params['sq_time'],8)
 #+END_SRC
 
+#+RESULTS: beta3-tendencia-cuadr
+: -2.191e-05
 
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
+
+#+ :results silentattr_ipynb: (slideshow . ((slide_type . skip)))
 #+name: my-latex-code-quadratic-trend
 #+BEGIN_SRC latex :noweb strip-export :exports result :results drawer replace
 $$\widehat{\ln{y_t}}=<<Cte-ajuste-tendencia-cuadr()>>+(<<beta2-tendencia-cuadr()>>)\cdot t +(<<beta3-tendencia-cuadr()>>)\cdot t^2, \qquad t=1:114$$
@@ -448,14 +496,16 @@ repr_png(results2.summary().as_latex(), "./img/lecc02/resultsModel2.png")
    :END:
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results silent
-# Creamos un dataframe con los datos y los regresores 'cte', 't' y 't^2'
+#+BEGIN_SRC jupyter-python
+# Creamos un dataframe con los datos y los regresores 'cte', 't' y ' :results silentt^2'
 df = TransformedData[['dataLog']].copy()
 nsample = len(df)
 df['cte']     = [1]*nsample
 df['time']    = np.linspace(1, nsample, nsample)
 df['sq_time'] = [t**2 for t in df['time']]
 #+END_SRC
+
+#+RESULTS:
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results none
@@ -483,7 +533,7 @@ TrendComp = datosModelo3[['cte','time','sq_time']].dot(results3.params[['cte','t
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+TrendC.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/airlinepass+TrendC.png :results  silent
 rcParams['figure.figsize'] = 15,4
 plt.plot(datosModelo1['dataLog'])
 plt.plot(TrendComp)
@@ -497,7 +547,7 @@ plt.ylabel(r"Log-Passengers, ($\ln\boldsymbol{x}$) ")
 [[./img/lecc02/airlinepass+TrendC.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+SeasonalC.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/airlinepass+SeasonalC.png :results  silent
 SeasonalComp = (seasonalDummies.iloc[:,:-1]).dot(results3.params[3:])
 plt.grid()  
 plt.plot(SeasonalComp)
@@ -516,7 +566,7 @@ plt.plot(SeasonalComp)
 
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+yhat.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/airlinepass+yhat.png :results  silent
 plt.grid()  
 plt.plot(datosModelo3['dataLog'])
 plt.plot(TrendComp + SeasonalComp)
@@ -528,7 +578,7 @@ plt.plot(TrendComp + SeasonalComp)
 [[./img/lecc02/airlinepass+yhat.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/airlinepass+IrregC.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/airlinepass+IrregC.png :results silent
 plt.grid()  
 plt.plot(results3.resid)
 #+END_SRC
@@ -569,9 +619,11 @@ Pero sigamos explorando este modelo...
 febrero y octubre).
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/resultsModel3.png :results silent
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/resultsModel3.png
 repr_png(results3.summary().as_latex(), "./img/lecc02/resultsModel3.png")
 #+END_SRC
+
+#+RESULTS:
 
 #+BEGIN_EXPORT latex
 \begin{center}
@@ -754,13 +806,15 @@ autocorrelación positiva y valores próximos a 4 indican fuerte
 autocorrelación negativa.
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python  :results silent
+#+BEGIN_SRC jupyter-python 
 import statsmodels.stats.diagnostic as dg
-#perform Breusch-Godfrey test of order p = 3
+#perform Breusch-Godfrey t :results silentest of order p = 3
 arbg = dg.acorr_breusch_godfrey(results4, nlags=3, store=True)
 arbg[:1]
 repr_png(arbg[-1].resols.summary().as_latex(), "./img/lecc02/resultsBreusch-Godfrey.png") 
 #+END_SRC
+
+#+RESULTS:
 
 #+BEGIN_EXPORT latex
 \begin{center}
@@ -781,7 +835,7 @@ repr_png(arbg[-1].resols.summary().as_latex(), "./img/lecc02/resultsBreusch-Godf
 #+label: Test-Breusch-Godfrey
 #+RESULTS: my-latex-code-Breusch-Godfrey
 :results:
-- Valor del estadístico: $\quad 62.7119\qquad$ (p-valor: $\; 1.55e-13$)
+- Valor del estadístico: $\quad \qquad$ (p-valor: $\; 1.55e-13$)
 - $x_{12}$ corresponde al primer retardo en la regresión auxiliar y es muy significativo
 :end:
 
@@ -802,17 +856,29 @@ repr_png(arbg[-1].resols.summary().as_latex(), "./img/lecc02/resultsBreusch-Godf
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: Breusch-Godfrey test value
-#+BEGIN_SRC jupyter-python  :results value :results silent :exports results 
+#+BEGIN_SRC jupyter-python  :results value :exports results 
 # valor del estadístico del test
-round(arbg[0], 4)
+round(arbg[0], 4) :results silent
 #+END_SRC
+
+#+RESULTS: Breusch-Godfrey test value
+:RESULTS:
+# [goto error]
+:   Cell In [125], line 2
+:     round(arbg[0], 4) :results silent
+:     ^
+: SyntaxError: illegal target for annotation
+:END:
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: Breusch-Godfrey test p-value
-#+BEGIN_SRC jupyter-python  :results value :results silent :exports results 
+#+BEGIN_SRC jupyter-python  :results value :exports results 
 # pvalor del test
 round(arbg[1], 15)
 #+END_SRC
+
+#+RESULTS: Breusch-Godfrey test p-value
+: 1.55e-13
 
 
 ** Errores estándar robustos
@@ -845,9 +911,11 @@ print(results5.get_robustcov_results(cov_type='HAC', maxlags=3, use_correction=T
 
  
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel5.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/resultsModel5.png 
 repr_png(results5.get_robustcov_results(cov_type='HAC', maxlags=3, use_correction=True).summary().as_latex(), "./img/lecc02/resultsModel5.png")
 #+END_SRC
+
+#+RESULTS:
 
 #+BEGIN_EXPORT latex
 \begin{center}
@@ -875,7 +943,7 @@ robustas. El modelo reducido es...
 
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel6.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/resultsModel6.png :results silent
 y = datosModelo3['dataLog']
 X = datosModelo3.iloc[:,1:-1]
 
@@ -976,8 +1044,8 @@ $$\epsilon_t = \rho_1 \epsilon_{t-1} + e_t$$
 (/en este caso la estimación (*GLSAR*) converge en 7 iteraciones/)
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results silent :file ./img/lecc02/resultsModel7.png
-model = sm.GLSAR(y, X, rho=1) # rho=1 indica autocorrelación de orden uno
+#+BEGIN_SRC jupyter-python :file ./img/lecc02/resultsModel7.png :results silent
+model = sm.GLSAR(y, X, rho=1) # :results silent rho=1 indica autocorrelación de orden uno
 for i in range(7):
     results = model.fit()
     print("AR coefficients: {0}".format(model.rho))
@@ -985,6 +1053,7 @@ for i in range(7):
                                            order=model.order)
     model = sm.GLSAR(y, X, rho)
 #+END_SRC
+
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results none
@@ -1026,9 +1095,11 @@ print(model2.fit().summary())
 **************  Codigo aux                                       :noexport:
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)b))
-#+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel7.png
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/resultsModel7.png
 repr_png(results.summary().as_latex(), "./img/lecc02/resultsModel7.png") 
 #+END_SRC
+
+#+RESULTS:
 
 
 # [[https://ninjakx.github.io/Introduction-to-Time-series/]]

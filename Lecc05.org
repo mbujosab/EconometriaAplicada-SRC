@@ -299,8 +299,7 @@ aún así...
   Cov(X_t,X_{t-k}) & = \gamma_k
   \end{eqnarray}
 - Si además es i.i.d. podemos interpretar la serie temporal como una
-  realización de un muestreo aleatorio simple (lo que habilita la
-  inferencia estadística).
+  realización de un muestreo aleatorio simple.
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 El desafío para el analista es (y nótese el abuso de lenguaje)
 - primero :: transformar los datos para lograr que sean "*/estacionarios/*".
@@ -433,6 +432,7 @@ secuencia:
 $\;\boldsymbol{\rho}=\frac{1}{\gamma_0}(\boldsymbol{\gamma})
 =\sum\limits_{k\in\mathbb{Z}}\frac{\gamma_k}{\gamma_0}z^k$.
 
+
 * Ejemplos de procesos (débilmente) estacionarios
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
@@ -456,6 +456,10 @@ z^0\;=\;(\ldots,0,0,\sigma^2,0,0,\ldots)$$
 - Este proceso es el pilar sobre el que definiremos el resto de
   ejemplos.
 
+# #+attr_ipynb: (slideshow . ((slide_type . fragment)))
+# Si el proceso $\boldsymbol{U}$ de ruido blanco está formado por
+# variables independientes e idénticamente distribuidas se denota con
+# $\;\boldsymbol{U}\sim IID(0,\sigma^2)$.
 
 ** Procesos lineales
    :PROPERTIES:
@@ -551,7 +555,7 @@ Hay otros procesos lineales con representación parsimoniosa.
    :END:
 
 Sea $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, se denomina /proceso
-autorregresivo de orden $p$/ a aquel proceso estocástico
+autorregresivo de orden $p$/ a aquel proceso estocástico estacionario
 $\;\boldsymbol{X}\;$ que es la solución de la siguiente ecuación en
 diferencias $$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$$ donde
 $\;\boldsymbol{\phi}\;$ un _polinomio de grado $p$_ con $\phi_0=1$;
@@ -575,10 +579,10 @@ verlo basta despejar $\boldsymbol{X}$.
 
 Multiplicando ambos lados de la igualdad por una inversa de
 $\boldsymbol{\phi}$ lo logramos
-$$\boldsymbol{X}=inversa(\boldsymbol{\phi})*\boldsymbol{U}$$ es decir,
-si $\boldsymbol{a}=inversa(\boldsymbol{\phi})$ entonces
+$$\boldsymbol{X}=inversa(\boldsymbol{\phi})*\boldsymbol{U},$$ si
+denotamos $inversa(\boldsymbol{\phi})$ con $\boldsymbol{a}$ entonces
 $$X_t=\boldsymbol{a}(\mathsf{B})U_t=\sum_{j\in\mathbb{Z}} a_j
-U_{t-j}$$ 
+U_{t-j}.$$
 #+latex:\medskip
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
@@ -588,7 +592,9 @@ sumables (si el polinomio $\boldsymbol{\phi}$ tiene raíces unitarias
 ninguna lo es).
 
 #+begin_center
-En tal caso la expresión $\;\boldsymbol{a}(\mathsf{B})U_t=\sum\limits_{j\in\mathbb{Z}} a_j U_{t-j}\;$ carece de sentido
+En tal caso la expresión
+$\;\boldsymbol{a}(\mathsf{B})U_t=\sum\limits_{j=-\infty}^\infty a_j
+U_{t-j}\;$ carece de sentido (no converge).
 #+end_center
 #+latex:\medskip
 
@@ -598,11 +604,15 @@ En tal caso la expresión $\;\boldsymbol{a}(\mathsf{B})U_t=\sum\limits_{j\in\mat
 1) Para tener un _proceso lineal_, exigiremos que $\boldsymbol{\phi}$
    _no tenga raíces de módulo 1_.
 
-  En tal caso sabemos que la inversa en $\ell^1\subset\ell^2$ (la
-   abolutamente sumable) existe.
+   Entonces existe la inversa $\boldsymbol{\phi}^{-1} \in
+   \ell^1\subset\ell^2$ (la abolutamente sumable).
 
-  Denotamos dicha inversa con $\boldsymbol{\phi}^{-1}$
-  
+   La inversa $\boldsymbol{a}=\boldsymbol{\phi}^{-1}$ corresponde a la
+   única solución /estacionaria/ de
+   $\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$.  (Si
+   $\boldsymbol{\phi}$ tuviera raíces de módulo 1 no existiría ni
+   $\boldsymbol{\phi}^{-1}$ ni solución estacionaria).
+
 $$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=-\infty}^\infty
 a_j U_{t-j}$$
 
@@ -624,9 +634,9 @@ los dos anteriores.
    :END:
 
 Sea $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, se denomina /proceso
-autorregresivo de media móvil $(p,q)$/ a aquel proceso estocástico
-$\;\boldsymbol{X}\;$ que es la solución de la siguiente ecuación en
-diferencias
+autorregresivo de media móvil $(p,q)$/ al proceso estocástico
+estacionario $\;\boldsymbol{X}\;$ que es la solución de la ecuación en
+diferencias:
 $$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$$
 donde el polinomio /autorregresivo/ $\;\boldsymbol{\phi}\;$ tiene
 _grado $p$_ con $\phi_0=1$ y con todas sus raíces fuera del círculo

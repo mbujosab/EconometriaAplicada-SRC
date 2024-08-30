@@ -60,6 +60,10 @@ latexmk -c Lecc04.tex
 pdflatex --shell-escape  -interaction=batchmode Lecc05.tex
 pdflatex --shell-escape  -interaction=batchmode Lecc05.tex
 latexmk -c Lecc05.tex
+
+pdflatex --shell-escape  -interaction=batchmode Lecc06.tex
+pdflatex --shell-escape  -interaction=batchmode Lecc06.tex
+latexmk -c Lecc06.tex
 #+END_SRC
 
 
@@ -70,6 +74,7 @@ latexmk -c Lecc05.tex
 (ox-ipynb-export-org-file-to-ipynb-file "Lecc03.org")
 (ox-ipynb-export-org-file-to-ipynb-file "Lecc04.org")
 (ox-ipynb-export-org-file-to-ipynb-file "Lecc05.org")
+(ox-ipynb-export-org-file-to-ipynb-file "Lecc06.org")
 #+END_SRC
 
 #+BEGIN_SRC sh :results silent
@@ -146,6 +151,13 @@ We need a small elisp script to setup and publish  it.
 
   (org-publish "scimax-eln" t))
 #+END_SRC
+
+
+#+BEGIN_SRC bash
+rm Lecc*.{pdf,slides.html}
+#+END_SRC
+
+#+RESULTS:
 
 # ~/CloudStation/ReposGH/Docencia/Econometria-SRC/
 # ~/CloudStation/Nextcloud/Docencia/Ectr/
@@ -238,7 +250,8 @@ c.NbConvertApp.notebooks = ["Lecc01.ipynb",
                             "Lecc02.ipynb",
                             "Lecc03.ipynb",
                             "Lecc04.ipynb",
-                            "Lecc05.ipynb"]
+                            "Lecc05.ipynb",
+                            "Lecc06.ipynb"]
 c.SlidesExporter.reveal_theme = 'solarized'
 c.SlidesExporter.reveal_scroll = True
 #+END_SRC
@@ -296,7 +309,8 @@ c.NbConvertApp.notebooks = ["Lecc01.ipynb",
                             "Lecc02.ipynb",
                             "Lecc03.ipynb",
                             "Lecc04.ipynb",
-                            "Lecc05.ipynb"]
+                            "Lecc05.ipynb",
+                            "Lecc06.ipynb"]
 
 c.SlidesExporter.reveal_theme = 'solarized'
 c.SlidesExporter.reveal_scroll = True

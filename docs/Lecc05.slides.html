@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="org8ce5577">
+<div class="abstract" id="org30eb349">
 <p>
 Esta lección veremos las dificultades que ocasiona la correlación
 serial y algunos tipos de procesos débilmente estacionarios que nos
@@ -14601,8 +14601,7 @@ Cov(X_t,X_{t-k}) &amp; = \gamma_k
 \end{eqnarray}</p>
 </li>
 <li>Si además es i.i.d. podemos interpretar la serie temporal como una
-realización de un muestreo aleatorio simple (lo que habilita la
-inferencia estadística).</li>
+realización de un muestreo aleatorio simple.</li>
 </ul>
 
 </div>
@@ -15045,7 +15044,7 @@ $$ X_t = U_t + \theta_1 U_{t-1} + \cdots + \theta_q U_{t-q}.$$</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Sea $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, se denomina <em>proceso
-autorregresivo de orden $p$</em> a aquel proceso estocástico
+autorregresivo de orden $p$</em> a aquel proceso estocástico estacionario
 $\;\boldsymbol{X}\;$ que es la solución de la siguiente ecuación en
 diferencias $$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$$ donde
 $\;\boldsymbol{\phi}\;$ un <u>polinomio de grado $p$</u> con $\phi_0=1$;</p>
@@ -15093,10 +15092,10 @@ $\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$ no es única. Para
 verlo basta despejar $\boldsymbol{X}$.</p>
 <p>Multiplicando ambos lados de la igualdad por una inversa de
 $\boldsymbol{\phi}$ lo logramos
-$$\boldsymbol{X}=inversa(\boldsymbol{\phi})*\boldsymbol{U}$$ es decir,
-si $\boldsymbol{a}=inversa(\boldsymbol{\phi})$ entonces
+$$\boldsymbol{X}=inversa(\boldsymbol{\phi})*\boldsymbol{U},$$ si
+denotamos $inversa(\boldsymbol{\phi})$ con $\boldsymbol{a}$ entonces
 $$X_t=\boldsymbol{a}(\mathsf{B})U_t=\sum_{j\in\mathbb{Z}} a_j
-U_{t-j}$$</p>
+U_{t-j}.$$</p>
 
 </div>
 </div>
@@ -15114,7 +15113,9 @@ sumables (si el polinomio $\boldsymbol{\phi}$ tiene raíces unitarias
 ninguna lo es).</p>
 <div class="org-center">
 <p>
-En tal caso la expresión $\;\boldsymbol{a}(\mathsf{B})U_t=\sum\limits_{j\in\mathbb{Z}} a_j U_{t-j}\;$ carece de sentido
+En tal caso la expresión
+$\;\boldsymbol{a}(\mathsf{B})U_t=\sum\limits_{j=-\infty}^\infty a_j
+U_{t-j}\;$ carece de sentido (no converge).
 </p>
 </div>
 </div>
@@ -15131,9 +15132,13 @@ En tal caso la expresión $\;\boldsymbol{a}(\mathsf{B})U_t=\sum\limits_{j\in\mat
 <ol>
 <li><p>Para tener un <u>proceso lineal</u>, exigiremos que $\boldsymbol{\phi}$
 <u>no tenga raíces de módulo 1</u>.</p>
-<p>En tal caso sabemos que la inversa en $\ell^1\subset\ell^2$ (la
- abolutamente sumable) existe.</p>
-<p>Denotamos dicha inversa con $\boldsymbol{\phi}^{-1}$</p>
+<p>Entonces existe la inversa $\boldsymbol{\phi}^{-1} \in
+   \ell^1\subset\ell^2$ (la abolutamente sumable).</p>
+<p>La inversa $\boldsymbol{a}=\boldsymbol{\phi}^{-1}$ corresponde a la
+única solución <em>estacionaria</em> de
+$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$.  (Si
+$\boldsymbol{\phi}$ tuviera raíces de módulo 1 no existiría ni
+$\boldsymbol{\phi}^{-1}$ ni solución estacionaria).</p>
 </li>
 </ol>
 $$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=-\infty}^\infty
@@ -15179,9 +15184,9 @@ los dos anteriores.</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Sea $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, se denomina <em>proceso
-autorregresivo de media móvil $(p,q)$</em> a aquel proceso estocástico
-$\;\boldsymbol{X}\;$ que es la solución de la siguiente ecuación en
-diferencias
+autorregresivo de media móvil $(p,q)$</em> al proceso estocástico
+estacionario $\;\boldsymbol{X}\;$ que es la solución de la ecuación en
+diferencias:
 $$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$$
 donde el polinomio <em>autorregresivo</em> $\;\boldsymbol{\phi}\;$ tiene
 <u>grado $p$</u> con $\phi_0=1$ y con todas sus raíces fuera del círculo
