@@ -190,7 +190,14 @@ Hay una correspondencia uno-a-uno entre la función de autocovarianzas
 $\boldsymbol{\gamma}$ y la PACF $\boldsymbol{\pi}$. 
 
 Es decir, es posible reconstruir una de las secuencias a partir de la
-otra. Véase /Pourahmadi, M. (2001, capítulo 7)/
+otra (por ejemplo resolviendo la ecuaciones de Yule-Walker
+recursivamente con el algoritmo Levinson-Durbin; véase
+/Pourahmadi, M. (2001, Capítulo 7)/ o /Brockwell & Davis (1991,
+Capitulo 5)/)
+
+\(\pi_1=\phi_{11}=\rho_1\)
+
+\(\pi_{k+1}=\phi_{k+1,k+1}=\frac{\rho_{k+1}-\sum_{j=1}^k\phi_{kj}\rho_{k+1-j}}{1-\sum_{j=1}^k\phi_{kj}\rho_j}\); donde $\phi_{k+1,j}=\phi_{kj}-\phi_{k+1,k+1}\phi_{k,k+1-j}$, $j=1:k$
 
 Consecuentemente, la PACF $\boldsymbol{\pi}$ puede verse como una
 reparametrización de la función de autocovarianzas
@@ -245,9 +252,185 @@ modelos lineales concretos.
 
 * ACF, PACF y densidad espectral de algunos modelos lineales
    :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . skip)))
+   :END:
+
+** ACF de procesos lineales
+   :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
+Sea el proceso lineal
+$\boldsymbol{X}=\boldsymbol{\varphi}*\boldsymbol{U}$, donde
+$\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y
+$\;\boldsymbol{\varphi}\in\ell^1;\;$ es decir
+$$X_t=\sum_{j\in\mathbb{Z}}\varphi_j U_{t-j}.$$ Puesto que $E(U_t)=0$
+para todo $t\in\mathbb{Z}$, entonces
+$$E(X_t)=E\left(\sum_{j\in\mathbb{Z}}\varphi_j
+U_{t-j}\right)=\sum_{j\in\mathbb{Z}}\varphi_j E(U_{t-j})=0$$ Y como
+además, $E(U_j\cdot U_k)=0$ cuando $j\ne k$, su función de
+autocovarianzas es 
+\begin{eqnarray*}
+\gamma_{k,t}= E\big[X_t\cdot X_{t-k}\big]=&
+E\left[\Big(\sum_{j\in\mathbb{Z}}\varphi_j
+U_{t-j}\Big)\Big(\sum_{j\in\mathbb{Z}}\varphi_j U_{t-k-j}\Big)\right]=
+\sigma^2\sum_{j\in\mathbb{Z}}\varphi_{j+k}\cdot\varphi_{j}\\
+=&\sigma^2\sum_{j\in\mathbb{Z}}\varphi_{j+k}\cdot R(\varphi_{-j}) =
+\sigma^2\left(\boldsymbol{\varphi}(z)*\boldsymbol{\varphi}(z^{-1})\right)_k
+\end{eqnarray*}
+que solo depende de $k$ (el proceso es estacionario como ya sabíamos).
+
+** Proceso de Ruido Blanco
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+Sea $\boldsymbol{X}=\boldsymbol{1}*\boldsymbol{U}$,
+donde $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;;$ es decir $X_t=U_t$ para
+$t\in\mathbb{Z}$. Entonces
+
+- $\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{1}(z)*\boldsymbol{1}(z^{-1}) \;=\; \sigma^2\boldsymbol{1} \;=\; (\ldots,0,0,\sigma^2,0,0,\ldots) \;=\; \sigma^2 z^0$
+
+# - $\boldsymbol{\gamma} \;=\; \sum_{k\in\mathbb{Z}}\gamma_k z^k \;=\; \sigma^2 z^0 \;=\; \sigma^2\boldsymbol{1} \;=\; (\ldots,0,0,\sigma^2,0,0,\ldots)$
+
+- $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2}\boldsymbol{\gamma} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,1,0,0,\ldots) \;=\; 1 z^0$
+
+# - $\boldsymbol{\rho} \;=\; \sum_{k\in\mathbb{Z}}\frac{\gamma_k}{\gamma_0} z^k \;=\; 1 z^0 \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,1,0,0,\ldots)$
+
+- $\boldsymbol{\pi} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,1,0,0,\ldots) \;=\; 1 z^0$
+
+# \sum_{k\in\mathbb{Z}}\pi_k z^k \;=\; 1 z^0 \;=\; 
+
+- $f(\omega) \;=\; \frac{1}{2\pi}\sum_{h\geq0}\gamma_h \cos(h\omega) \;=\; \frac{\sigma^2}{2\pi} \cos(0\omega) \;=\; \frac{\sigma^2}{2\pi};\quad \omega\in[-\pi,\pi]$
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACFwhitenoise.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+wn <- um(ar = "(1 - 0B)")
+display(list(ar0p), lag.max = 20, byrow = TRUE)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/ACFwhitenoise.png]]
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file SimulWhitenoise.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(wn, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"), main="Ruido blanco")
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/SimulWhitenoise.png]]
+
+
+
+
+** Media móvil MA($q$)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+Sea
+$\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$, con
+$\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y donde $\boldsymbol{\theta}$
+es un polinomio de orden $q$ con $\theta_0=1$, es decir $$X_t=
+\sum_{j=1}^q\theta_j U_{t-j}+U_t.$$
+
+- $\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\theta}(z^{-1}) \;=\; \sigma^2 \sum\limits_{j,k=0}^q \theta_j\theta_k z^{j-k}$
+
+- $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$
+
+- $\boldsymbol{\pi}$ tiene una expresión más complicada, pero su magnitud decae paulatinamente 
+
+- $f(\omega) \;=\; \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})*\boldsymbol{\theta}(e^{i\omega}) \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^q \gamma_h \cos(h\omega);\quad \omega\in[-\pi,\pi]$
+
+** Media móvil MA($1$)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+Sea $\boldsymbol{X}=(1+\theta z)*\boldsymbol{U}$, con
+$\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es decir $X_t=U_t+\theta U_{t-1}$.
+
+- $\boldsymbol{\gamma} \;=\; \sigma^2 (1+\theta z)*(1+\theta z^{-1}) \;=\; \sigma^2 (\ldots,\ 0\ ,\ -\theta,\ (1+\theta^2),\ -\theta,\ 0,\ \ldots)$
+
+- $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{1+\theta^2}\boldsymbol{\gamma}$
+
+- $\boldsymbol{\pi} \;=\; \sum\limits_{k\in\mathbb{Z}}{ \frac{-\theta^k(1-\theta^2)}{1-\theta^{2(k+1)}} z^k}$ 
+
+- $f(\omega) \;=\; \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})*\boldsymbol{\theta}(e^{i\omega}) \;=\; \frac{\sigma^2}{2\pi}\left((1+\theta^2)-\theta\cos(\omega)\right);\quad \omega\in[-\pi,\pi]$
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACF-MA1p.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ma1p <- um(ma = "(1 + 0.9B)")
+display(list(ma1p), lag.max = 20, byrow = TRUE)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+$$\boldsymbol{\theta}(z)=1+0.9z\quad\Rightarrow\quad X_t=
+(1+0.9 \mathsf{B})U_t.$$
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/ACF-MA1p.png]]
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file Sim-MA1p.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ma1p, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"), main="MA(1)")
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/Sim-MA1p.png]]
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACF-MA1n.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ma1n <- um(ma = "(1 - 0.9B)")
+display(list(ma1n), lag.max = 20, byrow = TRUE)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+$$\boldsymbol{\theta}(z)=1-0.9z\quad\Rightarrow\quad X_t=
+(1-0.9 \mathsf{B})U_t.$$
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/ACF-MA1n.png]]
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file Sim-MA1n.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ma1n, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"), main="MA(1)")
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/Sim-MA1n.png]]
+
+
+
+** AR(1)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+# +attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-R
 ar0p <- um(ar = "(1 - 0B)")
 ar1p <- um(ar = "(1 - 0.9B)")
@@ -256,14 +439,11 @@ ma1p <- um(ma = "(1 - 0.9B)")
 ma1n <- um(ma = "(1 + 0.9B)")
 ar2c <- um(ar = "(1 - 1.52B + 0.8B^2)")
 #display(list(ar1p, ar1n, ma1p, ma1n, ar2c), lag.max = 20)
-display(list(ar1p), lag.max = 20)
+display(list(ar0p), lag.max = 20)
 #+END_SRC
 
-#+RESULTS:
-:RESULTS:
-#+attr_org: :width 1200 :height 800
-[[./.ob-jupyter/19423910a47f865994b81bfcff87a1efe941f82c.png]]
-:END:
+
+
 
 
 * La especificación del modelo se escoge según las características de los datos.
@@ -581,11 +761,6 @@ p <- p + labs(y = "Miles de millones de euros", x = "Años") + ggtitle("PIB UEM 
 p 
 #+END_SRC
 
-#+RESULTS:
-:RESULTS:
-#+attr_org: :width 1200 :height 800
-[[./.ob-jupyter/bb38d3b5fedcf743921e45e000873a00134cbd11.png]]
-:END:
 
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
@@ -596,12 +771,6 @@ ProduccionCemento_ts = as.ts( read.csv.zoo("datos/ProduccionCemento.csv",
                                            strip.white = TRUE))
 autoplot(ProduccionCemento_ts)
 #+END_SRC
-
-#+RESULTS:
-:RESULTS:
-#+attr_org: :width 1200 :height 800
-[[./.ob-jupyter/77f5dea1afae26038646e090068fcefbd9b8daf6.png]]
-:END:
 
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))

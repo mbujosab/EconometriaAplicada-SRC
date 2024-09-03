@@ -371,6 +371,14 @@ Comprobación:
 % $$(1-az)\sum_{j=-\infty}^{-1} -a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + (-az)\sum_{j=-\infty}^{-1} -a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + \sum_{j=-\infty}^{0} a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + \sum_{j=-\infty}^{-1} a^j z^j +a^0 z^0=\sum_{j=-\infty}^{-1} (a^j-a^j) z^j + 1 z^0=\boldsymbol{1}$$
 #+END_EXPORT
 
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Si definimos la función entre secuencias
+$R:\mathbb{R}^\mathbb{Z}\to\mathbb{R}^\mathbb{Z}$ tal que
+$R(a_j)=a_{-j}$, es decir, la función /reverso/
+$$R\big(\boldsymbol{a}(z)\big)=\boldsymbol{a}(z^{-1})$$ se puede
+demostrar que para toda secuencia con final $\boldsymbol{a}$
+$$\boldsymbol{a}^{\blacktriangleleft-}=R\left(\big(R(\boldsymbol{a})\big)^{-\triangleright}\right).$$
+
 *** Inversas de polinomios
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
@@ -457,7 +465,7 @@ $$\boldsymbol{a}*\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)=
 (\beta+\delta)\boldsymbol{1}=\boldsymbol{1}$$
 # \boldsymbol{a}*(\beta\boldsymbol{b})+\boldsymbol{a}*(\delta\boldsymbol{d})=
 
-Por tanto, para $\beta$ y $\delta$ tales que $\beta+\delta=1$, sabemos
+Así, para $\beta$ y $\delta$ tales que $\beta+\delta=1$, sabemos
 que $\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)$ es otra
 inversa de $\boldsymbol{a}$.
 

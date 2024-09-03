@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="org8d8d5b6">
+<div class="ABSTRACT" id="org7a3d1a0">
 <p>
 En esta lección veremos conceptos algebraicos usados en la
 modelización de series temporales.
@@ -14656,6 +14656,23 @@ $(\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{0},\ldots)=\sum_
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Si definimos la función entre secuencias
+$R:\mathbb{R}^\mathbb{Z}\to\mathbb{R}^\mathbb{Z}$ tal que
+$R(a_j)=a_{-j}$, es decir, la función <em>reverso</em>
+$$R\big(\boldsymbol{a}(z)\big)=\boldsymbol{a}(z^{-1})$$ se puede
+demostrar que para toda secuencia con final $\boldsymbol{a}$
+$$\boldsymbol{a}^{\blacktriangleleft-}=R\left(\big(R(\boldsymbol{a})\big)^{-\triangleright}\right).$$</p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="Inversas-de-polinomios">Inversas de polinomios<a class="anchor-link" href="#Inversas-de-polinomios">&#182;</a></h4>
 </div>
 </div>
@@ -14781,7 +14798,7 @@ $\delta$ dos escalares tales que $\beta+\delta=1$. Entonces</p>
 $$\boldsymbol{a}*\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)=
 \beta(\boldsymbol{a}*\boldsymbol{b})+\delta(\boldsymbol{a}*\boldsymbol{d})=
 \beta\boldsymbol{1}+\delta\boldsymbol{1}=
-(\beta+\delta)\boldsymbol{1}=\boldsymbol{1}$$<p>Por tanto, para $\beta$ y $\delta$ tales que $\beta+\delta=1$, sabemos
+(\beta+\delta)\boldsymbol{1}=\boldsymbol{1}$$<p>Así, para $\beta$ y $\delta$ tales que $\beta+\delta=1$, sabemos
 que $\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)$ es otra
 inversa de $\boldsymbol{a}$.</p>
 

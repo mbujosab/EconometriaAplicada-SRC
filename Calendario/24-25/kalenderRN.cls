@@ -264,9 +264,10 @@
 }
 
 \definecolor{dark}{HTML}{A57C00}
-\colorlet{medium}{dark!35}
-\colorlet{bright}{dark!20}
-\colorlet{period}{gray!30}
+\colorlet{medium}{dark!35}  % domingos
+\colorlet{bright}{dark!20}  % sábados
+
+\colorlet{period}{gray!30}  % no usado
 \definecolor{examen}{HTML}{CC0000}
 \colorlet{postex}{examen!20}
 \colorlet{ex}{examen!50}
@@ -274,7 +275,7 @@
 \definecolor{lecture}{HTML}{BF94E4}
 \colorlet{lecc}{gray!35}
 \definecolor{laboratorio}{HTML}{87A96B}
-\definecolor{clase}{HTML}{848482}
+\definecolor{clase}{HTML}{848482} % días con lección
 
 \newcommand\RN@@title{%
   \raisebox{-.3\height}{\parbox[b]{\wd\RN@tempbox}{%
