@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="org5a041ee">
+<div class="abstract" id="org074a565">
 <p>
 En esta lección veremos algunas herramientas estadísticas.
  y usaré la librería <code>tfarima</code> de
@@ -14307,9 +14307,9 @@ median entre ambas.
 $$X_t,\ \overbrace{X_{t-1},\ldots X_{t-(k-1)},}\ X_{t-k}$$</p>
 <p>Si denotamos con $\widehat{X_t}$ y $\widehat{X_{t-k}}$ los ajustes de
 las respectivas regresiones de $X_t$ y $X_{t-k}$ sobre $X_{t-1},\ldots
-X_{t-(k-1)};\;$ la <em>correlación parcial</em> entre $X_t$ y $X_{t+k}$ es la
+X_{t-(k-1)};\;$ la <em>correlación parcial</em> $\pi_k$ entre $X_t$ y $X_{t+k}$ es la
 correlación entre los residuos de sendas regresiones:
-$$Coor\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widehat{X_{t-k}})\Big)$$</p>
+$$\pi_k=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widehat{X_{t-k}})\Big)$$</p>
 
 </div>
 </div>
@@ -14326,17 +14326,14 @@ dependen de la distancia $k$, lo que permite definir la siguiente
 secuencia.</p>
 <p><strong>Función de autocorrelación parcial</strong> (PACF) de un proceso estacionario
 $\boldsymbol{X}$ es la siguiente secuencia
-$\boldsymbol{\pi}=(\pi_k\mid k\in\mathbb{Z}),\;$ que es
-simétrica pues
-$\pi_{-k}=\pi_k$:
-$$\begin{cases}
-\pi_0 &amp;=1\\\\
-\pi_1 &amp;=Corr(X_t,\ X_{t-1})=\rho_1=\frac{\gamma_1}{\gamma_0}\\\\
-\pi_k &amp;=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widehat{X_{t-k}})\Big)
-\end{cases},$$
-donde $\widehat{X_t}$ y $\widehat{X_{t-k}}$ son los ajustes de las
-respectivas regresiones de $X_t$ y $X_{t-k}$ sobre 
-$X_{t-1},\ldots X_{t-(k-1)}$.</p>
+$\boldsymbol{\pi}=(\pi_k\mid k\in\mathbb{Z}),\;$ que es simétrica pues
+$\pi_{-k}=\pi_k$: $$\begin{cases} \pi_0 &amp;={\color{blue}{1}}\\\\ \pi_1 &amp;=Corr(X_t,\
+X_{t-1})=\rho_1=\frac{\gamma_1}{\gamma_0}\\\\ \pi_k
+&amp;=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widehat{X_{t-k}})\Big)
+\end{cases},$$ donde $\widehat{X_t}$ y $\widehat{X_{t-k}}$ son los
+ajustes de las respectivas regresiones de $X_t$ y $X_{t-k}$ sobre
+$X_{t-1},\ldots X_{t-(k-1)}.\;$ i.e., las proyecciones ortogonales
+sobre $\bar{sp}(1,X_{t-1}:X_{t-(k-1)})$.</p>
 
 </div>
 </div>
@@ -14371,8 +14368,6 @@ otra (por ejemplo resolviendo la ecuaciones de Yule-Walker
 recursivamente con el algoritmo Levinson-Durbin; véase
 <em>Pourahmadi, M. (2001, Capítulo 7)</em> o <em>Brockwell &amp; Davis (1991,
 Capitulo 5)</em>)</p>
-<p>$\pi_1=\phi_{11}=\rho_1$</p>
-<p>$\pi_{k+1}=\phi_{k+1,k+1}=\frac{\rho_{k+1}-\sum_{j=1}^k\phi_{kj}\rho_{k+1-j}}{1-\sum_{j=1}^k\phi_{kj}\rho_j}$; donde $\phi_{k+1,j}=\phi_{kj}-\phi_{k+1,k+1}\phi_{k,k+1-j}$, $j=1:k$</p>
 <p>Consecuentemente, la PACF $\boldsymbol{\pi}$ puede verse como una
 reparametrización de la función de autocovarianzas
 $\boldsymbol{\gamma}$.</p>
@@ -14483,7 +14478,7 @@ modelos lineales concretos.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="ACF-de-procesos-lineales">ACF de procesos lineales<a class="anchor-link" href="#ACF-de-procesos-lineales">&#182;</a></h3>
+<h3 id="Procesos-lineales">Procesos lineales<a class="anchor-link" href="#Procesos-lineales">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14495,28 +14490,69 @@ modelos lineales concretos.</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Sea el proceso lineal
-$\boldsymbol{X}=\boldsymbol{\varphi}*\boldsymbol{U}$, donde
+$\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}$, donde
 $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y
-$\;\boldsymbol{\varphi}\in\ell^1;\;$ es decir
-$$X_t=\sum_{j\in\mathbb{Z}}\varphi_j U_{t-j}.$$ Puesto que $E(U_t)=0$
+$\;\boldsymbol{\psi}\in\ell^1;\;$ es decir
+$$X_t=\sum_{j\in\mathbb{Z}}\psi_j U_{t-j}.$$ Puesto que $E(U_t)=0$
 para todo $t\in\mathbb{Z}$, entonces
-$$E(X_t)=E\left(\sum_{j\in\mathbb{Z}}\varphi_j
-U_{t-j}\right)=\sum_{j\in\mathbb{Z}}\varphi_j E(U_{t-j})=0$$ Y como
+$$E(X_t)=E\left(\sum_{j\in\mathbb{Z}}\psi_j
+U_{t-j}\right)=\sum_{j\in\mathbb{Z}}\psi_j E(U_{t-j})=0$$ Y como
 además, $E(U_j\cdot U_k)=0$ cuando $j\ne k$, su función de
 autocovarianzas es</p>
 \begin{eqnarray*}
 \gamma_{k,t}= E\big[X_t\cdot X_{t-k}\big]=&amp;
-E\left[\Big(\sum_{j\in\mathbb{Z}}\varphi_j
-U_{t-j}\Big)\Big(\sum_{j\in\mathbb{Z}}\varphi_j U_{t-k-j}\Big)\right]=
-\sigma^2\sum_{j\in\mathbb{Z}}\varphi_{j+k}\cdot\varphi_{j}\\
-=&amp;\sigma^2\sum_{j\in\mathbb{Z}}\varphi_{j+k}\cdot R(\varphi_{-j}) =
-\sigma^2\left(\boldsymbol{\varphi}(z)*\boldsymbol{\varphi}(z^{-1})\right)_k
-\end{eqnarray*}<p>que solo depende de $k$ (el proceso es estacionario como ya sabíamos).</p>
+E\left[\Big(\sum_{j\in\mathbb{Z}}\psi_j
+U_{t-j}\Big)\Big(\sum_{j\in\mathbb{Z}}\psi_j U_{t-k-j}\Big)\right]=
+\sigma^2\sum_{j\in\mathbb{Z}}\psi_{j+k}\cdot\psi_{j}\\
+=&amp;\sigma^2\sum_{j\in\mathbb{Z}}\psi_{j+k}\cdot R(\psi_{-j}) =
+\sigma^2\left(\boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})\right)_k
+\end{eqnarray*}<p>que solo depende de $k$ (el proceso es estacionario como ya sabíamos). Por tanto&#x2026;</p>
 
 </div>
 </div>
 </div>
-</div></section></section><section><section>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Si $\boldsymbol{X}$ es un proceso lineal
+$\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}$, con
+$\;\boldsymbol{U}\sim WN(0,\sigma^2),\;$ donde
+$\boldsymbol{\psi}\in\ell^1$ es una serie formal (i.e., cogrado $0$) y
+donde $\psi_0=1$, es decir, si  $$X_t= \sum_{j=1}^\infty\psi_j
+U_{t-j}+U_t;\qquad t\in\mathbb{Z}.$$</p>
+
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Entonces</p>
+<ul>
+<li><p>$\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})$</p>
+<p>$\gamma_k = \sum_{j\in\mathbb{Z}} \psi_{k-j}\psi_j;\quad$ así que $\;\gamma_k\to0\;$ cuando $\;k\to\infty$.</p>
+</li>
+<li><p>ACF: $\;\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$</p>
+</li>
+<li><p>Densidad espectral: $\;f(\omega) \;=\; \frac{1}{2\pi}\sum_{h\geq0}\gamma_h \cos(h\omega);\quad \omega\in[-\pi,\pi]$</p>
+</li>
+<li><p>PACF: $\;\boldsymbol{\pi}\in\ell^2,\quad$ i.e., $\;\pi_k\to0\;$ cuando $\;k\to\infty$</p>
+<p>(Cuando $\boldsymbol{\pi}\in\ell^2$ se dice que el proceso es <em>no-determinista</em>)</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14538,13 +14574,13 @@ U_{t-j}\Big)\Big(\sum_{j\in\mathbb{Z}}\varphi_j U_{t-k-j}\Big)\right]=
 donde $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;;$ es decir $X_t=U_t$ para
 $t\in\mathbb{Z}$. Entonces</p>
 <ul>
-<li><p>$\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{1}(z)*\boldsymbol{1}(z^{-1}) \;=\; \sigma^2\boldsymbol{1} \;=\; (\ldots,0,0,\sigma^2,0,0,\ldots) \;=\; \sigma^2 z^0$</p>
+<li><p>$\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{1}(z)*\boldsymbol{1}(z^{-1}) \;=\; \sigma^2\boldsymbol{1} \;=\; (\ldots,0,0,{\color{blue}{\sigma^2}},0,0,\ldots) \;=\; \sigma^2 z^0$</p>
 </li>
-<li><p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2}\boldsymbol{\gamma} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,1,0,0,\ldots) \;=\; 1 z^0$</p>
-</li>
-<li><p>$\boldsymbol{\pi} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,1,0,0,\ldots) \;=\; 1 z^0$</p>
+<li><p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2}\boldsymbol{\gamma} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,{\color{blue}{1}},0,0,\ldots) \;=\; 1 z^0$</p>
 </li>
 <li><p>$f(\omega) \;=\; \frac{1}{2\pi}\sum_{h\geq0}\gamma_h \cos(h\omega) \;=\; \frac{\sigma^2}{2\pi} \cos(0\omega) \;=\; \frac{\sigma^2}{2\pi};\quad \omega\in[-\pi,\pi]$</p>
+</li>
+<li><p>$\boldsymbol{\pi} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,{\color{blue}{1}},0,0,\ldots) \;=\; 1 z^0$</p>
 </li>
 </ul>
 
@@ -14582,7 +14618,7 @@ $t\in\mathbb{Z}$. Entonces</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Media-m%C3%B3vil-MA($q$)">Media m&#243;vil MA($q$)<a class="anchor-link" href="#Media-m%C3%B3vil-MA($q$)">&#182;</a></h3>
+<h3 id="Proceso-de-media-m%C3%B3vil-MA($q$)">Proceso de media m&#243;vil MA($q$)<a class="anchor-link" href="#Proceso-de-media-m%C3%B3vil-MA($q$)">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14593,21 +14629,17 @@ $t\in\mathbb{Z}$. Entonces</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Sea
-$\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$, con
+<p>Sea $\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$, con
 $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y donde $\boldsymbol{\theta}$
-es un polinomio de orden $q$ con $\theta_0=1$, es decir $$X_t=
+es un polinomio de orden $q&gt;0$, con $\theta_0=1$ y con todas sus raíces
+fuera del círculo unidad
+$(\boldsymbol{\theta}^{-\triangleright}\in\ell^1)$, es decir $$X_t=
 \sum_{j=1}^q\theta_j U_{t-j}+U_t.$$</p>
-<ul>
-<li><p>$\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\theta}(z^{-1}) \;=\; \sigma^2 \sum\limits_{j,k=0}^q \theta_j\theta_k z^{j-k}$</p>
-</li>
-<li><p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$</p>
-</li>
-<li><p>$\boldsymbol{\pi}$ tiene una expresión más complicada, pero su magnitud decae paulatinamente</p>
-</li>
-<li><p>$f(\omega) \;=\; \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})*\boldsymbol{\theta}(e^{i\omega}) \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^q \gamma_h \cos(h\omega);\quad \omega\in[-\pi,\pi]$</p>
-</li>
-</ul>
+<p>Entonces $E(X_t)=0$ y</p>
+<p>$\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\theta}(z^{-1}) \;=\; \sigma^2 \sum\limits_{j,k=0}^q \theta_j\theta_k z^{j-k}\;$ (grado $q$ y cogrado $-q$)</p>
+<p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$</p>
+<p>$f(\omega) \;=\; \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})\cdot\boldsymbol{\theta}(e^{i\omega}) \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^q \gamma_h \cos(h\omega);\quad \omega\in[-\pi,\pi]\quad$ ($q$ cosenos $+1$)</p>
+<p>$\boldsymbol{\pi}\;$ tiene grado $\infty$ y cogrado $-\infty\;$ y su magnitud decae paulatinamente cuando $\;k\to\infty$</p>
 
 </div>
 </div>
@@ -14619,7 +14651,7 @@ es un polinomio de orden $q$ con $\theta_0=1$, es decir $$X_t=
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Media-m%C3%B3vil-MA($1$)">Media m&#243;vil MA($1$)<a class="anchor-link" href="#Media-m%C3%B3vil-MA($1$)">&#182;</a></h3>
+<h3 id="Proceso-de-media-m%C3%B3vil-MA($1$)">Proceso de media m&#243;vil MA($1$)<a class="anchor-link" href="#Proceso-de-media-m%C3%B3vil-MA($1$)">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14630,31 +14662,53 @@ es un polinomio de orden $q$ con $\theta_0=1$, es decir $$X_t=
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Sea $\boldsymbol{X}=(1+\theta z)*\boldsymbol{U}$, con
-$\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es decir $X_t=U_t+\theta U_{t-1}$.</p>
+<p>Sea $\boldsymbol{X}=(1-\theta z)*\boldsymbol{U}$ con $|\theta|&lt;1$ y
+con $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es decir $X_t=U_t-\theta
+U_{t-1}$.</p>
 <ul>
-<li><p>$\boldsymbol{\gamma} \;=\; \sigma^2 (1+\theta z)*(1+\theta z^{-1}) \;=\; \sigma^2 (\ldots,\ 0\ ,\ -\theta,\ (1+\theta^2),\ -\theta,\ 0,\ \ldots)$</p>
+<li><p>$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\theta z)*(1-\theta z^{-1})
+  \;=\; \sigma^2 (\ldots,\ 0\ ,\ -\theta,\ {\color{blue}{(1+\theta^2)}},\ -\theta,\
+  0,\ \ldots)$</p>
 </li>
-<li><p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{1+\theta^2}\boldsymbol{\gamma}$</p>
+<li><p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\;
+  \frac{1}{\sigma^2(1+\theta^2)}\boldsymbol{\gamma}$</p>
 </li>
-<li><p>$\boldsymbol{\pi} \;=\; \sum\limits_{k\in\mathbb{Z}}{ \frac{-\theta^k(1-\theta^2)}{1-\theta^{2(k+1)}} z^k}$</p>
+<li><p>$f(\omega) \;=\;
+  \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})\cdot\boldsymbol{\theta}(e^{i\omega})
+  \;=\;
+  \frac{\sigma^2}{2\pi}\Big((1+\theta^2)\;-\;2\theta\cos(\omega)\Big);\quad
+  \omega\in[-\pi,\pi]$</p>
 </li>
-<li><p>$f(\omega) \;=\; \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})*\boldsymbol{\theta}(e^{i\omega}) \;=\; \frac{\sigma^2}{2\pi}\left((1+\theta^2)-\theta\cos(\omega)\right);\quad \omega\in[-\pi,\pi]$</p>
+<li><p>$\boldsymbol{\pi} \;=\; \sum\limits_{k\in\mathbb{Z}}{
+  \frac{-\theta^k(1-\theta^2)}{1-\theta^{2(k+1)}} z^k}$</p>
 </li>
 </ul>
 
 </div>
 </div>
 </div>
-</div></section><section>
+</div><aside class="notes">
+
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-$$\boldsymbol{\theta}(z)=1+0.9z\quad\Rightarrow\quad X_t=
-(1+0.9 \mathsf{B})U_t.$$<p><img src="./img/lecc06/ACF-MA1p.png" alt="img"></p>
+<h4 id="MA(1)-con-ra%C3%ADz-positiva">MA(1) con ra&#237;z positiva<a class="anchor-link" href="#MA(1)-con-ra%C3%ADz-positiva">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+</aside></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\boldsymbol{\theta}(z)=1-0.9z\quad\Rightarrow\quad X_t=
+(1-0.9 \mathsf{B})U_t.$$<p><img src="./img/lecc06/ACF-MA1p.png" alt="img"></p>
 
 </div>
 </div>
@@ -14671,15 +14725,28 @@ $$\boldsymbol{\theta}(z)=1+0.9z\quad\Rightarrow\quad X_t=
 </div>
 </div>
 </div>
-</div></section><section>
+</div><aside class="notes">
+
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-$$\boldsymbol{\theta}(z)=1-0.9z\quad\Rightarrow\quad X_t=
-(1-0.9 \mathsf{B})U_t.$$<p><img src="./img/lecc06/ACF-MA1n.png" alt="img"></p>
+<h4 id="MA(1)-con-ra%C3%ADz-negativa">MA(1) con ra&#237;z negativa<a class="anchor-link" href="#MA(1)-con-ra%C3%ADz-negativa">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+</aside></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\boldsymbol{\theta}(z)=1+0.9z\quad\Rightarrow\quad X_t=
+(1+0.9 \mathsf{B})U_t.$$<p><img src="./img/lecc06/ACF-MA1n.png" alt="img"></p>
 
 </div>
 </div>
@@ -14703,33 +14770,192 @@ $$\boldsymbol{\theta}(z)=1-0.9z\quad\Rightarrow\quad X_t=
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="AR(1)">AR(1)<a class="anchor-link" href="#AR(1)">&#182;</a></h3>
+<h3 id="Proceso-de-media-m%C3%B3vil-MA($2$)">Proceso de media m&#243;vil MA($2$)<a class="anchor-link" href="#Proceso-de-media-m%C3%B3vil-MA($2$)">&#182;</a></h3>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="n">ar0p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">um</span><span class="p">(</span><span class="n">ar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"(1 - 0B)"</span><span class="p">)</span>
-<span class="n">ar1p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">um</span><span class="p">(</span><span class="n">ar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"(1 - 0.9B)"</span><span class="p">)</span>
-<span class="n">ar1n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">um</span><span class="p">(</span><span class="n">ar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"(1 + 0.9B)"</span><span class="p">)</span>
-<span class="n">ma1p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">um</span><span class="p">(</span><span class="n">ma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"(1 - 0.9B)"</span><span class="p">)</span>
-<span class="n">ma1n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">um</span><span class="p">(</span><span class="n">ma</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"(1 + 0.9B)"</span><span class="p">)</span>
-<span class="n">ar2c</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">um</span><span class="p">(</span><span class="n">ar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"(1 - 1.52B + 0.8B^2)"</span><span class="p">)</span>
-<span class="c1">#display(list(ar1p, ar1n, ma1p, ma1n, ar2c), lag.max = 20)</span>
-<span class="nf">display</span><span class="p">(</span><span class="nf">list</span><span class="p">(</span><span class="n">ar0p</span><span class="p">),</span><span class="w"> </span><span class="n">lag.max</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">20</span><span class="p">)</span>
-</pre></div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Sea $\boldsymbol{X}=(1-\theta_1 z-\theta_2 z^2)*\boldsymbol{U}$, con
+$\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y con
+$$\theta_1+\theta_2&lt;1;\qquad \theta_2-\theta_1&lt;1;\qquad |\theta_2|&lt;1;\quad \text{(i.e., invertible)}$$
+es decir $X_t=U_t-\theta_1 U_{t-1}-\theta_2 U_{t-2}$.</p>
+<ul>
+<li><p>$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\theta_1 z-\theta_2 z^2)*(1-\theta_1 z^{-1}-\theta_2 z^{-2})$</p>
+<p>$\gamma_0={\color{blue}{\sigma^2(1+\theta_1^2+\theta_2^2)}};\qquad$
+$\gamma_1=\sigma^2\big(-\theta_1(1-\theta_2)\big);\qquad$
+$\gamma_2=\sigma^2(-\theta_2)$</p>
+<p>$\gamma_3=\gamma_4=\cdots=0\qquad$ (y es simétrica)</p>
+</li>
+<li><p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2(1+\theta_1^2+\theta_2^2)}\boldsymbol{\gamma}$</p>
+</li>
+<li><p>$f(\omega) \;=\;  \frac{\sigma^2}{2\pi}\Big((1+\theta_1^2+\theta_2^2)\;-\;2\theta_1(1+\theta_2)\cos(\omega)\;-\;2\theta_2\cos(2\omega)\Big)$</p>
+</li>
+<li><p>$\boldsymbol{\pi}$ tiene una expresión complicada, pero su magnitud
+decae paulatinamente</p>
+</li>
+</ul>
 
-     </div>
 </div>
 </div>
 </div>
+</div><aside class="notes">
 
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="MA(2)-con-dos-ra%C3%ADces-reales,-una-positiva-y-la-otra-negativa">MA(2) con dos ra&#237;ces reales, una positiva y la otra negativa<a class="anchor-link" href="#MA(2)-con-dos-ra%C3%ADces-reales,-una-positiva-y-la-otra-negativa">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+</aside></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\boldsymbol{\theta}(z)=1+0.1z-0.8z^2\quad\Rightarrow\quad X_t=
+(1+0.1\mathsf{B}-0.8\mathsf{B}^2)U_t.$$<p><img src="./img/lecc06/ACF-MA2pn.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc06/Sim-MA2pn.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div><aside class="notes">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="MA(2)-con-un-par-de-ra%C3%ADces-complejas">MA(2) con un par de ra&#237;ces complejas<a class="anchor-link" href="#MA(2)-con-un-par-de-ra%C3%ADces-complejas">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+</aside></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\boldsymbol{\theta}(z)=1-0.1z+0.8z^2\quad\Rightarrow\quad X_t=
+(1-0.1\mathsf{B}+0.8\mathsf{B}^2)U_t.$$<p><img src="./img/lecc06/ACF-MA2np.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>c<img src="./img/lecc06/Sim-MA2np.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div><aside class="notes">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="MA(2)-con-dos-ra%C3%ADces-reales-y-negativas">MA(2) con dos ra&#237;ces reales y negativas<a class="anchor-link" href="#MA(2)-con-dos-ra%C3%ADces-reales-y-negativas">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+</aside></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\boldsymbol{\theta}(z)=1+1.9z+0.9z^2\quad\Rightarrow\quad X_t=
+(1+1.8\mathsf{B}+0.9\mathsf{B}^2)U_t.$$<p><img src="./img/lecc06/ACF-MA2rojo.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc06/Sim-MA2rojo.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div><aside class="notes">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="MA(2)-con-dos-ra%C3%ADces-reales-y-positivas">MA(2) con dos ra&#237;ces reales y positivas<a class="anchor-link" href="#MA(2)-con-dos-ra%C3%ADces-reales-y-positivas">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+</aside></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\boldsymbol{\theta}(z)=1-1.9z+0.9z^2\quad\Rightarrow\quad X_t=
+(1-1.8\mathsf{B}+0.9\mathsf{B}^2)U_t.$$<p><img src="./img/lecc06/ACF-MA2violeta.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc06/Sim-MA2violeta.png" alt="img"></p>
+
+</div>
+</div>
+</div>
 </div></section></section><section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
@@ -14737,7 +14963,7 @@ $$\boldsymbol{\theta}(z)=1-0.9z\quad\Rightarrow\quad X_t=
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="La-especificaci%C3%B3n-del-modelo-se-escoge-seg%C3%BAn-las-caracter%C3%ADsticas-de-los-datos.">La especificaci&#243;n del modelo se escoge seg&#250;n las caracter&#237;sticas de los datos.<a class="anchor-link" href="#La-especificaci%C3%B3n-del-modelo-se-escoge-seg%C3%BAn-las-caracter%C3%ADsticas-de-los-datos.">&#182;</a></h2>
+<h3 id="Proceso-autorregresivo-AR($p$)">Proceso autorregresivo AR($p$)<a class="anchor-link" href="#Proceso-autorregresivo-AR($p$)">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14748,75 +14974,12 @@ $$\boldsymbol{\theta}(z)=1-0.9z\quad\Rightarrow\quad X_t=
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>¿Es la serie</p>
-<ul>
-<li>"<strong><em>estacionaria en media</em></strong>"<ul>
-<li>(y si lo es, ¿cuál es su media?)</li>
-<li>(y si no lo es, ¿cómo cambia o evoluciona su media?)</li>
-</ul>
-</li>
-<li>"<strong><em>estacionaria en varianza</em></strong>" (<em>homocedástica</em>)<ul>
-<li>(y si lo es, ¿cuál es su varianza?)</li>
-<li>(y si es <em>heterocedástica</em>, ¿cómo cambia o evoluciona su varianza?)?</li>
-</ul>
-</li>
-</ul>
-<p>¿Están sus valores correlados con su historia pasada (autocorrelados)?</p>
-<p>¿Están correlados con los valores presentes o pasados de otras series?</p>
-<p>Veamos algunas herramientas estadísticas para poder desvelar estas
-características.</p>
-
-</div>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="An%C3%A1lisis-gr%C3%A1fico">An&#225;lisis gr&#225;fico<a class="anchor-link" href="#An%C3%A1lisis-gr%C3%A1fico">&#182;</a></h3>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Gr%C3%A1fico-de-la-serie-temporal">Gr&#225;fico de la serie temporal<a class="anchor-link" href="#Gr%C3%A1fico-de-la-serie-temporal">&#182;</a></h4>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Representa sus valores en el eje vertical ($y$) frente a una escala
-temporal en el horizontal ($x$). Es útil para detectar visualmente:</p>
-<ul>
-<li>tendencias y/o estacionalidad</li>
-<li>cambios de variabilidad</li>
-<li><p>valores atípicos (<em>outliers</em>)</p>
-<ul>
-<li>el 95% aprox. de una muestra de valores generados por una
-distribución normal debería estar comprendido entre
-$\mu\pm2\sigma$</li>
-<li><p>la probabilidad de que una variable normal genere un valor fuera
-de las bandas de $\mu\pm3\sigma$ es $0.0023$</p>
-<p>(<a href="./img/lecc05/IBEX35.png">véase gráfico IBEX 35</a>)</p>
-</li>
-</ul>
-</li>
-</ul>
-<p>En es importante escalar y rotular adecuadamente los ejes y asegurar
-la comparabilidad entre series y gráficos distintos (si los hubiere).</p>
+<p>Sea $\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$, con
+$\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y donde $\boldsymbol{\phi}$ es
+un polinomio de grado $p&gt;0$. Entonces
+$$(\boldsymbol{\phi}*\boldsymbol{X})_t=\boldsymbol{\phi}(\mathsf{B})X_t=
+(1+\phi_1\mathsf{B}+\phi_2\mathsf{B}^2+\cdots+\phi_p\mathsf{B}^p)X_t=
+U_t$$ Y por tanto $$X_t= U_t-\sum_{j=1}^p\phi_j X_{t-j}.$$</p>
 
 </div>
 </div>
@@ -14828,27 +14991,49 @@ la comparabilidad entre series y gráficos distintos (si los hubiere).</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Gr%C3%A1fico-rango-media">Gr&#225;fico rango-media<a class="anchor-link" href="#Gr%C3%A1fico-rango-media">&#182;</a></h4>
+<p>Si todas las raíces del polinomio $\boldsymbol{\phi}$ (de grado $p$)
+están fuera del círculo unidad, es decir, si <em>el polinomio AR es
+``invertible''</em>
+$\;(\boldsymbol{\phi}^{-\triangleright}=\boldsymbol{\phi}^{-1}\in\ell^1)\;$
+entonces $\boldsymbol{X}$ tiene una representación como proceso lineal
+causal MA($\infty$): $$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}
+\quad\Rightarrow\quad
+\boldsymbol{X}=\frac{1}{\boldsymbol{\phi}}*\boldsymbol{U}
+\quad\Rightarrow\quad X_t = U_t + \sum_{j=1}^\infty\psi_j U_{t-j};$$
+donde $\;\boldsymbol{\phi}^{-1}=\boldsymbol{\psi}=({\color{blue}1},\
+\psi_1,\ \psi_2,\ \psi_3,\ldots)\;$ tiene grado $\infty$.</p>
+
 </div>
 </div>
 </div>
-</div>
+</div><div class="fragment">
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Cambios de variabilidad de una serie pueden evidenciarse en su gráfico
-temporal.</p>
-<p>Pero también suelen verse bien en un gráfico rango-media, donde se
-representa:</p>
-<ul>
-<li><strong>en el eje $x$:</strong> un indicador del nivel de la serie calculado para
-distintas submuestras no solapadas (normalmente la media).</li>
-<li><strong>en el eje $y$:</strong> un indicador de la dispersión de la serie
-calculado para las mismas submuestras (normalmente el rango.)</li>
-</ul>
+<p>Por tanto $E(X_t)=0$ para todo $t\in\mathbb{Z}$ y</p>
+<p>$\boldsymbol{\gamma} \;=\; \sigma^2 \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^{-1})} \;=\; \sigma^2 \sum\limits_{j,k=0}^\infty \psi_j\psi_k z^{j-k}\quad$ (grado $\infty$ y cogrado $-\infty$)</p>
+<p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$</p>
+<p>$f(\omega) =
+  \frac{\sigma^2}{2\pi}\frac{1}{\boldsymbol{\phi}(e^{-i\omega})\cdot\boldsymbol{\phi}(e^{i\omega})}
+  \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^\infty \gamma_h
+  \cos(h\omega);\quad$ donde $\omega\in[-\pi,\pi]$.</p>
+<p>(suma infinita de cosenos)</p>
+
+</div>
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Pero, sin embargo, la PACF, $\;\boldsymbol{\pi},\;$ es una secuencia
+con grado $p$ y cogrado $-p$&#x2026;</p>
 
 </div>
 </div>
@@ -14861,64 +15046,41 @@ calculado para las mismas submuestras (normalmente el rango.)</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Veamos el gráfico de la serie de pasajeros de líneas aéreas junto a su
-gráfico de rango media:</p>
-
+<h4 id="Demostraci%C3%B3n-de-que-la-PACF-tiene-cogrado-$-p$-y-grado-$p$">Demostraci&#243;n de que la PACF tiene cogrado $-p$ y grado $p$<a class="anchor-link" href="#Demostraci%C3%B3n-de-que-la-PACF-tiene-cogrado-$-p$-y-grado-$p$">&#182;</a></h4>
 </div>
 </div>
 </div>
 </div>
-</aside>
+</aside></div></section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="./img/lecc06/rango-mediaAirPass.png" alt="img"></p>
-
-</div>
-</div>
-</div>
-</div><aside class="notes">
-
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>El gráfico de rango media a veces se acompaña de una regresión de la
-dispersión sobre los niveles para medir la relación nivel-dispersión.</p>
-
-</div>
-</div>
-</div>
-</div>
-</aside></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Determinaci%C3%B3n-del-orden-de-integraci%C3%B3n">Determinaci&#243;n del orden de integraci&#243;n<a class="anchor-link" href="#Determinaci%C3%B3n-del-orden-de-integraci%C3%B3n">&#182;</a></h3>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Decidir adecuadamente el orden de integración es crucial en el
-análisis de series temporales.</p>
-<p>Las herramientas utilizadas para tomar la decisión son</p>
 <ul>
-<li>el análisis gráfico</li>
-<li>los contrastes formales</li>
+<li>Sea $\boldsymbol{X}$ un proceso causal AR($p$): $\quad
+  X_t\;=\;\sum\limits_{j=1}^p\phi_j X_{t-j}+U_t$</li>
+<li>La proyección de $X_{k+1}$ sobre el espacio $\bar{sp}(X_{2}:X_k)$
+generado por $X_2,\ldots X_k$ (con $k&gt;p$) es:
+$$\widehat{X_{k+1}}=P_{\bar{sp}(X_{2}:X_k)}(X_{k+1})=\sum_{j=1}^p\phi_j X_{k+1-j}$$</li>
+<li>De su representación MA($\infty$): $\;Y\in\bar{sp}(X_{2}:X_k)
+  \;\Rightarrow\; Y\in\bar{sp}(U_j\mid{j\leq k})$, pues
+$$X_t\;=\;\sum\limits_{j=0}^{\infty} \psi_j U_{t-j}
+  \quad\Rightarrow\quad
+  \bar{sp}(X_{2}:X_k)\subset\bar{sp}(U_j\mid{j\leq k}) \; \perp \; U_{k+1}$$</li>
+<li>Si $Y\in\bar{sp}(X_{2}:X_k)$ entonces $Cov\Big((X_{k+1}-\widehat{X_{k+1}}), Y\Big)=Cov(U_{k+1}, Y)=0$</li>
+<li>Denotemos con $\widetilde{X_{1}}$ a la proyección
+$P_{\bar{sp}(X_{2}:X_k)}(X_{1})$ de $X_1$ sobre
+$\bar{sp}(X_{2}:X_k)$</li>
+<li><p>Ahora es fácil ver que $\pi_k=0$ para $k&gt;p$, pues</p>
+<p>\begin{eqnarray*}
+ \pi_k 
+ = &amp; Corr\Big((X_{k+1}-\widehat{X_{k+1}}),(X_{1}-\widetilde{X_{1}})\Big)\\
+ = &amp; Corr\Big(U_{k+1},(X_{1}-\widetilde{X_{1}})\Big) \; = \; 0
+\end{eqnarray*}</p>
+<p>ya que $U_{k+1}\perp(X_{1}-\widetilde{X_{1}}) \in \bar{sp}(U_j\mid{j\leq k})$.</p>
+</li>
 </ul>
 
 </div>
@@ -14931,151 +15093,29 @@ análisis de series temporales.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="An%C3%A1lisis-gr%C3%A1fico">An&#225;lisis gr&#225;fico<a class="anchor-link" href="#An%C3%A1lisis-gr%C3%A1fico">&#182;</a></h4>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="./img/lecc06/diferenciasPoblacion.png" alt="img"></p>
-
-</div>
-</div>
-</div>
-</div><aside class="notes">
-
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>La serie de población $\boldsymbol{y}$ tiene una clara tendencia
-creciente (primer gráfico), que desaparece al tomar una diferencia
-ordinaria, $$\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y}$$
-(segundo gráfico). Bastar con tomar una primera diferencia de la serie
-de población para obtener una nueva serie que se asemeja a la
-realización de un proceso estacionario.</p>
-<p>No obstante, ¿qué pasa si tomamos una segunda diferencia ordinaria?
-$$\nabla\nabla\boldsymbol{y}=\nabla^2\boldsymbol{y}=(1-\mathsf{B})^2*\boldsymbol{y}$$
-(segundo gráfico). Pues que la serie obtenida también es estacionaria,
-pero ojo, es un grave error tomar más diferencias de las necesarias al
-modelizar los datos. Se debe tomar el mínimo número de
-transformaciones que arrojen una serie ``estacionaria'' (recuerde que
-decir que una serie temporal es <em>estacionaria</em> es un abuso del
-lenguaje).</p>
-
-</div>
-</div>
-</div>
-</div>
-</aside></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="./img/lecc06/diferenciasPasajeros.png" alt="img"></p>
-
-</div>
-</div>
-</div>
-</div><aside class="notes">
-
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Como ya vimos, la serie pasajeros en logaritmos tiene tendencia y
-estacionalidad muy evidentes. No basta con tomar solo una diferencia
-ordinaria $$\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y};$$ pues
-el resultado muestra una pauta estacional. Ni tampoco basta con tomar
-solo una diferencia estacional
-$$\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B^{12}})*\boldsymbol{y};$$ pues
-resulta una serie que ``deambula'', i.e., que no es <em>``estacionaria''</em>
-en media.</p>
-<p>Tomar una diferencia ordinaria y otra estacional
-$$\nabla\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B})*(1-\mathsf{B^{12}})*\boldsymbol{y}$$
-arroja una serie que sí parece ser <em>``estacionaria''</em>.</p>
-
-</div>
-</div>
-</div>
-</div>
-</aside></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="./img/lecc06/diferenciasTemperaturasRetiro.png" alt="img"></p>
-
-</div>
-</div>
-</div>
-</div><aside class="notes">
-
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>En el caso de la serie de temperaturas en el Parque del Retiro, parece
-que es suficiente con tomar solo una diferencia estacional.</p>
-
-</div>
-</div>
-</div>
-</div>
-</aside></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Contrastes-formales-sobre-el-orden-de-integraci%C3%B3n">Contrastes formales sobre el orden de integraci&#243;n<a class="anchor-link" href="#Contrastes-formales-sobre-el-orden-de-integraci%C3%B3n">&#182;</a></h4>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h5 id="Test-de-Dickey-Fuller-(DF)">Test de Dickey-Fuller (DF)<a class="anchor-link" href="#Test-de-Dickey-Fuller-(DF)">&#182;</a></h5>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Nota.</strong> Se puede demostrar que</p>
 <ul>
-<li><strong>$H_0$:</strong> la serie es $I(1)$</li>
-<li><strong>$H_1$:</strong> la serie es $I(0)$.</li>
+<li>si un proceso tiene una ACF $\boldsymbol{\rho}$ con cogrado $-q$ y grado $q$, es un proceso MA($q$)</li>
+<li>si un proceso tiene una PACF $\boldsymbol{\pi}$ con cogrado $-p$ y grado $p$, es un proceso AR($p$)</li>
 </ul>
-<p>Consideremos el modelo $$y_{t}=\rho y_{t-1}+u_{t},$$ donde $y_{t}$ es
-la variable de interés, $\rho$ es un coeficiente, y $u_{t}$ es un
-proceso de ruido blanco. Una raíz unitaria estará presente si $\rho
-=1$. En tal caso el modelo será no-estacionario.</p>
-<p>El modelo de regresión se puede escribir como</p>
-$$\nabla y_{t}=(\rho -1)y_{t-1}+u_{t}=\delta y_{t-1}+u_{t}$$
+<p>Véase <em>Pourahmadi M. (2001).</em></p>
+<p>Consecuentemente, que la ACF o la PACF se cortan ``bruscamente'' nos
+indica que el modelo es AR o MA (y su grado).</p>
+<p>Desgraciadamente para los modelos ARMA (qué veremos más adelante)
+tanto la ACF como la PACF tienen infinitos términos no nulos, por lo
+que su identificación no es tan sencilla.</p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="Ecuaciones-de-Yule-Walker-(que-relacionan-las-autocovarianzas-con-los-par%C3%A1metros-de-$%5Cboldsymbol%7B%5Cphi%7D$)">Ecuaciones de Yule-Walker (que relacionan las autocovarianzas con los par&#225;metros de $\boldsymbol{\phi}$)<a class="anchor-link" href="#Ecuaciones-de-Yule-Walker-(que-relacionan-las-autocovarianzas-con-los-par%C3%A1metros-de-$%5Cboldsymbol%7B%5Cphi%7D$)">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -15086,7 +15126,34 @@ $$\nabla y_{t}=(\rho -1)y_{t-1}+u_{t}=\delta y_{t-1}+u_{t}$$
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h5 id="Test-de-Dickey-Fuller-aumentado-(ADF)">Test de Dickey-Fuller aumentado (ADF)<a class="anchor-link" href="#Test-de-Dickey-Fuller-aumentado-(ADF)">&#182;</a></h5>
+<p>Consideremos un proceso AR($p$): $\quad X_t=\sum\limits_{j=1}^p\phi_j
+X_{t-j}+U_t;\qquad U_t\sim WN(0,\sigma^2)$</p>
+<p>Multiplicando ambos lados por $X_{t-k}$ para $0\leq k\leq p$ y tomando
+esperanzas tenemos $$Cov(X_t,X_{t-k})=\sum_{j=1}^p\phi_j
+Cov(X_{t-j},X_{t-k})+ Cov(U_t,X_{t-k});\qquad 0\leq k\leq p.$$</p>
+<p>Para $\;k=0\;$ tenemos:</p>
+\begin{equation}
+  \sigma^2=\gamma_0-\sum_{j=1}^p\phi_j\gamma_j
+\end{equation}<p>Para $\;1\leq k\leq p\;$ tenemos:</p>
+\begin{equation}
+  \gamma_k=\sum_{j=1}^p\phi_j\gamma_{k-j}
+\end{equation}<p>Dividiendo (1) y (2) por $\gamma_0$ (y operando en (1)) tenemos</p>
+\begin{equation}
+  \gamma_0=\frac{\sigma^2}{1-\phi_1\rho_1-\cdots-\phi_p\rho_p};
+  \qquad
+  \rho_k=\phi_1\rho_{k-1}+\cdots+\phi_p\rho_{k-p}
+\end{equation}
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Proceso-autorregresivo-AR($1$)">Proceso autorregresivo AR($1$)<a class="anchor-link" href="#Proceso-autorregresivo-AR($1$)">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -15097,7 +15164,45 @@ $$\nabla y_{t}=(\rho -1)y_{t-1}+u_{t}=\delta y_{t-1}+u_{t}$$
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Otras-herramientas-estad%C3%ADsticas">Otras herramientas estad&#237;sticas<a class="anchor-link" href="#Otras-herramientas-estad%C3%ADsticas">&#182;</a></h2>
+<p>Sea $\;(1-\phi z)*\boldsymbol{X}=\boldsymbol{U},\quad$ con
+$\;|\phi|&lt;1\;$ y con $\;\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es
+decir $$X_t=\phi X_{t-1} + U_t.$$</p>
+<p>Dado que $(1-a z)*(1+a z+a^2 z^2+a^3 z^3+\cdots)=1$</p>
+<p>$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\theta z)^{-1}*(1-\theta
+  z^{-1})^{-1} \;=\; \frac{\sigma^2}{1-\phi^2} \sum_{j=0}^\infty
+  \phi^j z^j$</p>
+<p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\;
+  \frac{1+\theta^2}{\sigma^2}\boldsymbol{\gamma} \;=\;
+  \sum_{j=0}^\infty \phi^j z^j \quad\Rightarrow\quad \rho_k=\phi^k$.</p>
+<p>$f(\omega) \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^\infty \gamma_h
+  \cos(h\omega)=\frac{\sigma^2}{2\pi}\frac{1}{1+\theta^2-2\theta\cos(\omega)}$.</p>
+<p>$\boldsymbol{\pi} \;=\; (\ldots,\; 0,\; 0,\; \phi,\; {\color{blue}1},\; \phi,\; 0,\; 0,\;\ldots)$</p>
+
+</div>
+</div>
+</div>
+</div><aside class="notes">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="AR(1)-con-ra%C3%ADz-positiva">AR(1) con ra&#237;z positiva<a class="anchor-link" href="#AR(1)-con-ra%C3%ADz-positiva">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+</aside></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\boldsymbol{\phi}(z)=1-0.9z\quad\Rightarrow\quad X_t=0.9X_{t-1}+U_t.$$<p><img src="./img/lecc06/ACF-AR1p.png" alt="img"></p>
+
 </div>
 </div>
 </div>
@@ -15108,59 +15213,36 @@ $$\nabla y_{t}=(\rho -1)y_{t-1}+u_{t}=\delta y_{t-1}+u_{t}$$
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><a href="https://en.wikipedia.org/wiki/Jarque%E2%80%93Bera_test">Jarque-Vera test (Wikipedia)</a></p>
-<p>Podemos calcularlo con la librería <a href="https://cran.r-project.org/web/packages/moments/index.html">momments</a>:</p>
+<p><img src="./img/lecc06/Sim-AR1p.png" alt="img"></p>
 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><aside class="notes">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="c1">#install.packages("moments")</span>
-<span class="nf">library</span><span class="p">(</span><span class="n">moments</span><span class="p">)</span>
-<span class="c1"># Perform the Jarque-Bera test</span>
-<span class="n">jb_test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">jarque.test</span><span class="p">(</span><span class="nf">as.numeric</span><span class="p">(</span><span class="n">Z</span><span class="p">))</span>
-<span class="c1"># Print the test result</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">jb_test</span><span class="p">)</span>
-</pre></div>
-
-     </div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="AR(1)-con-ra%C3%ADz-negativa">AR(1) con ra&#237;z negativa<a class="anchor-link" href="#AR(1)-con-ra%C3%ADz-negativa">&#182;</a></h4>
 </div>
 </div>
 </div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
+</aside></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\boldsymbol{\phi}(z)=1+0.9z\quad\Rightarrow\quad X_t=-0.9X_{t-1}+U_t.$$<p><img src="./img/lecc06/ACF-AR1n.png" alt="img"></p>
 
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Jarque-Bera Normality Test
-
-data:  as.numeric(Z)
-JB = 8.9225, p-value = 0.01155
-alternative hypothesis: greater</pre>
 </div>
 </div>
-
 </div>
-
-</div>
-
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
@@ -15168,56 +15250,52 @@ alternative hypothesis: greater</pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Otra librería alternativa para calcularlo: <a href="https://cran.r-project.org/web/packages/tseries/index.html">tseries</a></p>
+<p><img src="./img/lecc06/Sim-AR1n.png" alt="img"></p>
 
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-r"><pre><span></span><span class="nf">library</span><span class="p">(</span><span class="n">tseries</span><span class="p">)</span>
-<span class="c1"># Perform the Jarque-Bera test</span>
-<span class="n">jb_test</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">jarque.bera.test</span><span class="p">(</span><span class="n">Z</span><span class="p">)</span>
-<span class="c1"># Print the test result</span>
-<span class="nf">print</span><span class="p">(</span><span class="n">jb_test</span><span class="p">)</span>
-</pre></div>
-
-     </div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Proceso-autorregresivo-AR($2$)">Proceso autorregresivo AR($2$)<a class="anchor-link" href="#Proceso-autorregresivo-AR($2$)">&#182;</a></h3>
 </div>
 </div>
 </div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Sea $(1-\phi_1 z-\phi_2 z^2)*\boldsymbol{X}=\boldsymbol{U}$, con
+$\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y con
+$$\phi_1+\phi_2&lt;1;\qquad \phi_2-\phi_1&lt;1;\qquad |\phi_2|&lt;1;\quad \text{(i.e., invertible)}$$
+es decir $X_t=\phi_1 X_{t-1} + \phi_2 X_{t-2} + U_t$.</p>
+<ul>
+<li><p>$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi_1 z-\phi_2 z^2)*(1-\phi_1 z^{-1}-\phi_2 z^{-2})$</p>
+<p>$\gamma_0={\color{blue}{\sigma^2(1+\phi_1^2+\phi_2^2)}};\qquad$
+$\gamma_1=\sigma^2\big(-\phi_1(1-\phi_2)\big);\qquad$
+$\gamma_2=\sigma^2(-\phi_2)$</p>
+<p>$\gamma_3=\gamma_4=\cdots=0\qquad$ (y es simétrica)</p>
+</li>
+<li><p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2(1+\phi_1^2+\phi_2^2)}\boldsymbol{\gamma}$</p>
+</li>
+<li><p>$f(\omega) \;=\;  \frac{\sigma^2}{2\pi}\frac{1}{1+\phi_1^2+\phi_2^2-2\phi_1(1+\phi_2)\cos(\omega)-2\phi_2\cos(2\omega)};\quad -\pi\leq\omega\leq\pi$</p>
+</li>
+<li><p>$\boldsymbol{\pi}$ tiene una expresión complicada, pero su magnitud
+decae paulatinamente</p>
+</li>
+</ul>
 
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Jarque Bera Test
-
-data:  Z
-X-squared = 8.9225, df = 2, p-value = 0.01155</pre>
 </div>
 </div>
-
 </div>
-
-</div>
-
 </div></section></section>
 </div>
 </div>

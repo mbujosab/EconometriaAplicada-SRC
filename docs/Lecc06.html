@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
 <head>
-<!-- 2024-09-03 mar 17:57 -->
+<!-- 2024-09-06 vie 22:48 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 6</title>
@@ -233,46 +233,48 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org44b9b9d">Carga de algunas librerías de R</a></li>
+<li><a href="#orgd99af8a">Carga de algunas librerías de R</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org616360b">1. Función de autocovarianzas y función de autocorrelación (ACF)</a></li>
-<li><a href="#orgd9578b6">2. Función de autocorrelación parcial  (PACF)</a></li>
+<li><a href="#org88df22e">1. Función de autocovarianzas y función de autocorrelación (ACF)</a></li>
+<li><a href="#orgd7456f4">2. Función de autocorrelación parcial  (PACF)</a></li>
 <li><a href="#org3673052">3. Densidad espectral</a></li>
 <li><a href="#org9148dd4">4. ACF, PACF y densidad espectral de algunos modelos lineales</a>
 <ul>
-<li><a href="#orgf28bb33">4.1. ACF de procesos lineales</a></li>
+<li><a href="#org3a596a8">4.1. Procesos lineales</a></li>
 <li><a href="#org2c77457">4.2. Proceso de Ruido Blanco</a></li>
-<li><a href="#orgdee5083">4.3. Media móvil MA(\(q\))</a></li>
-<li><a href="#orgd523d41">4.4. Media móvil MA(\(1\))</a></li>
-<li><a href="#org492bcba">4.5. AR(1)</a></li>
+<li><a href="#org2f32080">4.3. Proceso de media móvil MA(\(q\))</a></li>
+<li><a href="#orgb8553b8">4.4. Proceso de media móvil MA(\(1\))</a>
+<ul>
+<li><a href="#orgfbfd90d">4.4.1. MA(1) con raíz positiva</a></li>
+<li><a href="#org0fe415e">4.4.2. MA(1) con raíz negativa</a></li>
 </ul>
 </li>
-<li><a href="#org4ac3b1b">5. La especificación del modelo se escoge según las características de los datos.</a></li>
-<li><a href="#org9e2deee">6. Herramientas para desvelar propiedades de una serie temporal</a>
+<li><a href="#org2cba15a">4.5. Proceso de media móvil MA(\(2\))</a>
 <ul>
-<li><a href="#orgfa072c8">6.1. Análisis gráfico</a>
-<ul>
-<li><a href="#orgb300b25">6.1.1. Gráfico de la serie temporal</a></li>
-<li><a href="#org9acbd89">6.1.2. Gráfico rango-media</a></li>
+<li><a href="#org40d3399">4.5.1. MA(2) con dos raíces reales, una positiva y la otra negativa</a></li>
+<li><a href="#org67282a6">4.5.2. MA(2) con un par de raíces complejas</a></li>
+<li><a href="#org6296dfa">4.5.3. MA(2) con dos raíces reales y negativas</a></li>
+<li><a href="#org381b2aa">4.5.4. MA(2) con dos raíces reales y positivas</a></li>
 </ul>
 </li>
-<li><a href="#orge6c5ad9">6.2. Determinación del orden de integración</a>
+<li><a href="#org51d6a8b">4.6. Proceso autorregresivo AR(\(p\))</a>
 <ul>
-<li><a href="#org90c3d2d">6.2.1. Análisis gráfico</a></li>
-<li><a href="#org1f0e895">6.2.2. Contrastes formales sobre el orden de integración</a></li>
+<li><a href="#org8780c18">4.6.1. Demostración de que la PACF tiene cogrado \(-p\) y grado \(p\)</a></li>
+<li><a href="#orgbcf8433">4.6.2. Ecuaciones de Yule-Walker (que relacionan las autocovarianzas con los parámetros de \(\boldsymbol{\phi}\))</a></li>
 </ul>
 </li>
+<li><a href="#orgfdcf386">4.7. Proceso autorregresivo AR(\(1\))</a>
+<ul>
+<li><a href="#org3ee24c2">4.7.1. AR(1) con raíz positiva</a></li>
+<li><a href="#org207f3a0">4.7.2. AR(1) con raíz negativa</a></li>
 </ul>
 </li>
-<li><a href="#org6a4434f">7. Otras herramientas estadísticas&#xa0;&#xa0;&#xa0;<span class="tag"><span class="C_moHacerConR">CómoHacerConR</span></span></a>
-<ul>
-<li><a href="#orgcd25fd1">7.1. Estadísticos descriptivos</a></li>
-<li><a href="#org8331c96">7.2. Test de normalidad Jarque-Vera</a></div>
+<li><a href="#orgb5f3fc6">4.8. Proceso autorregresivo AR(\(2\))</a></div>
 </div>
-<div class="abstract" id="org9edce9f">
+<div class="abstract" id="orgb06dfc6">
 <p>
 En esta lección veremos algunas herramientas estadísticas.
  y usaré la librería <code>tfarima</code> de
@@ -280,9 +282,9 @@ José Luis Gallego siempre que pueda.
 </p>
 
 </div>
-<div id="outline-container-org44b9b9d" class="outline-4">
-<h4 id="org44b9b9d">Carga de algunas librerías de R</h4>
-<div class="outline-text-4" id="text-org44b9b9d">
+<div id="outline-container-orgd99af8a" class="outline-4">
+<h4 id="orgd99af8a">Carga de algunas librerías de R</h4>
+<div class="outline-text-4" id="text-orgd99af8a">
 <p>
 Primero cargamos la librería <code>tfarima</code> (Repositorio Cran:
 <a href="https://cran.r-project.org/web/packages/tfarima/index.html">https://cran.r-project.org/web/packages/tfarima/index.html</a>;
@@ -308,8 +310,8 @@ del notebook
 </div>
 </div>
 </div>
-<div id="outline-container-org616360b" class="outline-2">
-<h2 id="org616360b"><span class="section-number-2">1.</span> Función de autocovarianzas y función de autocorrelación (ACF)</h2>
+<div id="outline-container-org88df22e" class="outline-2">
+<h2 id="org88df22e"><span class="section-number-2">1.</span> Función de autocovarianzas y función de autocorrelación (ACF)</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Ya hemos visto que si un proceso estocásticos es estacionario, la
@@ -336,8 +338,8 @@ variables del proceso.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd9578b6" class="outline-2">
-<h2 id="orgd9578b6"><span class="section-number-2">2.</span> Función de autocorrelación parcial  (PACF)</h2>
+<div id="outline-container-orgd7456f4" class="outline-2">
+<h2 id="orgd7456f4"><span class="section-number-2">2.</span> Función de autocorrelación parcial  (PACF)</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 La <i>correlación parcial</i> entre dos variables \(X_t\) y \(X_{t-k}\) de un
@@ -350,9 +352,9 @@ median entre ambas.
 <p>
 Si denotamos con \(\widehat{X_t}\) y \(\widehat{X_{t-k}}\) los ajustes de
 las respectivas regresiones de \(X_t\) y \(X_{t-k}\) sobre \(X_{t-1},\ldots
-X_{t-(k-1)};\;\) la <i>correlación parcial</i> entre \(X_t\) y \(X_{t+k}\) es la
+X_{t-(k-1)};\;\) la <i>correlación parcial</i> \(\pi_k\) entre \(X_t\) y \(X_{t+k}\) es la
 correlación entre los residuos de sendas regresiones:
-\[Coor\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widehat{X_{t-k}})\Big)\]
+\[\pi_k=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widehat{X_{t-k}})\Big)\]
 </p>
 
 <p>
@@ -363,17 +365,14 @@ secuencia.
 <p>
 <b>Función de autocorrelación parcial</b> (PACF) de un proceso estacionario
 \(\boldsymbol{X}\) es la siguiente secuencia
-\(\boldsymbol{\pi}=(\pi_k\mid k\in\mathbb{Z}),\;\) que es
-simétrica pues
-\(\pi_{-k}=\pi_k\):
-\[\begin{cases}
-\pi_0 &=1\\\\
-\pi_1 &=Corr(X_t,\ X_{t-1})=\rho_1=\frac{\gamma_1}{\gamma_0}\\\\
-\pi_k &=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widehat{X_{t-k}})\Big)
-\end{cases},\]
-donde \(\widehat{X_t}\) y \(\widehat{X_{t-k}}\) son los ajustes de las
-respectivas regresiones de \(X_t\) y \(X_{t-k}\) sobre 
-\(X_{t-1},\ldots X_{t-(k-1)}\).
+\(\boldsymbol{\pi}=(\pi_k\mid k\in\mathbb{Z}),\;\) que es simétrica pues
+\(\pi_{-k}=\pi_k\): \[\begin{cases} \pi_0 &={\color{blue}{1}}\\\\ \pi_1 &=Corr(X_t,\
+X_{t-1})=\rho_1=\frac{\gamma_1}{\gamma_0}\\\\ \pi_k
+&=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widehat{X_{t-k}})\Big)
+\end{cases},\] donde \(\widehat{X_t}\) y \(\widehat{X_{t-k}}\) son los
+ajustes de las respectivas regresiones de \(X_t\) y \(X_{t-k}\) sobre
+\(X_{t-1},\ldots X_{t-(k-1)}.\;\) i.e., las proyecciones ortogonales
+sobre \(\bar{sp}(1,X_{t-1}:X_{t-(k-1)})\).
 </p>
 <p>
 La magnitud de la correlación parcial \(\;\pi_k\;\) refleja la mejora en
@@ -393,14 +392,6 @@ otra (por ejemplo resolviendo la ecuaciones de Yule-Walker
 recursivamente con el algoritmo Levinson-Durbin; véase
 <i>Pourahmadi, M. (2001, Capítulo 7)</i> o <i>Brockwell &amp; Davis (1991,
 Capitulo 5)</i>)
-</p>
-
-<p>
-\(\pi_1=\phi_{11}=\rho_1\)
-</p>
-
-<p>
-\(\pi_{k+1}=\phi_{k+1,k+1}=\frac{\rho_{k+1}-\sum_{j=1}^k\phi_{kj}\rho_{k+1-j}}{1-\sum_{j=1}^k\phi_{kj}\rho_j}\); donde \(\phi_{k+1,j}=\phi_{kj}-\phi_{k+1,k+1}\phi_{k,k+1-j}\), \(j=1:k\)
 </p>
 
 <p>
@@ -474,32 +465,70 @@ modelos lineales concretos.
 <h2 id="org9148dd4"><span class="section-number-2">4.</span> ACF, PACF y densidad espectral de algunos modelos lineales</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-orgf28bb33" class="outline-3">
-<h3 id="orgf28bb33"><span class="section-number-3">4.1.</span> ACF de procesos lineales</h3>
+<div id="outline-container-org3a596a8" class="outline-3">
+<h3 id="org3a596a8"><span class="section-number-3">4.1.</span> Procesos lineales</h3>
 <div class="outline-text-3" id="text-4-1">
 <p>
 Sea el proceso lineal
-\(\boldsymbol{X}=\boldsymbol{\varphi}*\boldsymbol{U}\), donde
+\(\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}\), donde
 \(\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\) y
-\(\;\boldsymbol{\varphi}\in\ell^1;\;\) es decir
-\[X_t=\sum_{j\in\mathbb{Z}}\varphi_j U_{t-j}.\] Puesto que \(E(U_t)=0\)
+\(\;\boldsymbol{\psi}\in\ell^1;\;\) es decir
+\[X_t=\sum_{j\in\mathbb{Z}}\psi_j U_{t-j}.\] Puesto que \(E(U_t)=0\)
 para todo \(t\in\mathbb{Z}\), entonces
-\[E(X_t)=E\left(\sum_{j\in\mathbb{Z}}\varphi_j
-U_{t-j}\right)=\sum_{j\in\mathbb{Z}}\varphi_j E(U_{t-j})=0\] Y como
+\[E(X_t)=E\left(\sum_{j\in\mathbb{Z}}\psi_j
+U_{t-j}\right)=\sum_{j\in\mathbb{Z}}\psi_j E(U_{t-j})=0\] Y como
 además, \(E(U_j\cdot U_k)=0\) cuando \(j\ne k\), su función de
 autocovarianzas es 
 </p>
 \begin{eqnarray*}
 \gamma_{k,t}= E\big[X_t\cdot X_{t-k}\big]=&
-E\left[\Big(\sum_{j\in\mathbb{Z}}\varphi_j
-U_{t-j}\Big)\Big(\sum_{j\in\mathbb{Z}}\varphi_j U_{t-k-j}\Big)\right]=
-\sigma^2\sum_{j\in\mathbb{Z}}\varphi_{j+k}\cdot\varphi_{j}\\
-=&\sigma^2\sum_{j\in\mathbb{Z}}\varphi_{j+k}\cdot R(\varphi_{-j}) =
-\sigma^2\left(\boldsymbol{\varphi}(z)*\boldsymbol{\varphi}(z^{-1})\right)_k
+E\left[\Big(\sum_{j\in\mathbb{Z}}\psi_j
+U_{t-j}\Big)\Big(\sum_{j\in\mathbb{Z}}\psi_j U_{t-k-j}\Big)\right]=
+\sigma^2\sum_{j\in\mathbb{Z}}\psi_{j+k}\cdot\psi_{j}\\
+=&\sigma^2\sum_{j\in\mathbb{Z}}\psi_{j+k}\cdot R(\psi_{-j}) =
+\sigma^2\left(\boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})\right)_k
 \end{eqnarray*}
 <p>
-que solo depende de \(k\) (el proceso es estacionario como ya sabíamos).
+que solo depende de \(k\) (el proceso es estacionario como ya sabíamos). Por tanto&#x2026;
 </p>
+<p>
+Si \(\boldsymbol{X}\) es un proceso lineal
+\(\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}\), con
+\(\;\boldsymbol{U}\sim WN(0,\sigma^2),\;\) donde
+\(\boldsymbol{\psi}\in\ell^1\) es una serie formal (i.e., cogrado \(0\)) y
+donde \(\psi_0=1\), es decir, si  \[X_t= \sum_{j=1}^\infty\psi_j
+U_{t-j}+U_t;\qquad t\in\mathbb{Z}.\]
+</p>
+
+<p>
+Entonces
+</p>
+
+<ul class="org-ul">
+<li><p>
+\(\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})\)
+</p>
+
+<p>
+\(\gamma_k = \sum_{j\in\mathbb{Z}} \psi_{k-j}\psi_j;\quad\) así que \(\;\gamma_k\to0\;\) cuando \(\;k\to\infty\).
+</p></li>
+</ul>
+
+<ul class="org-ul">
+<li>ACF: \(\;\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}\)</li>
+</ul>
+
+<ul class="org-ul">
+<li>Densidad espectral: \(\;f(\omega) \;=\; \frac{1}{2\pi}\sum_{h\geq0}\gamma_h \cos(h\omega);\quad \omega\in[-\pi,\pi]\)</li>
+
+<li><p>
+PACF: \(\;\boldsymbol{\pi}\in\ell^2,\quad\) i.e., \(\;\pi_k\to0\;\) cuando \(\;k\to\infty\) 
+</p>
+
+<p>
+(Cuando \(\boldsymbol{\pi}\in\ell^2\) se dice que el proceso es <i>no-determinista</i>)
+</p></li>
+</ul>
 </div>
 </div>
 <div id="outline-container-org2c77457" class="outline-3">
@@ -512,30 +541,28 @@ donde \(\;\boldsymbol{U}\sim WN(0,\sigma^2)\;;\) es decir \(X_t=U_t\) para
 </p>
 
 <ul class="org-ul">
-<li>\(\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{1}(z)*\boldsymbol{1}(z^{-1}) \;=\; \sigma^2\boldsymbol{1} \;=\; (\ldots,0,0,\sigma^2,0,0,\ldots) \;=\; \sigma^2 z^0\)</li>
+<li>\(\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{1}(z)*\boldsymbol{1}(z^{-1}) \;=\; \sigma^2\boldsymbol{1} \;=\; (\ldots,0,0,{\color{blue}{\sigma^2}},0,0,\ldots) \;=\; \sigma^2 z^0\)</li>
 </ul>
 
 <ul class="org-ul">
-<li>\(\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2}\boldsymbol{\gamma} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,1,0,0,\ldots) \;=\; 1 z^0\)</li>
-</ul>
-
-<ul class="org-ul">
-<li>\(\boldsymbol{\pi} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,1,0,0,\ldots) \;=\; 1 z^0\)</li>
+<li>\(\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2}\boldsymbol{\gamma} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,{\color{blue}{1}},0,0,\ldots) \;=\; 1 z^0\)</li>
 </ul>
 
 <ul class="org-ul">
 <li>\(f(\omega) \;=\; \frac{1}{2\pi}\sum_{h\geq0}\gamma_h \cos(h\omega) \;=\; \frac{\sigma^2}{2\pi} \cos(0\omega) \;=\; \frac{\sigma^2}{2\pi};\quad \omega\in[-\pi,\pi]\)</li>
+
+<li>\(\boldsymbol{\pi} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,{\color{blue}{1}},0,0,\ldots) \;=\; 1 z^0\)</li>
 </ul>
 
 <div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
 wn <span style="color: #D0372D;">&lt;-</span> um(ar = <span style="color: #008000;">"(1 - 0B)"</span>)
-display(list(ar0p), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</span>)
+display(list(wn), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</span>)
 </pre>
 </div>
 
 
-<div id="org7f6b128" class="figure">
+<div id="org5a37e7f" class="figure">
 <p><img src="./img/lecc06/ACFwhitenoise.png" alt="ACFwhitenoise.png" width="900px" />
 </p>
 </div>
@@ -547,57 +574,161 @@ ide(sim(wn, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"pl
 </div>
 
 
-<div id="org9300d8e" class="figure">
+<div id="orgb75f638" class="figure">
 <p><img src="./img/lecc06/SimulWhitenoise.png" alt="SimulWhitenoise.png" width="900px" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgdee5083" class="outline-3">
-<h3 id="orgdee5083"><span class="section-number-3">4.3.</span> Media móvil MA(\(q\))</h3>
+<div id="outline-container-org2f32080" class="outline-3">
+<h3 id="org2f32080"><span class="section-number-3">4.3.</span> Proceso de media móvil MA(\(q\))</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
-Sea
-\(\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}\), con
+Sea \(\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}\), con
 \(\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\) y donde \(\boldsymbol{\theta}\)
-es un polinomio de orden \(q\) con \(\theta_0=1\), es decir \[X_t=
+es un polinomio de orden \(q>0\), con \(\theta_0=1\) y con todas sus raíces
+fuera del círculo unidad
+\((\boldsymbol{\theta}^{-\triangleright}\in\ell^1)\), es decir \[X_t=
 \sum_{j=1}^q\theta_j U_{t-j}+U_t.\]
 </p>
 
-<ul class="org-ul">
-<li>\(\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\theta}(z^{-1}) \;=\; \sigma^2 \sum\limits_{j,k=0}^q \theta_j\theta_k z^{j-k}\)</li>
+<p>
+Entonces \(E(X_t)=0\) y
+</p>
 
-<li>\(\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}\)</li>
+<p>
+\(\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\theta}(z^{-1}) \;=\; \sigma^2 \sum\limits_{j,k=0}^q \theta_j\theta_k z^{j-k}\;\) (grado \(q\) y cogrado \(-q\))
+</p>
 
-<li>\(\boldsymbol{\pi}\) tiene una expresión más complicada, pero su magnitud decae paulatinamente</li>
+<p>
+\(\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}\)
+</p>
 
-<li>\(f(\omega) \;=\; \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})*\boldsymbol{\theta}(e^{i\omega}) \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^q \gamma_h \cos(h\omega);\quad \omega\in[-\pi,\pi]\)</li>
-</ul>
+<p>
+\(f(\omega) \;=\; \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})\cdot\boldsymbol{\theta}(e^{i\omega}) \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^q \gamma_h \cos(h\omega);\quad \omega\in[-\pi,\pi]\quad\) (\(q\) cosenos \(+1\))
+</p>
+
+<p>
+\(\boldsymbol{\pi}\;\) tiene grado \(\infty\) y cogrado \(-\infty\;\) y su magnitud decae paulatinamente cuando \(\;k\to\infty\)
+</p>
 </div>
 </div>
-<div id="outline-container-orgd523d41" class="outline-3">
-<h3 id="orgd523d41"><span class="section-number-3">4.4.</span> Media móvil MA(\(1\))</h3>
+<div id="outline-container-orgb8553b8" class="outline-3">
+<h3 id="orgb8553b8"><span class="section-number-3">4.4.</span> Proceso de media móvil MA(\(1\))</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
-Sea \(\boldsymbol{X}=(1+\theta z)*\boldsymbol{U}\), con
-\(\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\), es decir \(X_t=U_t+\theta U_{t-1}\).
+Sea \(\boldsymbol{X}=(1-\theta z)*\boldsymbol{U}\) con \(|\theta|<1\) y
+con \(\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\), es decir \(X_t=U_t-\theta
+U_{t-1}\).
 </p>
 
 <ul class="org-ul">
-<li>\(\boldsymbol{\gamma} \;=\; \sigma^2 (1+\theta z)*(1+\theta z^{-1}) \;=\; \sigma^2 (\ldots,\ 0\ ,\ -\theta,\ (1+\theta^2),\ -\theta,\ 0,\ \ldots)\)</li>
+<li>\(\boldsymbol{\gamma} \;=\; \sigma^2 (1-\theta z)*(1-\theta z^{-1})
+  \;=\; \sigma^2 (\ldots,\ 0\ ,\ -\theta,\ {\color{blue}{(1+\theta^2)}},\ -\theta,\
+  0,\ \ldots)\)</li>
 
-<li>\(\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{1+\theta^2}\boldsymbol{\gamma}\)</li>
+<li>\(\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\;
+  \frac{1}{\sigma^2(1+\theta^2)}\boldsymbol{\gamma}\)</li>
 
-<li>\(\boldsymbol{\pi} \;=\; \sum\limits_{k\in\mathbb{Z}}{ \frac{-\theta^k(1-\theta^2)}{1-\theta^{2(k+1)}} z^k}\)</li>
+<li>\(f(\omega) \;=\;
+  \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})\cdot\boldsymbol{\theta}(e^{i\omega})
+  \;=\;
+  \frac{\sigma^2}{2\pi}\Big((1+\theta^2)\;-\;2\theta\cos(\omega)\Big);\quad
+  \omega\in[-\pi,\pi]\)</li>
 
-<li>\(f(\omega) \;=\; \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})*\boldsymbol{\theta}(e^{i\omega}) \;=\; \frac{\sigma^2}{2\pi}\left((1+\theta^2)-\theta\cos(\omega)\right);\quad \omega\in[-\pi,\pi]\)</li>
+<li>\(\boldsymbol{\pi} \;=\; \sum\limits_{k\in\mathbb{Z}}{
+  \frac{-\theta^k(1-\theta^2)}{1-\theta^{2(k+1)}} z^k}\)</li>
 </ul>
+</div>
+<div id="outline-container-orgfbfd90d" class="outline-4">
+<h4 id="orgfbfd90d"><span class="section-number-4">4.4.1.</span> MA(1) con raíz positiva</h4>
+<div class="outline-text-4" id="text-4-4-1">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ma1p <span style="color: #D0372D;">&lt;-</span> um(ma = <span style="color: #008000;">"(1 - 0.9B)"</span>)
+display(list(ma1p), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</span>)
+</pre>
+</div>
+
+
+<p>
+\[\boldsymbol{\theta}(z)=1-0.9z\quad\Rightarrow\quad X_t=
+(1-0.9 \mathsf{B})U_t.\]
+</p>
+
+
+<div id="orgd6632d2" class="figure">
+<p><img src="./img/lecc06/ACF-MA1p.png" alt="ACF-MA1p.png" width="900px" />
+</p>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R" id="orgb85e5fa">roots(ma1p)
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Real</th>
+<th scope="col" class="org-right">Imaginary</th>
+<th scope="col" class="org-right">Modulus</th>
+<th scope="col" class="org-right">Frequency</th>
+<th scope="col" class="org-right">Period</th>
+<th scope="col" class="org-right">Mult.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1.111111</td>
+<td class="org-right">0</td>
+<td class="org-right">1.111111</td>
+<td class="org-right">0</td>
+<td class="org-right">Inf</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+
 
 
 <div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ma1p, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
+</pre>
+</div>
+
+
+<div id="org1207553" class="figure">
+<p><img src="./img/lecc06/Sim-MA1p.png" alt="Sim-MA1p.png" width="900px" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org0fe415e" class="outline-4">
+<h4 id="org0fe415e"><span class="section-number-4">4.4.2.</span> MA(1) con raíz negativa</h4>
+<div class="outline-text-4" id="text-4-4-2">
+<div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
-ma1p <span style="color: #D0372D;">&lt;-</span> um(ma = <span style="color: #008000;">"(1 + 0.9B)"</span>)
-display(list(ma1p), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</span>)
+ma1n <span style="color: #D0372D;">&lt;-</span> um(ma = <span style="color: #008000;">"(1 + 0.9B)"</span>)
+display(list(ma1n), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</span>)
 </pre>
 </div>
 
@@ -607,433 +738,840 @@ display(list(ma1p), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</sp
 </p>
 
 
-<div id="org3202d11" class="figure">
-<p><img src="./img/lecc06/ACF-MA1p.png" alt="ACF-MA1p.png" width="900px" />
-</p>
-</div>
-
-
-<div class="org-src-container">
-<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
-ide(sim(ma1p, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>), main=<span style="color: #008000;">"MA(1)"</span>)
-</pre>
-</div>
-
-
-<div id="org6dc51c4" class="figure">
-<p><img src="./img/lecc06/Sim-MA1p.png" alt="Sim-MA1p.png" width="900px" />
-</p>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
-ma1n <span style="color: #D0372D;">&lt;-</span> um(ma = <span style="color: #008000;">"(1 - 0.9B)"</span>)
-display(list(ma1n), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</span>)
-</pre>
-</div>
-
-<p>
-\[\boldsymbol{\theta}(z)=1-0.9z\quad\Rightarrow\quad X_t=
-(1-0.9 \mathsf{B})U_t.\]
-</p>
-
-
-<div id="org03217b1" class="figure">
+<div id="org643e5fd" class="figure">
 <p><img src="./img/lecc06/ACF-MA1n.png" alt="ACF-MA1n.png" width="900px" />
 </p>
 </div>
 
+<div class="org-src-container">
+<pre class="src src-jupyter-R" id="org41462d4">roots(ma1n)
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Real</th>
+<th scope="col" class="org-right">Imaginary</th>
+<th scope="col" class="org-right">Modulus</th>
+<th scope="col" class="org-right">Frequency</th>
+<th scope="col" class="org-right">Period</th>
+<th scope="col" class="org-right">Mult.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">-1.111111</td>
+<td class="org-right">0</td>
+<td class="org-right">1.111111</td>
+<td class="org-right">0.5</td>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
 
 <div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
-ide(sim(ma1n, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>), main=<span style="color: #008000;">"MA(1)"</span>)
+ide(sim(ma1n, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
 </pre>
 </div>
 
 
-<div id="org9186d75" class="figure">
+<div id="org1f31188" class="figure">
 <p><img src="./img/lecc06/Sim-MA1n.png" alt="Sim-MA1n.png" width="900px" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org492bcba" class="outline-3">
-<h3 id="org492bcba"><span class="section-number-3">4.5.</span> AR(1)</h3>
+</div>
+<div id="outline-container-org2cba15a" class="outline-3">
+<h3 id="org2cba15a"><span class="section-number-3">4.5.</span> Proceso de media móvil MA(\(2\))</h3>
 <div class="outline-text-3" id="text-4-5">
-<div class="org-src-container">
-<pre class="src src-jupyter-R">ar0p <span style="color: #D0372D;">&lt;-</span> um(ar = <span style="color: #008000;">"(1 - 0B)"</span>)
-ar1p <span style="color: #D0372D;">&lt;-</span> um(ar = <span style="color: #008000;">"(1 - 0.9B)"</span>)
-ar1n <span style="color: #D0372D;">&lt;-</span> um(ar = <span style="color: #008000;">"(1 + 0.9B)"</span>)
-ma1p <span style="color: #D0372D;">&lt;-</span> um(ma = <span style="color: #008000;">"(1 - 0.9B)"</span>)
-ma1n <span style="color: #D0372D;">&lt;-</span> um(ma = <span style="color: #008000;">"(1 + 0.9B)"</span>)
-ar2c <span style="color: #D0372D;">&lt;-</span> um(ar = <span style="color: #008000;">"(1 - 1.52B + 0.8B^2)"</span>)
-<span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">display(list(ar1p, ar1n, ma1p, ma1n, ar2c), lag.max = 20)</span>
-display(list(ar0p), lag.max = 20)
-</pre>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-org4ac3b1b" class="outline-2">
-<h2 id="org4ac3b1b"><span class="section-number-2">5.</span> La especificación del modelo se escoge según las características de los datos.</h2>
-<div class="outline-text-2" id="text-5">
 <p>
-¿Es la serie 
-</p>
-<ul class="org-ul">
-<li>"<b><i>estacionaria en media</i></b>"
-<ul class="org-ul">
-<li>(y si lo es, ¿cuál es su media?)</li>
-<li>(y si no lo es, ¿cómo cambia o evoluciona su media?)</li>
-</ul></li>
-<li>"<b><i>estacionaria en varianza</i></b>" (<i>homocedástica</i>)
-<ul class="org-ul">
-<li>(y si lo es, ¿cuál es su varianza?)</li>
-<li>(y si es <i>heterocedástica</i>, ¿cómo cambia o evoluciona su varianza?)?</li>
-</ul></li>
-</ul>
-
-<p>
-¿Están sus valores correlados con su historia pasada (autocorrelados)?
+Sea \(\boldsymbol{X}=(1-\theta_1 z-\theta_2 z^2)*\boldsymbol{U}\), con
+\(\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\) y con
+\[\theta_1+\theta_2<1;\qquad \theta_2-\theta_1<1;\qquad |\theta_2|<1;\quad \text{(i.e., invertible)}\]
+es decir \(X_t=U_t-\theta_1 U_{t-1}-\theta_2 U_{t-2}\).
 </p>
 
-<p>
-¿Están correlados con los valores presentes o pasados de otras series?
-</p>
-<p>
-Veamos algunas herramientas estadísticas para poder desvelar estas
-características.
-</p>
-</div>
-</div>
-<div id="outline-container-org9e2deee" class="outline-2">
-<h2 id="org9e2deee"><span class="section-number-2">6.</span> Herramientas para desvelar propiedades de una serie temporal</h2>
-<div class="outline-text-2" id="text-6">
-</div>
-<div id="outline-container-orgfa072c8" class="outline-3">
-<h3 id="orgfa072c8"><span class="section-number-3">6.1.</span> Análisis gráfico</h3>
-<div class="outline-text-3" id="text-6-1">
-</div>
-<div id="outline-container-orgb300b25" class="outline-4">
-<h4 id="orgb300b25"><span class="section-number-4">6.1.1.</span> Gráfico de la serie temporal</h4>
-<div class="outline-text-4" id="text-6-1-1">
-<p>
-Representa sus valores en el eje vertical (\(y\)) frente a una escala
-temporal en el horizontal (\(x\)). Es útil para detectar visualmente:
-</p>
 <ul class="org-ul">
-<li>tendencias y/o estacionalidad</li>
-<li>cambios de variabilidad</li>
-<li>valores atípicos (<i>outliers</i>)
-<ul class="org-ul">
-<li>el 95% aprox. de una muestra de valores generados por una
-distribución normal debería estar comprendido entre
-\(\mu\pm2\sigma\)</li>
 <li><p>
-la probabilidad de que una variable normal genere un valor fuera
-de las bandas de \(\mu\pm3\sigma\) es \(0.0023\)
+\(\boldsymbol{\gamma} \;=\; \sigma^2 (1-\theta_1 z-\theta_2 z^2)*(1-\theta_1 z^{-1}-\theta_2 z^{-2})\)
 </p>
 
 <p>
-(<a href="./img/lecc05/IBEX35.png">véase gráfico IBEX 35</a>)
+\(\gamma_0={\color{blue}{\sigma^2(1+\theta_1^2+\theta_2^2)}};\qquad\)
+\(\gamma_1=\sigma^2\big(-\theta_1(1-\theta_2)\big);\qquad\)
+\(\gamma_2=\sigma^2(-\theta_2)\)
+</p>
+
+<p>
+\(\gamma_3=\gamma_4=\cdots=0\qquad\) (y es simétrica) 
 </p></li>
-</ul></li>
+
+<li>\(\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2(1+\theta_1^2+\theta_2^2)}\boldsymbol{\gamma}\)</li>
+
+<li>\(f(\omega) \;=\;  \frac{\sigma^2}{2\pi}\Big((1+\theta_1^2+\theta_2^2)\;-\;2\theta_1(1+\theta_2)\cos(\omega)\;-\;2\theta_2\cos(2\omega)\Big)\)</li>
 </ul>
 
-<p>
-En es importante escalar y rotular adecuadamente los ejes y asegurar
-la comparabilidad entre series y gráficos distintos (si los hubiere).
-</p>
+<ul class="org-ul">
+<li>\(\boldsymbol{\pi}\) tiene una expresión complicada, pero su magnitud
+decae paulatinamente</li>
+</ul>
 </div>
+<div id="outline-container-org40d3399" class="outline-4">
+<h4 id="org40d3399"><span class="section-number-4">4.5.1.</span> MA(2) con dos raíces reales, una positiva y la otra negativa</h4>
+<div class="outline-text-4" id="text-4-5-1">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ma2pn <span style="color: #D0372D;">&lt;-</span> um(ma = <span style="color: #008000;">"(1 + 0.1B - 0.8B^2)"</span>)
+display(list(ma2pn), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</span>)
+</pre>
 </div>
-<div id="outline-container-org9acbd89" class="outline-4">
-<h4 id="org9acbd89"><span class="section-number-4">6.1.2.</span> Gráfico rango-media</h4>
-<div class="outline-text-4" id="text-6-1-2">
-<p>
-Cambios de variabilidad de una serie pueden evidenciarse en su gráfico
-temporal.
-</p>
 
 <p>
-Pero también suelen verse bien en un gráfico rango-media, donde se
-representa:
+\[\boldsymbol{\theta}(z)=1+0.1z-0.8z^2\quad\Rightarrow\quad X_t=
+(1+0.1\mathsf{B}-0.8\mathsf{B}^2)U_t.\]
 </p>
-<dl class="org-dl">
-<dt>en el eje \(x\)</dt><dd>un indicador del nivel de la serie calculado para
-distintas submuestras no solapadas (normalmente la media).</dd>
-<dt>en el eje \(y\)</dt><dd>un indicador de la dispersión de la serie
-calculado para las mismas submuestras (normalmente el rango.)</dd>
-</dl>
 
-<p>
-Veamos el gráfico de la serie de pasajeros de líneas aéreas junto a su
-gráfico de rango media:
+
+<div id="org51bd07a" class="figure">
+<p><img src="./img/lecc06/ACF-MA2pn.png" alt="ACF-MA2pn.png" width="900px" />
 </p>
+</div>
 
 <div class="org-src-container">
-<pre class="src src-jupyter-R">Z <span style="color: #D0372D;">&lt;-</span> AirPassengers
-ide(Z, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"rm"</span>), main=<span style="color: #008000;">"Pasajeros de l&#237;neas (a&#233;reas en miles) y gr&#225;fico rango-media"</span>)
+<pre class="src src-jupyter-R" id="org444a099">roots(ma2pn)
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Real</th>
+<th scope="col" class="org-right">Imaginary</th>
+<th scope="col" class="org-right">Modulus</th>
+<th scope="col" class="org-right">Frequency</th>
+<th scope="col" class="org-right">Period</th>
+<th scope="col" class="org-right">Mult.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1.18228</td>
+<td class="org-right">7.754818e-26</td>
+<td class="org-right">1.18228</td>
+<td class="org-right">0.0</td>
+<td class="org-right">Inf</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">-1.05728</td>
+<td class="org-right">-7.754818e-26</td>
+<td class="org-right">1.05728</td>
+<td class="org-right">0.5</td>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ma2pn, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
 </pre>
 </div>
 
 
-<div id="org720ae9c" class="figure">
-<p><img src="./img/lecc06/rango-mediaAirPass.png" alt="rango-mediaAirPass.png" width="900px" />
+<div id="org68de6ba" class="figure">
+<p><img src="./img/lecc06/Sim-MA2pn.png" alt="Sim-MA2pn.png" width="900px" />
 </p>
+</div>
+</div>
+</div>
+<div id="outline-container-org67282a6" class="outline-4">
+<h4 id="org67282a6"><span class="section-number-4">4.5.2.</span> MA(2) con un par de raíces complejas</h4>
+<div class="outline-text-4" id="text-4-5-2">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ma2np <span style="color: #D0372D;">&lt;-</span> um(ma = <span style="color: #008000;">"(1 - 0.1B + 0.8B^2)"</span>)
+display(list(ma2np), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</span>)
+</pre>
 </div>
 
 <p>
-El gráfico de rango media a veces se acompaña de una regresión de la
-dispersión sobre los niveles para medir la relación nivel-dispersión.
+\[\boldsymbol{\theta}(z)=1-0.1z+0.8z^2\quad\Rightarrow\quad X_t=
+(1-0.1\mathsf{B}+0.8\mathsf{B}^2)U_t.\]
+</p>
+
+
+<div id="org383f6fe" class="figure">
+<p><img src="./img/lecc06/ACF-MA2np.png" alt="ACF-MA2np.png" width="900px" />
+</p>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R" id="org407cdc0">roots(ma2np)
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Real</th>
+<th scope="col" class="org-right">Imaginary</th>
+<th scope="col" class="org-right">Modulus</th>
+<th scope="col" class="org-right">Frequency</th>
+<th scope="col" class="org-right">Period</th>
+<th scope="col" class="org-right">Mult.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0.0625</td>
+<td class="org-right">1.116286</td>
+<td class="org-right">1.118034</td>
+<td class="org-right">0.2410983</td>
+<td class="org-right">4.147685</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">0.0625</td>
+<td class="org-right">-1.116286</td>
+<td class="org-right">1.118034</td>
+<td class="org-right">0.2410983</td>
+<td class="org-right">4.147685</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ma2np, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
+</pre>
+</div>
+
+<p width="900px">
+c<img src="./img/lecc06/Sim-MA2np.png" alt="Sim-MA2np.png" width="900px" />
+</p>
+</div>
+</div>
+<div id="outline-container-org6296dfa" class="outline-4">
+<h4 id="org6296dfa"><span class="section-number-4">4.5.3.</span> MA(2) con dos raíces reales y negativas</h4>
+<div class="outline-text-4" id="text-4-5-3">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ma2rojo <span style="color: #D0372D;">&lt;-</span> um(ma = <span style="color: #008000;">"(1 + 1.8B + .9B^2 )"</span>)
+display(list(ma2rojo), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</span>)
+</pre>
+</div>
+
+<p>
+\[\boldsymbol{\theta}(z)=1+1.9z+0.9z^2\quad\Rightarrow\quad X_t=
+(1+1.8\mathsf{B}+0.9\mathsf{B}^2)U_t.\]
+</p>
+
+
+<div id="org74ae881" class="figure">
+<p><img src="./img/lecc06/ACF-MA2rojo.png" alt="ACF-MA2rojo.png" width="900px" />
+</p>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R" id="orgdac9448">roots(ma2rojo)
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Real</th>
+<th scope="col" class="org-right">Imaginary</th>
+<th scope="col" class="org-right">Modulus</th>
+<th scope="col" class="org-right">Frequency</th>
+<th scope="col" class="org-right">Period</th>
+<th scope="col" class="org-right">Mult.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">-1</td>
+<td class="org-right">0.3333333</td>
+<td class="org-right">1.054093</td>
+<td class="org-right">0.4487918</td>
+<td class="org-right">2.228205</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">-1</td>
+<td class="org-right">-0.3333333</td>
+<td class="org-right">1.054093</td>
+<td class="org-right">0.4487918</td>
+<td class="org-right">2.228205</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ma2rojo, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
+</pre>
+</div>
+
+
+<div id="org0f062c1" class="figure">
+<p><img src="./img/lecc06/Sim-MA2rojo.png" alt="Sim-MA2rojo.png" width="900px" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orge6c5ad9" class="outline-3">
-<h3 id="orge6c5ad9"><span class="section-number-3">6.2.</span> Determinación del orden de integración</h3>
-<div class="outline-text-3" id="text-6-2">
+<div id="outline-container-org381b2aa" class="outline-4">
+<h4 id="org381b2aa"><span class="section-number-4">4.5.4.</span> MA(2) con dos raíces reales y positivas</h4>
+<div class="outline-text-4" id="text-4-5-4">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ma2violeta <span style="color: #D0372D;">&lt;-</span> um(ma = <span style="color: #008000;">"(1 - 1.8B + .9B^2 )"</span>)
+display(list(ma2violeta), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</span>)
+</pre>
+</div>
+
 <p>
-Decidir adecuadamente el orden de integración es crucial en el
-análisis de series temporales.
+\[\boldsymbol{\theta}(z)=1-1.9z+0.9z^2\quad\Rightarrow\quad X_t=
+(1-1.8\mathsf{B}+0.9\mathsf{B}^2)U_t.\]
+</p>
+
+
+<div id="org4c0d04c" class="figure">
+<p><img src="./img/lecc06/ACF-MA2violeta.png" alt="ACF-MA2violeta.png" width="900px" />
+</p>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R" id="org48f83ba">roots(ma2violeta)
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Real</th>
+<th scope="col" class="org-right">Imaginary</th>
+<th scope="col" class="org-right">Modulus</th>
+<th scope="col" class="org-right">Frequency</th>
+<th scope="col" class="org-right">Period</th>
+<th scope="col" class="org-right">Mult.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">0.3333333</td>
+<td class="org-right">1.054093</td>
+<td class="org-right">0.05120819</td>
+<td class="org-right">19.52813</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">-0.3333333</td>
+<td class="org-right">1.054093</td>
+<td class="org-right">0.05120819</td>
+<td class="org-right">19.52813</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ma2violeta, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
+</pre>
+</div>
+
+
+<div id="orgd664fc7" class="figure">
+<p><img src="./img/lecc06/Sim-MA2violeta.png" alt="Sim-MA2violeta.png" width="900px" />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org51d6a8b" class="outline-3">
+<h3 id="org51d6a8b"><span class="section-number-3">4.6.</span> Proceso autorregresivo AR(\(p\))</h3>
+<div class="outline-text-3" id="text-4-6">
+<p>
+Sea \(\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}\), con
+\(\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\) y donde \(\boldsymbol{\phi}\) es
+un polinomio de grado \(p>0\). Entonces
+\[(\boldsymbol{\phi}*\boldsymbol{X})_t=\boldsymbol{\phi}(\mathsf{B})X_t=
+(1+\phi_1\mathsf{B}+\phi_2\mathsf{B}^2+\cdots+\phi_p\mathsf{B}^p)X_t=
+U_t\] Y por tanto \[X_t= U_t-\sum_{j=1}^p\phi_j X_{t-j}.\]
+</p>
+
+
+<p>
+Si todas las raíces del polinomio \(\boldsymbol{\phi}\) (de grado \(p\))
+están fuera del círculo unidad, es decir, si <i>el polinomio AR es
+``invertible''</i>
+\(\;(\boldsymbol{\phi}^{-\triangleright}=\boldsymbol{\phi}^{-1}\in\ell^1)\;\)
+entonces \(\boldsymbol{X}\) tiene una representación como proceso lineal
+causal MA(\(\infty\)): \[\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}
+\quad\Rightarrow\quad
+\boldsymbol{X}=\frac{1}{\boldsymbol{\phi}}*\boldsymbol{U}
+\quad\Rightarrow\quad X_t = U_t + \sum_{j=1}^\infty\psi_j U_{t-j};\]
+donde \(\;\boldsymbol{\phi}^{-1}=\boldsymbol{\psi}=({\color{blue}1},\
+\psi_1,\ \psi_2,\ \psi_3,\ldots)\;\) tiene grado \(\infty\).
+</p>
+<p>
+Por tanto \(E(X_t)=0\) para todo \(t\in\mathbb{Z}\) y
 </p>
 
 <p>
-Las herramientas utilizadas para tomar la decisión son 
+\(\boldsymbol{\gamma} \;=\; \sigma^2 \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^{-1})} \;=\; \sigma^2 \sum\limits_{j,k=0}^\infty \psi_j\psi_k z^{j-k}\quad\) (grado \(\infty\) y cogrado \(-\infty\))
+</p>
+
+<p>
+\(\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}\)
+</p>
+
+<p>
+\(f(\omega) =
+  \frac{\sigma^2}{2\pi}\frac{1}{\boldsymbol{\phi}(e^{-i\omega})\cdot\boldsymbol{\phi}(e^{i\omega})}
+  \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^\infty \gamma_h
+  \cos(h\omega);\quad\) donde \(\omega\in[-\pi,\pi]\).
+</p>
+
+<p>
+(suma infinita de cosenos)
+</p>
+<p>
+Pero, sin embargo, la PACF, \(\;\boldsymbol{\pi},\;\) es una secuencia
+con grado \(p\) y cogrado \(-p\)&#x2026;
+</p>
+</div>
+<div id="outline-container-org8780c18" class="outline-4">
+<h4 id="org8780c18"><span class="section-number-4">4.6.1.</span> Demostración de que la PACF tiene cogrado \(-p\) y grado \(p\)</h4>
+<div class="outline-text-4" id="text-4-6-1">
+<ul class="org-ul">
+<li>Sea \(\boldsymbol{X}\) un proceso causal AR(\(p\)): \(\quad
+  X_t\;=\;\sum\limits_{j=1}^p\phi_j X_{t-j}+U_t\)</li>
+<li>La proyección de \(X_{k+1}\) sobre el espacio \(\bar{sp}(X_{2}:X_k)\)
+generado por \(X_2,\ldots X_k\) (con \(k>p\)) es:
+\[\widehat{X_{k+1}}=P_{\bar{sp}(X_{2}:X_k)}(X_{k+1})=\sum_{j=1}^p\phi_j X_{k+1-j}\]</li>
+<li>De su representación MA(\(\infty\)): \(\;Y\in\bar{sp}(X_{2}:X_k)
+  \;\Rightarrow\; Y\in\bar{sp}(U_j\mid{j\leq k})\), pues
+\[X_t\;=\;\sum\limits_{j=0}^{\infty} \psi_j U_{t-j}
+  \quad\Rightarrow\quad
+  \bar{sp}(X_{2}:X_k)\subset\bar{sp}(U_j\mid{j\leq k}) \; \perp \; U_{k+1}\]</li>
+<li>Si \(Y\in\bar{sp}(X_{2}:X_k)\) entonces \(Cov\Big((X_{k+1}-\widehat{X_{k+1}}), Y\Big)=Cov(U_{k+1}, Y)=0\)</li>
+<li>Denotemos con \(\widetilde{X_{1}}\) a la proyección
+\(P_{\bar{sp}(X_{2}:X_k)}(X_{1})\) de \(X_1\) sobre
+\(\bar{sp}(X_{2}:X_k)\)</li>
+<li><p>
+Ahora es fácil ver que \(\pi_k=0\) para \(k>p\), pues
+</p>
+\begin{eqnarray*}
+ \pi_k 
+ = & Corr\Big((X_{k+1}-\widehat{X_{k+1}}),(X_{1}-\widetilde{X_{1}})\Big)\\
+ = & Corr\Big(U_{k+1},(X_{1}-\widetilde{X_{1}})\Big) \; = \; 0
+\end{eqnarray*}
+<p>
+ya que \(U_{k+1}\perp(X_{1}-\widetilde{X_{1}}) \in \bar{sp}(U_j\mid{j\leq k})\).
+</p></li>
+</ul>
+
+
+<p>
+<b>Nota.</b> Se puede demostrar que
 </p>
 <ul class="org-ul">
-<li>el análisis gráfico</li>
-<li>los contrastes formales</li>
+<li>si un proceso tiene una ACF \(\boldsymbol{\rho}\) con cogrado \(-q\) y grado \(q\), es un proceso MA(\(q\))</li>
+<li>si un proceso tiene una PACF \(\boldsymbol{\pi}\) con cogrado \(-p\) y grado \(p\), es un proceso AR(\(p\))</li>
 </ul>
+
+<p>
+Véase <i>Pourahmadi M. (2001).</i>
+</p>
+<p>
+Consecuentemente, que la ACF o la PACF se cortan ``bruscamente'' nos
+indica que el modelo es AR o MA (y su grado).
+</p>
+
+<p>
+Desgraciadamente para los modelos ARMA (qué veremos más adelante)
+tanto la ACF como la PACF tienen infinitos términos no nulos, por lo
+que su identificación no es tan sencilla.
+</p>
 </div>
-<div id="outline-container-org90c3d2d" class="outline-4">
-<h4 id="org90c3d2d"><span class="section-number-4">6.2.1.</span> Análisis gráfico</h4>
-<div class="outline-text-4" id="text-6-2-1">
+</div>
+<div id="outline-container-orgbcf8433" class="outline-4">
+<h4 id="orgbcf8433"><span class="section-number-4">4.6.2.</span> Ecuaciones de Yule-Walker (que relacionan las autocovarianzas con los parámetros de \(\boldsymbol{\phi}\))</h4>
+<div class="outline-text-4" id="text-4-6-2">
+<p>
+Consideremos un proceso AR(\(p\)): \(\quad X_t=\sum\limits_{j=1}^p\phi_j
+X_{t-j}+U_t;\qquad U_t\sim WN(0,\sigma^2)\) 
+</p>
+
+<p>
+Multiplicando ambos lados por \(X_{t-k}\) para \(0\leq k\leq p\) y tomando
+esperanzas tenemos \[Cov(X_t,X_{t-k})=\sum_{j=1}^p\phi_j
+Cov(X_{t-j},X_{t-k})+ Cov(U_t,X_{t-k});\qquad 0\leq k\leq p.\]
+</p>
+
+<p>
+Para \(\;k=0\;\) tenemos:
+</p>
+\begin{equation}
+  \sigma^2=\gamma_0-\sum_{j=1}^p\phi_j\gamma_j
+\end{equation}
+<p>
+Para \(\;1\leq k\leq p\;\) tenemos:
+</p>
+\begin{equation}
+  \gamma_k=\sum_{j=1}^p\phi_j\gamma_{k-j}
+\end{equation}
+
+<p>
+Dividiendo (1) y (2) por \(\gamma_0\) (y operando en (1)) tenemos
+</p>
+\begin{equation}
+  \gamma_0=\frac{\sigma^2}{1-\phi_1\rho_1-\cdots-\phi_p\rho_p};
+  \qquad
+  \rho_k=\phi_1\rho_{k-1}+\cdots+\phi_p\rho_{k-p}
+\end{equation}
+</div>
+</div>
+</div>
+<div id="outline-container-orgfdcf386" class="outline-3">
+<h3 id="orgfdcf386"><span class="section-number-3">4.7.</span> Proceso autorregresivo AR(\(1\))</h3>
+<div class="outline-text-3" id="text-4-7">
+<p>
+Sea \(\;(1-\phi z)*\boldsymbol{X}=\boldsymbol{U},\quad\) con
+\(\;|\phi|<1\;\) y con \(\;\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\), es
+decir \[X_t=\phi X_{t-1} + U_t.\]
+</p>
+
+<p>
+Dado que \((1-a z)*(1+a z+a^2 z^2+a^3 z^3+\cdots)=1\)
+</p>
+<p>
+\(\boldsymbol{\gamma} \;=\; \sigma^2 (1-\theta z)^{-1}*(1-\theta
+  z^{-1})^{-1} \;=\; \frac{\sigma^2}{1-\phi^2} \sum_{j=0}^\infty
+  \phi^j z^j\)
+</p>
+
+<p>
+\(\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\;
+  \frac{1+\theta^2}{\sigma^2}\boldsymbol{\gamma} \;=\;
+  \sum_{j=0}^\infty \phi^j z^j \quad\Rightarrow\quad \rho_k=\phi^k\).
+</p>
+
+<p>
+\(f(\omega) \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^\infty \gamma_h
+  \cos(h\omega)=\frac{\sigma^2}{2\pi}\frac{1}{1+\theta^2-2\theta\cos(\omega)}\).
+</p>
+
+<p>
+\(\boldsymbol{\pi} \;=\; (\ldots,\; 0,\; 0,\; \phi,\; {\color{blue}1},\; \phi,\; 0,\; 0,\;\ldots)\) 
+</p>
+</div>
+<div id="outline-container-org3ee24c2" class="outline-4">
+<h4 id="org3ee24c2"><span class="section-number-4">4.7.1.</span> AR(1) con raíz positiva</h4>
+<div class="outline-text-4" id="text-4-7-1">
 <div class="org-src-container">
-<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 8, repr.plot.res = 200)
-ide(PoblacionAustralia_ts,
-    graphs = c(<span style="color: #008000;">"plot"</span>),
-    transf = list(list(bc = F), list(bc = F, d = 1), list(bc = F, d = 2)),
-    main=<span style="color: #008000;">"Poblaci&#243;n australiana, primera diferencia y segunda diferencia"</span> )
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ar1p <span style="color: #D0372D;">&lt;-</span> um(ar = <span style="color: #008000;">"(1 - 0.9B)"</span>)
+display(list(ar1p), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</span>)
 </pre>
 </div>
 
+<p>
+\[\boldsymbol{\phi}(z)=1-0.9z\quad\Rightarrow\quad X_t=0.9X_{t-1}+U_t.\]
+</p>
 
-<div id="orgaaa7376" class="figure">
-<p><img src="./img/lecc06/diferenciasPoblacion.png" alt="diferenciasPoblacion.png" width="900px" />
+
+<div id="org751b966" class="figure">
+<p><img src="./img/lecc06/ACF-AR1p.png" alt="ACF-AR1p.png" width="900px" />
 </p>
 </div>
 
-
-
-<p>
-La serie de población \(\boldsymbol{y}\) tiene una clara tendencia
-creciente (primer gráfico), que desaparece al tomar una diferencia
-ordinaria, \[\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y}\]
-(segundo gráfico). Bastar con tomar una primera diferencia de la serie
-de población para obtener una nueva serie que se asemeja a la
-realización de un proceso estacionario.
-</p>
-
-<p>
-No obstante, ¿qué pasa si tomamos una segunda diferencia ordinaria?
-\[\nabla\nabla\boldsymbol{y}=\nabla^2\boldsymbol{y}=(1-\mathsf{B})^2*\boldsymbol{y}\]
-(segundo gráfico). Pues que la serie obtenida también es estacionaria,
-pero ojo, es un grave error tomar más diferencias de las necesarias al
-modelizar los datos. Se debe tomar el mínimo número de
-transformaciones que arrojen una serie ``estacionaria'' (recuerde que
-decir que una serie temporal es <i>estacionaria</i> es un abuso del
-lenguaje).
-</p>
-
 <div class="org-src-container">
-<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height =  10, repr.plot.res = 200)
-ide(Z,
-    graphs = c(<span style="color: #008000;">"plot"</span>),
-    transf = list(list(bc=T), list(bc=T, d=1), list(bc=T, D=1), list(bc=T, D=1, d=1)),
-    main = <span style="color: #008000;">"Log pasajeros a&#233;reos, diferencia ordinaria, diferencia estacional y composici&#243;n de ambas diferencias"</span> )
+<pre class="src src-jupyter-R" id="orge3e586f">roots(ar1p)
 </pre>
 </div>
 
-
-<div id="org6c846e1" class="figure">
-<p><img src="./img/lecc06/diferenciasPasajeros.png" alt="diferenciasPasajeros.png" width="900px" />
-</p>
-</div>
-
-<p>
-Como ya vimos, la serie pasajeros en logaritmos tiene tendencia y
-estacionalidad muy evidentes. No basta con tomar solo una diferencia
-ordinaria \[\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y};\] pues
-el resultado muestra una pauta estacional. Ni tampoco basta con tomar
-solo una diferencia estacional
-\[\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B^{12}})*\boldsymbol{y};\] pues
-resulta una serie que ``deambula'', i.e., que no es <i>``estacionaria''</i>
-en media.
-</p>
-
-<p>
-Tomar una diferencia ordinaria y otra estacional
-\[\nabla\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B})*(1-\mathsf{B^{12}})*\boldsymbol{y}\]
-arroja una serie que sí parece ser <i>``estacionaria''</i>.
-</p>
-
-
-<div class="org-src-container">
-<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height =  8, repr.plot.res = 200)
-TemperaturaRetiro_ts=ts(read.csv(<span style="color: #008000;">"datos/Retiro.txt"</span>),start=c(1985, 1), end=c(2015,9), frequency=12)
-ide(TemperaturaRetiro_ts,
-    graphs = c(<span style="color: #008000;">"plot"</span>),
-    transf = list(list(), list(D = 1)),
-    main=<span style="color: #008000;">"Temperatura media en el Retiro y diferencia estacional"</span> )
-</pre>
-</div>
-
-
-<div id="org0411cf0" class="figure">
-<p><img src="./img/lecc06/diferenciasTemperaturasRetiro.png" alt="diferenciasTemperaturasRetiro.png" width="900px" />
-</p>
-</div>
-
-
-<p>
-En el caso de la serie de temperaturas en el Parque del Retiro, parece
-que es suficiente con tomar solo una diferencia estacional.
-</p>
-</div>
-</div>
-<div id="outline-container-org1f0e895" class="outline-4">
-<h4 id="org1f0e895"><span class="section-number-4">6.2.2.</span> Contrastes formales sobre el orden de integración</h4>
-<div class="outline-text-4" id="text-6-2-2">
-</div>
 <ol class="org-ol">
-<li><a id="org350436e"></a>Test de Dickey-Fuller (DF)<br />
-<div class="outline-text-5" id="text-6-2-2-1">
-<dl class="org-dl">
-<dt>\(H_0\)</dt><dd>la serie es \(I(1)\)</dd>
-<dt>\(H_1\)</dt><dd>la serie es \(I(0)\).</dd>
-</dl>
+<li><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
-<p>
-Consideremos el modelo \[y_{t}=\rho y_{t-1}+u_{t},\] donde \(y_{t}\) es
-la variable de interés, \(\rho\) es un coeficiente, y \(u_{t}\) es un
-proceso de ruido blanco. Una raíz unitaria estará presente si \(\rho
-=1\). En tal caso el modelo será no-estacionario.
-</p>
 
-<p>
-El modelo de regresión se puede escribir como
-</p>
+<colgroup>
+<col  class="org-right" />
 
-<p>
-\[\nabla y_{t}=(\rho -1)y_{t-1}+u_{t}=\delta y_{t-1}+u_{t}\]
-</p>
-</div>
-</li>
-<li><a id="org218b056"></a>Test de Dickey-Fuller aumentado (ADF)<br /></li>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Real</th>
+<th scope="col" class="org-right">Imaginary</th>
+<th scope="col" class="org-right">Modulus</th>
+<th scope="col" class="org-right">Frequency</th>
+<th scope="col" class="org-right">Period</th>
+<th scope="col" class="org-right">Mult.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1.111111</td>
+<td class="org-right">0</td>
+<td class="org-right">1.111111</td>
+<td class="org-right">0</td>
+<td class="org-right">Inf</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table></li>
 </ol>
-</div>
-</div>
-</div>
-<div id="outline-container-org6a4434f" class="outline-2">
-<h2 id="org6a4434f"><span class="section-number-2">7.</span> Otras herramientas estadísticas&#xa0;&#xa0;&#xa0;<span class="tag"><span class="C_moHacerConR">CómoHacerConR</span></span></h2>
-<div class="outline-text-2" id="text-7">
-</div>
-<div id="outline-container-orgcd25fd1" class="outline-3">
-<h3 id="orgcd25fd1"><span class="section-number-3">7.1.</span> Estadísticos descriptivos</h3>
-<div class="outline-text-3" id="text-7-1">
+
+
 <div class="org-src-container">
-<pre class="src src-jupyter-R"><span style="color: #D0372D;">library</span>(pastecs)      <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">resumen estad&#237;sticos descriptivos</span>
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">https://cran.r-project.org/web/packages/pastecs/index.html (stat.desc)</span>
-<span style="color: #D0372D;">library</span>(knitr)        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">presentaci&#243;n de tabla resumen</span>
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">https://cran.r-project.org/web/packages/knitr/index.html (kable)</span>
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">https://bookdown.org/yihui/rmarkdown-cookbook/kable.html</span>
-
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">estad&#237;sticos principales y test de normalidad</span>
-kable(stat.desc(Z, basic=<span style="color: #6434A3;">FALSE</span>, norm=<span style="color: #6434A3;">TRUE</span>), <span style="color: #008000;">'rst'</span>)
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ar1p, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
 </pre>
 </div>
 
-<pre class="example" id="org282e2de">
 
-
-============  =============
-\                         x
-============  =============
-median          265.5000000
-mean            280.2986111
-SE.mean           9.9971931
-CI.mean.0.95     19.7613736
-var           14391.9172009
-std.dev         119.9663169
-coef.var          0.4279947
-skewness          0.5710676
-skew.2SE          1.4132515
-kurtosis         -0.4298441
-kurt.2SE         -0.5353818
-normtest.W        0.9519577
-normtest.p        0.0000683
-============  =============
+<div id="org200ec2e" class="figure">
+<p><img src="./img/lecc06/Sim-AR1p.png" alt="Sim-AR1p.png" width="900px" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org207f3a0" class="outline-4">
+<h4 id="org207f3a0"><span class="section-number-4">4.7.2.</span> AR(1) con raíz negativa</h4>
+<div class="outline-text-4" id="text-4-7-2">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ar1n <span style="color: #D0372D;">&lt;-</span> um(ar = <span style="color: #008000;">"(1 + 0.9B)"</span>)
+display(list(ar1n), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</span>)
 </pre>
 </div>
-</div>
-<div id="outline-container-org8331c96" class="outline-3">
-<h3 id="org8331c96"><span class="section-number-3">7.2.</span> Test de normalidad Jarque-Vera</h3>
-<div class="outline-text-3" id="text-7-2">
+
 <p>
-<a href="https://en.wikipedia.org/wiki/Jarque%E2%80%93Bera_test">Jarque-Vera test (Wikipedia)</a>
+\[\boldsymbol{\phi}(z)=1+0.9z\quad\Rightarrow\quad X_t=-0.9X_{t-1}+U_t.\]
+</p>
+
+
+<div id="org700c129" class="figure">
+<p><img src="./img/lecc06/ACF-AR1n.png" alt="ACF-AR1n.png" width="900px" />
+</p>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R" id="org780c8b5">roots(ar1n)
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Real</th>
+<th scope="col" class="org-right">Imaginary</th>
+<th scope="col" class="org-right">Modulus</th>
+<th scope="col" class="org-right">Frequency</th>
+<th scope="col" class="org-right">Period</th>
+<th scope="col" class="org-right">Mult.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">-1.111111</td>
+<td class="org-right">0</td>
+<td class="org-right">1.111111</td>
+<td class="org-right">0.5</td>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ar1n, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
+</pre>
+</div>
+
+
+<div id="orgc5e8025" class="figure">
+<p><img src="./img/lecc06/Sim-AR1n.png" alt="Sim-AR1n.png" width="900px" />
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb5f3fc6" class="outline-3">
+<h3 id="orgb5f3fc6"><span class="section-number-3">4.8.</span> Proceso autorregresivo AR(\(2\))</h3>
+<div class="outline-text-3" id="text-4-8">
+<p>
+Sea \((1-\phi_1 z-\phi_2 z^2)*\boldsymbol{X}=\boldsymbol{U}\), con
+\(\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\) y con
+\[\phi_1+\phi_2<1;\qquad \phi_2-\phi_1<1;\qquad |\phi_2|<1;\quad \text{(i.e., invertible)}\]
+es decir \(X_t=\phi_1 X_{t-1} + \phi_2 X_{t-2} + U_t\).
+</p>
+
+<ul class="org-ul">
+<li><p>
+\(\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi_1 z-\phi_2 z^2)*(1-\phi_1 z^{-1}-\phi_2 z^{-2})\)
 </p>
 
 <p>
-Podemos calcularlo con la librería <a href="https://cran.r-project.org/web/packages/moments/index.html">momments</a>:
+\(\gamma_0={\color{blue}{\sigma^2(1+\phi_1^2+\phi_2^2)}};\qquad\)
+\(\gamma_1=\sigma^2\big(-\phi_1(1-\phi_2)\big);\qquad\)
+\(\gamma_2=\sigma^2(-\phi_2)\)
 </p>
-<div class="org-src-container">
-<pre class="src src-jupyter-R"><span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">install.packages("moments")</span>
-<span style="color: #D0372D;">library</span>(moments)
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Perform the Jarque-Bera test</span>
-jb_test <span style="color: #D0372D;">&lt;-</span> jarque.test(as.numeric(Z))
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Print the test result</span>
-print(jb_test)
-</pre>
-</div>
-
-<pre class="example">
-
-	Jarque-Bera Normality Test
-
-data:  as.numeric(Z)
-JB = 8.9225, p-value = 0.01155
-alternative hypothesis: greater
-
-</pre>
-
 
 <p>
-Otra librería alternativa para calcularlo: <a href="https://cran.r-project.org/web/packages/tseries/index.html">tseries</a>
-</p>
-<div class="org-src-container">
-<pre class="src src-jupyter-R"><span style="color: #D0372D;">library</span>(tseries)
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Perform the Jarque-Bera test</span>
-jb_test <span style="color: #D0372D;">&lt;-</span> jarque.bera.test(Z)
-<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Print the test result</span>
-print(jb_test)
-</pre>
-</div>
+\(\gamma_3=\gamma_4=\cdots=0\qquad\) (y es simétrica) 
+</p></li>
 
-<pre class="example">
+<li>\(\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2(1+\phi_1^2+\phi_2^2)}\boldsymbol{\gamma}\)</li>
 
-	Jarque Bera Test
+<li>\(f(\omega) \;=\;  \frac{\sigma^2}{2\pi}\frac{1}{1+\phi_1^2+\phi_2^2-2\phi_1(1+\phi_2)\cos(\omega)-2\phi_2\cos(2\omega)};\quad -\pi\leq\omega\leq\pi\)</li>
+</ul>
 
-data:  Z
-X-squared = 8.9225, df = 2, p-value = 0.01155
-
-</pre>
+<ul class="org-ul">
+<li>\(\boldsymbol{\pi}\) tiene una expresión complicada, pero su magnitud
+decae paulatinamente</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-09-03 mar 17:57</p>
+<p class="date">Created: 2024-09-06 vie 22:48</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

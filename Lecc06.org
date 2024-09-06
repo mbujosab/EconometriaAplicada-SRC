@@ -75,6 +75,8 @@ José Luis Gallego siempre que pueda.
 # library(readr)
 # library(ggplot2)
 # install.packages("pastecs")
+# install.packages("orgutils")
+
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 Primero cargamos la librería =tfarima= (Repositorio Cran:
@@ -132,7 +134,7 @@ variables del proceso.
 Dado un conjunto de variables
 $\boldsymbol{Z}=(Z_1,Z_2,\ldots Z_k)$, la \emph{correlación condicional} 
 $\rho_{X,Y|\boldsymbol{Z}}$ entre las variables $X$ e $Y$ es
-$$\rho_{X,Y|\boldsymbol{Z}}=Coor\Big(X-E(X\mid\boldsymbol{Z}),\ Y-E(Y\mid\boldsymbol{Z})\Big)$$ 
+$$\rho_{X,Y|\boldsymbol{Z}}=Corr\Big(X-E(X\mid\boldsymbol{Z}),\ Y-E(Y\mid\boldsymbol{Z})\Big)$$ 
 El problema es que no siempre es fácil conocer las esperanzas condicionadas 
 $E(X\mid\boldsymbol{Z})$ y $E(Y\mid\boldsymbol{Z})$.
 
@@ -141,7 +143,7 @@ correspondientes a sus respectivas regresiones lineales sobre $\boldsymbol{Z}$.
 La correlación entre ambos residuos se denomina \emph{correlación parcial} 
 entre $X$ e $Y$; y mide la correlación entre ambas variables una vez  
 ``descontado'' el efecto lineal de las variables $\boldsymbol{Z}$.
-$$Coor\Big((X-\widehat{X}),\ (Y-\widehat{Y})\Big)$$
+$$Corr\Big((X-\widehat{X}),\ (Y-\widehat{Y})\Big)$$
 #+END_EXPORT
 
 La /correlación parcial/ entre dos variables $X_t$ y $X_{t-k}$ de un
@@ -152,9 +154,9 @@ $$X_t,\ \overbrace{X_{t-1},\ldots X_{t-(k-1)},}\ X_{t-k}$$
 
 Si denotamos con $\widehat{X_t}$ y $\widehat{X_{t-k}}$ los ajustes de
 las respectivas regresiones de $X_t$ y $X_{t-k}$ sobre $X_{t-1},\ldots
-X_{t-(k-1)};\;$ la /correlación parcial/ entre $X_t$ y $X_{t+k}$ es la
+X_{t-(k-1)};\;$ la /correlación parcial/ $\pi_k$ entre $X_t$ y $X_{t+k}$ es la
 correlación entre los residuos de sendas regresiones:
-$$Coor\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widehat{X_{t-k}})\Big)$$
+$$\pi_k=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widehat{X_{t-k}})\Big)$$
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 En un proceso débilmente estacionario las correlaciones parciales solo
@@ -164,17 +166,14 @@ secuencia.
 
 *Función de autocorrelación parcial* (PACF) de un proceso estacionario
 $\boldsymbol{X}$ es la siguiente secuencia
-$\boldsymbol{\pi}=(\pi_k\mid k\in\mathbb{Z}),\;$ que es
-simétrica pues
-$\pi_{-k}=\pi_k$:
-$$\begin{cases}
-\pi_0 &=1\\\\
-\pi_1 &=Corr(X_t,\ X_{t-1})=\rho_1=\frac{\gamma_1}{\gamma_0}\\\\
-\pi_k &=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widehat{X_{t-k}})\Big)
-\end{cases},$$
-donde $\widehat{X_t}$ y $\widehat{X_{t-k}}$ son los ajustes de las
-respectivas regresiones de $X_t$ y $X_{t-k}$ sobre 
-$X_{t-1},\ldots X_{t-(k-1)}$.
+$\boldsymbol{\pi}=(\pi_k\mid k\in\mathbb{Z}),\;$ que es simétrica pues
+$\pi_{-k}=\pi_k$: $$\begin{cases} \pi_0 &={\color{blue}{1}}\\\\ \pi_1 &=Corr(X_t,\
+X_{t-1})=\rho_1=\frac{\gamma_1}{\gamma_0}\\\\ \pi_k
+&=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widehat{X_{t-k}})\Big)
+\end{cases},$$ donde $\widehat{X_t}$ y $\widehat{X_{t-k}}$ son los
+ajustes de las respectivas regresiones de $X_t$ y $X_{t-k}$ sobre
+$X_{t-1},\ldots X_{t-(k-1)}.\;$ i.e., las proyecciones ortogonales
+sobre $\bar{sp}(1,X_{t-1}:X_{t-(k-1)})$.
 #+LATEX: \medskip
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
@@ -195,9 +194,9 @@ recursivamente con el algoritmo Levinson-Durbin; véase
 /Pourahmadi, M. (2001, Capítulo 7)/ o /Brockwell & Davis (1991,
 Capitulo 5)/)
 
-\(\pi_1=\phi_{11}=\rho_1\)
+# \(\pi_1=\phi_{11}=\rho_1\)
 
-\(\pi_{k+1}=\phi_{k+1,k+1}=\frac{\rho_{k+1}-\sum_{j=1}^k\phi_{kj}\rho_{k+1-j}}{1-\sum_{j=1}^k\phi_{kj}\rho_j}\); donde $\phi_{k+1,j}=\phi_{kj}-\phi_{k+1,k+1}\phi_{k,k+1-j}$, $j=1:k$
+# \(\pi_{k+1}=\phi_{k+1,k+1}=\frac{\rho_{k+1}-\sum_{j=1}^k\phi_{kj}\rho_{k+1-j}}{1-\sum_{j=1}^k\phi_{kj}\rho_j}\); donde $\phi_{k+1,j}=\phi_{kj}-\phi_{k+1,k+1}\phi_{k,k+1-j}$, $j=1:k$
 
 Consecuentemente, la PACF $\boldsymbol{\pi}$ puede verse como una
 reparametrización de la función de autocovarianzas
@@ -205,6 +204,7 @@ $\boldsymbol{\gamma}$.
 
 Veamos otra transformación de $\boldsymbol{\gamma}$ que también
 arrojará luz sobre las propiedades de un proceso estocástico.
+
 
 * Densidad espectral
    :PROPERTIES:
@@ -250,35 +250,70 @@ elegir un modelo ARMA para una serie temporal /``estacionaria''/.
 Para entenderlo debemos ver cómo son estas funciones en algunos
 modelos lineales concretos.
 
+
 * ACF, PACF y densidad espectral de algunos modelos lineales
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . skip)))
    :END:
 
-** ACF de procesos lineales
+
+** Procesos lineales
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
 Sea el proceso lineal
-$\boldsymbol{X}=\boldsymbol{\varphi}*\boldsymbol{U}$, donde
+$\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}$, donde
 $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y
-$\;\boldsymbol{\varphi}\in\ell^1;\;$ es decir
-$$X_t=\sum_{j\in\mathbb{Z}}\varphi_j U_{t-j}.$$ Puesto que $E(U_t)=0$
+$\;\boldsymbol{\psi}\in\ell^1;\;$ es decir
+$$X_t=\sum_{j\in\mathbb{Z}}\psi_j U_{t-j}.$$ Puesto que $E(U_t)=0$
 para todo $t\in\mathbb{Z}$, entonces
-$$E(X_t)=E\left(\sum_{j\in\mathbb{Z}}\varphi_j
-U_{t-j}\right)=\sum_{j\in\mathbb{Z}}\varphi_j E(U_{t-j})=0$$ Y como
+$$E(X_t)=E\left(\sum_{j\in\mathbb{Z}}\psi_j
+U_{t-j}\right)=\sum_{j\in\mathbb{Z}}\psi_j E(U_{t-j})=0$$ Y como
 además, $E(U_j\cdot U_k)=0$ cuando $j\ne k$, su función de
 autocovarianzas es 
 \begin{eqnarray*}
 \gamma_{k,t}= E\big[X_t\cdot X_{t-k}\big]=&
-E\left[\Big(\sum_{j\in\mathbb{Z}}\varphi_j
-U_{t-j}\Big)\Big(\sum_{j\in\mathbb{Z}}\varphi_j U_{t-k-j}\Big)\right]=
-\sigma^2\sum_{j\in\mathbb{Z}}\varphi_{j+k}\cdot\varphi_{j}\\
-=&\sigma^2\sum_{j\in\mathbb{Z}}\varphi_{j+k}\cdot R(\varphi_{-j}) =
-\sigma^2\left(\boldsymbol{\varphi}(z)*\boldsymbol{\varphi}(z^{-1})\right)_k
+E\left[\Big(\sum_{j\in\mathbb{Z}}\psi_j
+U_{t-j}\Big)\Big(\sum_{j\in\mathbb{Z}}\psi_j U_{t-k-j}\Big)\right]=
+\sigma^2\sum_{j\in\mathbb{Z}}\psi_{j+k}\cdot\psi_{j}\\
+=&\sigma^2\sum_{j\in\mathbb{Z}}\psi_{j+k}\cdot R(\psi_{-j}) =
+\sigma^2\left(\boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})\right)_k
 \end{eqnarray*}
-que solo depende de $k$ (el proceso es estacionario como ya sabíamos).
+que solo depende de $k$ (el proceso es estacionario como ya sabíamos). Por tanto...
+#+latex: \medskip
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Si $\boldsymbol{X}$ es un proceso lineal
+$\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}$, con
+$\;\boldsymbol{U}\sim WN(0,\sigma^2),\;$ donde
+$\boldsymbol{\psi}\in\ell^1$ es una serie formal (i.e., cogrado $0$) y
+donde $\psi_0=1$, es decir, si  $$X_t= \sum_{j=1}^\infty\psi_j
+U_{t-j}+U_t;\qquad t\in\mathbb{Z}.$$
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Entonces
+
+- $\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})$
+
+ $\gamma_k = \sum_{j\in\mathbb{Z}} \psi_{k-j}\psi_j;\quad$ así que $\;\gamma_k\to0\;$ cuando $\;k\to\infty$.
+
+# - $\boldsymbol{\gamma} \;=\; \sum_{k\in\mathbb{Z}}\gamma_k z^k \;=\; \sigma^2 z^0 \;=\; \sigma^2\boldsymbol{1} \;=\; (\ldots,0,0,\sigma^2,0,0,\ldots)$
+
+- ACF: $\;\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$
+
+# - $\boldsymbol{\rho} \;=\; \sum_{k\in\mathbb{Z}}\frac{\gamma_k}{\gamma_0} z^k \;=\; 1 z^0 \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,1,0,0,\ldots)$
+
+- Densidad espectral: $\;f(\omega) \;=\; \frac{1}{2\pi}\sum_{h\geq0}\gamma_h \cos(h\omega);\quad \omega\in[-\pi,\pi]$
+
+- PACF: $\;\boldsymbol{\pi}\in\ell^2,\quad$ i.e., $\;\pi_k\to0\;$ cuando $\;k\to\infty$ 
+
+  (Cuando $\boldsymbol{\pi}\in\ell^2$ se dice que el proceso es /no-determinista/)
+
+# \sum_{k\in\mathbb{Z}}\pi_k z^k \;=\; 1 z^0 \;=\; 
+
+
+
 
 ** Proceso de Ruido Blanco
    :PROPERTIES:
@@ -289,25 +324,25 @@ Sea $\boldsymbol{X}=\boldsymbol{1}*\boldsymbol{U}$,
 donde $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;;$ es decir $X_t=U_t$ para
 $t\in\mathbb{Z}$. Entonces
 
-- $\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{1}(z)*\boldsymbol{1}(z^{-1}) \;=\; \sigma^2\boldsymbol{1} \;=\; (\ldots,0,0,\sigma^2,0,0,\ldots) \;=\; \sigma^2 z^0$
+- $\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{1}(z)*\boldsymbol{1}(z^{-1}) \;=\; \sigma^2\boldsymbol{1} \;=\; (\ldots,0,0,{\color{blue}{\sigma^2}},0,0,\ldots) \;=\; \sigma^2 z^0$
 
 # - $\boldsymbol{\gamma} \;=\; \sum_{k\in\mathbb{Z}}\gamma_k z^k \;=\; \sigma^2 z^0 \;=\; \sigma^2\boldsymbol{1} \;=\; (\ldots,0,0,\sigma^2,0,0,\ldots)$
 
-- $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2}\boldsymbol{\gamma} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,1,0,0,\ldots) \;=\; 1 z^0$
+- $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2}\boldsymbol{\gamma} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,{\color{blue}{1}},0,0,\ldots) \;=\; 1 z^0$
 
 # - $\boldsymbol{\rho} \;=\; \sum_{k\in\mathbb{Z}}\frac{\gamma_k}{\gamma_0} z^k \;=\; 1 z^0 \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,1,0,0,\ldots)$
 
-- $\boldsymbol{\pi} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,1,0,0,\ldots) \;=\; 1 z^0$
+- $f(\omega) \;=\; \frac{1}{2\pi}\sum_{h\geq0}\gamma_h \cos(h\omega) \;=\; \frac{\sigma^2}{2\pi} \cos(0\omega) \;=\; \frac{\sigma^2}{2\pi};\quad \omega\in[-\pi,\pi]$
+
+- $\boldsymbol{\pi} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,{\color{blue}{1}},0,0,\ldots) \;=\; 1 z^0$
 
 # \sum_{k\in\mathbb{Z}}\pi_k z^k \;=\; 1 z^0 \;=\; 
-
-- $f(\omega) \;=\; \frac{1}{2\pi}\sum_{h\geq0}\gamma_h \cos(h\omega) \;=\; \frac{\sigma^2}{2\pi} \cos(0\omega) \;=\; \frac{\sigma^2}{2\pi};\quad \omega\in[-\pi,\pi]$
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACFwhitenoise.png :exports code :results none
 options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
 wn <- um(ar = "(1 - 0B)")
-display(list(ar0p), lag.max = 20, byrow = TRUE)
+display(list(wn), lag.max = 20, byrow = TRUE)
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
@@ -321,7 +356,7 @@ display(list(ar0p), lag.max = 20, byrow = TRUE)
 options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
 ide(sim(wn, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"), main="Ruido blanco")
 #+END_SRC
-
+ 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 #+attr_org: :width 800
 #+attr_html: :width 900px
@@ -329,49 +364,131 @@ ide(sim(wn, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"), 
 [[./img/lecc06/SimulWhitenoise.png]]
 
 
-
-
-** Media móvil MA($q$)
+** Proceso de media móvil MA($q$)
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
-Sea
-$\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$, con
+Sea $\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$, con
 $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y donde $\boldsymbol{\theta}$
-es un polinomio de orden $q$ con $\theta_0=1$, es decir $$X_t=
+es un polinomio de orden $q>0$, con $\theta_0=1$ y con todas sus raíces
+fuera del círculo unidad
+$(\boldsymbol{\theta}^{-\triangleright}\in\ell^1)$, es decir $$X_t=
 \sum_{j=1}^q\theta_j U_{t-j}+U_t.$$
 
-- $\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\theta}(z^{-1}) \;=\; \sigma^2 \sum\limits_{j,k=0}^q \theta_j\theta_k z^{j-k}$
+#+BEGIN_EXPORT latex
+\begin{quotation}
+\em
+Este requisito no es necesario para que el proceso sea estacionario, pero por conveniencia se usan modelos MA que puedan tener una representación AR($\infty$) \emph{causal} (es decir, usando observaciones del pasado ``para construir'' el presente):
+$$\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}
+\quad\rightarrow\quad
+\frac{1}{\boldsymbol{\theta}}*\boldsymbol{X}=\boldsymbol{U}
+\quad\Rightarrow\quad
+U_t = \sum_{h=0}^\infty\psi_j X_{t-j}
+$$
+donde $\boldsymbol{\psi}=\boldsymbol{\theta}^{-\triangleright}=\boldsymbol{\theta}^{-1}\in\ell^1$. Entonces se dice que el model MA es ``\emph{invertible}''. Cualquier modelo MA sin raices en el círculo unidad se puede reparametrizar para obtener un modelo invertible con la misma función de autocovarianzas ``$\boldsymbol{\gamma}$'' y ,consecuentemente, las mismas ACF, PACF y densidad espectral que el modelo original.
+\end{quotation}
+#+END_EXPORT
+Entonces $E(X_t)=0$ y
 
-- $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$
+$\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\theta}(z^{-1}) \;=\; \sigma^2 \sum\limits_{j,k=0}^q \theta_j\theta_k z^{j-k}\;$ (grado $q$ y cogrado $-q$)
 
-- $\boldsymbol{\pi}$ tiene una expresión más complicada, pero su magnitud decae paulatinamente 
+$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$
 
-- $f(\omega) \;=\; \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})*\boldsymbol{\theta}(e^{i\omega}) \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^q \gamma_h \cos(h\omega);\quad \omega\in[-\pi,\pi]$
+$f(\omega) \;=\; \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})\cdot\boldsymbol{\theta}(e^{i\omega}) \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^q \gamma_h \cos(h\omega);\quad \omega\in[-\pi,\pi]\quad$ ($q$ cosenos $+1$)
 
-** Media móvil MA($1$)
+$\boldsymbol{\pi}\;$ tiene grado $\infty$ y cogrado $-\infty\;$ y su magnitud decae paulatinamente cuando $\;k\to\infty$
+
+
+** Proceso de media móvil MA($1$)
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
 
-Sea $\boldsymbol{X}=(1+\theta z)*\boldsymbol{U}$, con
-$\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es decir $X_t=U_t+\theta U_{t-1}$.
+Sea $\boldsymbol{X}=(1-\theta z)*\boldsymbol{U}$ con $|\theta|<1$ y
+con $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es decir $X_t=U_t-\theta
+U_{t-1}$.
 
-- $\boldsymbol{\gamma} \;=\; \sigma^2 (1+\theta z)*(1+\theta z^{-1}) \;=\; \sigma^2 (\ldots,\ 0\ ,\ -\theta,\ (1+\theta^2),\ -\theta,\ 0,\ \ldots)$
+- $\boldsymbol{\gamma} \;=\; \sigma^2 (1-\theta z)*(1-\theta z^{-1})
+  \;=\; \sigma^2 (\ldots,\ 0\ ,\ -\theta,\ {\color{blue}{(1+\theta^2)}},\ -\theta,\
+  0,\ \ldots)$
 
-- $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{1+\theta^2}\boldsymbol{\gamma}$
+- $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\;
+  \frac{1}{\sigma^2(1+\theta^2)}\boldsymbol{\gamma}$
 
-- $\boldsymbol{\pi} \;=\; \sum\limits_{k\in\mathbb{Z}}{ \frac{-\theta^k(1-\theta^2)}{1-\theta^{2(k+1)}} z^k}$ 
+- $f(\omega) \;=\;
+  \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})\cdot\boldsymbol{\theta}(e^{i\omega})
+  \;=\;
+  \frac{\sigma^2}{2\pi}\Big((1+\theta^2)\;-\;2\theta\cos(\omega)\Big);\quad
+  \omega\in[-\pi,\pi]$
 
-- $f(\omega) \;=\; \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})*\boldsymbol{\theta}(e^{i\omega}) \;=\; \frac{\sigma^2}{2\pi}\left((1+\theta^2)-\theta\cos(\omega)\right);\quad \omega\in[-\pi,\pi]$
+- $\boldsymbol{\pi} \;=\; \sum\limits_{k\in\mathbb{Z}}{
+  \frac{-\theta^k(1-\theta^2)}{1-\theta^{2(k+1)}} z^k}$
 
+*** MA(1) con raíz positiva
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+# PARÁMETRO NEGATIVO (violeta)
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACF-MA1p.png :exports code :results none
 options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
-ma1p <- um(ma = "(1 + 0.9B)")
+ma1p <- um(ma = "(1 - 0.9B)")
 display(list(ma1p), lag.max = 20, byrow = TRUE)
+#+END_SRC
+
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+$$\boldsymbol{\theta}(z)=1-0.9z\quad\Rightarrow\quad X_t=
+(1-0.9 \mathsf{B})U_t.$$
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/ACF-MA1p.png]]
+
+#+name: raices-ma1p
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :exports result  :results value table pp :results none
+roots(ma1p)
+#+END_SRC
+
+#+RESULTS: raices-ma1p
+:RESULTS:
+1. 
+   |     Real | Imaginary |  Modulus | Frequency | Period | Mult. |
+   |----------+-----------+----------+-----------+--------+-------|
+   | 1.111111 |         0 | 1.111111 |         0 |    Inf |     1 |
+   #+caption: A matrix: 1 × 6 of type dbl
+:END:
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file Sim-MA1p.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ma1p, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"))
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/Sim-MA1p.png]]
+
+*** MA(1) con raíz negativa
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+# PARÁMETRO POSITIVO (rojo)
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACF-MA1n.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ma1n <- um(ma = "(1 + 0.9B)")
+display(list(ma1n), lag.max = 20, byrow = TRUE)
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
@@ -381,41 +498,27 @@ $$\boldsymbol{\theta}(z)=1+0.9z\quad\Rightarrow\quad X_t=
 #+attr_org: :width 800
 #+attr_html: :width 900px
 #+attr_latex: :width 425px
-[[./img/lecc06/ACF-MA1p.png]]
-
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file Sim-MA1p.png :exports code :results none
-options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
-ide(sim(ma1p, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"), main="MA(1)")
-#+END_SRC
-
-#+attr_org: :width 800
-#+attr_html: :width 900px
-#+attr_latex: :width 425px
-[[./img/lecc06/Sim-MA1p.png]]
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACF-MA1n.png :exports code :results none
-options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
-ma1n <- um(ma = "(1 - 0.9B)")
-display(list(ma1n), lag.max = 20, byrow = TRUE)
-#+END_SRC
-
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
-$$\boldsymbol{\theta}(z)=1-0.9z\quad\Rightarrow\quad X_t=
-(1-0.9 \mathsf{B})U_t.$$
-
-#+attr_org: :width 800
-#+attr_html: :width 900px
-#+attr_latex: :width 425px
 [[./img/lecc06/ACF-MA1n.png]]
 
+#+name: raices-ma1n
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :exports result :results value table pp :results none
+roots(ma1n)
+#+END_SRC
+
+#+RESULTS: raices-ma1n
+:RESULTS:
+1. 
+   |      Real | Imaginary |  Modulus | Frequency | Period | Mult. |
+   |-----------+-----------+----------+-----------+--------+-------|
+   | -1.111111 |         0 | 1.111111 |       0.5 |      2 |     1 |
+   #+caption: A matrix: 1 × 6 of type dbl
+:END:
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file Sim-MA1n.png :exports code :results none
 options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
-ide(sim(ma1n, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"), main="MA(1)")
+ide(sim(ma1n, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"))
 #+END_SRC
 
 #+attr_org: :width 800
@@ -425,12 +528,564 @@ ide(sim(ma1n, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram")
 
 
 
-** AR(1)
+** Proceso de media móvil MA($2$)
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
 
-# +attr_ipynb: (slideshow . ((slide_type . skip)))
+Sea $\boldsymbol{X}=(1-\theta_1 z-\theta_2 z^2)*\boldsymbol{U}$, con
+$\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y con
+$$\theta_1+\theta_2<1;\qquad \theta_2-\theta_1<1;\qquad |\theta_2|<1;\quad \text{(i.e., invertible)}$$
+es decir $X_t=U_t-\theta_1 U_{t-1}-\theta_2 U_{t-2}$.
+
+- $\boldsymbol{\gamma} \;=\; \sigma^2 (1-\theta_1 z-\theta_2 z^2)*(1-\theta_1 z^{-1}-\theta_2 z^{-2})$
+  # $\sigma^2(\ldots,\; 0,\; -\theta_2,\; -\theta_1(1-\theta_2),\; {\color{blue}{1+\theta_1^2+\theta_2^2}},\; -\theta_1(1-\theta_2),\; -\theta_2,\; 0,\;\ldots)$ 
+  
+  $\gamma_0={\color{blue}{\sigma^2(1+\theta_1^2+\theta_2^2)}};\qquad$
+  $\gamma_1=\sigma^2\big(-\theta_1(1-\theta_2)\big);\qquad$
+  $\gamma_2=\sigma^2(-\theta_2)$
+
+  $\gamma_3=\gamma_4=\cdots=0\qquad$ (y es simétrica) 
+
+- $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2(1+\theta_1^2+\theta_2^2)}\boldsymbol{\gamma}$
+
+- $f(\omega) \;=\;  \frac{\sigma^2}{2\pi}\Big((1+\theta_1^2+\theta_2^2)\;-\;2\theta_1(1+\theta_2)\cos(\omega)\;-\;2\theta_2\cos(2\omega)\Big)$
+# ;\; -\pi\leq\omega\leq\pi
+# \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})*\boldsymbol{\theta}(e^{i\omega}) \;=\;
+
+- $\boldsymbol{\pi}$ tiene una expresión complicada, pero su magnitud
+  decae paulatinamente
+
+*** MA(2) con dos raíces reales, una positiva y la otra negativa
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+# MA2 verde
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACF-MA2pn.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ma2pn <- um(ma = "(1 + 0.1B - 0.8B^2)")
+display(list(ma2pn), lag.max = 20, byrow = TRUE)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+$$\boldsymbol{\theta}(z)=1+0.1z-0.8z^2\quad\Rightarrow\quad X_t=
+(1+0.1\mathsf{B}-0.8\mathsf{B}^2)U_t.$$
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/ACF-MA2pn.png]]
+
+#+name: raices-ma2pn
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :exports result :results value table pp :results none
+roots(ma2pn)
+#+END_SRC
+
+#+RESULTS: raices-ma2pn
+:RESULTS:
+1. 
+   |     Real |     Imaginary | Modulus | Frequency | Period | Mult. |
+   |----------+---------------+---------+-----------+--------+-------|
+   |  1.18228 |  7.754818e-26 | 1.18228 |       0.0 |    Inf |     1 |
+   | -1.05728 | -7.754818e-26 | 1.05728 |       0.5 |      2 |     1 |
+   #+caption: A matrix: 2 × 6 of type dbl
+:END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file Sim-MA2pn.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ma2pn, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"))
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/Sim-MA2pn.png]]
+
+*** MA(2) con un par de raíces complejas
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+# MA2 rojo y violeta
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACF-MA2np.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ma2np <- um(ma = "(1 - 0.1B + 0.8B^2)")
+display(list(ma2np), lag.max = 20, byrow = TRUE)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+$$\boldsymbol{\theta}(z)=1-0.1z+0.8z^2\quad\Rightarrow\quad X_t=
+(1-0.1\mathsf{B}+0.8\mathsf{B}^2)U_t.$$
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/ACF-MA2np.png]]
+
+
+#+name: raices-ma2np
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :exports result :results value table pp :results none
+roots(ma2np)
+#+END_SRC
+
+#+RESULTS: raices-ma2np
+:RESULTS:
+1. 
+   |   Real | Imaginary |  Modulus | Frequency |   Period | Mult. |
+   |--------+-----------+----------+-----------+----------+-------|
+   | 0.0625 |  1.116286 | 1.118034 | 0.2410983 | 4.147685 |     1 |
+   | 0.0625 | -1.116286 | 1.118034 | 0.2410983 | 4.147685 |     1 |
+   #+caption: A matrix: 2 × 6 of type dbl
+:END:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file Sim-MA2np.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ma2np, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"))
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+c[[./img/lecc06/Sim-MA2np.png]]
+
+*** MA(2) con dos raíces reales y negativas
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+# MA2 rojo
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACF-MA2rojo.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ma2rojo <- um(ma = "(1 + 1.8B + .9B^2 )")
+display(list(ma2rojo), lag.max = 20, byrow = TRUE)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+$$\boldsymbol{\theta}(z)=1+1.9z+0.9z^2\quad\Rightarrow\quad X_t=
+(1+1.8\mathsf{B}+0.9\mathsf{B}^2)U_t.$$
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/ACF-MA2rojo.png]]
+
+
+#+name: raices-ma2rojo
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :exports result :results value table pp :results none
+roots(ma2rojo)
+#+END_SRC
+
+#+RESULTS: raices-ma2rojo
+:RESULTS:
+1. 
+   | Real |  Imaginary |  Modulus | Frequency |   Period | Mult. |
+   |------+------------+----------+-----------+----------+-------|
+   |   -1 |  0.3333333 | 1.054093 | 0.4487918 | 2.228205 |     1 |
+   |   -1 | -0.3333333 | 1.054093 | 0.4487918 | 2.228205 |     1 |
+   #+caption: A matrix: 2 × 6 of type dbl
+:END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file Sim-MA2rojo.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ma2rojo, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"))
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/Sim-MA2rojo.png]]
+
+*** MA(2) con dos raíces reales y positivas
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+# MA2 violeta
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACF-MA2violeta.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ma2violeta <- um(ma = "(1 - 1.8B + .9B^2 )")
+display(list(ma2violeta), lag.max = 20, byrow = TRUE)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+$$\boldsymbol{\theta}(z)=1-1.9z+0.9z^2\quad\Rightarrow\quad X_t=
+(1-1.8\mathsf{B}+0.9\mathsf{B}^2)U_t.$$
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/ACF-MA2violeta.png]]
+
+
+#+name: raices-ma2violeta
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :exports result :results value table pp :results none
+roots(ma2violeta)
+#+END_SRC
+
+#+RESULTS: raices-ma2violeta
+:RESULTS:
+1. 
+   | Real |  Imaginary |  Modulus |  Frequency |   Period | Mult. |
+   |------+------------+----------+------------+----------+-------|
+   |    1 |  0.3333333 | 1.054093 | 0.05120819 | 19.52813 |     1 |
+   |    1 | -0.3333333 | 1.054093 | 0.05120819 | 19.52813 |     1 |
+   #+caption: A matrix: 2 × 6 of type dbl
+:END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file Sim-MA2violeta.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ma2violeta, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"))
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/Sim-MA2violeta.png]]
+
+
+
+** Proceso autorregresivo AR($p$)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+Sea $\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$, con
+$\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y donde $\boldsymbol{\phi}$ es
+un polinomio de grado $p>0$. Entonces
+$$(\boldsymbol{\phi}*\boldsymbol{X})_t=\boldsymbol{\phi}(\mathsf{B})X_t=
+(1+\phi_1\mathsf{B}+\phi_2\mathsf{B}^2+\cdots+\phi_p\mathsf{B}^p)X_t=
+U_t$$ Y por tanto $$X_t= U_t-\sum_{j=1}^p\phi_j X_{t-j}.$$
+
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Si todas las raíces del polinomio $\boldsymbol{\phi}$ (de grado $p$)
+están fuera del círculo unidad, es decir, si /el polinomio AR es
+``invertible''/
+$\;(\boldsymbol{\phi}^{-\triangleright}=\boldsymbol{\phi}^{-1}\in\ell^1)\;$
+entonces $\boldsymbol{X}$ tiene una representación como proceso lineal
+causal MA($\infty$): $$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}
+\quad\Rightarrow\quad
+\boldsymbol{X}=\frac{1}{\boldsymbol{\phi}}*\boldsymbol{U}
+\quad\Rightarrow\quad X_t = U_t + \sum_{j=1}^\infty\psi_j U_{t-j};$$
+donde $\;\boldsymbol{\phi}^{-1}=\boldsymbol{\psi}=({\color{blue}1},\
+\psi_1,\ \psi_2,\ \psi_3,\ldots)\;$ tiene grado $\infty$.
+#+latex: \bigskip
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+#+latex: \noindent
+Por tanto $E(X_t)=0$ para todo $t\in\mathbb{Z}$ y
+
+$\boldsymbol{\gamma} \;=\; \sigma^2 \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^{-1})} \;=\; \sigma^2 \sum\limits_{j,k=0}^\infty \psi_j\psi_k z^{j-k}\quad$ (grado $\infty$ y cogrado $-\infty$)
+
+$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$
+
+$f(\omega) =
+  \frac{\sigma^2}{2\pi}\frac{1}{\boldsymbol{\phi}(e^{-i\omega})\cdot\boldsymbol{\phi}(e^{i\omega})}
+  \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^\infty \gamma_h
+  \cos(h\omega);\quad$ donde $\omega\in[-\pi,\pi]$.
+
+(suma infinita de cosenos)
+#+latex: \medskip
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Pero, sin embargo, la PACF, $\;\boldsymbol{\pi},\;$ es una secuencia
+con grado $p$ y cogrado $-p$...
+#+latex: \medskip
+
+*** Demostración de que la PACF tiene cogrado $-p$ y grado $p$
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+- Sea $\boldsymbol{X}$ un proceso causal AR($p$): $\quad
+  X_t\;=\;\sum\limits_{j=1}^p\phi_j X_{t-j}+U_t$ @@latex:donde
+  $\boldsymbol{U}\sim WN(0,\sigma^2)$.@@
+- La proyección de $X_{k+1}$ sobre el espacio $\bar{sp}(X_{2}:X_k)$
+  generado por $X_2,\ldots X_k$ (con $k>p$) es:
+  $$\widehat{X_{k+1}}=P_{\bar{sp}(X_{2}:X_k)}(X_{k+1})=\sum_{j=1}^p\phi_j X_{k+1-j}$$
+- De su representación MA($\infty$): $\;Y\in\bar{sp}(X_{2}:X_k)
+  \;\Rightarrow\; Y\in\bar{sp}(U_j\mid{j\leq k})$, pues
+  $$X_t\;=\;\sum\limits_{j=0}^{\infty} \psi_j U_{t-j}
+  \quad\Rightarrow\quad
+  \bar{sp}(X_{2}:X_k)\subset\bar{sp}(U_j\mid{j\leq k}) \; \perp \; U_{k+1}$$
+- Si $Y\in\bar{sp}(X_{2}:X_k)$ entonces $Cov\Big((X_{k+1}-\widehat{X_{k+1}}), Y\Big)=Cov(U_{k+1}, Y)=0$
+- Denotemos con $\widetilde{X_{1}}$ a la proyección
+  $P_{\bar{sp}(X_{2}:X_k)}(X_{1})$ de $X_1$ sobre
+  $\bar{sp}(X_{2}:X_k)$
+- Ahora es fácil ver que $\pi_k=0$ para $k>p$, pues
+  \begin{eqnarray*}
+   \pi_k 
+   = & Corr\Big((X_{k+1}-\widehat{X_{k+1}}),(X_{1}-\widetilde{X_{1}})\Big)\\
+   = & Corr\Big(U_{k+1},(X_{1}-\widetilde{X_{1}})\Big) \; = \; 0
+  \end{eqnarray*}
+  ya que $U_{k+1}\perp(X_{1}-\widetilde{X_{1}}) \in \bar{sp}(U_j\mid{j\leq k})$.
+
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+*Nota.* Se puede demostrar que
+- si un proceso tiene una ACF $\boldsymbol{\rho}$ con cogrado $-q$ y grado $q$, es un proceso MA($q$)
+- si un proceso tiene una PACF $\boldsymbol{\pi}$ con cogrado $-p$ y grado $p$, es un proceso AR($p$)
+
+Véase /Pourahmadi M. (2001)./
+#+latex: \medskip
+
+Consecuentemente, que la ACF o la PACF se cortan ``bruscamente'' nos
+indica que el modelo es AR o MA (y su grado).
+
+Desgraciadamente para los modelos ARMA (qué veremos más adelante)
+tanto la ACF como la PACF tienen infinitos términos no nulos, por lo
+que su identificación no es tan sencilla.
+
+*** Ecuaciones de Yule-Walker (que relacionan las autocovarianzas con los parámetros de $\boldsymbol{\phi}$)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+Consideremos un proceso AR($p$): $\quad X_t=\sum\limits_{j=1}^p\phi_j
+X_{t-j}+U_t;\qquad U_t\sim WN(0,\sigma^2)$ 
+
+Multiplicando ambos lados por $X_{t-k}$ para $0\leq k\leq p$ y tomando
+esperanzas tenemos $$Cov(X_t,X_{t-k})=\sum_{j=1}^p\phi_j
+Cov(X_{t-j},X_{t-k})+ Cov(U_t,X_{t-k});\qquad 0\leq k\leq p.$$
+
+Para $\;k=0\;$ tenemos:
+\begin{equation}
+  \sigma^2=\gamma_0-\sum_{j=1}^p\phi_j\gamma_j
+\end{equation}
+#+latex: puesto que $Cov(U_t,X_{t})=Cov(U_t,\sum_{j=1}^p\phi_j X_{t-j})+Cov(U_t,U_t)=0+\sigma^2$. \medskip
+
+Para $\;1\leq k\leq p\;$ tenemos:
+\begin{equation}
+  \gamma_k=\sum_{j=1}^p\phi_j\gamma_{k-j}
+\end{equation}
+
+#+BEGIN_EXPORT latex
+\noindent
+O en forma matricial
+\[
+\begin{bmatrix}
+\gamma_{0}&\gamma_{1}&\cdots&\gamma_{p-1}\\ 
+\gamma_{1}&\gamma_{0}&\cdots&\gamma_{p-2}\\ 
+\vdots&\vdots&\ddots&\vdots\\
+\gamma_{p-1}&\gamma_{p-2}&\cdots&\gamma_{0}
+\end{bmatrix}
+\begin{bmatrix}
+\phi_1\\
+\phi_2\\
+\vdots\\
+\phi_p
+\end{bmatrix}=
+\begin{bmatrix}
+\gamma_1\\
+\gamma_2\\
+\vdots\\
+\gamma_p
+\end{bmatrix}.
+\]
+#+END_EXPORT
+
+Dividiendo (1) y (2) por $\gamma_0$ (y operando en (1)) tenemos
+\begin{equation}
+  \gamma_0=\frac{\sigma^2}{1-\phi_1\rho_1-\cdots-\phi_p\rho_p};
+  \qquad
+  \rho_k=\phi_1\rho_{k-1}+\cdots+\phi_p\rho_{k-p}
+\end{equation}
+# \rho_k=\sum_{j=1}^p\phi_j\rho_{k-j}
+
+** Proceso autorregresivo AR($1$)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+Sea $\;(1-\phi z)*\boldsymbol{X}=\boldsymbol{U},\quad$ con
+$\;|\phi|<1\;$ y con $\;\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es
+decir $$X_t=\phi X_{t-1} + U_t.$$
+
+Dado que $(1-a z)*(1+a z+a^2 z^2+a^3 z^3+\cdots)=1$
+#+latex:\medskip
+#+BEGIN_EXPORT latex
+$$(1-a z)^{-1}=(1+a z+a^2 z^2+a^3 z^3+\cdots)=\sum_{h=0}^\infty a^h z^h$$ 
+Por tanto 
+\begin{eqnarray*}
+(1-a z)^{-1}*(1-a z^{-1})^{-1} = 
+& (\ldots,0,0,0,0,&1,a,a^2,a^3,\ldots)\\
+*& (\ldots,a^3,a^2,a,&1,0,0,0,\ldots)\\
+= & ( )
+\end{eqnarray*}
+#+END_EXPORT
+
+
+$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\theta z)^{-1}*(1-\theta
+  z^{-1})^{-1} \;=\; \frac{\sigma^2}{1-\phi^2} \sum_{j=0}^\infty
+  \phi^j z^j$
+
+$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\;
+  \frac{1+\theta^2}{\sigma^2}\boldsymbol{\gamma} \;=\;
+  \sum_{j=0}^\infty \phi^j z^j \quad\Rightarrow\quad \rho_k=\phi^k$.
+
+$f(\omega) \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^\infty \gamma_h
+  \cos(h\omega)=\frac{\sigma^2}{2\pi}\frac{1}{1+\theta^2-2\theta\cos(\omega)}$.
+#  = \frac{\sigma^2}{2\pi}\frac{1}{\boldsymbol{\phi}(e^{-i\omega})\cdot\boldsymbol{\phi}(e^{i\omega})}
+
+$\boldsymbol{\pi} \;=\; (\ldots,\; 0,\; 0,\; \phi,\; {\color{blue}1},\; \phi,\; 0,\; 0,\;\ldots)$ 
+# :\quad$ $\pi_0=1,\quad$ $\pi_1=\rho_1=\phi,\quad$ $0=\pi_2=\pi_3=\cdots$
+
+*** AR(1) con raíz positiva
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+# PARÁMETRO NEGATIVO (violeta)
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACF-AR1p.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ar1p <- um(ar = "(1 - 0.9B)")
+display(list(ar1p), lag.max = 20, byrow = TRUE)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+$$\boldsymbol{\phi}(z)=1-0.9z\quad\Rightarrow\quad X_t=0.9X_{t-1}+U_t.$$
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/ACF-AR1p.png]]
+
+#+name: raices-ar1p
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :exports result :results value table pp :results none
+roots(ar1p)
+#+END_SRC
+
+#+RESULTS: raices-ar1p
+:RESULTS:
+1. 
+   |     Real | Imaginary |  Modulus | Frequency | Period | Mult. |
+   |----------+-----------+----------+-----------+--------+-------|
+   | 1.111111 |         0 | 1.111111 |         0 |    Inf |     1 |
+   #+caption: A matrix: 1 × 6 of type dbl
+:END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file Sim-AR1p.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ar1p, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"))
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/Sim-AR1p.png]]
+
+*** AR(1) con raíz negativa
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+# PARÁMETRO POSITIVO (rojo)
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACF-AR1n.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ar1n <- um(ar = "(1 + 0.9B)")
+display(list(ar1n), lag.max = 20, byrow = TRUE)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+$$\boldsymbol{\phi}(z)=1+0.9z\quad\Rightarrow\quad X_t=-0.9X_{t-1}+U_t.$$
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/ACF-AR1n.png]]
+
+#+name: raices-ar1n
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :exports result :results value table pp :results none
+roots(ar1n)
+#+END_SRC
+
+#+RESULTS: raices-ar1n
+:RESULTS:
+1. 
+   |      Real | Imaginary |  Modulus | Frequency | Period | Mult. |
+   |-----------+-----------+----------+-----------+--------+-------|
+   | -1.111111 |         0 | 1.111111 |       0.5 |      2 |     1 |
+   #+caption: A matrix: 1 × 6 of type dbl
+:END:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file Sim-AR1n.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ar1n, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"))
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/Sim-AR1n.png]]
+
+
+
+** Proceso autorregresivo AR($2$)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+Sea $(1-\phi_1 z-\phi_2 z^2)*\boldsymbol{X}=\boldsymbol{U}$, con
+$\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y con
+$$\phi_1+\phi_2<1;\qquad \phi_2-\phi_1<1;\qquad |\phi_2|<1;\quad \text{(i.e., invertible)}$$
+es decir $X_t=\phi_1 X_{t-1} + \phi_2 X_{t-2} + U_t$.
+
+- $\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi_1 z-\phi_2 z^2)*(1-\phi_1 z^{-1}-\phi_2 z^{-2})$
+  # $\sigma^2(\ldots,\; 0,\; -\phi_2,\; -\phi_1(1-\phi_2),\; {\color{blue}{1+\phi_1^2+\phi_2^2}},\; -\phi_1(1-\phi_2),\; -\phi_2,\; 0,\;\ldots)$ 
+  
+  $\gamma_0={\color{blue}{\sigma^2(1+\phi_1^2+\phi_2^2)}};\qquad$
+  $\gamma_1=\sigma^2\big(-\phi_1(1-\phi_2)\big);\qquad$
+  $\gamma_2=\sigma^2(-\phi_2)$
+
+  $\gamma_3=\gamma_4=\cdots=0\qquad$ (y es simétrica) 
+
+- $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2(1+\phi_1^2+\phi_2^2)}\boldsymbol{\gamma}$
+
+- $f(\omega) \;=\;  \frac{\sigma^2}{2\pi}\frac{1}{1+\phi_1^2+\phi_2^2-2\phi_1(1+\phi_2)\cos(\omega)-2\phi_2\cos(2\omega)};\quad -\pi\leq\omega\leq\pi$
+# \frac{\sigma^2}{2\pi}\boldsymbol{\phi}(e^{-i\omega})*\boldsymbol{\phi}(e^{i\omega}) \;=\;
+
+- $\boldsymbol{\pi}$ tiene una expresión complicada, pero su magnitud
+  decae paulatinamente
+
+
+
+** COMMENT AR(1)                                                   :noexports:
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . skip)))
+   :END:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-R
 ar0p <- um(ar = "(1 - 0B)")
 ar1p <- um(ar = "(1 - 0.9B)")
@@ -442,436 +1097,13 @@ ar2c <- um(ar = "(1 - 1.52B + 0.8B^2)")
 display(list(ar0p), lag.max = 20)
 #+END_SRC
 
-
-
-
-
-* La especificación del modelo se escoge según las características de los datos.
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . slide)))
-   :END:
-
-¿Es la serie 
-- "*/estacionaria en media/*"
-  + (y si lo es, ¿cuál es su media?)
-  + (y si no lo es, ¿cómo cambia o evoluciona su media?)
-- "*/estacionaria en varianza/*" (/homocedástica/)
-  + (y si lo es, ¿cuál es su varianza?)
-  + (y si es /heterocedástica/, ¿cómo cambia o evoluciona su varianza?)? 
-
-¿Están sus valores correlados con su historia pasada (autocorrelados)?
-
-#+LATEX: \noindent
-¿Están correlados con los valores presentes o pasados de otras series?
-#+LATEX: \bigskip
-
-Veamos algunas herramientas estadísticas para poder desvelar estas
-características.
-
-
-* Herramientas para desvelar propiedades de una serie temporal
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . skip)))
-   :END:
-
-** Análisis gráfico
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . slide)))
-   :END:
-
-*** Gráfico de la serie temporal 
-
-Representa sus valores en el eje vertical ($y$) frente a una escala
-temporal en el horizontal ($x$). Es útil para detectar visualmente:
- - tendencias y/o estacionalidad 
- - cambios de variabilidad
- - valores atípicos (/outliers/)
-   + el 95% aprox. de una muestra de valores generados por una
-     distribución normal debería estar comprendido entre
-     $\mu\pm2\sigma$
-   + la probabilidad de que una variable normal genere un valor fuera
-     de las bandas de $\mu\pm3\sigma$ es $0.0023$
-    
-    ([[file:./img/lecc05/IBEX35.png][véase gráfico IBEX 35]])
-
-En es importante escalar y rotular adecuadamente los ejes y asegurar
-la comparabilidad entre series y gráficos distintos (si los hubiere).
-
-
-*** Gráfico rango-media
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
-   :END:
-Cambios de variabilidad de una serie pueden evidenciarse en su gráfico
-temporal.
-
-Pero también suelen verse bien en un gráfico rango-media, donde se
-representa:
-  + en el eje $x$ :: un indicador del nivel de la serie calculado para
-    distintas submuestras no solapadas (normalmente la media).
-  + en el eje $y$ :: un indicador de la dispersión de la serie
-    calculado para las mismas submuestras (normalmente el rango.)
-
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-Veamos el gráfico de la serie de pasajeros de líneas aéreas junto a su
-gráfico de rango media:
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file rango-mediaAirPass.png :exports code :results silent
-Z <- AirPassengers
-ide(Z, graphs = c("plot", "rm"), main="Pasajeros de líneas (aéreas en miles) y gráfico rango-media")
-#+END_SRC
-
-#+attr_org: :width 800
-#+attr_html: :width 900px
-#+attr_latex: :width 425px
-[[./img/lecc06/rango-mediaAirPass.png]]
-
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-El gráfico de rango media a veces se acompaña de una regresión de la
-dispersión sobre los niveles para medir la relación nivel-dispersión.
-
-
-** Determinación del orden de integración
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . slide)))
-   :END:
-
-Decidir adecuadamente el orden de integración es crucial en el
-análisis de series temporales.
-
-Las herramientas utilizadas para tomar la decisión son 
- - el análisis gráfico
- - los contrastes formales
-
-*** Análisis gráfico
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
-   :END:
-
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file diferenciasPoblacion.png :results silent 
-options(repr.plot.width = 12, repr.plot.height = 8, repr.plot.res = 200)
-ide(PoblacionAustralia_ts,
-    graphs = c("plot"),
-    transf = list(list(bc = F), list(bc = F, d = 1), list(bc = F, d = 2)),
-    main="Población australiana, primera diferencia y segunda diferencia" )
-#+END_SRC
-
-#+attr_org: :width 800
-#+attr_html: :width 900px
-#+attr_latex: :width 425px
-[[./img/lecc06/diferenciasPoblacion.png]]
-
-
-
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-La serie de población $\boldsymbol{y}$ tiene una clara tendencia
-creciente (primer gráfico), que desaparece al tomar una diferencia
-ordinaria, $$\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y}$$
-(segundo gráfico). Bastar con tomar una primera diferencia de la serie
-de población para obtener una nueva serie que se asemeja a la
-realización de un proceso estacionario.
-
-No obstante, ¿qué pasa si tomamos una segunda diferencia ordinaria?
-$$\nabla\nabla\boldsymbol{y}=\nabla^2\boldsymbol{y}=(1-\mathsf{B})^2*\boldsymbol{y}$$
-(segundo gráfico). Pues que la serie obtenida también es estacionaria,
-pero ojo, es un grave error tomar más diferencias de las necesarias al
-modelizar los datos. Se debe tomar el mínimo número de
-transformaciones que arrojen una serie ``estacionaria'' (recuerde que
-decir que una serie temporal es /estacionaria/ es un abuso del
-lenguaje).
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file diferenciasPasajeros.png :results silent
-options(repr.plot.width = 12, repr.plot.height =  10, repr.plot.res = 200)
-ide(Z,
-    graphs = c("plot"),
-    transf = list(list(bc=T), list(bc=T, d=1), list(bc=T, D=1), list(bc=T, D=1, d=1)),
-    main = "Log pasajeros aéreos, diferencia ordinaria, diferencia estacional y composición de ambas diferencias" )
-#+END_SRC
-
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
-#+attr_org: :width 800
-#+attr_html: :width 900px
-#+attr_latex: :width 425px
-[[./img/lecc06/diferenciasPasajeros.png]]
-
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-Como ya vimos, la serie pasajeros en logaritmos tiene tendencia y
-estacionalidad muy evidentes. No basta con tomar solo una diferencia
-ordinaria $$\nabla\boldsymbol{y}=(1-\mathsf{B})*\boldsymbol{y};$$ pues
-el resultado muestra una pauta estacional. Ni tampoco basta con tomar
-solo una diferencia estacional
-$$\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B^{12}})*\boldsymbol{y};$$ pues
-resulta una serie que ``deambula'', i.e., que no es /``estacionaria''/
-en media.
-
-Tomar una diferencia ordinaria y otra estacional
-$$\nabla\nabla_{12}(\boldsymbol{y})=(1-\mathsf{B})*(1-\mathsf{B^{12}})*\boldsymbol{y}$$
-arroja una serie que sí parece ser /``estacionaria''/.
-
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file diferenciasTemperaturasRetiro.png :results silent
-options(repr.plot.width = 12, repr.plot.height =  8, repr.plot.res = 200)
-TemperaturaRetiro_ts=ts(read.csv("datos/Retiro.txt"),start=c(1985, 1), end=c(2015,9), frequency=12)
-ide(TemperaturaRetiro_ts,
-    graphs = c("plot"),
-    transf = list(list(), list(D = 1)),
-    main="Temperatura media en el Retiro y diferencia estacional" )
-#+END_SRC
-
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
-#+attr_org: :width 800
-#+attr_html: :width 900px
-#+attr_latex: :width 425px
-[[./img/lecc06/diferenciasTemperaturasRetiro.png]]
-
-
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-En el caso de la serie de temperaturas en el Parque del Retiro, parece
-que es suficiente con tomar solo una diferencia estacional.
-
-
-*** Contrastes formales sobre el orden de integración
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
-   :END:
-
-**** Test de Dickey-Fuller (DF)
-
-- $H_0$ :: la serie es $I(1)$
-- $H_1$ :: la serie es $I(0)$.
-
-Consideremos el modelo $$y_{t}=\rho y_{t-1}+u_{t},$$ donde $y_{t}$ es
-la variable de interés, $\rho$ es un coeficiente, y $u_{t}$ es un
-proceso de ruido blanco. Una raíz unitaria estará presente si $\rho
-=1$. En tal caso el modelo será no-estacionario.
-
-El modelo de regresión se puede escribir como
-
-$$\nabla y_{t}=(\rho -1)y_{t-1}+u_{t}=\delta y_{t-1}+u_{t}$$
-
-
-**** Test de Dickey-Fuller aumentado (ADF)
-
-
-
-* Otras herramientas estadísticas                                 :CómoHacerConR:
-
-** Estadísticos descriptivos
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . skip)))
-   :END:
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results plain
-library(pastecs)      # resumen estadísticos descriptivos
-# https://cran.r-project.org/web/packages/pastecs/index.html (stat.desc)
-library(knitr)        # presentación de tabla resumen
-# https://cran.r-project.org/web/packages/knitr/index.html (kable)
-# https://bookdown.org/yihui/rmarkdown-cookbook/kable.html
-
-# estadísticos principales y test de normalidad
-kable(stat.desc(Z, basic=FALSE, norm=TRUE), 'rst')
-#+END_SRC
-
 #+RESULTS:
-#+begin_example
-
-
-============  =============
-\                         x
-============  =============
-median          265.5000000
-mean            280.2986111
-SE.mean           9.9971931
-CI.mean.0.95     19.7613736
-var           14391.9172009
-std.dev         119.9663169
-coef.var          0.4279947
-skewness          0.5710676
-skew.2SE          1.4132515
-kurtosis         -0.4298441
-kurt.2SE         -0.5353818
-normtest.W        0.9519577
-normtest.p        0.0000683
-============  =============
-#+end_example
-
-
-** Test de normalidad Jarque-Vera
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . skip)))
-   :END:
-
-[[https://en.wikipedia.org/wiki/Jarque%E2%80%93Bera_test][Jarque-Vera test (Wikipedia)]]
-
-Podemos calcularlo con la librería [[https://cran.r-project.org/web/packages/moments/index.html][momments]]:
-#+BEGIN_SRC jupyter-R :results plain
-#install.packages("moments")
-library(moments)
-# Perform the Jarque-Bera test
-jb_test <- jarque.test(as.numeric(Z))
-# Print the test result
-print(jb_test)
-#+END_SRC
-
-#+RESULTS:
-: 
-: 	Jarque-Bera Normality Test
-: 
-: data:  as.numeric(Z)
-: JB = 8.9225, p-value = 0.01155
-: alternative hypothesis: greater
-: 
-
-Otra librería alternativa para calcularlo: [[https://cran.r-project.org/web/packages/tseries/index.html][tseries]]
-#+BEGIN_SRC jupyter-R :results plain
-library(tseries)
-# Perform the Jarque-Bera test
-jb_test <- jarque.bera.test(Z)
-# Print the test result
-print(jb_test)
-#+END_SRC
-
-#+RESULTS:
-: 
-: 	Jarque Bera Test
-: 
-: data:  Z
-: X-squared = 8.9225, df = 2, p-value = 0.01155
-: 
+:RESULTS:
+#+attr_org: :width 1200 :height 500
+[[./.ob-jupyter/cb7678f00eed9d73dbc1beb0e187d0003abef796.png]]
+:END:
 
 
 
-
-* COMMENT Otro código                                              :noexport:
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R 
-PIB_UEM_ts = as.ts( read.csv.zoo("datos/PIB_UEM.csv", 
-                                 FUN = as.yearqtr, 
-                                 format = "%YQ%q", 
-                                 strip.white = TRUE))
-p <- autoplot(PIB_UEM_ts)
-p <- p + labs(y = "Miles de millones de euros", x = "Años") + ggtitle("PIB UEM a precios corrientes (datos trimestrales). Fuente Banco de España")
-p 
-#+END_SRC
-
-
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R 
-ProduccionCemento_ts = as.ts( read.csv.zoo("datos/ProduccionCemento.csv",
-                                           FUN = as.yearmon, 
-                                           format = "%YM%m",
-                                           strip.white = TRUE))
-autoplot(ProduccionCemento_ts)
-#+END_SRC
-
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ExportacionDeAcero.png :exports code :results silent
-ExportacionDeAcero_ts = as.ts( read.csv.zoo("datos/ExportacionDeAcero.csv",
-                                            FUN = as.yearmon,
-                                            format = "%YM%m",
-                                            strip.white = TRUE))
-autoplot(ExportacionDeAcero_ts)
-#+END_SRC
-
-
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file rango-mediaLogAirPass.png :exports code :results silent
-Z <- AirPassengers
-ide(Z, transf=list(bc=T, d=1, D=1), graphs = c("plot", "rm"))
-#+END_SRC
-
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
-#+attr_org: :width 800
-#+attr_html: :width 900px
-#+attr_latex: :width 425px
-[[./img/lecc06/rango-mediaLogAirPass.png]]
-
-$$\nabla_{12}(\nabla\ln\boldsymbol{y})$$
-
-
-1985ene 
-2012sep
-
-#+BEGIN_SRC jupyter-R
-as.yearmon(1985 + seq(0, nrow(TemperaturaRetiro_df)-1)/12)
-#+END_SRC
-
-#+RESULTS:
-#+begin_example
-  [1] "ene 1985" "feb 1985" "mar 1985" "abr 1985" "may 1985" "jun 1985"
-  [7] "jul 1985" "ago 1985" "sep 1985" "oct 1985" "nov 1985" "dic 1985"
- [13] "ene 1986" "feb 1986" "mar 1986" "abr 1986" "may 1986" "jun 1986"
- [19] "jul 1986" "ago 1986" "sep 1986" "oct 1986" "nov 1986" "dic 1986"
- [25] "ene 1987" "feb 1987" "mar 1987" "abr 1987" "may 1987" "jun 1987"
- [31] "jul 1987" "ago 1987" "sep 1987" "oct 1987" "nov 1987" "dic 1987"
- [37] "ene 1988" "feb 1988" "mar 1988" "abr 1988" "may 1988" "jun 1988"
- [43] "jul 1988" "ago 1988" "sep 1988" "oct 1988" "nov 1988" "dic 1988"
- [49] "ene 1989" "feb 1989" "mar 1989" "abr 1989" "may 1989" "jun 1989"
- [55] "jul 1989" "ago 1989" "sep 1989" "oct 1989" "nov 1989" "dic 1989"
- [61] "ene 1990" "feb 1990" "mar 1990" "abr 1990" "may 1990" "jun 1990"
- [67] "jul 1990" "ago 1990" "sep 1990" "oct 1990" "nov 1990" "dic 1990"
- [73] "ene 1991" "feb 1991" "mar 1991" "abr 1991" "may 1991" "jun 1991"
- [79] "jul 1991" "ago 1991" "sep 1991" "oct 1991" "nov 1991" "dic 1991"
- [85] "ene 1992" "feb 1992" "mar 1992" "abr 1992" "may 1992" "jun 1992"
- [91] "jul 1992" "ago 1992" "sep 1992" "oct 1992" "nov 1992" "dic 1992"
- [97] "ene 1993" "feb 1993" "mar 1993" "abr 1993" "may 1993" "jun 1993"
-[103] "jul 1993" "ago 1993" "sep 1993" "oct 1993" "nov 1993" "dic 1993"
-[109] "ene 1994" "feb 1994" "mar 1994" "abr 1994" "may 1994" "jun 1994"
-[115] "jul 1994" "ago 1994" "sep 1994" "oct 1994" "nov 1994" "dic 1994"
-[121] "ene 1995" "feb 1995" "mar 1995" "abr 1995" "may 1995" "jun 1995"
-[127] "jul 1995" "ago 1995" "sep 1995" "oct 1995" "nov 1995" "dic 1995"
-[133] "ene 1996" "feb 1996" "mar 1996" "abr 1996" "may 1996" "jun 1996"
-[139] "jul 1996" "ago 1996" "sep 1996" "oct 1996" "nov 1996" "dic 1996"
-[145] "ene 1997" "feb 1997" "mar 1997" "abr 1997" "may 1997" "jun 1997"
-[151] "jul 1997" "ago 1997" "sep 1997" "oct 1997" "nov 1997" "dic 1997"
-[157] "ene 1998" "feb 1998" "mar 1998" "abr 1998" "may 1998" "jun 1998"
-[163] "jul 1998" "ago 1998" "sep 1998" "oct 1998" "nov 1998" "dic 1998"
-[169] "ene 1999" "feb 1999" "mar 1999" "abr 1999" "may 1999" "jun 1999"
-[175] "jul 1999" "ago 1999" "sep 1999" "oct 1999" "nov 1999" "dic 1999"
-[181] "ene 2000" "feb 2000" "mar 2000" "abr 2000" "may 2000" "jun 2000"
-[187] "jul 2000" "ago 2000" "sep 2000" "oct 2000" "nov 2000" "dic 2000"
-[193] "ene 2001" "feb 2001" "mar 2001" "abr 2001" "may 2001" "jun 2001"
-[199] "jul 2001" "ago 2001" "sep 2001" "oct 2001" "nov 2001" "dic 2001"
-[205] "ene 2002" "feb 2002" "mar 2002" "abr 2002" "may 2002" "jun 2002"
-[211] "jul 2002" "ago 2002" "sep 2002" "oct 2002" "nov 2002" "dic 2002"
-[217] "ene 2003" "feb 2003" "mar 2003" "abr 2003" "may 2003" "jun 2003"
-[223] "jul 2003" "ago 2003" "sep 2003" "oct 2003" "nov 2003" "dic 2003"
-[229] "ene 2004" "feb 2004" "mar 2004" "abr 2004" "may 2004" "jun 2004"
-[235] "jul 2004" "ago 2004" "sep 2004" "oct 2004" "nov 2004" "dic 2004"
-[241] "ene 2005" "feb 2005" "mar 2005" "abr 2005" "may 2005" "jun 2005"
-[247] "jul 2005" "ago 2005" "sep 2005" "oct 2005" "nov 2005" "dic 2005"
-[253] "ene 2006" "feb 2006" "mar 2006" "abr 2006" "may 2006" "jun 2006"
-[259] "jul 2006" "ago 2006" "sep 2006" "oct 2006" "nov 2006" "dic 2006"
-[265] "ene 2007" "feb 2007" "mar 2007" "abr 2007" "may 2007" "jun 2007"
-[271] "jul 2007" "ago 2007" "sep 2007" "oct 2007" "nov 2007" "dic 2007"
-[277] "ene 2008" "feb 2008" "mar 2008" "abr 2008" "may 2008" "jun 2008"
-[283] "jul 2008" "ago 2008" "sep 2008" "oct 2008" "nov 2008" "dic 2008"
-[289] "ene 2009" "feb 2009" "mar 2009" "abr 2009" "may 2009" "jun 2009"
-[295] "jul 2009" "ago 2009" "sep 2009" "oct 2009" "nov 2009" "dic 2009"
-[301] "ene 2010" "feb 2010" "mar 2010" "abr 2010" "may 2010" "jun 2010"
-[307] "jul 2010" "ago 2010" "sep 2010" "oct 2010" "nov 2010" "dic 2010"
-[313] "ene 2011" "feb 2011" "mar 2011" "abr 2011" "may 2011" "jun 2011"
-[319] "jul 2011" "ago 2011" "sep 2011" "oct 2011" "nov 2011" "dic 2011"
-[325] "ene 2012" "feb 2012" "mar 2012" "abr 2012" "may 2012" "jun 2012"
-[331] "jul 2012" "ago 2012" "sep 2012"
-#+end_example
-
-
-#+BEGIN_SRC jupyter-R
-as.yearmon("mar07", "%b%y")
-#+END_SRC
-
-#+RESULTS:
-: [1] "mar 2007"
 
 

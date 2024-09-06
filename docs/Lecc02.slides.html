@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="org4ba9a9a">
+<div class="ABSTRACT" id="orge00f1a6">
 <p>
 En esta lección veremos algunos modelos de regresión con series
 temporales; en particular la estimación de componentes (no
@@ -14652,16 +14652,16 @@ $$Var(\widehat{\boldsymbol{\beta}}\mid\boldsymbol{\mathsf{X}})=Var(\widehat{\bol
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Considere el <em>modelo de regresión lineal</em></p>
 \begin{equation}
-\label{org8ef3fc4}
+\label{org714e5e8}
 Y_t = \beta_1+ \beta_2 X_{t,1} + \cdots +  \beta_k X_{t,k+1} + U_t 
 \end{equation}<p>donde las perturbaciones $\boldsymbol{U}$ quizá siguen un esquema
 auto-regresivo $AR(p)$:</p>
 $$U_t = \rho_1 U_{t-1} + \rho_2 U_{t-2}  + \cdots + \rho_p U_{t-p} + \varepsilon_t$$<ul>
 <li><strong>Paso 1</strong>. Obtener los errores $\hat{\boldsymbol{e}}$ del ajuste MCO
-del modelo (<a href="#org8ef3fc4">1</a>) con una muestra de tamaño $T$.</li>
+del modelo (<a href="#org714e5e8">1</a>) con una muestra de tamaño $T$.</li>
 <li><strong>Paso 2</strong>. Calcular el $R^2$ de la <em>regresión auxiliar</em> de los
 errores $\hat{\boldsymbol{e}}$ sobre los regresores del modelo
-original (<a href="#org8ef3fc4">1</a>) y sobre los $p$ primeros retardos
+original (<a href="#org714e5e8">1</a>) y sobre los $p$ primeros retardos
 de $\hat{\boldsymbol{e}}$.  $$\hat{e}_t = \alpha_0 + \alpha_1
   X_{t,1} + \cdots \alpha_k X_{t,k} + \rho_1 \hat{e}_{t-1} + \rho_2
   \hat{e}_{t-2} + \cdots + \rho_p \hat{e}_{t-p} + \varepsilon_t$$</li>
