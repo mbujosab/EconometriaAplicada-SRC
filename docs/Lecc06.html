@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
 <head>
-<!-- 2024-09-06 vie 22:48 -->
+<!-- 2024-09-07 sáb 15:33 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 6</title>
@@ -233,48 +233,59 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd99af8a">Carga de algunas librerías de R</a></li>
+<li><a href="#orgac70714">Carga de algunas librerías de R</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org88df22e">1. Función de autocovarianzas y función de autocorrelación (ACF)</a></li>
-<li><a href="#orgd7456f4">2. Función de autocorrelación parcial  (PACF)</a></li>
+<li><a href="#org266c60c">1. Función de autocovarianzas y función de autocorrelación (ACF)</a></li>
+<li><a href="#orgf883f7f">2. Función de autocorrelación parcial  (PACF)</a></li>
 <li><a href="#org3673052">3. Densidad espectral</a></li>
 <li><a href="#org9148dd4">4. ACF, PACF y densidad espectral de algunos modelos lineales</a>
 <ul>
 <li><a href="#org3a596a8">4.1. Procesos lineales</a></li>
 <li><a href="#org2c77457">4.2. Proceso de Ruido Blanco</a></li>
-<li><a href="#org2f32080">4.3. Proceso de media móvil MA(\(q\))</a></li>
-<li><a href="#orgb8553b8">4.4. Proceso de media móvil MA(\(1\))</a>
+<li><a href="#orgfaa4f3e">4.3. Proceso de media móvil MA(\(q\))</a></li>
+<li><a href="#org4006edd">4.4. Proceso de media móvil MA(\(1\))</a>
 <ul>
-<li><a href="#orgfbfd90d">4.4.1. MA(1) con raíz positiva</a></li>
-<li><a href="#org0fe415e">4.4.2. MA(1) con raíz negativa</a></li>
+<li><a href="#orgb2caf20">4.4.1. MA(1) con raíz positiva</a></li>
+<li><a href="#org74ad9d5">4.4.2. MA(1) con raíz negativa</a></li>
 </ul>
 </li>
-<li><a href="#org2cba15a">4.5. Proceso de media móvil MA(\(2\))</a>
+<li><a href="#org7bf6dae">4.5. Proceso de media móvil MA(\(2\))</a>
 <ul>
-<li><a href="#org40d3399">4.5.1. MA(2) con dos raíces reales, una positiva y la otra negativa</a></li>
-<li><a href="#org67282a6">4.5.2. MA(2) con un par de raíces complejas</a></li>
-<li><a href="#org6296dfa">4.5.3. MA(2) con dos raíces reales y negativas</a></li>
-<li><a href="#org381b2aa">4.5.4. MA(2) con dos raíces reales y positivas</a></li>
+<li><a href="#org4df6716">4.5.1. MA(2) con dos raíces reales, una positiva y la otra negativa</a></li>
+<li><a href="#orga4dc7af">4.5.2. MA(2) con un par de raíces complejas</a></li>
+<li><a href="#org963edd9">4.5.3. MA(2) con dos raíces reales y negativas</a></li>
+<li><a href="#org71d9945">4.5.4. MA(2) con dos raíces reales y positivas</a></li>
 </ul>
 </li>
 <li><a href="#org51d6a8b">4.6. Proceso autorregresivo AR(\(p\))</a>
 <ul>
-<li><a href="#org8780c18">4.6.1. Demostración de que la PACF tiene cogrado \(-p\) y grado \(p\)</a></li>
-<li><a href="#orgbcf8433">4.6.2. Ecuaciones de Yule-Walker (que relacionan las autocovarianzas con los parámetros de \(\boldsymbol{\phi}\))</a></li>
+<li><a href="#org1ede741">4.6.1. Demostración de que la PACF tiene cogrado \(-p\) y grado \(p\)</a></li>
+<li><a href="#org3cde7d2">4.6.2. Ecuaciones de Yule-Walker (que relacionan las autocovarianzas con los parámetros de \(\boldsymbol{\phi}\))</a></li>
 </ul>
 </li>
-<li><a href="#orgfdcf386">4.7. Proceso autorregresivo AR(\(1\))</a>
+<li><a href="#orgdfff23b">4.7. Proceso autorregresivo AR(\(1\))</a></li>
+<li><a href="#orga8a87b5">Proceso autorregresivo AR(\(1\))</a>
 <ul>
-<li><a href="#org3ee24c2">4.7.1. AR(1) con raíz positiva</a></li>
-<li><a href="#org207f3a0">4.7.2. AR(1) con raíz negativa</a></li>
+<li><a href="#org1fdf555">AR(1) con raíz positiva</a></li>
+<li><a href="#orgb3d51f1">AR(1) con raíz negativa</a></li>
 </ul>
 </li>
-<li><a href="#orgb5f3fc6">4.8. Proceso autorregresivo AR(\(2\))</a></div>
+<li><a href="#orgb5f3fc6">4.8. Proceso autorregresivo AR(\(2\))</a>
+<ul>
+<li><a href="#org97c6db3">4.8.1. AR(2) con dos raíces reales, una positiva y la otra negativa</a></li>
+<li><a href="#orgfec8e34">4.8.2. AR(2) con un par de raíces complejas</a></li>
+<li><a href="#orgcf7d3cb">4.8.3. AR(2) con dos raíces reales y negativas</a></li>
+<li><a href="#orgf391488">4.8.4. AR(2) con dos raíces reales y positivas</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org30bb2ce">5. Nota final</a></div>
 </div>
-<div class="abstract" id="orgb06dfc6">
+<div class="abstract" id="orgc3e18aa">
 <p>
 En esta lección veremos algunas herramientas estadísticas.
  y usaré la librería <code>tfarima</code> de
@@ -282,9 +293,9 @@ José Luis Gallego siempre que pueda.
 </p>
 
 </div>
-<div id="outline-container-orgd99af8a" class="outline-4">
-<h4 id="orgd99af8a">Carga de algunas librerías de R</h4>
-<div class="outline-text-4" id="text-orgd99af8a">
+<div id="outline-container-orgac70714" class="outline-4">
+<h4 id="orgac70714">Carga de algunas librerías de R</h4>
+<div class="outline-text-4" id="text-orgac70714">
 <p>
 Primero cargamos la librería <code>tfarima</code> (Repositorio Cran:
 <a href="https://cran.r-project.org/web/packages/tfarima/index.html">https://cran.r-project.org/web/packages/tfarima/index.html</a>;
@@ -310,8 +321,8 @@ del notebook
 </div>
 </div>
 </div>
-<div id="outline-container-org88df22e" class="outline-2">
-<h2 id="org88df22e"><span class="section-number-2">1.</span> Función de autocovarianzas y función de autocorrelación (ACF)</h2>
+<div id="outline-container-org266c60c" class="outline-2">
+<h2 id="org266c60c"><span class="section-number-2">1.</span> Función de autocovarianzas y función de autocorrelación (ACF)</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Ya hemos visto que si un proceso estocásticos es estacionario, la
@@ -338,8 +349,8 @@ variables del proceso.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd7456f4" class="outline-2">
-<h2 id="orgd7456f4"><span class="section-number-2">2.</span> Función de autocorrelación parcial  (PACF)</h2>
+<div id="outline-container-orgf883f7f" class="outline-2">
+<h2 id="orgf883f7f"><span class="section-number-2">2.</span> Función de autocorrelación parcial  (PACF)</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 La <i>correlación parcial</i> entre dos variables \(X_t\) y \(X_{t-k}\) de un
@@ -562,7 +573,7 @@ display(list(wn), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</span
 </div>
 
 
-<div id="org5a37e7f" class="figure">
+<div id="org31d5984" class="figure">
 <p><img src="./img/lecc06/ACFwhitenoise.png" alt="ACFwhitenoise.png" width="900px" />
 </p>
 </div>
@@ -574,14 +585,14 @@ ide(sim(wn, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"pl
 </div>
 
 
-<div id="orgb75f638" class="figure">
+<div id="org098e234" class="figure">
 <p><img src="./img/lecc06/SimulWhitenoise.png" alt="SimulWhitenoise.png" width="900px" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org2f32080" class="outline-3">
-<h3 id="org2f32080"><span class="section-number-3">4.3.</span> Proceso de media móvil MA(\(q\))</h3>
+<div id="outline-container-orgfaa4f3e" class="outline-3">
+<h3 id="orgfaa4f3e"><span class="section-number-3">4.3.</span> Proceso de media móvil MA(\(q\))</h3>
 <div class="outline-text-3" id="text-4-3">
 <p>
 Sea \(\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}\), con
@@ -613,8 +624,8 @@ Entonces \(E(X_t)=0\) y
 </p>
 </div>
 </div>
-<div id="outline-container-orgb8553b8" class="outline-3">
-<h3 id="orgb8553b8"><span class="section-number-3">4.4.</span> Proceso de media móvil MA(\(1\))</h3>
+<div id="outline-container-org4006edd" class="outline-3">
+<h3 id="org4006edd"><span class="section-number-3">4.4.</span> Proceso de media móvil MA(\(1\))</h3>
 <div class="outline-text-3" id="text-4-4">
 <p>
 Sea \(\boldsymbol{X}=(1-\theta z)*\boldsymbol{U}\) con \(|\theta|<1\) y
@@ -640,8 +651,8 @@ U_{t-1}\).
   \frac{-\theta^k(1-\theta^2)}{1-\theta^{2(k+1)}} z^k}\)</li>
 </ul>
 </div>
-<div id="outline-container-orgfbfd90d" class="outline-4">
-<h4 id="orgfbfd90d"><span class="section-number-4">4.4.1.</span> MA(1) con raíz positiva</h4>
+<div id="outline-container-orgb2caf20" class="outline-4">
+<h4 id="orgb2caf20"><span class="section-number-4">4.4.1.</span> MA(1) con raíz positiva</h4>
 <div class="outline-text-4" id="text-4-4-1">
 <div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
@@ -657,7 +668,7 @@ display(list(ma1p), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</sp
 </p>
 
 
-<div id="orgd6632d2" class="figure">
+<div id="orgc81bed0" class="figure">
 <p><img src="./img/lecc06/ACF-MA1p.png" alt="ACF-MA1p.png" width="900px" />
 </p>
 </div>
@@ -716,14 +727,14 @@ ide(sim(ma1p, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"
 </div>
 
 
-<div id="org1207553" class="figure">
+<div id="org506d992" class="figure">
 <p><img src="./img/lecc06/Sim-MA1p.png" alt="Sim-MA1p.png" width="900px" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org0fe415e" class="outline-4">
-<h4 id="org0fe415e"><span class="section-number-4">4.4.2.</span> MA(1) con raíz negativa</h4>
+<div id="outline-container-org74ad9d5" class="outline-4">
+<h4 id="org74ad9d5"><span class="section-number-4">4.4.2.</span> MA(1) con raíz negativa</h4>
 <div class="outline-text-4" id="text-4-4-2">
 <div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
@@ -738,7 +749,7 @@ display(list(ma1n), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</sp
 </p>
 
 
-<div id="org643e5fd" class="figure">
+<div id="orgaa2f09e" class="figure">
 <p><img src="./img/lecc06/ACF-MA1n.png" alt="ACF-MA1n.png" width="900px" />
 </p>
 </div>
@@ -795,15 +806,15 @@ ide(sim(ma1n, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"
 </div>
 
 
-<div id="org1f31188" class="figure">
+<div id="org55ce536" class="figure">
 <p><img src="./img/lecc06/Sim-MA1n.png" alt="Sim-MA1n.png" width="900px" />
 </p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org2cba15a" class="outline-3">
-<h3 id="org2cba15a"><span class="section-number-3">4.5.</span> Proceso de media móvil MA(\(2\))</h3>
+<div id="outline-container-org7bf6dae" class="outline-3">
+<h3 id="org7bf6dae"><span class="section-number-3">4.5.</span> Proceso de media móvil MA(\(2\))</h3>
 <div class="outline-text-3" id="text-4-5">
 <p>
 Sea \(\boldsymbol{X}=(1-\theta_1 z-\theta_2 z^2)*\boldsymbol{U}\), con
@@ -837,8 +848,8 @@ es decir \(X_t=U_t-\theta_1 U_{t-1}-\theta_2 U_{t-2}\).
 decae paulatinamente</li>
 </ul>
 </div>
-<div id="outline-container-org40d3399" class="outline-4">
-<h4 id="org40d3399"><span class="section-number-4">4.5.1.</span> MA(2) con dos raíces reales, una positiva y la otra negativa</h4>
+<div id="outline-container-org4df6716" class="outline-4">
+<h4 id="org4df6716"><span class="section-number-4">4.5.1.</span> MA(2) con dos raíces reales, una positiva y la otra negativa</h4>
 <div class="outline-text-4" id="text-4-5-1">
 <div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
@@ -853,7 +864,7 @@ display(list(ma2pn), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</s
 </p>
 
 
-<div id="org51bd07a" class="figure">
+<div id="org62217d0" class="figure">
 <p><img src="./img/lecc06/ACF-MA2pn.png" alt="ACF-MA2pn.png" width="900px" />
 </p>
 </div>
@@ -920,14 +931,14 @@ ide(sim(ma2pn, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">
 </div>
 
 
-<div id="org68de6ba" class="figure">
+<div id="orgb3af793" class="figure">
 <p><img src="./img/lecc06/Sim-MA2pn.png" alt="Sim-MA2pn.png" width="900px" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org67282a6" class="outline-4">
-<h4 id="org67282a6"><span class="section-number-4">4.5.2.</span> MA(2) con un par de raíces complejas</h4>
+<div id="outline-container-orga4dc7af" class="outline-4">
+<h4 id="orga4dc7af"><span class="section-number-4">4.5.2.</span> MA(2) con un par de raíces complejas</h4>
 <div class="outline-text-4" id="text-4-5-2">
 <div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
@@ -942,7 +953,7 @@ display(list(ma2np), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</s
 </p>
 
 
-<div id="org383f6fe" class="figure">
+<div id="org3a72fde" class="figure">
 <p><img src="./img/lecc06/ACF-MA2np.png" alt="ACF-MA2np.png" width="900px" />
 </p>
 </div>
@@ -1013,8 +1024,8 @@ c<img src="./img/lecc06/Sim-MA2np.png" alt="Sim-MA2np.png" width="900px" />
 </p>
 </div>
 </div>
-<div id="outline-container-org6296dfa" class="outline-4">
-<h4 id="org6296dfa"><span class="section-number-4">4.5.3.</span> MA(2) con dos raíces reales y negativas</h4>
+<div id="outline-container-org963edd9" class="outline-4">
+<h4 id="org963edd9"><span class="section-number-4">4.5.3.</span> MA(2) con dos raíces reales y negativas</h4>
 <div class="outline-text-4" id="text-4-5-3">
 <div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
@@ -1029,7 +1040,7 @@ display(list(ma2rojo), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE<
 </p>
 
 
-<div id="org74ae881" class="figure">
+<div id="org4e1abfd" class="figure">
 <p><img src="./img/lecc06/ACF-MA2rojo.png" alt="ACF-MA2rojo.png" width="900px" />
 </p>
 </div>
@@ -1097,14 +1108,14 @@ ide(sim(ma2rojo, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;
 </div>
 
 
-<div id="org0f062c1" class="figure">
+<div id="org5a711bb" class="figure">
 <p><img src="./img/lecc06/Sim-MA2rojo.png" alt="Sim-MA2rojo.png" width="900px" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org381b2aa" class="outline-4">
-<h4 id="org381b2aa"><span class="section-number-4">4.5.4.</span> MA(2) con dos raíces reales y positivas</h4>
+<div id="outline-container-org71d9945" class="outline-4">
+<h4 id="org71d9945"><span class="section-number-4">4.5.4.</span> MA(2) con dos raíces reales y positivas</h4>
 <div class="outline-text-4" id="text-4-5-4">
 <div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
@@ -1119,7 +1130,7 @@ display(list(ma2violeta), lag.max = 20, byrow = <span style="color: #6434A3;">TR
 </p>
 
 
-<div id="org4c0d04c" class="figure">
+<div id="orga322712" class="figure">
 <p><img src="./img/lecc06/ACF-MA2violeta.png" alt="ACF-MA2violeta.png" width="900px" />
 </p>
 </div>
@@ -1187,7 +1198,7 @@ ide(sim(ma2violeta, n = 400), lag.max = 20, graphs = c(<span style="color: #0080
 </div>
 
 
-<div id="orgd664fc7" class="figure">
+<div id="orgb896102" class="figure">
 <p><img src="./img/lecc06/Sim-MA2violeta.png" alt="Sim-MA2violeta.png" width="900px" />
 </p>
 </div>
@@ -1247,8 +1258,8 @@ Pero, sin embargo, la PACF, \(\;\boldsymbol{\pi},\;\) es una secuencia
 con grado \(p\) y cogrado \(-p\)&#x2026;
 </p>
 </div>
-<div id="outline-container-org8780c18" class="outline-4">
-<h4 id="org8780c18"><span class="section-number-4">4.6.1.</span> Demostración de que la PACF tiene cogrado \(-p\) y grado \(p\)</h4>
+<div id="outline-container-org1ede741" class="outline-4">
+<h4 id="org1ede741"><span class="section-number-4">4.6.1.</span> Demostración de que la PACF tiene cogrado \(-p\) y grado \(p\)</h4>
 <div class="outline-text-4" id="text-4-6-1">
 <ul class="org-ul">
 <li>Sea \(\boldsymbol{X}\) un proceso causal AR(\(p\)): \(\quad
@@ -1277,33 +1288,10 @@ Ahora es fácil ver que \(\pi_k=0\) para \(k>p\), pues
 ya que \(U_{k+1}\perp(X_{1}-\widetilde{X_{1}}) \in \bar{sp}(U_j\mid{j\leq k})\).
 </p></li>
 </ul>
-
-
-<p>
-<b>Nota.</b> Se puede demostrar que
-</p>
-<ul class="org-ul">
-<li>si un proceso tiene una ACF \(\boldsymbol{\rho}\) con cogrado \(-q\) y grado \(q\), es un proceso MA(\(q\))</li>
-<li>si un proceso tiene una PACF \(\boldsymbol{\pi}\) con cogrado \(-p\) y grado \(p\), es un proceso AR(\(p\))</li>
-</ul>
-
-<p>
-Véase <i>Pourahmadi M. (2001).</i>
-</p>
-<p>
-Consecuentemente, que la ACF o la PACF se cortan ``bruscamente'' nos
-indica que el modelo es AR o MA (y su grado).
-</p>
-
-<p>
-Desgraciadamente para los modelos ARMA (qué veremos más adelante)
-tanto la ACF como la PACF tienen infinitos términos no nulos, por lo
-que su identificación no es tan sencilla.
-</p>
 </div>
 </div>
-<div id="outline-container-orgbcf8433" class="outline-4">
-<h4 id="orgbcf8433"><span class="section-number-4">4.6.2.</span> Ecuaciones de Yule-Walker (que relacionan las autocovarianzas con los parámetros de \(\boldsymbol{\phi}\))</h4>
+<div id="outline-container-org3cde7d2" class="outline-4">
+<h4 id="org3cde7d2"><span class="section-number-4">4.6.2.</span> Ecuaciones de Yule-Walker (que relacionan las autocovarianzas con los parámetros de \(\boldsymbol{\phi}\))</h4>
 <div class="outline-text-4" id="text-4-6-2">
 <p>
 Consideremos un proceso AR(\(p\)): \(\quad X_t=\sum\limits_{j=1}^p\phi_j
@@ -1320,19 +1308,23 @@ Cov(X_{t-j},X_{t-k})+ Cov(U_t,X_{t-k});\qquad 0\leq k\leq p.\]
 Para \(\;k=0\;\) tenemos:
 </p>
 \begin{equation}
+\label{orga9910bb}
   \sigma^2=\gamma_0-\sum_{j=1}^p\phi_j\gamma_j
 \end{equation}
 <p>
 Para \(\;1\leq k\leq p\;\) tenemos:
 </p>
 \begin{equation}
+\label{org1befa06}
   \gamma_k=\sum_{j=1}^p\phi_j\gamma_{k-j}
 \end{equation}
 
 <p>
-Dividiendo (1) y (2) por \(\gamma_0\) (y operando en (1)) tenemos
+Dividiendo (\eqref{orga9910bb}) y (\eqref{org1befa06}) por \(\gamma_0\) (y
+operando en (\eqref{orga9910bb})) tenemos
 </p>
 \begin{equation}
+\label{orgdee3bc5}
   \gamma_0=\frac{\sigma^2}{1-\phi_1\rho_1-\cdots-\phi_p\rho_p};
   \qquad
   \rho_k=\phi_1\rho_{k-1}+\cdots+\phi_p\rho_{k-p}
@@ -1340,8 +1332,8 @@ Dividiendo (1) y (2) por \(\gamma_0\) (y operando en (1)) tenemos
 </div>
 </div>
 </div>
-<div id="outline-container-orgfdcf386" class="outline-3">
-<h3 id="orgfdcf386"><span class="section-number-3">4.7.</span> Proceso autorregresivo AR(\(1\))</h3>
+<div id="outline-container-orgdfff23b" class="outline-3">
+<h3 id="orgdfff23b"><span class="section-number-3">4.7.</span> Proceso autorregresivo AR(\(1\))</h3>
 <div class="outline-text-3" id="text-4-7">
 <p>
 Sea \(\;(1-\phi z)*\boldsymbol{X}=\boldsymbol{U},\quad\) con
@@ -1350,32 +1342,79 @@ decir \[X_t=\phi X_{t-1} + U_t.\]
 </p>
 
 <p>
-Dado que \((1-a z)*(1+a z+a^2 z^2+a^3 z^3+\cdots)=1\)
+Y nótese que 
+\[(1-a z)*(1+a z+a^2 z^2+a^3 z^3+\cdots)=1;\] 
+por lo que ahora hay que calcular infinitos términos en 
+\[\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi z)^{-1}*(1-\phi z^{-1})^{-1}.\]
 </p>
 <p>
-\(\boldsymbol{\gamma} \;=\; \sigma^2 (1-\theta z)^{-1}*(1-\theta
-  z^{-1})^{-1} \;=\; \frac{\sigma^2}{1-\phi^2} \sum_{j=0}^\infty
-  \phi^j z^j\)
+Hay varias formas de hacer los cálculos. Una es vía los productos convolución;
+puesto que 
+\[(1-a^2 z)^{-1}=(1+a^2 z+a^4 z^2+a^6 z^3+\cdots)=\sum_{h\in\mathbb{Z}} a^{2|h|} z^h\] 
+(para verlo basta sustituir \(a^2\) por \(b\)), tenemos que \((1-a z)^{-1}*(1-a z^{-1})^{-1}\) es:
+\[
+\begin{array}{rcccccccl}
+(\ldots,& 0,& 0,& 0,& {\color{blue}{1}},& a,& a^2,& a^3,& \ldots)\\
+*(\ldots,& a^3,& a^2,& a,& {\color{blue}{1}},& 0,& 0,& 0,& \ldots)\\\hline
+=(\ldots,& \frac{a^3}{1+a^2},& \frac{a^2}{1+a^2},& \frac{a}{1+a^2},&{\color{blue}{\frac{1}{1+a^2}}},& \frac{a}{1+a^2},& \frac{a^2}{1+a^2},& \frac{a^3}{1+a^2},& \ldots)
+\end{array}\]
+(donde además hemos sustituido \(z\) por \(1\), pues cada término es una suma).
+</p>
+<p>
+Es decir \((1-a z)^{-1}*(1-a z^{-1})^{-1}=\sum\limits_{k\in\mathbb{Z}}\frac{a^{|k|}}{1-a^2}z^k\); y por tanto
+\[\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi z)^{-1}*(1-\phi
+  z^{-1})^{-1} \;=\; \frac{\sigma^2}{1-\phi^2} \sum_{k=-\infty}^\infty
+  \phi^{|k|} z^k\]
+</p>
+<p>
+Pero también podemos usar las Ecuaciones de Yule-Walker. En este caso
+(donde el único parámetro es \(\phi_1=\phi\)), en cuanto a la
+correlación: \[\rho_k=\phi\rho_{k-1}\qquad k>0\] y como \(\rho_0=1\),
+tenemos que \[\rho_k=\phi^k\qquad k\geq0\] Y en cuanto a la varianza,
+dado que \(\rho_1=\phi\)
+\[\gamma_0=\frac{\sigma^2}{1-\rho_1\phi}=\frac{\sigma^2}{1-\phi^2}.\]
+Por tanto \[\boldsymbol{\gamma} \;=\; \gamma_0\cdot\boldsymbol{\rho} \;=\;
+\frac{\sigma^2}{1-\phi^2} \sum_{k=-\infty}^\infty \phi^{|k|} z^k\]
+</p>
+</div>
+</div>
+<div id="outline-container-orga8a87b5" class="outline-3">
+<h3 id="orga8a87b5">Proceso autorregresivo AR(\(1\))</h3>
+<div class="outline-text-3" id="text-orga8a87b5">
+<p>
+Así pues,
+si \(\;(1-\phi z)*\boldsymbol{X}=\boldsymbol{U},\quad\) con
+\(\;|\phi|<1\;\) y con \(\;\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\), es
+decir, si \[X_t=\phi X_{t-1} + U_t\]
+tenemos que
+</p>
+
+<p>
+\(\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi z)^{-1}*(1-\phi
+  z^{-1})^{-1} \;=\; \frac{\sigma^2}{1-\phi^2}
+  \sum\limits_{k=-\infty}^\infty \phi^{|k|} z^k\)
 </p>
 
 <p>
 \(\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\;
-  \frac{1+\theta^2}{\sigma^2}\boldsymbol{\gamma} \;=\;
-  \sum_{j=0}^\infty \phi^j z^j \quad\Rightarrow\quad \rho_k=\phi^k\).
+  \frac{1+\phi^2}{\sigma^2}\boldsymbol{\gamma} \;=\;
+  \sum\limits_{j=-\infty}^\infty \phi^{|j|} z^j \quad\Rightarrow\quad
+  \rho_k=\phi^k\) para \(k\geq0\).
 </p>
 
 <p>
 \(f(\omega) \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^\infty \gamma_h
-  \cos(h\omega)=\frac{\sigma^2}{2\pi}\frac{1}{1+\theta^2-2\theta\cos(\omega)}\).
+  \cos(h\omega)=\frac{\sigma^2}{2\pi}\frac{1}{1+\phi^2-2\phi\cos(\omega)}\;\) (compárese con MA(\(1\))).
 </p>
+
 
 <p>
 \(\boldsymbol{\pi} \;=\; (\ldots,\; 0,\; 0,\; \phi,\; {\color{blue}1},\; \phi,\; 0,\; 0,\;\ldots)\) 
 </p>
 </div>
-<div id="outline-container-org3ee24c2" class="outline-4">
-<h4 id="org3ee24c2"><span class="section-number-4">4.7.1.</span> AR(1) con raíz positiva</h4>
-<div class="outline-text-4" id="text-4-7-1">
+<div id="outline-container-org1fdf555" class="outline-4">
+<h4 id="org1fdf555">AR(1) con raíz positiva</h4>
+<div class="outline-text-4" id="text-org1fdf555">
 <div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
 ar1p <span style="color: #D0372D;">&lt;-</span> um(ar = <span style="color: #008000;">"(1 - 0.9B)"</span>)
@@ -1388,7 +1427,7 @@ display(list(ar1p), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</sp
 </p>
 
 
-<div id="org751b966" class="figure">
+<div id="orgf59efd6" class="figure">
 <p><img src="./img/lecc06/ACF-AR1p.png" alt="ACF-AR1p.png" width="900px" />
 </p>
 </div>
@@ -1446,15 +1485,15 @@ ide(sim(ar1p, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"
 </div>
 
 
-<div id="org200ec2e" class="figure">
+<div id="org50ad75f" class="figure">
 <p><img src="./img/lecc06/Sim-AR1p.png" alt="Sim-AR1p.png" width="900px" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org207f3a0" class="outline-4">
-<h4 id="org207f3a0"><span class="section-number-4">4.7.2.</span> AR(1) con raíz negativa</h4>
-<div class="outline-text-4" id="text-4-7-2">
+<div id="outline-container-orgb3d51f1" class="outline-4">
+<h4 id="orgb3d51f1">AR(1) con raíz negativa</h4>
+<div class="outline-text-4" id="text-orgb3d51f1">
 <div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
 ar1n <span style="color: #D0372D;">&lt;-</span> um(ar = <span style="color: #008000;">"(1 + 0.9B)"</span>)
@@ -1467,7 +1506,7 @@ display(list(ar1n), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</sp
 </p>
 
 
-<div id="org700c129" class="figure">
+<div id="orgae64b81" class="figure">
 <p><img src="./img/lecc06/ACF-AR1n.png" alt="ACF-AR1n.png" width="900px" />
 </p>
 </div>
@@ -1524,7 +1563,7 @@ ide(sim(ar1n, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"
 </div>
 
 
-<div id="orgc5e8025" class="figure">
+<div id="org6c5ea45" class="figure">
 <p><img src="./img/lecc06/Sim-AR1n.png" alt="Sim-AR1n.png" width="900px" />
 </p>
 </div>
@@ -1535,43 +1574,425 @@ ide(sim(ar1n, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"
 <h3 id="orgb5f3fc6"><span class="section-number-3">4.8.</span> Proceso autorregresivo AR(\(2\))</h3>
 <div class="outline-text-3" id="text-4-8">
 <p>
-Sea \((1-\phi_1 z-\phi_2 z^2)*\boldsymbol{X}=\boldsymbol{U}\), con
-\(\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\) y con
-\[\phi_1+\phi_2<1;\qquad \phi_2-\phi_1<1;\qquad |\phi_2|<1;\quad \text{(i.e., invertible)}\]
-es decir \(X_t=\phi_1 X_{t-1} + \phi_2 X_{t-2} + U_t\).
+Sea \(\quad(1-\phi_1 z-\phi_2 z^2)*\boldsymbol{X}=\boldsymbol{U},\quad\)
+con \(\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\) y con
+\[\phi_1+\phi_2<1;\qquad \phi_2-\phi_1<1;\qquad |\phi_2|<1;\quad
+\text{(i.e., invertible)}\] es decir \[X_t=\phi_1 X_{t-1} + \phi_2
+X_{t-2} + U_t.\] Entonces
 </p>
-
-<ul class="org-ul">
-<li><p>
-\(\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi_1 z-\phi_2 z^2)*(1-\phi_1 z^{-1}-\phi_2 z^{-2})\)
+<p>
+\(\boldsymbol{\gamma}=\sigma^2\left(
+  \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^-1)}\right)\qquad\)(Verifica
+  \(\;\gamma_k=\phi_1\gamma_{k-1}+\phi_2\gamma_{k-2}\;\) y decae
+  paulatinamente)
+</p>
+<p>
+\(\quad\) <i>(de (3): \(\gamma_0 =
+   \frac{\sigma^2}{1-\phi_1\rho_1-\phi_2\rho_2}\) e iniciamos el
+  cálculo (2) recursivamente)</i>
 </p>
 
 <p>
-\(\gamma_0={\color{blue}{\sigma^2(1+\phi_1^2+\phi_2^2)}};\qquad\)
-\(\gamma_1=\sigma^2\big(-\phi_1(1-\phi_2)\big);\qquad\)
-\(\gamma_2=\sigma^2(-\phi_2)\)
+\(\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}\qquad\qquad\qquad\quad\)
+  (Verifica \(\;\rho_k=\phi_1\rho_{k-1}+\phi_2\rho_{k-2}\;\) y decae
+  paulatinamente)
+</p>
+<p>
+\(f(\omega) \;=\;  \frac{\sigma^2}{2\pi}\frac{1}{1+\phi_1^2+\phi_2^2-2\phi_1(1+\phi_2)\cos(\omega)-2\phi_2\cos(2\omega)}\)
 </p>
 
 <p>
-\(\gamma_3=\gamma_4=\cdots=0\qquad\) (y es simétrica) 
-</p></li>
-
-<li>\(\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2(1+\phi_1^2+\phi_2^2)}\boldsymbol{\gamma}\)</li>
-
-<li>\(f(\omega) \;=\;  \frac{\sigma^2}{2\pi}\frac{1}{1+\phi_1^2+\phi_2^2-2\phi_1(1+\phi_2)\cos(\omega)-2\phi_2\cos(2\omega)};\quad -\pi\leq\omega\leq\pi\)</li>
-</ul>
-
-<ul class="org-ul">
-<li>\(\boldsymbol{\pi}\) tiene una expresión complicada, pero su magnitud
-decae paulatinamente</li>
-</ul>
+\(\boldsymbol{\pi} \;=\; (\ldots,\; 0,\; \phi_2,\; \frac{\phi_1}{1-\phi_2},\; {\color{blue}1},\; \frac{\phi_1}{1-\phi_2},\; \phi_2,\; 0,\;\ldots)\) 
+</p>
 </div>
+<div id="outline-container-org97c6db3" class="outline-4">
+<h4 id="org97c6db3"><span class="section-number-4">4.8.1.</span> AR(2) con dos raíces reales, una positiva y la otra negativa</h4>
+<div class="outline-text-4" id="text-4-8-1">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ar2pn <span style="color: #D0372D;">&lt;-</span> um(ar = <span style="color: #008000;">"(1 + 0.1B - 0.8B^2)"</span>)
+display(list(ar2pn), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</span>)
+</pre>
+</div>
+
+<p>
+\[\boldsymbol{\theta}(z)=1+0.1z-0.8z^2\quad\Rightarrow\quad X_t=
+-0.1X_{t-1}+0.8X_{t-2} + U_t.\]
+</p>
+
+
+<div id="orgb6cddba" class="figure">
+<p><img src="./img/lecc06/ACF-AR2pn.png" alt="ACF-AR2pn.png" width="900px" />
+</p>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R" id="org7566c71">roots(ar2pn)
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Real</th>
+<th scope="col" class="org-right">Imaginary</th>
+<th scope="col" class="org-right">Modulus</th>
+<th scope="col" class="org-right">Frequency</th>
+<th scope="col" class="org-right">Period</th>
+<th scope="col" class="org-right">Mult.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1.18228</td>
+<td class="org-right">7.754818e-26</td>
+<td class="org-right">1.18228</td>
+<td class="org-right">0.0</td>
+<td class="org-right">Inf</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">-1.05728</td>
+<td class="org-right">-7.754818e-26</td>
+<td class="org-right">1.05728</td>
+<td class="org-right">0.5</td>
+<td class="org-right">2</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ar2pn, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
+</pre>
+</div>
+
+
+<div id="org48519cf" class="figure">
+<p><img src="./img/lecc06/Sim-AR2pn.png" alt="Sim-AR2pn.png" width="900px" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfec8e34" class="outline-4">
+<h4 id="orgfec8e34"><span class="section-number-4">4.8.2.</span> AR(2) con un par de raíces complejas</h4>
+<div class="outline-text-4" id="text-4-8-2">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ar2np <span style="color: #D0372D;">&lt;-</span> um(ar = <span style="color: #008000;">"(1 - 0.1B + 0.8B^2)"</span>)
+display(list(ar2np), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</span>)
+</pre>
+</div>
+
+<p>
+\[\boldsymbol{\theta}(z)=1-0.1z+0.8z^2\quad\Rightarrow\quad X_t=
+0.1X_{t-1}-0.8X_{t-2} + U_t.\]
+</p>
+
+
+<div id="org6240f48" class="figure">
+<p><img src="./img/lecc06/ACF-AR2np.png" alt="ACF-AR2np.png" width="900px" />
+</p>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R" id="orged8d95c">roots(ar2np)
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Real</th>
+<th scope="col" class="org-right">Imaginary</th>
+<th scope="col" class="org-right">Modulus</th>
+<th scope="col" class="org-right">Frequency</th>
+<th scope="col" class="org-right">Period</th>
+<th scope="col" class="org-right">Mult.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0.0625</td>
+<td class="org-right">1.116286</td>
+<td class="org-right">1.118034</td>
+<td class="org-right">0.2410983</td>
+<td class="org-right">4.147685</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">0.0625</td>
+<td class="org-right">-1.116286</td>
+<td class="org-right">1.118034</td>
+<td class="org-right">0.2410983</td>
+<td class="org-right">4.147685</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ar2np, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
+</pre>
+</div>
+
+<p width="900px">
+c<img src="./img/lecc06/Sim-AR2np.png" alt="Sim-AR2np.png" width="900px" />
+</p>
+</div>
+</div>
+<div id="outline-container-orgcf7d3cb" class="outline-4">
+<h4 id="orgcf7d3cb"><span class="section-number-4">4.8.3.</span> AR(2) con dos raíces reales y negativas</h4>
+<div class="outline-text-4" id="text-4-8-3">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ar2azul <span style="color: #D0372D;">&lt;-</span> um(ar = <span style="color: #008000;">"(1 + 1.8B + .9B^2 )"</span>)
+display(list(ar2azul), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</span>)
+</pre>
+</div>
+
+<p>
+\[\boldsymbol{\theta}(z)=1+1.8z+0.9z^2\quad\Rightarrow\quad X_t=
+-1.8X_{t-1}-0.9X_{t-2} + U_t.\]
+</p>
+
+
+<div id="org9903e0c" class="figure">
+<p><img src="./img/lecc06/ACF-AR2azul.png" alt="ACF-AR2azul.png" width="900px" />
+</p>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R" id="org6ba63b6">roots(ar2azul)
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Real</th>
+<th scope="col" class="org-right">Imaginary</th>
+<th scope="col" class="org-right">Modulus</th>
+<th scope="col" class="org-right">Frequency</th>
+<th scope="col" class="org-right">Period</th>
+<th scope="col" class="org-right">Mult.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">-1</td>
+<td class="org-right">0.3333333</td>
+<td class="org-right">1.054093</td>
+<td class="org-right">0.4487918</td>
+<td class="org-right">2.228205</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">-1</td>
+<td class="org-right">-0.3333333</td>
+<td class="org-right">1.054093</td>
+<td class="org-right">0.4487918</td>
+<td class="org-right">2.228205</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ar2azul, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
+</pre>
+</div>
+
+
+<div id="orgec61c29" class="figure">
+<p><img src="./img/lecc06/Sim-AR2azul.png" alt="Sim-AR2azul.png" width="900px" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf391488" class="outline-4">
+<h4 id="orgf391488"><span class="section-number-4">4.8.4.</span> AR(2) con dos raíces reales y positivas</h4>
+<div class="outline-text-4" id="text-4-8-4">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ar2rojo <span style="color: #D0372D;">&lt;-</span> um(ar = <span style="color: #008000;">"(1 - 1.8B + .9B^2 )"</span>)
+display(list(ar2rojo), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE</span>)
+</pre>
+</div>
+
+<p>
+\[\boldsymbol{\theta}(z)=1-1.8z+0.9z^2\quad\Rightarrow\quad X_t=
+1.8X_{t-1}-0.9X_{t-2} + U_t.\]
+</p>
+
+
+<div id="org296566a" class="figure">
+<p><img src="./img/lecc06/ACF-AR2rojo.png" alt="ACF-AR2rojo.png" width="900px" />
+</p>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R" id="org4375500">roots(ar2rojo)
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Real</th>
+<th scope="col" class="org-right">Imaginary</th>
+<th scope="col" class="org-right">Modulus</th>
+<th scope="col" class="org-right">Frequency</th>
+<th scope="col" class="org-right">Period</th>
+<th scope="col" class="org-right">Mult.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">0.3333333</td>
+<td class="org-right">1.054093</td>
+<td class="org-right">0.05120819</td>
+<td class="org-right">19.52813</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">-0.3333333</td>
+<td class="org-right">1.054093</td>
+<td class="org-right">0.05120819</td>
+<td class="org-right">19.52813</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ar2rojo, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
+</pre>
+</div>
+
+
+<div id="org81de5f8" class="figure">
+<p><img src="./img/lecc06/Sim-AR2rojo.png" alt="Sim-AR2rojo.png" width="900px" />
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org30bb2ce" class="outline-2">
+<h2 id="org30bb2ce"><span class="section-number-2">5.</span> Nota final</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+Se puede demostrar que
+</p>
+<ul class="org-ul">
+<li>si un proceso tiene una ACF \(\boldsymbol{\rho}\) con cogrado \(-q\) y grado \(q\), es un proceso MA(\(q\))</li>
+<li>si un proceso tiene una PACF \(\boldsymbol{\pi}\) con cogrado \(-p\) y grado \(p\), es un proceso AR(\(p\))</li>
+</ul>
+
+<p>
+Véase <i>Pourahmadi M. (2001).</i>
+</p>
+<p>
+Consecuentemente, que la ACF o la PACF se cortan ``bruscamente'' nos
+indica que el modelo es AR o MA (y su grado).
+</p>
+
+<p>
+Desgraciadamente para los modelos ARMA (qué veremos más adelante)
+tanto la ACF como la PACF tienen infinitos términos no nulos, por lo
+que su identificación no es tan sencilla.
+</p>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-09-06 vie 22:48</p>
+<p class="date">Created: 2024-09-07 sáb 15:33</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

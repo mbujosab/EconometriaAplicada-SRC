@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="org074a565">
+<div class="abstract" id="org47e75ad">
 <p>
 En esta lección veremos algunas herramientas estadísticas.
  y usaré la librería <code>tfarima</code> de
@@ -15093,28 +15093,6 @@ $\bar{sp}(X_{2}:X_k)$</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Nota.</strong> Se puede demostrar que</p>
-<ul>
-<li>si un proceso tiene una ACF $\boldsymbol{\rho}$ con cogrado $-q$ y grado $q$, es un proceso MA($q$)</li>
-<li>si un proceso tiene una PACF $\boldsymbol{\pi}$ con cogrado $-p$ y grado $p$, es un proceso AR($p$)</li>
-</ul>
-<p>Véase <em>Pourahmadi M. (2001).</em></p>
-<p>Consecuentemente, que la ACF o la PACF se cortan ``bruscamente'' nos
-indica que el modelo es AR o MA (y su grado).</p>
-<p>Desgraciadamente para los modelos ARMA (qué veremos más adelante)
-tanto la ACF como la PACF tienen infinitos términos no nulos, por lo
-que su identificación no es tan sencilla.</p>
-
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="Ecuaciones-de-Yule-Walker-(que-relacionan-las-autocovarianzas-con-los-par%C3%A1metros-de-$%5Cboldsymbol%7B%5Cphi%7D$)">Ecuaciones de Yule-Walker (que relacionan las autocovarianzas con los par&#225;metros de $\boldsymbol{\phi}$)<a class="anchor-link" href="#Ecuaciones-de-Yule-Walker-(que-relacionan-las-autocovarianzas-con-los-par%C3%A1metros-de-$%5Cboldsymbol%7B%5Cphi%7D$)">&#182;</a></h4>
 </div>
 </div>
@@ -15133,12 +15111,16 @@ esperanzas tenemos $$Cov(X_t,X_{t-k})=\sum_{j=1}^p\phi_j
 Cov(X_{t-j},X_{t-k})+ Cov(U_t,X_{t-k});\qquad 0\leq k\leq p.$$</p>
 <p>Para $\;k=0\;$ tenemos:</p>
 \begin{equation}
+\label{orgdc840e5}
   \sigma^2=\gamma_0-\sum_{j=1}^p\phi_j\gamma_j
 \end{equation}<p>Para $\;1\leq k\leq p\;$ tenemos:</p>
 \begin{equation}
+\label{orgeaeb119}
   \gamma_k=\sum_{j=1}^p\phi_j\gamma_{k-j}
-\end{equation}<p>Dividiendo (1) y (2) por $\gamma_0$ (y operando en (1)) tenemos</p>
+\end{equation}<p>Dividiendo (<a href="#orgdc840e5">1</a>) y (<a href="#orgeaeb119">2</a>) por $\gamma_0$ (y
+operando en (<a href="#orgdc840e5">1</a>)) tenemos</p>
 \begin{equation}
+\label{org5bc2b2b}
   \gamma_0=\frac{\sigma^2}{1-\phi_1\rho_1-\cdots-\phi_p\rho_p};
   \qquad
   \rho_k=\phi_1\rho_{k-1}+\cdots+\phi_p\rho_{k-p}
@@ -15167,15 +15149,91 @@ Cov(X_{t-j},X_{t-k})+ Cov(U_t,X_{t-k});\qquad 0\leq k\leq p.$$</p>
 <p>Sea $\;(1-\phi z)*\boldsymbol{X}=\boldsymbol{U},\quad$ con
 $\;|\phi|&lt;1\;$ y con $\;\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es
 decir $$X_t=\phi X_{t-1} + U_t.$$</p>
-<p>Dado que $(1-a z)*(1+a z+a^2 z^2+a^3 z^3+\cdots)=1$</p>
-<p>$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\theta z)^{-1}*(1-\theta
-  z^{-1})^{-1} \;=\; \frac{\sigma^2}{1-\phi^2} \sum_{j=0}^\infty
-  \phi^j z^j$</p>
+<p>Y nótese que 
+$$(1-a z)*(1+a z+a^2 z^2+a^3 z^3+\cdots)=1;$$ 
+por lo que ahora hay que calcular infinitos términos en 
+$$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi z)^{-1}*(1-\phi z^{-1})^{-1}.$$</p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Hay varias formas de hacer los cálculos. Una es vía los productos convolución;
+puesto que 
+$$(1-a^2 z)^{-1}=(1+a^2 z+a^4 z^2+a^6 z^3+\cdots)=\sum_{h\in\mathbb{Z}} a^{2|h|} z^h$$ 
+(para verlo basta sustituir $a^2$ por $b$), tenemos que $(1-a z)^{-1}*(1-a z^{-1})^{-1}$ es:
+$$
+\begin{array}{rcccccccl}
+(\ldots,&amp; 0,&amp; 0,&amp; 0,&amp; {\color{blue}{1}},&amp; a,&amp; a^2,&amp; a^3,&amp; \ldots)\\
+*(\ldots,&amp; a^3,&amp; a^2,&amp; a,&amp; {\color{blue}{1}},&amp; 0,&amp; 0,&amp; 0,&amp; \ldots)\\\hline
+=(\ldots,&amp; \frac{a^3}{1+a^2},&amp; \frac{a^2}{1+a^2},&amp; \frac{a}{1+a^2},&amp;{\color{blue}{\frac{1}{1+a^2}}},&amp; \frac{a}{1+a^2},&amp; \frac{a^2}{1+a^2},&amp; \frac{a^3}{1+a^2},&amp; \ldots)
+\end{array}$$
+(donde además hemos sustituido $z$ por $1$, pues cada término es una suma).</p>
+<p>Es decir $(1-a z)^{-1}*(1-a z^{-1})^{-1}=\sum\limits_{k\in\mathbb{Z}}\frac{a^{|k|}}{1-a^2}z^k$; y por tanto
+$$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi z)^{-1}*(1-\phi
+  z^{-1})^{-1} \;=\; \frac{\sigma^2}{1-\phi^2} \sum_{k=-\infty}^\infty
+  \phi^{|k|} z^k$$</p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Pero también podemos usar las Ecuaciones de Yule-Walker. En este caso
+(donde el único parámetro es $\phi_1=\phi$), en cuanto a la
+correlación: $$\rho_k=\phi\rho_{k-1}\qquad k&gt;0$$ y como $\rho_0=1$,
+tenemos que $$\rho_k=\phi^k\qquad k\geq0$$ Y en cuanto a la varianza,
+dado que $\rho_1=\phi$
+$$\gamma_0=\frac{\sigma^2}{1-\rho_1\phi}=\frac{\sigma^2}{1-\phi^2}.$$
+Por tanto $$\boldsymbol{\gamma} \;=\; \gamma_0\cdot\boldsymbol{\rho} \;=\;
+\frac{\sigma^2}{1-\phi^2} \sum_{k=-\infty}^\infty \phi^{|k|} z^k$$</p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Proceso-autorregresivo-AR($1$)">Proceso autorregresivo AR($1$)<a class="anchor-link" href="#Proceso-autorregresivo-AR($1$)">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Así pues,
+si $\;(1-\phi z)*\boldsymbol{X}=\boldsymbol{U},\quad$ con
+$\;|\phi|&lt;1\;$ y con $\;\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es
+decir, si $$X_t=\phi X_{t-1} + U_t$$
+tenemos que</p>
+<p>$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi z)^{-1}*(1-\phi
+  z^{-1})^{-1} \;=\; \frac{\sigma^2}{1-\phi^2}
+  \sum\limits_{k=-\infty}^\infty \phi^{|k|} z^k$</p>
 <p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\;
-  \frac{1+\theta^2}{\sigma^2}\boldsymbol{\gamma} \;=\;
-  \sum_{j=0}^\infty \phi^j z^j \quad\Rightarrow\quad \rho_k=\phi^k$.</p>
+  \frac{1+\phi^2}{\sigma^2}\boldsymbol{\gamma} \;=\;
+  \sum\limits_{j=-\infty}^\infty \phi^{|j|} z^j \quad\Rightarrow\quad
+  \rho_k=\phi^k$ para $k\geq0$.</p>
 <p>$f(\omega) \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^\infty \gamma_h
-  \cos(h\omega)=\frac{\sigma^2}{2\pi}\frac{1}{1+\theta^2-2\theta\cos(\omega)}$.</p>
+  \cos(h\omega)=\frac{\sigma^2}{2\pi}\frac{1}{1+\phi^2-2\phi\cos(\omega)}\;$ (compárese con MA($1$)).</p>
 <p>$\boldsymbol{\pi} \;=\; (\ldots,\; 0,\; 0,\; \phi,\; {\color{blue}1},\; \phi,\; 0,\; 0,\;\ldots)$</p>
 
 </div>
@@ -15273,25 +15331,208 @@ $$\boldsymbol{\phi}(z)=1+0.9z\quad\Rightarrow\quad X_t=-0.9X_{t-1}+U_t.$$<p><img
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Sea $(1-\phi_1 z-\phi_2 z^2)*\boldsymbol{X}=\boldsymbol{U}$, con
-$\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y con
-$$\phi_1+\phi_2&lt;1;\qquad \phi_2-\phi_1&lt;1;\qquad |\phi_2|&lt;1;\quad \text{(i.e., invertible)}$$
-es decir $X_t=\phi_1 X_{t-1} + \phi_2 X_{t-2} + U_t$.</p>
+<p>Sea $\quad(1-\phi_1 z-\phi_2 z^2)*\boldsymbol{X}=\boldsymbol{U},\quad$
+con $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y con
+$$\phi_1+\phi_2&lt;1;\qquad \phi_2-\phi_1&lt;1;\qquad |\phi_2|&lt;1;\quad
+\text{(i.e., invertible)}$$ es decir $$X_t=\phi_1 X_{t-1} + \phi_2
+X_{t-2} + U_t.$$ Entonces</p>
+<p>$\boldsymbol{\gamma}=\sigma^2\left(
+  \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^-1)}\right)\qquad$(Verifica
+  $\;\gamma_k=\phi_1\gamma_{k-1}+\phi_2\gamma_{k-2}\;$ y decae
+  paulatinamente)</p>
+<p>$\quad$ <em>(de (3): $\gamma_0 =
+   \frac{\sigma^2}{1-\phi_1\rho_1-\phi_2\rho_2}$ e iniciamos el
+  cálculo (2) recursivamente)</em></p>
+<p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}\qquad\qquad\qquad\quad$
+  (Verifica $\;\rho_k=\phi_1\rho_{k-1}+\phi_2\rho_{k-2}\;$ y decae
+  paulatinamente)</p>
+<p>$f(\omega) \;=\;  \frac{\sigma^2}{2\pi}\frac{1}{1+\phi_1^2+\phi_2^2-2\phi_1(1+\phi_2)\cos(\omega)-2\phi_2\cos(2\omega)}$</p>
+<p>$\boldsymbol{\pi} \;=\; (\ldots,\; 0,\; \phi_2,\; \frac{\phi_1}{1-\phi_2},\; {\color{blue}1},\; \frac{\phi_1}{1-\phi_2},\; \phi_2,\; 0,\;\ldots)$</p>
+
+</div>
+</div>
+</div>
+</div><aside class="notes">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="AR(2)-con-dos-ra%C3%ADces-reales,-una-positiva-y-la-otra-negativa">AR(2) con dos ra&#237;ces reales, una positiva y la otra negativa<a class="anchor-link" href="#AR(2)-con-dos-ra%C3%ADces-reales,-una-positiva-y-la-otra-negativa">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+</aside></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\boldsymbol{\theta}(z)=1+0.1z-0.8z^2\quad\Rightarrow\quad X_t=
+-0.1X_{t-1}+0.8X_{t-2} + U_t.$$<p><img src="./img/lecc06/ACF-AR2pn.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc06/Sim-AR2pn.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div><aside class="notes">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="AR(2)-con-un-par-de-ra%C3%ADces-complejas">AR(2) con un par de ra&#237;ces complejas<a class="anchor-link" href="#AR(2)-con-un-par-de-ra%C3%ADces-complejas">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+</aside></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\boldsymbol{\theta}(z)=1-0.1z+0.8z^2\quad\Rightarrow\quad X_t=
+0.1X_{t-1}-0.8X_{t-2} + U_t.$$<p><img src="./img/lecc06/ACF-AR2np.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>c<img src="./img/lecc06/Sim-AR2np.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div><aside class="notes">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="AR(2)-con-dos-ra%C3%ADces-reales-y-negativas">AR(2) con dos ra&#237;ces reales y negativas<a class="anchor-link" href="#AR(2)-con-dos-ra%C3%ADces-reales-y-negativas">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+</aside></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\boldsymbol{\theta}(z)=1+1.8z+0.9z^2\quad\Rightarrow\quad X_t=
+-1.8X_{t-1}-0.9X_{t-2} + U_t.$$<p><img src="./img/lecc06/ACF-AR2azul.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc06/Sim-AR2azul.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div><aside class="notes">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="AR(2)-con-dos-ra%C3%ADces-reales-y-positivas">AR(2) con dos ra&#237;ces reales y positivas<a class="anchor-link" href="#AR(2)-con-dos-ra%C3%ADces-reales-y-positivas">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+</aside></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+$$\boldsymbol{\theta}(z)=1-1.8z+0.9z^2\quad\Rightarrow\quad X_t=
+1.8X_{t-1}-0.9X_{t-2} + U_t.$$<p><img src="./img/lecc06/ACF-AR2rojo.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc06/Sim-AR2rojo.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Nota-final">Nota final<a class="anchor-link" href="#Nota-final">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Se puede demostrar que</p>
 <ul>
-<li><p>$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi_1 z-\phi_2 z^2)*(1-\phi_1 z^{-1}-\phi_2 z^{-2})$</p>
-<p>$\gamma_0={\color{blue}{\sigma^2(1+\phi_1^2+\phi_2^2)}};\qquad$
-$\gamma_1=\sigma^2\big(-\phi_1(1-\phi_2)\big);\qquad$
-$\gamma_2=\sigma^2(-\phi_2)$</p>
-<p>$\gamma_3=\gamma_4=\cdots=0\qquad$ (y es simétrica)</p>
-</li>
-<li><p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2(1+\phi_1^2+\phi_2^2)}\boldsymbol{\gamma}$</p>
-</li>
-<li><p>$f(\omega) \;=\;  \frac{\sigma^2}{2\pi}\frac{1}{1+\phi_1^2+\phi_2^2-2\phi_1(1+\phi_2)\cos(\omega)-2\phi_2\cos(2\omega)};\quad -\pi\leq\omega\leq\pi$</p>
-</li>
-<li><p>$\boldsymbol{\pi}$ tiene una expresión complicada, pero su magnitud
-decae paulatinamente</p>
-</li>
+<li>si un proceso tiene una ACF $\boldsymbol{\rho}$ con cogrado $-q$ y grado $q$, es un proceso MA($q$)</li>
+<li>si un proceso tiene una PACF $\boldsymbol{\pi}$ con cogrado $-p$ y grado $p$, es un proceso AR($p$)</li>
 </ul>
+<p>Véase <em>Pourahmadi M. (2001).</em></p>
+<p>Consecuentemente, que la ACF o la PACF se cortan ``bruscamente'' nos
+indica que el modelo es AR o MA (y su grado).</p>
+<p>Desgraciadamente para los modelos ARMA (qué veremos más adelante)
+tanto la ACF como la PACF tienen infinitos términos no nulos, por lo
+que su identificación no es tan sencilla.</p>
 
 </div>
 </div>

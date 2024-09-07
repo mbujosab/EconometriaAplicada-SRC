@@ -842,25 +842,10 @@ con grado $p$ y cogrado $-p$...
   \end{eqnarray*}
   ya que $U_{k+1}\perp(X_{1}-\widetilde{X_{1}}) \in \bar{sp}(U_j\mid{j\leq k})$.
 
-
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
-*Nota.* Se puede demostrar que
-- si un proceso tiene una ACF $\boldsymbol{\rho}$ con cogrado $-q$ y grado $q$, es un proceso MA($q$)
-- si un proceso tiene una PACF $\boldsymbol{\pi}$ con cogrado $-p$ y grado $p$, es un proceso AR($p$)
-
-Véase /Pourahmadi M. (2001)./
-#+latex: \medskip
-
-Consecuentemente, que la ACF o la PACF se cortan ``bruscamente'' nos
-indica que el modelo es AR o MA (y su grado).
-
-Desgraciadamente para los modelos ARMA (qué veremos más adelante)
-tanto la ACF como la PACF tienen infinitos términos no nulos, por lo
-que su identificación no es tan sencilla.
-
 *** Ecuaciones de Yule-Walker (que relacionan las autocovarianzas con los parámetros de $\boldsymbol{\phi}$)
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
+   :ID:       f2ccd47b-3053-4c09-a332-1a005f50bbe6
    :END:
 
 Consideremos un proceso AR($p$): $\quad X_t=\sum\limits_{j=1}^p\phi_j
@@ -871,12 +856,14 @@ esperanzas tenemos $$Cov(X_t,X_{t-k})=\sum_{j=1}^p\phi_j
 Cov(X_{t-j},X_{t-k})+ Cov(U_t,X_{t-k});\qquad 0\leq k\leq p.$$
 
 Para $\;k=0\;$ tenemos:
+#+NAME: eqn:YuleWalker1
 \begin{equation}
   \sigma^2=\gamma_0-\sum_{j=1}^p\phi_j\gamma_j
 \end{equation}
 #+latex: puesto que $Cov(U_t,X_{t})=Cov(U_t,\sum_{j=1}^p\phi_j X_{t-j})+Cov(U_t,U_t)=0+\sigma^2$. \medskip
 
 Para $\;1\leq k\leq p\;$ tenemos:
+#+NAME: eqn:YuleWalker2
 \begin{equation}
   \gamma_k=\sum_{j=1}^p\phi_j\gamma_{k-j}
 \end{equation}
@@ -906,7 +893,9 @@ O en forma matricial
 \]
 #+END_EXPORT
 
-Dividiendo (1) y (2) por $\gamma_0$ (y operando en (1)) tenemos
+Dividiendo ([[eqn:YuleWalker1]]) y ([[eqn:YuleWalker2]]) por $\gamma_0$ (y
+operando en ([[eqn:YuleWalker1]])) tenemos
+#+NAME: eqn:YuleWalker3
 \begin{equation}
   \gamma_0=\frac{\sigma^2}{1-\phi_1\rho_1-\cdots-\phi_p\rho_p};
   \qquad
@@ -923,31 +912,67 @@ Sea $\;(1-\phi z)*\boldsymbol{X}=\boldsymbol{U},\quad$ con
 $\;|\phi|<1\;$ y con $\;\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es
 decir $$X_t=\phi X_{t-1} + U_t.$$
 
-Dado que $(1-a z)*(1+a z+a^2 z^2+a^3 z^3+\cdots)=1$
+Y nótese que 
+$$(1-a z)*(1+a z+a^2 z^2+a^3 z^3+\cdots)=1;$$ 
+por lo que ahora hay que calcular infinitos términos en 
+$$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi z)^{-1}*(1-\phi z^{-1})^{-1}.$$
 #+latex:\medskip
-#+BEGIN_EXPORT latex
-$$(1-a z)^{-1}=(1+a z+a^2 z^2+a^3 z^3+\cdots)=\sum_{h=0}^\infty a^h z^h$$ 
-Por tanto 
-\begin{eqnarray*}
-(1-a z)^{-1}*(1-a z^{-1})^{-1} = 
-& (\ldots,0,0,0,0,&1,a,a^2,a^3,\ldots)\\
-*& (\ldots,a^3,a^2,a,&1,0,0,0,\ldots)\\
-= & ( )
-\end{eqnarray*}
-#+END_EXPORT
 
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Hay varias formas de hacer los cálculos. Una es vía los productos convolución;
+puesto que 
+$$(1-a^2 z)^{-1}=(1+a^2 z+a^4 z^2+a^6 z^3+\cdots)=\sum_{h\in\mathbb{Z}} a^{2|h|} z^h$$ 
+(para verlo basta sustituir $a^2$ por $b$), tenemos que $(1-a z)^{-1}*(1-a z^{-1})^{-1}$ es:
+$$
+\begin{array}{rcccccccl}
+(\ldots,& 0,& 0,& 0,& {\color{blue}{1}},& a,& a^2,& a^3,& \ldots)\\
+*(\ldots,& a^3,& a^2,& a,& {\color{blue}{1}},& 0,& 0,& 0,& \ldots)\\\hline
+=(\ldots,& \frac{a^3}{1+a^2},& \frac{a^2}{1+a^2},& \frac{a}{1+a^2},&{\color{blue}{\frac{1}{1+a^2}}},& \frac{a}{1+a^2},& \frac{a^2}{1+a^2},& \frac{a^3}{1+a^2},& \ldots)
+\end{array}$$
+(donde además hemos sustituido $z$ por $1$, pues cada término es una suma).
+#+latex:\smallskip
 
-$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\theta z)^{-1}*(1-\theta
-  z^{-1})^{-1} \;=\; \frac{\sigma^2}{1-\phi^2} \sum_{j=0}^\infty
-  \phi^j z^j$
+Es decir $(1-a z)^{-1}*(1-a z^{-1})^{-1}=\sum\limits_{k\in\mathbb{Z}}\frac{a^{|k|}}{1-a^2}z^k$; y por tanto
+$$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi z)^{-1}*(1-\phi
+  z^{-1})^{-1} \;=\; \frac{\sigma^2}{1-\phi^2} \sum_{k=-\infty}^\infty
+  \phi^{|k|} z^k$$
+#+latex: \bigskip
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Pero también podemos usar las Ecuaciones de Yule-Walker. En este caso
+(donde el único parámetro es $\phi_1=\phi$), en cuanto a la
+correlación: $$\rho_k=\phi\rho_{k-1}\qquad k>0$$ y como $\rho_0=1$,
+tenemos que $$\rho_k=\phi^k\qquad k\geq0$$ Y en cuanto a la varianza,
+dado que $\rho_1=\phi$
+$$\gamma_0=\frac{\sigma^2}{1-\rho_1\phi}=\frac{\sigma^2}{1-\phi^2}.$$
+Por tanto $$\boldsymbol{\gamma} \;=\; \gamma_0\cdot\boldsymbol{\rho} \;=\;
+\frac{\sigma^2}{1-\phi^2} \sum_{k=-\infty}^\infty \phi^{|k|} z^k$$
+#+latex: \bigskip
+
+** Proceso autorregresivo AR($1$)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :UNNUMBERED: t 
+   :END:
+Así pues,
+si $\;(1-\phi z)*\boldsymbol{X}=\boldsymbol{U},\quad$ con
+$\;|\phi|<1\;$ y con $\;\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es
+decir, si $$X_t=\phi X_{t-1} + U_t$$
+tenemos que
+
+$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi z)^{-1}*(1-\phi
+  z^{-1})^{-1} \;=\; \frac{\sigma^2}{1-\phi^2}
+  \sum\limits_{k=-\infty}^\infty \phi^{|k|} z^k$
 
 $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\;
-  \frac{1+\theta^2}{\sigma^2}\boldsymbol{\gamma} \;=\;
-  \sum_{j=0}^\infty \phi^j z^j \quad\Rightarrow\quad \rho_k=\phi^k$.
+  \frac{1+\phi^2}{\sigma^2}\boldsymbol{\gamma} \;=\;
+  \sum\limits_{j=-\infty}^\infty \phi^{|j|} z^j \quad\Rightarrow\quad
+  \rho_k=\phi^k$ para $k\geq0$.
 
 $f(\omega) \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^\infty \gamma_h
-  \cos(h\omega)=\frac{\sigma^2}{2\pi}\frac{1}{1+\theta^2-2\theta\cos(\omega)}$.
+  \cos(h\omega)=\frac{\sigma^2}{2\pi}\frac{1}{1+\phi^2-2\phi\cos(\omega)}\;$ (compárese con MA($1$)).
 #  = \frac{\sigma^2}{2\pi}\frac{1}{\boldsymbol{\phi}(e^{-i\omega})\cdot\boldsymbol{\phi}(e^{i\omega})}
+
 
 $\boldsymbol{\pi} \;=\; (\ldots,\; 0,\; 0,\; \phi,\; {\color{blue}1},\; \phi,\; 0,\; 0,\;\ldots)$ 
 # :\quad$ $\pi_0=1,\quad$ $\pi_1=\rho_1=\phi,\quad$ $0=\pi_2=\pi_3=\cdots$
@@ -957,7 +982,7 @@ $\boldsymbol{\pi} \;=\; (\ldots,\; 0,\; 0,\; \phi,\; {\color{blue}1},\; \phi,\; 
    :metadata: (slideshow . ((slide_type . notes)))
    :END:
 
-# PARÁMETRO NEGATIVO (violeta)
+# PARÁMETRO NEGATIVO (rojo)
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACF-AR1p.png :exports code :results none
@@ -1006,7 +1031,7 @@ ide(sim(ar1p, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram")
    :metadata: (slideshow . ((slide_type . notes)))
    :END:
 
-# PARÁMETRO POSITIVO (rojo)
+# PARÁMETRO POSITIVO (violeta)
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACF-AR1n.png :exports code :results none
@@ -1056,54 +1081,264 @@ ide(sim(ar1n, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram")
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
 
-Sea $(1-\phi_1 z-\phi_2 z^2)*\boldsymbol{X}=\boldsymbol{U}$, con
-$\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y con
-$$\phi_1+\phi_2<1;\qquad \phi_2-\phi_1<1;\qquad |\phi_2|<1;\quad \text{(i.e., invertible)}$$
-es decir $X_t=\phi_1 X_{t-1} + \phi_2 X_{t-2} + U_t$.
+Sea $\quad(1-\phi_1 z-\phi_2 z^2)*\boldsymbol{X}=\boldsymbol{U},\quad$
+con $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y con
+$$\phi_1+\phi_2<1;\qquad \phi_2-\phi_1<1;\qquad |\phi_2|<1;\quad
+\text{(i.e., invertible)}$$ es decir $$X_t=\phi_1 X_{t-1} + \phi_2
+X_{t-2} + U_t.$$ Entonces
+#+latex: \medskip
 
-- $\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi_1 z-\phi_2 z^2)*(1-\phi_1 z^{-1}-\phi_2 z^{-2})$
-  # $\sigma^2(\ldots,\; 0,\; -\phi_2,\; -\phi_1(1-\phi_2),\; {\color{blue}{1+\phi_1^2+\phi_2^2}},\; -\phi_1(1-\phi_2),\; -\phi_2,\; 0,\;\ldots)$ 
-  
-  $\gamma_0={\color{blue}{\sigma^2(1+\phi_1^2+\phi_2^2)}};\qquad$
-  $\gamma_1=\sigma^2\big(-\phi_1(1-\phi_2)\big);\qquad$
-  $\gamma_2=\sigma^2(-\phi_2)$
+$\boldsymbol{\gamma}=\sigma^2\left(
+  \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^-1)}\right)\qquad$(Verifica
+  $\;\gamma_k=\phi_1\gamma_{k-1}+\phi_2\gamma_{k-2}\;$ y decae
+  paulatinamente)
+#+latex: \smallskip
 
-  $\gamma_3=\gamma_4=\cdots=0\qquad$ (y es simétrica) 
+ $\quad$ /(de (3): $\gamma_0 =
+   \frac{\sigma^2}{1-\phi_1\rho_1-\phi_2\rho_2}$ e iniciamos el
+   cálculo (2) recursivamente)/
+   #  = \frac{1-\phi_2}{1+\phi_2}\frac{\sigma^2}{(1-\phi_2)^2-\phi_1^2}
+#+latex: \medskip
 
-- $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2(1+\phi_1^2+\phi_2^2)}\boldsymbol{\gamma}$
+$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}\qquad\qquad\qquad\quad$
+  (Verifica $\;\rho_k=\phi_1\rho_{k-1}+\phi_2\rho_{k-2}\;$ y decae
+  paulatinamente)
+#+latex: \smallskip
 
-- $f(\omega) \;=\;  \frac{\sigma^2}{2\pi}\frac{1}{1+\phi_1^2+\phi_2^2-2\phi_1(1+\phi_2)\cos(\omega)-2\phi_2\cos(2\omega)};\quad -\pi\leq\omega\leq\pi$
+#+latex:  $\quad$ \emph{(como $\rho_0=1$, iniciamos el cálculo (\ref{eqn:YuleWalker3}) recursivamente)} \medskip
+
+$f(\omega) \;=\;  \frac{\sigma^2}{2\pi}\frac{1}{1+\phi_1^2+\phi_2^2-2\phi_1(1+\phi_2)\cos(\omega)-2\phi_2\cos(2\omega)}$
 # \frac{\sigma^2}{2\pi}\boldsymbol{\phi}(e^{-i\omega})*\boldsymbol{\phi}(e^{i\omega}) \;=\;
+# ;\quad -\pi\leq\omega\leq\pi
+#+latex: \medskip
 
-- $\boldsymbol{\pi}$ tiene una expresión complicada, pero su magnitud
-  decae paulatinamente
+$\boldsymbol{\pi} \;=\; (\ldots,\; 0,\; \phi_2,\; \frac{\phi_1}{1-\phi_2},\; {\color{blue}1},\; \frac{\phi_1}{1-\phi_2},\; \phi_2,\; 0,\;\ldots)$ 
+# :\quad$ $\pi_0=1,\quad$ $\pi_1=\rho_1=\phi,\quad$ $0=\pi_2=\pi_3=\cdots$
 
 
-
-** COMMENT AR(1)                                                   :noexports:
+*** AR(2) con dos raíces reales, una positiva y la otra negativa
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . skip)))
+   :metadata: (slideshow . ((slide_type . notes)))
    :END:
 
+# AR2 rojo y violeta
+
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R
-ar0p <- um(ar = "(1 - 0B)")
-ar1p <- um(ar = "(1 - 0.9B)")
-ar1n <- um(ar = "(1 + 0.9B)")
-ma1p <- um(ma = "(1 - 0.9B)")
-ma1n <- um(ma = "(1 + 0.9B)")
-ar2c <- um(ar = "(1 - 1.52B + 0.8B^2)")
-#display(list(ar1p, ar1n, ma1p, ma1n, ar2c), lag.max = 20)
-display(list(ar0p), lag.max = 20)
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACF-AR2pn.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ar2pn <- um(ar = "(1 + 0.1B - 0.8B^2)")
+display(list(ar2pn), lag.max = 20, byrow = TRUE)
 #+END_SRC
 
-#+RESULTS:
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+$$\boldsymbol{\theta}(z)=1+0.1z-0.8z^2\quad\Rightarrow\quad X_t=
+-0.1X_{t-1}+0.8X_{t-2} + U_t.$$
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/ACF-AR2pn.png]]
+
+#+name: raices-ar2pn
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :exports result :results value table pp :results none
+roots(ar2pn)
+#+END_SRC
+
+#+RESULTS: raices-ar2pn
 :RESULTS:
-#+attr_org: :width 1200 :height 500
-[[./.ob-jupyter/cb7678f00eed9d73dbc1beb0e187d0003abef796.png]]
+1. 
+   |     Real |     Imaginary | Modulus | Frequency | Period | Mult. |
+   |----------+---------------+---------+-----------+--------+-------|
+   |  1.18228 |  7.754818e-26 | 1.18228 |       0.0 |    Inf |     1 |
+   | -1.05728 | -7.754818e-26 | 1.05728 |       0.5 |      2 |     1 |
+   #+caption: A matrix: 2 × 6 of type dbl
 :END:
 
 
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file Sim-AR2pn.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ar2pn, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"))
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/Sim-AR2pn.png]]
+
+*** AR(2) con un par de raíces complejas
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+# AR2 verde
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACF-AR2np.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ar2np <- um(ar = "(1 - 0.1B + 0.8B^2)")
+display(list(ar2np), lag.max = 20, byrow = TRUE)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+$$\boldsymbol{\theta}(z)=1-0.1z+0.8z^2\quad\Rightarrow\quad X_t=
+0.1X_{t-1}-0.8X_{t-2} + U_t.$$
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/ACF-AR2np.png]]
 
 
+#+name: raices-ar2np
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :exports result :results value table pp :results none
+roots(ar2np)
+#+END_SRC
+
+#+RESULTS: raices-ar2np
+:RESULTS:
+1. 
+   |   Real | Imaginary |  Modulus | Frequency |   Period | Mult. |
+   |--------+-----------+----------+-----------+----------+-------|
+   | 0.0625 |  1.116286 | 1.118034 | 0.2410983 | 4.147685 |     1 |
+   | 0.0625 | -1.116286 | 1.118034 | 0.2410983 | 4.147685 |     1 |
+   #+caption: A matrix: 2 × 6 of type dbl
+:END:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file Sim-AR2np.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ar2np, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"))
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+c[[./img/lecc06/Sim-AR2np.png]]
+
+*** AR(2) con dos raíces reales y negativas
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+# AR2 azul
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACF-AR2azul.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ar2azul <- um(ar = "(1 + 1.8B + .9B^2 )")
+display(list(ar2azul), lag.max = 20, byrow = TRUE)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+$$\boldsymbol{\theta}(z)=1+1.8z+0.9z^2\quad\Rightarrow\quad X_t=
+-1.8X_{t-1}-0.9X_{t-2} + U_t.$$
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/ACF-AR2azul.png]]
+
+
+#+name: raices-ar2azul
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :exports result :results value table pp :results none
+roots(ar2azul)
+#+END_SRC
+
+#+RESULTS: raices-ar2azul
+:RESULTS:
+1. 
+   | Real | Imaginary  | Modulus  | Frequency | Period   | Mult. |
+   |------+------------+----------+-----------+----------+-------|
+   | -1   | 0.3333333  | 1.054093 | 0.4487918 | 2.228205 | 1     |
+   | -1   | -0.3333333 | 1.054093 | 0.4487918 | 2.228205 | 1     |
+   #+caption: A matrix: 2 × 6 of type dbl
+:END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file Sim-AR2azul.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ar2azul, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"))
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/Sim-AR2azul.png]]
+
+*** AR(2) con dos raíces reales y positivas
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+# AR2 rojo
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ACF-AR2rojo.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ar2rojo <- um(ar = "(1 - 1.8B + .9B^2 )")
+display(list(ar2rojo), lag.max = 20, byrow = TRUE)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+$$\boldsymbol{\theta}(z)=1-1.8z+0.9z^2\quad\Rightarrow\quad X_t=
+1.8X_{t-1}-0.9X_{t-2} + U_t.$$
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/ACF-AR2rojo.png]]
+
+
+#+name: raices-ar2rojo
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :exports result :results value table pp :results none
+roots(ar2rojo)
+#+END_SRC
+
+#+RESULTS: raices-ar2rojo
+:RESULTS:
+1. 
+   | Real | Imaginary  | Modulus  | Frequency  | Period   | Mult. |
+   |------+------------+----------+------------+----------+-------|
+   | 1    | 0.3333333  | 1.054093 | 0.05120819 | 19.52813 | 1     |
+   | 1    | -0.3333333 | 1.054093 | 0.05120819 | 19.52813 | 1     |
+   #+caption: A matrix: 2 × 6 of type dbl
+:END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file Sim-AR2rojo.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ar2rojo, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"))
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc06/Sim-AR2rojo.png]]
+
+
+* Nota final
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+Se puede demostrar que
+- si un proceso tiene una ACF $\boldsymbol{\rho}$ con cogrado $-q$ y grado $q$, es un proceso MA($q$)
+- si un proceso tiene una PACF $\boldsymbol{\pi}$ con cogrado $-p$ y grado $p$, es un proceso AR($p$)
+
+Véase /Pourahmadi M. (2001)./
+#+latex: \medskip
+
+Consecuentemente, que la ACF o la PACF se cortan ``bruscamente'' nos
+indica que el modelo es AR o MA (y su grado).
+
+Desgraciadamente para los modelos ARMA (qué veremos más adelante)
+tanto la ACF como la PACF tienen infinitos términos no nulos, por lo
+que su identificación no es tan sencilla.
 
