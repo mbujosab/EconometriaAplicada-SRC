@@ -345,12 +345,24 @@ producto escalar entre $X,Y\in H$ también es $$\langle X \mid Y
 \rangle=Cov(X,Y).$$ Por tanto, en este espacio $H$ la noción
 geométrica de ortogonalidad coincide con la noción estadística de /no
 correlación/. Por tanto, en este contexto los términos producto
-escalar y covarianza serán intercambiables.
+escalar, covarianza y esperanza del producto serán intercambiables.
+#+latex: \medskip
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 Una colección de variables aleatorias pertenecientes a $H$
 $$\boldsymbol{X}=(X_t\mid t\in\mathbb{Z}) \;\text{ con }\; X_t\in H$$
 se denomina /proceso estocástico de segundo orden/.
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Si $\boldsymbol{Y}=(Y_t\mid t\in\mathbb{Z})$ es tal que
+$E(Y_t)=\mu\ne0$, entonces $\boldsymbol{Y}$ no es de segundo orden.
+
+Pero basta restar $\mu$ de cada $Y_t$ para tener un proceso
+$(\boldsymbol{Y}-\boldsymbol{\mu})$ de segundo orden.
+
+/Por ello siempre asumiremos/ (sin pérdida de generalidad) /que las
+variables aleatorias de los procesos estocásticos de esta lección/ (y
+la siguiente) /tienen esperanza cero/.
 
 ** Función de covarianzas
    :PROPERTIES:
@@ -466,16 +478,21 @@ z^0\;=\;(\ldots,0,0,\sigma^2,0,0,\ldots)$$
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
 
-Sea $\boldsymbol{U}\sim WN(0,\sigma^2)$ y sea $\boldsymbol{\theta}\in
+Sea $\boldsymbol{U}\sim WN(0,\sigma^2)$ y sea $\boldsymbol{b}\in
 \ell^2$; @@latex: es decir,@@ una secuencia de _cuadrado sumable_
-$\;\sum\limits_{j\in\mathbb{Z}}\theta_j^2<\infty$.
+$\;\sum\limits_{j\in\mathbb{Z}}{b}_j^2<\infty$.
 #+latex:\medskip
 
 Denominamos /proceso lineal/ al proceso estocástico
-$\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$ cuyos elementos son $$X_t
-\;=\;(\boldsymbol{\theta}*\boldsymbol{U})_t
-\;=\;\boldsymbol{\theta}(B)U_t \;=\;\sum_{j=-\infty}^\infty \theta_j
+$\boldsymbol{X}=\boldsymbol{b}*\boldsymbol{U}$ cuyos elementos son $$X_t
+\;=\;(\boldsymbol{b}*\boldsymbol{U})_t
+\;=\;\boldsymbol{b}(B)U_t \;=\;\sum_{j=-\infty}^\infty {b}_j
 U_{t-j};\qquad t\in\mathbb{Z}.$$
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+$\boldsymbol{b}(B)$ se denomina /función de transferencia/ del
+filtro lineal que relaciona $X_t$ con $U_t$.
+#+latex:\medskip
 
 #+BEGIN_EXPORT latex
 El proceso está bien definido puesto que la serie infinita converge en norma por el Teorema de Riesz-Fisher (Pourahmadi, M. 2001, Teorema 9.7).
@@ -483,9 +500,9 @@ Y el proceso es estacionario porque, usando la continuidad de los productos esca
 \begin{align*}
 \gamma_k=Cov(X_{t+k},X_t)=\langle X_{t+k}\mid X_{t}\rangle 
 & = \lim_{m,n\to\infty} 
-\left\langle \sum_{i=-m}^m c_i U_{t+k-i}\mid \sum_{j=-n}^n c_j U_{t-j}\right\rangle\\
-& = \sum_{i=-\infty}^\infty \sum_{j=-\infty}^\infty c_i c_j \langle U_{t+k-i}\mid  U_{t-j} \rangle \\
-& = \sigma^2 \sum_{i=-\infty}^\infty \sum_{j=-\infty}^\infty c_i c_j \delta_{t+k-i,t-j} \; = \; \sigma^2 \sum_{i=-\infty}^\infty c_i c_{i+k}
+\left\langle \sum_{i=-m}^m {b}_i U_{t+k-i}\mid \sum_{j=-n}^n {b}_j U_{t-j}\right\rangle\\
+& = \sum_{i=-\infty}^\infty \sum_{j=-\infty}^\infty {b}_i {b}_j \langle U_{t+k-i}\mid  U_{t-j} \rangle \\
+& = \sigma^2 \sum_{i=-\infty}^\infty \sum_{j=-\infty}^\infty {b}_i {b}_j \delta_{t+k-i,t-j} \; = \; \sigma^2 \sum_{i=-\infty}^\infty {b}_i {b}_{i+k}
 \end{align*}
 que solo depende de $k$ y donde $\delta_{p,q}$ es la delta de Kronecker.
 \medskip
@@ -493,10 +510,10 @@ que solo depende de $k$ y donde $\delta_{p,q}$ es la delta de Kronecker.
 #+END_EXPORT
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-El proceso lineal es /``causal''/ si además $\boldsymbol{\theta}$ es
+El proceso lineal es /``causal''/ si además $\boldsymbol{b}$ es
 una _serie formal_ (i.e.,
-$cogrado(\boldsymbol{\theta})\geq{\color{blue}{0}}$)
-$$X_t=\sum_{\color{blue}{j=0}}^\infty \theta_j U_{t-j};\qquad
+$cogrado(\boldsymbol{b})\geq{\color{blue}{0}}$)
+$$X_t=\sum_{j=0}^\infty {b}_j U_{t-j};\qquad
 t\in\mathbb{Z}$$ $\;$ (pues cada $X_t$ es una suma de variables "/del
 presente y pasado/").
 #+latex:\medskip
@@ -512,20 +529,20 @@ este curso.
    :END:
 
 Sea $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y sea
-$\;\boldsymbol{\theta}\in \ell^2\;$ una serie formal con _infinitos
+$\;\boldsymbol{\psi}\in \ell^2\;$ una serie formal con _infinitos
 términos NO nulos_; entonces el proceso estocástico
-$\boldsymbol{\theta}*\boldsymbol{U}$, cuyos elementos son $$X_t
-\;=\;(\boldsymbol{\theta}*\boldsymbol{U})_t
-\;=\;\boldsymbol{\theta}(B)U_t \;=\;\sum_{j=0}^\infty \theta_j
+$\boldsymbol{\psi}*\boldsymbol{U}$, cuyos elementos son $$X_t
+\;=\;(\boldsymbol{\psi}*\boldsymbol{U})_t
+\;=\;\boldsymbol{\psi}(B)U_t \;=\;\sum_{j=0}^\infty \psi_j
 U_{t-j};\qquad t\in\mathbb{Z}$$ se denomina proceso de /media móvil
 infinita/ MA($\infty$).
 #+latex:\bigskip
 
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_ipynb: (slideshow . ((slide_type . slide)))
 Algunas clases de procesos lineales tienen una representación
 parsimoniosa, pues basta un número finito de parámetros para
 representarlos completamente. Por ejemplo, cuando
-$\boldsymbol{\theta}$ tiene un número finito de términos no nulos...
+$\boldsymbol{\psi}$ tiene un número finito de términos no nulos...
 
 *** Proceso de media móvil de orden $q$. MA($q$)
    :PROPERTIES:
@@ -533,9 +550,10 @@ $\boldsymbol{\theta}$ tiene un número finito de términos no nulos...
    :END:
 
 Sea $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y sea
-$\;\boldsymbol{\theta}\;$ un _polinomio de grado $q$_ con $\theta_0=1$;
-entonces el proceso estocástico $\boldsymbol{\theta}*\boldsymbol{U}$,
-cuyos elementos son $$X_t \;=\;(\boldsymbol{\theta}*\boldsymbol{U})_t
+$\;\boldsymbol{\theta}\;$ un _polinomio de grado $q$_ con
+${\color{#008000}{\theta_{0}=1}}$; entonces el proceso estocástico
+$\boldsymbol{\theta}*\boldsymbol{U}$, cuyos elementos son $$X_t
+\;=\;(\boldsymbol{\theta}*\boldsymbol{U})_t
 \;=\;\boldsymbol{\theta}(B)U_t \;=\;\sum_{j=0}^q\theta_j
 U_{t-j};\qquad t\in\mathbb{Z}$$ se denomina proceso de /media móvil/
 MA($q$).
@@ -545,7 +563,7 @@ Es decir:
 $$ X_t = U_t + \theta_1 U_{t-1} + \cdots + \theta_q U_{t-q}.$$
 
 
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_ipynb: (slideshow . ((slide_type . slide)))
 Hay otros procesos lineales con representación parsimoniosa.
 #+latex:\bigskip
 
@@ -558,7 +576,7 @@ Sea $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, se denomina /proceso
 autorregresivo de orden $p$/ a aquel proceso estocástico estacionario
 $\;\boldsymbol{X}\;$ que es la solución de la siguiente ecuación en
 diferencias $$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$$ donde
-$\;\boldsymbol{\phi}\;$ un _polinomio de grado $p$_ con $\phi_0=1$;
+$\;\boldsymbol{\phi}\;$ un _polinomio de grado $p$_ con ${\color{#008000}{\phi_{0}=1}}$;
 #+latex:\medskip
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
@@ -572,15 +590,16 @@ la siguiente ecuación en diferencias: $$X_t + \phi_1 X_{t-1} +
 #+latex:\medskip
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-El problema con la anterior definición es que la solución
-$\boldsymbol{X}$ de la ecuación
-$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$ no es única. Para
-verlo basta despejar $\boldsymbol{X}$.
+El problema con la anterior definición es que la ecuación
+$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$ no tiene solución
+única (y en algunos casos ninguna solución es
+estacionaria). Despejemos $\boldsymbol{X}$ para verlo.
 
-Multiplicando ambos lados de la igualdad por una inversa de
-$\boldsymbol{\phi}$ lo logramos
-$$\boldsymbol{X}=inversa(\boldsymbol{\phi})*\boldsymbol{U},$$ si
-denotamos $inversa(\boldsymbol{\phi})$ con $\boldsymbol{a}$ entonces
+Multiplicando ambos lados de la ecuación por una inversa de
+$\boldsymbol{\phi}$ lo logramos:
+$$\boldsymbol{X}=inversa(\boldsymbol{\phi})*\boldsymbol{U}.$$ Y si
+denotamos la secuencia $inversa(\boldsymbol{\phi})$ con
+$\boldsymbol{a}$ entonces
 $$X_t=\boldsymbol{a}(\mathsf{B})U_t=\sum_{j\in\mathbb{Z}} a_j
 U_{t-j}.$$
 #+latex:\medskip
@@ -594,7 +613,7 @@ ninguna lo es).
 #+begin_center
 En tal caso la expresión
 $\;\boldsymbol{a}(\mathsf{B})U_t=\sum\limits_{j=-\infty}^\infty a_j
-U_{t-j}\;$ carece de sentido (no converge).
+U_{t-j}\;$ carece de sentido (pues no converge).
 #+end_center
 #+latex:\medskip
 
@@ -604,33 +623,32 @@ U_{t-j}\;$ carece de sentido (no converge).
 1) Para tener un _proceso lineal_, exigiremos que $\boldsymbol{\phi}$
    _no tenga raíces de módulo 1_.
 
-   Entonces existe la inversa $\boldsymbol{\phi}^{-1} \in
-   \ell^1\subset\ell^2$ (la abolutamente sumable).
+   Entonces existe una única inversa absolutamente sumable: $\boldsymbol{\phi}^{-1} \in
+   \ell^1\subset\ell^2$.
 
    La inversa $\boldsymbol{a}=\boldsymbol{\phi}^{-1}$ corresponde a la
    única solución /estacionaria/ de
    $\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$.  (Si
    $\boldsymbol{\phi}$ tuviera raíces de módulo 1 no existiría ni
-   $\boldsymbol{\phi}^{-1}$ ni solución estacionaria).
+   $\boldsymbol{\phi}^{-1}$, ni la solución estacionaria).
 
-$$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=-\infty}^\infty
-a_j U_{t-j}$$
+   $$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=-\infty}^\infty a_j U_{t-j}$$
 
 2) Para tener un _proceso lineal causal_ exigiremos que las raíces de
    $\boldsymbol{\phi}$ sean mayores que 1 en valor absoluto (_raíces
-   fuera del círculo unidad_).
+   fuera del círculo unidad_):
+   $\boldsymbol{\phi}^{-1}=\boldsymbol{\phi}^{-\triangleright}$.
 
-$$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=0}^\infty a_j
-U_{t-j}$$
+   $$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=0}^\infty a_j U_{t-j}$$
 #+latex:\bigskip
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 El siguiente modelo lineal es una combinación (o generalización) de
 los dos anteriores.
 
-*** Proceso Autorregresivo de media móvil. ARMA($p,q$)
+*** Proceso autorregresivo de media móvil. ARMA($p,q$)
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
+   :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
 Sea $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, se denomina /proceso
@@ -639,17 +657,16 @@ estacionario $\;\boldsymbol{X}\;$ que es la solución de la ecuación en
 diferencias:
 $$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$$
 donde el polinomio /autorregresivo/ $\;\boldsymbol{\phi}\;$ tiene
-_grado $p$_ con $\phi_0=1$ y con todas sus raíces fuera del círculo
-unidad (/por los motivos anteriormente vistos/); y el polinomio /de
-media móvil/ $\;\boldsymbol{\theta}\;$ es _de grado $q$_ con
-$\theta_0=1$;
+_grado $p$_ con ${\color{#008000}{\phi_{0}=1}}$ y con todas sus raíces
+fuera del círculo unidad (/por los motivos anteriormente vistos/); y
+el polinomio /de media móvil/ $\;\boldsymbol{\theta}\;$ es _de grado
+$q$_ con ${\color{#008000}{\theta_{0}=1}}$;
 #+latex:\medskip
 
-
-$$\text{Es decir}\quad
-\boldsymbol{X}=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}*\boldsymbol{U}
-\quad\text{donde}\quad
-\frac{1}{\boldsymbol{\phi}}\equiv\boldsymbol{\phi}^{-1}\in\ell^1$$
+$$\text{es decir,}\qquad
+\boldsymbol{X}=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}*\boldsymbol{U};
+\qquad\text{donde}\;
+\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}\equiv\boldsymbol{\phi}^{-1}*\boldsymbol{\theta}$$
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 Tanto $\boldsymbol{\phi}^{-1}$ como $\boldsymbol{\theta}$ son
@@ -660,4 +677,33 @@ consecuentemente el proceso estocástico es un proceso lineal.
 $$X_t=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}(\mathsf{B})U_t=\sum_{j=0}^\infty
 a_j U_{t-j}$$ donde
 $\boldsymbol{a}=\boldsymbol{\phi}^{-1}*\boldsymbol{\theta}$.
+#+latex:\bigskip
 
+*** Proceso autorregresivo de media móvil con media no nula
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+Por último, consideremos un proceso $\boldsymbol{Y}$ con media
+distinta de cero, es decir, $$E(Y_t)=\mu\ne0$$ y definamos la
+secuencia constante $\boldsymbol{\mu}=\sum\limits_{j\in\mathbb{Z}} \mu
+z^j=(\ldots,\mu,\mu,\mu,\ldots)$. 
+\medskip
+
+Decimos que $\boldsymbol{Y}$ es un proceso ARMA($p,q$) con media
+distinta de cero si $\boldsymbol{X}$ es ARMA($p,q$)
+$$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$$
+donde $\boldsymbol{X}=\boldsymbol{Y}-\boldsymbol{\mu}$ es
+evidentemente un proceso de media cero.  Por tanto
+\begin{align*}
+\boldsymbol{\phi}*(\boldsymbol{Y}-\boldsymbol{\mu})=&\boldsymbol{\theta}*\boldsymbol{U}\\
+\boldsymbol{\phi}*\boldsymbol{Y}-\boldsymbol{\phi}*\boldsymbol{\mu}=&\boldsymbol{\theta}*\boldsymbol{U}\\
+\boldsymbol{\phi}*\boldsymbol{Y}=&\boldsymbol{\phi}*\boldsymbol{\mu}+ \boldsymbol{\theta}*\boldsymbol{U}\\
+\end{align*}
+Es decir, si $\boldsymbol{\phi}(\mathsf{B})$ es
+$\;1-\phi_1\mathsf{B}-\phi_2\mathsf{B}^2-\cdots-\phi_p\mathsf{B}^p,\;$
+entonces $$\boldsymbol{\phi}(B){Y_t}=c+\boldsymbol{\theta}(B){U_t}$$
+donde $$\;c=(1-\phi_1-\phi_2-\cdots-\phi_p)\mu\;$$ y donde
+$\;\mu=E(Y_t)$, es un proceso autorregresivo de media móvil
+ARMA($p,q$) /con media no nula/.

@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="org0528cdb">
+<div class="ABSTRACT" id="orgc6bebe3">
 <p>
 En esta lección veremos algunos transformaciones de los datos para
 <i>"hacerlos estacionarios"</i>.
@@ -14280,7 +14280,8 @@ idénticamente distribuidas</em>).</p>
 <ul>
 <li><p>Aunque el marco ideal es que la serie temporal analizada "<strong>sea estacionaria</strong>"</p>
 <p>(<em>abuso del lenguaje que expresa que podemos asumir que la serie es
-una realización de un proceso estocástico estacionario</em>)</p>
+una <u>realización de un proceso estocástico estacionario</u>, es decir,
+cuyos momentos no dependen del índice $t$</em>)</p>
 </li>
 <li>lo habitual es que, por distintos motivos, <strong>NO lo sea</strong></li>
 </ul>
@@ -14346,10 +14347,10 @@ una realización de un proceso estocástico estacionario</em>)</p>
 <p>El desafío para el analista es</p>
 <ul>
 <li><strong>primero:</strong> transformar los datos para lograr que sean "<strong><em>estacionarios</em></strong>"</li>
-<li><p><strong>y después:</strong> transformar los datos estacionarios en una secuencia de
-"<strong>datos <em>i.i.d</em></strong>"</p>
-<p>(<em>nuevo abuso del lenguaje que expresa que podemos asumir que los
-datos son realizaciones de variables aleatorias i.i.d.</em>)</p>
+<li><p><strong>y después:</strong> transformar los datos estacionarios en "<strong><em>ruido blanco</em></strong>"</p>
+<p>(<em>nuevo abuso del lenguaje que expresa que podemos asumir dichos
+datos transformados son realizaciones de un proceso de ruido blanco,
+i.e. de media cero e incorrelado.</em>)</p>
 </li>
 </ul>
 
@@ -14411,16 +14412,16 @@ necesaria.</p>
 <p>Un proceso estocástico $\boldsymbol{X}$ se dice <strong>estacionario</strong> (<em>en
 sentido débil</em>) si para todo $t,k\in\mathbb{Z}$</p>
 \begin{equation}
-\label{orge051d09}
+\label{org5320fd9}
 E(X_t)  = \mu
 \end{equation}\begin{equation}
-\label{org10a8ee4}
+\label{org6ae7099}
 Cov(X_t,X_{t-k}) = \gamma_k 
 \end{equation}<ul>
-<li><p>(<a href="#orge051d09">1</a>) sugiere que las realizaciones de
+<li><p>(<a href="#org5320fd9">1</a>) sugiere que las realizaciones de
 $\boldsymbol{X}$ generalmente oscilan entorno a $\mu$.</p>
 </li>
-<li><p>(<a href="#org10a8ee4">2</a>) sugiere que la variabilidad de las
+<li><p>(<a href="#org6ae7099">2</a>) sugiere que la variabilidad de las
 realizaciones de $\boldsymbol{X}$ entorno a $\mu$ es constante, pues
 para el caso particular $k=0$</p>
 <p>$$Cov(X_t,X_{t-0})=Var(X_t) = \gamma_0\quad\text{ para todo } t$$</p>

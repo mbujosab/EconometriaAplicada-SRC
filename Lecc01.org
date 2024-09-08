@@ -129,7 +129,8 @@ Además,
 - Aunque el marco ideal es que la serie temporal analizada "*sea estacionaria*"
   #+LATEX: \newline  \noindent
   (/abuso del lenguaje que expresa que podemos asumir que la serie es
-  una realización de un proceso estocástico estacionario/)
+  una _realización de un proceso estocástico estacionario_, es decir,
+  cuyos momentos no dependen del índice $t$/)
 - lo habitual es que, por distintos motivos, *NO lo sea*
 
 
@@ -191,11 +192,11 @@ df4.plot(x='obs',xlabel='',title='Exportaciones españolas de acero', figsize=(1
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 El desafío para el analista es
 - primero :: transformar los datos para lograr que sean "*/estacionarios/*"
-- y después :: transformar los datos estacionarios en una secuencia de
-  "*datos /i.i.d/*"
+- y después :: transformar los datos estacionarios en "*/ruido blanco/*"
   #+LATEX: \newline  \noindent
-  (/nuevo abuso del lenguaje que expresa que podemos asumir que los
-  datos son realizaciones de variables aleatorias i.i.d./)
+  (/nuevo abuso del lenguaje que expresa que podemos asumir dichos
+  datos transformados son realizaciones de un proceso de ruido blanco,
+  i.e. de media cero e incorrelado./)
 
 # ([[https://web.stat.tamu.edu/~pourahm/fts.htm][Pourahmadi 2001]])
 

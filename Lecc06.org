@@ -856,15 +856,16 @@ esperanzas tenemos $$Cov(X_t,X_{t-k})=\sum_{j=1}^p\phi_j
 Cov(X_{t-j},X_{t-k})+ Cov(U_t,X_{t-k});\qquad 0\leq k\leq p.$$
 
 Para $\;k=0\;$ tenemos:
-#+NAME: eqn:YuleWalker1
 \begin{equation}
+  \label{eqYuleW1}
   \sigma^2=\gamma_0-\sum_{j=1}^p\phi_j\gamma_j
 \end{equation}
 #+latex: puesto que $Cov(U_t,X_{t})=Cov(U_t,\sum_{j=1}^p\phi_j X_{t-j})+Cov(U_t,U_t)=0+\sigma^2$. \medskip
 
 Para $\;1\leq k\leq p\;$ tenemos:
-#+NAME: eqn:YuleWalker2
+
 \begin{equation}
+  \label{eqYuleW2}
   \gamma_k=\sum_{j=1}^p\phi_j\gamma_{k-j}
 \end{equation}
 
@@ -893,10 +894,9 @@ O en forma matricial
 \]
 #+END_EXPORT
 
-Dividiendo ([[eqn:YuleWalker1]]) y ([[eqn:YuleWalker2]]) por $\gamma_0$ (y
-operando en ([[eqn:YuleWalker1]])) tenemos
-#+NAME: eqn:YuleWalker3
+Dividiendo [[eqref:eqYuleW1][(1)]] y [[eqref:eqYuleW2][(2)]] por $\gamma_0$ (y operando en ([[ref:eqYuleW1][1]]) tenemos
 \begin{equation}
+  \label{eqYuleW3}
   \gamma_0=\frac{\sigma^2}{1-\phi_1\rho_1-\cdots-\phi_p\rho_p};
   \qquad
   \rho_k=\phi_1\rho_{k-1}+\cdots+\phi_p\rho_{k-p}
@@ -1094,9 +1094,9 @@ $\boldsymbol{\gamma}=\sigma^2\left(
   paulatinamente)
 #+latex: \smallskip
 
- $\quad$ /(de (3): $\gamma_0 =
+ $\quad$ /(de [[eqref:eqYuleW3][(3)]] : $\gamma_0 =
    \frac{\sigma^2}{1-\phi_1\rho_1-\phi_2\rho_2}$ e iniciamos el
-   cálculo (2) recursivamente)/
+   cálculo  [[eqref:eqYuleW2][(2)]] recursivamente)/
    #  = \frac{1-\phi_2}{1+\phi_2}\frac{\sigma^2}{(1-\phi_2)^2-\phi_1^2}
 #+latex: \medskip
 
@@ -1105,7 +1105,7 @@ $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}\qquad\qquad\qquad
   paulatinamente)
 #+latex: \smallskip
 
-#+latex:  $\quad$ \emph{(como $\rho_0=1$, iniciamos el cálculo (\ref{eqn:YuleWalker3}) recursivamente)} \medskip
+#+latex:  $\quad$ \emph{(como $\rho_0=1$, iniciamos el cálculo \eqref{eqYuleW3} recursivamente)} \medskip
 
 $f(\omega) \;=\;  \frac{\sigma^2}{2\pi}\frac{1}{1+\phi_1^2+\phi_2^2-2\phi_1(1+\phi_2)\cos(\omega)-2\phi_2\cos(2\omega)}$
 # \frac{\sigma^2}{2\pi}\boldsymbol{\phi}(e^{-i\omega})*\boldsymbol{\phi}(e^{i\omega}) \;=\;
@@ -1321,6 +1321,90 @@ ide(sim(ar2rojo, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgra
 #+attr_html: :width 900px
 #+attr_latex: :width 425px
 [[./img/lecc06/Sim-AR2rojo.png]]
+
+* (Resumen) características de procesos MA($q$)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+#+latex: \noindent
+_Siempre estacionario._
+
+#+latex: \noindent
+Para ser invertible raíces $\boldsymbol{\theta}$ fuera del círculo
+unidad
+$(\boldsymbol{\theta}^{-\triangleright}=\boldsymbol{\theta}^{-1}\in\ell^1)$
+#+latex: \bigskip
+
+*Tipos de representación del proceso*
+
+#+latex: \noindent
+- Como suma ponderada finita :: (número finito de parámetros)
+  $$\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}
+  \quad\Rightarrow\quad X_t=\boldsymbol{\theta}(\mathsf{B})U_t$$
+- Como suma ponderada infinita :: (_solo existe si es invertible_):
+  $$\frac{1}{\boldsymbol{\theta}}*\boldsymbol{X}=\boldsymbol{U}
+  \quad\Rightarrow\quad
+  \frac{1}{\boldsymbol{\theta}}(\mathsf{B})X_t=U_t$$
+#+latex: \bigskip
+
+#+latex: {\bf Comportamiento de las funciones asociadas a los segundo momentos}
+#+latex: \medskip
+
+#+latex: \noindent
+*ACF ($\boldsymbol{\rho}$):* Grado ($q$) y cogrado ($-q$)
+#+latex: \smallskip
+
+#+latex: \noindent
+*PACF ($\boldsymbol{\pi}$):* Grado ($\infty$) y cogrado ($-\infty$):
+@@latex:Combinación de @@ exponenciales y/o sinusoidales amortiguadas.
+#+latex: \smallskip
+
+#+latex: \noindent
+*Densidad espectral* proporcional al inverso de la densidad espectral
+  de $\;\boldsymbol{\theta}*\boldsymbol{X}=\boldsymbol{U}$
+
+* (Resumen) características de procesos AR($p$)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+#+latex: \noindent
+_Siempre invertible._
+
+#+latex: \noindent
+Para ser estacionario raíces de $\boldsymbol{\phi}$ fuera del círculo
+unidad
+$(\boldsymbol{\phi}^{-\triangleright}=\boldsymbol{\phi}^{-1}\in\ell^1)$
+#+latex: \bigskip
+
+*Tipos de representación del proceso*
+
+#+latex: \noindent
+- Como suma ponderada finita :: (número finito de parámetros)
+  $$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}
+  \quad\Rightarrow\quad \boldsymbol{\phi}(\mathsf{B})X_t=U_t$$
+- Como suma ponderada infinita :: (_solo si es estacionario_)
+  $$\boldsymbol{X}=\frac{1}{\boldsymbol{\phi}}*\boldsymbol{U}
+  \quad\Rightarrow\quad
+  X_t=\frac{1}{\boldsymbol{\phi}}(\mathsf{B})U_t$$
+#+latex: \bigskip
+
+#+latex: {\bf Comportamiento de las funciones asociadas a los segundo momentos}
+#+latex: \medskip
+
+#+latex: \noindent
+*ACF ($\boldsymbol{\rho}$):* Grado ($\infty$) y cogrado ($-\infty$): 
+@@latex:Combinación de @@ exponenciales y/o sinusoidales amortiguadas.
+#+latex: \smallskip
+
+#+latex: \noindent
+*PACF ($\boldsymbol{\pi}$):* Grado ($p$) y cogrado ($-p$)
+#+latex: \smallskip
+
+#+latex: \noindent
+*Densidad espectral* proporcional al inverso de la densidad espectral
+de $\boldsymbol{X}=\boldsymbol{\phi}*\boldsymbol{U}$
 
 
 * Nota final

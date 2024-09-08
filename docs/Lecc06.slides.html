@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="org47e75ad">
+<div class="abstract" id="org055efd4">
 <p>
 En esta lección veremos algunas herramientas estadísticas.
  y usaré la librería <code>tfarima</code> de
@@ -15111,16 +15111,15 @@ esperanzas tenemos $$Cov(X_t,X_{t-k})=\sum_{j=1}^p\phi_j
 Cov(X_{t-j},X_{t-k})+ Cov(U_t,X_{t-k});\qquad 0\leq k\leq p.$$</p>
 <p>Para $\;k=0\;$ tenemos:</p>
 \begin{equation}
-\label{orgdc840e5}
+  \label{eqYuleW1}
   \sigma^2=\gamma_0-\sum_{j=1}^p\phi_j\gamma_j
 \end{equation}<p>Para $\;1\leq k\leq p\;$ tenemos:</p>
 \begin{equation}
-\label{orgeaeb119}
+  \label{eqYuleW2}
   \gamma_k=\sum_{j=1}^p\phi_j\gamma_{k-j}
-\end{equation}<p>Dividiendo (<a href="#orgdc840e5">1</a>) y (<a href="#orgeaeb119">2</a>) por $\gamma_0$ (y
-operando en (<a href="#orgdc840e5">1</a>)) tenemos</p>
+\end{equation}<p>Dividiendo <a href="eqref:eqYuleW1">(1)</a> y <a href="eqref:eqYuleW2">(2)</a> por $\gamma_0$ (y operando en (<a href="ref:eqYuleW1">1</a>) tenemos</p>
 \begin{equation}
-\label{org5bc2b2b}
+  \label{eqYuleW3}
   \gamma_0=\frac{\sigma^2}{1-\phi_1\rho_1-\cdots-\phi_p\rho_p};
   \qquad
   \rho_k=\phi_1\rho_{k-1}+\cdots+\phi_p\rho_{k-p}
@@ -15340,9 +15339,9 @@ X_{t-2} + U_t.$$ Entonces</p>
   \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^-1)}\right)\qquad$(Verifica
   $\;\gamma_k=\phi_1\gamma_{k-1}+\phi_2\gamma_{k-2}\;$ y decae
   paulatinamente)</p>
-<p>$\quad$ <em>(de (3): $\gamma_0 =
+<p>$\quad$ <em>(de <a href="eqref:eqYuleW3">(3)</a> : $\gamma_0 =
    \frac{\sigma^2}{1-\phi_1\rho_1-\phi_2\rho_2}$ e iniciamos el
-  cálculo (2) recursivamente)</em></p>
+  cálculo  <a href="eqref:eqYuleW2">(2)</a> recursivamente)</em></p>
 <p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}\qquad\qquad\qquad\quad$
   (Verifica $\;\rho_k=\phi_1\rho_{k-1}+\phi_2\rho_{k-2}\;$ y decae
   paulatinamente)</p>
@@ -15500,6 +15499,88 @@ $$\boldsymbol{\theta}(z)=1-1.8z+0.9z^2\quad\Rightarrow\quad X_t=
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc06/Sim-AR2rojo.png" alt="img"></p>
+
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="(Resumen)-caracter%C3%ADsticas-de-procesos-MA($q$)">(Resumen) caracter&#237;sticas de procesos MA($q$)<a class="anchor-link" href="#(Resumen)-caracter%C3%ADsticas-de-procesos-MA($q$)">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><u>Siempre estacionario.</u></p>
+<p>Para ser invertible raíces $\boldsymbol{\theta}$ fuera del círculo
+unidad
+$(\boldsymbol{\theta}^{-\triangleright}=\boldsymbol{\theta}^{-1}\in\ell^1)$</p>
+<p><strong>Tipos de representación del proceso</strong></p>
+<ul>
+<li><strong>Como suma ponderada finita:</strong> (número finito de parámetros)
+$$\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}
+  \quad\Rightarrow\quad X_t=\boldsymbol{\theta}(\mathsf{B})U_t$$</li>
+<li><strong>Como suma ponderada infinita:</strong> (<u>solo existe si es invertible</u>):
+$$\frac{1}{\boldsymbol{\theta}}*\boldsymbol{X}=\boldsymbol{U}
+  \quad\Rightarrow\quad
+  \frac{1}{\boldsymbol{\theta}}(\mathsf{B})X_t=U_t$$</li>
+</ul>
+<p><strong>ACF ($\boldsymbol{\rho}$):</strong> Grado ($q$) y cogrado ($-q$)</p>
+<p><strong>PACF ($\boldsymbol{\pi}$):</strong> Grado ($\infty$) y cogrado ($-\infty$):
+exponenciales y/o sinusoidales amortiguadas.</p>
+<p><strong>Densidad espectral</strong> proporcional al inverso de la densidad espectral
+  de $\;\boldsymbol{\theta}*\boldsymbol{X}=\boldsymbol{U}$</p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="(Resumen)-caracter%C3%ADsticas-de-procesos-AR($p$)">(Resumen) caracter&#237;sticas de procesos AR($p$)<a class="anchor-link" href="#(Resumen)-caracter%C3%ADsticas-de-procesos-AR($p$)">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><u>Siempre invertible.</u></p>
+<p>Para ser estacionario raíces de $\boldsymbol{\phi}$ fuera del círculo
+unidad
+$(\boldsymbol{\phi}^{-\triangleright}=\boldsymbol{\phi}^{-1}\in\ell^1)$</p>
+<p><strong>Tipos de representación del proceso</strong></p>
+<ul>
+<li><strong>Como suma ponderada finita:</strong> (número finito de parámetros)
+$$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}
+  \quad\Rightarrow\quad \boldsymbol{\phi}(\mathsf{B})X_t=U_t$$</li>
+<li><strong>Como suma ponderada infinita:</strong> (<u>solo si es estacionario</u>)
+$$\boldsymbol{X}=\frac{1}{\boldsymbol{\phi}}*\boldsymbol{U}
+  \quad\Rightarrow\quad
+  X_t=\frac{1}{\boldsymbol{\phi}}(\mathsf{B})U_t$$</li>
+</ul>
+<p><strong>ACF ($\boldsymbol{\rho}$):</strong> Grado ($\infty$) y cogrado ($-\infty$): 
+exponenciales y/o sinusoidales amortiguadas.</p>
+<p><strong>PACF ($\boldsymbol{\pi}$):</strong> Grado ($p$) y cogrado ($-p$)</p>
+<p><strong>Densidad espectral</strong> proporcional al inverso de la densidad espectral
+de $\boldsymbol{X}=\boldsymbol{\phi}*\boldsymbol{U}$</p>
 
 </div>
 </div>

@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="org4bad4f1">
+<div class="abstract" id="org2629699">
 <p>
 Esta lección veremos las dificultades que ocasiona la correlación
 serial y algunos tipos de procesos débilmente estacionarios que nos
@@ -14702,7 +14702,7 @@ producto escalar entre $X,Y\in H$ también es $$\langle X \mid Y
 \rangle=Cov(X,Y).$$ Por tanto, en este espacio $H$ la noción
 geométrica de ortogonalidad coincide con la noción estadística de <em>no
 correlación</em>. Por tanto, en este contexto los términos producto
-escalar y covarianza serán intercambiables.</p>
+escalar, covarianza y esperanza del producto serán intercambiables.</p>
 
 </div>
 </div>
@@ -14718,6 +14718,24 @@ escalar y covarianza serán intercambiables.</p>
 <p>Una colección de variables aleatorias pertenecientes a $H$
 $$\boldsymbol{X}=(X_t\mid t\in\mathbb{Z}) \;\text{ con }\; X_t\in H$$
 se denomina <em>proceso estocástico de segundo orden</em>.</p>
+
+</div>
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Si $\boldsymbol{Y}=(Y_t\mid t\in\mathbb{Z})$ es tal que
+$E(Y_t)=\mu\ne0$, entonces $\boldsymbol{Y}$ no es de segundo orden.</p>
+<p>Pero basta restar $\mu$ de cada $Y_t$ para tener un proceso
+$(\boldsymbol{Y}-\boldsymbol{\mu})$ de segundo orden.</p>
+<p><em>Por ello siempre asumiremos</em> (sin pérdida de generalidad) <em>que las
+variables aleatorias de los procesos estocásticos de esta lección</em> (y
+la siguiente) <em>tienen esperanza cero</em>.</p>
 
 </div>
 </div>
@@ -14883,29 +14901,44 @@ ejemplos.</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Sea $\boldsymbol{U}\sim WN(0,\sigma^2)$ y sea $\boldsymbol{\theta}\in
+<p>Sea $\boldsymbol{U}\sim WN(0,\sigma^2)$ y sea $\boldsymbol{b}\in
 \ell^2$; una secuencia de <u>cuadrado sumable</u>
-$\;\sum\limits_{j\in\mathbb{Z}}\theta_j^2&lt;\infty$.</p>
+$\;\sum\limits_{j\in\mathbb{Z}}{b}_j^2&lt;\infty$.</p>
 <p>Denominamos <em>proceso lineal</em> al proceso estocástico
-$\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$ cuyos elementos son $$X_t
-\;=\;(\boldsymbol{\theta}*\boldsymbol{U})_t
-\;=\;\boldsymbol{\theta}(B)U_t \;=\;\sum_{j=-\infty}^\infty \theta_j
+$\boldsymbol{X}=\boldsymbol{b}*\boldsymbol{U}$ cuyos elementos son $$X_t
+\;=\;(\boldsymbol{b}*\boldsymbol{U})_t
+\;=\;\boldsymbol{b}(B)U_t \;=\;\sum_{j=-\infty}^\infty {b}_j
 U_{t-j};\qquad t\in\mathbb{Z}.$$</p>
 
 </div>
 </div>
 </div>
-</div><div class="fragment">
+</div><aside class="notes">
+
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>El proceso lineal es <em>``causal''</em> si además $\boldsymbol{\theta}$ es
+<p>$\boldsymbol{b}(B)$ se denomina <em>función de transferencia</em> del
+filtro lineal que relaciona $X_t$ con $U_t$.</p>
+
+</div>
+</div>
+</div>
+</div>
+</aside><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>El proceso lineal es <em>``causal''</em> si además $\boldsymbol{b}$ es
 una <u>serie formal</u> (i.e.,
-$cogrado(\boldsymbol{\theta})\geq{\color{blue}{0}}$)
-$$X_t=\sum_{\color{blue}{j=0}}^\infty \theta_j U_{t-j};\qquad
+$cogrado(\boldsymbol{b})\geq{\color{blue}{0}}$)
+$$X_t=\sum_{j=0}^\infty {b}_j U_{t-j};\qquad
 t\in\mathbb{Z}$$ $\;$ (pues cada $X_t$ es una suma de variables "<em>del
 presente y pasado</em>").</p>
 
@@ -14945,18 +14978,18 @@ este curso.</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Sea $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y sea
-$\;\boldsymbol{\theta}\in \ell^2\;$ una serie formal con <u>infinitos
+$\;\boldsymbol{\psi}\in \ell^2\;$ una serie formal con <u>infinitos
 términos NO nulos</u>; entonces el proceso estocástico
-$\boldsymbol{\theta}*\boldsymbol{U}$, cuyos elementos son $$X_t
-\;=\;(\boldsymbol{\theta}*\boldsymbol{U})_t
-\;=\;\boldsymbol{\theta}(B)U_t \;=\;\sum_{j=0}^\infty \theta_j
+$\boldsymbol{\psi}*\boldsymbol{U}$, cuyos elementos son $$X_t
+\;=\;(\boldsymbol{\psi}*\boldsymbol{U})_t
+\;=\;\boldsymbol{\psi}(B)U_t \;=\;\sum_{j=0}^\infty \psi_j
 U_{t-j};\qquad t\in\mathbb{Z}$$ se denomina proceso de <em>media móvil
 infinita</em> MA($\infty$).</p>
 
 </div>
 </div>
 </div>
-</div></section><section>
+</div></section></section><section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14966,7 +14999,7 @@ infinita</em> MA($\infty$).</p>
 <p>Algunas clases de procesos lineales tienen una representación
 parsimoniosa, pues basta un número finito de parámetros para
 representarlos completamente. Por ejemplo, cuando
-$\boldsymbol{\theta}$ tiene un número finito de términos no nulos&#x2026;</p>
+$\boldsymbol{\psi}$ tiene un número finito de términos no nulos&#x2026;</p>
 
 </div>
 </div>
@@ -14990,9 +15023,10 @@ $\boldsymbol{\theta}$ tiene un número finito de términos no nulos&#x2026;</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Sea $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y sea
-$\;\boldsymbol{\theta}\;$ un <u>polinomio de grado $q$</u> con $\theta_0=1$;
-entonces el proceso estocástico $\boldsymbol{\theta}*\boldsymbol{U}$,
-cuyos elementos son $$X_t \;=\;(\boldsymbol{\theta}*\boldsymbol{U})_t
+$\;\boldsymbol{\theta}\;$ un <u>polinomio de grado $q$</u> con
+${\color{#008000}{\theta_{0}=1}}$; entonces el proceso estocástico
+$\boldsymbol{\theta}*\boldsymbol{U}$, cuyos elementos son $$X_t
+\;=\;(\boldsymbol{\theta}*\boldsymbol{U})_t
 \;=\;\boldsymbol{\theta}(B)U_t \;=\;\sum_{j=0}^q\theta_j
 U_{t-j};\qquad t\in\mathbb{Z}$$ se denomina proceso de <em>media móvil</em>
 MA($q$).</p>
@@ -15013,7 +15047,7 @@ $$ X_t = U_t + \theta_1 U_{t-1} + \cdots + \theta_q U_{t-q}.$$</p>
 </div>
 </div>
 </div>
-</div></div></section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15047,7 +15081,7 @@ $$ X_t = U_t + \theta_1 U_{t-1} + \cdots + \theta_q U_{t-q}.$$</p>
 autorregresivo de orden $p$</em> a aquel proceso estocástico estacionario
 $\;\boldsymbol{X}\;$ que es la solución de la siguiente ecuación en
 diferencias $$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$$ donde
-$\;\boldsymbol{\phi}\;$ un <u>polinomio de grado $p$</u> con $\phi_0=1$;</p>
+$\;\boldsymbol{\phi}\;$ un <u>polinomio de grado $p$</u> con ${\color{#008000}{\phi_{0}=1}}$;</p>
 
 </div>
 </div>
@@ -15086,14 +15120,15 @@ la siguiente ecuación en diferencias: $$X_t + \phi_1 X_{t-1} +
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>El problema con la anterior definición es que la solución
-$\boldsymbol{X}$ de la ecuación
-$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$ no es única. Para
-verlo basta despejar $\boldsymbol{X}$.</p>
-<p>Multiplicando ambos lados de la igualdad por una inversa de
-$\boldsymbol{\phi}$ lo logramos
-$$\boldsymbol{X}=inversa(\boldsymbol{\phi})*\boldsymbol{U},$$ si
-denotamos $inversa(\boldsymbol{\phi})$ con $\boldsymbol{a}$ entonces
+<p>El problema con la anterior definición es que la ecuación
+$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$ no tiene solución
+única (y en algunos casos ninguna solución es
+estacionaria). Despejemos $\boldsymbol{X}$ para verlo.</p>
+<p>Multiplicando ambos lados de la ecuación por una inversa de
+$\boldsymbol{\phi}$ lo logramos:
+$$\boldsymbol{X}=inversa(\boldsymbol{\phi})*\boldsymbol{U}.$$ Y si
+denotamos la secuencia $inversa(\boldsymbol{\phi})$ con
+$\boldsymbol{a}$ entonces
 $$X_t=\boldsymbol{a}(\mathsf{B})U_t=\sum_{j\in\mathbb{Z}} a_j
 U_{t-j}.$$</p>
 
@@ -15115,7 +15150,7 @@ ninguna lo es).</p>
 <p>
 En tal caso la expresión
 $\;\boldsymbol{a}(\mathsf{B})U_t=\sum\limits_{j=-\infty}^\infty a_j
-U_{t-j}\;$ carece de sentido (no converge).
+U_{t-j}\;$ carece de sentido (pues no converge).
 </p>
 </div>
 </div>
@@ -15132,23 +15167,23 @@ U_{t-j}\;$ carece de sentido (no converge).
 <ol>
 <li><p>Para tener un <u>proceso lineal</u>, exigiremos que $\boldsymbol{\phi}$
 <u>no tenga raíces de módulo 1</u>.</p>
-<p>Entonces existe la inversa $\boldsymbol{\phi}^{-1} \in
-   \ell^1\subset\ell^2$ (la abolutamente sumable).</p>
+<p>Entonces existe una única inversa absolutamente sumable: $\boldsymbol{\phi}^{-1} \in
+   \ell^1\subset\ell^2$.</p>
 <p>La inversa $\boldsymbol{a}=\boldsymbol{\phi}^{-1}$ corresponde a la
 única solución <em>estacionaria</em> de
 $\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$.  (Si
 $\boldsymbol{\phi}$ tuviera raíces de módulo 1 no existiría ni
-$\boldsymbol{\phi}^{-1}$ ni solución estacionaria).</p>
+$\boldsymbol{\phi}^{-1}$, ni la solución estacionaria).</p>
+<p>$$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=-\infty}^\infty a_j U_{t-j}$$</p>
+</li>
+<li><p>Para tener un <u>proceso lineal causal</u> exigiremos que las raíces de
+$\boldsymbol{\phi}$ sean mayores que 1 en valor absoluto (<u>raíces
+fuera del círculo unidad</u>):
+$\boldsymbol{\phi}^{-1}=\boldsymbol{\phi}^{-\triangleright}$.</p>
+<p>$$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=0}^\infty a_j U_{t-j}$$</p>
 </li>
 </ol>
-$$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=-\infty}^\infty
-a_j U_{t-j}$$<ol>
-<li>Para tener un <u>proceso lineal causal</u> exigiremos que las raíces de
-$\boldsymbol{\phi}$ sean mayores que 1 en valor absoluto (<u>raíces
-fuera del círculo unidad</u>).</li>
-</ol>
-$$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=0}^\infty a_j
-U_{t-j}$$
+
 </div>
 </div>
 </div>
@@ -15165,14 +15200,14 @@ los dos anteriores.</p>
 </div>
 </div>
 </div>
-</div></div></section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Proceso-Autorregresivo-de-media-m%C3%B3vil.-ARMA($p,q$)">Proceso Autorregresivo de media m&#243;vil. ARMA($p,q$)<a class="anchor-link" href="#Proceso-Autorregresivo-de-media-m%C3%B3vil.-ARMA($p,q$)">&#182;</a></h4>
+<h4 id="Proceso-autorregresivo-de-media-m%C3%B3vil.-ARMA($p,q$)">Proceso autorregresivo de media m&#243;vil. ARMA($p,q$)<a class="anchor-link" href="#Proceso-autorregresivo-de-media-m%C3%B3vil.-ARMA($p,q$)">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -15189,14 +15224,14 @@ estacionario $\;\boldsymbol{X}\;$ que es la solución de la ecuación en
 diferencias:
 $$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$$
 donde el polinomio <em>autorregresivo</em> $\;\boldsymbol{\phi}\;$ tiene
-<u>grado $p$</u> con $\phi_0=1$ y con todas sus raíces fuera del círculo
-unidad (<em>por los motivos anteriormente vistos</em>); y el polinomio <em>de
-media móvil</em> $\;\boldsymbol{\theta}\;$ es <u>de grado $q$</u> con
-$\theta_0=1$;</p>
-$$\text{Es decir}\quad
-\boldsymbol{X}=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}*\boldsymbol{U}
-\quad\text{donde}\quad
-\frac{1}{\boldsymbol{\phi}}\equiv\boldsymbol{\phi}^{-1}\in\ell^1$$
+<u>grado $p$</u> con ${\color{#008000}{\phi_{0}=1}}$ y con todas sus raíces
+fuera del círculo unidad (<em>por los motivos anteriormente vistos</em>); y
+el polinomio <em>de media móvil</em> $\;\boldsymbol{\theta}\;$ es <u>de grado
+$q$</u> con ${\color{#008000}{\theta_{0}=1}}$;</p>
+$$\text{es decir,}\qquad
+\boldsymbol{X}=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}*\boldsymbol{U};
+\qquad\text{donde}\;
+\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}\equiv\boldsymbol{\phi}^{-1}*\boldsymbol{\theta}$$
 </div>
 </div>
 </div>
@@ -15219,7 +15254,53 @@ $\boldsymbol{a}=\boldsymbol{\phi}^{-1}*\boldsymbol{\theta}$.</p>
 </div>
 </div>
 </div>
-</div></div></section></section>
+</div><aside class="notes">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="Proceso-autorregresivo-de-media-m%C3%B3vil-con-media-no-nula">Proceso autorregresivo de media m&#243;vil con media no nula<a class="anchor-link" href="#Proceso-autorregresivo-de-media-m%C3%B3vil-con-media-no-nula">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+</aside><aside class="notes">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Por último, consideremos un proceso $\boldsymbol{Y}$ con media
+distinta de cero, es decir, $$E(Y_t)=\mu\ne0$$ y definamos la
+secuencia constante $\boldsymbol{\mu}=\sum\limits_{j\in\mathbb{Z}} \mu
+z^j=(\ldots,\mu,\mu,\mu,\ldots)$. 
+\medskip</p>
+<p>Decimos que $\boldsymbol{Y}$ es un proceso ARMA($p,q$) con media
+distinta de cero si $\boldsymbol{X}$ es ARMA($p,q$)
+$$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$$
+donde $\boldsymbol{X}=\boldsymbol{Y}-\boldsymbol{\mu}$ es
+evidentemente un proceso de media cero.  Por tanto</p>
+\begin{align*}
+\boldsymbol{\phi}*(\boldsymbol{Y}-\boldsymbol{\mu})=&amp;\boldsymbol{\theta}*\boldsymbol{U}\\
+\boldsymbol{\phi}*\boldsymbol{Y}-\boldsymbol{\phi}*\boldsymbol{\mu}=&amp;\boldsymbol{\theta}*\boldsymbol{U}\\
+\boldsymbol{\phi}*\boldsymbol{Y}=&amp;\boldsymbol{\phi}*\boldsymbol{\mu}+ \boldsymbol{\theta}*\boldsymbol{U}\\
+\end{align*}<p>Es decir, si $\boldsymbol{\phi}(\mathsf{B})$ es
+$\;1-\phi_1\mathsf{B}-\phi_2\mathsf{B}^2-\cdots-\phi_p\mathsf{B}^p,\;$
+entonces $$\boldsymbol{\phi}(B){Y_t}=c+\boldsymbol{\theta}(B){U_t}$$
+donde $$\;c=(1-\phi_1-\phi_2-\cdots-\phi_p)\mu\;$$ y donde
+$\;\mu=E(Y_t)$, es un proceso autorregresivo de media móvil
+ARMA($p,q$) <em>con media no nula</em>.</p>
+
+</div>
+</div>
+</div>
+</div>
+</aside></div></section></section>
 </div>
 </div>
 </body>
