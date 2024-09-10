@@ -214,13 +214,13 @@ En cuanto a la suma
 En cuanto al producto 
  - $(\boldsymbol{a} * \boldsymbol{b}) * \boldsymbol{c} = \boldsymbol{a} * (\boldsymbol{b} * \boldsymbol{c})\;$ para todo $\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}$ en $\mathsf{S}\qquad$ (i.e. $*$ es asociativo). 
  - $\boldsymbol{a} * \boldsymbol{b} = \boldsymbol{b} * \boldsymbol{a}\;$ para todo $\boldsymbol{a}, \boldsymbol{b}$ en $\mathsf{S}\qquad$ (i.e. $*$ es conmutativo).
- - Existe un elemento $\boldsymbol{1}$ tal que $\boldsymbol{a} * \boldsymbol{1} = \boldsymbol{a}$ para todo $\boldsymbol{a}\in \mathsf{S}$.
+ - Existe un elemento ${{1}}$ tal que $\boldsymbol{a} * {{1}} = \boldsymbol{a}$ para todo $\boldsymbol{a}\in \mathsf{S}$.
 
 #+BEGIN_EXPORT latex
 \noindent
-El elemento $\boldsymbol{1}$ es la secuencia cuyos elementos son cero excepto un 1 en la posición cero:
+El elemento ${{1}}$ es la secuencia cuyos elementos son cero excepto un 1 en la posición cero:
 \begin{displaymath}
-\boldsymbol{1}\;=\;1z^0\;=\;(\ldots,0,0,\fbox{$1$},0,0,\ldots)
+{{1}}\;=\;1z^0\;=\;(\ldots,0,0,\fbox{$1$},0,0,\ldots)
 \end{displaymath}
 #+END_EXPORT
 
@@ -239,10 +239,10 @@ El producto es distributivo respecto de la suma: Para todo $\boldsymbol{a}, \bol
 
 Un *cuerpo* es un anillo conmutativo que adicionalmente satisface:
 
-# - $\boldsymbol{1}\ne\boldsymbol{0}$
+# - ${{1}}\ne\boldsymbol{0}$
 - Para cada $\boldsymbol{a}\in \mathsf{S}$ no nulo
   ($\boldsymbol{a}\ne\boldsymbol{0}$), existe $\boldsymbol{b}\in \mathsf{S}$
-  tal que $\boldsymbol{a}*\boldsymbol{b}=\boldsymbol{1}$.
+  tal que $\boldsymbol{a}*\boldsymbol{b}={{1}}$.
 
   (/Todo elemento no nulo del conjunto tiene una inversa en dicho
   conjunto/)
@@ -324,9 +324,9 @@ Comprobación:
 = & \sum_{j=0}^\infty a^j z^j-az\sum_{j=0}^\infty a^j z^j \\
 = & \sum_{j=0}^\infty a^j z^j - \sum_{j=1}^\infty a^j z^j \\
 = & a^0 z^0 + \sum_{j=1}^\infty (a^j-a^j) z^j \\
-= & 1z^0 + \sum_{j=1}^\infty 0 z^j = \boldsymbol{1}
+= & 1z^0 + \sum_{j=1}^\infty 0 z^j = {{1}}
 \end{align*}
-% $$(1-az)\sum_{j=0}^\infty a^j z^j=\sum_{j=0}^\infty a^j z^j-az\sum_{j=0}^\infty a^j z^j=\sum_{j=0}^\infty a^j z^j-\sum_{j=1}^\infty a^j z^j=a^0 z^0+\sum_{j=1}^\infty (a^j-a^j) z^j=1z^0+\sum_{j=1}^\infty 0 z^j=\boldsymbol{1}$$
+% $$(1-az)\sum_{j=0}^\infty a^j z^j=\sum_{j=0}^\infty a^j z^j-az\sum_{j=0}^\infty a^j z^j=\sum_{j=0}^\infty a^j z^j-\sum_{j=1}^\infty a^j z^j=a^0 z^0+\sum_{j=1}^\infty (a^j-a^j) z^j=1z^0+\sum_{j=1}^\infty 0 z^j={{1}}$$
 \medskip
 
 #+END_EXPORT
@@ -366,9 +366,9 @@ Comprobación:
 = & \sum_{j=-\infty}^{-1} -a^j z^j + (-az)\sum_{j=-\infty}^{-1} -a^j z^j \\
 = & \sum_{j=-\infty}^{-1} -a^j z^j + \sum_{j=-\infty}^{0} a^j z^j \\
 = & \sum_{j=-\infty}^{-1} -a^j z^j + \sum_{j=-\infty}^{-1} a^j z^j +a^0 z^0 \\
-= & \sum_{j=-\infty}^{-1} (a^j-a^j) z^j + 1 z^0=\boldsymbol{1}
+= & \sum_{j=-\infty}^{-1} (a^j-a^j) z^j + 1 z^0={{1}}
 \end{align*}
-% $$(1-az)\sum_{j=-\infty}^{-1} -a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + (-az)\sum_{j=-\infty}^{-1} -a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + \sum_{j=-\infty}^{0} a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + \sum_{j=-\infty}^{-1} a^j z^j +a^0 z^0=\sum_{j=-\infty}^{-1} (a^j-a^j) z^j + 1 z^0=\boldsymbol{1}$$
+% $$(1-az)\sum_{j=-\infty}^{-1} -a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + (-az)\sum_{j=-\infty}^{-1} -a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + \sum_{j=-\infty}^{0} a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + \sum_{j=-\infty}^{-1} a^j z^j +a^0 z^0=\sum_{j=-\infty}^{-1} (a^j-a^j) z^j + 1 z^0={{1}}$$
 #+END_EXPORT
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
@@ -430,7 +430,7 @@ $\boldsymbol{b}^{\blacktriangleleft-}$ y
 $\boldsymbol{c}^{-\triangleright}$ pertenecen al anillo $\ell^1$,
 $$\boldsymbol{a}*(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})
 =(\boldsymbol{b}*\boldsymbol{c})*(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})
-=\boldsymbol{b}*\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}*\boldsymbol{c}^{-\triangleright}=\boldsymbol{1}*\boldsymbol{1}=\boldsymbol{1}.$$
+=\boldsymbol{b}*\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}*\boldsymbol{c}^{-\triangleright}={{1}}*{{1}}={{1}}.$$
 La secuencia
 $\;(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})\;$
 es "la" inversa de $\boldsymbol{a}$ en $\ell^1$.
@@ -455,14 +455,14 @@ $$\text{(la inversa con principio) }\;\boldsymbol{a}^{-\triangleright}=\boldsymb
 entonces tiene infinitas.
 
 Sean $\boldsymbol{a}$, $\boldsymbol{b}$ y $\boldsymbol{d}$ secuencias
-tales que $\;\boldsymbol{a}*\boldsymbol{b}=\boldsymbol{1}\;$ y
-$\;\boldsymbol{a}*\boldsymbol{d}=\boldsymbol{1};\;$ y sean $\beta$ y
+tales que $\;\boldsymbol{a}*\boldsymbol{b}={{1}}\;$ y
+$\;\boldsymbol{a}*\boldsymbol{d}={{1}};\;$ y sean $\beta$ y
 $\delta$ dos escalares tales que $\beta+\delta=1$. Entonces
 
 $$\boldsymbol{a}*\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)=
 \beta(\boldsymbol{a}*\boldsymbol{b})+\delta(\boldsymbol{a}*\boldsymbol{d})=
-\beta\boldsymbol{1}+\delta\boldsymbol{1}=
-(\beta+\delta)\boldsymbol{1}=\boldsymbol{1}$$
+\beta{{1}}+\delta{{1}}=
+(\beta+\delta){{1}}={{1}}$$
 # \boldsymbol{a}*(\beta\boldsymbol{b})+\boldsymbol{a}*(\delta\boldsymbol{d})=
 
 Así, para $\beta$ y $\delta$ tales que $\beta+\delta=1$, sabemos
@@ -610,4 +610,135 @@ converge para todo $t$, entonces
 & =(\boldsymbol{a}*\boldsymbol{y})_t,\quad \text{para } t\in\mathbb{Z}
 \end{align*}
 
+* COMMENT Probando a extender la notación compacta de más arriba  :noexports:
+
+Del mismo modo que denotamos con ${{1}}$ la secuencia
+$$1=(\ldots,0,0,{\color{blue}{1}},0,0,\ldots)=1 z^0,$$ denotamos con
+${{z}}$ la secuencia
+$$z=(\ldots,0,0,{\color{blue}{0}},1,0,\ldots)=1 z^1;$$
+y con ${{z^{-1}}}$ la secuencia
+$$z^{-1}=(\ldots,0,1,{\color{blue}{0}},0,0,\ldots)=1 z^{-1}.$$
+Evidentemente
+$$z^2=z*z=(\ldots,0,0,{\color{blue}{0}},0,1,\ldots)=1 z^{2}.$$
+De ese modo $$\boldsymbol{x}*z^k=\sum_{t\in\mathbb{Z}}x_t
+z^{t+k}=(\mathsf{B}^kx_t\mid t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}x_{t-k}
+z^t.$$
+\bigskip
+
+Además, definimos el producto elemento a elemento (o producto
+Hadamard) de dos secuencias $\boldsymbol{a}$ y $\boldsymbol{b}$ como
+la secuencia $$\boldsymbol{a}\odot\boldsymbol{b}=(a_tb_t\mid
+t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}a_tb_t z^t.$$ Por tanto
+$$\boldsymbol{x}\odot(\boldsymbol{y}*z^k)=(x_t y_{t-k}\mid
+t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}x_t y_{t-k} z^t;$$ y si
+$\boldsymbol{\phi}$ es el polinomio
+$\;1-\phi_1 z^1-\cdots-\phi_p z^p$,
+$$(\boldsymbol{\phi}*\boldsymbol{x})\odot(\boldsymbol{y}*z^k)=\Big(\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
+y_{t-k}\mid
+t\in\mathbb{Z}\Big)=\sum_{t\in\mathbb{Z}}\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
+y_{t-k} z^t,$$ donde
+\begin{align*}
+\big(\boldsymbol{\phi}(\mathsf{B})x_t\big) y_{t-k}
+= & \big(x_t-\phi_1x_{t-1}-\cdots-\phi_px_{t-p}\big)y_{t-k}\\
+= & x_ty_{t-k}-\phi_1x_{t-1}y_{t-k}-\cdots-\phi_px_{t-p}y_{t-k}.
+\end{align*}
+
+Por conveniencia vamos a definir la secuencia constante
+$\boldsymbol{1}=(\ldots,1,1,1,\ldots)=\sum_{t\in\mathbb{Z}}1 z^t$.
+\bigskip
+
+** Experimentando con un uso más intensivo de la notación compacta
+
+Si $E(X_t)=\mu$ para $t\in\mathbb{Z}$, entonces definimos
+$$E(\boldsymbol{X})=(E(X_t)\mid t\in\mathbb{Z})=(\mu\mid
+t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}\mu
+z^t=\boldsymbol{\mu}=\mu\boldsymbol{1}.$$
+
+Así, si $\boldsymbol{X}$ es un proceso (débilmente) estacionario con
+esperanza nula, $E(\boldsymbol{X})=\boldsymbol{0}=0\boldsymbol{1}$,
+entonces
+\begin{align*}
+E\Big((\boldsymbol{\phi}*\boldsymbol{X})\odot(\boldsymbol{X}*z^k)\Big)
+= &
+\Big(E\big(X_tX_{t-k}-\phi_1X_{t-1}X_{t-k}-\cdots-\phi_pX_{t-p}X_{t-k} \big) \mid t\in\mathbb{Z}\Big)\\
+= &
+\Big(E(X_tX_{t-k})-\phi_1E(X_{t-1}X_{t-k})-\cdots-\phi_pE(X_{t-p}X_{t-k}) \big) \mid t\in\mathbb{Z}\Big)\\
+= &
+\big(\gamma_k-\phi_1\gamma_{k-1}-\cdots-\phi_p\gamma_{k-p} \mid t\in\mathbb{Z}\big)\\
+= &
+\big(\boldsymbol{\phi}(\mathsf{B})\gamma_k \mid t\in\mathbb{Z}\big)\quad\text{es decir}\quad
+\big(\boldsymbol{\phi}(\mathsf{B})\gamma_k\big)\boldsymbol{1}.
+\end{align*}
+que, como no puede ser de otra forma, es una secuencia constante por
+ser $\boldsymbol{X}$ es un proceso (débilmente) estacionario.
+
+*** Ecuaciones de Yule-Walker con la notación compacta
+
+**** *AR($p$)*
+
+Consideremos el siguiente proceso estacionario AR($p$):
+$\;\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U},\;$ donde
+$\boldsymbol{U}\sim WN(0,\sigma^2)$.
+
+Multiplicando ambos lados de la ecuación en diferencias por el proceso
+$\boldsymbol{X}$ retardado $k$ periodos, es decir, por
+$\boldsymbol{X}*z^k$, y tomando esperanzas tenemos
+$$E\Big((\boldsymbol{\phi}*\boldsymbol{X})\odot(\boldsymbol{X}*z^k)\Big) = E\Big(\boldsymbol{U}\odot(\boldsymbol{X}*z^k)\Big)$$
+
+Nótese que $E\Big(\boldsymbol{U}\odot(\boldsymbol{X}*z^k)\Big)$ es
+cero si $k>0$ pues
+$E\Big(\boldsymbol{U}\odot(\boldsymbol{U}*z^k)\Big)=\boldsymbol{0}$
+por ser $\boldsymbol{U}$ un proceso estocástico incorrelado con su
+pasado. Pero que
+$E\Big(\boldsymbol{U}\odot(\boldsymbol{U}*z^k)\Big)=\boldsymbol{\sigma^2}=\sigma^2\boldsymbol{1}$
+cuando $k=0$.
+
+Por tanto, 
+
+- para $k=0$ tenemos: ::
+  $\quad\big(\boldsymbol{\phi}(\mathsf{B})\gamma_0\big)\boldsymbol{1}
+  = \boldsymbol{\sigma^2},\quad$ es decir,
+  $$\fbox{\(\boldsymbol{\phi}(\mathsf{B})\gamma_0=\sigma^2\)}
+  \quad\Rightarrow\quad
+  \gamma_0-\phi_1\gamma_1-\cdots-\phi_p\gamma_p=\sigma^2
+  \quad\Rightarrow\quad
+  \sigma^2=\gamma_0-\sum_{j=1}^p\phi_j\gamma_j.$$
+  Y dividiendo por $\gamma_0$,
+  $$\boldsymbol{\phi}(\mathsf{B})\rho_0=\frac{\sigma^2}{\gamma_0}
+  \quad\Rightarrow\quad
+  \fbox{\(\gamma_0=\frac{\sigma^2}{\boldsymbol{\phi}(\mathsf{B})\rho_0}\)}
+  \quad\Rightarrow\quad
+  \gamma_0=\frac{\sigma^2}{1-\sum_{j=1}^p\phi_j\rho_j},$$
+  ya que $\rho_0=1$.
+  
+- para $k>0$ tenemos: ::
+  $\quad\big(\boldsymbol{\phi}(\mathsf{B})\gamma_k\big)\boldsymbol{1} =
+  \boldsymbol{0},\quad$ es decir,
+  $$\fbox{\(\boldsymbol{\phi}(\mathsf{B})\gamma_k=0\)}
+  \quad\Rightarrow\quad
+  \gamma_k-\phi_1\gamma_{k-1}-\cdots-\phi_p\gamma_{k-p}=0
+  \quad\Rightarrow\quad \gamma_k=\sum_{j=1}^p\phi_j\gamma_{k-j}.$$
+  Y dividiendo por $\gamma_0$,
+  $$\fbox{\(\boldsymbol{\phi}(\mathsf{B})\rho_k=0\)}
+  \quad\Rightarrow\quad
+  \rho_k-\phi_1\rho_{k-1}-\cdots-\phi_p\rho_{k-p}=0
+  \quad\Rightarrow\quad \rho_k=\sum_{j=1}^p\phi_j\rho_{k-j}.$$
+
+
+**** *En el caso de un MA($q$) invertible no se llaman ecuaciones de Yule-Walker*
+
+Consideremos el siguiente proceso invertible MA($p$):
+$\;\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U},\;$ donde
+$\boldsymbol{U}\sim WN(0,\sigma^2)$.
+
+De nuevo, multiplicando ambos lados de la ecuación en diferencias por
+el proceso $\boldsymbol{X}$ retardado $k$ periodos, es decir, por
+$\boldsymbol{X}*z^k$, y tomando esperanzas tenemos
+$$E\Big(\boldsymbol{X}\odot(\boldsymbol{X}*z^k)\Big) =
+E\Big((\boldsymbol{\theta}*\boldsymbol{U})\odot(\boldsymbol{X}*z^k)\Big)=
+E\Big((\boldsymbol{\theta}*\boldsymbol{U})\odot(\boldsymbol{\theta}*\boldsymbol{U}*z^k)\Big)
+$$
+Es decir,
+$$\gamma_k\boldsymbol{1}=
+E\Big((U_t-\theta_1U_{t-1}-\cdots-\theta_qU_{t-q})(U_{t-k}-\theta_1U_{t-k-1}-\cdots-\theta_qU_{t-k-q})\Big)\boldsymbol{1}$$
 

@@ -74,6 +74,7 @@ José Luis Gallego siempre que pueda.
 # install.packages(c("readr", "latticeExtra", "tfarima"))
 # library(readr)
 # library(ggplot2)
+.
 # install.packages("pastecs")
 # install.packages("orgutils")
 

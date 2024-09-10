@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="orga8f6643">
+<div class="ABSTRACT" id="org86681ec">
 <p>
 En esta lección veremos conceptos algebraicos usados en la
 modelización de series temporales.
@@ -14461,7 +14461,7 @@ tres conjuntos de axiomas.</p>
 <ul>
 <li>$(\boldsymbol{a} * \boldsymbol{b}) * \boldsymbol{c} = \boldsymbol{a} * (\boldsymbol{b} * \boldsymbol{c})\;$ para todo $\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}$ en $\mathsf{S}\qquad$ (i.e. $*$ es asociativo).</li>
 <li>$\boldsymbol{a} * \boldsymbol{b} = \boldsymbol{b} * \boldsymbol{a}\;$ para todo $\boldsymbol{a}, \boldsymbol{b}$ en $\mathsf{S}\qquad$ (i.e. $*$ es conmutativo).</li>
-<li>Existe un elemento $\boldsymbol{1}$ tal que $\boldsymbol{a} * \boldsymbol{1} = \boldsymbol{a}$ para todo $\boldsymbol{a}\in \mathsf{S}$.</li>
+<li>Existe un elemento ${{1}}$ tal que $\boldsymbol{a} * {{1}} = \boldsymbol{a}$ para todo $\boldsymbol{a}\in \mathsf{S}$.</li>
 </ul>
 
 </div>
@@ -14505,7 +14505,7 @@ tres conjuntos de axiomas.</p>
 <ul>
 <li><p>Para cada $\boldsymbol{a}\in \mathsf{S}$ no nulo
 ($\boldsymbol{a}\ne\boldsymbol{0}$), existe $\boldsymbol{b}\in \mathsf{S}$
-tal que $\boldsymbol{a}*\boldsymbol{b}=\boldsymbol{1}$.</p>
+tal que $\boldsymbol{a}*\boldsymbol{b}={{1}}$.</p>
 <p>(<em>Todo elemento no nulo del conjunto tiene una inversa en dicho
 conjunto</em>)</p>
 </li>
@@ -14746,7 +14746,7 @@ $\boldsymbol{b}^{\blacktriangleleft-}$ y
 $\boldsymbol{c}^{-\triangleright}$ pertenecen al anillo $\ell^1$,
 $$\boldsymbol{a}*(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})
 =(\boldsymbol{b}*\boldsymbol{c})*(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})
-=\boldsymbol{b}*\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}*\boldsymbol{c}^{-\triangleright}=\boldsymbol{1}*\boldsymbol{1}=\boldsymbol{1}.$$
+=\boldsymbol{b}*\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}*\boldsymbol{c}^{-\triangleright}={{1}}*{{1}}={{1}}.$$
 La secuencia
 $\;(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})\;$
 es "la" inversa de $\boldsymbol{a}$ en $\ell^1$.</p>
@@ -14792,13 +14792,13 @@ $$\text{(la inversa con principio) }\;\boldsymbol{a}^{-\triangleright}=\boldsymb
 <p><strong>Hay infinitas inversas.</strong> Si una secuencia tiene dos inversas,
 entonces tiene infinitas.</p>
 <p>Sean $\boldsymbol{a}$, $\boldsymbol{b}$ y $\boldsymbol{d}$ secuencias
-tales que $\;\boldsymbol{a}*\boldsymbol{b}=\boldsymbol{1}\;$ y
-$\;\boldsymbol{a}*\boldsymbol{d}=\boldsymbol{1};\;$ y sean $\beta$ y
+tales que $\;\boldsymbol{a}*\boldsymbol{b}={{1}}\;$ y
+$\;\boldsymbol{a}*\boldsymbol{d}={{1}};\;$ y sean $\beta$ y
 $\delta$ dos escalares tales que $\beta+\delta=1$. Entonces</p>
 $$\boldsymbol{a}*\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)=
 \beta(\boldsymbol{a}*\boldsymbol{b})+\delta(\boldsymbol{a}*\boldsymbol{d})=
-\beta\boldsymbol{1}+\delta\boldsymbol{1}=
-(\beta+\delta)\boldsymbol{1}=\boldsymbol{1}$$<p>Así, para $\beta$ y $\delta$ tales que $\beta+\delta=1$, sabemos
+\beta{{1}}+\delta{{1}}=
+(\beta+\delta){{1}}={{1}}$$<p>Así, para $\beta$ y $\delta$ tales que $\beta+\delta=1$, sabemos
 que $\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)$ es otra
 inversa de $\boldsymbol{a}$.</p>
 
@@ -15076,6 +15076,202 @@ converge para todo $t$, entonces</p>
 % &amp; =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
 &amp; =(\boldsymbol{a}*\boldsymbol{y})_t,\quad \text{para } t\in\mathbb{Z}
 \end{align*}
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Del mismo modo que denotamos con ${{1}}$ la secuencia
+$$1=(\ldots,0,0,{\color{blue}{1}},0,0,\ldots)=1 z^0,$$ denotamos con
+${{z}}$ la secuencia
+$$z=(\ldots,0,0,{\color{blue}{0}},1,0,\ldots)=1 z^1;$$
+y con ${{z^{-1}}}$ la secuencia
+$$z^{-1}=(\ldots,0,1,{\color{blue}{0}},0,0,\ldots)=1 z^{-1}.$$
+Evidentemente
+$$z^2=z*z=(\ldots,0,0,{\color{blue}{0}},0,1,\ldots)=1 z^{2}.$$
+De ese modo $$\boldsymbol{x}*z^k=\sum_{t\in\mathbb{Z}}x_t
+z^{t+k}=(\mathsf{B}^kx_t\mid t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}x_{t-k}
+z^t.$$
+\bigskip</p>
+<p>Además, definimos el producto elemento a elemento (o producto
+Hadamard) de dos secuencias $\boldsymbol{a}$ y $\boldsymbol{b}$ como
+la secuencia $$\boldsymbol{a}\odot\boldsymbol{b}=(a_tb_t\mid
+t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}a_tb_t z^t.$$ Por tanto
+$$\boldsymbol{x}\odot(\boldsymbol{y}*z^k)=(x_t y_{t-k}\mid
+t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}x_t y_{t-k} z^t;$$ y si
+$\boldsymbol{\phi}$ es el polinomio
+$\;1-\phi_1 z^1-\cdots-\phi_p z^p$,
+$$(\boldsymbol{\phi}*\boldsymbol{x})\odot(\boldsymbol{y}*z^k)=\Big(\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
+y_{t-k}\mid
+t\in\mathbb{Z}\Big)=\sum_{t\in\mathbb{Z}}\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
+y_{t-k} z^t,$$ donde</p>
+\begin{align*}
+\big(\boldsymbol{\phi}(\mathsf{B})x_t\big) y_{t-k}
+= &amp; \big(x_t-\phi_1x_{t-1}-\cdots-\phi_px_{t-p}\big)y_{t-k}\\
+= &amp; x_ty_{t-k}-\phi_1x_{t-1}y_{t-k}-\cdots-\phi_px_{t-p}y_{t-k}.
+\end{align*}<p>Por conveniencia vamos a definir la secuencia constante
+$\boldsymbol{1}=(\ldots,1,1,1,\ldots)=\sum_{t\in\mathbb{Z}}1 z^t$.
+\bigskip</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Experimentando-con-un-uso-m%C3%A1s-intensivo-de-la-notaci%C3%B3n-compacta">Experimentando con un uso m&#225;s intensivo de la notaci&#243;n compacta<a class="anchor-link" href="#Experimentando-con-un-uso-m%C3%A1s-intensivo-de-la-notaci%C3%B3n-compacta">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Si $E(X_t)=\mu$ para $t\in\mathbb{Z}$, entonces definimos
+$$E(\boldsymbol{X})=(E(X_t)\mid t\in\mathbb{Z})=(\mu\mid
+t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}\mu
+z^t=\boldsymbol{\mu}=\mu\boldsymbol{1}.$$</p>
+<p>Así, si $\boldsymbol{X}$ es un proceso (débilmente) estacionario con
+esperanza nula, $E(\boldsymbol{X})=\boldsymbol{0}=0\boldsymbol{1}$,
+entonces</p>
+\begin{align*}
+E\Big((\boldsymbol{\phi}*\boldsymbol{X})\odot(\boldsymbol{X}*z^k)\Big)
+= &amp;
+\Big(E\big(X_tX_{t-k}-\phi_1X_{t-1}X_{t-k}-\cdots-\phi_pX_{t-p}X_{t-k} \big) \mid t\in\mathbb{Z}\Big)\\
+= &amp;
+\Big(E(X_tX_{t-k})-\phi_1E(X_{t-1}X_{t-k})-\cdots-\phi_pE(X_{t-p}X_{t-k}) \big) \mid t\in\mathbb{Z}\Big)\\
+= &amp;
+\big(\gamma_k-\phi_1\gamma_{k-1}-\cdots-\phi_p\gamma_{k-p} \mid t\in\mathbb{Z}\big)\\
+= &amp;
+\big(\boldsymbol{\phi}(\mathsf{B})\gamma_k \mid t\in\mathbb{Z}\big)\quad\text{es decir}\quad
+\big(\boldsymbol{\phi}(\mathsf{B})\gamma_k\big)\boldsymbol{1}.
+\end{align*}<p>que, como no puede ser de otra forma, es una secuencia constante por
+ser $\boldsymbol{X}$ es un proceso (débilmente) estacionario.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="Ecuaciones-de-Yule-Walker-con-la-notaci%C3%B3n-compacta">Ecuaciones de Yule-Walker con la notaci&#243;n compacta<a class="anchor-link" href="#Ecuaciones-de-Yule-Walker-con-la-notaci%C3%B3n-compacta">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h5 id="AR($p$)"><strong>AR($p$)</strong><a class="anchor-link" href="#AR($p$)">&#182;</a></h5>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Consideremos el siguiente proceso estacionario AR($p$):
+$\;\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U},\;$ donde
+$\boldsymbol{U}\sim WN(0,\sigma^2)$.</p>
+<p>Multiplicando ambos lados de la ecuación en diferencias por el proceso
+$\boldsymbol{X}$ retardado $k$ periodos, es decir, por
+$\boldsymbol{X}*z^k$, y tomando esperanzas tenemos
+$$E\Big((\boldsymbol{\phi}*\boldsymbol{X})\odot(\boldsymbol{X}*z^k)\Big) = E\Big(\boldsymbol{U}\odot(\boldsymbol{X}*z^k)\Big)$$</p>
+<p>Nótese que $E\Big(\boldsymbol{U}\odot(\boldsymbol{X}*z^k)\Big)$ es
+cero si $k&gt;0$ pues
+$E\Big(\boldsymbol{U}\odot(\boldsymbol{U}*z^k)\Big)=\boldsymbol{0}$
+por ser $\boldsymbol{U}$ un proceso estocástico incorrelado con su
+pasado. Pero que
+$E\Big(\boldsymbol{U}\odot(\boldsymbol{U}*z^k)\Big)=\boldsymbol{\sigma^2}=\sigma^2\boldsymbol{1}$
+cuando $k=0$.</p>
+<p>Por tanto,</p>
+<ul>
+<li><p><strong>para $k=0$ tenemos::</strong> $\quad\big(\boldsymbol{\phi}(\mathsf{B})\gamma_0\big)\boldsymbol{1}
+  = \boldsymbol{\sigma^2},\quad$ es decir,
+$$\fbox{$\boldsymbol{\phi}(\mathsf{B})\gamma_0=\sigma^2$}
+  \quad\Rightarrow\quad
+  \gamma_0-\phi_1\gamma_1-\cdots-\phi_p\gamma_p=\sigma^2
+  \quad\Rightarrow\quad
+  \sigma^2=\gamma_0-\sum_{j=1}^p\phi_j\gamma_j.$$
+Y dividiendo por $\gamma_0$,
+$$\boldsymbol{\phi}(\mathsf{B})\rho_0=\frac{\sigma^2}{\gamma_0}
+  \quad\Rightarrow\quad
+  \fbox{$\gamma_0=\frac{\sigma^2}{\boldsymbol{\phi}(\mathsf{B})\rho_0}$}
+  \quad\Rightarrow\quad
+  \gamma_0=\frac{\sigma^2}{1-\sum_{j=1}^p\phi_j\rho_j},$$
+ya que $\rho_0=1$.</p>
+</li>
+<li><p><strong>para $k&gt;0$ tenemos::</strong> $\quad\big(\boldsymbol{\phi}(\mathsf{B})\gamma_k\big)\boldsymbol{1} =
+  \boldsymbol{0},\quad$ es decir,
+$$\fbox{$\boldsymbol{\phi}(\mathsf{B})\gamma_k=0$}
+  \quad\Rightarrow\quad
+  \gamma_k-\phi_1\gamma_{k-1}-\cdots-\phi_p\gamma_{k-p}=0
+  \quad\Rightarrow\quad \gamma_k=\sum_{j=1}^p\phi_j\gamma_{k-j}.$$
+Y dividiendo por $\gamma_0$,
+$$\fbox{$\boldsymbol{\phi}(\mathsf{B})\rho_k=0$}
+  \quad\Rightarrow\quad
+  \rho_k-\phi_1\rho_{k-1}-\cdots-\phi_p\rho_{k-p}=0
+  \quad\Rightarrow\quad \rho_k=\sum_{j=1}^p\phi_j\rho_{k-j}.$$</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h5 id="En-el-caso-de-un-MA($q$)-invertible-no-se-llaman-ecuaciones-de-Yule-Walker"><strong>En el caso de un MA($q$) invertible no se llaman ecuaciones de Yule-Walker</strong><a class="anchor-link" href="#En-el-caso-de-un-MA($q$)-invertible-no-se-llaman-ecuaciones-de-Yule-Walker">&#182;</a></h5>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Consideremos el siguiente proceso invertible MA($p$):
+$\;\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U},\;$ donde
+$\boldsymbol{U}\sim WN(0,\sigma^2)$.</p>
+<p>De nuevo, multiplicando ambos lados de la ecuación en diferencias por
+el proceso $\boldsymbol{X}$ retardado $k$ periodos, es decir, por
+$\boldsymbol{X}*z^k$, y tomando esperanzas tenemos
+$$E\Big(\boldsymbol{X}\odot(\boldsymbol{X}*z^k)\Big) =
+E\Big((\boldsymbol{\theta}*\boldsymbol{U})\odot(\boldsymbol{X}*z^k)\Big)=
+E\Big((\boldsymbol{\theta}*\boldsymbol{U})\odot(\boldsymbol{\theta}*\boldsymbol{U}*z^k)\Big)
+$$
+Es decir,
+$$\gamma_k\boldsymbol{1}=
+E\Big((U_t-\theta_1U_{t-1}-\cdots-\theta_qU_{t-q})(U_{t-k}-\theta_1U_{t-k-1}-\cdots-\theta_qU_{t-k-q})\Big)\boldsymbol{1}$$</p>
+
 </div>
 </div>
 </div>

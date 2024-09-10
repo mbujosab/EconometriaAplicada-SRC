@@ -76,9 +76,9 @@
    :header-args: :tangle ./pub/scripts/airlinePass.inp
    :END:
 
-   | Guión: | [[https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/airlinePass.inp][airlinePass.inp]] |
-   
-En esta primera práctica con [[https://gretl.sourceforge.net/es.html][Gretl]] reproduciremos el ejemplo visto en
+   | Guión: | [[https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Practicas/PracticasGretl/pub/scripts/airlinePass.inp][airlinePass.inp]] |
+
+ñEn esta primera práctica con [[https://gretl.sourceforge.net/es.html][Gretl]] reproduciremos el ejemplo visto en
 clase, en el que hemos aplicado distintas transformaciones a los datos
 hasta obtener una serie temporal que podemos asumir que podría ser una
 realización de un proceso estocástico estacionario.  Los datos son

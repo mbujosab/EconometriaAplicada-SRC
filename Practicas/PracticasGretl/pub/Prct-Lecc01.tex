@@ -1,4 +1,4 @@
-% Created 2024-07-26 vie 10:02
+% Created 2024-09-10 mar 15:53
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -37,14 +37,14 @@
 
 
 \section{Número de viajeros internacionales}
-\label{sec:orgcb2a902}
+\label{sec:orgc576d58}
 \begin{center}
 \begin{tabular}{ll}
-Guión: & \href{https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/airlinePass.inp}{airlinePass.inp}\\[0pt]
+Guión: & \href{https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Practicas/PracticasGretl/pub/scripts/airlinePass.inp}{airlinePass.inp}\\[0pt]
 \end{tabular}
 \end{center}
 
-En esta primera práctica con \href{https://gretl.sourceforge.net/es.html}{Gretl} reproduciremos el ejemplo visto en
+ñEn esta primera práctica con \href{https://gretl.sourceforge.net/es.html}{Gretl} reproduciremos el ejemplo visto en
 clase, en el que hemos aplicado distintas transformaciones a los datos
 hasta obtener una serie temporal que podemos asumir que podría ser una
 realización de un proceso estocástico estacionario.  Los datos son
@@ -54,7 +54,7 @@ aparece en manual de Box \& Jenkins.
 
 \begin{enumerate}
 \item Objetivo
-\label{sec:orgc922707}
+\label{sec:org3e89c52}
 \begin{enumerate}
 \item Reproducir el primer ejemplo visto en clase.
 \item Mostrar datos.
@@ -63,7 +63,7 @@ aparece en manual de Box \& Jenkins.
 \end{enumerate}
 
 \item Carga de datos
-\label{sec:orgc91ef83}
+\label{sec:orgcc64e77}
 \textbf{\emph{\texttt{Archivo -{}-{}> Abrir datos -{}-{}> Archivo de muestra}}} y en la pestaña
 \textbf{\emph{\texttt{Gretl}}} seleccione \texttt{bjg}.
 
@@ -76,10 +76,10 @@ open bjg
 \end{enumerate}
 
 \subsection{Actividad 1 - mostrar datos}
-\label{sec:org47ba6de}
+\label{sec:orgeae6623}
 \begin{enumerate}
 \item Visualice los datos de precios y tamaños de las casas
-\label{sec:org831979d}
+\label{sec:org724bb00}
 \begin{itemize}
 \item En la ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}, marque con el ratón la 
 variable: \texttt{g}.
@@ -98,7 +98,7 @@ print -o g
 \vspace{-3pt}
 
 \item Ayuda
-\label{sec:orgc9b8d40}
+\label{sec:orgbeedcf4}
 Para consultar la documentación sobre cualquier comando, puede emplear
 el menú desplegable \textbf{\emph{\texttt{Ayuda}}} que aparece arriba, a la derecha de la
 ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
@@ -112,10 +112,10 @@ ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
 \end{enumerate}
 
 \subsection{Actividad 2 - Gráfico de series temporales}
-\label{sec:org2b31b9a}
+\label{sec:org37a38b4}
 \begin{enumerate}
 \item Scatter plot
-\label{sec:org0aa7ca4}
+\label{sec:org0f7c8a8}
 \begin{itemize}
 \item Marque la variable \texttt{g} (pulsando \texttt{ctrl} y pinchando con el botón
 derecho del ratón sobre ella). Elija \textbf{\emph{\texttt{Gráfico de series temporales}}}
@@ -126,7 +126,7 @@ derecho del ratón sobre ella). Elija \textbf{\emph{\texttt{Gráfico de series t
 \end{itemize}
 
 \item Guardar gráfico como \emph{icono} para editarlo más tarde
-\label{sec:orgf3eeb66}
+\label{sec:orgca9d159}
 \begin{itemize}
 \item ``Pinche'' con el botón derecho sobre la ventana del gráfico.
 \item Seleccione \textbf{\emph{\texttt{Guardar a sesión como icono}}}
@@ -146,7 +146,7 @@ serie de iconos. Uno de ellos es la \textbf{\emph{\texttt{vista de iconos de ses
 
 
 \subsection{Actividad 3 - Transformar logarítmicamente los datos}
-\label{sec:org726c40f}
+\label{sec:org4628ffb}
 Aunque el fichero ya contiene el logaritmo de la serie, vamos a
 tranfformar logarítmicamente los datos originales.
 
@@ -175,7 +175,7 @@ icono, por ejemplo \texttt{LogsAirlinePassengers})
 }
 
 \subsection{Actividad 4 - Primera diferencia de los datos en logaritmos}
-\label{sec:orgeefed41}
+\label{sec:orgb541fa9}
 
 Selecione con el ratón la variable \texttt{l\_g} y luego pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
 ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
@@ -201,7 +201,7 @@ ejemplo \texttt{D\_LogsAirlinePassengers})
 }
 
 \subsection{Actividad 5 - El logaritmo no es una función lineal}
-\label{sec:org52b496d}
+\label{sec:org3b2acbd}
 
 Aunque el operador primera diferencia es lineal, la función logaritmo
 no lo es. Comprobemos que no es lo mismo la primera diferencia del
@@ -226,7 +226,7 @@ print -o d_l_g l_d_g
 \end{itemize}
 
 \subsection{Actividad 6 - Diferencia de orden 12 (o estacional) de la primera diferencia de los datos en logaritmos}
-\label{sec:org831b7a5}
+\label{sec:org85bb633}
 Selecione con el ratón la variable \texttt{d\_l\_g} y luego pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
 ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
 \begin{itemize}
@@ -254,7 +254,7 @@ Observe que en la serie obtenida ya no se observa ni tendencia ni un
 componente cíclico estacional.
 
 \subsection{Actividad 5 - El orden en que se aplican los operadores diferencia y diferencia estacional es irelevante}
-\label{sec:org7365299}
+\label{sec:org8f2033a}
 
 \begin{enumerate}
 \item calcule la diferencia estacional de la serie en logaritmos \texttt{l\_g} y

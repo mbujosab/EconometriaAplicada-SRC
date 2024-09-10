@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
 <head>
-<!-- 2024-09-08 dom 21:52 -->
+<!-- 2024-09-10 mar 16:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 2</title>
@@ -233,30 +233,30 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge1efb2d">Carga de algunos módulos de python</a></li>
+<li><a href="#org397b3a0">Carga de algunos módulos de python</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgd6b0872">1. Descomposición estructural de una serie temporal</a>
+<li><a href="#org9e89b24">1. Descomposición estructural de una serie temporal</a>
 <ul>
 <li><a href="#orgc468f75">1.1. Tendencia determinista <i>lineal</i></a></li>
-<li><a href="#org52bb78d">1.2. Tendencia determinista <i>cuadrática</i></a></li>
-<li><a href="#org61d3e09">1.3. Tendencia cuadrática más estacionalidad determinista mediante <i>dummies</i></a>
+<li><a href="#org2a0fdcb">1.2. Tendencia determinista <i>cuadrática</i></a></li>
+<li><a href="#org1b4f89d">1.3. Tendencia cuadrática más estacionalidad determinista mediante <i>dummies</i></a>
 <ul>
 <li><a href="#orgf413664">1.3.1. Ajuste y componente irregular \(\boldsymbol{e}=\boldsymbol{y}-\boldsymbol{t}-\boldsymbol{s}\)</a></li>
-<li><a href="#org86be034">1.3.2. Valoración de modelos con componentes deterministas</a></li>
+<li><a href="#org3577715">1.3.2. Valoración de modelos con componentes deterministas</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org14c4a88">2. Perturbaciones no esféricas</a>
+<li><a href="#orgeace1f4">2. Perturbaciones no esféricas</a>
 <ul>
-<li><a href="#orgeea2b70">2.1. Test de autocorrelación de Breusch y Godfrey</a></li>
-<li><a href="#orgd445458">2.2. Errores estándar robustos</a></li>
+<li><a href="#org0d12434">2.1. Test de autocorrelación de Breusch y Godfrey</a></li>
+<li><a href="#org74f447a">2.2. Errores estándar robustos</a></li>
 <li><a href="#orgec246c8">2.3. Modelo del error</a></div>
 </div>
-<div class="ABSTRACT" id="orgda97a56">
+<div class="ABSTRACT" id="org969518a">
 <p>
 En esta lección veremos algunos modelos de regresión con series
 temporales; en particular la estimación de componentes (no
@@ -269,9 +269,9 @@ observables) con modelos deterministas.
 <li><a href="https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc02.html">lección en html</a></li>
 <li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc02.ipynb">lección en mybinder</a></li>
 </ul>
-<div id="outline-container-orge1efb2d" class="outline-4">
-<h4 id="orge1efb2d">Carga de algunos módulos de python</h4>
-<div class="outline-text-4" id="text-orge1efb2d">
+<div id="outline-container-org397b3a0" class="outline-4">
+<h4 id="org397b3a0">Carga de algunos módulos de python</h4>
+<div class="outline-text-4" id="text-org397b3a0">
 <div class="org-src-container">
 <pre class="src src-jupyter-python"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Importamos algunos m&#243;dulos de python</span>
 <span style="color: #0000FF;">import</span> numpy <span style="color: #0000FF;">as</span> np <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">linear algebra</span>
@@ -299,8 +299,8 @@ mpl.rc(<span style="color: #008000;">'text.latex'</span>, preamble=r<span style=
 </div>
 </div>
 <ul class="org-ul">
-<li><a id="org72f8c01"></a>Lectura datos: Internat. airline passengers. Monthly totals in thousands. Jan 49 – Dec 60<br />
-<div class="outline-text-5" id="text-org72f8c01">
+<li><a id="orgd92e3ae"></a>Lectura datos: Internat. airline passengers. Monthly totals in thousands. Jan 49 – Dec 60<br />
+<div class="outline-text-5" id="text-orgd92e3ae">
 <div class="org-src-container">
 <pre class="src src-jupyter-python"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Leemos los datos de un fichero csv y generamos un dataframe de pandas cuyo &#237;ndice es el tiempo</span>
 <span style="color: #BA36A5;">OrigData</span> = pd.read_csv(<span style="color: #008000;">'./database/Datasets-master/airline-passengers.csv'</span>)
@@ -321,8 +321,8 @@ mpl.rc(<span style="color: #008000;">'text.latex'</span>, preamble=r<span style=
 </li>
 </ul>
 </div>
-<div id="outline-container-orgd6b0872" class="outline-2">
-<h2 id="orgd6b0872"><span class="section-number-2">1.</span> Descomposición estructural de una serie temporal</h2>
+<div id="outline-container-org9e89b24" class="outline-2">
+<h2 id="org9e89b24"><span class="section-number-2">1.</span> Descomposición estructural de una serie temporal</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 En la lección anterior vimos que una estrategia para analizar series
@@ -332,10 +332,11 @@ temporales es transformar los datos para
 <ol class="org-ol">
 <li>primero lograr que sean "<b><i>estacionarios</i></b>" y</li>
 <li>después, mediante más transformaciones, lograr una secuencia de
-"<b>datos <i>i.i.d</i></b>" (este segundo paso aún no lo hemos abordado)</li>
+"<b>ruido blanco</b>" (este segundo paso aún no lo hemos abordado)</li>
 </ol>
 <p>
-(<i>recuerde que las expresiones "datos estacionarios" o "datos i.i.d." son un abuso del lenguaje</i>).
+(<i>recuerde que las expresiones "datos estacionarios" o secuencia de
+"ruido blanco" son un abuso del lenguaje</i>).
 </p>
 
 <p>
@@ -420,7 +421,7 @@ regresor no constante es el índice \(t\)):
 \[\ln{y_t}=\underbrace{\beta_1+\beta_2\cdot t}_{\text{tendencia}} + e_t; \quad t=1:114\]
 </p>
 
-<div id="org0109c0b" class="figure">
+<div id="orgae5f46c" class="figure">
 <p><img src="./img/lecc02/airlinepass+linearTrend.png" alt="airlinepass+linearTrend.png" width="900px" />
 </p>
 </div>
@@ -436,7 +437,7 @@ regresor no constante es el índice \(t\)):
 
 
 
-<div id="orge7a24cf" class="figure">
+<div id="orgcc40dda" class="figure">
 <p><img src="./img/lecc02/resultsModel1.png" alt="resultsModel1.png" width="600px" />
 </p>
 </div>
@@ -454,7 +455,7 @@ plt.plot(results1.resid)
 </div>
 
 
-<div id="orge3e961a" class="figure">
+<div id="orga6397a8" class="figure">
 <p><img src="./img/lecc02/airlinepass+irreg.png" alt="airlinepass+irreg.png" width="900px" />
 </p>
 </div>
@@ -489,7 +490,7 @@ irregular parece mostrar un componente cíclico con un periodo de unos
 </p>
 
 
-<div id="org136debd" class="figure">
+<div id="org292b484" class="figure">
 <p><img src="./img/lecc02/airlinepass+irregDiff12.png" alt="airlinepass+irregDiff12.png" width="900px" />
 </p>
 </div>
@@ -499,8 +500,8 @@ En el siguiente ejercicio probaremos con una tendencia cuadrática&#x2026;
 </p>
 </div>
 </div>
-<div id="outline-container-org52bb78d" class="outline-3">
-<h3 id="org52bb78d"><span class="section-number-3">1.2.</span> Tendencia determinista <i>cuadrática</i></h3>
+<div id="outline-container-org2a0fdcb" class="outline-3">
+<h3 id="org2a0fdcb"><span class="section-number-3">1.2.</span> Tendencia determinista <i>cuadrática</i></h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-jupyter-python" id="org1fb6e06"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">creamos un DataFrame con el regresando y los regresores del modelo :results silent.</span>
@@ -537,7 +538,7 @@ plt.ylabel(r<span style="color: #008000;">"Log-Passengers, ($\ln\boldsymbol{x}$)
 </p>
 
 
-<div id="org3fc36db" class="figure">
+<div id="orgb31c158" class="figure">
 <p><img src="./img/lecc02/airlinepass+quadraticTrend.png" alt="airlinepass+quadraticTrend.png" width="900px" />
 </p>
 </div>
@@ -585,7 +586,7 @@ strong multicollinearity or other numerical problems.
 </pre>
 
 
-<div id="org6b04910" class="figure">
+<div id="orgdb59b11" class="figure">
 <p><img src="./img/lecc02/resultsModel2.png" alt="resultsModel2.png" width="600px" />
 </p>
 </div>
@@ -619,13 +620,13 @@ plt.plot(results2.resid)
 </tbody>
 </table>
 
-<div id="org19c2c64" class="figure">
+<div id="orge408bd2" class="figure">
 <p><img src="./img/lecc02/airlinepass+irreg2.png" alt="airlinepass+irreg2.png" />
 </p>
 </div>
 
 
-<div id="orgc533939" class="figure">
+<div id="orgc3c30bb" class="figure">
 <p><img src="./img/lecc02/airlinepass+irreg2.png" alt="airlinepass+irreg2.png" width="900px" />
 </p>
 </div>
@@ -658,7 +659,7 @@ irregular muestra un componente cíclico con un periodo de unos 4 años.
 </p>
 
 
-<div id="org8972048" class="figure">
+<div id="org01cac2a" class="figure">
 <p><img src="./img/lecc02/airlinepass+irregDiff12.png" alt="airlinepass+irregDiff12.png" width="900px" />
 </p>
 </div>
@@ -676,8 +677,8 @@ determinista</b> (junto a una tendencia cuadrática determinista).
 </p>
 </div>
 </div>
-<div id="outline-container-org61d3e09" class="outline-3">
-<h3 id="org61d3e09"><span class="section-number-3">1.3.</span> Tendencia cuadrática más estacionalidad determinista mediante <i>dummies</i></h3>
+<div id="outline-container-org1b4f89d" class="outline-3">
+<h3 id="org1b4f89d"><span class="section-number-3">1.3.</span> Tendencia cuadrática más estacionalidad determinista mediante <i>dummies</i></h3>
 <div class="outline-text-3" id="text-1-3">
 <div class="org-src-container">
 <pre class="src src-jupyter-python"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">Creamos un dataframe con los datos y los regresores 'cte', 't' y ' :results silentt^2'</span>
@@ -724,7 +725,7 @@ plt.ylabel(r<span style="color: #008000;">"Log-Passengers, ($\ln\boldsymbol{x}$)
 </div>
 
 
-<div id="orgd4c1025" class="figure">
+<div id="org4559604" class="figure">
 <p><img src="./img/lecc02/airlinepass+TrendC.png" alt="airlinepass+TrendC.png" width="900px" />
 </p>
 </div>
@@ -737,7 +738,7 @@ plt.plot(SeasonalComp)
 </div>
 
 
-<div id="orgb321e28" class="figure">
+<div id="org79da109" class="figure">
 <p><img src="./img/lecc02/airlinepass+SeasonalC.png" alt="airlinepass+SeasonalC.png" width="900px" />
 </p>
 </div>
@@ -753,7 +754,7 @@ plt.plot(TrendComp + SeasonalComp)
 </div>
 
 
-<div id="orgebea4d3" class="figure">
+<div id="org2c6a5a7" class="figure">
 <p><img src="./img/lecc02/airlinepass+yhat.png" alt="airlinepass+yhat.png" width="900px" />
 </p>
 </div>
@@ -765,14 +766,14 @@ plt.plot(results3.resid)
 </div>
 
 
-<div id="org987c8c5" class="figure">
+<div id="orgef632c2" class="figure">
 <p><img src="./img/lecc02/airlinepass+IrregC.png" alt="airlinepass+IrregC.png" width="900px" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org86be034" class="outline-4">
-<h4 id="org86be034"><span class="section-number-4">1.3.2.</span> Valoración de modelos con componentes deterministas</h4>
+<div id="outline-container-org3577715" class="outline-4">
+<h4 id="org3577715"><span class="section-number-4">1.3.2.</span> Valoración de modelos con componentes deterministas</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <ul class="org-ul">
 <li>Estos modelos resultan útiles para realizar un análisis descriptivo.</li>
@@ -875,8 +876,8 @@ desviaciones típicas es incorrecta</b>)
 </div>
 </div>
 </div>
-<div id="outline-container-org14c4a88" class="outline-2">
-<h2 id="org14c4a88"><span class="section-number-2">2.</span> Perturbaciones no esféricas</h2>
+<div id="outline-container-orgeace1f4" class="outline-2">
+<h2 id="orgeace1f4"><span class="section-number-2">2.</span> Perturbaciones no esféricas</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Considere el modelo
@@ -920,18 +921,17 @@ insesgado, ya no es eficiente; y su varianza es
 
 </p>
 </div>
-<div id="outline-container-orgeea2b70" class="outline-3">
-<h3 id="orgeea2b70"><span class="section-number-3">2.1.</span> Test de autocorrelación de Breusch y Godfrey</h3>
+<div id="outline-container-org0d12434" class="outline-3">
+<h3 id="org0d12434"><span class="section-number-3">2.1.</span> Test de autocorrelación de Breusch y Godfrey</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
-El tests el de Breusch y Godfrey (y el de Durbin-Watson) contrastan la \(H_0\) de <i>no autocorrelación</i>.
+El tests Breusch-Godfrey (y el Durbin-Watson) contrastan la \(H_0\) de <i>no autocorrelación</i>.
 </p>
 
 <p>
 
 Considere el <i>modelo de regresión lineal</i> 
 </p>
-
 \begin{equation}
 \label{orgcf376f7}
 Y_t = \beta_1+ \beta_2 X_{t,1} + \cdots +  \beta_k X_{t,k+1} + U_t 
@@ -947,8 +947,8 @@ auto-regresivo \(AR(p)\):
 \[U_t = \rho_1 U_{t-1} + \rho_2 U_{t-2}  + \cdots + \rho_p U_{t-p} + \varepsilon_t\]
 </p>
 <ul class="org-ul">
-<li><b>Paso 1</b>. Obtener los errores \(\hat{\boldsymbol{e}}\) del ajuste MCO
-del modelo (\eqref{orgcf376f7}) con una muestra de tamaño \(T\).</li>
+<li><b>Paso 1</b>. Obtener los errores \(\hat{\boldsymbol{e}}\) de ajuste MCO
+de (\eqref{orgcf376f7}) (muestra de tamaño \(T\))</li>
 <li><b>Paso 2</b>. Calcular el \(R^2\) de la <i>regresión auxiliar</i> de los
 errores \(\hat{\boldsymbol{e}}\) sobre los regresores del modelo
 original (\eqref{orgcf376f7}) y sobre los \(p\) primeros retardos
@@ -1001,8 +1001,8 @@ repr_png(arbg[-1].resols.summary().as_latex(), <span style="color: #008000;">"./
 </div>
 </div>
 </div>
-<div id="outline-container-orgd445458" class="outline-3">
-<h3 id="orgd445458"><span class="section-number-3">2.2.</span> Errores estándar robustos</h3>
+<div id="outline-container-org74f447a" class="outline-3">
+<h3 id="org74f447a"><span class="section-number-3">2.2.</span> Errores estándar robustos</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Un procedimiento adecuado en presencia de autocorrelación y muestras
@@ -1190,7 +1190,7 @@ model2.rho
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-09-08 dom 21:52</p>
+<p class="date">Created: 2024-09-10 mar 16:45</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
