@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="org095a4d0">
+<div class="abstract" id="orgb75e1db">
 <p>
 Esta lección veremos las dificultades que ocasiona la correlación
 serial y algunos tipos de procesos débilmente estacionarios que nos
@@ -14833,6 +14833,129 @@ $\;\boldsymbol{\rho}=\frac{1}{\gamma_0}(\boldsymbol{\gamma})
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Procesos-estoc%C3%A1sticos-y-notaci%C3%B3n">Procesos estoc&#225;sticos y notaci&#243;n<a class="anchor-link" href="#Procesos-estoc%C3%A1sticos-y-notaci%C3%B3n">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Los procesos estocásticos se pueden sumar y se pueden multiplicar por
+escalares.</p>
+<p>Si $\boldsymbol{X}$ e $\boldsymbol{Y}$ son dos procesos estocásticos y
+$\;a\in\mathbb{R}$, entonces $$\boldsymbol{X}+\boldsymbol{Y}=(X_t+Y_t
+\mid t\in\mathbb{Z})\qquad\text{y}\qquad a\boldsymbol{X}=\big(a(X_t)
+\mid t\in\mathbb{Z}\big).$$ El conjunto de procesos estocásticos junto
+con la suma elemento a elemento y el producto por escalares
+constituyen un espacio vectorial.</p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Consideremos el proceso estocástico 
+$$\boldsymbol{X}=(X_t \mid t=0,\pm1,\pm2,\ldots).$$</p>
+<p>Lo podemos denotar con una función generatriz (como hicimos con las
+secuencias) $$\boldsymbol{X} \quad = \quad \sum_{t=-\infty}^\infty X_t
+z^t \quad\equiv\quad \boldsymbol{X}(z)$$ Recuerde que esto no es una
+suma; es una secuencia de variables aleatorias
+$$\sum_{t=-\infty}^\infty X_t z^t = (\ldots,\ X_{-2},\ X_{-1},\
+X_{0},\ X_{1},\ X_{2},\ldots)$$</p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Sea $\boldsymbol{a}$ una secuencia de números y $\boldsymbol{X}$ un
+proceso estocástico tales que <u>la suma</u>
+$\sum\limits_{k=-\infty}^{\infty}a_kX_{t-k}\;$ <u>converge</u> para todo
+$t.\;$ Entonces:</p>
+<p>Definimos el producto convolución ($∗$) de $\boldsymbol{a}$ con $\boldsymbol{X}$ como el proceso estocástico:
+$$\boldsymbol{a}*\boldsymbol{X}=\left(\left.\sum_{r+s=t} a_r X_s \right| t\in\mathbb{Z}\right)$$
+es decir
+$$(\boldsymbol{a}*\boldsymbol{X})_t=\sum_{r+s=t} a_r X_s,\quad \text{para } t\in\mathbb{Z}.$$
+Por tanto, cada elemento de $(\boldsymbol{a}*\boldsymbol{X})$ es una combinación de variables aleatorias de $\boldsymbol{X}$</p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Podemos aplicar el operador $\mathsf{B}$ sobre los elementos de un proceso estocástico $\boldsymbol{X}$.
+$$\mathsf{B} X_t = X_{t−1},\quad \text{para } t\in\mathbb{Z}.$$</p>
+<p>Aplicando el operador $\mathsf{B}$ repetidamente tenemos $$\mathsf{B}^k X_t =
+X_{t−k},\quad \text{para } t,z\in\mathbb{Z}$$</p>
+
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Así, para el polinomio $\boldsymbol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3$, y el proceso estocástico $\boldsymbol{Y}$</p>
+\begin{align*}
+\boldsymbol{a}(\mathsf{B})Y_t 
+&amp; = (a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+a_3\mathsf{B}^3) Y_t \\
+% &amp; = a_0 Y_t + a_1 \mathsf{B}^1 Y_t + a_2 \mathsf{B}^2 Y_t + a_3 \mathsf{B}^3 Y_t \\
+&amp; = a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+a_3Y_{t-3} \\
+% &amp; =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
+&amp; =(\boldsymbol{a}*\boldsymbol{Y})_t,\quad \text{para } t\in\mathbb{Z}
+\end{align*}
+</div>
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Y en general, si la suma $\sum\limits_{k=-\infty}^{\infty}a_kY_{t-k}$
+converge para todo $t$, entonces</p>
+\begin{align*}
+\boldsymbol{a}(\mathsf{B})Y_t 
+&amp; = (\cdots+a_{-2}\mathsf{B}^{-2}+a_{-1}\mathsf{B}^{-1}+a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) Y_t \\
+% &amp; = a_0 Y_t + a_1 \mathsf{B}^1 Y_t + a_2 \mathsf{B}^2 Y_t + a_3 \mathsf{B}^3 Y_t \\
+&amp; = \cdots+a_{-2}Y_{t+2}+a_{-1}Y_{t+1}+a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+\cdots \\
+% &amp; =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
+&amp; =(\boldsymbol{a}*\boldsymbol{y})_t,\quad \text{para } t\in\mathbb{Z}
+\end{align*}
+</div>
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Ejemplos-de-procesos-(d%C3%A9bilmente)-estacionarios">Ejemplos de procesos (d&#233;bilmente) estacionarios<a class="anchor-link" href="#Ejemplos-de-procesos-(d%C3%A9bilmente)-estacionarios">&#182;</a></h2>
 </div>
 </div>
@@ -15300,7 +15423,334 @@ ARMA($p,q$) <em>con media no nula</em>.</p>
 </div>
 </div>
 </div>
-</aside></div></section></section>
+</aside></div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Primeros-momentos-de-procesos-estoc%C3%A1sticos">Primeros momentos de procesos estoc&#225;sticos<a class="anchor-link" href="#Primeros-momentos-de-procesos-estoc%C3%A1sticos">&#182;</a></h2>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Si $E(X_t)&lt;\infty$ para $t\in\mathbb{Z}$, entonces $E(\boldsymbol{X})$ es
+la secuencia $$E(\boldsymbol{X})=\big(E(X_t)\mid
+t\in\mathbb{Z}\big)=\sum\nolimits_{t\in\mathbb{Z}} E(X_t)
+z^t=\big(\ldots,\;E(X_{-1}),\;E(X_{0}),\;E(X_{1}),\ldots\big)$$</p>
+
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Si $\boldsymbol{Y}$ tiene segundos momentos finitos, la secuencia de
+autocovarianzas <u>de orden $k$</u> es</p>
+\begin{align*}
+Cov(\boldsymbol{Y},\boldsymbol{Y}*z^k) = &amp;
+% \boldsymbol{\gamma_k}= &amp;
+E\Big(\big[\boldsymbol{Y}-E(\boldsymbol{Y})\big]\odot\big[(\boldsymbol{Y}-E(\boldsymbol{Y}))*z^k\big]\Big)\\
+= &amp; 
+\left.\Big(E\big[\big(Y_t-E(Y_t)\big)\big(Y_{t-k}-E(Y_{t-k})\big)\big]\; \right| t\in\mathbb{Z}\Big)\\
+=&amp;
+% \sum_{t\in\mathbb{Z}} \gamma_{_{k,t}} z^t
+(\gamma_{_{k,t}}\mid t\in\mathbb{Z}) \;=\;
+(\ldots,\,\gamma_{_{k,-1}},\,{\color{blue}{\gamma_{_{k,0}}}},\,\gamma_{_{k,1}},\,\gamma_{_{k,2}},\ldots);\quad k\in\mathbb{Z}.
+\end{align*}
+</div>
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Cuando $E(X_t)=\mu$ para todo $t\in\mathbb{Z}$, entonces
+$E(\boldsymbol{X})$ es una secuencia constante: $$E(\boldsymbol{X}) =
+(\mu\mid t\in\mathbb{Z}) = \mu\boldsymbol{1}.$$</p>
+<p>Si $\gamma_{_{k,t}}=\gamma_k$ 
+para todo $t\in\mathbb{Z}$, 
+entonces definimos la <u>función de autocovarianzas</u> (todas):
+$$\boldsymbol{\gamma} = (\gamma_{k}\mid k\in\mathbb{Z}) =
+(\ldots,\,\gamma_{-1},\,{\color{blue}{\gamma_{0}}},\,\gamma_{1},\,\gamma_{2},\ldots).$$</p>
+
+</div>
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Esperanza-y-autocovarianzas-de-un-proceso-lineal">Esperanza y autocovarianzas de un proceso lineal<a class="anchor-link" href="#Esperanza-y-autocovarianzas-de-un-proceso-lineal">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Sea $\;\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U},\;$ donde
+$\boldsymbol{\psi}$ es una serie formal de cuadrado sumable
+con cogrado $0$ y
+$\;\boldsymbol{U}\sim WN(0,\sigma^2).\quad$ Recordando que la
+convolución es una operación lineal: $$E(\boldsymbol{X})
+=E(\boldsymbol{\psi}*\boldsymbol{U})
+=\boldsymbol{\psi}*E(\boldsymbol{U})
+=\boldsymbol{\psi}*\boldsymbol{0}=\boldsymbol{0}.$$ Consecuentemente,
+la covarianza de orden $k$ para cada $X_t$ es</p>
+\begin{align*}
+\gamma_{_{k,t}} = &amp; E\Big[\big(\boldsymbol{\psi}(\mathsf{B})X_t\big)\cdot \big(\boldsymbol{\psi}(\mathsf{B}) X_{t-k}\big)\Big] 
+\\ = &amp;
+E\Big[
+ (\psi_0U_{t}+\psi_1U_{t-1}+\psi_2U_{t-2}\cdots)
+ (\psi_0U_{t-k}+\psi_1U_{t-k-1}+\psi_2U_{t-k-2}\cdots)\Big]
+\\ = &amp;
+\sigma^2\sum\nolimits_{j\in\mathbb{Z}}\psi_{j+k}\psi_j
+\qquad \text{ ya que }\; E(U_hU_j)=0\; \text{ si } \;j\ne h
+\end{align*}<p>no depende de $t$ (por tanto $\boldsymbol{X}$ es estacionario). Es más, por la última ecuación de la lección anterior
+$$\;\gamma_k \;=\; \sigma^2\sum\nolimits_{j\in\mathbb{Z}}\psi_{j+k}\psi_j \;=\;
+\sigma^2\big(\boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})\big)_k
+\qquad \text{ para } k\in\mathbb{Z}.$$
+Y, por tanto</p>
+\begin{equation}
+ \label{eqAutoCovarianzaProcesoLineal}
+ \boldsymbol{\gamma}=\sigma^2\boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})
+\end{equation}<p>con grado igual al grado de $\boldsymbol{\psi}$ y cogrado igual a
+menos el grado de $\boldsymbol{\psi}$.</p>
+
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="Covarianza-cruzada-entre-dos-procesos-lineales-causales">Covarianza cruzada entre dos procesos lineales causales<a class="anchor-link" href="#Covarianza-cruzada-entre-dos-procesos-lineales-causales">&#182;</a></h4>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Sean $\;\boldsymbol{W}=\boldsymbol{\theta}*\boldsymbol{U}\quad$ e
+$\quad\boldsymbol{Y}=\boldsymbol{\psi}*\boldsymbol{U},\quad$ donde
+$\boldsymbol{\theta}$ y $\boldsymbol{\psi}$ son series formales de
+cuadrado sumable con cogrado $0$ y donde $\;\boldsymbol{U}\sim
+WN(0,\sigma^2)$.</p>
+<p>Entonces la covarianza cruzada (de orden $k\in\mathbb{Z}$) entre $W_t$
+e $Y_{t-k}$ es</p>
+\begin{align*}
+E\Big[W_t\cdot Y_{t-k}\Big] = &amp;
+E\Big[\big(\boldsymbol{\theta}(\mathsf{B})U_t\big)\cdot \big(\boldsymbol{\psi}(\mathsf{B}) U_{t-k}\big)\Big] 
+\\ = &amp;
+E\Big[
+ (\theta_0U_{t}+\theta_1U_{t-1}+\theta_2U_{t-2}\cdots)
+ (\psi_0U_{t-k}+\psi_1U_{t-k-1}+\psi_2U_{t-k-2}\cdots)\Big]
+\\ = &amp;
+\sigma^2\sum\nolimits_{j\in\mathbb{Z}}\theta_{j+k}\psi_j
+\qquad \text{ ya que }\; E(U_hU_j)=0\; \text{ si } \;j\ne h
+\end{align*}<p>que tampoco depende de $t$. Es más, por la última ecuación de la lección 4
+$$\;\gamma_{_{\boldsymbol{W},\boldsymbol{Y}}}(k) =
+\sigma^2\sum\nolimits_{j\in\mathbb{Z}}\theta_{j+k}\psi_j =
+\sigma^2\big(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\big)_k\quad
+\text{ para todo } k\in\mathbb{Z}.$$ Por tanto, la función de
+covarianzas cruzadas es la secuencia</p>
+\begin{equation}
+ \label{eqCovarianzaCruzadaProcesosLineales}
+ \boldsymbol{\gamma_{_{\boldsymbol{W},\boldsymbol{Y}}}} =
+ \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})
+\end{equation}<p>de grado igual al grado de $\boldsymbol{\theta}$ y cogrado igual a menos
+el grado de $\boldsymbol{\psi}$.</p>
+
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Las-Ecuaciones-de-Yule-Walker-para-un-AR($p$)-estacionario">Las Ecuaciones de Yule-Walker para un AR($p$) estacionario<a class="anchor-link" href="#Las-Ecuaciones-de-Yule-Walker-para-un-AR($p$)-estacionario">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><em>Por una parte</em> (lado izquierdo):</p>
+<p>Si $\boldsymbol{X}$ es un proceso (débilmente) estacionario con
+$E(\boldsymbol{X})=\boldsymbol{0}\;$ y $\;\boldsymbol{\phi}$ es una serie
+formal absolutamente sumable; entonces para $t,k\in\mathbb{Z}$</p>
+\begin{equation}
+  E\Big[\Big(\boldsymbol{\phi}(\mathsf{B})X_t\Big)\cdot X_{t-k}\Big]
+  \quad = \quad
+  \boldsymbol{\phi}(\mathsf{B})E\big(X_t\cdot X_{t-k}\big)
+  \quad = \quad
+  \boldsymbol{\phi}(\mathsf{B})\gamma_k
+  \label{eqnLadoIzquierdoYW}
+\end{equation}<p>que no depende de $t$, por ser $\boldsymbol{X}$ es un proceso
+(débilmente) estacionario.</p>
+
+</div>
+</div>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><em>Por otra parte</em> (lado derecho):</p>
+<p>Si $\boldsymbol{X}$ tiene representación
+$\;\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}$ donde
+$\;\boldsymbol{U}\sim WN(0,\sigma^2)$ y $\boldsymbol{\psi}$ es una
+serie formal de cuadrado sumable con $\psi_0=1$; es decir</p>
+$$\quad X_t=U_t + \sum\nolimits_{j=1}^\infty \psi_j U_{t-j},$$<p>entonces para $t,k\in\mathbb{Z}$</p>
+\begin{equation}
+  E[U_t\cdot X_{t-k}] = E\Big[U_t\Big(U_{t-k} + \sum\nolimits_{j=1}^\infty \psi_j U_{t-k-j}\Big) \Big]=
+  \begin{cases}
+  \sigma^2 &amp; \text{cuando } k=0\\
+  0 &amp; \text{cuando } k\ne0
+  \end{cases}
+  \label{eqnLadoDerechoYW}
+\end{equation}
+</div>
+</div>
+</div>
+</div></div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Sea un AR($p$) estacionario:
+$\;\;\boldsymbol{\phi}(\mathsf{B})X_t=U_t\;\;$ donde
+$\;\;\boldsymbol{\phi}(z)=1-\phi_1z^1-\cdots-\phi_pz^p.\;$
+Multiplicando por $X_{t-k}$ y tomando esperanzas:
+$$E\Big[\Big(\boldsymbol{\phi}(\mathsf{B})X_t\Big)\cdot X_{t-k}\Big] =
+E[U_t\cdot X_{t-k}]$$</p>
+<p><strong>para $k=0$:</strong> $\quad$ (por $\ref{eqnLadoIzquierdoYW}$ y $\ref{eqnLadoDerechoYW}$)
+$$\fbox{$\boldsymbol{\phi}(\mathsf{B})\gamma_0=\sigma^2$}
+\quad\Rightarrow\quad
+\gamma_0-\phi_1\gamma_1-\cdots-\phi_p\gamma_p=\sigma^2
+\quad\Rightarrow\quad \sigma^2=\gamma_0-\sum\nolimits_{j=1}^p\phi_j\gamma_j.$$
+Dividiendo por $\gamma_0$ (y recordando que $\rho_0=1$):
+$$\boldsymbol{\phi}(\mathsf{B})\rho_0=\frac{\sigma^2}{\gamma_0}
+\quad\Rightarrow\quad
+\fbox{$\gamma_0=\frac{\sigma^2}{\boldsymbol{\phi}(\mathsf{B})\rho_0}$}
+\quad\Rightarrow\quad
+\gamma_0=\frac{\sigma^2}{1-\sum\nolimits_{j=1}^p\phi_j\rho_j}.$$</p>
+<p><strong>para $k&gt;0$:</strong> $\quad$ (por $\ref{eqnLadoIzquierdoYW}$ y $\ref{eqnLadoDerechoYW}$)
+$$\fbox{$\boldsymbol{\phi}(\mathsf{B})\gamma_k=0$}
+\quad\Rightarrow\quad
+\gamma_k-\phi_1\gamma_{k-1}-\cdots-\phi_p\gamma_{k-p}=0
+\quad\Rightarrow\quad \gamma_k=\sum\nolimits_{j=1}^p\phi_j\gamma_{k-j}.$$ 
+Dividiendo por $\gamma_0$:
+$$\fbox{$\boldsymbol{\phi}(\mathsf{B})\rho_k=0$}
+\quad\Rightarrow\quad
+\rho_k-\phi_1\rho_{k-1}-\cdots-\phi_p\rho_{k-p}=0
+\quad\Rightarrow\quad \rho_k=\sum\nolimits_{j=1}^p\phi_j\rho_{k-j}.$$</p>
+
+</div>
+</div>
+</div>
+</div><aside class="notes">
+
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Por tanto, la estructura autorregresiva del proceso impone que las
+autocovarianzas (y las autocorrelaciones) verifiquen las ecuaciones de
+Yule-Walker.</p>
+
+</div>
+</div>
+</div>
+</div>
+</aside></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Esperanza-y-funci%C3%B3n-de-autocovarianzas-para-un-ARMA($p,q$)">Esperanza y funci&#243;n de autocovarianzas para un ARMA($p,q$)<a class="anchor-link" href="#Esperanza-y-funci%C3%B3n-de-autocovarianzas-para-un-ARMA($p,q$)">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Sea un ARMA($p,q$) estacionario:
+$\boldsymbol{\phi}(\mathsf{B}){X_t}=\boldsymbol{\theta}(\mathsf{B}){U_t}.\;$
+Multiplicando por $X_{t-k}$, tomando esperanzas y sustituyendo
+$X_{t-k}$ por su representación MA($\infty$), donde
+$\boldsymbol{\psi}=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}$:
+$$E\Big[\Big(\boldsymbol{\phi}(\mathsf{B})X_t\Big)\cdot X_{t-k}\Big] =
+E\Big[\Big(\boldsymbol{\theta}(\mathsf{B})U_t\Big)\cdot X_{t-k}\Big]
+\;=\; E\Big[\Big(\boldsymbol{\theta}(\mathsf{B})U_t\Big)\cdot
+\Big(\boldsymbol{\psi}(\mathsf{B})U_{t-k}\Big)\Big]$$ Usando
+$\eqref{eqnLadoIzquierdoYW}$, renombrando
+$\Big(\boldsymbol{\theta}(\mathsf{B})U_t\Big)=\boldsymbol{W}$ y
+$\Big(\boldsymbol{\psi}(\mathsf{B})U_t\Big)=\boldsymbol{Y}$, y
+recordando ($\ref{eqnLadoIzquierdoYW}$):</p>
+\begin{align*}
+  \boldsymbol{\phi}(\mathsf{B})\gamma_k &amp; = \boldsymbol{\gamma_{_{\boldsymbol{W},\boldsymbol{Y}}}}(k)\\
+  &amp; =  \sigma^2 \Big(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\Big)_k &amp; \text{por } \eqref{eqCovarianzaCruzadaProcesosLineales}
+\end{align*}<p>Y como $\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})$ tiene grado $q$ y cogrado $-\infty$</p>
+\begin{equation}
+  \boldsymbol{\phi}(\mathsf{B})\gamma_k = 
+  \begin{cases}
+     0 &amp; k &gt; q\; \text{(como en un AR)}\\
+    \sigma^2 \Big(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\Big)_k &amp; k\leq q
+  \end{cases}
+\end{equation}
+</div>
+</div>
+</div>
+</div></section></section>
 </div>
 </div>
 </body>

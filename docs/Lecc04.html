@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-09-10 mar 16:45 -->
+<!-- 2024-09-13 vie 18:50 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 4</title>
@@ -233,23 +233,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org77e1951">1. Secuencias de números</a>
+<li><a href="#orgdbef2b1">1. Secuencias de números</a>
 <ul>
 <li><a href="#org9eb2348">1.1. El espacio vectorial de las secuencias infinitas \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a>
 <ul>
-<li><a href="#orgef7a672">1.1.1. Notación mediante funciones generatrices</a></li>
-<li><a href="#org7b60685">1.1.2. Características de algunas secuencias</a></li>
+<li><a href="#org2010287">1.1.1. Notación mediante funciones generatrices</a></li>
+<li><a href="#orgdb4890b">1.1.2. Características de algunas secuencias</a></li>
 <li><a href="#orgc1c3cae">1.1.3. Algunos subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a></li>
 </ul>
 </li>
-<li><a href="#orgea1ed51">1.2. Producto convolución</a></li>
+<li><a href="#org19df1d4">1.2. Producto convolución</a></li>
 <li><a href="#org1817ae9">1.3. Anillos conmutativos y cuerpos</a>
 <ul>
 <li><a href="#orgc70da8e">1.3.1. Anillos conmutativos</a></li>
 <li><a href="#org099a838">1.3.2. Cuerpos</a></li>
 </ul>
 </li>
-<li><a href="#org0f9db27">1.4. Clasificación de algunos subconjuntos de sucesiones</a></li>
+<li><a href="#orgd6eb7a0">1.4. Clasificación de algunos subconjuntos de sucesiones</a></li>
 <li><a href="#org1eded2f">1.5. Inversas</a>
 <ul>
 <li><a href="#org82b8dbf">1.5.1. Inversas de secuencias con principio</a></li>
@@ -261,23 +261,25 @@
 <li><a href="#org2ac125e">1.6. Operador retardo \(\mathsf{B}{}\) y suma de los elementos de una secuencia.</a>
 <ul>
 <li><a href="#orgd470d6f">1.6.1. Polinomios y secuencias en el operador retardo \(\boldsymbol{a}(\mathsf{B}{})\) actuando sobre secuencias</a></li>
+<li><a href="#orgcdcd187">1.6.2. El operador retardo y el producto convolución de una secuencia \(\boldsymbol{x}\) por \(z\)</a></li>
+</ul>
+</li>
+<li><a href="#org0527240">1.7. El producto elemento a elemento de dos secuencias</a></li>
+<li><a href="#org79041d8">1.8. Convolución de una serie formal con el "<i>reverso</i>" de otra</a></li>
 </ul>
 </li>
 </ul>
-</li>
-<li><a href="#orgcc4ae5c">2. Procesos estocásticos y notación</a></li>
-</ul>
 </div>
 </div>
-<div class="ABSTRACT" id="orga397b9e">
+<div class="ABSTRACT" id="orgabf77f1">
 <p>
 En esta lección veremos conceptos algebraicos usados en la
 modelización de series temporales.
 </p>
 
 </div>
-<div id="outline-container-org77e1951" class="outline-2">
-<h2 id="org77e1951"><span class="section-number-2">1.</span> Secuencias de números</h2>
+<div id="outline-container-orgdbef2b1" class="outline-2">
+<h2 id="orgdbef2b1"><span class="section-number-2">1.</span> Secuencias de números</h2>
 <div class="outline-text-2" id="text-1">
 </div>
 <div id="outline-container-org9eb2348" class="outline-3">
@@ -312,8 +314,8 @@ Si \(\;\boldsymbol{x},\boldsymbol{y}\in{\mathbb{R}}^\mathbb{Z}\;\) y
 producto por escalares constituyen un espacio vectorial.
 </p>
 </div>
-<div id="outline-container-orgef7a672" class="outline-4">
-<h4 id="orgef7a672"><span class="section-number-4">1.1.1.</span> Notación mediante funciones generatrices</h4>
+<div id="outline-container-org2010287" class="outline-4">
+<h4 id="org2010287"><span class="section-number-4">1.1.1.</span> Notación mediante funciones generatrices</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 En la expresión \(\;\boldsymbol{x} \quad = \quad (\ldots,\ x_{-2},\
@@ -346,8 +348,8 @@ secuencia. Dicha expresión se denomina <i>función generatriz</i>.
 </p>
 </div>
 </div>
-<div id="outline-container-org7b60685" class="outline-4">
-<h4 id="org7b60685"><span class="section-number-4">1.1.2.</span> Características de algunas secuencias</h4>
+<div id="outline-container-orgdb4890b" class="outline-4">
+<h4 id="orgdb4890b"><span class="section-number-4">1.1.2.</span> Características de algunas secuencias</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 La sucesión \(\;\boldsymbol{0}=\sum_{t=-\infty}^\infty 0 z^t\;\) se denomina <i>sucesión nula</i>.
@@ -388,31 +390,24 @@ cero).  \[\boldsymbol{a}(z) = (\ldots,\ a_{p-3},\ a_{p-2},\ a_{p-1},\ a_{p},\ 0,
 <dt>Secuencias con principio</dt><dd>si tienen cogrado (antes de cierto índice
 son cero).  \[\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2},\ a_{k+3},\ldots) = \sum_{t=k}^\infty a_t z^t\qquad k\in\mathbb{Z}\]
 <dl class="org-dl">
-<dt>Secuencias o <a href="https://en.wikipedia.org/wiki/Formal_power_series">sucesiones formales</a></dt><dd>si su cogrado \(\geq 0\).
+<dt><a href="https://en.wikipedia.org/wiki/Formal_power_series">Series formales</a></dt><dd>si su cogrado \(\geq 0\).
 \[\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ a_{2},\ a_{3},\ldots) = \sum_{t=k}^\infty a_t z^t\qquad k\geq0\]</dd>
 </dl></dd>
-<dt>Polinomios</dt><dd>son sucesiones formales con grado 
+<dt>Polinomios</dt><dd>son series formales con grado 
 \[\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ldots,\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=k}^p a_t z^t\qquad k\geq0\]
 (p.e. \(\;a_0+a_1z+a_2z^2\;\) es un polinomio de grado 2).</dd>
 </dl>
 </div>
 </div>
 </div>
-<div id="outline-container-orgea1ed51" class="outline-3">
-<h3 id="orgea1ed51"><span class="section-number-3">1.2.</span> Producto convolución</h3>
+<div id="outline-container-org19df1d4" class="outline-3">
+<h3 id="org19df1d4"><span class="section-number-3">1.2.</span> Producto convolución</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
-Sean \(\boldsymbol{a}\) y \(\boldsymbol{b}\) sucesiones <span class="underline">con principio</span> (con cogrado).
-</p>
-
-<p>
-Definimos la sucesión producto convolución (\(∗\)) de \(\boldsymbol{a}\) con \(\boldsymbol{b}\) como:
-\[(\boldsymbol{a}*\boldsymbol{b})_t=\sum_{r+s=t} a_rb_s\]
-</p>
-
-<p>
-El producto convolución entre dos sucesiones con cogrado está bien
-definido. 
+Sean \(\boldsymbol{a}\) y \(\boldsymbol{b}\) sucesiones <span class="underline">con principio</span>
+(con cogrado). Su producto convolución es la sucesión:
+\[(\boldsymbol{a}*\boldsymbol{b})_t=\sum_{r+s=t} a_rb_s; \qquad
+r,s,t\in\mathbb{Z}\]
 </p>
 
 <p>
@@ -422,7 +417,7 @@ respectivos cogrados.
 
 
 <p>
-Además, <span class="underline">el producto convolución está bien definido entre dos sucesiones</span>:
+La convolución también está definida entre sucesiones:
 </p>
 <ul class="org-ul">
 <li><span class="underline">con final</span> (con grado). El grado del producto es la suma de los
@@ -432,7 +427,7 @@ respectivos grados.</li>
 </ul>
 
 <div class="inlinetask">
-<b><span class="todo TODO">TODO</span> Incluir las demos en los apuntes</b><br />
+<b><span class="todo TODO">TODO</span> Incluir las demos en los apuntes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="_EctrApl">@EctrApl</span></span></b><br />
 </div>
 </div>
 </div>
@@ -457,6 +452,7 @@ En cuanto a la suma
 <li>\(\boldsymbol{a} + \boldsymbol{b} = \boldsymbol{b} + \boldsymbol{a}\;\) para todo \(\boldsymbol{a}, \boldsymbol{b}\) en \(\mathsf{S}\qquad\) (i.e. \(+\) es conmutativa).</li>
 <li>Existe un elemento \(\boldsymbol{0}\) tal que \(\boldsymbol{a} + \boldsymbol{0} = \boldsymbol{a}\) para todo \(\boldsymbol{a}\in \mathsf{S}\).</li>
 <li>Para cada \(\boldsymbol{a}\in \mathsf{S}\) existe \(-\boldsymbol{a}\in \mathsf{S}\) tal que \(\boldsymbol{a} + (−\boldsymbol{a}) = \boldsymbol{0}\).</li>
+<li></li>
 </ul>
 <p>
 En cuanto al producto 
@@ -498,12 +494,12 @@ conjunto</i>)
 </div>
 </div>
 </div>
-<div id="outline-container-org0f9db27" class="outline-3">
-<h3 id="org0f9db27"><span class="section-number-3">1.4.</span> Clasificación de algunos subconjuntos de sucesiones</h3>
+<div id="outline-container-orgd6eb7a0" class="outline-3">
+<h3 id="orgd6eb7a0"><span class="section-number-3">1.4.</span> Clasificación de algunos subconjuntos de sucesiones</h3>
 <div class="outline-text-3" id="text-1-4">
 <dl class="org-dl">
 <dt>Son anillos el conjunto de</dt><dd><p>
-sucesiones formales (cogrado \(\geq0\)), polinomios y
+series formales (cogrado \(\geq0\)), polinomios y
 \(\ell^1\).
 </p>
 
@@ -749,6 +745,7 @@ Por conveniencia se usa el operador retardo \(\mathsf{B}\) en la notación:
 Aplicando el operador \(\mathsf{B}{}\) repetidamente tenemos \[\mathsf{B}^k x_t =
 x_{t−k},\quad \text{para } t,z\in\mathbb{Z}\] 
 </p>
+
 <p>
 Así, si la secuencia \(\boldsymbol{x}(z)=\sum_{t=-\infty}^\infty x_t z^t\) es
 sumable, entonces la expresión 
@@ -783,90 +780,79 @@ Y en general, si \(\boldsymbol{a}\) e \(\boldsymbol{y}\) son secuencias sumables
 \end{align*}
 </div>
 </div>
+<div id="outline-container-orgcdcd187" class="outline-4">
+<h4 id="orgcdcd187"><span class="section-number-4">1.6.2.</span> El operador retardo y el producto convolución de una secuencia \(\boldsymbol{x}\) por \(z\)</h4>
+<div class="outline-text-4" id="text-1-6-2">
+<p>
+Del mismo modo que denotamos con \({{1}}\) la secuencia
+\[1=(\ldots,0,0,{\color{blue}{1}},0,0,\ldots)=1 z^0,\] denotamos con
+\({{z}}\) la secuencia
+\[z=(\ldots,0,0,{\color{blue}{0}},1,0,\ldots)=1 z^1;\]
+y con \({{z^{-1}}}\) la secuencia
+\[z^{-1}=(\ldots,0,1,{\color{blue}{0}},0,0,\ldots)=1 z^{-1}.\]
+Evidentemente
+\[z^2=z*z=(\ldots,0,0,{\color{blue}{0}},0,1,\ldots)=1 z^{2}.\]
+De ese modo \[\boldsymbol{x}*z^k=\sum_{t\in\mathbb{Z}}x_t
+z^{t+k}=(\mathsf{B}^kx_t\mid t\in\mathbb{Z}).\]
+</p>
 </div>
 </div>
-<div id="outline-container-orgcc4ae5c" class="outline-2">
-<h2 id="orgcc4ae5c"><span class="section-number-2">2.</span> Procesos estocásticos y notación</h2>
-<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org0527240" class="outline-3">
+<h3 id="org0527240"><span class="section-number-3">1.7.</span> El producto elemento a elemento de dos secuencias</h3>
+<div class="outline-text-3" id="text-1-7">
 <p>
-Los procesos estocásticos se pueden sumar y se pueden multiplicar por
-escalares.
-</p>
-
-<p>
-Si \(\boldsymbol{X}\) e \(\boldsymbol{Y}\) son dos procesos estocásticos y
-\(\;a\in\mathbb{R}\), entonces \[\boldsymbol{X}+\boldsymbol{Y}=(X_t+Y_t
-\mid t\in\mathbb{Z})\qquad\text{y}\qquad a\boldsymbol{X}=\big(a(X_t)
-\mid t\in\mathbb{Z}\big).\] El conjunto de procesos estocásticos junto
-con la suma elemento a elemento y el producto por escalares
-constituyen un espacio vectorial.
-</p>
-<p>
-Consideremos el proceso estocástico 
-\[\boldsymbol{X}=(X_t \mid t=0,\pm1,\pm2,\ldots).\]
-</p>
-
-<p>
-Lo podemos denotar con una función generatriz (como hicimos con las
-secuencias) \[\boldsymbol{X} \quad = \quad \sum_{t=-\infty}^\infty X_t
-z^t \quad\equiv\quad \boldsymbol{X}(z)\] Recuerde que esto no es una
-suma; es una secuencia de variables aleatorias
-\[\sum_{t=-\infty}^\infty X_t z^t = (\ldots,\ X_{-2},\ X_{-1},\
-X_{0},\ X_{1},\ X_{2},\ldots)\]
-</p>
-
-<p>
-Sea \(\boldsymbol{a}\) una secuencia de números y \(\boldsymbol{X}\) un
-proceso estocástico tales que <span class="underline">la suma</span>
-\(\sum\limits_{k=-\infty}^{\infty}a_kX_{t-k}\;\) <span class="underline">converge</span> para todo
-\(t.\;\) Entonces:
-</p>
-<p>
-Definimos el producto convolución (\(∗\)) de \(\boldsymbol{a}\) con \(\boldsymbol{X}\) como el proceso estocástico:
-\[\boldsymbol{a}*\boldsymbol{X}=\left(\left.\sum_{r+s=t} a_r X_s \right| t\in\mathbb{Z}\right)\]
-es decir
-\[(\boldsymbol{a}*\boldsymbol{X})_t=\sum_{r+s=t} a_r X_s,\quad \text{para } t\in\mathbb{Z}.\]
-Por tanto, cada elemento de \((\boldsymbol{a}*\boldsymbol{X})\) es una combinación de variables aleatorias de \(\boldsymbol{X}\)
-</p>
-<p>
-Podemos aplicar el operador \(\mathsf{B}\) sobre los elementos de un proceso estocástico \(\boldsymbol{X}\).
-\[\mathsf{B} X_t = X_{t−1},\quad \text{para } t\in\mathbb{Z}.\]
-</p>
-
-<p>
-Aplicando el operador \(\mathsf{B}\) repetidamente tenemos \[\mathsf{B}^k X_t =
-X_{t−k},\quad \text{para } t,z\in\mathbb{Z}\] 
-</p>
-<p>
-Así, para el polinomio \(\boldsymbol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3\), y el proceso estocástico \(\boldsymbol{Y}\)
+El producto elemento a elemento (o producto Hadamard) de \(\boldsymbol{a}\) y \(\boldsymbol{b}\) es la secuencia
+\[\boldsymbol{a}\odot\boldsymbol{b}=(a_tb_t\mid
+t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}a_tb_t z^t.\] Por tanto
+\[\boldsymbol{x}\odot(\boldsymbol{y}*z^k)=(x_t y_{t-k}\mid
+t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}x_t y_{t-k} z^t;\] y si
+\(\boldsymbol{\phi}\) es el polinomio \(\;1-\phi_1 z^1-\cdots-\phi_p
+z^p\),
+\[(\boldsymbol{\phi}*\boldsymbol{x})\odot(\boldsymbol{y}*z^k)=\Big(\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
+y_{t-k}\mid
+t\in\mathbb{Z}\Big)=\sum_{t\in\mathbb{Z}}\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
+y_{t-k} z^t,\] donde
 </p>
 \begin{align*}
-\boldsymbol{a}(\mathsf{B})Y_t 
-& = (a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+a_3\mathsf{B}^3) Y_t \\
-% & = a_0 Y_t + a_1 \mathsf{B}^1 Y_t + a_2 \mathsf{B}^2 Y_t + a_3 \mathsf{B}^3 Y_t \\
-& = a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+a_3Y_{t-3} \\
-% & =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
-& =(\boldsymbol{a}*\boldsymbol{Y})_t,\quad \text{para } t\in\mathbb{Z}
+\big(\boldsymbol{\phi}(\mathsf{B})x_t\big) y_{t-k}
+= & \big(x_t-\phi_1x_{t-1}-\cdots-\phi_px_{t-p}\big)y_{t-k}\\
+= & x_ty_{t-k}-\phi_1x_{t-1}y_{t-k}-\cdots-\phi_px_{t-p}y_{t-k}.
+\end{align*}
+</div>
+</div>
+<div id="outline-container-org79041d8" class="outline-3">
+<h3 id="org79041d8"><span class="section-number-3">1.8.</span> Convolución de una serie formal con el "<i>reverso</i>" de otra</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+Por último, si tenemos dos series formales \(\boldsymbol{a}\) y
+\(\boldsymbol{b}\), entonces
+</p>
+\begin{align*}
+\boldsymbol{a}(z)*\boldsymbol{b}(z^{-1})
+=&(a_0z^0+a_1z^1+a_2z^2+\cdots)(\cdots+b_2z^{-2}+b_1z^{-1}+b_0z^0)\\
+=&\Big(\ldots,
+\sum_{j\in\mathbb{Z}}a_{j+2}b_j,\; 
+\sum_{j\in\mathbb{Z}}a_{j-1}b_j,\;
+{\color{blue}{\sum_{j\in\mathbb{Z}}a_jb_j}},\;
+\sum_{j\in\mathbb{Z}}a_{j+1}b_j,\;
+\sum_{j\in\mathbb{Z}}a_{j+2}b_j,\ldots\Big)\\
+=&\Big(\sum_{j\in\mathbb{Z}}a_{j+k}b_j\mid k\in\mathbb{Z}\Big)
 \end{align*}
 <p>
-Y en general, si la suma \(\sum\limits_{k=-\infty}^{\infty}a_kY_{t-k}\)
-converge para todo \(t\), entonces
+es decir,
 </p>
-
-\begin{align*}
-\boldsymbol{a}(\mathsf{B})Y_t 
-& = (\cdots+a_{-2}\mathsf{B}^{-2}+a_{-1}\mathsf{B}^{-1}+a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) Y_t \\
-% & = a_0 Y_t + a_1 \mathsf{B}^1 Y_t + a_2 \mathsf{B}^2 Y_t + a_3 \mathsf{B}^3 Y_t \\
-& = \cdots+a_{-2}Y_{t+2}+a_{-1}Y_{t+1}+a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+\cdots \\
-% & =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
-& =(\boldsymbol{a}*\boldsymbol{y})_t,\quad \text{para } t\in\mathbb{Z}
-\end{align*}
+\begin{equation}
+ \label{eqConvolucionConSuReverso}
+ \Big(\boldsymbol{a}(z)*\boldsymbol{b}(z^{-1})\Big)_k=\sum_{j\in\mathbb{Z}}a_{j+k}b_{j}.
+\end{equation}
+</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-09-10 mar 16:45</p>
+<p class="date">Created: 2024-09-13 vie 18:50</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

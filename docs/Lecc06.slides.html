@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="orge3507dd">
+<div class="abstract" id="org1634106">
 <p>
 En esta lección veremos algunas herramientas estadísticas.
  y usaré la librería <code>tfarima</code> de
@@ -14305,11 +14305,11 @@ proceso estacionario $\boldsymbol{X}$ mide su correlación una vez
 descontado el efecto de las variables $X_{t-1},\ldots X_{t-(k-1)}$ que
 median entre ambas.
 $$X_t,\ \overbrace{X_{t-1},\ldots X_{t-(k-1)},}\ X_{t-k}$$</p>
-<p>Si denotamos con $\widehat{X_t}$ y $\widehat{X_{t-k}}$ los ajustes de
+<p>Si denotamos con $\widehat{X_t}$ y $\widetilde{X_{t-k}}$ los ajustes de
 las respectivas regresiones de $X_t$ y $X_{t-k}$ sobre $X_{t-1},\ldots
 X_{t-(k-1)};\;$ la <em>correlación parcial</em> $\pi_k$ entre $X_t$ y $X_{t+k}$ es la
 correlación entre los residuos de sendas regresiones:
-$$\pi_k=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widehat{X_{t-k}})\Big)$$</p>
+$$\pi_k=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widetilde{X_{t-k}})\Big)$$</p>
 
 </div>
 </div>
@@ -14327,10 +14327,10 @@ secuencia.</p>
 <p><strong>Función de autocorrelación parcial</strong> (PACF) de un proceso estacionario
 $\boldsymbol{X}$ es la siguiente secuencia
 $\boldsymbol{\pi}=(\pi_k\mid k\in\mathbb{Z}),\;$ que es simétrica pues
-$\pi_{-k}=\pi_k$: $$\begin{cases} \pi_0 &amp;={\color{blue}{1}}\\\\ \pi_1 &amp;=Corr(X_t,\
+$\pi_{-k}=\pi_k$: $$\begin{cases} \pi_0 &amp; = \rho_0 ={\color{blue}{1}}\\\\ \pi_1 &amp;=Corr(X_t,\
 X_{t-1})=\rho_1=\frac{\gamma_1}{\gamma_0}\\\\ \pi_k
-&amp;=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widehat{X_{t-k}})\Big)
-\end{cases},$$ donde $\widehat{X_t}$ y $\widehat{X_{t-k}}$ son los
+&amp;=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widetilde{X_{t-k}})\Big)
+\end{cases},$$ donde $\widehat{X_t}$ y $\widetilde{X_{t-k}}$ son los
 ajustes de las respectivas regresiones de $X_t$ y $X_{t-k}$ sobre
 $X_{t-1},\ldots X_{t-(k-1)}.\;$ i.e., las proyecciones ortogonales
 sobre $\bar{sp}(1,X_{t-1}:X_{t-(k-1)})$.</p>
@@ -14368,6 +14368,30 @@ otra (por ejemplo resolviendo la ecuaciones de Yule-Walker
 recursivamente con el algoritmo Levinson-Durbin; véase
 <em>Pourahmadi, M. (2001, Capítulo 7)</em> o <em>Brockwell &amp; Davis (1991,
 Capitulo 5)</em>)</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="inlinetask">
+<b><span class="todo TODO">TODO</span> Incluir algoritmo en los apuntes</b><br />
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Consecuentemente, la PACF $\boldsymbol{\pi}$ puede verse como una
 reparametrización de la función de autocovarianzas
 $\boldsymbol{\gamma}$.</p>
@@ -14395,7 +14419,7 @@ arrojará luz sobre las propiedades de un proceso estocástico.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Para un proceso estocástico $\boldsymbol{X}$ con función de
+<p>Si $\boldsymbol{X}$ es un proceso estocástico con función de
 autocovarianzas $\boldsymbol{\gamma}\in\ell^1$, es decir, con función
 de autocovarianzas absolutamente sumable,
 $$\sum_{h\in\mathbb{Z}}|\gamma_h|&lt;\infty,$$ entonces definimos la
@@ -14432,9 +14456,9 @@ propiedades:</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Es más, desde la densidad espectral se pueden calcular las covarianzas
-$$\gamma_h=\int_{-\pi}^\pi f(\omega)e^{-i h\omega}d\omega;\quad
-h\in\mathbb{Z}$$</p>
+<p>Es más, partiendo de la densidad espectral se pueden calcular las
+covarianzas $$\gamma_h=\int_{-\pi}^\pi f(\omega)e^{-i
+h\omega}d\omega;\quad h\in\mathbb{Z}$$</p>
 
 </div>
 </div>
@@ -14449,7 +14473,7 @@ h\in\mathbb{Z}$$</p>
 <p>Consecuentemente, para $h=0$
 $$\sigma^2=\gamma_0=\int_{-\pi}^\pi f(\omega)d\omega.$$</p>
 <p>Por tanto podemos interpretar la densidad espectral como una
-descomposición de la varianza en distintas frecuencias.</p>
+descomposición de la varianza oscilaciones de distintas frecuencias.</p>
 
 </div>
 </div>
@@ -14461,8 +14485,8 @@ descomposición de la varianza en distintas frecuencias.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>La ACF, la PACF y la densidad espectral son funciones que solo
-dependen de los dos primeros momentos de la distribución.</p>
+<p>La ACF, la PACF y la <em>densidad espectral</em> son funciones que dependen
+únicamente de los dos primeros momentos de la distribución.</p>
 <p>Su estimación y posterior análisis son la herramienta fundamental para
 elegir un modelo ARMA para una serie temporal <em>``estacionaria''</em>.</p>
 <p>Para entenderlo debemos ver cómo son estas funciones en algunos
@@ -14500,9 +14524,9 @@ U_{t-j}\right)=\sum_{j\in\mathbb{Z}}\psi_j E(U_{t-j})=0$$ Y como
 además, $E(U_j\cdot U_k)=0$ cuando $j\ne k$, su función de
 autocovarianzas es</p>
 \begin{eqnarray*}
-\gamma_{k,t}= E\big[X_t\cdot X_{t-k}\big]=&amp;
+\gamma_{k,t}= E\big[X_{t+k}\cdot X_{t}\big]=&amp;
 E\left[\Big(\sum_{j\in\mathbb{Z}}\psi_j
-U_{t-j}\Big)\Big(\sum_{j\in\mathbb{Z}}\psi_j U_{t-k-j}\Big)\right]=
+U_{t+k-j}\Big)\Big(\sum_{j\in\mathbb{Z}}\psi_j U_{t-j}\Big)\right]=
 \sigma^2\sum_{j\in\mathbb{Z}}\psi_{j+k}\cdot\psi_{j}\\
 =&amp;\sigma^2\sum_{j\in\mathbb{Z}}\psi_{j+k}\cdot R(\psi_{-j}) =
 \sigma^2\left(\boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})\right)_k
@@ -14538,7 +14562,7 @@ U_{t-j}+U_t;\qquad t\in\mathbb{Z}.$$</p>
 <p>Entonces</p>
 <ul>
 <li><p>$\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})$</p>
-<p>$\gamma_k = \sum_{j\in\mathbb{Z}} \psi_{k-j}\psi_j;\quad$ así que $\;\gamma_k\to0\;$ cuando $\;k\to\infty$.</p>
+<p>$\gamma_k = \sigma^2\sum_{j=0}^\infty \psi_{j+k}\cdot\psi_j.\quad$ Además $\;\gamma_k\to0\;$ cuando $\;k\to\infty$</p>
 </li>
 <li><p>ACF: $\;\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$</p>
 </li>
@@ -14570,17 +14594,19 @@ U_{t-j}+U_t;\qquad t\in\mathbb{Z}.$$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Sea $\boldsymbol{X}=\boldsymbol{1}*\boldsymbol{U}$,
+<p>Sea $\boldsymbol{X}=1*\boldsymbol{U}$,
 donde $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;;$ es decir $X_t=U_t$ para
 $t\in\mathbb{Z}$. Entonces</p>
 <ul>
-<li><p>$\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{1}(z)*\boldsymbol{1}(z^{-1}) \;=\; \sigma^2\boldsymbol{1} \;=\; (\ldots,0,0,{\color{blue}{\sigma^2}},0,0,\ldots) \;=\; \sigma^2 z^0$</p>
+<li><p>$\boldsymbol{\gamma} \;=\; \sigma^2 (1z^0*1z^{0}) \;=\; \sigma^2z^0 \;=\; (\ldots,0,0,{\color{blue}{\sigma^2}},0,0,\ldots)$</p>
 </li>
-<li><p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2}\boldsymbol{\gamma} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,{\color{blue}{1}},0,0,\ldots) \;=\; 1 z^0$</p>
+<li><p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\;
+  \frac{1}{\sigma^2}\boldsymbol{\gamma} \;=\; 1 z^0 \;=\;
+  (\ldots,0,0,{\color{blue}{1}},0,0,\ldots)$</p>
 </li>
 <li><p>$f(\omega) \;=\; \frac{1}{2\pi}\sum_{h\geq0}\gamma_h \cos(h\omega) \;=\; \frac{\sigma^2}{2\pi} \cos(0\omega) \;=\; \frac{\sigma^2}{2\pi};\quad \omega\in[-\pi,\pi]$</p>
 </li>
-<li><p>$\boldsymbol{\pi} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,{\color{blue}{1}},0,0,\ldots) \;=\; 1 z^0$</p>
+<li><p>$\boldsymbol{\pi} \;=\; 1 z^0 \;=\; (\ldots,0,0,{\color{blue}{1}},0,0,\ldots)$</p>
 </li>
 </ul>
 
@@ -14636,7 +14662,7 @@ fuera del círculo unidad
 $(\boldsymbol{\theta}^{-\triangleright}\in\ell^1)$, es decir $$X_t=
 \sum_{j=1}^q\theta_j U_{t-j}+U_t.$$</p>
 <p>Entonces $E(X_t)=0$ y</p>
-<p>$\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\theta}(z^{-1}) \;=\; \sigma^2 \sum\limits_{j,k=0}^q \theta_j\theta_k z^{j-k}\;$ (grado $q$ y cogrado $-q$)</p>
+<p>$\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\theta}(z^{-1}) \;=\; \sigma^2 \sum\limits_{j,k=0}^q \theta_{j+k}\theta_{j} z^{j}\;$ (grado $q$ y cogrado $-q$)</p>
 <p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$</p>
 <p>$f(\omega) \;=\; \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})\cdot\boldsymbol{\theta}(e^{i\omega}) \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^q \gamma_h \cos(h\omega);\quad \omega\in[-\pi,\pi]\quad$ ($q$ cosenos $+1$)</p>
 <p>$\boldsymbol{\pi}\;$ tiene grado $\infty$ y cogrado $-\infty\;$ y su magnitud decae paulatinamente cuando $\;k\to\infty$</p>
@@ -14679,8 +14705,7 @@ U_{t-1}$.</p>
   \frac{\sigma^2}{2\pi}\Big((1+\theta^2)\;-\;2\theta\cos(\omega)\Big);\quad
   \omega\in[-\pi,\pi]$</p>
 </li>
-<li><p>$\boldsymbol{\pi} \;=\; \sum\limits_{k\in\mathbb{Z}}{
-  \frac{-\theta^k(1-\theta^2)}{1-\theta^{2(k+1)}} z^k}$</p>
+<li><p>$\boldsymbol{\pi} \;=\; \sum\limits_{k\in\mathbb{Z}}{  \frac{-\theta^k(1-\theta^2)}{1-\theta^{2(k+1)}} z^k}$</p>
 </li>
 </ul>
 
@@ -14797,7 +14822,7 @@ $\gamma_2=\sigma^2(-\theta_2)$</p>
 <li><p>$f(\omega) \;=\;  \frac{\sigma^2}{2\pi}\Big((1+\theta_1^2+\theta_2^2)\;-\;2\theta_1(1+\theta_2)\cos(\omega)\;-\;2\theta_2\cos(2\omega)\Big)$</p>
 </li>
 <li><p>$\boldsymbol{\pi}$ tiene una expresión complicada, pero su magnitud
-decae paulatinamente</p>
+decae paulatinamente.</p>
 </li>
 </ul>
 
@@ -15014,7 +15039,7 @@ donde $\;\boldsymbol{\phi}^{-1}=\boldsymbol{\psi}=({\color{blue}1},\
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Por tanto $E(X_t)=0$ para todo $t\in\mathbb{Z}$ y</p>
-<p>$\boldsymbol{\gamma} \;=\; \sigma^2 \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^{-1})} \;=\; \sigma^2 \sum\limits_{j,k=0}^\infty \psi_j\psi_k z^{j-k}\quad$ (grado $\infty$ y cogrado $-\infty$)</p>
+<p>$\boldsymbol{\gamma} \;=\; \sigma^2 \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^{-1})} \;=\; \sigma^2 \sum\limits_{j,k=0}^\infty \psi_{j+k}\psi_j z^{j}\quad$ (grado $\infty$ y cogrado $-\infty$)</p>
 <p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$</p>
 <p>$f(\omega) =
   \frac{\sigma^2}{2\pi}\frac{1}{\boldsymbol{\phi}(e^{-i\omega})\cdot\boldsymbol{\phi}(e^{i\omega})}
@@ -15032,26 +15057,14 @@ donde $\;\boldsymbol{\phi}^{-1}=\boldsymbol{\psi}=({\color{blue}1},\
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Pero, sin embargo, la PACF, $\;\boldsymbol{\pi},\;$ es una secuencia
-con grado $p$ y cogrado $-p$&#x2026;</p>
+<p>Pero la PACF, $\;\boldsymbol{\pi},\;$ es una secuencia
+con grado $p$ y cogrado $-p$ (demo en los apuntes).</p>
 
 </div>
 </div>
 </div>
 </div><aside class="notes">
 
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Demostraci%C3%B3n-de-que-la-PACF-tiene-cogrado-$-p$-y-grado-$p$">Demostraci&#243;n de que la PACF tiene cogrado $-p$ y grado $p$<a class="anchor-link" href="#Demostraci%C3%B3n-de-que-la-PACF-tiene-cogrado-$-p$-y-grado-$p$">&#182;</a></h4>
-</div>
-</div>
-</div>
-</div>
-</aside></div></section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15086,48 +15099,8 @@ $\bar{sp}(X_{2}:X_k)$</li>
 </div>
 </div>
 </div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Ecuaciones-de-Yule-Walker-(que-relacionan-las-autocovarianzas-con-los-par%C3%A1metros-de-$%5Cboldsymbol%7B%5Cphi%7D$)">Ecuaciones de Yule-Walker (que relacionan las autocovarianzas con los par&#225;metros de $\boldsymbol{\phi}$)<a class="anchor-link" href="#Ecuaciones-de-Yule-Walker-(que-relacionan-las-autocovarianzas-con-los-par%C3%A1metros-de-$%5Cboldsymbol%7B%5Cphi%7D$)">&#182;</a></h4>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Consideremos un proceso AR($p$): $\quad X_t=\sum\limits_{j=1}^p\phi_j
-X_{t-j}+U_t;\qquad U_t\sim WN(0,\sigma^2)$</p>
-<p>Multiplicando ambos lados por $X_{t-k}$ para $0\leq k\leq p$ y tomando
-esperanzas tenemos $$Cov(X_t,X_{t-k})=\sum_{j=1}^p\phi_j
-Cov(X_{t-j},X_{t-k})+ Cov(U_t,X_{t-k});\qquad 0\leq k\leq p.$$</p>
-<p>Para $\;k=0\;$ tenemos:</p>
-\begin{equation}
-  \label{eqYuleW1}
-  \sigma^2=\gamma_0-\sum_{j=1}^p\phi_j\gamma_j
-\end{equation}<p>Para $\;1\leq k\leq p\;$ tenemos:</p>
-\begin{equation}
-  \label{eqYuleW2}
-  \gamma_k=\sum_{j=1}^p\phi_j\gamma_{k-j}
-\end{equation}<p>Dividiendo <a href="eqref:eqYuleW1">(1)</a> y <a href="eqref:eqYuleW2">(2)</a> por $\gamma_0$ (y operando en (<a href="ref:eqYuleW1">1</a>) tenemos</p>
-\begin{equation}
-  \label{eqYuleW3}
-  \gamma_0=\frac{\sigma^2}{1-\phi_1\rho_1-\cdots-\phi_p\rho_p};
-  \qquad
-  \rho_k=\phi_1\rho_{k-1}+\cdots+\phi_p\rho_{k-p}
-\end{equation}
-</div>
-</div>
-</div>
-</div></section><section>
+</aside></div></section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -15226,14 +15199,14 @@ decir, si $$X_t=\phi X_{t-1} + U_t$$
 tenemos que</p>
 <p>$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi z)^{-1}*(1-\phi
   z^{-1})^{-1} \;=\; \frac{\sigma^2}{1-\phi^2}
-  \sum\limits_{k=-\infty}^\infty \phi^{|k|} z^k$</p>
+  \sum\limits_{k=-\infty}^\infty \phi^{|k|} z^k\qquad$ grado $\infty$ y cogrado $-\infty$</p>
 <p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\;
   \frac{1+\phi^2}{\sigma^2}\boldsymbol{\gamma} \;=\;
   \sum\limits_{j=-\infty}^\infty \phi^{|j|} z^j \quad\Rightarrow\quad
   \rho_k=\phi^k$ para $k\geq0$.</p>
 <p>$f(\omega) \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^\infty \gamma_h
   \cos(h\omega)=\frac{\sigma^2}{2\pi}\frac{1}{1+\phi^2-2\phi\cos(\omega)}\;$ (compárese con MA($1$)).</p>
-<p>$\boldsymbol{\pi} \;=\; (\ldots,\; 0,\; 0,\; \phi,\; {\color{blue}1},\; \phi,\; 0,\; 0,\;\ldots)$</p>
+<p>$\boldsymbol{\pi} \;=\; (\ldots,\; 0,\; 0,\; \phi,\; {\color{blue}1},\; \phi,\; 0,\; 0,\;\ldots)\qquad$ grado $1$ y cogrado $-1$</p>
 
 </div>
 </div>
@@ -15339,9 +15312,9 @@ X_{t-2} + U_t.$$ Entonces</p>
   \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^-1)}\right)\qquad$(Verifica
   $\;\gamma_k=\phi_1\gamma_{k-1}+\phi_2\gamma_{k-2}\;$ y decae
   paulatinamente)</p>
-<p>$\quad$ <em>(de <a href="eqref:eqYuleW3">(3)</a> : $\gamma_0 =
-   \frac{\sigma^2}{1-\phi_1\rho_1-\phi_2\rho_2}$ e iniciamos el
-  cálculo  <a href="eqref:eqYuleW2">(2)</a> recursivamente)</em></p>
+<p>$\quad$ <em>(de Ec. Yule-Walker: $\gamma_0 =
+   \frac{\sigma^2}{1-\phi_1\rho_1-\phi_2\rho_2}$ y resolvemos
+  $\boldsymbol{\phi}(\mathsf{B})\gamma_k=0$ recursivamente)</em></p>
 <p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}\qquad\qquad\qquad\quad$
   (Verifica $\;\rho_k=\phi_1\rho_{k-1}+\phi_2\rho_{k-2}\;$ y decae
   paulatinamente)</p>
@@ -15609,8 +15582,8 @@ de $\boldsymbol{X}=\boldsymbol{\phi}*\boldsymbol{U}$</p>
 <li>si un proceso tiene una PACF $\boldsymbol{\pi}$ con cogrado $-p$ y grado $p$, es un proceso AR($p$)</li>
 </ul>
 <p>Véase <em>Pourahmadi M. (2001).</em></p>
-<p>Consecuentemente, que la ACF o la PACF se cortan ``bruscamente'' nos
-indica que el modelo es AR o MA (y su grado).</p>
+<p>Consecuentemente, que la ACF o la PACF se corten ``bruscamente'' nos
+indica que el modelo es AR o MA (además de su grado).</p>
 <p>Desgraciadamente para los modelos ARMA (qué veremos más adelante)
 tanto la ACF como la PACF tienen infinitos términos no nulos, por lo
 que su identificación no es tan sencilla.</p>

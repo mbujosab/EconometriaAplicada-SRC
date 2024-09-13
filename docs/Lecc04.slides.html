@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="org86681ec">
+<div class="ABSTRACT" id="org6fc59b4">
 <p>
 En esta lección veremos conceptos algebraicos usados en la
 modelización de series temporales.
@@ -14185,18 +14185,7 @@ $$
 (\ldots,\ x_{-2},\ x_{-1},\ x_{0},\ x_{1},\ x_{2},\ldots) 
 \quad = \quad
 (x_t \mid t\in\mathbb{Z}) 
-$$
-</div>
-</div>
-</div>
-</div><div class="fragment">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Las secuencias se pueden sumar y también se pueden multiplicar por
+$$<p>Las secuencias se pueden sumar y también se pueden multiplicar por
 escalares.</p>
 <p>Si $\;\boldsymbol{x},\boldsymbol{y}\in{\mathbb{R}}^\mathbb{Z}\;$ y
 $\;a\in\mathbb{R}$, entonces
@@ -14208,7 +14197,7 @@ producto por escalares constituyen un espacio vectorial.</p>
 </div>
 </div>
 </div>
-</div></div></section><section>
+</div></section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14345,11 +14334,11 @@ $\ell^1\subset \ell^2$.</p>
 cero).  $$\boldsymbol{a}(z) = (\ldots,\ a_{p-3},\ a_{p-2},\ a_{p-1},\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=-\infty}^p a_t z^t$$</li>
 <li><strong>Secuencias con principio:</strong> si tienen cogrado (antes de cierto índice
 son cero).  $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2},\ a_{k+3},\ldots) = \sum_{t=k}^\infty a_t z^t\qquad k\in\mathbb{Z}$$<ul>
-<li><strong>Secuencias o <a href="https://en.wikipedia.org/wiki/Formal_power_series">sucesiones formales</a>:</strong> si su cogrado $\geq 0$.
+<li><strong><a href="https://en.wikipedia.org/wiki/Formal_power_series">Series formales</a>:</strong> si su cogrado $\geq 0$.
 $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ a_{2},\ a_{3},\ldots) = \sum_{t=k}^\infty a_t z^t\qquad k\geq0$$</li>
 </ul>
 </li>
-<li><strong>Polinomios:</strong> son sucesiones formales con grado 
+<li><strong>Polinomios:</strong> son series formales con grado 
 $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ldots,\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=k}^p a_t z^t\qquad k\geq0$$
 (p.e. $\;a_0+a_1z+a_2z^2\;$ es un polinomio de grado 2).</li>
 </ul>
@@ -14375,25 +14364,13 @@ $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ldots,\ a_{p},\ 0,\ 0
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Sean $\boldsymbol{a}$ y $\boldsymbol{b}$ sucesiones <u>con principio</u> (con cogrado).</p>
-<p>Definimos la sucesión producto convolución ($∗$) de $\boldsymbol{a}$ con $\boldsymbol{b}$ como:
-$$(\boldsymbol{a}*\boldsymbol{b})_t=\sum_{r+s=t} a_rb_s$$</p>
-<p>El producto convolución entre dos sucesiones con cogrado está bien
-definido.</p>
+<p>Sean $\boldsymbol{a}$ y $\boldsymbol{b}$ sucesiones <u>con principio</u>
+(con cogrado). Su producto convolución es la sucesión:
+$$(\boldsymbol{a}*\boldsymbol{b})_t=\sum_{r+s=t} a_rb_s; \qquad
+r,s,t\in\mathbb{Z}$$</p>
 <p>El cogrado de $\boldsymbol{a}*\boldsymbol{b}$ es la suma de los
 respectivos cogrados.</p>
-
-</div>
-</div>
-</div>
-</div><div class="fragment">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Además, <u>el producto convolución está bien definido entre dos sucesiones</u>:</p>
+<p>La convolución también está definida entre sucesiones:</p>
 <ul>
 <li><p><u>con final</u> (con grado). El grado del producto es la suma de los
 respectivos grados.</p>
@@ -14418,7 +14395,7 @@ respectivos grados.</p>
 </div>
 </div>
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14445,35 +14422,14 @@ tres conjuntos de axiomas.</p>
 <li>$\boldsymbol{a} + \boldsymbol{b} = \boldsymbol{b} + \boldsymbol{a}\;$ para todo $\boldsymbol{a}, \boldsymbol{b}$ en $\mathsf{S}\qquad$ (i.e. $+$ es conmutativa).</li>
 <li>Existe un elemento $\boldsymbol{0}$ tal que $\boldsymbol{a} + \boldsymbol{0} = \boldsymbol{a}$ para todo $\boldsymbol{a}\in \mathsf{S}$.</li>
 <li>Para cada $\boldsymbol{a}\in \mathsf{S}$ existe $-\boldsymbol{a}\in \mathsf{S}$ tal que $\boldsymbol{a} + (−\boldsymbol{a}) = \boldsymbol{0}$.</li>
+<li></li>
 </ul>
-
-</div>
-</div>
-</div>
-</div><div class="fragment">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>En cuanto al producto</p>
 <ul>
 <li>$(\boldsymbol{a} * \boldsymbol{b}) * \boldsymbol{c} = \boldsymbol{a} * (\boldsymbol{b} * \boldsymbol{c})\;$ para todo $\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}$ en $\mathsf{S}\qquad$ (i.e. $*$ es asociativo).</li>
 <li>$\boldsymbol{a} * \boldsymbol{b} = \boldsymbol{b} * \boldsymbol{a}\;$ para todo $\boldsymbol{a}, \boldsymbol{b}$ en $\mathsf{S}\qquad$ (i.e. $*$ es conmutativo).</li>
 <li>Existe un elemento ${{1}}$ tal que $\boldsymbol{a} * {{1}} = \boldsymbol{a}$ para todo $\boldsymbol{a}\in \mathsf{S}$.</li>
 </ul>
-
-</div>
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>El producto es distributivo respecto de la suma: Para todo $\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}$ en $\mathsf{S}$</p>
 <ul>
 <li>$\boldsymbol{a}*(\boldsymbol{b}+\boldsymbol{c})=(\boldsymbol{a}*\boldsymbol{b})+(\boldsymbol{a}*\boldsymbol{c})\;$</li>
@@ -14483,7 +14439,7 @@ tres conjuntos de axiomas.</p>
 </div>
 </div>
 </div>
-</div></div></section><section>
+</div></section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14533,7 +14489,7 @@ conjunto</em>)</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li><p><strong>Son anillos el conjunto de:</strong> sucesiones formales (cogrado $\geq0$), polinomios y
+<li><p><strong>Son anillos el conjunto de:</strong> series formales (cogrado $\geq0$), polinomios y
 $\ell^1$.</p>
 <p>Para algunas sucesiones (no nulas) de estos subconjuntos o no existe
 inversa o, cuando existe, es una sucesión de otro tipo (p.e. las
@@ -14888,17 +14844,6 @@ así $\frac{\boldsymbol{p}}{\boldsymbol{q}}$
 $$\mathsf{B} x_t = x_{t−1},\quad \text{para } t\in\mathbb{Z}.$$</p>
 <p>Aplicando el operador $\mathsf{B}{}$ repetidamente tenemos $$\mathsf{B}^k x_t =
 x_{t−k},\quad \text{para } t,z\in\mathbb{Z}$$</p>
-
-</div>
-</div>
-</div>
-</div><div class="fragment">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Así, si la secuencia $\boldsymbol{x}(z)=\sum_{t=-\infty}^\infty x_t z^t$ es
 sumable, entonces la expresión 
 $$\boldsymbol{x}(\mathsf{B})=\sum_{t=-\infty}^\infty x_t \mathsf{B}^t\;=\;\cdots+x_{-2}+x_{-1}+x_{0}+x_{1}+\cdots$$ tiene sentido como suma.</p>
@@ -14906,7 +14851,7 @@ $$\boldsymbol{x}(\mathsf{B})=\sum_{t=-\infty}^\infty x_t \mathsf{B}^t\;=\;\cdots
 </div>
 </div>
 </div>
-</div></div></section><section>
+</div></section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14956,126 +14901,14 @@ secuencia $\boldsymbol{y}$, tenemos</p>
 </div>
 </div>
 </div>
-</div></div></section></section><section><section>
+</div></div></section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Procesos-estoc%C3%A1sticos-y-notaci%C3%B3n">Procesos estoc&#225;sticos y notaci&#243;n<a class="anchor-link" href="#Procesos-estoc%C3%A1sticos-y-notaci%C3%B3n">&#182;</a></h2>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Los procesos estocásticos se pueden sumar y se pueden multiplicar por
-escalares.</p>
-<p>Si $\boldsymbol{X}$ e $\boldsymbol{Y}$ son dos procesos estocásticos y
-$\;a\in\mathbb{R}$, entonces $$\boldsymbol{X}+\boldsymbol{Y}=(X_t+Y_t
-\mid t\in\mathbb{Z})\qquad\text{y}\qquad a\boldsymbol{X}=\big(a(X_t)
-\mid t\in\mathbb{Z}\big).$$ El conjunto de procesos estocásticos junto
-con la suma elemento a elemento y el producto por escalares
-constituyen un espacio vectorial.</p>
-
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Consideremos el proceso estocástico 
-$$\boldsymbol{X}=(X_t \mid t=0,\pm1,\pm2,\ldots).$$</p>
-<p>Lo podemos denotar con una función generatriz (como hicimos con las
-secuencias) $$\boldsymbol{X} \quad = \quad \sum_{t=-\infty}^\infty X_t
-z^t \quad\equiv\quad \boldsymbol{X}(z)$$ Recuerde que esto no es una
-suma; es una secuencia de variables aleatorias
-$$\sum_{t=-\infty}^\infty X_t z^t = (\ldots,\ X_{-2},\ X_{-1},\
-X_{0},\ X_{1},\ X_{2},\ldots)$$</p>
-
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Sea $\boldsymbol{a}$ una secuencia de números y $\boldsymbol{X}$ un
-proceso estocástico tales que <u>la suma</u>
-$\sum\limits_{k=-\infty}^{\infty}a_kX_{t-k}\;$ <u>converge</u> para todo
-$t.\;$ Entonces:</p>
-<p>Definimos el producto convolución ($∗$) de $\boldsymbol{a}$ con $\boldsymbol{X}$ como el proceso estocástico:
-$$\boldsymbol{a}*\boldsymbol{X}=\left(\left.\sum_{r+s=t} a_r X_s \right| t\in\mathbb{Z}\right)$$
-es decir
-$$(\boldsymbol{a}*\boldsymbol{X})_t=\sum_{r+s=t} a_r X_s,\quad \text{para } t\in\mathbb{Z}.$$
-Por tanto, cada elemento de $(\boldsymbol{a}*\boldsymbol{X})$ es una combinación de variables aleatorias de $\boldsymbol{X}$</p>
-
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Podemos aplicar el operador $\mathsf{B}$ sobre los elementos de un proceso estocástico $\boldsymbol{X}$.
-$$\mathsf{B} X_t = X_{t−1},\quad \text{para } t\in\mathbb{Z}.$$</p>
-<p>Aplicando el operador $\mathsf{B}$ repetidamente tenemos $$\mathsf{B}^k X_t =
-X_{t−k},\quad \text{para } t,z\in\mathbb{Z}$$</p>
-
-</div>
-</div>
-</div>
-</div><div class="fragment">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Así, para el polinomio $\boldsymbol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3$, y el proceso estocástico $\boldsymbol{Y}$</p>
-\begin{align*}
-\boldsymbol{a}(\mathsf{B})Y_t 
-&amp; = (a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+a_3\mathsf{B}^3) Y_t \\
-% &amp; = a_0 Y_t + a_1 \mathsf{B}^1 Y_t + a_2 \mathsf{B}^2 Y_t + a_3 \mathsf{B}^3 Y_t \\
-&amp; = a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+a_3Y_{t-3} \\
-% &amp; =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
-&amp; =(\boldsymbol{a}*\boldsymbol{Y})_t,\quad \text{para } t\in\mathbb{Z}
-\end{align*}
-</div>
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Y en general, si la suma $\sum\limits_{k=-\infty}^{\infty}a_kY_{t-k}$
-converge para todo $t$, entonces</p>
-\begin{align*}
-\boldsymbol{a}(\mathsf{B})Y_t 
-&amp; = (\cdots+a_{-2}\mathsf{B}^{-2}+a_{-1}\mathsf{B}^{-1}+a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) Y_t \\
-% &amp; = a_0 Y_t + a_1 \mathsf{B}^1 Y_t + a_2 \mathsf{B}^2 Y_t + a_3 \mathsf{B}^3 Y_t \\
-&amp; = \cdots+a_{-2}Y_{t+2}+a_{-1}Y_{t+1}+a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+\cdots \\
-% &amp; =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
-&amp; =(\boldsymbol{a}*\boldsymbol{y})_t,\quad \text{para } t\in\mathbb{Z}
-\end{align*}
+<h4 id="El-operador-retardo-y-el-producto-convoluci%C3%B3n-de-una-secuencia-$%5Cboldsymbol%7Bx%7D$-por-$z$">El operador retardo y el producto convoluci&#243;n de una secuencia $\boldsymbol{x}$ por $z$<a class="anchor-link" href="#El-operador-retardo-y-el-producto-convoluci%C3%B3n-de-una-secuencia-$%5Cboldsymbol%7Bx%7D$-por-$z$">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -15095,17 +14928,36 @@ $$z^{-1}=(\ldots,0,1,{\color{blue}{0}},0,0,\ldots)=1 z^{-1}.$$
 Evidentemente
 $$z^2=z*z=(\ldots,0,0,{\color{blue}{0}},0,1,\ldots)=1 z^{2}.$$
 De ese modo $$\boldsymbol{x}*z^k=\sum_{t\in\mathbb{Z}}x_t
-z^{t+k}=(\mathsf{B}^kx_t\mid t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}x_{t-k}
-z^t.$$
-\bigskip</p>
-<p>Además, definimos el producto elemento a elemento (o producto
-Hadamard) de dos secuencias $\boldsymbol{a}$ y $\boldsymbol{b}$ como
-la secuencia $$\boldsymbol{a}\odot\boldsymbol{b}=(a_tb_t\mid
+z^{t+k}=(\mathsf{B}^kx_t\mid t\in\mathbb{Z}).$$</p>
+
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="El-producto-elemento-a-elemento-de-dos-secuencias">El producto elemento a elemento de dos secuencias<a class="anchor-link" href="#El-producto-elemento-a-elemento-de-dos-secuencias">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>El producto elemento a elemento (o producto Hadamard) de $\boldsymbol{a}$ y $\boldsymbol{b}$ es la secuencia
+$$\boldsymbol{a}\odot\boldsymbol{b}=(a_tb_t\mid
 t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}a_tb_t z^t.$$ Por tanto
 $$\boldsymbol{x}\odot(\boldsymbol{y}*z^k)=(x_t y_{t-k}\mid
 t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}x_t y_{t-k} z^t;$$ y si
-$\boldsymbol{\phi}$ es el polinomio
-$\;1-\phi_1 z^1-\cdots-\phi_p z^p$,
+$\boldsymbol{\phi}$ es el polinomio $\;1-\phi_1 z^1-\cdots-\phi_p
+z^p$,
 $$(\boldsymbol{\phi}*\boldsymbol{x})\odot(\boldsymbol{y}*z^k)=\Big(\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
 y_{t-k}\mid
 t\in\mathbb{Z}\Big)=\sum_{t\in\mathbb{Z}}\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
@@ -15114,10 +14966,18 @@ y_{t-k} z^t,$$ donde</p>
 \big(\boldsymbol{\phi}(\mathsf{B})x_t\big) y_{t-k}
 = &amp; \big(x_t-\phi_1x_{t-1}-\cdots-\phi_px_{t-p}\big)y_{t-k}\\
 = &amp; x_ty_{t-k}-\phi_1x_{t-1}y_{t-k}-\cdots-\phi_px_{t-p}y_{t-k}.
-\end{align*}<p>Por conveniencia vamos a definir la secuencia constante
-$\boldsymbol{1}=(\ldots,1,1,1,\ldots)=\sum_{t\in\mathbb{Z}}1 z^t$.
-\bigskip</p>
-
+\end{align*}
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Convoluci%C3%B3n-de-una-serie-formal-con-el-%22reverso%22-de-otra">Convoluci&#243;n de una serie formal con el "<em>reverso</em>" de otra<a class="anchor-link" href="#Convoluci%C3%B3n-de-una-serie-formal-con-el-%22reverso%22-de-otra">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -15128,154 +14988,27 @@ $\boldsymbol{1}=(\ldots,1,1,1,\ldots)=\sum_{t\in\mathbb{Z}}1 z^t$.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Experimentando-con-un-uso-m%C3%A1s-intensivo-de-la-notaci%C3%B3n-compacta">Experimentando con un uso m&#225;s intensivo de la notaci&#243;n compacta<a class="anchor-link" href="#Experimentando-con-un-uso-m%C3%A1s-intensivo-de-la-notaci%C3%B3n-compacta">&#182;</a></h3>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Si $E(X_t)=\mu$ para $t\in\mathbb{Z}$, entonces definimos
-$$E(\boldsymbol{X})=(E(X_t)\mid t\in\mathbb{Z})=(\mu\mid
-t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}\mu
-z^t=\boldsymbol{\mu}=\mu\boldsymbol{1}.$$</p>
-<p>Así, si $\boldsymbol{X}$ es un proceso (débilmente) estacionario con
-esperanza nula, $E(\boldsymbol{X})=\boldsymbol{0}=0\boldsymbol{1}$,
-entonces</p>
+<p>Por último, si tenemos dos series formales $\boldsymbol{a}$ y
+$\boldsymbol{b}$, entonces</p>
 \begin{align*}
-E\Big((\boldsymbol{\phi}*\boldsymbol{X})\odot(\boldsymbol{X}*z^k)\Big)
-= &amp;
-\Big(E\big(X_tX_{t-k}-\phi_1X_{t-1}X_{t-k}-\cdots-\phi_pX_{t-p}X_{t-k} \big) \mid t\in\mathbb{Z}\Big)\\
-= &amp;
-\Big(E(X_tX_{t-k})-\phi_1E(X_{t-1}X_{t-k})-\cdots-\phi_pE(X_{t-p}X_{t-k}) \big) \mid t\in\mathbb{Z}\Big)\\
-= &amp;
-\big(\gamma_k-\phi_1\gamma_{k-1}-\cdots-\phi_p\gamma_{k-p} \mid t\in\mathbb{Z}\big)\\
-= &amp;
-\big(\boldsymbol{\phi}(\mathsf{B})\gamma_k \mid t\in\mathbb{Z}\big)\quad\text{es decir}\quad
-\big(\boldsymbol{\phi}(\mathsf{B})\gamma_k\big)\boldsymbol{1}.
-\end{align*}<p>que, como no puede ser de otra forma, es una secuencia constante por
-ser $\boldsymbol{X}$ es un proceso (débilmente) estacionario.</p>
-
+\boldsymbol{a}(z)*\boldsymbol{b}(z^{-1})
+=&amp;(a_0z^0+a_1z^1+a_2z^2+\cdots)(\cdots+b_2z^{-2}+b_1z^{-1}+b_0z^0)\\
+=&amp;\Big(\ldots,
+\sum_{j\in\mathbb{Z}}a_{j+2}b_j,\; 
+\sum_{j\in\mathbb{Z}}a_{j-1}b_j,\;
+{\color{blue}{\sum_{j\in\mathbb{Z}}a_jb_j}},\;
+\sum_{j\in\mathbb{Z}}a_{j+1}b_j,\;
+\sum_{j\in\mathbb{Z}}a_{j+2}b_j,\ldots\Big)\\
+=&amp;\Big(\sum_{j\in\mathbb{Z}}a_{j+k}b_j\mid k\in\mathbb{Z}\Big)
+\end{align*}<p>es decir,</p>
+\begin{equation}
+ \label{eqConvolucionConSuReverso}
+ \Big(\boldsymbol{a}(z)*\boldsymbol{b}(z^{-1})\Big)_k=\sum_{j\in\mathbb{Z}}a_{j+k}b_{j}.
+\end{equation}
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Ecuaciones-de-Yule-Walker-con-la-notaci%C3%B3n-compacta">Ecuaciones de Yule-Walker con la notaci&#243;n compacta<a class="anchor-link" href="#Ecuaciones-de-Yule-Walker-con-la-notaci%C3%B3n-compacta">&#182;</a></h4>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h5 id="AR($p$)"><strong>AR($p$)</strong><a class="anchor-link" href="#AR($p$)">&#182;</a></h5>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Consideremos el siguiente proceso estacionario AR($p$):
-$\;\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U},\;$ donde
-$\boldsymbol{U}\sim WN(0,\sigma^2)$.</p>
-<p>Multiplicando ambos lados de la ecuación en diferencias por el proceso
-$\boldsymbol{X}$ retardado $k$ periodos, es decir, por
-$\boldsymbol{X}*z^k$, y tomando esperanzas tenemos
-$$E\Big((\boldsymbol{\phi}*\boldsymbol{X})\odot(\boldsymbol{X}*z^k)\Big) = E\Big(\boldsymbol{U}\odot(\boldsymbol{X}*z^k)\Big)$$</p>
-<p>Nótese que $E\Big(\boldsymbol{U}\odot(\boldsymbol{X}*z^k)\Big)$ es
-cero si $k&gt;0$ pues
-$E\Big(\boldsymbol{U}\odot(\boldsymbol{U}*z^k)\Big)=\boldsymbol{0}$
-por ser $\boldsymbol{U}$ un proceso estocástico incorrelado con su
-pasado. Pero que
-$E\Big(\boldsymbol{U}\odot(\boldsymbol{U}*z^k)\Big)=\boldsymbol{\sigma^2}=\sigma^2\boldsymbol{1}$
-cuando $k=0$.</p>
-<p>Por tanto,</p>
-<ul>
-<li><p><strong>para $k=0$ tenemos::</strong> $\quad\big(\boldsymbol{\phi}(\mathsf{B})\gamma_0\big)\boldsymbol{1}
-  = \boldsymbol{\sigma^2},\quad$ es decir,
-$$\fbox{$\boldsymbol{\phi}(\mathsf{B})\gamma_0=\sigma^2$}
-  \quad\Rightarrow\quad
-  \gamma_0-\phi_1\gamma_1-\cdots-\phi_p\gamma_p=\sigma^2
-  \quad\Rightarrow\quad
-  \sigma^2=\gamma_0-\sum_{j=1}^p\phi_j\gamma_j.$$
-Y dividiendo por $\gamma_0$,
-$$\boldsymbol{\phi}(\mathsf{B})\rho_0=\frac{\sigma^2}{\gamma_0}
-  \quad\Rightarrow\quad
-  \fbox{$\gamma_0=\frac{\sigma^2}{\boldsymbol{\phi}(\mathsf{B})\rho_0}$}
-  \quad\Rightarrow\quad
-  \gamma_0=\frac{\sigma^2}{1-\sum_{j=1}^p\phi_j\rho_j},$$
-ya que $\rho_0=1$.</p>
-</li>
-<li><p><strong>para $k&gt;0$ tenemos::</strong> $\quad\big(\boldsymbol{\phi}(\mathsf{B})\gamma_k\big)\boldsymbol{1} =
-  \boldsymbol{0},\quad$ es decir,
-$$\fbox{$\boldsymbol{\phi}(\mathsf{B})\gamma_k=0$}
-  \quad\Rightarrow\quad
-  \gamma_k-\phi_1\gamma_{k-1}-\cdots-\phi_p\gamma_{k-p}=0
-  \quad\Rightarrow\quad \gamma_k=\sum_{j=1}^p\phi_j\gamma_{k-j}.$$
-Y dividiendo por $\gamma_0$,
-$$\fbox{$\boldsymbol{\phi}(\mathsf{B})\rho_k=0$}
-  \quad\Rightarrow\quad
-  \rho_k-\phi_1\rho_{k-1}-\cdots-\phi_p\rho_{k-p}=0
-  \quad\Rightarrow\quad \rho_k=\sum_{j=1}^p\phi_j\rho_{k-j}.$$</p>
-</li>
-</ul>
-
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h5 id="En-el-caso-de-un-MA($q$)-invertible-no-se-llaman-ecuaciones-de-Yule-Walker"><strong>En el caso de un MA($q$) invertible no se llaman ecuaciones de Yule-Walker</strong><a class="anchor-link" href="#En-el-caso-de-un-MA($q$)-invertible-no-se-llaman-ecuaciones-de-Yule-Walker">&#182;</a></h5>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Consideremos el siguiente proceso invertible MA($p$):
-$\;\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U},\;$ donde
-$\boldsymbol{U}\sim WN(0,\sigma^2)$.</p>
-<p>De nuevo, multiplicando ambos lados de la ecuación en diferencias por
-el proceso $\boldsymbol{X}$ retardado $k$ periodos, es decir, por
-$\boldsymbol{X}*z^k$, y tomando esperanzas tenemos
-$$E\Big(\boldsymbol{X}\odot(\boldsymbol{X}*z^k)\Big) =
-E\Big((\boldsymbol{\theta}*\boldsymbol{U})\odot(\boldsymbol{X}*z^k)\Big)=
-E\Big((\boldsymbol{\theta}*\boldsymbol{U})\odot(\boldsymbol{\theta}*\boldsymbol{U}*z^k)\Big)
-$$
-Es decir,
-$$\gamma_k\boldsymbol{1}=
-E\Big((U_t-\theta_1U_{t-1}-\cdots-\theta_qU_{t-q})(U_{t-k}-\theta_1U_{t-k-1}-\cdots-\theta_qU_{t-k-q})\Big)\boldsymbol{1}$$</p>
-
-</div>
-</div>
-</div>
-</div></div></section></section>
+</div></section></section>
 </div>
 </div>
 </body>

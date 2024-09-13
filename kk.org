@@ -1,4 +1,5 @@
 
+[[https://www.stat.berkeley.edu/~bartlett/courses/153-fall2010/][Introduction to Time Series (Berkeley)]]
 
 https://halweb.uc3m.es/esp/Personal/personas/amalonso/esp/TSAtema4.pdf C-III AR, MA, ARMA
 

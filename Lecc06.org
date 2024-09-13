@@ -152,11 +152,11 @@ descontado el efecto de las variables $X_{t-1},\ldots X_{t-(k-1)}$ que
 median entre ambas.
 $$X_t,\ \overbrace{X_{t-1},\ldots X_{t-(k-1)},}\ X_{t-k}$$
 
-Si denotamos con $\widehat{X_t}$ y $\widehat{X_{t-k}}$ los ajustes de
+Si denotamos con $\widehat{X_t}$ y $\widetilde{X_{t-k}}$ los ajustes de
 las respectivas regresiones de $X_t$ y $X_{t-k}$ sobre $X_{t-1},\ldots
 X_{t-(k-1)};\;$ la /correlación parcial/ $\pi_k$ entre $X_t$ y $X_{t+k}$ es la
 correlación entre los residuos de sendas regresiones:
-$$\pi_k=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widehat{X_{t-k}})\Big)$$
+$$\pi_k=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widetilde{X_{t-k}})\Big)$$
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 En un proceso débilmente estacionario las correlaciones parciales solo
@@ -167,10 +167,10 @@ secuencia.
 *Función de autocorrelación parcial* (PACF) de un proceso estacionario
 $\boldsymbol{X}$ es la siguiente secuencia
 $\boldsymbol{\pi}=(\pi_k\mid k\in\mathbb{Z}),\;$ que es simétrica pues
-$\pi_{-k}=\pi_k$: $$\begin{cases} \pi_0 &={\color{blue}{1}}\\\\ \pi_1 &=Corr(X_t,\
+$\pi_{-k}=\pi_k$: $$\begin{cases} \pi_0 & = \rho_0 ={\color{blue}{1}}\\\\ \pi_1 &=Corr(X_t,\
 X_{t-1})=\rho_1=\frac{\gamma_1}{\gamma_0}\\\\ \pi_k
-&=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widehat{X_{t-k}})\Big)
-\end{cases},$$ donde $\widehat{X_t}$ y $\widehat{X_{t-k}}$ son los
+&=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widetilde{X_{t-k}})\Big)
+\end{cases},$$ donde $\widehat{X_t}$ y $\widetilde{X_{t-k}}$ son los
 ajustes de las respectivas regresiones de $X_t$ y $X_{t-k}$ sobre
 $X_{t-1},\ldots X_{t-(k-1)}.\;$ i.e., las proyecciones ortogonales
 sobre $\bar{sp}(1,X_{t-1}:X_{t-(k-1)})$.
@@ -194,6 +194,8 @@ recursivamente con el algoritmo Levinson-Durbin; véase
 /Pourahmadi, M. (2001, Capítulo 7)/ o /Brockwell & Davis (1991,
 Capitulo 5)/)
 
+*************** TODO Incluir algoritmo en los apuntes :@EctrApl:
+
 # \(\pi_1=\phi_{11}=\rho_1\)
 
 # \(\pi_{k+1}=\phi_{k+1,k+1}=\frac{\rho_{k+1}-\sum_{j=1}^k\phi_{kj}\rho_{k+1-j}}{1-\sum_{j=1}^k\phi_{kj}\rho_j}\); donde $\phi_{k+1,j}=\phi_{kj}-\phi_{k+1,k+1}\phi_{k,k+1-j}$, $j=1:k$
@@ -211,7 +213,7 @@ arrojará luz sobre las propiedades de un proceso estocástico.
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
-Para un proceso estocástico $\boldsymbol{X}$ con función de
+Si $\boldsymbol{X}$ es un proceso estocástico con función de
 autocovarianzas $\boldsymbol{\gamma}\in\ell^1$, es decir, con función
 de autocovarianzas absolutamente sumable,
 $$\sum_{h\in\mathbb{Z}}|\gamma_h|<\infty,$$ entonces definimos la
@@ -229,20 +231,20 @@ b) $f(\omega)\geq0$
 c) $\int_{-\pi}^\pi f(\omega)d\omega<\infty$
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Es más, desde la densidad espectral se pueden calcular las covarianzas
-$$\gamma_h=\int_{-\pi}^\pi f(\omega)e^{-i h\omega}d\omega;\quad
-h\in\mathbb{Z}$$
+Es más, partiendo de la densidad espectral se pueden calcular las
+covarianzas $$\gamma_h=\int_{-\pi}^\pi f(\omega)e^{-i
+h\omega}d\omega;\quad h\in\mathbb{Z}$$
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 Consecuentemente, para $h=0$
 $$\sigma^2=\gamma_0=\int_{-\pi}^\pi f(\omega)d\omega.$$
 
 Por tanto podemos interpretar la densidad espectral como una
-descomposición de la varianza en distintas frecuencias.
+descomposición de la varianza oscilaciones de distintas frecuencias.
 
 #+attr_ipynb: (slideshow . ((slide_type . slide)))
-La ACF, la PACF y la densidad espectral son funciones que solo
-dependen de los dos primeros momentos de la distribución.
+La ACF, la PACF y la /densidad espectral/ son funciones que dependen
+únicamente de los dos primeros momentos de la distribución.
 
 Su estimación y posterior análisis son la herramienta fundamental para
 elegir un modelo ARMA para una serie temporal /``estacionaria''/.
@@ -273,9 +275,9 @@ U_{t-j}\right)=\sum_{j\in\mathbb{Z}}\psi_j E(U_{t-j})=0$$ Y como
 además, $E(U_j\cdot U_k)=0$ cuando $j\ne k$, su función de
 autocovarianzas es 
 \begin{eqnarray*}
-\gamma_{k,t}= E\big[X_t\cdot X_{t-k}\big]=&
+\gamma_{k,t}= E\big[X_{t+k}\cdot X_{t}\big]=&
 E\left[\Big(\sum_{j\in\mathbb{Z}}\psi_j
-U_{t-j}\Big)\Big(\sum_{j\in\mathbb{Z}}\psi_j U_{t-k-j}\Big)\right]=
+U_{t+k-j}\Big)\Big(\sum_{j\in\mathbb{Z}}\psi_j U_{t-j}\Big)\right]=
 \sigma^2\sum_{j\in\mathbb{Z}}\psi_{j+k}\cdot\psi_{j}\\
 =&\sigma^2\sum_{j\in\mathbb{Z}}\psi_{j+k}\cdot R(\psi_{-j}) =
 \sigma^2\left(\boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})\right)_k
@@ -296,8 +298,22 @@ Entonces
 
 - $\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})$
 
- $\gamma_k = \sum_{j\in\mathbb{Z}} \psi_{k-j}\psi_j;\quad$ así que $\;\gamma_k\to0\;$ cuando $\;k\to\infty$.
-
+ $\gamma_k = \sigma^2\sum_{j=0}^\infty \psi_{j+k}\cdot\psi_j.\quad$ Además $\;\gamma_k\to0\;$ cuando $\;k\to\infty$
+#+BEGIN_EXPORT latex
+\emph{Demostración}:  aplicando la desigualdad de Cauchy-Schwarz
+\begin{align*}
+|\gamma_k| & \leq  \sigma^2 
+\left(\sum_{j=0}^\infty |\psi_{j+k}|^2\right)^{\frac{1}{2}}
+\left(\sum_{j=0}^\infty |\psi_{j}|^2\right)^{\frac{1}{2}}\\
+& =
+\sigma^2 
+\left(\sum_{j=k}^\infty |\psi_{j}|^2\right)^{\frac{1}{2}}
+\left(\sum_{j=0}^\infty |\psi_{j}|^2\right)^{\frac{1}{2}}\\
+\end{align*}
+y puesto que $\boldsymbol{\psi}$ es de cuadrado sumable, la cola 
+$\sum_{j=k}^\infty |\psi_{j}|^2$ 
+converje a cero cuando $k\to\infty$.
+#+END_EXPORT
 # - $\boldsymbol{\gamma} \;=\; \sum_{k\in\mathbb{Z}}\gamma_k z^k \;=\; \sigma^2 z^0 \;=\; \sigma^2\boldsymbol{1} \;=\; (\ldots,0,0,\sigma^2,0,0,\ldots)$
 
 - ACF: $\;\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$
@@ -320,21 +336,23 @@ Entonces
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
-Sea $\boldsymbol{X}=\boldsymbol{1}*\boldsymbol{U}$,
+Sea $\boldsymbol{X}=1*\boldsymbol{U}$,
 donde $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;;$ es decir $X_t=U_t$ para
 $t\in\mathbb{Z}$. Entonces
 
-- $\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{1}(z)*\boldsymbol{1}(z^{-1}) \;=\; \sigma^2\boldsymbol{1} \;=\; (\ldots,0,0,{\color{blue}{\sigma^2}},0,0,\ldots) \;=\; \sigma^2 z^0$
+- $\boldsymbol{\gamma} \;=\; \sigma^2 (1z^0*1z^{0}) \;=\; \sigma^2z^0 \;=\; (\ldots,0,0,{\color{blue}{\sigma^2}},0,0,\ldots)$
 
 # - $\boldsymbol{\gamma} \;=\; \sum_{k\in\mathbb{Z}}\gamma_k z^k \;=\; \sigma^2 z^0 \;=\; \sigma^2\boldsymbol{1} \;=\; (\ldots,0,0,\sigma^2,0,0,\ldots)$
 
-- $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\; \frac{1}{\sigma^2}\boldsymbol{\gamma} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,{\color{blue}{1}},0,0,\ldots) \;=\; 1 z^0$
+- $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\;
+  \frac{1}{\sigma^2}\boldsymbol{\gamma} \;=\; 1 z^0 \;=\;
+  (\ldots,0,0,{\color{blue}{1}},0,0,\ldots)$
 
 # - $\boldsymbol{\rho} \;=\; \sum_{k\in\mathbb{Z}}\frac{\gamma_k}{\gamma_0} z^k \;=\; 1 z^0 \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,1,0,0,\ldots)$
 
 - $f(\omega) \;=\; \frac{1}{2\pi}\sum_{h\geq0}\gamma_h \cos(h\omega) \;=\; \frac{\sigma^2}{2\pi} \cos(0\omega) \;=\; \frac{\sigma^2}{2\pi};\quad \omega\in[-\pi,\pi]$
 
-- $\boldsymbol{\pi} \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,{\color{blue}{1}},0,0,\ldots) \;=\; 1 z^0$
+- $\boldsymbol{\pi} \;=\; 1 z^0 \;=\; (\ldots,0,0,{\color{blue}{1}},0,0,\ldots)$
 
 # \sum_{k\in\mathbb{Z}}\pi_k z^k \;=\; 1 z^0 \;=\; 
 
@@ -384,14 +402,14 @@ $$\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}
 \quad\rightarrow\quad
 \frac{1}{\boldsymbol{\theta}}*\boldsymbol{X}=\boldsymbol{U}
 \quad\Rightarrow\quad
-U_t = \sum_{h=0}^\infty\psi_j X_{t-j}
+U_t = \sum_{j=0}^\infty\psi_j X_{t-j}
 $$
 donde $\boldsymbol{\psi}=\boldsymbol{\theta}^{-\triangleright}=\boldsymbol{\theta}^{-1}\in\ell^1$. Entonces se dice que el model MA es ``\emph{invertible}''. Cualquier modelo MA sin raices en el círculo unidad se puede reparametrizar para obtener un modelo invertible con la misma función de autocovarianzas ``$\boldsymbol{\gamma}$'' y ,consecuentemente, las mismas ACF, PACF y densidad espectral que el modelo original.
 \end{quotation}
 #+END_EXPORT
 Entonces $E(X_t)=0$ y
 
-$\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\theta}(z^{-1}) \;=\; \sigma^2 \sum\limits_{j,k=0}^q \theta_j\theta_k z^{j-k}\;$ (grado $q$ y cogrado $-q$)
+$\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\theta}(z^{-1}) \;=\; \sigma^2 \sum\limits_{j,k=0}^q \theta_{j+k}\theta_{j} z^{j}\;$ (grado $q$ y cogrado $-q$)
 
 $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$
 
@@ -422,8 +440,7 @@ U_{t-1}$.
   \frac{\sigma^2}{2\pi}\Big((1+\theta^2)\;-\;2\theta\cos(\omega)\Big);\quad
   \omega\in[-\pi,\pi]$
 
-- $\boldsymbol{\pi} \;=\; \sum\limits_{k\in\mathbb{Z}}{
-  \frac{-\theta^k(1-\theta^2)}{1-\theta^{2(k+1)}} z^k}$
+- $\boldsymbol{\pi} \;=\; \sum\limits_{k\in\mathbb{Z}}{  \frac{-\theta^k(1-\theta^2)}{1-\theta^{2(k+1)}} z^k}$
 
 *** MA(1) con raíz positiva
    :PROPERTIES:
@@ -554,7 +571,7 @@ es decir $X_t=U_t-\theta_1 U_{t-1}-\theta_2 U_{t-2}$.
 # \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})*\boldsymbol{\theta}(e^{i\omega}) \;=\;
 
 - $\boldsymbol{\pi}$ tiene una expresión complicada, pero su magnitud
-  decae paulatinamente
+  decae paulatinamente.
 
 *** MA(2) con dos raíces reales, una positiva y la otra negativa
    :PROPERTIES:
@@ -795,7 +812,7 @@ donde $\;\boldsymbol{\phi}^{-1}=\boldsymbol{\psi}=({\color{blue}1},\
 #+latex: \noindent
 Por tanto $E(X_t)=0$ para todo $t\in\mathbb{Z}$ y
 
-$\boldsymbol{\gamma} \;=\; \sigma^2 \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^{-1})} \;=\; \sigma^2 \sum\limits_{j,k=0}^\infty \psi_j\psi_k z^{j-k}\quad$ (grado $\infty$ y cogrado $-\infty$)
+$\boldsymbol{\gamma} \;=\; \sigma^2 \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^{-1})} \;=\; \sigma^2 \sum\limits_{j,k=0}^\infty \psi_{j+k}\psi_j z^{j}\quad$ (grado $\infty$ y cogrado $-\infty$)
 
 $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$
 
@@ -808,17 +825,15 @@ $f(\omega) =
 #+latex: \medskip
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Pero, sin embargo, la PACF, $\;\boldsymbol{\pi},\;$ es una secuencia
-con grado $p$ y cogrado $-p$...
+Pero la PACF, $\;\boldsymbol{\pi},\;$ es una secuencia
+con grado $p$ y cogrado $-p$ (demo en los apuntes).
 #+latex: \medskip
 
 *** Demostración de que la PACF tiene cogrado $-p$ y grado $p$
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . notes)))
+   :metadata: (slideshow . ((slide_type . skip)))
    :END:
-
-
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
 - Sea $\boldsymbol{X}$ un proceso causal AR($p$): $\quad
   X_t\;=\;\sum\limits_{j=1}^p\phi_j X_{t-j}+U_t$ @@latex:donde
   $\boldsymbol{U}\sim WN(0,\sigma^2)$.@@
@@ -842,66 +857,6 @@ con grado $p$ y cogrado $-p$...
   \end{eqnarray*}
   ya que $U_{k+1}\perp(X_{1}-\widetilde{X_{1}}) \in \bar{sp}(U_j\mid{j\leq k})$.
 
-*** Ecuaciones de Yule-Walker (que relacionan las autocovarianzas con los parámetros de $\boldsymbol{\phi}$)
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
-   :ID:       f2ccd47b-3053-4c09-a332-1a005f50bbe6
-   :END:
-
-Consideremos un proceso AR($p$): $\quad X_t=\sum\limits_{j=1}^p\phi_j
-X_{t-j}+U_t;\qquad U_t\sim WN(0,\sigma^2)$ 
-
-Multiplicando ambos lados por $X_{t-k}$ para $0\leq k\leq p$ y tomando
-esperanzas tenemos $$Cov(X_t,X_{t-k})=\sum_{j=1}^p\phi_j
-Cov(X_{t-j},X_{t-k})+ Cov(U_t,X_{t-k});\qquad 0\leq k\leq p.$$
-
-Para $\;k=0\;$ tenemos:
-\begin{equation}
-  \label{eqYuleW1}
-  \sigma^2=\gamma_0-\sum_{j=1}^p\phi_j\gamma_j
-\end{equation}
-#+latex: puesto que $Cov(U_t,X_{t})=Cov(U_t,\sum_{j=1}^p\phi_j X_{t-j})+Cov(U_t,U_t)=0+\sigma^2$. \medskip
-
-Para $\;1\leq k\leq p\;$ tenemos:
-
-\begin{equation}
-  \label{eqYuleW2}
-  \gamma_k=\sum_{j=1}^p\phi_j\gamma_{k-j}
-\end{equation}
-
-#+BEGIN_EXPORT latex
-\noindent
-O en forma matricial
-\[
-\begin{bmatrix}
-\gamma_{0}&\gamma_{1}&\cdots&\gamma_{p-1}\\ 
-\gamma_{1}&\gamma_{0}&\cdots&\gamma_{p-2}\\ 
-\vdots&\vdots&\ddots&\vdots\\
-\gamma_{p-1}&\gamma_{p-2}&\cdots&\gamma_{0}
-\end{bmatrix}
-\begin{bmatrix}
-\phi_1\\
-\phi_2\\
-\vdots\\
-\phi_p
-\end{bmatrix}=
-\begin{bmatrix}
-\gamma_1\\
-\gamma_2\\
-\vdots\\
-\gamma_p
-\end{bmatrix}.
-\]
-#+END_EXPORT
-
-Dividiendo [[eqref:eqYuleW1][(1)]] y [[eqref:eqYuleW2][(2)]] por $\gamma_0$ (y operando en ([[ref:eqYuleW1][1]]) tenemos
-\begin{equation}
-  \label{eqYuleW3}
-  \gamma_0=\frac{\sigma^2}{1-\phi_1\rho_1-\cdots-\phi_p\rho_p};
-  \qquad
-  \rho_k=\phi_1\rho_{k-1}+\cdots+\phi_p\rho_{k-p}
-\end{equation}
-# \rho_k=\sum_{j=1}^p\phi_j\rho_{k-j}
 
 ** Proceso autorregresivo AR($1$)
    :PROPERTIES:
@@ -962,7 +917,7 @@ tenemos que
 
 $\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi z)^{-1}*(1-\phi
   z^{-1})^{-1} \;=\; \frac{\sigma^2}{1-\phi^2}
-  \sum\limits_{k=-\infty}^\infty \phi^{|k|} z^k$
+  \sum\limits_{k=-\infty}^\infty \phi^{|k|} z^k\qquad$ grado $\infty$ y cogrado $-\infty$
 
 $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\;
   \frac{1+\phi^2}{\sigma^2}\boldsymbol{\gamma} \;=\;
@@ -974,7 +929,7 @@ $f(\omega) \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^\infty \gamma_h
 #  = \frac{\sigma^2}{2\pi}\frac{1}{\boldsymbol{\phi}(e^{-i\omega})\cdot\boldsymbol{\phi}(e^{i\omega})}
 
 
-$\boldsymbol{\pi} \;=\; (\ldots,\; 0,\; 0,\; \phi,\; {\color{blue}1},\; \phi,\; 0,\; 0,\;\ldots)$ 
+$\boldsymbol{\pi} \;=\; (\ldots,\; 0,\; 0,\; \phi,\; {\color{blue}1},\; \phi,\; 0,\; 0,\;\ldots)\qquad$ grado $1$ y cogrado $-1$
 # :\quad$ $\pi_0=1,\quad$ $\pi_1=\rho_1=\phi,\quad$ $0=\pi_2=\pi_3=\cdots$
 
 *** AR(1) con raíz positiva
@@ -1093,10 +1048,11 @@ $\boldsymbol{\gamma}=\sigma^2\left(
   $\;\gamma_k=\phi_1\gamma_{k-1}+\phi_2\gamma_{k-2}\;$ y decae
   paulatinamente)
 #+latex: \smallskip
+#  [[eqref:eqYuleW3][(3)]
 
- $\quad$ /(de [[eqref:eqYuleW3][(3)]] : $\gamma_0 =
-   \frac{\sigma^2}{1-\phi_1\rho_1-\phi_2\rho_2}$ e iniciamos el
-   cálculo  [[eqref:eqYuleW2][(2)]] recursivamente)/
+ $\quad$ /(de Ec. Yule-Walker: $\gamma_0 =
+   \frac{\sigma^2}{1-\phi_1\rho_1-\phi_2\rho_2}$ y resolvemos
+   $\boldsymbol{\phi}(\mathsf{B})\gamma_k=0$ recursivamente)/
    #  = \frac{1-\phi_2}{1+\phi_2}\frac{\sigma^2}{(1-\phi_2)^2-\phi_1^2}
 #+latex: \medskip
 
@@ -1105,7 +1061,7 @@ $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}\qquad\qquad\qquad
   paulatinamente)
 #+latex: \smallskip
 
-#+latex:  $\quad$ \emph{(como $\rho_0=1$, iniciamos el cálculo \eqref{eqYuleW3} recursivamente)} \medskip
+#+latex:  $\quad$ \emph{(con $\rho_0=1$ iniciamos el cálculo de $\boldsymbol{\phi}(\mathsf{B})\rho_k=0$ recursivamente)} \medskip
 
 $f(\omega) \;=\;  \frac{\sigma^2}{2\pi}\frac{1}{1+\phi_1^2+\phi_2^2-2\phi_1(1+\phi_2)\cos(\omega)-2\phi_2\cos(2\omega)}$
 # \frac{\sigma^2}{2\pi}\boldsymbol{\phi}(e^{-i\omega})*\boldsymbol{\phi}(e^{i\omega}) \;=\;
@@ -1419,10 +1375,78 @@ Se puede demostrar que
 Véase /Pourahmadi M. (2001)./
 #+latex: \medskip
 
-Consecuentemente, que la ACF o la PACF se cortan ``bruscamente'' nos
-indica que el modelo es AR o MA (y su grado).
+Consecuentemente, que la ACF o la PACF se corten ``bruscamente'' nos
+indica que el modelo es AR o MA (además de su grado).
 
 Desgraciadamente para los modelos ARMA (qué veremos más adelante)
 tanto la ACF como la PACF tienen infinitos términos no nulos, por lo
 que su identificación no es tan sencilla.
 
+
+
+*** COMMENT Ecuaciones de Yule-Walker (que relacionan las autocovarianzas con los parámetros de $\boldsymbol{\phi}$)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . skip)))
+   :ID:       f2ccd47b-3053-4c09-a332-1a005f50bbe6
+   :END:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+Consideremos un proceso AR($p$): $\quad X_t=\sum\limits_{j=1}^p\phi_j
+X_{t-j}+U_t;\qquad U_t\sim WN(0,\sigma^2)$ 
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+Multiplicando ambos lados por $X_{t-k}$ para $0\leq k\leq p$ y tomando
+esperanzas tenemos $$Cov(X_t,X_{t-k})=\sum_{j=1}^p\phi_j
+Cov(X_{t-j},X_{t-k})+ Cov(U_t,X_{t-k});\qquad 0\leq k\leq p.$$
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+Para $\;k=0\;$ tenemos:
+\begin{equation}
+  \label{eqYuleW1}
+  \sigma^2=\gamma_0-\sum_{j=1}^p\phi_j\gamma_j
+\end{equation}
+#+latex: puesto que $Cov(U_t,X_{t})=Cov(U_t,\sum_{j=1}^p\phi_j X_{t-j})+Cov(U_t,U_t)=0+\sigma^2$. \medskip
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+Para $\;1\leq k\leq p\;$ tenemos:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+\begin{equation}
+  \label{eqYuleW2}
+  \gamma_k=\sum_{j=1}^p\phi_j\gamma_{k-j}
+\end{equation}
+
+#+BEGIN_EXPORT latex
+\noindent
+O en forma matricial
+\[
+\begin{bmatrix}
+\gamma_{0}&\gamma_{1}&\cdots&\gamma_{p-1}\\ 
+\gamma_{1}&\gamma_{0}&\cdots&\gamma_{p-2}\\ 
+\vdots&\vdots&\ddots&\vdots\\
+\gamma_{p-1}&\gamma_{p-2}&\cdots&\gamma_{0}
+\end{bmatrix}
+\begin{bmatrix}
+\phi_1\\
+\phi_2\\
+\vdots\\
+\phi_p
+\end{bmatrix}=
+\begin{bmatrix}
+\gamma_1\\
+\gamma_2\\
+\vdots\\
+\gamma_p
+\end{bmatrix}.
+\]
+#+END_EXPORT
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+Dividiendo [[eqref:eqYuleW1][(1)]] y [[eqref:eqYuleW2][(2)]] por $\gamma_0$ (y operando en ([[ref:eqYuleW1][1]]) tenemos
+\begin{equation}
+  \label{eqYuleW3}
+  \gamma_0=\frac{\sigma^2}{1-\phi_1\rho_1-\cdots-\phi_p\rho_p};
+  \qquad
+  \rho_k=\phi_1\rho_{k-1}+\cdots+\phi_p\rho_{k-p}
+\end{equation}
+# \rho_k=\sum_{j=1}^p\phi_j\rho_{k-j}

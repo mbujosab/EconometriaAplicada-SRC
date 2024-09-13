@@ -20,7 +20,7 @@
 #+LATEX: \maketitle
 
 # M-x jupyter-refresh-kernelspecs
-
+# M-x ox-ipynb-insert-slide 
 # C-c C-v C-b ejecuta el cuaderno electrónico
 
 #+OX-IPYNB-LANGUAGE: jupyter-R
@@ -87,7 +87,6 @@ $$
 (x_t \mid t\in\mathbb{Z}) 
 $$
 
-#+attr_ipynb: (slideshow . ((slide_type . fragment)))
 Las secuencias se pueden sumar y también se pueden multiplicar por
 escalares. 
 
@@ -159,37 +158,36 @@ $\ell^1\subset \ell^2$.
   cero).  $$\boldsymbol{a}(z) = (\ldots,\ a_{p-3},\ a_{p-2},\ a_{p-1},\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=-\infty}^p a_t z^t$$
 - Secuencias con principio :: si tienen cogrado (antes de cierto índice
   son cero).  $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2},\ a_{k+3},\ldots) = \sum_{t=k}^\infty a_t z^t\qquad k\in\mathbb{Z}$$
-  + Secuencias o [[https://en.wikipedia.org/wiki/Formal_power_series][sucesiones formales]] :: si su cogrado $\geq 0$.
+  + [[https://en.wikipedia.org/wiki/Formal_power_series][Series formales]] :: si su cogrado $\geq 0$.
     $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ a_{2},\ a_{3},\ldots) = \sum_{t=k}^\infty a_t z^t\qquad k\geq0$$
-- Polinomios :: son sucesiones formales con grado 
+- Polinomios :: son series formales con grado 
   $$\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{0},\ a_{1},\ldots,\ a_{p},\ 0,\ 0,\ 0,\ldots) = \sum_{t=k}^p a_t z^t\qquad k\geq0$$
   (p.e. $\;a_0+a_1z+a_2z^2\;$ es un polinomio de grado 2).
+
 
 ** Producto convolución
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
-Sean $\boldsymbol{a}$ y $\boldsymbol{b}$ sucesiones _con principio_ (con cogrado).
+Sean $\boldsymbol{a}$ y $\boldsymbol{b}$ sucesiones _con principio_
+(con cogrado). Su producto convolución es la sucesión:
+$$(\boldsymbol{a}*\boldsymbol{b})_t=\sum_{r+s=t} a_rb_s; \qquad
+r,s,t\in\mathbb{Z}$$
 
-Definimos la sucesión producto convolución ($∗$) de $\boldsymbol{a}$ con $\boldsymbol{b}$ como:
-$$(\boldsymbol{a}*\boldsymbol{b})_t=\sum_{r+s=t} a_rb_s$$
-
-El producto convolución entre dos sucesiones con cogrado está bien
-definido. 
+# El producto convolución entre dos sucesiones con cogrado está bien definido. 
 
 El cogrado de $\boldsymbol{a}*\boldsymbol{b}$ es la suma de los
 respectivos cogrados.
 
 
-#+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Además, _el producto convolución está bien definido entre dos sucesiones_:
+La convolución también está definida entre sucesiones:
 - _con final_ (con grado). El grado del producto es la suma de los
   respectivos grados.
 
 - _absolutamente sumables_ ($\ell^1$).
 
-*************** TODO Incluir las demos en los apuntes
+*************** TODO Incluir las demos en los apuntes :@EctrApl:
 
 ** Anillos conmutativos y cuerpos
    :PROPERTIES:
@@ -210,7 +208,7 @@ En cuanto a la suma
  - $\boldsymbol{a} + \boldsymbol{b} = \boldsymbol{b} + \boldsymbol{a}\;$ para todo $\boldsymbol{a}, \boldsymbol{b}$ en $\mathsf{S}\qquad$ (i.e. $+$ es conmutativa).
  - Existe un elemento $\boldsymbol{0}$ tal que $\boldsymbol{a} + \boldsymbol{0} = \boldsymbol{a}$ para todo $\boldsymbol{a}\in \mathsf{S}$.
  - Para cada $\boldsymbol{a}\in \mathsf{S}$ existe $-\boldsymbol{a}\in \mathsf{S}$ tal que $\boldsymbol{a} + (−\boldsymbol{a}) = \boldsymbol{0}$.
-#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+ - 
 En cuanto al producto 
  - $(\boldsymbol{a} * \boldsymbol{b}) * \boldsymbol{c} = \boldsymbol{a} * (\boldsymbol{b} * \boldsymbol{c})\;$ para todo $\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}$ en $\mathsf{S}\qquad$ (i.e. $*$ es asociativo). 
  - $\boldsymbol{a} * \boldsymbol{b} = \boldsymbol{b} * \boldsymbol{a}\;$ para todo $\boldsymbol{a}, \boldsymbol{b}$ en $\mathsf{S}\qquad$ (i.e. $*$ es conmutativo).
@@ -224,7 +222,6 @@ El elemento ${{1}}$ es la secuencia cuyos elementos son cero excepto un 1 en la 
 \end{displaymath}
 #+END_EXPORT
 
-#+attr_ipynb: (slideshow . ((slide_type . fragment)))
 El producto es distributivo respecto de la suma: Para todo $\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}$ en $\mathsf{S}$
  - \(\boldsymbol{a}*(\boldsymbol{b}+\boldsymbol{c})=(\boldsymbol{a}*\boldsymbol{b})+(\boldsymbol{a}*\boldsymbol{c})\;\) 
  - \((\boldsymbol{b}+\boldsymbol{c})*\boldsymbol{a}=(\boldsymbol{b}*\boldsymbol{a})+(\boldsymbol{c}*\boldsymbol{a})\;\)
@@ -236,7 +233,6 @@ El producto es distributivo respecto de la suma: Para todo $\boldsymbol{a}, \bol
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
-
 Un *cuerpo* es un anillo conmutativo que adicionalmente satisface:
 
 # - ${{1}}\ne\boldsymbol{0}$
@@ -246,13 +242,14 @@ Un *cuerpo* es un anillo conmutativo que adicionalmente satisface:
 
   (/Todo elemento no nulo del conjunto tiene una inversa en dicho
   conjunto/)
+  
 
 ** Clasificación de algunos subconjuntos de sucesiones 
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . fragment)))
    :END:
 
-- Son anillos el conjunto de :: sucesiones formales (cogrado $\geq0$), polinomios y
+- Son anillos el conjunto de :: series formales (cogrado $\geq0$), polinomios y
   $\ell^1$.
 
   Para algunas sucesiones (no nulas) de estos subconjuntos o no existe
@@ -498,6 +495,7 @@ denotar la secuencia $\boldsymbol{p}*\boldsymbol{q}^{-\triangleright}$
 así $\frac{\boldsymbol{p}}{\boldsymbol{q}}$
  $$(\boldsymbol{p}*\boldsymbol{q}^{-\triangleright})(z)=\frac{\boldsymbol{p}(z)}{\boldsymbol{q}(z)}$$
 
+
 ** Operador retardo $\mathsf{B}{}$ y suma de los elementos de una secuencia.
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
@@ -508,7 +506,7 @@ $$\mathsf{B} x_t = x_{t−1},\quad \text{para } t\in\mathbb{Z}.$$
 
 Aplicando el operador $\mathsf{B}{}$ repetidamente tenemos $$\mathsf{B}^k x_t =
 x_{t−k},\quad \text{para } t,z\in\mathbb{Z}$$ 
-#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+
 Así, si la secuencia $\boldsymbol{x}(z)=\sum_{t=-\infty}^\infty x_t z^t$ es
 sumable, entonces la expresión 
 $$\boldsymbol{x}(\mathsf{B})=\sum_{t=-\infty}^\infty x_t \mathsf{B}^t\;=\;\cdots+x_{-2}+x_{-1}+x_{0}+x_{1}+\cdots$$ tiene sentido como suma.
@@ -539,78 +537,10 @@ Y en general, si $\boldsymbol{a}$ e $\boldsymbol{y}$ son secuencias sumables, en
 & =(\boldsymbol{a}*\boldsymbol{y})_t
 \end{align*}
 
-* Procesos estocásticos y notación
+*** El operador retardo y el producto convolución de una secuencia $\boldsymbol{x}$ por $z$
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . slide)))
+   :metadata: (slideshow . ((slide_type . subslide)))
    :END:
-
-
-Los procesos estocásticos se pueden sumar y se pueden multiplicar por
-escalares.
-
-Si $\boldsymbol{X}$ e $\boldsymbol{Y}$ son dos procesos estocásticos y
-$\;a\in\mathbb{R}$, entonces $$\boldsymbol{X}+\boldsymbol{Y}=(X_t+Y_t
-\mid t\in\mathbb{Z})\qquad\text{y}\qquad a\boldsymbol{X}=\big(a(X_t)
-\mid t\in\mathbb{Z}\big).$$ El conjunto de procesos estocásticos junto
-con la suma elemento a elemento y el producto por escalares
-constituyen un espacio vectorial.
-#+latex:\smallskip
-
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
-Consideremos el proceso estocástico 
-$$\boldsymbol{X}=(X_t \mid t=0,\pm1,\pm2,\ldots).$$
-
-Lo podemos denotar con una función generatriz (como hicimos con las
-secuencias) $$\boldsymbol{X} \quad = \quad \sum_{t=-\infty}^\infty X_t
-z^t \quad\equiv\quad \boldsymbol{X}(z)$$ Recuerde que esto no es una
-suma; es una secuencia de variables aleatorias
-$$\sum_{t=-\infty}^\infty X_t z^t = (\ldots,\ X_{-2},\ X_{-1},\
-X_{0},\ X_{1},\ X_{2},\ldots)$$
-
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
-Sea $\boldsymbol{a}$ una secuencia de números y $\boldsymbol{X}$ un
-proceso estocástico tales que _la suma_
-$\sum\limits_{k=-\infty}^{\infty}a_kX_{t-k}\;$ _converge_ para todo
-$t.\;$ Entonces:
-#+latex:\smallskip
-
-Definimos el producto convolución ($∗$) de $\boldsymbol{a}$ con $\boldsymbol{X}$ como el proceso estocástico:
-$$\boldsymbol{a}*\boldsymbol{X}=\left(\left.\sum_{r+s=t} a_r X_s \right| t\in\mathbb{Z}\right)$$
-es decir
-$$(\boldsymbol{a}*\boldsymbol{X})_t=\sum_{r+s=t} a_r X_s,\quad \text{para } t\in\mathbb{Z}.$$
-Por tanto, cada elemento de $(\boldsymbol{a}*\boldsymbol{X})$ es una combinación de variables aleatorias de $\boldsymbol{X}$
-#+latex:\smallskip
-
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
-Podemos aplicar el operador $\mathsf{B}$ sobre los elementos de un proceso estocástico $\boldsymbol{X}$.
-$$\mathsf{B} X_t = X_{t−1},\quad \text{para } t\in\mathbb{Z}.$$
-
-Aplicando el operador $\mathsf{B}$ repetidamente tenemos $$\mathsf{B}^k X_t =
-X_{t−k},\quad \text{para } t,z\in\mathbb{Z}$$ 
-#+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Así, para el polinomio $\boldsymbol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3$, y el proceso estocástico $\boldsymbol{Y}$
-\begin{align*}
-\boldsymbol{a}(\mathsf{B})Y_t 
-& = (a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+a_3\mathsf{B}^3) Y_t \\
-% & = a_0 Y_t + a_1 \mathsf{B}^1 Y_t + a_2 \mathsf{B}^2 Y_t + a_3 \mathsf{B}^3 Y_t \\
-& = a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+a_3Y_{t-3} \\
-% & =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
-& =(\boldsymbol{a}*\boldsymbol{Y})_t,\quad \text{para } t\in\mathbb{Z}
-\end{align*}
-#+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Y en general, si la suma $\sum\limits_{k=-\infty}^{\infty}a_kY_{t-k}$
-converge para todo $t$, entonces
-# si \(\fbox{$\boldsymbol{a}\in \ell^1$}\), entonces
-\begin{align*}
-\boldsymbol{a}(\mathsf{B})Y_t 
-& = (\cdots+a_{-2}\mathsf{B}^{-2}+a_{-1}\mathsf{B}^{-1}+a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) Y_t \\
-% & = a_0 Y_t + a_1 \mathsf{B}^1 Y_t + a_2 \mathsf{B}^2 Y_t + a_3 \mathsf{B}^3 Y_t \\
-& = \cdots+a_{-2}Y_{t+2}+a_{-1}Y_{t+1}+a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+\cdots \\
-% & =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
-& =(\boldsymbol{a}*\boldsymbol{y})_t,\quad \text{para } t\in\mathbb{Z}
-\end{align*}
-
-* COMMENT Probando a extender la notación compacta de más arriba  :noexports:
 
 Del mismo modo que denotamos con ${{1}}$ la secuencia
 $$1=(\ldots,0,0,{\color{blue}{1}},0,0,\ldots)=1 z^0,$$ denotamos con
@@ -621,18 +551,21 @@ $$z^{-1}=(\ldots,0,1,{\color{blue}{0}},0,0,\ldots)=1 z^{-1}.$$
 Evidentemente
 $$z^2=z*z=(\ldots,0,0,{\color{blue}{0}},0,1,\ldots)=1 z^{2}.$$
 De ese modo $$\boldsymbol{x}*z^k=\sum_{t\in\mathbb{Z}}x_t
-z^{t+k}=(\mathsf{B}^kx_t\mid t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}x_{t-k}
-z^t.$$
-\bigskip
+z^{t+k}=(\mathsf{B}^kx_t\mid t\in\mathbb{Z}).$$
+# =\sum_{t\in\mathbb{Z}}x_{t-k}z^t
 
-Además, definimos el producto elemento a elemento (o producto
-Hadamard) de dos secuencias $\boldsymbol{a}$ y $\boldsymbol{b}$ como
-la secuencia $$\boldsymbol{a}\odot\boldsymbol{b}=(a_tb_t\mid
+
+** El producto elemento a elemento de dos secuencias
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+El producto elemento a elemento (o producto Hadamard) de $\boldsymbol{a}$ y $\boldsymbol{b}$ es la secuencia
+$$\boldsymbol{a}\odot\boldsymbol{b}=(a_tb_t\mid
 t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}a_tb_t z^t.$$ Por tanto
 $$\boldsymbol{x}\odot(\boldsymbol{y}*z^k)=(x_t y_{t-k}\mid
 t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}x_t y_{t-k} z^t;$$ y si
-$\boldsymbol{\phi}$ es el polinomio
-$\;1-\phi_1 z^1-\cdots-\phi_p z^p$,
+$\boldsymbol{\phi}$ es el polinomio $\;1-\phi_1 z^1-\cdots-\phi_p
+z^p$,
 $$(\boldsymbol{\phi}*\boldsymbol{x})\odot(\boldsymbol{y}*z^k)=\Big(\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
 y_{t-k}\mid
 t\in\mathbb{Z}\Big)=\sum_{t\in\mathbb{Z}}\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
@@ -642,103 +575,30 @@ y_{t-k} z^t,$$ donde
 = & \big(x_t-\phi_1x_{t-1}-\cdots-\phi_px_{t-p}\big)y_{t-k}\\
 = & x_ty_{t-k}-\phi_1x_{t-1}y_{t-k}-\cdots-\phi_px_{t-p}y_{t-k}.
 \end{align*}
+#+latex: \bigskip
 
-Por conveniencia vamos a definir la secuencia constante
-$\boldsymbol{1}=(\ldots,1,1,1,\ldots)=\sum_{t\in\mathbb{Z}}1 z^t$.
-\bigskip
 
-** Experimentando con un uso más intensivo de la notación compacta
+** Convolución de una serie formal con el "/reverso/" de otra
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
 
-Si $E(X_t)=\mu$ para $t\in\mathbb{Z}$, entonces definimos
-$$E(\boldsymbol{X})=(E(X_t)\mid t\in\mathbb{Z})=(\mu\mid
-t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}\mu
-z^t=\boldsymbol{\mu}=\mu\boldsymbol{1}.$$
-
-Así, si $\boldsymbol{X}$ es un proceso (débilmente) estacionario con
-esperanza nula, $E(\boldsymbol{X})=\boldsymbol{0}=0\boldsymbol{1}$,
-entonces
+Por último, si tenemos dos series formales $\boldsymbol{a}$ y
+$\boldsymbol{b}$, entonces
 \begin{align*}
-E\Big((\boldsymbol{\phi}*\boldsymbol{X})\odot(\boldsymbol{X}*z^k)\Big)
-= &
-\Big(E\big(X_tX_{t-k}-\phi_1X_{t-1}X_{t-k}-\cdots-\phi_pX_{t-p}X_{t-k} \big) \mid t\in\mathbb{Z}\Big)\\
-= &
-\Big(E(X_tX_{t-k})-\phi_1E(X_{t-1}X_{t-k})-\cdots-\phi_pE(X_{t-p}X_{t-k}) \big) \mid t\in\mathbb{Z}\Big)\\
-= &
-\big(\gamma_k-\phi_1\gamma_{k-1}-\cdots-\phi_p\gamma_{k-p} \mid t\in\mathbb{Z}\big)\\
-= &
-\big(\boldsymbol{\phi}(\mathsf{B})\gamma_k \mid t\in\mathbb{Z}\big)\quad\text{es decir}\quad
-\big(\boldsymbol{\phi}(\mathsf{B})\gamma_k\big)\boldsymbol{1}.
+\boldsymbol{a}(z)*\boldsymbol{b}(z^{-1})
+=&(a_0z^0+a_1z^1+a_2z^2+\cdots)(\cdots+b_2z^{-2}+b_1z^{-1}+b_0z^0)\\
+=&\Big(\ldots,
+\sum_{j\in\mathbb{Z}}a_{j+2}b_j,\; 
+\sum_{j\in\mathbb{Z}}a_{j-1}b_j,\;
+{\color{blue}{\sum_{j\in\mathbb{Z}}a_jb_j}},\;
+\sum_{j\in\mathbb{Z}}a_{j+1}b_j,\;
+\sum_{j\in\mathbb{Z}}a_{j+2}b_j,\ldots\Big)\\
+=&\Big(\sum_{j\in\mathbb{Z}}a_{j+k}b_j\mid k\in\mathbb{Z}\Big)
 \end{align*}
-que, como no puede ser de otra forma, es una secuencia constante por
-ser $\boldsymbol{X}$ es un proceso (débilmente) estacionario.
-
-*** Ecuaciones de Yule-Walker con la notación compacta
-
-**** *AR($p$)*
-
-Consideremos el siguiente proceso estacionario AR($p$):
-$\;\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U},\;$ donde
-$\boldsymbol{U}\sim WN(0,\sigma^2)$.
-
-Multiplicando ambos lados de la ecuación en diferencias por el proceso
-$\boldsymbol{X}$ retardado $k$ periodos, es decir, por
-$\boldsymbol{X}*z^k$, y tomando esperanzas tenemos
-$$E\Big((\boldsymbol{\phi}*\boldsymbol{X})\odot(\boldsymbol{X}*z^k)\Big) = E\Big(\boldsymbol{U}\odot(\boldsymbol{X}*z^k)\Big)$$
-
-Nótese que $E\Big(\boldsymbol{U}\odot(\boldsymbol{X}*z^k)\Big)$ es
-cero si $k>0$ pues
-$E\Big(\boldsymbol{U}\odot(\boldsymbol{U}*z^k)\Big)=\boldsymbol{0}$
-por ser $\boldsymbol{U}$ un proceso estocástico incorrelado con su
-pasado. Pero que
-$E\Big(\boldsymbol{U}\odot(\boldsymbol{U}*z^k)\Big)=\boldsymbol{\sigma^2}=\sigma^2\boldsymbol{1}$
-cuando $k=0$.
-
-Por tanto, 
-
-- para $k=0$ tenemos: ::
-  $\quad\big(\boldsymbol{\phi}(\mathsf{B})\gamma_0\big)\boldsymbol{1}
-  = \boldsymbol{\sigma^2},\quad$ es decir,
-  $$\fbox{\(\boldsymbol{\phi}(\mathsf{B})\gamma_0=\sigma^2\)}
-  \quad\Rightarrow\quad
-  \gamma_0-\phi_1\gamma_1-\cdots-\phi_p\gamma_p=\sigma^2
-  \quad\Rightarrow\quad
-  \sigma^2=\gamma_0-\sum_{j=1}^p\phi_j\gamma_j.$$
-  Y dividiendo por $\gamma_0$,
-  $$\boldsymbol{\phi}(\mathsf{B})\rho_0=\frac{\sigma^2}{\gamma_0}
-  \quad\Rightarrow\quad
-  \fbox{\(\gamma_0=\frac{\sigma^2}{\boldsymbol{\phi}(\mathsf{B})\rho_0}\)}
-  \quad\Rightarrow\quad
-  \gamma_0=\frac{\sigma^2}{1-\sum_{j=1}^p\phi_j\rho_j},$$
-  ya que $\rho_0=1$.
-  
-- para $k>0$ tenemos: ::
-  $\quad\big(\boldsymbol{\phi}(\mathsf{B})\gamma_k\big)\boldsymbol{1} =
-  \boldsymbol{0},\quad$ es decir,
-  $$\fbox{\(\boldsymbol{\phi}(\mathsf{B})\gamma_k=0\)}
-  \quad\Rightarrow\quad
-  \gamma_k-\phi_1\gamma_{k-1}-\cdots-\phi_p\gamma_{k-p}=0
-  \quad\Rightarrow\quad \gamma_k=\sum_{j=1}^p\phi_j\gamma_{k-j}.$$
-  Y dividiendo por $\gamma_0$,
-  $$\fbox{\(\boldsymbol{\phi}(\mathsf{B})\rho_k=0\)}
-  \quad\Rightarrow\quad
-  \rho_k-\phi_1\rho_{k-1}-\cdots-\phi_p\rho_{k-p}=0
-  \quad\Rightarrow\quad \rho_k=\sum_{j=1}^p\phi_j\rho_{k-j}.$$
-
-
-**** *En el caso de un MA($q$) invertible no se llaman ecuaciones de Yule-Walker*
-
-Consideremos el siguiente proceso invertible MA($p$):
-$\;\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U},\;$ donde
-$\boldsymbol{U}\sim WN(0,\sigma^2)$.
-
-De nuevo, multiplicando ambos lados de la ecuación en diferencias por
-el proceso $\boldsymbol{X}$ retardado $k$ periodos, es decir, por
-$\boldsymbol{X}*z^k$, y tomando esperanzas tenemos
-$$E\Big(\boldsymbol{X}\odot(\boldsymbol{X}*z^k)\Big) =
-E\Big((\boldsymbol{\theta}*\boldsymbol{U})\odot(\boldsymbol{X}*z^k)\Big)=
-E\Big((\boldsymbol{\theta}*\boldsymbol{U})\odot(\boldsymbol{\theta}*\boldsymbol{U}*z^k)\Big)
-$$
-Es decir,
-$$\gamma_k\boldsymbol{1}=
-E\Big((U_t-\theta_1U_{t-1}-\cdots-\theta_qU_{t-q})(U_{t-k}-\theta_1U_{t-k-1}-\cdots-\theta_qU_{t-k-q})\Big)\boldsymbol{1}$$
+es decir,
+\begin{equation}
+ \label{eqConvolucionConSuReverso}
+ \Big(\boldsymbol{a}(z)*\boldsymbol{b}(z^{-1})\Big)_k=\sum_{j\in\mathbb{Z}}a_{j+k}b_{j}.
+\end{equation}
 

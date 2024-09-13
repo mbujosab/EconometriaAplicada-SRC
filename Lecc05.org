@@ -317,6 +317,7 @@ Antes de atacar los temas de especificación y ajuste de modelos,
 debemos estudiar un poco los procesos estocásticos débilmente
 estacionarios que vamos a utilizar.
 
+
 * Procesos estocásticos de segundo orden
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
@@ -443,6 +444,78 @@ Es más, una secuencia $\boldsymbol{\gamma}$ es definida positiva si y solo si e
 secuencia:
 $\;\boldsymbol{\rho}=\frac{1}{\gamma_0}(\boldsymbol{\gamma})
 =\sum\limits_{k\in\mathbb{Z}}\frac{\gamma_k}{\gamma_0}z^k$.
+
+
+* Procesos estocásticos y notación
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+
+Los procesos estocásticos se pueden sumar y se pueden multiplicar por
+escalares.
+
+Si $\boldsymbol{X}$ e $\boldsymbol{Y}$ son dos procesos estocásticos y
+$\;a\in\mathbb{R}$, entonces $$\boldsymbol{X}+\boldsymbol{Y}=(X_t+Y_t
+\mid t\in\mathbb{Z})\qquad\text{y}\qquad a\boldsymbol{X}=\big(a(X_t)
+\mid t\in\mathbb{Z}\big).$$ El conjunto de procesos estocásticos junto
+con la suma elemento a elemento y el producto por escalares
+constituyen un espacio vectorial.
+#+latex:\smallskip
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Consideremos el proceso estocástico 
+$$\boldsymbol{X}=(X_t \mid t=0,\pm1,\pm2,\ldots).$$
+
+Lo podemos denotar con una función generatriz (como hicimos con las
+secuencias) $$\boldsymbol{X} \quad = \quad \sum_{t=-\infty}^\infty X_t
+z^t \quad\equiv\quad \boldsymbol{X}(z)$$ Recuerde que esto no es una
+suma; es una secuencia de variables aleatorias
+$$\sum_{t=-\infty}^\infty X_t z^t = (\ldots,\ X_{-2},\ X_{-1},\
+X_{0},\ X_{1},\ X_{2},\ldots)$$
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Sea $\boldsymbol{a}$ una secuencia de números y $\boldsymbol{X}$ un
+proceso estocástico tales que _la suma_
+$\sum\limits_{k=-\infty}^{\infty}a_kX_{t-k}\;$ _converge_ para todo
+$t.\;$ Entonces:
+#+latex:\smallskip
+
+Definimos el producto convolución ($∗$) de $\boldsymbol{a}$ con $\boldsymbol{X}$ como el proceso estocástico:
+$$\boldsymbol{a}*\boldsymbol{X}=\left(\left.\sum_{r+s=t} a_r X_s \right| t\in\mathbb{Z}\right)$$
+es decir
+$$(\boldsymbol{a}*\boldsymbol{X})_t=\sum_{r+s=t} a_r X_s,\quad \text{para } t\in\mathbb{Z}.$$
+Por tanto, cada elemento de $(\boldsymbol{a}*\boldsymbol{X})$ es una combinación de variables aleatorias de $\boldsymbol{X}$
+#+latex:\smallskip
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Podemos aplicar el operador $\mathsf{B}$ sobre los elementos de un proceso estocástico $\boldsymbol{X}$.
+$$\mathsf{B} X_t = X_{t−1},\quad \text{para } t\in\mathbb{Z}.$$
+
+Aplicando el operador $\mathsf{B}$ repetidamente tenemos $$\mathsf{B}^k X_t =
+X_{t−k},\quad \text{para } t,z\in\mathbb{Z}$$ 
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Así, para el polinomio $\boldsymbol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3$, y el proceso estocástico $\boldsymbol{Y}$
+\begin{align*}
+\boldsymbol{a}(\mathsf{B})Y_t 
+& = (a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+a_3\mathsf{B}^3) Y_t \\
+% & = a_0 Y_t + a_1 \mathsf{B}^1 Y_t + a_2 \mathsf{B}^2 Y_t + a_3 \mathsf{B}^3 Y_t \\
+& = a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+a_3Y_{t-3} \\
+% & =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
+& =(\boldsymbol{a}*\boldsymbol{Y})_t,\quad \text{para } t\in\mathbb{Z}
+\end{align*}
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Y en general, si la suma $\sum\limits_{k=-\infty}^{\infty}a_kY_{t-k}$
+converge para todo $t$, entonces
+# si \(\fbox{$\boldsymbol{a}\in \ell^1$}\), entonces
+\begin{align*}
+\boldsymbol{a}(\mathsf{B})Y_t 
+& = (\cdots+a_{-2}\mathsf{B}^{-2}+a_{-1}\mathsf{B}^{-1}+a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) Y_t \\
+% & = a_0 Y_t + a_1 \mathsf{B}^1 Y_t + a_2 \mathsf{B}^2 Y_t + a_3 \mathsf{B}^3 Y_t \\
+& = \cdots+a_{-2}Y_{t+2}+a_{-1}Y_{t+1}+a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+\cdots \\
+% & =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
+& =(\boldsymbol{a}*\boldsymbol{y})_t,\quad \text{para } t\in\mathbb{Z}
+\end{align*}
 
 
 * Ejemplos de procesos (débilmente) estacionarios
@@ -707,3 +780,278 @@ entonces $$\boldsymbol{\phi}(B){Y_t}=c+\boldsymbol{\theta}(B){U_t}$$
 donde $$\;c=(1-\phi_1-\phi_2-\cdots-\phi_p)\mu\;$$ y donde
 $\;\mu=E(Y_t)$, es un proceso autorregresivo de media móvil
 ARMA($p,q$) /con media no nula/.
+
+
+* Primeros momentos de procesos estocásticos
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+#+BEGIN_EXPORT latex
+Por conveniencia denotaremos con $\boldsymbol{1}$ la secuencia constante uno:
+$$\boldsymbol{1}=(\ldots,1,1,1,\ldots)=\sum_{t\in\mathbb{Z}}1 z^t.$$
+Y con $\boldsymbol{0}$ la secuencia constante cero:
+$$\;\boldsymbol{0}=(\ldots,0,0,0,\ldots)=0\cdot\boldsymbol{1}.$$
+#+END_EXPORT
+
+Si $E(X_t)<\infty$ para $t\in\mathbb{Z}$, entonces $E(\boldsymbol{X})$ es
+la secuencia $$E(\boldsymbol{X})=\big(E(X_t)\mid
+t\in\mathbb{Z}\big)=\sum\nolimits_{t\in\mathbb{Z}} E(X_t)
+z^t=\big(\ldots,\;E(X_{-1}),\;E(X_{0}),\;E(X_{1}),\ldots\big)$$
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Si $\boldsymbol{Y}$ tiene segundos momentos finitos, la secuencia de
+autocovarianzas _de orden $k$_ es
+\begin{align*}
+Cov(\boldsymbol{Y},\boldsymbol{Y}*z^k) = &
+% \boldsymbol{\gamma_k}= &
+E\Big(\big[\boldsymbol{Y}-E(\boldsymbol{Y})\big]\odot\big[(\boldsymbol{Y}-E(\boldsymbol{Y}))*z^k\big]\Big)\\
+= & 
+\left.\Big(E\big[\big(Y_t-E(Y_t)\big)\big(Y_{t-k}-E(Y_{t-k})\big)\big]\; \right| t\in\mathbb{Z}\Big)\\
+=&
+% \sum_{t\in\mathbb{Z}} \gamma_{_{k,t}} z^t
+(\gamma_{_{k,t}}\mid t\in\mathbb{Z}) \;=\;
+(\ldots,\,\gamma_{_{k,-1}},\,{\color{blue}{\gamma_{_{k,0}}}},\,\gamma_{_{k,1}},\,\gamma_{_{k,2}},\ldots);\quad k\in\mathbb{Z}.
+\end{align*}
+#+latex: \medskip
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+#+latex: \noindent
+Cuando $E(X_t)=\mu$ para todo $t\in\mathbb{Z}$, entonces
+$E(\boldsymbol{X})$ es una secuencia constante: $$E(\boldsymbol{X}) =
+(\mu\mid t\in\mathbb{Z}) = \mu\boldsymbol{1}.$$
+#+latex: \smallskip
+
+#+latex: \noindent
+Si $\gamma_{_{k,t}}=\gamma_k$ 
+para todo $t\in\mathbb{Z}$, 
+entonces definimos la _función de autocovarianzas_ (todas):
+$$\boldsymbol{\gamma} = (\gamma_{k}\mid k\in\mathbb{Z}) =
+(\ldots,\,\gamma_{-1},\,{\color{blue}{\gamma_{0}}},\,\gamma_{1},\,\gamma_{2},\ldots).$$
+
+
+** Esperanza y autocovarianzas de un proceso lineal
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+Sea $\;\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U},\;$ donde
+$\boldsymbol{\psi}$ es una serie formal de cuadrado sumable
+@@latex:($\boldsymbol{\psi}\in\ell^2$)@@ con cogrado $0$ y
+$\;\boldsymbol{U}\sim WN(0,\sigma^2).\quad$ Recordando que la
+convolución es una operación lineal: $$E(\boldsymbol{X})
+=E(\boldsymbol{\psi}*\boldsymbol{U})
+=\boldsymbol{\psi}*E(\boldsymbol{U})
+=\boldsymbol{\psi}*\boldsymbol{0}=\boldsymbol{0}.$$ Consecuentemente,
+la covarianza de orden $k$ para cada $X_t$ es
+\begin{align*}
+\gamma_{_{k,t}} = & E\Big[\big(\boldsymbol{\psi}(\mathsf{B})X_t\big)\cdot \big(\boldsymbol{\psi}(\mathsf{B}) X_{t-k}\big)\Big] 
+\\ = &
+E\Big[
+ (\psi_0U_{t}+\psi_1U_{t-1}+\psi_2U_{t-2}\cdots)
+ (\psi_0U_{t-k}+\psi_1U_{t-k-1}+\psi_2U_{t-k-2}\cdots)\Big]
+\\ = &
+\sigma^2\sum\nolimits_{j\in\mathbb{Z}}\psi_{j+k}\psi_j
+\qquad \text{ ya que }\; E(U_hU_j)=0\; \text{ si } \;j\ne h
+\end{align*}
+no depende de $t$ (por tanto $\boldsymbol{X}$ es estacionario). Es más, por la última ecuación de la lección anterior
+$$\;\gamma_k \;=\; \sigma^2\sum\nolimits_{j\in\mathbb{Z}}\psi_{j+k}\psi_j \;=\;
+\sigma^2\big(\boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})\big)_k
+\qquad \text{ para } k\in\mathbb{Z}.$$
+Y, por tanto
+\begin{equation}
+ \label{eqAutoCovarianzaProcesoLineal}
+ \boldsymbol{\gamma}=\sigma^2\boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})
+\end{equation}
+con grado igual al grado de $\boldsymbol{\psi}$ y cogrado igual a
+menos el grado de $\boldsymbol{\psi}$.
+
+# $$\fbox{\(\)}$$
+# \begin{align*}
+# Cov(\boldsymbol{X},\boldsymbol{X}*z^k) 
+# =&E\Big[\boldsymbol{X}\odot(\boldsymbol{X}*z^k)\Big]
+# \;=\;
+# E\Big[(\boldsymbol{\psi}*\boldsymbol{U})\odot(\boldsymbol{\psi}*\boldsymbol{U}*z^k)\Big]
+# \\ = &
+# \Big(
+# E\Big[
+#  (\phi_0U_{t}+\phi_1U_{t-1}+\phi_2U_{t-2}\cdots)
+#  (\phi_0U_{t-k}+\phi_1U_{t-k-1}\cdots)\Big]
+# \,\Big|\, t\in\mathbb{Z}
+# \Big)
+# \\ = &
+# \Big(\sigma^2\sum_{j\in\mathbb{Z}}\phi_{j+k}\phi_j \;\Big|\; t\in\mathbb{Z} \Big)
+# \quad \text{ ya que }\; E(U_hU_j)=0\; \text{ si } \;j\ne h
+# \end{align*}
+
+*** Covarianza cruzada entre dos procesos lineales causales
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+Sean $\;\boldsymbol{W}=\boldsymbol{\theta}*\boldsymbol{U}\quad$ e
+$\quad\boldsymbol{Y}=\boldsymbol{\psi}*\boldsymbol{U},\quad$ donde
+$\boldsymbol{\theta}$ y $\boldsymbol{\psi}$ son series formales de
+cuadrado sumable con cogrado $0$ y donde $\;\boldsymbol{U}\sim
+WN(0,\sigma^2)$.
+
+Entonces la covarianza cruzada (de orden $k\in\mathbb{Z}$) entre $W_t$
+e $Y_{t-k}$ es
+\begin{align*}
+E\Big[W_t\cdot Y_{t-k}\Big] = &
+E\Big[\big(\boldsymbol{\theta}(\mathsf{B})U_t\big)\cdot \big(\boldsymbol{\psi}(\mathsf{B}) U_{t-k}\big)\Big] 
+\\ = &
+E\Big[
+ (\theta_0U_{t}+\theta_1U_{t-1}+\theta_2U_{t-2}\cdots)
+ (\psi_0U_{t-k}+\psi_1U_{t-k-1}+\psi_2U_{t-k-2}\cdots)\Big]
+\\ = &
+\sigma^2\sum\nolimits_{j\in\mathbb{Z}}\theta_{j+k}\psi_j
+\qquad \text{ ya que }\; E(U_hU_j)=0\; \text{ si } \;j\ne h
+\end{align*}
+que tampoco depende de $t$. Es más, por la última ecuación de la lección 4
+$$\;\gamma_{_{\boldsymbol{W},\boldsymbol{Y}}}(k) =
+\sigma^2\sum\nolimits_{j\in\mathbb{Z}}\theta_{j+k}\psi_j =
+\sigma^2\big(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\big)_k\quad
+\text{ para todo } k\in\mathbb{Z}.$$ Por tanto, la función de
+covarianzas cruzadas es la secuencia
+\begin{equation}
+ \label{eqCovarianzaCruzadaProcesosLineales}
+ \boldsymbol{\gamma_{_{\boldsymbol{W},\boldsymbol{Y}}}} =
+ \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})
+\end{equation}
+de grado igual al grado de $\boldsymbol{\theta}$ y cogrado igual a menos
+el grado de $\boldsymbol{\psi}$.
+
+# $$\fbox{\(\)}$$
+
+
+** Las Ecuaciones de Yule-Walker para un AR($p$) estacionario
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+#+latex: \noindent
+/Por una parte/ (lado izquierdo):
+
+Si $\boldsymbol{X}$ es un proceso (débilmente) estacionario con
+$E(\boldsymbol{X})=\boldsymbol{0}\;$ y $\;\boldsymbol{\phi}$ es una serie
+formal absolutamente sumable; entonces para $t,k\in\mathbb{Z}$
+\begin{equation}
+  E\Big[\Big(\boldsymbol{\phi}(\mathsf{B})X_t\Big)\cdot X_{t-k}\Big]
+  \quad = \quad
+  \boldsymbol{\phi}(\mathsf{B})E\big(X_t\cdot X_{t-k}\big)
+  \quad = \quad
+  \boldsymbol{\phi}(\mathsf{B})\gamma_k
+  \label{eqnLadoIzquierdoYW}
+\end{equation}
+que no depende de $t$, por ser $\boldsymbol{X}$ es un proceso
+(débilmente) estacionario.
+#+latex: \medskip
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+#+latex: \noindent
+/Por otra parte/ (lado derecho):
+
+Si $\boldsymbol{X}$ tiene representación
+$\;\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}$ donde
+$\;\boldsymbol{U}\sim WN(0,\sigma^2)$ y $\boldsymbol{\psi}$ es una
+serie formal de cuadrado sumable con $\psi_0=1$; es decir
+# Sea un AR($p$) estacionario:
+# $\;\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U};\;$ entonces $\;\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}$ 
+# con $\boldsymbol{\psi}=\frac{1}{\boldsymbol{\phi}}$ y $\psi_0=1$.
+# # donde $\boldsymbol{U}\sim WN(0,\sigma^2)$.
+#+latex: \noindent
+$$\quad X_t=U_t + \sum\nolimits_{j=1}^\infty \psi_j U_{t-j},$$
+entonces para $t,k\in\mathbb{Z}$
+\begin{equation}
+  E[U_t\cdot X_{t-k}] = E\Big[U_t\Big(U_{t-k} + \sum\nolimits_{j=1}^\infty \psi_j U_{t-k-j}\Big) \Big]=
+  \begin{cases}
+  \sigma^2 & \text{cuando } k=0\\
+  0 & \text{cuando } k\ne0
+  \end{cases}
+  \label{eqnLadoDerechoYW}
+\end{equation}
+#+latex: \bigskip
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Sea un AR($p$) estacionario:
+$\;\;\boldsymbol{\phi}(\mathsf{B})X_t=U_t\;\;$ donde
+$\;\;\boldsymbol{\phi}(z)=1-\phi_1z^1-\cdots-\phi_pz^p.\;$
+Multiplicando por $X_{t-k}$ y tomando esperanzas:
+$$E\Big[\Big(\boldsymbol{\phi}(\mathsf{B})X_t\Big)\cdot X_{t-k}\Big] =
+E[U_t\cdot X_{t-k}]$$
+
+*para $k=0$:* $\quad$ (por $\ref{eqnLadoIzquierdoYW}$ y $\ref{eqnLadoDerechoYW}$)
+$$\fbox{\(\boldsymbol{\phi}(\mathsf{B})\gamma_0=\sigma^2\)}
+\quad\Rightarrow\quad
+\gamma_0-\phi_1\gamma_1-\cdots-\phi_p\gamma_p=\sigma^2
+\quad\Rightarrow\quad \sigma^2=\gamma_0-\sum\nolimits_{j=1}^p\phi_j\gamma_j.$$
+Dividiendo por $\gamma_0$ (y recordando que $\rho_0=1$):
+$$\boldsymbol{\phi}(\mathsf{B})\rho_0=\frac{\sigma^2}{\gamma_0}
+\quad\Rightarrow\quad
+\fbox{\(\gamma_0=\frac{\sigma^2}{\boldsymbol{\phi}(\mathsf{B})\rho_0}\)}
+\quad\Rightarrow\quad
+\gamma_0=\frac{\sigma^2}{1-\sum\nolimits_{j=1}^p\phi_j\rho_j}.$$ 
+  
+*para $k>0$:* $\quad$ (por $\ref{eqnLadoIzquierdoYW}$ y $\ref{eqnLadoDerechoYW}$)
+$$\fbox{\(\boldsymbol{\phi}(\mathsf{B})\gamma_k=0\)}
+\quad\Rightarrow\quad
+\gamma_k-\phi_1\gamma_{k-1}-\cdots-\phi_p\gamma_{k-p}=0
+\quad\Rightarrow\quad \gamma_k=\sum\nolimits_{j=1}^p\phi_j\gamma_{k-j}.$$ 
+Dividiendo por $\gamma_0$:
+$$\fbox{\(\boldsymbol{\phi}(\mathsf{B})\rho_k=0\)}
+\quad\Rightarrow\quad
+\rho_k-\phi_1\rho_{k-1}-\cdots-\phi_p\rho_{k-p}=0
+\quad\Rightarrow\quad \rho_k=\sum\nolimits_{j=1}^p\phi_j\rho_{k-j}.$$
+
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+Por tanto, la estructura autorregresiva del proceso impone que las
+autocovarianzas (y las autocorrelaciones) verifiquen las ecuaciones de
+Yule-Walker.
+
+** Esperanza y función de autocovarianzas para un ARMA($p,q$)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+# donde $$\boldsymbol{\phi}(z)=1-\phi_1z^1\cdots-\phi_pz^p \quad\text{y}\quad \boldsymbol{\theta}(z)=1-\theta_1z^1\cdots-\theta_qz^q.$$
+
+Sea un ARMA($p,q$) estacionario:
+$\boldsymbol{\phi}(\mathsf{B}){X_t}=\boldsymbol{\theta}(\mathsf{B}){U_t}.\;$
+Multiplicando por $X_{t-k}$, tomando esperanzas y sustituyendo
+$X_{t-k}$ por su representación MA($\infty$), donde
+$\boldsymbol{\psi}=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}$:
+$$E\Big[\Big(\boldsymbol{\phi}(\mathsf{B})X_t\Big)\cdot X_{t-k}\Big] =
+E\Big[\Big(\boldsymbol{\theta}(\mathsf{B})U_t\Big)\cdot X_{t-k}\Big]
+\;=\; E\Big[\Big(\boldsymbol{\theta}(\mathsf{B})U_t\Big)\cdot
+\Big(\boldsymbol{\psi}(\mathsf{B})U_{t-k}\Big)\Big]$$ Usando
+$\eqref{eqnLadoIzquierdoYW}$, renombrando
+$\Big(\boldsymbol{\theta}(\mathsf{B})U_t\Big)=\boldsymbol{W}$ y
+$\Big(\boldsymbol{\psi}(\mathsf{B})U_t\Big)=\boldsymbol{Y}$, y
+recordando ($\ref{eqnLadoIzquierdoYW}$):
+\begin{align*}
+  \boldsymbol{\phi}(\mathsf{B})\gamma_k & = \boldsymbol{\gamma_{_{\boldsymbol{W},\boldsymbol{Y}}}}(k)\\
+  & =  \sigma^2 \Big(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\Big)_k & \text{por } \eqref{eqCovarianzaCruzadaProcesosLineales}
+\end{align*}
+Y como $\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})$ tiene grado $q$ y cogrado $-\infty$
+\begin{equation}
+  \boldsymbol{\phi}(\mathsf{B})\gamma_k = 
+  \begin{cases}
+     0 & k > q\; \text{(como en un AR)}\\
+    \sigma^2 \Big(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\Big)_k & k\leq q
+  \end{cases}
+\end{equation}
+
+
+
+** COMMENT Esperanza y autocovarianzas de un proceso de ruido blanco :noexports:
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . skip)))
+   :END:
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+Un proceso de ruido blanco $\boldsymbol{U}\sim WN(0,\sigma^2)$ es un
+proceso /débilmente estacionario/ (o estacionario de segundo orden)
+tal que: $$E(U_t)=0;\qquad t\in\mathbb{Z}$$ y $$\boldsymbol{\gamma} =
+(\ldots,\,0,\,0,\,{\color{blue}{\sigma^2}},\,0,\,0,\ldots)=\sigma^2
+z^0;$$ es decir, $\;\gamma_0=\sigma^2\;$ y $\;\gamma_k=0\;$ para todo
+$k\ne0$.
+#
