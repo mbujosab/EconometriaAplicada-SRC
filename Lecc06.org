@@ -389,8 +389,8 @@ ide(sim(wn, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"), 
 
 Sea $\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$, con
 $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y donde $\boldsymbol{\theta}$
-es un polinomio de orden $q>0$, con $\theta_0=1$ y con todas sus raíces
-fuera del círculo unidad
+es un polinomio de orden $q>0$, con $\theta_0=1$ y
+con todas sus raíces fuera del círculo unidad
 $(\boldsymbol{\theta}^{-\triangleright}\in\ell^1)$, es decir $$X_t=
 \sum_{j=1}^q\theta_j U_{t-j}+U_t.$$
 
@@ -404,7 +404,7 @@ $$\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}
 \quad\Rightarrow\quad
 U_t = \sum_{j=0}^\infty\psi_j X_{t-j}
 $$
-donde $\boldsymbol{\psi}=\boldsymbol{\theta}^{-\triangleright}=\boldsymbol{\theta}^{-1}\in\ell^1$. Entonces se dice que el model MA es ``\emph{invertible}''. Cualquier modelo MA sin raices en el círculo unidad se puede reparametrizar para obtener un modelo invertible con la misma función de autocovarianzas ``$\boldsymbol{\gamma}$'' y ,consecuentemente, las mismas ACF, PACF y densidad espectral que el modelo original.
+donde $\boldsymbol{\psi}=\boldsymbol{\theta}^{-\triangleright}=\boldsymbol{\theta}^{-1}\in\ell^1$. Entonces se dice que el model MA es ``\emph{invertible}''. Cualquier modelo MA sin raices en el círculo unidad se puede reparametrizar para obtener un modelo invertible con la misma función de autocovarianzas ``$\boldsymbol{\gamma}$'' (\emph{Véase Sección 2.6 de Fuller (1996)}) y, consecuentemente, las mismas ACF, PACF y densidad espectral que el modelo original. Para tener una asociación uno a uno entre ACFs y procesos estocásticos, siempre asumiremos que las raíces de los polinomios MA, $\boldsymbol{\theta}$, son mayores que uno en valor absoluto.
 \end{quotation}
 #+END_EXPORT
 Entonces $E(X_t)=0$ y
@@ -788,7 +788,7 @@ ide(sim(ma2violeta, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "p
 
 Sea $\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$, con
 $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y donde $\boldsymbol{\phi}$ es
-un polinomio de grado $p>0$. Entonces
+un polinomio de grado $p>0$ con $\phi_0=1$. Entonces
 $$(\boldsymbol{\phi}*\boldsymbol{X})_t=\boldsymbol{\phi}(\mathsf{B})X_t=
 (1+\phi_1\mathsf{B}+\phi_2\mathsf{B}^2+\cdots+\phi_p\mathsf{B}^p)X_t=
 U_t$$ Y por tanto $$X_t= U_t-\sum_{j=1}^p\phi_j X_{t-j}.$$
@@ -894,14 +894,15 @@ $$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi z)^{-1}*(1-\phi
 #+latex: \bigskip
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-Pero también podemos usar las Ecuaciones de Yule-Walker. En este caso
-(donde el único parámetro es $\phi_1=\phi$), en cuanto a la
-correlación: $$\rho_k=\phi\rho_{k-1}\qquad k>0$$ y como $\rho_0=1$,
-tenemos que $$\rho_k=\phi^k\qquad k\geq0$$ Y en cuanto a la varianza,
-dado que $\rho_1=\phi$
+Pero también podemos usar las Ecuaciones de Yule-Walker (Lecc. 5). En
+este caso (donde el único parámetro es $\phi_1=\phi$), en cuanto a la
+ACF tenemos que: $$\rho_k=\phi\rho_{k-1}\qquad k>0$$ y como $\rho_0=1$
+$$\rho_k=\phi^k\qquad k\geq0$$ Y en cuanto a la varianza, dado que
+$\rho_1=\phi$
 $$\gamma_0=\frac{\sigma^2}{1-\rho_1\phi}=\frac{\sigma^2}{1-\phi^2}.$$
-Por tanto $$\boldsymbol{\gamma} \;=\; \gamma_0\cdot\boldsymbol{\rho} \;=\;
-\frac{\sigma^2}{1-\phi^2} \sum_{k=-\infty}^\infty \phi^{|k|} z^k$$
+Por tanto, la función de autocovarianzas es $$\boldsymbol{\gamma}
+\;=\; \gamma_0\cdot\boldsymbol{\rho} \;=\; \frac{\sigma^2}{1-\phi^2}
+\sum_{k=-\infty}^\infty \phi^{|k|} z^k$$
 #+latex: \bigskip
 
 ** Proceso autorregresivo AR($1$)
@@ -1070,7 +1071,6 @@ $f(\omega) \;=\;  \frac{\sigma^2}{2\pi}\frac{1}{1+\phi_1^2+\phi_2^2-2\phi_1(1+\p
 
 $\boldsymbol{\pi} \;=\; (\ldots,\; 0,\; \phi_2,\; \frac{\phi_1}{1-\phi_2},\; {\color{blue}1},\; \frac{\phi_1}{1-\phi_2},\; \phi_2,\; 0,\;\ldots)$ 
 # :\quad$ $\pi_0=1,\quad$ $\pi_1=\rho_1=\phi,\quad$ $0=\pi_2=\pi_3=\cdots$
-
 
 *** AR(2) con dos raíces reales, una positiva y la otra negativa
    :PROPERTIES:
@@ -1278,6 +1278,7 @@ ide(sim(ar2rojo, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgra
 #+attr_latex: :width 425px
 [[./img/lecc06/Sim-AR2rojo.png]]
 
+
 * (Resumen) características de procesos MA($q$)
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
@@ -1319,6 +1320,7 @@ $(\boldsymbol{\theta}^{-\triangleright}=\boldsymbol{\theta}^{-1}\in\ell^1)$
 #+latex: \noindent
 *Densidad espectral* proporcional al inverso de la densidad espectral
   de $\;\boldsymbol{\theta}*\boldsymbol{X}=\boldsymbol{U}$
+
 
 * (Resumen) características de procesos AR($p$)
    :PROPERTIES:

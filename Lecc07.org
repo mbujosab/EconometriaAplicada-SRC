@@ -102,6 +102,263 @@ options(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
 #+END_SRC
 
 
+* ACF, PACF y densidad espectral de algunos modelos lineales (cont.)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . skip)))
+   :END:
+
+** Proceso autorregresivo ARMA($p,q$)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . slide)))
+   :END:
+
+Sea $\;\boldsymbol{X}\;$ el proceso estocástico estacionario solución
+de la ecuación en diferencias:
+$$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$$
+donde $\;\boldsymbol{U}\sim WN(0,\sigma^2);\;$ el polinomio
+/autorregresivo/ $\;\boldsymbol{\phi}\;$ tiene _grado $p$_ con
+${\color{#008000}{\phi_{0}=1}}$ (y raíces fuera del círculo unidad), y
+el polinomio /de media móvil/ $\;\boldsymbol{\theta}\;$ es _de grado
+$q$_ con ${\color{#008000}{\theta_{0}=1}};\;$ y donde
+$\boldsymbol{\phi}$ y $\boldsymbol{\theta}$ no tienen raíces comunes.
+#+latex:\medskip
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Si $\;\;\boldsymbol{\phi}(z)=1-\phi_1z-\cdots-\phi_p z^p\;\;$ y
+$\;\;\boldsymbol{\theta}(z)=1+\theta_1z+\cdots+\theta_q z^q,\;\;$
+entonces
+\begin{align*}
+  % (\boldsymbol{\phi}*\boldsymbol{X})_t = & (\boldsymbol{\theta}*\boldsymbol{U}_t \\\\
+  (1-\phi_1\mathsf{B}-\cdots-\phi_p\mathsf{B}^p)X_t = &
+  (1+\theta_1\mathsf{B}+\cdots+\theta_q\mathsf{B}^q)U_t;
+\end{align*}
+y por tanto $$X_t= U_t+\sum_{j=1}^p\phi_j X_{t-j}+\sum_{j=1}^q\theta_j
+U_{t-j}.$$
+
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Como las raíces de $\boldsymbol{\phi}$ están fuera del círculo unidad,
+es decir, como /el polinomio AR es ``invertible''/
+$\;(\boldsymbol{\phi}^{-\triangleright}=\boldsymbol{\phi}^{-1}\in\ell^1)\;$
+entonces $\boldsymbol{X}$ tiene una representación como MA($\infty$):
+$$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}
+\quad\Rightarrow\quad
+\boldsymbol{X}=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}*\boldsymbol{U}
+\quad\Rightarrow\quad X_t = U_t + \sum_{j=1}^\infty\psi_j U_{t-j};$$
+donde
+$\;\boldsymbol{\psi}=\boldsymbol{\phi}^{-1}*\boldsymbol{\theta}=({\color{blue}1},\
+\psi_1,\ \psi_2,\ \psi_3,\ldots)\;$ tiene grado $\infty$.
+#+latex: \bigskip
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Y como las raíces de $\boldsymbol{\theta}$ están fuera del círculo
+unidad, es decir, como /el polinomio MA es ``invertible''/
+$\;(\boldsymbol{\theta}^{-\triangleright}=\boldsymbol{\theta}^{-1}\in\ell^1)\;$
+entonces $\boldsymbol{X}$ tiene una representación como AR($\infty$):
+$$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}
+\quad\Rightarrow\quad
+\frac{\boldsymbol{\phi}}{\boldsymbol{\theta}}*\boldsymbol{X}=\boldsymbol{U}
+\quad\Rightarrow\quad X_t = U_t + \sum_{j=1}^\infty-\varphi_j
+X_{t-j};$$ donde
+$\;\boldsymbol{\varphi}=\boldsymbol{\theta}^{-1}*\boldsymbol{\phi}=({\color{blue}1},\
+\varphi_1,\ \varphi_2,\ \varphi_3,\ldots)\;$ tiene grado $\infty$.
+#+latex: \bigskip
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+latex: \noindent
+
+Por tener representación MA($\infty$):
+
+$E(X_t)=0$ para todo $t\in\mathbb{Z}$ y
+
+$\boldsymbol{\gamma} \;=\; \sigma^2
+\frac{\boldsymbol{\theta}(z)}{\boldsymbol{\phi}(z)}*\frac{\boldsymbol{\theta}(z^{-1})}{\boldsymbol{\phi}(z^{-1})}
+= \sigma^2 \boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})\;$ donde $\;\boldsymbol{\phi}=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}$;
+
+#+latex: \noindent
+es decir, $\;\gamma_k = \sigma^2 \sum\limits_{j=0}^\infty
+\psi_{j+|k|}\psi_j;\quad k\in\mathbb{Z}\;$ (grado $\infty$ y cogrado
+$-\infty$).
+
+$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$
+
+$f(\omega) =
+  \frac{\sigma^2}{2\pi}\frac{\boldsymbol{\theta}(e^{-i\omega})\cdot\boldsymbol{\theta}(e^{i\omega})}{\boldsymbol{\phi}(e^{-i\omega})\cdot\boldsymbol{\phi}(e^{i\omega})}
+  \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^\infty \gamma_h
+  \cos(h\omega);\quad$ donde $\omega\in[-\pi,\pi]$.
+
+(suma infinita de cosenos)
+#+latex: \medskip
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+Por tener representación AR($\infty$):
+
+La PACF, $\;\boldsymbol{\pi},\;$ también es una secuencia con grado
+$\infty$ y cogrado $-\infty$.
+#+latex: \medskip
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+En la Lección 5 vimos que para un proceso ARMA($p,q$)
+$$\boldsymbol{\phi}(\mathsf{B})\gamma_k = 
+\begin{cases}
+  \sigma^2 \Big(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\Big)_k & \text{para } k\leq q \\
+  0 & \text{para } k > q \quad \text{(como en un AR)}
+\end{cases}$$
+Por tanto, en cuanto a la ACF $\boldsymbol{\gamma}$:
+ - de $\rho_1$ a $\rho_q$ dependen de los $q$ parámetros de
+   $\boldsymbol{\theta}$ y los $p$ parámetros de $\boldsymbol{\phi}$
+ - Los $p$ valores de $\rho_q$ a $\rho_{q-p+1}$ son los valores
+   iniciales para resolver la ecuación en diferencias
+   $\boldsymbol{\phi}(\mathsf{B})\rho_k=0\;$ (con $k\geq q)$
+ - Si $q<p$ toda la secuencia $\rho_j$ para $j\geq0$ decae
+   exponencialmente o sinusoidalmente según $\boldsymbol{\phi}$ y los
+   valores iniciales $\rho_q$ a $\rho_{q-p+1}$
+ - Si $q\geq p0$ los primeros $q-p+1$ valores iniciales $\rho_0$ a
+   $\rho_{q-p}$ siguen una pauta diferente
+
+En cuanto a la PACF $\boldsymbol{\pi}$:
+- Tiene grado $\infty$ y cogrado $-\infty$
+- A partir de cierto retardo se comporta como la PACF de un MA($q$),
+  es decir, decae exponencialmente o sinusoidalmente.
+
+
+
+** Proceso ARMA($1,1$)
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . subslide)))
+   :END:
+
+Sea $\boldsymbol{X}=(1-\theta z)*\boldsymbol{U}$ con $|\theta|<1$ y
+con $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es decir $X_t=U_t-\theta
+U_{t-1}$.
+
+- $\boldsymbol{\gamma} \;=\; \sigma^2 (1-\theta z)*(1-\theta z^{-1})
+  \;=\; \sigma^2 (\ldots,\ 0\ ,\ -\theta,\ {\color{blue}{(1+\theta^2)}},\ -\theta,\
+  0,\ \ldots)$
+
+- $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\;
+  \frac{1}{\sigma^2(1+\theta^2)}\boldsymbol{\gamma}$
+
+- $f(\omega) \;=\;
+  \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})\cdot\boldsymbol{\theta}(e^{i\omega})
+  \;=\;
+  \frac{\sigma^2}{2\pi}\Big((1+\theta^2)\;-\;2\theta\cos(\omega)\Big);\quad
+  \omega\in[-\pi,\pi]$
+
+- $\boldsymbol{\pi} \;=\; \sum\limits_{k\in\mathbb{Z}}{  \frac{-\theta^k(1-\theta^2)}{1-\theta^{2(k+1)}} z^k}$
+
+*** ARMA(1,1) $\phi_1=0.8$ y $\theta_1=-0.8$
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+# :results file :output-dir ./img/lecc07/ :file ACF-MA1p.png :exports code :results none
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R 
+options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+armaR <- um(ar = "(1 - 0.8B)", ma = "(1 + 0.8B)")
+armaA <- um(ar = "(1 + 0.8B)", ma = "(1 - 0.8B)")
+armaRc  <- um(ar = "(1 - 0.8B)", ma = "(1 - 0.3B)")
+armaRNV <- um(ar = "(1 - 0.3B)", ma = "(1 - 0.0B)")
+display(list(armaRNV), lag.max = 20, byrow = TRUE)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 200
+[[./.ob-jupyter/e5df4cdd519b80fc3bfcdc2ca30ffae40eee8782.png]]
+:END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+$$\boldsymbol{\theta}(z)=1-0.9z\quad\Rightarrow\quad X_t=
+(1-0.9 \mathsf{B})U_t.$$
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc07/ACF-MA1p.png]]
+
+#+name: raices-ma1p
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :exports result  :results value table pp :results none
+roots(ma1p)
+#+END_SRC
+
+#+RESULTS: raices-ma1p
+:RESULTS:
+1. 
+   |     Real | Imaginary |  Modulus | Frequency | Period | Mult. |
+   |----------+-----------+----------+-----------+--------+-------|
+   | 1.111111 |         0 | 1.111111 |         0 |    Inf |     1 |
+   #+caption: A matrix: 1 × 6 of type dbl
+:END:
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc07/ :file Sim-MA1p.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ma1p, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"))
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc07/Sim-MA1p.png]]
+
+*** ARMA(1,1) con raíz negativa
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+# PARÁMETRO POSITIVO (rojo)
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc07/ :file ACF-MA1n.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+ma1n <- um(ma = "(1 + 0.9B)")
+display(list(ma1n), lag.max = 20, byrow = TRUE)
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+$$\boldsymbol{\theta}(z)=1+0.9z\quad\Rightarrow\quad X_t=
+(1+0.9 \mathsf{B})U_t.$$
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc07/ACF-MA1n.png]]
+
+#+name: raices-ma1n
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :exports result :results value table pp :results none
+roots(ma1n)
+#+END_SRC
+
+#+RESULTS: raices-ma1n
+:RESULTS:
+1. 
+   |      Real | Imaginary |  Modulus | Frequency | Period | Mult. |
+   |-----------+-----------+----------+-----------+--------+-------|
+   | -1.111111 |         0 | 1.111111 |       0.5 |      2 |     1 |
+   #+caption: A matrix: 1 × 6 of type dbl
+:END:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc07/ :file Sim-MA1n.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(ma1n, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"))
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc07/Sim-MA1n.png]]
+
+
+
+
 * La especificación del modelo se escoge según las características de los datos.
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
@@ -173,7 +430,7 @@ Veamos el gráfico de la serie de pasajeros de líneas aéreas junto a su
 gráfico de rango media:
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file rango-mediaAirPass.png :exports code :results silent
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc07/ :file rango-mediaAirPass.png :exports code :results silent
 Z <- AirPassengers
 ide(Z, graphs = c("plot", "rm"), main="Pasajeros de líneas (aéreas en miles) y gráfico rango-media")
 #+END_SRC
@@ -181,7 +438,7 @@ ide(Z, graphs = c("plot", "rm"), main="Pasajeros de líneas (aéreas en miles) y
 #+attr_org: :width 800
 #+attr_html: :width 900px
 #+attr_latex: :width 425px
-[[./img/lecc06/rango-mediaAirPass.png]]
+[[./img/lecc07/rango-mediaAirPass.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 El gráfico de rango media a veces se acompaña de una regresión de la
@@ -207,7 +464,7 @@ Las herramientas utilizadas para tomar la decisión son
 
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file diferenciasPoblacion.png :results silent 
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc07/ :file diferenciasPoblacion.png :results silent 
 options(repr.plot.width = 12, repr.plot.height = 8, repr.plot.res = 200)
 PoblacionAustralia_ts = as.ts( read.zoo('datos/PoblacionAustralia.csv', 
                                         header=TRUE,
@@ -223,7 +480,7 @@ ide(PoblacionAustralia_ts,
 #+attr_org: :width 800
 #+attr_html: :width 900px
 #+attr_latex: :width 425px
-[[./img/lecc06/diferenciasPoblacion.png]]
+[[./img/lecc07/diferenciasPoblacion.png]]
 
 
 
@@ -245,7 +502,7 @@ decir que una serie temporal es /estacionaria/ es un abuso del
 lenguaje).
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file diferenciasPasajeros.png :results silent
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc07/ :file diferenciasPasajeros.png :results silent
 options(repr.plot.width = 12, repr.plot.height =  10, repr.plot.res = 200)
 ide(Z,
     graphs = c("plot"),
@@ -257,7 +514,7 @@ ide(Z,
 #+attr_org: :width 800
 #+attr_html: :width 900px
 #+attr_latex: :width 425px
-[[./img/lecc06/diferenciasPasajeros.png]]
+[[./img/lecc07/diferenciasPasajeros.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 Como ya vimos, la serie pasajeros en logaritmos tiene tendencia y
@@ -275,7 +532,7 @@ arroja una serie que sí parece ser /``estacionaria''/.
 
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file diferenciasTemperaturasRetiro.png :results silent
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc07/ :file diferenciasTemperaturasRetiro.png :results silent
 options(repr.plot.width = 12, repr.plot.height =  8, repr.plot.res = 200)
 TemperaturaRetiro_ts=ts(read.csv("datos/Retiro.txt"),start=c(1985, 1), end=c(2015,9), frequency=12)
 ide(TemperaturaRetiro_ts,
@@ -288,7 +545,7 @@ ide(TemperaturaRetiro_ts,
 #+attr_org: :width 800
 #+attr_html: :width 900px
 #+attr_latex: :width 425px
-[[./img/lecc06/diferenciasTemperaturasRetiro.png]]
+[[./img/lecc07/diferenciasTemperaturasRetiro.png]]
 
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
@@ -447,7 +704,7 @@ autoplot(ProduccionCemento_ts)
 
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file ExportacionDeAcero.png :exports code :results silent
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc07/ :file ExportacionDeAcero.png :exports code :results silent
 ExportacionDeAcero_ts = as.ts( read.csv.zoo("datos/ExportacionDeAcero.csv",
                                             FUN = as.yearmon,
                                             format = "%YM%m",
@@ -458,7 +715,7 @@ autoplot(ExportacionDeAcero_ts)
 
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc06/ :file rango-mediaLogAirPass.png :exports code :results silent
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc07/ :file rango-mediaLogAirPass.png :exports code :results silent
 Z <- AirPassengers
 ide(Z, transf=list(bc=T, d=1, D=1), graphs = c("plot", "rm"))
 #+END_SRC
@@ -467,7 +724,7 @@ ide(Z, transf=list(bc=T, d=1, D=1), graphs = c("plot", "rm"))
 #+attr_org: :width 800
 #+attr_html: :width 900px
 #+attr_latex: :width 425px
-[[./img/lecc06/rango-mediaLogAirPass.png]]
+[[./img/lecc07/rango-mediaLogAirPass.png]]
 
 $$\nabla_{12}(\nabla\ln\boldsymbol{y})$$
 
@@ -493,10 +750,10 @@ as.yearmon(1985 + seq(0, nrow(TemperaturaRetiro_df)-1)/12)
 
 
 #+BEGIN_SRC jupyter-R
-# as.yearmon("mar07", "%b%y")
+as.yearmon("mar07", "%b%y")
 #+END_SRC
 
 #+RESULTS:
-: 6dcd603b-161b-4ac6-b715-3db826f7b9d1
+: [1] "mar 2007"
 
 

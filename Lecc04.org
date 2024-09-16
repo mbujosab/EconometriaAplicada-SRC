@@ -93,7 +93,7 @@ escalares.
 Si $\;\boldsymbol{x},\boldsymbol{y}\in{\mathbb{R}}^\mathbb{Z}\;$ y
 $\;a\in\mathbb{R}$, entonces
 $$\boldsymbol{x}+\boldsymbol{y}=(x_t+y_t \mid t\in\mathbb{Z})$$ y
-$$a\boldsymbol{x}=\big(a(x_t) \mid t\in\mathbb{Z}\big).$$ El conjunto
+$$a\cdot\boldsymbol{x}=\big(a\cdot x_t \mid t\in\mathbb{Z}\big).$$ El conjunto
 ${\mathbb{R}}^\mathbb{Z}$ junto con la suma elemento a elemento y el
 producto por escalares constituyen un espacio vectorial.
 

@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="org1634106">
+<div class="abstract" id="org0c4f762">
 <p>
 En esta lección veremos algunas herramientas estadísticas.
  y usaré la librería <code>tfarima</code> de
@@ -14657,8 +14657,8 @@ $t\in\mathbb{Z}$. Entonces</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Sea $\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}$, con
 $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y donde $\boldsymbol{\theta}$
-es un polinomio de orden $q&gt;0$, con $\theta_0=1$ y con todas sus raíces
-fuera del círculo unidad
+es un polinomio de orden $q&gt;0$, con $\theta_0=1$ y
+con todas sus raíces fuera del círculo unidad
 $(\boldsymbol{\theta}^{-\triangleright}\in\ell^1)$, es decir $$X_t=
 \sum_{j=1}^q\theta_j U_{t-j}+U_t.$$</p>
 <p>Entonces $E(X_t)=0$ y</p>
@@ -15001,7 +15001,7 @@ $$\boldsymbol{\theta}(z)=1-1.9z+0.9z^2\quad\Rightarrow\quad X_t=
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Sea $\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$, con
 $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y donde $\boldsymbol{\phi}$ es
-un polinomio de grado $p&gt;0$. Entonces
+un polinomio de grado $p&gt;0$ con $\phi_0=1$. Entonces
 $$(\boldsymbol{\phi}*\boldsymbol{X})_t=\boldsymbol{\phi}(\mathsf{B})X_t=
 (1+\phi_1\mathsf{B}+\phi_2\mathsf{B}^2+\cdots+\phi_p\mathsf{B}^p)X_t=
 U_t$$ Y por tanto $$X_t= U_t-\sum_{j=1}^p\phi_j X_{t-j}.$$</p>
@@ -15162,14 +15162,15 @@ $$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi z)^{-1}*(1-\phi
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Pero también podemos usar las Ecuaciones de Yule-Walker. En este caso
-(donde el único parámetro es $\phi_1=\phi$), en cuanto a la
-correlación: $$\rho_k=\phi\rho_{k-1}\qquad k&gt;0$$ y como $\rho_0=1$,
-tenemos que $$\rho_k=\phi^k\qquad k\geq0$$ Y en cuanto a la varianza,
-dado que $\rho_1=\phi$
+<p>Pero también podemos usar las Ecuaciones de Yule-Walker (Lecc. 5). En
+este caso (donde el único parámetro es $\phi_1=\phi$), en cuanto a la
+ACF tenemos que: $$\rho_k=\phi\rho_{k-1}\qquad k&gt;0$$ y como $\rho_0=1$
+$$\rho_k=\phi^k\qquad k\geq0$$ Y en cuanto a la varianza, dado que
+$\rho_1=\phi$
 $$\gamma_0=\frac{\sigma^2}{1-\rho_1\phi}=\frac{\sigma^2}{1-\phi^2}.$$
-Por tanto $$\boldsymbol{\gamma} \;=\; \gamma_0\cdot\boldsymbol{\rho} \;=\;
-\frac{\sigma^2}{1-\phi^2} \sum_{k=-\infty}^\infty \phi^{|k|} z^k$$</p>
+Por tanto, la función de autocovarianzas es $$\boldsymbol{\gamma}
+\;=\; \gamma_0\cdot\boldsymbol{\rho} \;=\; \frac{\sigma^2}{1-\phi^2}
+\sum_{k=-\infty}^\infty \phi^{|k|} z^k$$</p>
 
 </div>
 </div>

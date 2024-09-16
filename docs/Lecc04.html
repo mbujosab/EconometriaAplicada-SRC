@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-09-13 vie 18:50 -->
+<!-- 2024-09-16 lun 15:58 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 4</title>
@@ -233,23 +233,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgdbef2b1">1. Secuencias de números</a>
+<li><a href="#org687e7e0">1. Secuencias de números</a>
 <ul>
 <li><a href="#org9eb2348">1.1. El espacio vectorial de las secuencias infinitas \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a>
 <ul>
-<li><a href="#org2010287">1.1.1. Notación mediante funciones generatrices</a></li>
-<li><a href="#orgdb4890b">1.1.2. Características de algunas secuencias</a></li>
+<li><a href="#org0dd44c8">1.1.1. Notación mediante funciones generatrices</a></li>
+<li><a href="#org4a1d9ee">1.1.2. Características de algunas secuencias</a></li>
 <li><a href="#orgc1c3cae">1.1.3. Algunos subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a></li>
 </ul>
 </li>
-<li><a href="#org19df1d4">1.2. Producto convolución</a></li>
+<li><a href="#orge3d7a68">1.2. Producto convolución</a></li>
 <li><a href="#org1817ae9">1.3. Anillos conmutativos y cuerpos</a>
 <ul>
 <li><a href="#orgc70da8e">1.3.1. Anillos conmutativos</a></li>
 <li><a href="#org099a838">1.3.2. Cuerpos</a></li>
 </ul>
 </li>
-<li><a href="#orgd6eb7a0">1.4. Clasificación de algunos subconjuntos de sucesiones</a></li>
+<li><a href="#orga702f9d">1.4. Clasificación de algunos subconjuntos de sucesiones</a></li>
 <li><a href="#org1eded2f">1.5. Inversas</a>
 <ul>
 <li><a href="#org82b8dbf">1.5.1. Inversas de secuencias con principio</a></li>
@@ -261,25 +261,25 @@
 <li><a href="#org2ac125e">1.6. Operador retardo \(\mathsf{B}{}\) y suma de los elementos de una secuencia.</a>
 <ul>
 <li><a href="#orgd470d6f">1.6.1. Polinomios y secuencias en el operador retardo \(\boldsymbol{a}(\mathsf{B}{})\) actuando sobre secuencias</a></li>
-<li><a href="#orgcdcd187">1.6.2. El operador retardo y el producto convolución de una secuencia \(\boldsymbol{x}\) por \(z\)</a></li>
+<li><a href="#org3c62942">1.6.2. El operador retardo y el producto convolución de una secuencia \(\boldsymbol{x}\) por \(z\)</a></li>
 </ul>
 </li>
 <li><a href="#org0527240">1.7. El producto elemento a elemento de dos secuencias</a></li>
-<li><a href="#org79041d8">1.8. Convolución de una serie formal con el "<i>reverso</i>" de otra</a></li>
+<li><a href="#org163f993">1.8. Convolución de una serie formal con el "<i>reverso</i>" de otra</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div class="ABSTRACT" id="orgabf77f1">
+<div class="ABSTRACT" id="org3ce718c">
 <p>
 En esta lección veremos conceptos algebraicos usados en la
 modelización de series temporales.
 </p>
 
 </div>
-<div id="outline-container-orgdbef2b1" class="outline-2">
-<h2 id="orgdbef2b1"><span class="section-number-2">1.</span> Secuencias de números</h2>
+<div id="outline-container-org687e7e0" class="outline-2">
+<h2 id="org687e7e0"><span class="section-number-2">1.</span> Secuencias de números</h2>
 <div class="outline-text-2" id="text-1">
 </div>
 <div id="outline-container-org9eb2348" class="outline-3">
@@ -309,13 +309,13 @@ escalares.
 Si \(\;\boldsymbol{x},\boldsymbol{y}\in{\mathbb{R}}^\mathbb{Z}\;\) y
 \(\;a\in\mathbb{R}\), entonces
 \[\boldsymbol{x}+\boldsymbol{y}=(x_t+y_t \mid t\in\mathbb{Z})\] y
-\[a\boldsymbol{x}=\big(a(x_t) \mid t\in\mathbb{Z}\big).\] El conjunto
+\[a\cdot\boldsymbol{x}=\big(a\cdot x_t \mid t\in\mathbb{Z}\big).\] El conjunto
 \({\mathbb{R}}^\mathbb{Z}\) junto con la suma elemento a elemento y el
 producto por escalares constituyen un espacio vectorial.
 </p>
 </div>
-<div id="outline-container-org2010287" class="outline-4">
-<h4 id="org2010287"><span class="section-number-4">1.1.1.</span> Notación mediante funciones generatrices</h4>
+<div id="outline-container-org0dd44c8" class="outline-4">
+<h4 id="org0dd44c8"><span class="section-number-4">1.1.1.</span> Notación mediante funciones generatrices</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 En la expresión \(\;\boldsymbol{x} \quad = \quad (\ldots,\ x_{-2},\
@@ -348,8 +348,8 @@ secuencia. Dicha expresión se denomina <i>función generatriz</i>.
 </p>
 </div>
 </div>
-<div id="outline-container-orgdb4890b" class="outline-4">
-<h4 id="orgdb4890b"><span class="section-number-4">1.1.2.</span> Características de algunas secuencias</h4>
+<div id="outline-container-org4a1d9ee" class="outline-4">
+<h4 id="org4a1d9ee"><span class="section-number-4">1.1.2.</span> Características de algunas secuencias</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 La sucesión \(\;\boldsymbol{0}=\sum_{t=-\infty}^\infty 0 z^t\;\) se denomina <i>sucesión nula</i>.
@@ -400,8 +400,8 @@ son cero).  \[\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2
 </div>
 </div>
 </div>
-<div id="outline-container-org19df1d4" class="outline-3">
-<h3 id="org19df1d4"><span class="section-number-3">1.2.</span> Producto convolución</h3>
+<div id="outline-container-orge3d7a68" class="outline-3">
+<h3 id="orge3d7a68"><span class="section-number-3">1.2.</span> Producto convolución</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Sean \(\boldsymbol{a}\) y \(\boldsymbol{b}\) sucesiones <span class="underline">con principio</span>
@@ -494,8 +494,8 @@ conjunto</i>)
 </div>
 </div>
 </div>
-<div id="outline-container-orgd6eb7a0" class="outline-3">
-<h3 id="orgd6eb7a0"><span class="section-number-3">1.4.</span> Clasificación de algunos subconjuntos de sucesiones</h3>
+<div id="outline-container-orga702f9d" class="outline-3">
+<h3 id="orga702f9d"><span class="section-number-3">1.4.</span> Clasificación de algunos subconjuntos de sucesiones</h3>
 <div class="outline-text-3" id="text-1-4">
 <dl class="org-dl">
 <dt>Son anillos el conjunto de</dt><dd><p>
@@ -780,8 +780,8 @@ Y en general, si \(\boldsymbol{a}\) e \(\boldsymbol{y}\) son secuencias sumables
 \end{align*}
 </div>
 </div>
-<div id="outline-container-orgcdcd187" class="outline-4">
-<h4 id="orgcdcd187"><span class="section-number-4">1.6.2.</span> El operador retardo y el producto convolución de una secuencia \(\boldsymbol{x}\) por \(z\)</h4>
+<div id="outline-container-org3c62942" class="outline-4">
+<h4 id="org3c62942"><span class="section-number-4">1.6.2.</span> El operador retardo y el producto convolución de una secuencia \(\boldsymbol{x}\) por \(z\)</h4>
 <div class="outline-text-4" id="text-1-6-2">
 <p>
 Del mismo modo que denotamos con \({{1}}\) la secuencia
@@ -821,8 +821,8 @@ y_{t-k} z^t,\] donde
 \end{align*}
 </div>
 </div>
-<div id="outline-container-org79041d8" class="outline-3">
-<h3 id="org79041d8"><span class="section-number-3">1.8.</span> Convolución de una serie formal con el "<i>reverso</i>" de otra</h3>
+<div id="outline-container-org163f993" class="outline-3">
+<h3 id="org163f993"><span class="section-number-3">1.8.</span> Convolución de una serie formal con el "<i>reverso</i>" de otra</h3>
 <div class="outline-text-3" id="text-1-8">
 <p>
 Por último, si tenemos dos series formales \(\boldsymbol{a}\) y
@@ -852,7 +852,7 @@ es decir,
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-09-13 vie 18:50</p>
+<p class="date">Created: 2024-09-16 lun 15:58</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

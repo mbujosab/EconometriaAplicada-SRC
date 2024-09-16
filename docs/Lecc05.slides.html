@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="orgb75e1db">
+<div class="abstract" id="org3b9b23b">
 <p>
 Esta lección veremos las dificultades que ocasiona la correlación
 serial y algunos tipos de procesos débilmente estacionarios que nos
@@ -15164,8 +15164,8 @@ MA($q$).</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Es decir:
-$$ X_t = U_t + \theta_1 U_{t-1} + \cdots + \theta_q U_{t-q}.$$</p>
+<p>Es decir, si $\;\boldsymbol{\theta}=(1-\theta_1z-\cdots-\theta_qz^q)\;$:
+$$ X_t = U_t - \theta_1 U_{t-1} - \cdots - \theta_q U_{t-q}.$$</p>
 
 </div>
 </div>
@@ -15229,9 +15229,9 @@ $\;\boldsymbol{\phi}\;$ un <u>polinomio de grado $p$</u> con ${\color{#008000}{\
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Es decir $\boldsymbol{X}=(X_t\mid t\in\mathbb{Z})$ es una solución de
-la siguiente ecuación en diferencias: $$X_t + \phi_1 X_{t-1} +
-\cdots + \phi_q X_{t-q} = U_t.$$</p>
+<p>Si $\;\boldsymbol{\phi}=(1-\phi_1z-\cdots-\phi_pz^p)\;$ entonces
+$\boldsymbol{X}=(X_t\mid t\in\mathbb{Z})$ es solución de la ecuación:
+$$X_t + \phi_1 X_{t-1} + \cdots + \phi_q X_{t-q} = U_t.$$</p>
 
 </div>
 </div>
@@ -15526,12 +15526,12 @@ E\Big[
  (\psi_0U_{t-k}+\psi_1U_{t-k-1}+\psi_2U_{t-k-2}\cdots)\Big]
 \\ = &amp;
 \sigma^2\sum\nolimits_{j\in\mathbb{Z}}\psi_{j+k}\psi_j
-\qquad \text{ ya que }\; E(U_hU_j)=0\; \text{ si } \;j\ne h
-\end{align*}<p>no depende de $t$ (por tanto $\boldsymbol{X}$ es estacionario). Es más, por la última ecuación de la lección anterior
-$$\;\gamma_k \;=\; \sigma^2\sum\nolimits_{j\in\mathbb{Z}}\psi_{j+k}\psi_j \;=\;
+\qquad \text{ ya que }\; E(U_hU_j)=0\; \text{ si } \;j\ne h,
+\end{align*}<p>que no depende de $t$ ($\boldsymbol{X}$ es estacionario). Es más, por
+la última ecuación de la lección 4 $$\;\gamma_k \;=\;
+\sigma^2\sum\nolimits_{j\in\mathbb{Z}}\psi_{j+k}\psi_j \;=\;
 \sigma^2\big(\boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})\big)_k
-\qquad \text{ para } k\in\mathbb{Z}.$$
-Y, por tanto</p>
+\qquad \text{ para } k\in\mathbb{Z}.$$ Y, por tanto</p>
 \begin{equation}
  \label{eqAutoCovarianzaProcesoLineal}
  \boldsymbol{\gamma}=\sigma^2\boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})
@@ -15724,18 +15724,18 @@ Yule-Walker.</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Sea un ARMA($p,q$) estacionario:
-$\boldsymbol{\phi}(\mathsf{B}){X_t}=\boldsymbol{\theta}(\mathsf{B}){U_t}.\;$
-Multiplicando por $X_{t-k}$, tomando esperanzas y sustituyendo
-$X_{t-k}$ por su representación MA($\infty$), donde
+$\boldsymbol{\phi}(\mathsf{B}){X_t}=\boldsymbol{\theta}(\mathsf{B}){U_t}\;$
+donde $\boldsymbol{\phi}$ y $\boldsymbol{\theta}$ no tienen raíces
+comunes. Multiplicando por $X_{t-k}$, tomando esperanzas y
+sustituyendo $X_{t-k}$ por su representación MA($\infty$), donde
 $\boldsymbol{\psi}=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}$:
 $$E\Big[\Big(\boldsymbol{\phi}(\mathsf{B})X_t\Big)\cdot X_{t-k}\Big] =
 E\Big[\Big(\boldsymbol{\theta}(\mathsf{B})U_t\Big)\cdot X_{t-k}\Big]
 \;=\; E\Big[\Big(\boldsymbol{\theta}(\mathsf{B})U_t\Big)\cdot
 \Big(\boldsymbol{\psi}(\mathsf{B})U_{t-k}\Big)\Big]$$ Usando
 $\eqref{eqnLadoIzquierdoYW}$, renombrando
-$\Big(\boldsymbol{\theta}(\mathsf{B})U_t\Big)=\boldsymbol{W}$ y
-$\Big(\boldsymbol{\psi}(\mathsf{B})U_t\Big)=\boldsymbol{Y}$, y
-recordando ($\ref{eqnLadoIzquierdoYW}$):</p>
+$\;\boldsymbol{\theta}(\mathsf{B})U_t=\boldsymbol{W}\;$ y
+$\;\boldsymbol{\psi}(\mathsf{B})U_t=\boldsymbol{Y}:\;$</p>
 \begin{align*}
   \boldsymbol{\phi}(\mathsf{B})\gamma_k &amp; = \boldsymbol{\gamma_{_{\boldsymbol{W},\boldsymbol{Y}}}}(k)\\
   &amp; =  \sigma^2 \Big(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\Big)_k &amp; \text{por } \eqref{eqCovarianzaCruzadaProcesosLineales}
