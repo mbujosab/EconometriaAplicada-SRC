@@ -41,40 +41,40 @@ $(OUT_DIR)/%.pdf: %.pdf
 
 
 #+BEGIN_SRC sh :results silent
-pdflatex --shell-escape  -interaction=batchmode Lecc01.tex
-pdflatex --shell-escape  -interaction=batchmode Lecc01.tex
-latexmk -c Lecc01.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc01.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc01.tex
+#latexmk -c Lecc01.tex
 
 pdflatex --shell-escape  -interaction=batchmode Lecc02.tex
 pdflatex --shell-escape  -interaction=batchmode Lecc02.tex
 latexmk -c Lecc02.tex
 
-pdflatex --shell-escape  -interaction=batchmode Lecc03.tex
-pdflatex --shell-escape  -interaction=batchmode Lecc03.tex
-latexmk -c Lecc03.tex
-
-pdflatex --shell-escape  -interaction=batchmode Lecc04.tex
-pdflatex --shell-escape  -interaction=batchmode Lecc04.tex
-latexmk -c Lecc04.tex
-
-pdflatex --shell-escape  -interaction=batchmode Lecc05.tex
-pdflatex --shell-escape  -interaction=batchmode Lecc05.tex
-latexmk -c Lecc05.tex
-
-pdflatex --shell-escape  -interaction=batchmode Lecc06.tex
-pdflatex --shell-escape  -interaction=batchmode Lecc06.tex
-latexmk -c Lecc06.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc03.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc03.tex
+#latexmk -c Lecc03.tex
+#
+#pdflatex --shell-escape  -interaction=batchmode Lecc04.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc04.tex
+#latexmk -c Lecc04.tex
+#
+#pdflatex --shell-escape  -interaction=batchmode Lecc05.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc05.tex
+#latexmk -c Lecc05.tex
+#
+#pdflatex --shell-escape  -interaction=batchmode Lecc06.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc06.tex
+#latexmk -c Lecc06.tex
 #+END_SRC
 
 
 #+BEGIN_SRC emacs-lisp :results silent
 (require 'ox-ipynb)
-(ox-ipynb-export-org-file-to-ipynb-file "Lecc01.org")
-(ox-ipynb-export-org-file-to-ipynb-file "Lecc02.org")
-(ox-ipynb-export-org-file-to-ipynb-file "Lecc03.org")
-(ox-ipynb-export-org-file-to-ipynb-file "Lecc04.org")
-(ox-ipynb-export-org-file-to-ipynb-file "Lecc05.org")
-(ox-ipynb-export-org-file-to-ipynb-file "Lecc06.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc01.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc02.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc03.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc04.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc05.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc06.org")
 #+END_SRC
 
 #+BEGIN_SRC sh :results silent
