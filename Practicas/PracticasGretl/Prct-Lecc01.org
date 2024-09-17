@@ -78,7 +78,7 @@
 
    | Guión: | [[https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Practicas/PracticasGretl/pub/scripts/airlinePass.inp][airlinePass.inp]] |
 
-ñEn esta primera práctica con [[https://gretl.sourceforge.net/es.html][Gretl]] reproduciremos el ejemplo visto en
+En esta primera práctica con [[https://gretl.sourceforge.net/es.html][Gretl]] reproduciremos el ejemplo visto en
 clase, en el que hemos aplicado distintas transformaciones a los datos
 hasta obtener una serie temporal que podemos asumir que podría ser una
 realización de un proceso estocástico estacionario.  Los datos son
@@ -89,7 +89,7 @@ aparece en manual de Box & Jenkins.
 ***** Objetivo
 1. Reproducir el primer ejemplo visto en clase.
 2. Mostrar datos.
-3. Transformalos
+3. Transformarlos
 4. Generar gráficos.
 
 ***** Carga de datos
@@ -160,15 +160,15 @@ serie de iconos. Uno de ellos es la */~vista de iconos de sesión~/*.
 
 ** Actividad 3 - Transformar logarítmicamente los datos
 Aunque el fichero ya contiene el logaritmo de la serie, vamos a
-tranfformar logarítmicamente los datos originales.
+transformar logarítmicamente los datos originales.
 
-Selecione con el ratón la variable =g= y luego pulse en el menú desplegable */~Añadir~/* que aparece arriba, en el centro de la
+Seleccione con el ratón la variable =g= y luego pulse en el menú desplegable */~Añadir~/* que aparece arriba, en el centro de la
 ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
   + */~Añadir -> Logaritmos de las variables seleccionadas~/*
 
     #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
     /o bien teclee en linea de comandos/: 
-      #+NAME: Aplicamos la trnasformación logarítmica
+      #+NAME: Aplicamos la transformación logarítmica
       #+begin_src hansl 
 logs g
       #+end_src
@@ -178,7 +178,7 @@ Entre las variables aparecerá una nueva con el prefijo =l_=, es decir,
 en este caso aparecerá la variable =l_g= (que contiene exactamente la
 misma serie temporal que =lg=).
 
-Genere el gráfico de series temporales de esta nueva serie y guardelo
+Genere el gráfico de series temporales de esta nueva serie y guárdelo
 como un nuevo icono (use un nombre suficientemente descriptivo para el
 icono, por ejemplo =LogsAirlinePassengers=)
 
@@ -191,7 +191,7 @@ LogsAirlinePassengers <- gnuplot l_g --time-series --with-lines
 
 ** Actividad 4 - Primera diferencia de los datos en logaritmos
 
-Selecione con el ratón la variable =l_g= y luego pulse en el menú desplegable */~Añadir~/* que aparece arriba, en el centro de la
+Seleccione con el ratón la variable =l_g= y luego pulse en el menú desplegable */~Añadir~/* que aparece arriba, en el centro de la
 ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
   + */~Añadir -> Primeras diferencias de las variables seleccionadas~/*
 
@@ -205,7 +205,7 @@ diff l_g
 Entre las variables aparecerá una nueva con el prefijo =d_=, es decir,
 en este caso aparecerá la variable =d_l_g=.
 
-Genere el gráfico de series temporales de esta nueva serie y guardelo
+Genere el gráfico de series temporales de esta nueva serie y guárdelo
 como un nuevo icono (Use un nombre suficientemente descriptivo, por
 ejemplo =D_LogsAirlinePassengers=)
 
@@ -238,7 +238,7 @@ print -o d_l_g l_d_g
   #+latex: }
 
 ** Actividad 6 - Diferencia de orden 12 (o estacional) de la primera diferencia de los datos en logaritmos
-Selecione con el ratón la variable =d_l_g= y luego pulse en el menú desplegable */~Añadir~/* que aparece arriba, en el centro de la
+Seleccione con el ratón la variable =d_l_g= y luego pulse en el menú desplegable */~Añadir~/* que aparece arriba, en el centro de la
 ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
   + */~Añadir -> Diferencias estacionales de las variables seleccionadas~/*
 
@@ -252,7 +252,7 @@ sdiff d_l_g
 Entre las variables aparecerá una nueva con el prefijo =sd_=, es
 decir, en este caso aparecerá la variable =sd_d_l_g=.
 
-Genere el gráfico de series temporales de esta nueva serie y guardelo
+Genere el gráfico de series temporales de esta nueva serie y guárdelo
 como un nuevo icono (Use un nombre suficientemente descriptivo, por
 ejemplo =D12_D_LogsAirlinePassengers=)
 
@@ -265,7 +265,7 @@ D12_D_LogsAirlinePassengers <- gnuplot sd_d_l_g --time-series --with-lines
 Observe que en la serie obtenida ya no se observa ni tendencia ni un
 componente cíclico estacional.
 
-** Actividad 5 - El orden en que se aplican los operadores diferencia y diferencia estacional es irelevante
+** Actividad 5 - El orden en que se aplican los operadores diferencia y diferencia estacional es irrelevante
 
 1) calcule la diferencia estacional de la serie en logaritmos =l_g= y
    genere su gráfico

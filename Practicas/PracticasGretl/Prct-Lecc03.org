@@ -76,7 +76,7 @@
    :header-args: :tangle ./pub/scripts/GNPvsMelanoma.inp
    :END:
 
-   | Guión: | [[https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/GNPvsMelanoma.inp][GNPvsMelanoma.inp]] |
+   | Guión: | [[https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Practicas/PracticasGretl/pub/scripts/GNPvsMelanoma.inp][GNPvsMelanoma.inp]] |
    
 ***** Objetivo
 Comprobar cómo la aparente relación entre ambas series temporales se
@@ -156,12 +156,17 @@ AjusteEnNiveles <- ols GNP 0 Melanoma
 #+latex: }
 
 Aunque el coeficiente de determinación es muy elevado y los parámetros
-muy significativos, el modelo "/no vale una castaña/". Una forma de
-constatarlo es darse cuenta de que si fuera cierto que $$
-\boldsymbol{y}=\beta_1 \boldsymbol{1} + \beta_2 \boldsymbol{x} +
-\boldsymbol{u} $$ Entonces también sería cierto que (y nótese que
-$\nabla\boldsymbol{1}=\boldsymbol{0}$) $$ \nabla\boldsymbol{y}=
-\beta_2 \nabla\boldsymbol{x} + \nabla\boldsymbol{u}$$
+muy significativos, el modelo "/no es válido/". Una forma de
+constatarlo es darse cuenta de que si fuera cierto que
+
+$$\boldsymbol{y}=\beta_1 \boldsymbol{1} + \beta_2 \boldsymbol{x} +
+\boldsymbol{u}$$
+
+Entonces también sería cierto que (y nótese que
+$\nabla\boldsymbol{1}=\boldsymbol{0}$)
+
+$$\nabla\boldsymbol{y}=\beta_2 \nabla\boldsymbol{x} +
+\nabla\boldsymbol{u}$$
 
 Consecuentemente, si $\boldsymbol{y}$ corresponde al =GNP= y
 $\boldsymbol{x}$ a =Melanoma=, al regresar la primera diferencia de
@@ -171,7 +176,7 @@ significativo, pero si la pendiente ($\beta_2$). Veamos que ocurre justo lo cont
 
 ** Actividad 5 - Añadir la primera diferencia de los datos
 
-Selecione con el ratón la variable =GNP= y =Melanoma=. Luego pulse en el menú desplegable */~Añadir~/* que aparece arriba, en el centro de la
+Seleccione con el ratón la variable =GNP= y =Melanoma=. Luego pulse en el menú desplegable */~Añadir~/* que aparece arriba, en el centro de la
 ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
   + */~Añadir -> Primeras diferencias de las variables seleccionadas~/*
 
@@ -206,8 +211,8 @@ AjusteEnDiferencias <- ols d_GNP 0 d_Melanoma
 *Conclusión.* Las variables =GNP= y =Melanoma= muestran una tendencia
 creciente, lo que conduce a un elevado coeficiente de correlación
 entre ellas; pero la tendencia ni es común, ni la correlación se puede
-atribuir a ningúna relación de causalidad entre ellas. La correlación
-en este caso es espuria (es decir, carece de sentido tartar de
+atribuir a ninguna relación de causalidad entre ellas. La correlación
+en este caso es espuria (es decir, carece de sentido tratar de
 interpretarla).
 
 # +LATEX: \clearpage
@@ -224,10 +229,10 @@ interpretarla).
    :header-args: :tangle ./pub/scripts/UKinterestRates.inp
    :END:
 
-   | Guión: | [[https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/UKinterestRates.inp][UKinterestRates.inp]] |
+   | Guión: | [[https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Practicas/PracticasGretl/pub/scripts/UKinterestRates.inp][UKinterestRates.inp]] |
    
 ***** Objetivo
-Ver que probablemmente la correlación entre los tipos a corto y largo
+Ver que probablemente la correlación entre los tipos a corto y largo
 plazo no es espuria, y que ambas series probablemente están
 cointegrados.
 
@@ -293,7 +298,7 @@ Calcule la correlación entre ambas series.
      (compare esto con lo que pasaba en el ejemplo anterior)
    - ¿Reproduce el modelo parte de la varianza de =d_Short=?
 
-Realice los pasos con la interfáz gráfica y los menús desplegables,
+Realice los pasos con la interfaz gráfica y los menús desplegables,
 #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
 /o bien teclee en linea de comandos/:
   #+begin_src hansl 
@@ -317,7 +322,7 @@ debemos analizar los residuos de la regresión de =Short= sobre
 3) Dibuje los residuos de la regresión. ¿Parecen "estacionarios en
    media"? dicho de otra forma ¿muestran alguna tendencia?
 
-Realice los pasos con la interfáz gráfica y los menús desplegables,
+Realice los pasos con la interfaz gráfica y los menús desplegables,
 #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
 /o bien teclee en linea de comandos/:
   #+begin_src hansl 
@@ -331,7 +336,7 @@ GraficoResiduos <- gnuplot residuos --time-series --with-lines
 *Conclusión.* Las variables =Short= y =Long= son no estacionarias
 (tienen tendencia), lo que conduce a un elevado coeficiente de
 correlación entre ellas; sus primeras diferencias parecen
-"estacionarias" lo que sugiere que mabas series son $I(1)$.
+"estacionarias" lo que sugiere que ambas series son $I(1)$.
 
 La regresión de las series en diferencias y los residuos de la
 regresión en niveles parecen compatibles con que =Short= y =Long=
@@ -341,7 +346,7 @@ En este caso la correlación no parece ser espuria, por lo que cabe
 interpretar dicha correlación y pensar que hay relación entre los
 tipos a corto y a largo plazo.
 
-A este análisis le falta la realización de contrartes estadísticos que
+A este análisis le falta la realización de contrastes estadísticos que
 confirmen la estacionariedad de las series diferenciadas y de los
 residuos de la última regresión.
 
@@ -349,6 +354,7 @@ residuos de la última regresión.
 #+latex: \vspace{10pt}
 #+latex: \noindent
 *Código completo de la práctica* ~UKinterestRates.inp~
+
 #+latex: \vspace{10pt}
 \lstinputlisting{scripts/UKinterestRates.inp}
 #+LATEX: \clearpage

@@ -76,7 +76,7 @@
    :header-args: :tangle ./pub/scripts/componentesAirlinePass.inp
    :END:
 
-   | Guión: | [[https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/componentesAirlinePass.inp][componentesAirlinePass.inp]] |
+   | Guión: | [[https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Practicas/PracticasGretl/pub/scripts/componentesAirlinePass.inp][componentesAirlinePass.inp]] |
    
 Vamos a reproducir el ejemplo de estimación de componentes no
 observables visto en clase. Los datos son mensuales y contienen el
@@ -112,13 +112,13 @@ ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
       #+end_src
     #+latex: }
 
-Selecione con el ratón la variable =time= y luego pulse en el menú desplegable */~Añadir~/* que aparece arriba, en el centro de la
+Seleccione con el ratón la variable =time= y luego pulse en el menú desplegable */~Añadir~/* que aparece arriba, en el centro de la
 ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
   + */~Añadir -> Cuadrados de las variables seleccionadas~/*
 
     #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
     /o bien teclee en linea de comandos/: 
-      #+NAME: Aplicamos la trnasformación logarítmica
+      #+NAME: Aplicamos la transformación logarítmica
       #+begin_src hansl 
       square time
       #+end_src
@@ -209,7 +209,7 @@ serie de iconos. Uno de ellos es la */~vista de iconos de sesión~/*.
 
 ***** Gráfico de la diferencia estacional del componente irregular
 
-- Selecione con el ratón la variable correspondiente al componente
+- Seleccione con el ratón la variable correspondiente al componente
   irregular y luego pulse en el menú desplegable */~Añadir~/* que
   aparece arriba, en el centro de la ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
     + */~Añadir -> Diferencias estacionales de las variables
@@ -374,10 +374,10 @@ ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
    :header-args: :tangle ./pub/scripts/componentesAirlinePass2.inp
    :END:
 
-   | Guión: | [[https://github.com/mbujosab/Ectr/tree/master/Practicas/Gretl/scripts/componentesAirlinePass2.inp][componentesAirlinePass2.inp]] |
+   | Guión: | [[https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Practicas/PracticasGretl/pub/scripts/componentesAirlinePass2.inp][componentesAirlinePass2.inp]] |
    
 Continuamos el ejemplo anterior, pero ahora vamos a reducir el modelo
-quitando variables no siginificativas.
+quitando variables no significativas.
 
 ** Actividad 1 - Estime el modelo con tendencia cuadrática y estacionalidad determinista
 
@@ -396,7 +396,7 @@ Repita la estimación del último modelo de la practica anterior
 
 ** Actividad 2 - Reducir el modelo eliminando secuencialmente variables no significativas
 
-Los p-valores de algunos parametros indican que sus estimaciones son
+Los p-valores de algunos parámetros indican que sus estimaciones son
 no significativas. En particular los correspondientes a las variables
 ficticias de enero, febrero y octubre.
 
@@ -420,7 +420,7 @@ no significativo.
 - Observe bajo el valor de contraste de Durbin-Watson (0,691477).
 
 - Desde la ventana del modelo estimado ``pinche'' en */~contrastes -->
-  valor p del estadistico Durbin-Watson~/*. 
+  valor p del estadístico Durbin-Watson~/*. 
   #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
   /o bien teclee en linea de comandos/:
     #+begin_src hansl 
@@ -434,7 +434,7 @@ no significativo.
   Claramente se rechaza la ausencia de autocorrelación de orden uno.
 
 - Desde la ventana del modelo estimado ``pinche'' en */~contrastes -->
-  Autocrrelación~/*. E indique por ejemplo 3 retardos. 
+  Autocorrelación~/*. E indique por ejemplo 3 retardos. 
   #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
   /o bien teclee en linea de comandos/:
     #+begin_src hansl
@@ -443,7 +443,7 @@ no significativo.
   #+latex: }
 
   Claramente se rechaza la ausencia de autocorrelación y se observa
-  que el retardo de orden uno es muy siginificativo.
+  que el retardo de orden uno es muy significativo.
 
 
 ** Actividad 4 - Estimación del modelo con errores estándar robustos
@@ -451,7 +451,7 @@ no significativo.
 Los test de autocorrelación indican que la inferencia empleada para
 reducir el modelo es incorrecta. A la hora de calcular las
 desviaciones típicas de las estimaciones hay que tener en cuenta que
-las perturbaciones estan autocorreladas.
+las perturbaciones están autocorreladas.
 
 - Estime el modelo inicial con errores estándar robustos: */~Modelo ->
   Mínimos Cuadrados Ordinarios~/*; indique a [[https://gretl.sourceforge.net/es.html][Gretl]] el regresando y los
@@ -467,7 +467,7 @@ las perturbaciones estan autocorreladas.
   #+latex: }
 
   Fíjese que al 5% de significación, solo es no significativa al
-  dummie correspondeinte al mes de febrero.
+  dummie correspondiente al mes de febrero.
 
 - Reduzca el modelo, eliminando aquellas variables no significativas
   al 5%. Verifique que el conjunto de variables excluidas es
@@ -484,7 +484,7 @@ las perturbaciones estan autocorreladas.
     #+end_src
   #+latex: }
 
-  Fíjese que únicamente se elimina la dummie correspondeinte a
+  Fíjese que únicamente se elimina la dummie correspondiente a
   febrero.
 
 ** Actividad 4 - Estimación incluyendo en el modelo la autocorrelación de orden uno en las perturbaciones

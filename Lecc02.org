@@ -353,6 +353,38 @@ $$\widehat{\ln{y_t}}=4.7364+(0.0132)\cdot t +(-2.191e-05)\cdot t^2, \qquad t=1:1
 print(results2.summary()) 
 #+END_SRC
 
+#+RESULTS:
+#+begin_example
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                dataLog   R-squared:                       0.907
+Model:                            OLS   Adj. R-squared:                  0.906
+Method:                 Least Squares   F-statistic:                     691.0
+Date:                Mon, 16 Sep 2024   Prob (F-statistic):           1.37e-73
+Time:                        16:38:00   Log-Likelihood:                 85.260
+No. Observations:                 144   AIC:                            -164.5
+Df Residuals:                     141   BIC:                            -155.6
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+cte            4.7364      0.034    138.117      0.000       4.669       4.804
+time           0.0132      0.001     12.112      0.000       0.011       0.015
+sq_time    -2.191e-05   7.29e-06     -3.004      0.003   -3.63e-05   -7.49e-06
+==============================================================================
+Omnibus:                        4.978   Durbin-Watson:                   0.624
+Prob(Omnibus):                  0.083   Jarque-Bera (JB):                3.317
+Skew:                           0.205   Prob(JB):                        0.190
+Kurtosis:                       2.380   Cond. No.                     2.85e+04
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.85e+04. This might indicate that there are
+strong multicollinearity or other numerical problems.
+#+end_example
+
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 #+attr_org: :width 600
 #+attr_html: :width 600px
@@ -367,6 +399,12 @@ print(results2.summary())
 plt.grid()  
 plt.plot(results2.resid)
 #+END_SRC
+
+#+RESULTS:
+:RESULTS:
+| <matplotlib.lines.Line2D | at | 0x7fdeace02350> |
+[[./img/lecc02/airlinepass+irreg2.png]]
+:END:
 
 #+attr_org: :width 800
 #+attr_html: :width 900px
@@ -826,7 +864,7 @@ round(arbg[0], 4) :results silent
 #+RESULTS: Breusch-Godfrey test value
 :RESULTS:
 # [goto error]
-:   Cell In [125], line 2
+:   Cell In [45], line 2
 :     round(arbg[0], 4) :results silent
 :     ^
 : SyntaxError: illegal target for annotation

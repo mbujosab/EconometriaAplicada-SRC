@@ -1,4 +1,4 @@
-% Created 2024-09-10 mar 15:53
+% Created 2024-09-17 mar 13:10
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -37,14 +37,14 @@
 
 
 \section{Número de viajeros internacionales}
-\label{sec:orgc576d58}
+\label{sec:orgfddfaf0}
 \begin{center}
 \begin{tabular}{ll}
 Guión: & \href{https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Practicas/PracticasGretl/pub/scripts/airlinePass.inp}{airlinePass.inp}\\[0pt]
 \end{tabular}
 \end{center}
 
-ñEn esta primera práctica con \href{https://gretl.sourceforge.net/es.html}{Gretl} reproduciremos el ejemplo visto en
+En esta primera práctica con \href{https://gretl.sourceforge.net/es.html}{Gretl} reproduciremos el ejemplo visto en
 clase, en el que hemos aplicado distintas transformaciones a los datos
 hasta obtener una serie temporal que podemos asumir que podría ser una
 realización de un proceso estocástico estacionario.  Los datos son
@@ -54,16 +54,16 @@ aparece en manual de Box \& Jenkins.
 
 \begin{enumerate}
 \item Objetivo
-\label{sec:org3e89c52}
+\label{sec:org203f126}
 \begin{enumerate}
 \item Reproducir el primer ejemplo visto en clase.
 \item Mostrar datos.
-\item Transformalos
+\item Transformarlos
 \item Generar gráficos.
 \end{enumerate}
 
 \item Carga de datos
-\label{sec:orgcc64e77}
+\label{sec:org5ffcec5}
 \textbf{\emph{\texttt{Archivo -{}-{}> Abrir datos -{}-{}> Archivo de muestra}}} y en la pestaña
 \textbf{\emph{\texttt{Gretl}}} seleccione \texttt{bjg}.
 
@@ -76,10 +76,10 @@ open bjg
 \end{enumerate}
 
 \subsection{Actividad 1 - mostrar datos}
-\label{sec:orgeae6623}
+\label{sec:orgc1a3aec}
 \begin{enumerate}
 \item Visualice los datos de precios y tamaños de las casas
-\label{sec:org724bb00}
+\label{sec:org66785b5}
 \begin{itemize}
 \item En la ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}, marque con el ratón la 
 variable: \texttt{g}.
@@ -98,7 +98,7 @@ print -o g
 \vspace{-3pt}
 
 \item Ayuda
-\label{sec:orgbeedcf4}
+\label{sec:org6d0eb90}
 Para consultar la documentación sobre cualquier comando, puede emplear
 el menú desplegable \textbf{\emph{\texttt{Ayuda}}} que aparece arriba, a la derecha de la
 ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
@@ -112,10 +112,10 @@ ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
 \end{enumerate}
 
 \subsection{Actividad 2 - Gráfico de series temporales}
-\label{sec:org37a38b4}
+\label{sec:org13b1741}
 \begin{enumerate}
 \item Scatter plot
-\label{sec:org0f7c8a8}
+\label{sec:org5b191c0}
 \begin{itemize}
 \item Marque la variable \texttt{g} (pulsando \texttt{ctrl} y pinchando con el botón
 derecho del ratón sobre ella). Elija \textbf{\emph{\texttt{Gráfico de series temporales}}}
@@ -126,7 +126,7 @@ derecho del ratón sobre ella). Elija \textbf{\emph{\texttt{Gráfico de series t
 \end{itemize}
 
 \item Guardar gráfico como \emph{icono} para editarlo más tarde
-\label{sec:orgca9d159}
+\label{sec:org71f8dd5}
 \begin{itemize}
 \item ``Pinche'' con el botón derecho sobre la ventana del gráfico.
 \item Seleccione \textbf{\emph{\texttt{Guardar a sesión como icono}}}
@@ -146,11 +146,11 @@ serie de iconos. Uno de ellos es la \textbf{\emph{\texttt{vista de iconos de ses
 
 
 \subsection{Actividad 3 - Transformar logarítmicamente los datos}
-\label{sec:org4628ffb}
+\label{sec:orgf259a70}
 Aunque el fichero ya contiene el logaritmo de la serie, vamos a
-tranfformar logarítmicamente los datos originales.
+transformar logarítmicamente los datos originales.
 
-Selecione con el ratón la variable \texttt{g} y luego pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
+Seleccione con el ratón la variable \texttt{g} y luego pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
 ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
 \begin{itemize}
 \item \textbf{\emph{\texttt{Añadir -> Logaritmos de las variables seleccionadas}}}
@@ -167,7 +167,7 @@ Entre las variables aparecerá una nueva con el prefijo \texttt{l\_}, es decir,
 en este caso aparecerá la variable \texttt{l\_g} (que contiene exactamente la
 misma serie temporal que \texttt{lg}).
 
-Genere el gráfico de series temporales de esta nueva serie y guardelo
+Genere el gráfico de series temporales de esta nueva serie y guárdelo
 como un nuevo icono (use un nombre suficientemente descriptivo para el
 icono, por ejemplo \texttt{LogsAirlinePassengers})
 
@@ -175,9 +175,9 @@ icono, por ejemplo \texttt{LogsAirlinePassengers})
 }
 
 \subsection{Actividad 4 - Primera diferencia de los datos en logaritmos}
-\label{sec:orgb541fa9}
+\label{sec:orgc6f27e0}
 
-Selecione con el ratón la variable \texttt{l\_g} y luego pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
+Seleccione con el ratón la variable \texttt{l\_g} y luego pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
 ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
 \begin{itemize}
 \item \textbf{\emph{\texttt{Añadir -> Primeras diferencias de las variables seleccionadas}}}
@@ -193,7 +193,7 @@ diff l_g
 Entre las variables aparecerá una nueva con el prefijo \texttt{d\_}, es decir,
 en este caso aparecerá la variable \texttt{d\_l\_g}.
 
-Genere el gráfico de series temporales de esta nueva serie y guardelo
+Genere el gráfico de series temporales de esta nueva serie y guárdelo
 como un nuevo icono (Use un nombre suficientemente descriptivo, por
 ejemplo \texttt{D\_LogsAirlinePassengers})
 
@@ -201,7 +201,7 @@ ejemplo \texttt{D\_LogsAirlinePassengers})
 }
 
 \subsection{Actividad 5 - El logaritmo no es una función lineal}
-\label{sec:org3b2acbd}
+\label{sec:org2697646}
 
 Aunque el operador primera diferencia es lineal, la función logaritmo
 no lo es. Comprobemos que no es lo mismo la primera diferencia del
@@ -226,8 +226,8 @@ print -o d_l_g l_d_g
 \end{itemize}
 
 \subsection{Actividad 6 - Diferencia de orden 12 (o estacional) de la primera diferencia de los datos en logaritmos}
-\label{sec:org85bb633}
-Selecione con el ratón la variable \texttt{d\_l\_g} y luego pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
+\label{sec:orgfeadd6c}
+Seleccione con el ratón la variable \texttt{d\_l\_g} y luego pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
 ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
 \begin{itemize}
 \item \textbf{\emph{\texttt{Añadir -> Diferencias estacionales de las variables seleccionadas}}}
@@ -243,7 +243,7 @@ sdiff d_l_g
 Entre las variables aparecerá una nueva con el prefijo \texttt{sd\_}, es
 decir, en este caso aparecerá la variable \texttt{sd\_d\_l\_g}.
 
-Genere el gráfico de series temporales de esta nueva serie y guardelo
+Genere el gráfico de series temporales de esta nueva serie y guárdelo
 como un nuevo icono (Use un nombre suficientemente descriptivo, por
 ejemplo \texttt{D12\_D\_LogsAirlinePassengers})
 
@@ -253,8 +253,8 @@ ejemplo \texttt{D12\_D\_LogsAirlinePassengers})
 Observe que en la serie obtenida ya no se observa ni tendencia ni un
 componente cíclico estacional.
 
-\subsection{Actividad 5 - El orden en que se aplican los operadores diferencia y diferencia estacional es irelevante}
-\label{sec:org8f2033a}
+\subsection{Actividad 5 - El orden en que se aplican los operadores diferencia y diferencia estacional es irrelevante}
+\label{sec:orga293d5e}
 
 \begin{enumerate}
 \item calcule la diferencia estacional de la serie en logaritmos \texttt{l\_g} y
