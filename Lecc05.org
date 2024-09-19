@@ -54,7 +54,10 @@
 #+begin_abstract
 Esta lección veremos las dificultades que ocasiona la correlación
 serial y algunos tipos de procesos débilmente estacionarios que nos
-permitirán lidiar con ella.
+permitirán lidiar con ella. En particular veremos los procesos
+lineales, su valor esperado y su función de autocovarianzas, la
+función de covarianzas cruzadas entre dos procesos lineales, y las
+ecuaciones de Yule-Walker.
 #+end_abstract
 
 - [[https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc05.html][lección en html]]
@@ -113,6 +116,9 @@ cronológico puede ser crucial/ al modelar los datos.
 
 Esto tiene importantes implicaciones en las técnicas de análisis y
 los modelos a utilizar.
+#+latex: \bigskip
+
+Veamos algunos ejemplos de series temporales...
 
 **** Población en Australia
    :PROPERTIES:
@@ -153,7 +159,8 @@ PIB_UEM_df$Time <- as.yearqtr(PIB_UEM_df$obs, format = fmt)
 P <- ggplot(PIB_UEM_df, aes(Time, PIB))
 P <- P + geom_point() + geom_line()
 P <- P + scale_x_continuous(breaks = scales::pretty_breaks(n = 15))
-P <- P + labs(y = "Miles de millones de euros", x = "Años") + ggtitle("PIB UEM a precios corrientes (datos trimestrales). Fuente Banco de España")
+P <- P + labs(y = "Miles de millones de euros", x = "Años")
+P <- P + ggtitle("PIB UEM a precios corrientes (datos trimestrales). Fuente Banco de España")
 P
 #+END_SRC
 # p <- p +scale_x_yearqtr(format = fmt)
@@ -178,7 +185,8 @@ TemperaturaRetiro_df$Time <- as.yearmon(1985 + seq(0, nrow(TemperaturaRetiro_df)
 P <- ggplot(TemperaturaRetiro_df, aes(Time, TemperaturaMedia))
 P <- P + geom_line() # + geom_point() 
 P <- P + scale_x_continuous(breaks = scales::pretty_breaks(n = 25))
-P <- P + labs(y = "Grados Celsius", x = "Años") + ggtitle("Temperatura media mensual en el Parque del Retiro. Fuente: Comunidad de Madrid")
+P <- P + labs(y = "Grados Celsius", x = "Años") 
+P <- P + ggtitle("Temperatura media mensual en el Parque del Retiro. Fuente: Comunidad de Madrid")
 P
 #+END_SRC
 
@@ -198,7 +206,8 @@ P
 IBEX35_ts = as.ts( read.csv.zoo("datos/IBEX35.csv", 
                                 strip.white = TRUE))
 P <- autoplot(IBEX35_ts) + scale_y_continuous(breaks = scales::pretty_breaks(n = 12))
-p <- P + labs(y = "Desviaciones tipicas", x = "Días") + ggtitle("Rendimiento porcentual diario del IBEX 35 (std.). Fuente: Archivo Prof. Miguel Jerez")
+p <- P + labs(y = "Desviaciones típicas", x = "Días")
+p <- P + ggtitle("Rendimiento porcentual diario del IBEX 35 (std.). Fuente: Archivo Prof. Miguel Jerez")
 p 
 #+END_SRC
 
@@ -225,7 +234,8 @@ ProduccionCemento_df$Time <- as.yearmon(ProduccionCemento_df$obs, format = fmt)
 P <- ggplot(ProduccionCemento_df, aes(Time, ProduccionCemento))
 P <- P + geom_line() # + geom_point() 
 P <- P + scale_x_continuous(breaks = scales::pretty_breaks(n = 25))
-P <- P + labs(y = "Miles de Toneladas métricas", x = "Años") + ggtitle("Produccion de cemento (Datos mensuales). Fuente Banco de España")
+P <- P + labs(y = "Miles de Toneladas métricas", x = "Años")
+P <- P + ggtitle("Producción de cemento (Datos mensuales). Fuente Banco de España")
 P
 #+END_SRC
 

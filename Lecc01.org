@@ -22,7 +22,7 @@
 
 #+BEGIN_ABSTRACT
 En esta lección veremos algunos transformaciones de los datos para
-/"hacerlos estacionarios"/.
+/"hacerlos estacionarios"/. Daremos interpretación a los datos transformados.
 #+END_ABSTRACT
 
 - [[https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc01.html][lección en html]]

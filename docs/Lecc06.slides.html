@@ -14122,11 +14122,16 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="org0c4f762">
+<div class="abstract" id="org9dde5f6">
 <p>
-En esta lección veremos algunas herramientas estadísticas.
- y usaré la librería <code>tfarima</code> de
-José Luis Gallego siempre que pueda.
+En esta lección veremos tres funciones que describen las
+características correspondientes a los momentos de segundo orden de
+los procesos lineales: la función de autocorrelación (ACF), la función
+de autocorrelación parcial (PACF) y la densidad espectral (estas tres
+funciones son transformaciones de la función de autocovarianzas del
+proceso). Veremos la estructura de estas funciones en procesos
+lineales genéricos y luego particularizaremos a procesos de ruido
+blanco, procesos MA y procesos AR.
 </p>
 
 </div>
@@ -15622,7 +15627,7 @@ require(
             progress: true,
             history: true,
             transition: "slide",
-            slideNumber: "",
+            slideNumber: "c/t",
             plugins: [RevealNotes]
         });
 

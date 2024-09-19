@@ -52,9 +52,14 @@
 
 
 #+begin_abstract
-En esta lección veremos algunas herramientas estadísticas.
- y usaré la librería =tfarima= de
-José Luis Gallego siempre que pueda.
+En esta lección veremos tres funciones que describen las
+características correspondientes a los momentos de segundo orden de
+los procesos lineales: la función de autocorrelación (ACF), la función
+de autocorrelación parcial (PACF) y la densidad espectral (estas tres
+funciones son transformaciones de la función de autocovarianzas del
+proceso). Veremos la estructura de estas funciones en procesos
+lineales genéricos y luego particularizaremos a procesos de ruido
+blanco, procesos MA y procesos AR.
 #+end_abstract
 
 ***** COMMENT para Jupyter-Notebook                               :noexports:
@@ -404,7 +409,7 @@ $$\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}
 \quad\Rightarrow\quad
 U_t = \sum_{j=0}^\infty\psi_j X_{t-j}
 $$
-donde $\boldsymbol{\psi}=\boldsymbol{\theta}^{-\triangleright}=\boldsymbol{\theta}^{-1}\in\ell^1$. Entonces se dice que el model MA es ``\emph{invertible}''. Cualquier modelo MA sin raices en el círculo unidad se puede reparametrizar para obtener un modelo invertible con la misma función de autocovarianzas ``$\boldsymbol{\gamma}$'' (\emph{Véase Sección 2.6 de Fuller (1996)}) y, consecuentemente, las mismas ACF, PACF y densidad espectral que el modelo original. Para tener una asociación uno a uno entre ACFs y procesos estocásticos, siempre asumiremos que las raíces de los polinomios MA, $\boldsymbol{\theta}$, son mayores que uno en valor absoluto.
+donde $\boldsymbol{\psi}=\boldsymbol{\theta}^{-\triangleright}=\boldsymbol{\theta}^{-1}\in\ell^1$. Entonces se dice que el modelo MA es ``\emph{invertible}''. Cualquier modelo MA sin raíces en el círculo unidad se puede reparametrizar para obtener un modelo invertible con la misma función de autocovarianzas ``$\boldsymbol{\gamma}$'' (\emph{Véase Sección 2.6 de Fuller (1996)}) y, consecuentemente, las mismas ACF, PACF y densidad espectral que el modelo original. Para tener una asociación uno a uno entre ACFs y procesos estocásticos, siempre asumiremos que las raíces de los polinomios MA, $\boldsymbol{\theta}$, son mayores que uno en valor absoluto.
 \end{quotation}
 #+END_EXPORT
 Entonces $E(X_t)=0$ y

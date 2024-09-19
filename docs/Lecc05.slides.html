@@ -14122,11 +14122,14 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="org3b9b23b">
+<div class="abstract" id="orgdd98501">
 <p>
 Esta lección veremos las dificultades que ocasiona la correlación
 serial y algunos tipos de procesos débilmente estacionarios que nos
-permitirán lidiar con ella.
+permitirán lidiar con ella. En particular veremos los procesos
+lineales, su valor esperado y su función de autocovarianzas, la
+función de covarianzas cruzadas entre dos procesos lineales, y las
+ecuaciones de Yule-Walker.
 </p>
 
 </div><ul>
@@ -14256,6 +14259,7 @@ proceso estocástico subyacente, $\boldsymbol{X}=(X_t\mid
 </ul>
 <p>Esto tiene importantes implicaciones en las técnicas de análisis y
 los modelos a utilizar.</p>
+<p>Veamos algunos ejemplos de series temporales&#x2026;</p>
 
 </div>
 </div>
@@ -14337,7 +14341,8 @@ los modelos a utilizar.</p>
 <span class="n">P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">PIB_UEM_df</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">Time</span><span class="p">,</span><span class="w"> </span><span class="n">PIB</span><span class="p">))</span>
 <span class="n">P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_line</span><span class="p">()</span>
 <span class="n">P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">scale_x_continuous</span><span class="p">(</span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scales</span><span class="o">::</span><span class="nf">pretty_breaks</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">15</span><span class="p">))</span>
-<span class="n">P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Miles de millones de euros"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Años"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">"PIB UEM a precios corrientes (datos trimestrales). Fuente Banco de España"</span><span class="p">)</span>
+<span class="n">P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Miles de millones de euros"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Años"</span><span class="p">)</span>
+<span class="n">P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">"PIB UEM a precios corrientes (datos trimestrales). Fuente Banco de España"</span><span class="p">)</span>
 <span class="n">P</span>
 </pre></div>
 
@@ -14405,7 +14410,8 @@ los modelos a utilizar.</p>
 <div class=" highlight hl-r"><pre><span></span><span class="n">IBEX35_ts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">as.ts</span><span class="p">(</span><span class="w"> </span><span class="nf">read.csv.zoo</span><span class="p">(</span><span class="s">"datos/IBEX35.csv"</span><span class="p">,</span><span class="w"> </span>
 <span class="w">                                </span><span class="n">strip.white</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span>
 <span class="n">P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">autoplot</span><span class="p">(</span><span class="n">IBEX35_ts</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">scale_y_continuous</span><span class="p">(</span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scales</span><span class="o">::</span><span class="nf">pretty_breaks</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">12</span><span class="p">))</span>
-<span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Desviaciones tipicas"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Días"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">"Rendimiento porcentual diario del IBEX 35 (std.). Fuente: Archivo Prof. Miguel Jerez"</span><span class="p">)</span>
+<span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Desviaciones típicas"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Días"</span><span class="p">)</span>
+<span class="n">p</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">"Rendimiento porcentual diario del IBEX 35 (std.). Fuente: Archivo Prof. Miguel Jerez"</span><span class="p">)</span>
 <span class="n">p</span>
 </pre></div>
 
@@ -14459,7 +14465,8 @@ los modelos a utilizar.</p>
 <span class="n">P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">ggplot</span><span class="p">(</span><span class="n">ProduccionCemento_df</span><span class="p">,</span><span class="w"> </span><span class="nf">aes</span><span class="p">(</span><span class="n">Time</span><span class="p">,</span><span class="w"> </span><span class="n">ProduccionCemento</span><span class="p">))</span>
 <span class="n">P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">geom_line</span><span class="p">()</span><span class="w"> </span><span class="c1"># + geom_point() </span>
 <span class="n">P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">scale_x_continuous</span><span class="p">(</span><span class="n">breaks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">scales</span><span class="o">::</span><span class="nf">pretty_breaks</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">25</span><span class="p">))</span>
-<span class="n">P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Miles de Toneladas métricas"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Años"</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">"Produccion de cemento (Datos mensuales). Fuente Banco de España"</span><span class="p">)</span>
+<span class="n">P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">labs</span><span class="p">(</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Miles de Toneladas métricas"</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Años"</span><span class="p">)</span>
+<span class="n">P</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nf">ggtitle</span><span class="p">(</span><span class="s">"Producción de cemento (Datos mensuales). Fuente Banco de España"</span><span class="p">)</span>
 <span class="n">P</span>
 </pre></div>
 
@@ -15780,7 +15787,7 @@ require(
             progress: true,
             history: true,
             transition: "slide",
-            slideNumber: "",
+            slideNumber: "c/t",
             plugins: [RevealNotes]
         });
 

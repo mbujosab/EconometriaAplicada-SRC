@@ -20,7 +20,7 @@
 
   - [[https://drive.google.com/open?id=0Bwa1A30pN0IwWUtNNzRQRFRJUTQ][Ficha]] de la asignatura
 
-[[file:Calendario-Econometria-Aplicada.pdf][Calendario tentativo]] (solo clases M. Bujosa)
+[[file:Calendario-Econometria-Aplicada.pdf][Calendario tentativo]] 
 
 * Regresión con series temporales
     :PROPERTIES:  
@@ -32,7 +32,6 @@
 - [[file:./Lecc01.slides.html][slides]]
 - [[file:./Lecc01.html][html]]
 - [[file:./Lecc01.pdf][pdf]]
-- [[file:./Lecc01.ipynb][notebook]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc01.ipynb][notebook en mybinder]]
 
 *** Practicas
@@ -41,14 +40,13 @@
 - Guiones de gretl
   + [[file:./Practicas/PracticasGretl/pub/scripts/airlinePass.inp][airlinePass.inp]]
 
+
 ** Regresión con series temporales - Modelos con componentes deterministas (Lecc02)
 
 - [[file:./Lecc02.slides.html][slides]]
 - [[file:./Lecc02.html][html]]
 - [[file:./Lecc02.pdf][pdf]]
-- [[file:./Lecc02.ipynb][notebook]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc02.ipynb][notebook en mybinder]]
-
 
 *** Practicas
 
@@ -63,9 +61,7 @@
 - [[file:./Lecc03.slides.html][slides]]
 - [[file:./Lecc03.html][html]]
 - [[file:./Lecc03.pdf][pdf]]
-- [[file:./Lecc03.ipynb][notebook]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc03.ipynb][notebook en mybinder]]
-
 
 *** Practicas
 
@@ -85,7 +81,6 @@
 - [[file:./Lecc04.slides.html][slides]]
 - [[file:./Lecc04.html][html]]
 - [[file:./Lecc04.pdf][pdf]]
-- [[file:./Lecc04.ipynb][notebook]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc04.ipynb][notebook en mybinder]]
 
 
@@ -94,16 +89,41 @@
 - [[file:./Lecc05.slides.html][slides]]
 - [[file:./Lecc05.html][html]]
 - [[file:./Lecc05.pdf][pdf]]
-- [[file:./Lecc05.ipynb][notebook]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc05.ipynb][notebook en mybinder]]
+
 
 ** ACF, PACF y densidad espectral de algunos modelos lineales (Lecc06)
 
 - [[file:./Lecc06.slides.html][slides]]
 - [[file:./Lecc06.html][html]]
 - [[file:./Lecc06.pdf][pdf]]
-- [[file:./Lecc06.ipynb][notebook]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc06.ipynb][notebook en mybinder]]
 
-** Herramientas estadísticas (Lecc07)
+
+** ACF, PACF y densidad espectral de algunos modelos ARMA. Herramientas estadísticas (Lecc07)
+
+- [[file:./Lecc07.slides.html][slides]]
+- [[file:./Lecc07.html][html]]
+- [[file:./Lecc07.pdf][pdf]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc07.ipynb][notebook en mybinder]]
+
+
+** Modelos ARIMA y SARIMA. Identificación y diagnosis del análisis univariante (Lecc08)
+
+- [[file:./Lecc08.slides.html][slides]]
+- [[file:./Lecc08.html][html]]
+- [[file:./Lecc08.pdf][pdf]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc08.ipynb][notebook en mybinder]]
+
+
+* Ficheros .ipynb (notebooks de jupyter)
+
+- Lección 1: [[file:./Lecc01.ipynb][notebook]]
+- Lección 1: [[file:./Lecc02.ipynb][notebook]]
+- Lección 3: [[file:./Lecc03.ipynb][notebook]]
+- Lección 4: [[file:./Lecc04.ipynb][notebook]]
+- Lección 5: [[file:./Lecc05.ipynb][notebook]]
+- Lección 6: [[file:./Lecc06.ipynb][notebook]]
+- Lección 7: [[file:./Lecc07.ipynb][notebook]]
+- Lección 8: [[file:./Lecc08.ipynb][notebook]]
 

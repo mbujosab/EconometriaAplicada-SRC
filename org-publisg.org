@@ -45,25 +45,34 @@ $(OUT_DIR)/%.pdf: %.pdf
 #pdflatex --shell-escape  -interaction=batchmode Lecc01.tex
 #latexmk -c Lecc01.tex
 
-pdflatex --shell-escape  -interaction=batchmode Lecc02.tex
-pdflatex --shell-escape  -interaction=batchmode Lecc02.tex
-latexmk -c Lecc02.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc02.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc02.tex
+#latexmk -c Lecc02.tex
 
 #pdflatex --shell-escape  -interaction=batchmode Lecc03.tex
 #pdflatex --shell-escape  -interaction=batchmode Lecc03.tex
 #latexmk -c Lecc03.tex
-#
+
 #pdflatex --shell-escape  -interaction=batchmode Lecc04.tex
 #pdflatex --shell-escape  -interaction=batchmode Lecc04.tex
 #latexmk -c Lecc04.tex
-#
+
 #pdflatex --shell-escape  -interaction=batchmode Lecc05.tex
 #pdflatex --shell-escape  -interaction=batchmode Lecc05.tex
 #latexmk -c Lecc05.tex
-#
+
 #pdflatex --shell-escape  -interaction=batchmode Lecc06.tex
 #pdflatex --shell-escape  -interaction=batchmode Lecc06.tex
 #latexmk -c Lecc06.tex
+
+#pdflatex --shell-escape  -interaction=batchmode Lecc07.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc07.tex
+#latexmk -c Lecc07.tex
+
+#pdflatex --shell-escape  -interaction=batchmode Lecc08.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc08.tex
+#latexmk -c Lecc08.tex
+
 #+END_SRC
 
 
@@ -75,6 +84,8 @@ latexmk -c Lecc02.tex
 ;(ox-ipynb-export-org-file-to-ipynb-file "Lecc04.org")
 ;(ox-ipynb-export-org-file-to-ipynb-file "Lecc05.org")
 ;(ox-ipynb-export-org-file-to-ipynb-file "Lecc06.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc07.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc08.org")
 #+END_SRC
 
 #+BEGIN_SRC sh :results silent

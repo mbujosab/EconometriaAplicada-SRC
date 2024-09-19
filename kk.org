@@ -1,6 +1,9 @@
 
 [[https://www.stat.berkeley.edu/~bartlett/courses/153-fall2010/][Introduction to Time Series (Berkeley)]]
 
+https://www.stat.berkeley.edu/~bartlett/courses/153-fall2010/lectures/6.pdf
+
+
 https://halweb.uc3m.es/esp/Personal/personas/amalonso/esp/TSAtema4.pdf C-III AR, MA, ARMA
 
 https://www.stat.unm.edu/~ghuerta/tseries/week6_1.pdf  ACF PACF AR(p)
@@ -15,6 +18,15 @@ https://www.mathstat.dal.ca/~stat5390/Section_4_PSD1.pdf densidad espectral
 
 
 https://www.kaggle.com/code/iamleonie/time-series-interpreting-acf-and-pacf
+
+
+https://real-statistics.com/time-series-analysis/arma-processes/arma-proofs/ *proofs*
+
+https://real-statistics.com/time-series-analysis/arma-processes/arma11-processes/
+
+https://www.lem.sssup.it/phd/documents/Lesson10.pdf
+
+https://mcs.utm.utoronto.ca/~nosedal/sta457/arma-models.pdf
 
 
 #+BEGIN_SRC jupyter-R
@@ -2935,4 +2947,96 @@ repr_png(results.summary().as_latex(), "./img/lecc02/resultsModel7.png")
 # [[https://www.kaggle.com/code/darpan25bajaj/air-passengers-forecasting]]
 
 # [[https://machinelearningmastery.com/time-series-forecasting-methods-in-python-cheat-sheet/]]
+
+
+* COMMENT Otro código                            :noexports:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R 
+PIB_UEM_ts = as.ts( read.csv.zoo("datos/PIB_UEM.csv", 
+                                 FUN = as.yearqtr, 
+                                 format = "%YQ%q", 
+                                 strip.white = TRUE))
+p <- autoplot(PIB_UEM_ts)
+p <- p + labs(y = "Miles de millones de euros", x = "Años") + ggtitle("PIB UEM a precios corrientes (datos trimestrales). Fuente Banco de España")
+p 
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 800
+[[./.ob-jupyter/bb38d3b5fedcf743921e45e000873a00134cbd11.png]]
+:END:
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R 
+ProduccionCemento_ts = as.ts( read.csv.zoo("datos/ProduccionCemento.csv",
+                                           FUN = as.yearmon, 
+                                           format = "%YM%m",
+                                           strip.white = TRUE))
+autoplot(ProduccionCemento_ts)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 800
+[[./.ob-jupyter/77f5dea1afae26038646e090068fcefbd9b8daf6.png]]
+:END:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc07/ :file ExportacionDeAcero.png :exports code :results silent
+ExportacionDeAcero_ts = as.ts( read.csv.zoo("datos/ExportacionDeAcero.csv",
+                                            FUN = as.yearmon,
+                                            format = "%YM%m",
+                                            strip.white = TRUE))
+autoplot(ExportacionDeAcero_ts)
+#+END_SRC
+
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc07/ :file rango-mediaLogAirPass.png :exports code :results silent
+Z <- AirPassengers
+ide(Z, transf=list(bc=T, d=1, D=1), graphs = c("plot", "rm"))
+#+END_SRC
+
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc07/rango-mediaLogAirPass.png]]
+
+$$\nabla_{12}(\nabla\ln\boldsymbol{y})$$
+
+
+1985ene 
+2012sep
+
+#+BEGIN_SRC jupyter-R
+as.yearmon(1985 + seq(0, nrow(TemperaturaRetiro_df)-1)/12)
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+# [goto error]
+: Error in nrow(TemperaturaRetiro_df): objeto 'TemperaturaRetiro_df' no encontrado
+: Traceback:
+: 
+: 1. as.yearmon(1985 + seq(0, nrow(TemperaturaRetiro_df) - 1)/12)
+: 2. seq(0, nrow(TemperaturaRetiro_df) - 1)
+: 3. seq.default(0, nrow(TemperaturaRetiro_df) - 1)
+: 4. nrow(TemperaturaRetiro_df)
+:END:
+
+
+#+BEGIN_SRC jupyter-R
+as.yearmon("mar07", "%b%y")
+#+END_SRC
+
+#+RESULTS:
+: [1] "mar 2007"
+
 

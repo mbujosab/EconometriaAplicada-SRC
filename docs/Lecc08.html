@@ -1,0 +1,1173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
+<head>
+<!-- 2024-09-19 jue 23:20 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Econometría Aplicada. Lección 8</title>
+<meta name="author" content="Marcos Bujosa" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Econometría Aplicada. Lección 8</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org1caf515">Carga de algunas librerías de R</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orga66d751">1. Identificación y diagnosis</a>
+<ul>
+<li><a href="#org72d69d9">1.1. Instrumentos de identificación</a></li>
+<li><a href="#org6ccecf0">1.2. Instrumentos de diagnosis</a></li>
+</ul>
+</li>
+<li><a href="#orgfb5f640">2. Raíces unitarias</a>
+<ul>
+<li><a href="#orgc6148db">2.1. Notación: operadores retardo y diferencia</a>
+<ul>
+<li><a href="#org4b60adb">2.1.1. Notación: ARIMA</a></li>
+</ul>
+</li>
+<li><a href="#org59b3db6">2.2. Raíces unitarias en los polinomios AR y MA</a></li>
+<li><a href="#orgb2153ab">2.3. Paseos aleatorios</a></li>
+</ul>
+</li>
+<li><a href="#org4002e19">3. Modelos ARIMA estacionales (SARIMA)</a>
+<ul>
+<li><a href="#orge2b2706">3.1. MA(1) estacional con raíz positiva</a></li>
+<li><a href="#org3bfd8dd">3.2. AR(1) estacional con raíz positiva</a></li>
+<li><a href="#org6a8b645">3.3. ARIMA\((0,0,1)\times(0,0,1)_{12}\)</a></li>
+<li><a href="#org0924b05">3.4. ARIMA\((1,0,0)\times(0,0,1)_{12}\)</a></li>
+<li><a href="#org55b00d5">3.5. ARIMA\((1,0,0)\times(1,0,0)_{12}\)</a></li>
+<li><a href="#org277d088">3.6. ARIMA\((0,0,1)\times(1,0,0)_{12}\)</a></li>
+</ul>
+</li>
+<li><a href="#orgca9776e">4. Resumen del análisis univariante de series temporales</a>
+<ul>
+<li><a href="#org94eb2a3">4.1. Ideas principales</a></li>
+<li><a href="#org4769994">4.2. Metodología</a></div>
+</div>
+<div class="abstract" id="org15785eb">
+<p>
+En esta lección repasamos los instrumentos de identificación y
+diagnosis del análisis univariante. Extendemos la notación para
+incorporar modelos con raíces unitarias. Presentamos modelos
+estacionales y finalmente resumimos las ideas principales del análisis
+univariante.
+</p>
+
+</div>
+<div id="outline-container-org1caf515" class="outline-4">
+<h4 id="org1caf515">Carga de algunas librerías de R</h4>
+<div class="outline-text-4" id="text-org1caf515">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">cargamos algunas librer&#237;as de R</span>
+<span style="color: #D0372D;">library</span>(tfarima)      <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">librer&#237;a de Jos&#233; Luis Gallego para Time Series</span>
+<span style="color: #D0372D;">library</span>(readr)        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para leer ficheros CSV</span>
+<span style="color: #D0372D;">library</span>(ggplot2)      <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para el scatterplot (alternaticamente library(tidyverse))</span>
+<span style="color: #D0372D;">library</span>(ggfortify)    <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para pintar series temporales</span>
+<span style="color: #D0372D;">library</span>(jtools)       <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para representaci&#243;n resultados estimaci&#243;n</span>
+<span style="color: #D0372D;">library</span>(zoo)          <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">para generar objetos ts (time series)</span>
+<span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">y fijamos el tama&#241;o de las figuras que se generan en el notebook</span>
+<span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga66d751" class="outline-2">
+<h2 id="orga66d751"><span class="section-number-2">1.</span> Identificación y diagnosis</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>Combinando las herramientas gráficas y estadísticas que hemos visto,
+se puede inferir el modelo subyacente a los datos.</li>
+
+<li>Este proceso de especificación empírica del modelo es conocido como
+"<i>identificación</i>"</li>
+</ul>
+
+<p>
+El proceso de identificación puede estructurarse como una secuencia de
+preguntas:
+</p>
+
+<ol class="org-ol">
+<li>¿Es estacionaria la serie?</li>
+<li>¿Tiene una media significativa?</li>
+<li>¿Es persistente la ACF? ¿sigue alguna pauta reconocible?</li>
+<li>¿Es persistente la PACF? ¿sigue alguna pauta reconocible?</li>
+</ol>
+
+<ul class="org-ul">
+<li>La identificación se basa en estadísticos, como la media muestral o
+las autocorrelaciones, cuya representatividad depende de la
+estacionariedad de las series</li>
+
+<li>Tras inducir la estacionariedad, especificamos un modelo tentativo
+decidiendo cuál de las funciones ACF o PACF es finita y cuál es
+persistente</li>
+</ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left"><b>ACF finita</b></th>
+<th scope="col" class="org-left"><b>ACF persistente</b></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><b>PACF finita</b></td>
+<td class="org-left"><span class="underline">Ruido blanco</span>: retardos conjuntamente NO significativos</td>
+<td class="org-left"><span class="underline">AR</span>: orden indicado por la PACF</td>
+</tr>
+
+<tr>
+<td class="org-left"><b>PACF persistente</b></td>
+<td class="org-left"><span class="underline">MA</span>: orden indicado por la ACF</td>
+<td class="org-left"><span class="underline">ARMA</span></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+La parametrización de mayor orden en modelos ARMA con series
+económicas suele ser ARMA(\(2,1\))
+</p>
+</div>
+<div id="outline-container-org72d69d9" class="outline-3">
+<h3 id="org72d69d9"><span class="section-number-3">1.1.</span> Instrumentos de identificación</h3>
+<div class="outline-text-3" id="text-1-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">Instrumento</th>
+<th scope="col" class="org-left">Objetivo y observaciones</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Transf. logarítmica</td>
+<td class="org-left">Gráficos rango-media y serie temporal</td>
+<td class="org-left">Conseguir independizar la variabilidad de los datos de su nivel. Las series económicas suelen necesitar esta transformación</td>
+</tr>
+
+<tr>
+<td class="org-left">\(d\), orden de diferenciación</td>
+<td class="org-left">Gráfico de la serie temporal. ACF (caída lenta y lineal). Contrastes de raíz unitaria</td>
+<td class="org-left">Conseguir que los datos fluctúen en torno a una media estable. En series económicas, \(d\) suele ser 1 ó 2</td>
+</tr>
+
+<tr>
+<td class="org-left">Constante</td>
+<td class="org-left">Media de la serie diferenciada. Desviación típica de la media</td>
+<td class="org-left">Si la media de la serie transformada es significativa, el modelo debe incluir un término constante</td>
+</tr>
+
+<tr>
+<td class="org-left">\(p\), orden AR</td>
+<td class="org-left">PACF de orden \(p\). ACF infinita</td>
+<td class="org-left">PACF tiene \(p\) valores no nulos. En series económicas \(p\) suele ser \(\leq2\)</td>
+</tr>
+
+<tr>
+<td class="org-left">\(q\), orden MA</td>
+<td class="org-left">ACF de orden \(q\). PACF infinita</td>
+<td class="org-left">ACF tiene \(q\) valores no nulos. En series económicas q suele ser \(\leq1\)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org6ccecf0" class="outline-3">
+<h3 id="org6ccecf0"><span class="section-number-3">1.2.</span> Instrumentos de diagnosis</h3>
+<div class="outline-text-3" id="text-1-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">Instrumento</th>
+<th scope="col" class="org-left">Posible diagnóstico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">\(d\), orden de diferenciación</td>
+<td class="org-left">Raíces de los polinomios AR y MA</td>
+<td class="org-left">Raíz AR próxima a uno: quizá conviene añadir una diferencia.  Raíz MA próxima: quizá conviene quitar una diferencia.</td>
+</tr>
+
+<tr>
+<td class="org-left">\(d\), orden de diferenciación</td>
+<td class="org-left">Gráfico de los residuos</td>
+<td class="org-left">Si muestra rachas largas de residuos positivos o negativos, puede ser necesaria una diferencia adicional.</td>
+</tr>
+
+<tr>
+<td class="org-left">Constante</td>
+<td class="org-left">Media de los residuos</td>
+<td class="org-left">Si es significativa: añadir término constante</td>
+</tr>
+
+<tr>
+<td class="org-left">Constante</td>
+<td class="org-left">Constante estimada</td>
+<td class="org-left">Si NO es significativa: el modelo mejorará quitando el término constante</td>
+</tr>
+
+<tr>
+<td class="org-left">\(p\) y \(q\),</td>
+<td class="org-left">Contrastes de significación</td>
+<td class="org-left">Pueden sugerir eliminar parámetros irrelevantes</td>
+</tr>
+
+<tr>
+<td class="org-left">\(p\) y \(q\),</td>
+<td class="org-left">ACF y PACF de los residuos. Test Q de Ljung-Box</td>
+<td class="org-left">Indican posibles pautas de autocorrelación no modelizadas</td>
+</tr>
+
+<tr>
+<td class="org-left">\(p\) y \(q\),</td>
+<td class="org-left">Correlaciones elevadas entre parámetros estimados</td>
+<td class="org-left">Puede ser un síntoma de sobreparametrización</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Por último, se puede aplicar un análisis exploratorio consistente en
+añadir parámetros AR y/o MA, para comprobar si resultan significativos
+y, además, mejoran el modelo
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgfb5f640" class="outline-2">
+<h2 id="orgfb5f640"><span class="section-number-2">2.</span> Raíces unitarias</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-orgc6148db" class="outline-3">
+<h3 id="orgc6148db"><span class="section-number-3">2.1.</span> Notación: operadores retardo y diferencia</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+El operador diferencia \(\nabla\) se define a partir del operador retardo como \(\nabla=(1 - \mathsf{B})\):
+\[\nabla Y_t = (1 - \mathsf{B})Y_t = Y_t - Y_{t-1}\]
+El operador diferencia estacional es 
+\({\nabla}_{_S} = (1 - \mathsf{B}^S)\):
+\[\nabla_{_S}Y_t = (1 - \mathsf{B}^S)Y_t = Y_t - Y_{t-S}\]
+</p>
+</div>
+<div id="outline-container-org4b60adb" class="outline-4">
+<h4 id="org4b60adb"><span class="section-number-4">2.1.1.</span> Notación: ARIMA</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<p>
+Con ``ARIMA(\(p,d,q\))'', donde \(d\) indica el número \(d\) de diferencias
+que la serie necesita para ser estacionaria en media, extendemos la
+notación a procesos con raíces autorregresivas unitarias
+\[\boldsymbol{\phi}_p*\nabla^d*\boldsymbol{Y} = \boldsymbol{\theta}_q*
+\boldsymbol{U}\] es decir \[\boldsymbol{\phi}_p(\mathsf{B})\nabla^d
+Y_t = \boldsymbol{\theta}_q(\mathsf{B}) U_t; \quad t\in\mathbb{Z}\]
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org59b3db6" class="outline-3">
+<h3 id="org59b3db6"><span class="section-number-3">2.2.</span> Raíces unitarias en los polinomios AR y MA</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Cuando el polinomio AR tiene alguna raíz igual a uno, se dice que
+tiene “raíces unitarias”. Si el polinomio corresponde a un modelo
+estimado, esto es síntoma de subdiferenciación.
+</p>
+
+<p>
+Si la raíz unitaria está en el polinomio MA y este ha sido estimado,
+esto es síntoma de: (a) sobrediferenciación o (b) presencia de
+componentes deterministas, si además si tiene media significativa.
+</p>
+
+<p>
+Ejemplos
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Modelo expresado con raíz unitaria en \(\boldsymbol{\phi}\) o \(\boldsymbol{\theta}\)</th>
+<th scope="col" class="org-left">Modelo equivalente sin raíces unitarias en \(\boldsymbol{\phi}\) o \(\boldsymbol{\theta}\)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">\((1-1.5\mathsf{B}+.5\mathsf{B}^2) Y_t = U_t\)</td>
+<td class="org-left">\((1-0.5\mathsf{B})\nabla Y_t=U_t\)</td>
+</tr>
+
+<tr>
+<td class="org-left">\((1-.5\mathsf{B}+0.7\mathsf{B}^2)\nabla^2Y_t=(1-\mathsf{B})U_t\)</td>
+<td class="org-left">\((1-.5\mathsf{B}+0.7\mathsf{B}^2)\nabla Y_t =  U_t\)</td>
+</tr>
+
+<tr>
+<td class="org-left">\(\nabla Y_t = \beta+          (1-\mathsf{B}) U_t\)</td>
+<td class="org-left">\(Y_t = \beta t + U_t\)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-orgb2153ab" class="outline-3">
+<h3 id="orgb2153ab"><span class="section-number-3">2.3.</span> Paseos aleatorios</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Un paseo aleatorio representa una variable cuyos cambios son ruido
+blanco: \[Y_t = \mu + Y_{t-1} + U_t\]
+</p>
+
+<p>
+Cuando \(\mu=0\) se denomina sencillamente <i>paseo aleatorio</i>: \(\;\nabla Y_t =  U_t\)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
+rw <span style="color: #D0372D;">&lt;-</span> um(i = <span style="color: #008000;">"(1 - B)"</span>)
+ide(sim(rw, n = 500), lag.max = 20, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>), main = <span style="color: #008000;">"Paseo aleatorio"</span>)
+</pre>
+</div>
+
+
+<div id="orge8c36db" class="figure">
+<p><img src="./img/lecc08/ACF-RW.png" alt="ACF-RW.png" width="900px" />
+</p>
+</div>
+
+
+
+<p>
+Cuando \(\mu\ne0\) se denomina <i>paseo aleatorio con deriva</i>: \(\;\nabla Y_t = \mu +  U_t\)
+</p>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
+rwcd <span style="color: #D0372D;">&lt;-</span> um(i = <span style="color: #008000;">"(1 - B)"</span>,
+           mu=.25)
+ide(sim(rwcd, n = 500),
+    lag.max = 20,
+    graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>),
+    main = <span style="color: #008000;">"Paseo aleatorio con deriva (mu=0.25)"</span>)
+</pre>
+</div>
+
+
+<div id="org7de7442" class="figure">
+<p><img src="./img/lecc08/ACF-RWcd.png" alt="ACF-RWcd.png" width="900px" />
+</p>
+</div>
+
+<p>
+El proceso tiene mayor inercia cuanto mayor es \(|\mu|\). El signo de
+\(\mu\) determina el signo de la pendiente global.
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org4002e19" class="outline-2">
+<h2 id="org4002e19"><span class="section-number-2">3.</span> Modelos ARIMA estacionales (SARIMA)</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+El período estacional \(S\) es el número mínimo de observaciones
+necesarias para recorrer un ciclo estacional completo. Por ejemplo,
+\(S=12\) para datos mensuales, \(S=4\) para datos trimestrales, etc.
+</p>
+
+<p>
+Describiremos comportamientos estacionales con modelos
+ARIMA\((p,d,q)\times(P,D,Q)_S\) 
+</p>
+
+<p>
+\[\boldsymbol{\phi}_p(\mathsf{B})\boldsymbol{\Phi}_P(\mathsf{B}^S)\nabla^d\nabla_{_S}^D
+Y_t =
+\boldsymbol{\theta}_q(\mathsf{B})\boldsymbol{\Theta}_q(\mathsf{B}^S)
+U_t; \quad t\in\mathbb{Z}\] donde
+</p>
+\begin{align*}
+\boldsymbol{\Phi}_P(\mathsf{B}^S)  = & 1-\Phi_1\mathsf{B}^{1\cdot S}-\Phi_2\mathsf{B}^{2\cdot S}-\cdots-\Phi_P\mathsf{B}^{P\cdot S}\\
+\boldsymbol{\Theta}_Q(\mathsf{B}^S)  = & 1-\Theta_1\mathsf{B}^{1\cdot S}-\Theta_2\mathsf{B}^{2\cdot S}-\cdots-\Theta_Q\mathsf{B}^{Q\cdot S}\\
+{\nabla}_{_S}^D = & (1 - \mathsf{B}^S)^D
+\end{align*}
+<p>
+Es decir, el modelo consta de polinomios autorregresivos y de media
+móvil tanto regulares (en minúsculas) como estacionales (en
+mayúsculas).
+</p>
+<p>
+Veamos un ejemplo de un modelo MA(\(1\)) estacional y otro de un modelo
+AR(\(1\)) estacional&#x2026;
+</p>
+</div>
+<div id="outline-container-orge2b2706" class="outline-3">
+<h3 id="orge2b2706"><span class="section-number-3">3.1.</span> MA(1) estacional con raíz positiva</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+SMA1 <span style="color: #D0372D;">&lt;-</span> um(ma = <span style="color: #008000;">"(1 - 0.9B12)"</span>)
+display(list(SMA1), lag.max = 50, byrow = <span style="color: #6434A3;">TRUE</span>)
+</pre>
+</div>
+
+<p>
+MA(\(1\)) estacional:
+\(\quad\boldsymbol{\Theta}=1-0.9z^{12}\quad\Rightarrow\quad X_t= (1-0.9
+\mathsf{B}^{12})U_t\)
+</p>
+
+
+<div id="org70d49ca" class="figure">
+<p><img src="./img/lecc08/ACF-SMA1p.png" alt="ACF-SMA1p.png" width="900px" />
+</p>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R">roots(SMA1)
+</pre>
+</div>
+
+<ol class="org-ol">
+<li><table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Real</th>
+<th scope="col" class="org-right">Imaginary</th>
+<th scope="col" class="org-right">Modulus</th>
+<th scope="col" class="org-right">Frequency</th>
+<th scope="col" class="org-right">Period</th>
+<th scope="col" class="org-right">Mult.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1.008819e+00</td>
+<td class="org-right">1.082287e-14</td>
+<td class="org-right">1.008819</td>
+<td class="org-right">0.00000000</td>
+<td class="org-right">Inf</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">8.736626e-01</td>
+<td class="org-right">5.044094e-01</td>
+<td class="org-right">1.008819</td>
+<td class="org-right">0.08333333</td>
+<td class="org-right">12.0</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">8.736626e-01</td>
+<td class="org-right">-5.044094e-01</td>
+<td class="org-right">1.008819</td>
+<td class="org-right">0.08333333</td>
+<td class="org-right">12.0</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">5.044094e-01</td>
+<td class="org-right">-8.736626e-01</td>
+<td class="org-right">1.008819</td>
+<td class="org-right">0.16666667</td>
+<td class="org-right">6.0</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">5.044094e-01</td>
+<td class="org-right">8.736626e-01</td>
+<td class="org-right">1.008819</td>
+<td class="org-right">0.16666667</td>
+<td class="org-right">6.0</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">1.288336e-14</td>
+<td class="org-right">-1.008819e+00</td>
+<td class="org-right">1.008819</td>
+<td class="org-right">0.25000000</td>
+<td class="org-right">4.0</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">-2.057493e-17</td>
+<td class="org-right">1.008819e+00</td>
+<td class="org-right">1.008819</td>
+<td class="org-right">0.25000000</td>
+<td class="org-right">4.0</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">-5.044094e-01</td>
+<td class="org-right">-8.736626e-01</td>
+<td class="org-right">1.008819</td>
+<td class="org-right">0.33333333</td>
+<td class="org-right">3.0</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">-5.044094e-01</td>
+<td class="org-right">8.736626e-01</td>
+<td class="org-right">1.008819</td>
+<td class="org-right">0.33333333</td>
+<td class="org-right">3.0</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">-8.736626e-01</td>
+<td class="org-right">-5.044094e-01</td>
+<td class="org-right">1.008819</td>
+<td class="org-right">0.41666667</td>
+<td class="org-right">2.4</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">-8.736626e-01</td>
+<td class="org-right">5.044094e-01</td>
+<td class="org-right">1.008819</td>
+<td class="org-right">0.41666667</td>
+<td class="org-right">2.4</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">-1.008819e+00</td>
+<td class="org-right">-1.257046e-14</td>
+<td class="org-right">1.008819</td>
+<td class="org-right">0.50000000</td>
+<td class="org-right">2.0</td>
+<td class="org-right">1</td>
+</tr>
+</tbody>
+</table></li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(SMA1, n = 500),
+    lag.max = 50,
+    graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
+</pre>
+</div>
+
+
+<div id="orgfb4c3fa" class="figure">
+<p><img src="./img/lecc08/Sim-SMA1p.png" alt="Sim-SMA1p.png" width="900px" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org3bfd8dd" class="outline-3">
+<h3 id="org3bfd8dd"><span class="section-number-3">3.2.</span> AR(1) estacional con raíz positiva</h3>
+<div class="outline-text-3" id="text-3-2">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+SAR1 <span style="color: #D0372D;">&lt;-</span> um(ar = <span style="color: #008000;">"(1 - 0.9B12)"</span>)
+display(list(SAR1), lag.max = 50, byrow = <span style="color: #6434A3;">TRUE</span>)
+</pre>
+</div>
+
+<p>
+AR(\(1\)) estacional:
+\(\quad\boldsymbol{\Phi}=1-0.9z^{12}\quad\Rightarrow\quad (1-0.9
+\mathsf{B}^{12})X_t= U_t\)
+</p>
+
+
+<div id="orgf5fa5f0" class="figure">
+<p><img src="./img/lecc08/ACF-SAR1p.png" alt="ACF-SAR1p.png" width="900px" />
+</p>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R">roots(SAR1)
+</pre>
+</div>
+<p>
+Evidentemente las raíces son iguales a las del caso anterior (aunque ahora corresponden al polinomio autorregresivo).
+</p>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(SAR1, n = 500),
+    lag.max = 50,
+    graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
+</pre>
+</div>
+
+
+<div id="org63bb9e1" class="figure">
+<p><img src="./img/lecc08/Sim-SAR1p.png" alt="Sim-SAR1p.png" width="900px" />
+</p>
+</div>
+
+
+
+<p>
+Con estos dos ejemplos hemos podido apreciar que:
+</p>
+<ul class="org-ul">
+<li>las pautas de autocorrelación son análogas a las de los MA(1) y
+AR(2), pero ahora los retardos significativos corresponden a los
+retardos estacionales, es decir, a múltiplos del período estacional
+\(S\).</li>
+
+<li>las correlaciones correspondientes a los “retardos regulares” (es
+decir, todos menos menos los estacionales) son no significativas en
+general.</li>
+
+<li>En estos ejemplos, en los que \(S=12\), los retardos estacionales son:
+12, 24, 36, 48, 60,&#x2026;</li>
+</ul>
+<p>
+Veamos ahora un par de ejemplos de modelos estacionales
+multiplicativos (i.e., con parte regular y parte estacional).
+</p>
+</div>
+</div>
+<div id="outline-container-org6a8b645" class="outline-3">
+<h3 id="org6a8b645"><span class="section-number-3">3.3.</span> ARIMA\((0,0,1)\times(0,0,1)_{12}\)</h3>
+<div class="outline-text-3" id="text-3-3">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+MA1SMA1 <span style="color: #D0372D;">&lt;-</span> um(ma = <span style="color: #008000;">"(1 - 0.9B)(1 - 0.9B12)"</span>)
+display(list(MA1SMA1), lag.max = 50, byrow = <span style="color: #6434A3;">TRUE</span>)
+</pre>
+</div>
+
+<p>
+ARIMA\((0,0,1)\times(0,0,1)_{12}\):
+\(\quad X_t= (1-0.9 \mathsf{B})(1-0.9 \mathsf{B}^{12})U_t\)
+</p>
+
+
+<div id="orgcc4423a" class="figure">
+<p><img src="./img/lecc08/ACF-MA1SMA1.png" alt="ACF-MA1SMA1.png" width="900px" />
+</p>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(MA1SMA1, n = 500),
+    lag.max = 50,
+    graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
+</pre>
+</div>
+
+
+<div id="org6a7e82d" class="figure">
+<p><img src="./img/lecc08/Sim-MA1SMA1.png" alt="Sim-MA1SMA1.png" width="900px" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org0924b05" class="outline-3">
+<h3 id="org0924b05"><span class="section-number-3">3.4.</span> ARIMA\((1,0,0)\times(0,0,1)_{12}\)</h3>
+<div class="outline-text-3" id="text-3-4">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+AR1SMA1 <span style="color: #D0372D;">&lt;-</span> um(ar = <span style="color: #008000;">"(1 - 0.9B)"</span>, ma = <span style="color: #008000;">"(1 - 0.9B12)"</span>)
+display(list(AR1SMA1), lag.max = 50, byrow = <span style="color: #6434A3;">TRUE</span>)
+</pre>
+</div>
+
+<p>
+ARIMA\((1,0,0)\times(0,0,1)_{12}\):
+\(\quad (1-0.9 \mathsf{B})X_t= (1-0.9 \mathsf{B}^{12})U_t\)
+</p>
+
+
+<div id="org442d4b1" class="figure">
+<p><img src="./img/lecc08/ACF-AR1SMA1.png" alt="ACF-AR1SMA1.png" width="900px" />
+</p>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(AR1SMA1, n = 500),
+    lag.max = 50,
+    graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
+</pre>
+</div>
+
+
+<div id="org68eddf2" class="figure">
+<p><img src="./img/lecc08/Sim-AR1SMA1.png" alt="Sim-AR1SMA1.png" width="900px" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org55b00d5" class="outline-3">
+<h3 id="org55b00d5"><span class="section-number-3">3.5.</span> ARIMA\((1,0,0)\times(1,0,0)_{12}\)</h3>
+<div class="outline-text-3" id="text-3-5">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+AR1SAR1 <span style="color: #D0372D;">&lt;-</span> um(ar = <span style="color: #008000;">"(1 - 0.9B)(1 - 0.9B12)"</span>)
+display(list(AR1SAR1), lag.max = 50, byrow = <span style="color: #6434A3;">TRUE</span>, log.spec = <span style="color: #6434A3;">TRUE</span>)
+</pre>
+</div>
+
+<p>
+ARIMA\((1,0,0)\times(1,0,0)_{12}\):
+\(\quad (1-0.9 \mathsf{B})(1-0.9 \mathsf{B}^{12})X_t= U_t\)
+</p>
+
+
+<div id="org95cb274" class="figure">
+<p><img src="./img/lecc08/ACF-AR1SAR1.png" alt="ACF-AR1SAR1.png" width="900px" />
+</p>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(AR1SAR1, n = 500),
+    lag.max = 50,
+    graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
+</pre>
+</div>
+
+
+<div id="org026d59e" class="figure">
+<p><img src="./img/lecc08/Sim-AR1SAR1.png" alt="Sim-AR1SAR1.png" width="900px" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org277d088" class="outline-3">
+<h3 id="org277d088"><span class="section-number-3">3.6.</span> ARIMA\((0,0,1)\times(1,0,0)_{12}\)</h3>
+<div class="outline-text-3" id="text-3-6">
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
+MA1SAR1 <span style="color: #D0372D;">&lt;-</span> um(ar = <span style="color: #008000;">"(1 - 0.9B12)"</span>, ma = <span style="color: #008000;">"(1 - 0.9)"</span>)
+display(list(MA1SAR1), lag.max = 50, byrow = <span style="color: #6434A3;">TRUE</span>, log.spec = <span style="color: #6434A3;">TRUE</span>)
+</pre>
+</div>
+
+<p>
+ARIMA\((0,0,1)\times(1,0,0)_{12}\):
+\(\quad (1-0.9 \mathsf{B}^{12})X_t= (1-0.9 \mathsf{B})U_t\)
+</p>
+
+
+<div id="orge108771" class="figure">
+<p><img src="./img/lecc08/ACF-MA1SAR1.png" alt="ACF-MA1SAR1.png" width="900px" />
+</p>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
+ide(sim(MA1SAR1, n = 500),
+    lag.max = 50,
+    graphs = c(<span style="color: #008000;">"plot"</span>, <span style="color: #008000;">"acf"</span>, <span style="color: #008000;">"pacf"</span>, <span style="color: #008000;">"pgram"</span>))
+</pre>
+</div>
+
+
+<div id="org4ef0f7f" class="figure">
+<p><img src="./img/lecc08/Sim-MA1SAR1.png" alt="Sim-MA1SAR1.png" width="900px" />
+</p>
+</div>
+
+<p>
+En estos cuatro ejemplos hemos podido apreciar que
+</p>
+<ul class="org-ul">
+<li>en el entorno de los retardos estacionales surgen una serie de
+coeficientes significativos (“satélites”) que proceden de la
+interacción entre las estructuras regular y estacional</li>
+<li>Estos satélites son útiles para identificar en qué retardos
+estacionales hay autocorrelaciones no nulas, pero no requieren una
+parametrización especial.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgca9776e" class="outline-2">
+<h2 id="orgca9776e"><span class="section-number-2">4.</span> Resumen del análisis univariante de series temporales</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org94eb2a3" class="outline-3">
+<h3 id="org94eb2a3"><span class="section-number-3">4.1.</span> Ideas principales</h3>
+<div class="outline-text-3" id="text-4-1">
+<ul class="org-ul">
+<li>Se basa en modelos sin variables exógenas que resumen la
+interdependencia temporal con polinomios de órdenes reducidos.</li>
+<li>Está especialmente indicado para predecir el futuro de la serie
+temporal.</li>
+<li>Parte de dos supuestos sobre el proceso estocástico subyacente: 
+<ol class="org-ol">
+<li>es débilmente estacionario</li>
+<li>tiene representación en forma de proceso lineal \(Y_t=\sum_{j=0}^\infty a_j U_{t-j}\)</li>
+</ol></li>
+<li>(Además se suele asumir normalidad en \(U_t\))</li>
+<li>utiliza variados instrumentos: (a) gráficos (b) función de
+autocorrelación (c) función de autocorrelación parcial, (d)
+estadístico Q de Ljung-Box, etc&#x2026;</li>
+<li>Si la serie original no "parece" débilmente estacionaria, se induce
+esta propiedad mediante las transformaciones adecuadas</li>
+</ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left"><b>ACF finita</b></th>
+<th scope="col" class="org-left"><b>ACF persistente</b></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><b>PACF finita</b></td>
+<td class="org-left"><span class="underline">Ruido blanco</span>: retardos conjuntamente NO significativos</td>
+<td class="org-left"><span class="underline">AR</span>: orden indicado por la PACF</td>
+</tr>
+
+<tr>
+<td class="org-left"><b>PACF persistente</b></td>
+<td class="org-left"><span class="underline">MA</span>: orden indicado por la ACF</td>
+<td class="org-left"><span class="underline">ARMA</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org4769994" class="outline-3">
+<h3 id="org4769994"><span class="section-number-3">4.2.</span> Metodología</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+Tres fases:
+</p>
+<dl class="org-dl">
+<dt>Identificación</dt><dd>Elija una especificación provisional para el
+proceso estocástico generador de los datos en base a las
+características medibles de los datos: “dejar que los datos hablen”</dd>
+<dt>Estimación</dt><dd>suele requerir métodos iterativos</dd>
+<dt>Diagnosis</dt><dd>de la calidad estadística del modelo ajustado. Algunos
+controles estándar son:
+<ul class="org-ul">
+<li>Significatividad de los parámetros estimados</li>
+<li>Estacionariedad y homocedasticidad de los residuos</li>
+<li>¿Existe un patrón de autocorrelación residual que podría ser
+modelado? ¿O hemos logrado que los residuos sean <span class="underline"><i>"ruido
+blanco"</i></span>?</li>
+</ul></dd>
+</dl>
+
+<p>
+Si la diagnosis no es satisfactoria, se vuelve a la primera fase.
+</p>
+
+<p>
+Si la diagnosis es satisfactoria, se usa el modelo.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Marcos Bujosa</p>
+<p class="date">Created: 2024-09-19 jue 23:20</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
