@@ -1,3 +1,4 @@
+https://www.master203.com/wp-content/uploads/2023/06/Intro_to_Gretl.pdf
 
 [[https://www.stat.berkeley.edu/~bartlett/courses/153-fall2010/][Introduction to Time Series (Berkeley)]]
 
@@ -28,6 +29,7 @@ https://www.lem.sssup.it/phd/documents/Lesson10.pdf
 
 https://mcs.utm.utoronto.ca/~nosedal/sta457/arma-models.pdf
 
+https://rpubs.com/bachmanaaron42/airline_passengers_time_series_analysis
 
 #+BEGIN_SRC jupyter-R
 library(ggplot2)

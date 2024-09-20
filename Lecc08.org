@@ -490,6 +490,12 @@ ide(sim(AR1SMA1, n = 500),
     graphs = c("plot", "acf", "pacf", "pgram"))
 #+END_SRC
 
+#+RESULTS:
+:RESULTS:
+#+attr_org: :width 1200 :height 500
+[[./img/lecc08/Sim-AR1SMA1.png]]
+:END:
+
 #+attr_org: :width 800
 #+attr_html: :width 900px
 #+attr_latex: :width 425px
@@ -627,4 +633,5 @@ Tres fases:
 Si la diagnosis no es satisfactoria, se vuelve a la primera fase.
 
 Si la diagnosis es satisfactoria, se usa el modelo.
+
 

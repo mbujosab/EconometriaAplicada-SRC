@@ -353,7 +353,7 @@ ide(sim(arma11NVA, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pg
 [[./img/lecc06/Sim-arma11NVA.png]]
 
 
-*** ARMA(1,1) $\phi_1=-0.4$ y $\theta_1=-0.8$
+*** ARMA(1,1) $\phi_1=-0.8$ y $\theta_1=-0.4$
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . notes)))
    :END:
@@ -361,12 +361,12 @@ ide(sim(arma11NVA, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pg
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc07/ :file ACF-arma11RNV.png :exports code :results none
 options(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
-arma11RNV <- um(ar = "(1 + 0.4B)", ma = "(1 + 0.8B)")
+arma11RNV <- um(ar = "(1 + 0.8B)", ma = "(1 + 0.4B)")
 display(list(arma11RNV), lag.max = 20, byrow = TRUE)
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-$$(1 + 0.4\mathsf{B}){X_t}=(1 + 0.8\mathsf{B}){U_t};\quad \phi<0;\;\theta<0$$
+$$(1 + 0.8\mathsf{B}){X_t}=(1 + 0.4\mathsf{B}){U_t};\quad \phi<0;\;\theta<0$$
 
 #+attr_org: :width 800
 #+attr_html: :width 900px
@@ -773,6 +773,15 @@ jb_test <- jarque.test(as.numeric(Z))
 print(jb_test)
 #+END_SRC
 
+#+RESULTS:
+: 
+: 	Jarque-Bera Normality Test
+: 
+: data:  as.numeric(Z)
+: JB = 8.9225, p-value = 0.01155
+: alternative hypothesis: greater
+: 
+
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 
 #+RESULTS:
@@ -795,14 +804,20 @@ jb_test <- jarque.bera.test(Z)
 print(jb_test)
 #+END_SRC
 
+#+RESULTS:
+#+begin_example
+Registered S3 method overwritten by 'quantmod':
+  method            from
+  as.zoo.data.frame zoo 
+
+	Jarque Bera Test
+
+data:  Z
+X-squared = 8.9225, df = 2, p-value = 0.01155
+#+end_example
+
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+RESULTS:
-: 
-: 	Jarque Bera Test
-: 
-: data:  Z
-: X-squared = 8.9225, df = 2, p-value = 0.01155
-: 
 
 
 
