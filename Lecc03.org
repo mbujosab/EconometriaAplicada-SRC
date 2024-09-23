@@ -250,7 +250,7 @@ Melanoma            118.98    7.81    15.23   0.00
 --------------------------------------------------
 #+end_example
 
-** Una manera de ver que la correlación del ejemplo es posiblemente /espuria/ (que no hay causalidad)
+** Una manera de ver que la correlación es posiblemente /espuria/ (que no hay causalidad)
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
@@ -596,5 +596,6 @@ Aparentan ser "estacionarios en media" (i.e., no se aprecia una
 tendencia evidente); por lo que *los tipos de interés a corto y largo
 plazo podrían estar cointegrados*.
 
-Más adelante veremos test estadísticos que contrastan la
-estacionariedad (si son $I(0)$).
+Más adelante veremos test estadísticos (Dickey-Fuller y KPSS) que contrastan la
+estacionariedad (si son $I(1)$ o $I(0)$).
+
