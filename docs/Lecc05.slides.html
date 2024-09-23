@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="orgdd98501">
+<div class="abstract" id="org74eb96a">
 <p>
 Esta lección veremos las dificultades que ocasiona la correlación
 serial y algunos tipos de procesos débilmente estacionarios que nos
@@ -14553,7 +14553,7 @@ los momentos) es demasiado ambicioso.</p>
 <p>Así que, tentativamente, vamos a fijarnos <em>solo</em> en los dos primeros
 momentos:</p>
 $$E(X_t)={\color{blue}{ \mu_t}}\quad\text{ y }\quad
-Cov(X_t,X_k)=E\big[(X_t-\mu_t)(X_k-\mu_k)\big]={\color{blue}{\lambda_{t,k}}};\quad t,k\in\mathbb{Z}$$<p>(si $\;k=t\;$ entonces $\;\lambda_{t,t}=Var(X_t)=\sigma^2_t$).</p>
+Cov(X_t,X_k)=E\big[(X_t-\mu_t)(X_k-\mu_k)\big]={\color{blue}{\gamma_{t,k}}};\quad t,k\in\mathbb{Z}$$<p>(si $\;k=t\;$ entonces $\;\gamma_{t,t}=Var(X_t)=\sigma^2_t$).</p>
 <p>Si el proceso $\boldsymbol{X}$ fuera gaussiano, conocer estos
 <em>parámetros</em> bastaría para caracterizar la distribución conjunta. Pero
 aún así&#x2026;</p>
@@ -14588,7 +14588,7 @@ aún así&#x2026;</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Tipos-de-procesos-estoc%C3%A1sticos-que-simplifican-el-escenario">Tipos de procesos estoc&#225;sticos que simplifican el escenario<a class="anchor-link" href="#Tipos-de-procesos-estoc%C3%A1sticos-que-simplifican-el-escenario">&#182;</a></h3>
+<h3 id="Simplificaci%C3%B3n-del-escenario">Simplificaci&#243;n del escenario<a class="anchor-link" href="#Simplificaci%C3%B3n-del-escenario">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14599,18 +14599,11 @@ aún así&#x2026;</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li><p>Si es <a href="./Lecc01.slides.html#/3/1">débilmente estacionario</a> se reduce drásticamente el número de
-parámetros:</p>
-<p>\begin{eqnarray}
-E(X_t)  &amp; = \mu \\
-Cov(X_t,X_{t-k}) &amp; = \gamma_k
-\end{eqnarray}</p>
-</li>
-<li>Si además es i.i.d. podemos interpretar la serie temporal como una
-realización de un muestreo aleatorio simple.</li>
-</ul>
-
+<p>Si $\boldsymbol{X}$ es <a href="./Lecc01.slides.html#/3/1">débilmente estacionario</a> se reduce drásticamente el número de parámetros:</p>
+\begin{eqnarray}
+  E(X_t)  &amp; = \mu \\
+  Cov(X_t,X_{t-k}) &amp; = \gamma_k
+\end{eqnarray}
 </div>
 </div>
 </div>
@@ -14627,9 +14620,8 @@ realización de un muestreo aleatorio simple.</li>
 <li>(Algo vimos en la lección 1))</li>
 </ul>
 </li>
-<li><strong>después:</strong> transformar los datos estacionarios en una secuencia de
-"<strong>datos <em>i.i.d</em></strong>" <ul>
-<li>(Aún no lo hemos visto)</li>
+<li><strong>después:</strong> transformar los datos estacionarios en "<strong><em>ruido blanco</em></strong>"<ul>
+<li>(Es lo que iniciaremos en esta lección y las siguientes)</li>
 </ul>
 </li>
 </ul>
@@ -14660,144 +14652,7 @@ estacionarios que vamos a utilizar.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Procesos-estoc%C3%A1sticos-de-segundo-orden">Procesos estoc&#225;sticos de segundo orden<a class="anchor-link" href="#Procesos-estoc%C3%A1sticos-de-segundo-orden">&#182;</a></h2>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>El ambiente natural para estudiar las propiedades de segundo orden de
-una colección de variables aleatorias es el espacio de variables
-aleatorias $X$ definidas en un espacio de probabilidad tales que
-$$E(X)=0 \quad\text{y}\quad E(X^2)&lt;\infty$$ donde $E$ es el operador
-esperanza. Denotaremos este espacio con $H$.</p>
-
-</div>
-</div>
-</div>
-</div><aside class="notes">
-
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Un-poco-de-geometr%C3%ADa">Un poco de geometr&#237;a<a class="anchor-link" href="#Un-poco-de-geometr%C3%ADa">&#182;</a></h3>
-</div>
-</div>
-</div>
-</div>
-</aside><aside class="notes">
-
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>El espacio, dotado de producto escalar y norma $$\langle X \mid Y
-\rangle=E(XY),\qquad \lVert X \rVert= \sqrt{E(X^2)},\qquad X,Y \in
-H,$$ es un espacio de Hilbert,</p>
-<p>Nótese que como las variables de $H$ tienen esperanza cero, el
-producto escalar entre $X,Y\in H$ también es $$\langle X \mid Y
-\rangle=Cov(X,Y).$$ Por tanto, en este espacio $H$ la noción
-geométrica de ortogonalidad coincide con la noción estadística de <em>no
-correlación</em>. Por tanto, en este contexto los términos producto
-escalar, covarianza y esperanza del producto serán intercambiables.</p>
-
-</div>
-</div>
-</div>
-</div>
-</aside><div class="fragment">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Una colección de variables aleatorias pertenecientes a $H$
-$$\boldsymbol{X}=(X_t\mid t\in\mathbb{Z}) \;\text{ con }\; X_t\in H$$
-se denomina <em>proceso estocástico de segundo orden</em>.</p>
-
-</div>
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Si $\boldsymbol{Y}=(Y_t\mid t\in\mathbb{Z})$ es tal que
-$E(Y_t)=\mu\ne0$, entonces $\boldsymbol{Y}$ no es de segundo orden.</p>
-<p>Pero basta restar $\mu$ de cada $Y_t$ para tener un proceso
-$(\boldsymbol{Y}-\boldsymbol{\mu})$ de segundo orden.</p>
-<p><em>Por ello siempre asumiremos</em> (sin pérdida de generalidad) <em>que las
-variables aleatorias de los procesos estocásticos de esta lección</em> (y
-la siguiente) <em>tienen esperanza cero</em>.</p>
-
-</div>
-</div>
-</div>
-</div></div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Funci%C3%B3n-de-covarianzas">Funci&#243;n de covarianzas<a class="anchor-link" href="#Funci%C3%B3n-de-covarianzas">&#182;</a></h3>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>La <em>función de covarianzas</em> de un proceso estocástico $\boldsymbol{X}$
-segundo orden es $$\boldsymbol{\gamma}=(\gamma_{s,t}\mid
-s,t\in\mathbb{Z})$$ donde $\gamma_{s,t}=Cov(X_s,X_t)\quad
-s,t\in\mathbb{Z}$.</p>
-<p>Así, para cada par $(s,t)$, la covarianza $\gamma_{s,t}$ mide la
-dependencia lineal entre $X_s$ y $X_t$.</p>
-
-</div>
-</div>
-</div>
-</div><div class="fragment">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Esta función $\boldsymbol{\gamma}$ es demasiado general, por eso nos
-restringiremos a la subclase de procesos estocásticos <em>débilmente
-estacionarios</em>; pues simplifican enormemente la <em>función de
-covarianzas</em> $\boldsymbol{\gamma}$.</p>
-
-</div>
-</div>
-</div>
-</div></div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Proceso-estoc%C3%A1stico-(d%C3%A9bilmente)-estacionario-y-su-ACF">Proceso estoc&#225;stico (d&#233;bilmente) estacionario y su ACF<a class="anchor-link" href="#Proceso-estoc%C3%A1stico-(d%C3%A9bilmente)-estacionario-y-su-ACF">&#182;</a></h3>
+<h3 id="Procesos-estoc%C3%A1sticos-(d%C3%A9bilmente)-estacionarios-y-la-ACF">Procesos estoc&#225;sticos (d&#233;bilmente) estacionarios y la ACF<a class="anchor-link" href="#Procesos-estoc%C3%A1sticos-(d%C3%A9bilmente)-estacionarios-y-la-ACF">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14809,13 +14664,13 @@ covarianzas</em> $\boldsymbol{\gamma}$.</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Un proceso estocástico de segundo orden $\boldsymbol{X}$ se dice que
-es <em>débilmente estacionario</em> si la covarianza entre $X_s$ y $X_t$
-solo depende de la diferencia $s-t$ para todo $s,t\in\mathbb{Z}$.</p>
-<p>En tal caso se denomina <em>función de <u>auto</u>-covarianzas</em> de
-$\boldsymbol{X}$ a la secuencia
-$$\boldsymbol{\gamma}(z)\;=\;(\gamma_k\mid
-k\in\mathbb{Z})\;=\;\sum_{-\infty}^{\infty} \gamma_k z^k$$ donde
-$\;\gamma_k=Cov(X_{t+k}, X_{t})\;$ para $k\in\mathbb{Z}$.</p>
+es <em>débilmente estacionario</em> si $E(X_t)=\mu$ para todo
+$t\in\mathbb{Z}$ y la covarianza entre $X_s$ y $X_t$ solo depende de
+la diferencia $s-t$ para todo $s,t\in\mathbb{Z}$.</p>
+<p>En tal caso, definimos la <u>función de autocovarianzas</u> como:
+$$\boldsymbol{\gamma} = (\gamma_{k}\mid k\in\mathbb{Z}) =
+(\ldots,\,\gamma_{-1},\,{\color{blue}{\gamma_{0}}},\,\gamma_{1},\,\gamma_{2},\ldots)
+\;=\;\sum_{-\infty}^{\infty} \gamma_k z^k.$$</p>
 <p><strong>Propiedades</strong> de la función de autocovarianzas $\boldsymbol{\gamma}$ (ACF):</p>
 <ul>
 <li>$\gamma_0\geq0$</li>
@@ -14825,7 +14680,7 @@ $\;\gamma_k=Cov(X_{t+k}, X_{t})\;$ para $k\in\mathbb{Z}$.</p>
 </ul>
 </li>
 </ul>
-<p>llamamos <em>función de autocorrelación</em> (ACF) a la
+<p>Y llamamos <em>función de autocorrelación</em> (ACF) a la
 secuencia:
 $\;\boldsymbol{\rho}=\frac{1}{\gamma_0}(\boldsymbol{\gamma})
 =\sum\limits_{k\in\mathbb{Z}}\frac{\gamma_k}{\gamma_0}z^k$.</p>
@@ -14840,7 +14695,7 @@ $\;\boldsymbol{\rho}=\frac{1}{\gamma_0}(\boldsymbol{\gamma})
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Procesos-estoc%C3%A1sticos-y-notaci%C3%B3n">Procesos estoc&#225;sticos y notaci&#243;n<a class="anchor-link" href="#Procesos-estoc%C3%A1sticos-y-notaci%C3%B3n">&#182;</a></h2>
+<h2 id="Notaci%C3%B3n:-convoluci%C3%B3n-y-el-operador-retardo">Notaci&#243;n: convoluci&#243;n y el operador retardo<a class="anchor-link" href="#Notaci%C3%B3n:-convoluci%C3%B3n-y-el-operador-retardo">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -14851,53 +14706,18 @@ $\;\boldsymbol{\rho}=\frac{1}{\gamma_0}(\boldsymbol{\gamma})
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Los procesos estocásticos se pueden sumar y se pueden multiplicar por
-escalares.</p>
-<p>Si $\boldsymbol{X}$ e $\boldsymbol{Y}$ son dos procesos estocásticos y
-$\;a\in\mathbb{R}$, entonces $$\boldsymbol{X}+\boldsymbol{Y}=(X_t+Y_t
-\mid t\in\mathbb{Z})\qquad\text{y}\qquad a\boldsymbol{X}=\big(a(X_t)
-\mid t\in\mathbb{Z}\big).$$ El conjunto de procesos estocásticos junto
-con la suma elemento a elemento y el producto por escalares
-constituyen un espacio vectorial.</p>
-
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Consideremos el proceso estocástico 
-$$\boldsymbol{X}=(X_t \mid t=0,\pm1,\pm2,\ldots).$$</p>
-<p>Lo podemos denotar con una función generatriz (como hicimos con las
-secuencias) $$\boldsymbol{X} \quad = \quad \sum_{t=-\infty}^\infty X_t
-z^t \quad\equiv\quad \boldsymbol{X}(z)$$ Recuerde que esto no es una
-suma; es una secuencia de variables aleatorias
-$$\sum_{t=-\infty}^\infty X_t z^t = (\ldots,\ X_{-2},\ X_{-1},\
-X_{0},\ X_{1},\ X_{2},\ldots)$$</p>
-
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Sea $\boldsymbol{a}$ una secuencia de números y $\boldsymbol{X}$ un
+<p>Sea $\boldsymbol{a}$ una secuencia de números y sea $\boldsymbol{X}$ un
 proceso estocástico tales que <u>la suma</u>
-$\sum\limits_{k=-\infty}^{\infty}a_kX_{t-k}\;$ <u>converge</u> para todo
+$$\sum\limits_{k=-\infty}^{\infty}a_kX_{t-k}\;$$ <u>converge</u> para todo
 $t.\;$ Entonces:</p>
-<p>Definimos el producto convolución ($∗$) de $\boldsymbol{a}$ con $\boldsymbol{X}$ como el proceso estocástico:
-$$\boldsymbol{a}*\boldsymbol{X}=\left(\left.\sum_{r+s=t} a_r X_s \right| t\in\mathbb{Z}\right)$$
-es decir
-$$(\boldsymbol{a}*\boldsymbol{X})_t=\sum_{r+s=t} a_r X_s,\quad \text{para } t\in\mathbb{Z}.$$
-Por tanto, cada elemento de $(\boldsymbol{a}*\boldsymbol{X})$ es una combinación de variables aleatorias de $\boldsymbol{X}$</p>
+<p>Definimos el producto convolución ($*$) de $\boldsymbol{a}$ con
+$\boldsymbol{X}$ como el proceso estocástico:
+$$\boldsymbol{a}*\boldsymbol{X}=\left(\left.\sum_{r+s=t} a_r X_s
+\right| t\in\mathbb{Z}\right)$$ es decir
+$$(\boldsymbol{a}*\boldsymbol{X})_t=\sum_{r+s=t} a_r X_s,\quad
+\text{para } t\in\mathbb{Z}.$$ Por tanto, cada elemento de
+$(\boldsymbol{a}*\boldsymbol{X})$ es una combinación de variables
+aleatorias de $\boldsymbol{X}$</p>
 
 </div>
 </div>
@@ -15070,7 +14890,7 @@ una <u>serie formal</u> (i.e.,
 $cogrado(\boldsymbol{b})\geq{\color{blue}{0}}$)
 $$X_t=\sum_{j=0}^\infty {b}_j U_{t-j};\qquad
 t\in\mathbb{Z}$$ $\;$ (pues cada $X_t$ es una suma de variables "<em>del
-presente y pasado</em>").</p>
+presente y/o el pasado</em>").</p>
 
 </div>
 </div>
@@ -15255,7 +15075,7 @@ $\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$ no tiene solución
 única (y en algunos casos ninguna solución es
 estacionaria). Despejemos $\boldsymbol{X}$ para verlo.</p>
 <p>Multiplicando ambos lados de la ecuación por una inversa de
-$\boldsymbol{\phi}$ lo logramos:
+$\boldsymbol{\phi}$ tenemos
 $$\boldsymbol{X}=inversa(\boldsymbol{\phi})*\boldsymbol{U}.$$ Y si
 denotamos la secuencia $inversa(\boldsymbol{\phi})$ con
 $\boldsymbol{a}$ entonces
@@ -15293,9 +15113,9 @@ U_{t-j}\;$ carece de sentido (pues no converge).
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Requisitos</strong> sobre el polinomio autorregresivo $\boldsymbol{\phi}$</p>
+<p><strong>Requisitos</strong> sobre el polinomio autorregresivo $\boldsymbol{\phi}.\;$ Para que el proceso AR exista y sea:</p>
 <ol>
-<li><p>Para tener un <u>proceso lineal</u>, exigiremos que $\boldsymbol{\phi}$
+<li><p><u>estacionario</u>, exigiremos que $\boldsymbol{\phi}$
 <u>no tenga raíces de módulo 1</u>.</p>
 <p>Entonces existe una única inversa absolutamente sumable: $\boldsymbol{\phi}^{-1} \in
    \ell^1\subset\ell^2$.</p>
@@ -15306,9 +15126,9 @@ $\boldsymbol{\phi}$ tuviera raíces de módulo 1 no existiría ni
 $\boldsymbol{\phi}^{-1}$, ni la solución estacionaria).</p>
 <p>$$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=-\infty}^\infty a_j U_{t-j}$$</p>
 </li>
-<li><p>Para tener un <u>proceso lineal causal</u> exigiremos que las raíces de
-$\boldsymbol{\phi}$ sean mayores que 1 en valor absoluto (<u>raíces
-fuera del círculo unidad</u>):
+<li><p><u>lineal causal</u> exigiremos que las raíces de $\boldsymbol{\phi}$
+sean mayores que 1 en valor absoluto (<u>raíces fuera del círculo
+unidad</u>):
 $\boldsymbol{\phi}^{-1}=\boldsymbol{\phi}^{-\triangleright}$.</p>
 <p>$$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=0}^\infty a_j U_{t-j}$$</p>
 </li>
@@ -15405,7 +15225,7 @@ $\boldsymbol{a}=\boldsymbol{\phi}^{-1}*\boldsymbol{\theta}$.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Por último, consideremos un proceso $\boldsymbol{Y}$ con media
+<p>Consideremos un proceso $\boldsymbol{Y}$ con media
 distinta de cero, es decir, $$E(Y_t)=\mu\ne0$$ y definamos la
 secuencia constante $\boldsymbol{\mu}=\sum\limits_{j\in\mathbb{Z}} \mu
 z^j=(\ldots,\mu,\mu,\mu,\ldots)$. 
@@ -15437,75 +15257,7 @@ ARMA($p,q$) <em>con media no nula</em>.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Primeros-momentos-de-procesos-estoc%C3%A1sticos">Primeros momentos de procesos estoc&#225;sticos<a class="anchor-link" href="#Primeros-momentos-de-procesos-estoc%C3%A1sticos">&#182;</a></h2>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Si $E(X_t)&lt;\infty$ para $t\in\mathbb{Z}$, entonces $E(\boldsymbol{X})$ es
-la secuencia $$E(\boldsymbol{X})=\big(E(X_t)\mid
-t\in\mathbb{Z}\big)=\sum\nolimits_{t\in\mathbb{Z}} E(X_t)
-z^t=\big(\ldots,\;E(X_{-1}),\;E(X_{0}),\;E(X_{1}),\ldots\big)$$</p>
-
-</div>
-</div>
-</div>
-</div><div class="fragment">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Si $\boldsymbol{Y}$ tiene segundos momentos finitos, la secuencia de
-autocovarianzas <u>de orden $k$</u> es</p>
-\begin{align*}
-Cov(\boldsymbol{Y},\boldsymbol{Y}*z^k) = &amp;
-% \boldsymbol{\gamma_k}= &amp;
-E\Big(\big[\boldsymbol{Y}-E(\boldsymbol{Y})\big]\odot\big[(\boldsymbol{Y}-E(\boldsymbol{Y}))*z^k\big]\Big)\\
-= &amp; 
-\left.\Big(E\big[\big(Y_t-E(Y_t)\big)\big(Y_{t-k}-E(Y_{t-k})\big)\big]\; \right| t\in\mathbb{Z}\Big)\\
-=&amp;
-% \sum_{t\in\mathbb{Z}} \gamma_{_{k,t}} z^t
-(\gamma_{_{k,t}}\mid t\in\mathbb{Z}) \;=\;
-(\ldots,\,\gamma_{_{k,-1}},\,{\color{blue}{\gamma_{_{k,0}}}},\,\gamma_{_{k,1}},\,\gamma_{_{k,2}},\ldots);\quad k\in\mathbb{Z}.
-\end{align*}
-</div>
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Cuando $E(X_t)=\mu$ para todo $t\in\mathbb{Z}$, entonces
-$E(\boldsymbol{X})$ es una secuencia constante: $$E(\boldsymbol{X}) =
-(\mu\mid t\in\mathbb{Z}) = \mu\boldsymbol{1}.$$</p>
-<p>Si $\gamma_{_{k,t}}=\gamma_k$ 
-para todo $t\in\mathbb{Z}$, 
-entonces definimos la <u>función de autocovarianzas</u> (todas):
-$$\boldsymbol{\gamma} = (\gamma_{k}\mid k\in\mathbb{Z}) =
-(\ldots,\,\gamma_{-1},\,{\color{blue}{\gamma_{0}}},\,\gamma_{1},\,\gamma_{2},\ldots).$$</p>
-
-</div>
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Esperanza-y-autocovarianzas-de-un-proceso-lineal">Esperanza y autocovarianzas de un proceso lineal<a class="anchor-link" href="#Esperanza-y-autocovarianzas-de-un-proceso-lineal">&#182;</a></h3>
+<h3 id="Esperanza-y-autocovarianzas-de-un-proceso-lineal-causal">Esperanza y autocovarianzas de un proceso lineal causal<a class="anchor-link" href="#Esperanza-y-autocovarianzas-de-un-proceso-lineal-causal">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -15518,10 +15270,9 @@ $$\boldsymbol{\gamma} = (\gamma_{k}\mid k\in\mathbb{Z}) =
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Sea $\;\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U},\;$ donde
 $\boldsymbol{\psi}$ es una serie formal de cuadrado sumable
-con cogrado $0$ y
-$\;\boldsymbol{U}\sim WN(0,\sigma^2).\quad$ Recordando que la
-convolución es una operación lineal: $$E(\boldsymbol{X})
-=E(\boldsymbol{\psi}*\boldsymbol{U})
+y donde $\;\boldsymbol{U}\sim
+WN(0,\sigma^2).\quad$ Recordando que la convolución es una operación
+lineal: $$E(\boldsymbol{X}) =E(\boldsymbol{\psi}*\boldsymbol{U})
 =\boldsymbol{\psi}*E(\boldsymbol{U})
 =\boldsymbol{\psi}*\boldsymbol{0}=\boldsymbol{0}.$$ Consecuentemente,
 la covarianza de orden $k$ para cada $X_t$ es</p>
@@ -15555,7 +15306,7 @@ menos el grado de $\boldsymbol{\psi}$.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="Covarianza-cruzada-entre-dos-procesos-lineales-causales">Covarianza cruzada entre dos procesos lineales causales<a class="anchor-link" href="#Covarianza-cruzada-entre-dos-procesos-lineales-causales">&#182;</a></h4>
+<h3 id="Covarianza-cruzada-entre-dos-procesos-lineales-causales">Covarianza cruzada entre dos procesos lineales causales<a class="anchor-link" href="#Covarianza-cruzada-entre-dos-procesos-lineales-causales">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -15569,31 +15320,15 @@ menos el grado de $\boldsymbol{\psi}$.</p>
 <p>Sean $\;\boldsymbol{W}=\boldsymbol{\theta}*\boldsymbol{U}\quad$ e
 $\quad\boldsymbol{Y}=\boldsymbol{\psi}*\boldsymbol{U},\quad$ donde
 $\boldsymbol{\theta}$ y $\boldsymbol{\psi}$ son series formales de
-cuadrado sumable con cogrado $0$ y donde $\;\boldsymbol{U}\sim
+cuadrado sumable y donde $\;\boldsymbol{U}\sim
 WN(0,\sigma^2)$.</p>
-<p>Entonces la covarianza cruzada (de orden $k\in\mathbb{Z}$) entre $W_t$
-e $Y_{t-k}$ es</p>
-\begin{align*}
-E\Big[W_t\cdot Y_{t-k}\Big] = &amp;
-E\Big[\big(\boldsymbol{\theta}(\mathsf{B})U_t\big)\cdot \big(\boldsymbol{\psi}(\mathsf{B}) U_{t-k}\big)\Big] 
-\\ = &amp;
-E\Big[
- (\theta_0U_{t}+\theta_1U_{t-1}+\theta_2U_{t-2}\cdots)
- (\psi_0U_{t-k}+\psi_1U_{t-k-1}+\psi_2U_{t-k-2}\cdots)\Big]
-\\ = &amp;
-\sigma^2\sum\nolimits_{j\in\mathbb{Z}}\theta_{j+k}\psi_j
-\qquad \text{ ya que }\; E(U_hU_j)=0\; \text{ si } \;j\ne h
-\end{align*}<p>que tampoco depende de $t$. Es más, por la última ecuación de la lección 4
-$$\;\gamma_{_{\boldsymbol{W},\boldsymbol{Y}}}(k) =
-\sigma^2\sum\nolimits_{j\in\mathbb{Z}}\theta_{j+k}\psi_j =
-\sigma^2\big(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\big)_k\quad
-\text{ para todo } k\in\mathbb{Z}.$$ Por tanto, la función de
-covarianzas cruzadas es la secuencia</p>
+<p>Repitiendo los mismos pasos que en el caso de la autocovarianza,
+llegamos a que la <u>función de covarianzas cruzadas</u> es la secuencia</p>
 \begin{equation}
  \label{eqCovarianzaCruzadaProcesosLineales}
  \boldsymbol{\gamma_{_{\boldsymbol{W},\boldsymbol{Y}}}} =
  \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})
-\end{equation}<p>de grado igual al grado de $\boldsymbol{\theta}$ y cogrado igual a menos
+\end{equation}<p>con grado igual al grado de $\boldsymbol{\theta}$ y cogrado igual a menos
 el grado de $\boldsymbol{\psi}$.</p>
 
 </div>
@@ -15644,8 +15379,8 @@ formal absolutamente sumable; entonces para $t,k\in\mathbb{Z}$</p>
 <p><em>Por otra parte</em> (lado derecho):</p>
 <p>Si $\boldsymbol{X}$ tiene representación
 $\;\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}$ donde
-$\;\boldsymbol{U}\sim WN(0,\sigma^2)$ y $\boldsymbol{\psi}$ es una
-serie formal de cuadrado sumable con $\psi_0=1$; es decir</p>
+$\;\boldsymbol{U}\sim WN(0,\sigma^2)$ y $\boldsymbol{\psi}\in\ell^2$ es una
+serie formal con $\psi_0=1$; es decir, si es un proceso lineal causal</p>
 $$\quad X_t=U_t + \sum\nolimits_{j=1}^\infty \psi_j U_{t-j},$$<p>entonces para $t,k\in\mathbb{Z}$</p>
 \begin{equation}
   E[U_t\cdot X_{t-k}] = E\Big[U_t\Big(U_{t-k} + \sum\nolimits_{j=1}^\infty \psi_j U_{t-k-j}\Big) \Big]=
@@ -15719,7 +15454,7 @@ Yule-Walker.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Esperanza-y-funci%C3%B3n-de-autocovarianzas-para-un-ARMA($p,q$)">Esperanza y funci&#243;n de autocovarianzas para un ARMA($p,q$)<a class="anchor-link" href="#Esperanza-y-funci%C3%B3n-de-autocovarianzas-para-un-ARMA($p,q$)">&#182;</a></h3>
+<h3 id="Funci%C3%B3n-de-autocovarianzas-para-un-ARMA($p,q$)">Funci&#243;n de autocovarianzas para un ARMA($p,q$)<a class="anchor-link" href="#Funci%C3%B3n-de-autocovarianzas-para-un-ARMA($p,q$)">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -15736,13 +15471,16 @@ donde $\boldsymbol{\phi}$ y $\boldsymbol{\theta}$ no tienen raíces
 comunes. Multiplicando por $X_{t-k}$, tomando esperanzas y
 sustituyendo $X_{t-k}$ por su representación MA($\infty$), donde
 $\boldsymbol{\psi}=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}$:
-$$E\Big[\Big(\boldsymbol{\phi}(\mathsf{B})X_t\Big)\cdot X_{t-k}\Big] =
+$$\underbrace{E\Big[\Big(\boldsymbol{\phi}(\mathsf{B})X_t\Big)\cdot
+X_{t-k}\Big]}_{\boldsymbol{\phi}(\mathsf{B})\gamma_k\;(\text{por
+\ref{eqnLadoIzquierdoYW}})} =
 E\Big[\Big(\boldsymbol{\theta}(\mathsf{B})U_t\Big)\cdot X_{t-k}\Big]
-\;=\; E\Big[\Big(\boldsymbol{\theta}(\mathsf{B})U_t\Big)\cdot
-\Big(\boldsymbol{\psi}(\mathsf{B})U_{t-k}\Big)\Big]$$ Usando
-$\eqref{eqnLadoIzquierdoYW}$, renombrando
+\;=\;
+\underbrace{E\Big[\Big(\boldsymbol{\theta}(\mathsf{B})U_t\Big)\cdot
+\Big(\boldsymbol{\psi}(\mathsf{B})U_{t-k}\Big)\Big]}_{\boldsymbol{\gamma_{_{\boldsymbol{W},\boldsymbol{Y}}}}(k)}$$
+Donde hemos usando $\eqref{eqnLadoIzquierdoYW}$ y renombrando
 $\;\boldsymbol{\theta}(\mathsf{B})U_t=\boldsymbol{W}\;$ y
-$\;\boldsymbol{\psi}(\mathsf{B})U_t=\boldsymbol{Y}:\;$</p>
+$\;\boldsymbol{\psi}(\mathsf{B})U_t=\boldsymbol{Y}.\;$ Así:</p>
 \begin{align*}
   \boldsymbol{\phi}(\mathsf{B})\gamma_k &amp; = \boldsymbol{\gamma_{_{\boldsymbol{W},\boldsymbol{Y}}}}(k)\\
   &amp; =  \sigma^2 \Big(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\Big)_k &amp; \text{por } \eqref{eqCovarianzaCruzadaProcesosLineales}
@@ -15750,8 +15488,9 @@ $\;\boldsymbol{\psi}(\mathsf{B})U_t=\boldsymbol{Y}:\;$</p>
 \begin{equation}
   \boldsymbol{\phi}(\mathsf{B})\gamma_k = 
   \begin{cases}
-     0 &amp; k &gt; q\; \text{(como en un AR)}\\
+     0 &amp; k &gt; q\quad \text{(como en un AR)}\\
     \sigma^2 \Big(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\Big)_k &amp; k\leq q
+   \quad \text{(que depende de $\boldsymbol{\theta}$ y $\boldsymbol{\phi}$)}
   \end{cases}
 \end{equation}
 </div>

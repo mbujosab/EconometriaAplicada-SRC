@@ -126,12 +126,17 @@ compacta del siguiente modo $$\boldsymbol{x} \quad = \quad
 *¡Pero esta expresión no es una suma!* es solo un modo de expresar una
 secuencia. Dicha expresión se denomina /función generatriz/.
 
+La sucesión $\;\boldsymbol{0}=\sum_{t=-\infty}^\infty 0 z^t\;$ se denomina /sucesión nula/.
+
+#+BEGIN_EXPORT latex
+Además, denotaremos con $\boldsymbol{1}$ la secuencia constante uno:
+$\boldsymbol{1}=(\ldots,1,1,1,\ldots)=\sum_{t\in\mathbb{Z}}1 z^t.$
+#+END_EXPORT
+
 *** Características de algunas secuencias
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
-
-La sucesión $\;\boldsymbol{0}=\sum_{t=-\infty}^\infty 0 z^t\;$ se denomina /sucesión nula/.
 
 En una sucesión $\boldsymbol{a}$ no nula llamamos
 - Grado :: al menor índice entero que verifica la propiedad: $$j >
@@ -208,7 +213,7 @@ En cuanto a la suma
  - $\boldsymbol{a} + \boldsymbol{b} = \boldsymbol{b} + \boldsymbol{a}\;$ para todo $\boldsymbol{a}, \boldsymbol{b}$ en $\mathsf{S}\qquad$ (i.e. $+$ es conmutativa).
  - Existe un elemento $\boldsymbol{0}$ tal que $\boldsymbol{a} + \boldsymbol{0} = \boldsymbol{a}$ para todo $\boldsymbol{a}\in \mathsf{S}$.
  - Para cada $\boldsymbol{a}\in \mathsf{S}$ existe $-\boldsymbol{a}\in \mathsf{S}$ tal que $\boldsymbol{a} + (−\boldsymbol{a}) = \boldsymbol{0}$.
- - 
+ 
 En cuanto al producto 
  - $(\boldsymbol{a} * \boldsymbol{b}) * \boldsymbol{c} = \boldsymbol{a} * (\boldsymbol{b} * \boldsymbol{c})\;$ para todo $\boldsymbol{a}, \boldsymbol{b}, \boldsymbol{c}$ en $\mathsf{S}\qquad$ (i.e. $*$ es asociativo). 
  - $\boldsymbol{a} * \boldsymbol{b} = \boldsymbol{b} * \boldsymbol{a}\;$ para todo $\boldsymbol{a}, \boldsymbol{b}$ en $\mathsf{S}\qquad$ (i.e. $*$ es conmutativo).
@@ -368,13 +373,14 @@ Comprobación:
 % $$(1-az)\sum_{j=-\infty}^{-1} -a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + (-az)\sum_{j=-\infty}^{-1} -a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + \sum_{j=-\infty}^{0} a^j z^j=\sum_{j=-\infty}^{-1} -a^j z^j + \sum_{j=-\infty}^{-1} a^j z^j +a^0 z^0=\sum_{j=-\infty}^{-1} (a^j-a^j) z^j + 1 z^0={{1}}$$
 #+END_EXPORT
 
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+#+BEGIN_EXPORT latex
 Si definimos la función entre secuencias
 $R:\mathbb{R}^\mathbb{Z}\to\mathbb{R}^\mathbb{Z}$ tal que
 $R(a_j)=a_{-j}$, es decir, la función /reverso/
 $$R\big(\boldsymbol{a}(z)\big)=\boldsymbol{a}(z^{-1})$$ se puede
 demostrar que para toda secuencia con final $\boldsymbol{a}$
 $$\boldsymbol{a}^{\blacktriangleleft-}=R\left(\big(R(\boldsymbol{a})\big)^{-\triangleright}\right).$$
+#+END_EXPORT
 
 *** Inversas de polinomios
    :PROPERTIES:
@@ -433,10 +439,10 @@ $\;(\boldsymbol{b}^{\blacktriangleleft-}*\boldsymbol{c}^{-\triangleright})\;$
 es "la" inversa de $\boldsymbol{a}$ en $\ell^1$.
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-En general, dicha inversa no tiene grado ni cogrado y se denota
-con $\boldsymbol{a}^{-1}=\frac{1}{\boldsymbol{a}}$.\\
-@@latex:\noindent @@
-(/es la inversa que aparece en los libros de series temporales/)
+En general, dicha inversa no tiene grado ni cogrado finitos y se
+denota con $\boldsymbol{a}^{-1}=\frac{1}{\boldsymbol{a}}$.\\
+@@latex:\noindent @@ (/es la inversa que aparece en los libros de
+series temporales/)
 
 Evidentemente dicha inversa no existe si $\boldsymbol{a}$ tiene alguna raíz de módulo $1$.
 
@@ -444,11 +450,12 @@ Evidentemente dicha inversa no existe si $\boldsymbol{a}$ tiene alguna raíz de 
 En los manuales de /series temporales/ se dice que un polinomio $\boldsymbol{a}$ *es invertible* si 
 # la inversa con cogrado pertenece a $\ell^1$; es decir, si 
 $$\text{(la inversa con principio) }\;\boldsymbol{a}^{-\triangleright}=\boldsymbol{a}^{-1}\; \text{ (la inversa absolutamente sumable)}.$$
-(/si sus raíces están fuera del círculo unidad./)
+(y solo es posible /si sus raíces están fuera del círculo unidad/).
 #+latex:\bigskip
 
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
-*Hay infinitas inversas.* Si una secuencia tiene dos inversas,
+#+BEGIN_EXPORT latex
+% #+attr_ipynb: (slideshow . ((slide_type . subslide)))
+{\bf Hay infinitas inversas}. Si una secuencia tiene dos inversas,
 entonces tiene infinitas.
 
 Sean $\boldsymbol{a}$, $\boldsymbol{b}$ y $\boldsymbol{d}$ secuencias
@@ -465,6 +472,8 @@ $$\boldsymbol{a}*\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)=
 Así, para $\beta$ y $\delta$ tales que $\beta+\delta=1$, sabemos
 que $\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)$ es otra
 inversa de $\boldsymbol{a}$.
+#+END_EXPORT
+
 
 *** Cuerpo de fracciones de polinomios
    :PROPERTIES:
@@ -472,20 +481,22 @@ inversa de $\boldsymbol{a}$.
    :ID:       d636ae1f-28b8-470a-9001-b05f1321d5b0
    :END:
    
-El cuerpo más importante en la modelización ARIMA es el /cuerpo de
-fracciones de polinomios/
+El /cuerpo de fracciones de polinomios/
 $$\left\{\boldsymbol{p}*\boldsymbol{q}^{-\triangleright} \mid
 \boldsymbol{p} \text{ y } \boldsymbol{q} \text{ son polinomios y }
 \boldsymbol{q}\ne\boldsymbol{0} \right\};$$ es un subcuerpo del cuerpo
-de las sucesiones con principio (con cogrado)
+de las sucesiones con principio (i.e., con cogrado finito)
 
-#+attr_ipynb: (slideshow . ((slide_type . fragment)))
-/Toda fracción de sucesiones con grado y cogrado (con principio y
-final) pertenece al cuerpo de fracciones de polinomios/.
-
-El razonamiento es simple: Toda sucesión con grado $−k$ y cogrado es
+#+BEGIN_EXPORT latex
+\medskip
+% #+attr_ipynb: (slideshow . ((slide_type . fragment)))
+\emph{Toda fracción de sucesiones con grado y cogrado (con principio y
+final) pertenece al cuerpo de fracciones de polinomios},
+pues  toda sucesión con grado $−k$ y cogrado es
 de la forma $\boldsymbol{p}*(z^k)^{-\triangleright}$, donde
 $\boldsymbol{p}$ es un polinomio.
+\medskip
+#+END_EXPORT
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 Cuando las raíces del polinomio $\boldsymbol{q}$ están fuera del
@@ -494,6 +505,8 @@ $\;\boldsymbol{q}^{-\triangleright}=\boldsymbol{q}^{-1}$) es habitual
 denotar la secuencia $\boldsymbol{p}*\boldsymbol{q}^{-\triangleright}$
 así $\frac{\boldsymbol{p}}{\boldsymbol{q}}$
  $$(\boldsymbol{p}*\boldsymbol{q}^{-\triangleright})(z)=\frac{\boldsymbol{p}(z)}{\boldsymbol{q}(z)}$$
+
+Este conjunto es fundamental en la modelización ARIMA. 
 
 
 ** Operador retardo $\mathsf{B}{}$ y suma de los elementos de una secuencia.
@@ -537,47 +550,6 @@ Y en general, si $\boldsymbol{a}$ e $\boldsymbol{y}$ son secuencias sumables, en
 & =(\boldsymbol{a}*\boldsymbol{y})_t
 \end{align*}
 
-*** El operador retardo y el producto convolución de una secuencia $\boldsymbol{x}$ por $z$
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
-   :END:
-
-Del mismo modo que denotamos con ${{1}}$ la secuencia
-$$1=(\ldots,0,0,{\color{blue}{1}},0,0,\ldots)=1 z^0,$$ denotamos con
-${{z}}$ la secuencia
-$$z=(\ldots,0,0,{\color{blue}{0}},1,0,\ldots)=1 z^1;$$
-y con ${{z^{-1}}}$ la secuencia
-$$z^{-1}=(\ldots,0,1,{\color{blue}{0}},0,0,\ldots)=1 z^{-1}.$$
-Evidentemente
-$$z^2=z*z=(\ldots,0,0,{\color{blue}{0}},0,1,\ldots)=1 z^{2}.$$
-De ese modo $$\boldsymbol{x}*z^k=\sum_{t\in\mathbb{Z}}x_t
-z^{t+k}=(\mathsf{B}^kx_t\mid t\in\mathbb{Z}).$$
-# =\sum_{t\in\mathbb{Z}}x_{t-k}z^t
-
-
-** El producto elemento a elemento de dos secuencias
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . slide)))
-   :END:
-El producto elemento a elemento (o producto Hadamard) de $\boldsymbol{a}$ y $\boldsymbol{b}$ es la secuencia
-$$\boldsymbol{a}\odot\boldsymbol{b}=(a_tb_t\mid
-t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}a_tb_t z^t.$$ Por tanto
-$$\boldsymbol{x}\odot(\boldsymbol{y}*z^k)=(x_t y_{t-k}\mid
-t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}x_t y_{t-k} z^t;$$ y si
-$\boldsymbol{\phi}$ es el polinomio $\;1-\phi_1 z^1-\cdots-\phi_p
-z^p$,
-$$(\boldsymbol{\phi}*\boldsymbol{x})\odot(\boldsymbol{y}*z^k)=\Big(\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
-y_{t-k}\mid
-t\in\mathbb{Z}\Big)=\sum_{t\in\mathbb{Z}}\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
-y_{t-k} z^t,$$ donde
-\begin{align*}
-\big(\boldsymbol{\phi}(\mathsf{B})x_t\big) y_{t-k}
-= & \big(x_t-\phi_1x_{t-1}-\cdots-\phi_px_{t-p}\big)y_{t-k}\\
-= & x_ty_{t-k}-\phi_1x_{t-1}y_{t-k}-\cdots-\phi_px_{t-p}y_{t-k}.
-\end{align*}
-#+latex: \bigskip
-
-
 ** Convolución de una serie formal con el "/reverso/" de otra
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
@@ -601,4 +573,49 @@ es decir,
  \label{eqConvolucionConSuReverso}
  \Big(\boldsymbol{a}(z)*\boldsymbol{b}(z^{-1})\Big)_k=\sum_{j\in\mathbb{Z}}a_{j+k}b_{j}.
 \end{equation}
+
+
+*** COMMENT El operador retardo y el producto convolución de una secuencia $\boldsymbol{x}$ por $z$
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . skip)))
+   :END:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+Del mismo modo que denotamos con ${{1}}$ la secuencia
+$$1=(\ldots,0,0,{\color{blue}{1}},0,0,\ldots)=1 z^0,$$ denotamos con
+${{z}}$ la secuencia
+$$z=(\ldots,0,0,{\color{blue}{0}},1,0,\ldots)=1 z^1;$$
+y con ${{z^{-1}}}$ la secuencia
+$$z^{-1}=(\ldots,0,1,{\color{blue}{0}},0,0,\ldots)=1 z^{-1}.$$
+Evidentemente
+$$z^2=z*z=(\ldots,0,0,{\color{blue}{0}},0,1,\ldots)=1 z^{2}.$$
+De ese modo $$\boldsymbol{x}*z^k=\sum_{t\in\mathbb{Z}}x_t
+z^{t+k}=(\mathsf{B}^kx_t\mid t\in\mathbb{Z}).$$
+# =\sum_{t\in\mathbb{Z}}x_{t-k}z^t
+
+
+
+** COMMENT El producto elemento a elemento de dos secuencias
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . skip)))
+   :END:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+El producto elemento a elemento (o producto Hadamard) de $\boldsymbol{a}$ y $\boldsymbol{b}$ es la secuencia
+$$\boldsymbol{a}\odot\boldsymbol{b}=(a_tb_t\mid
+t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}a_tb_t z^t.$$ Por tanto
+$$\boldsymbol{x}\odot(\boldsymbol{y}*z^k)=(x_t y_{t-k}\mid
+t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}x_t y_{t-k} z^t;$$ y si
+$\boldsymbol{\phi}$ es el polinomio $\;1-\phi_1 z^1-\cdots-\phi_p
+z^p$,
+$$(\boldsymbol{\phi}*\boldsymbol{x})\odot(\boldsymbol{y}*z^k)=\Big(\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
+y_{t-k}\mid
+t\in\mathbb{Z}\Big)=\sum_{t\in\mathbb{Z}}\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
+y_{t-k} z^t,$$ donde
+\begin{align*}
+\big(\boldsymbol{\phi}(\mathsf{B})x_t\big) y_{t-k}
+= & \big(x_t-\phi_1x_{t-1}-\cdots-\phi_px_{t-p}\big)y_{t-k}\\
+= & x_ty_{t-k}-\phi_1x_{t-1}y_{t-k}-\cdots-\phi_px_{t-p}y_{t-k}.
+\end{align*}
+#+latex: \bigskip
 

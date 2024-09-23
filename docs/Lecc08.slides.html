@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="orge4e0865">
+<div class="abstract" id="org66e47d3">
 <p>
 En esta lección repasamos los instrumentos de identificación y
 diagnosis del análisis univariante. Extendemos la notación para
@@ -14304,7 +14304,7 @@ económicas suele ser ARMA($2,1$)</p>
 </tr>
 <tr>
 <td>$d$, orden de diferenciación</td>
-<td>Gráfico de la serie temporal. ACF (caída lenta y lineal). Contrastes de raíz unitaria</td>
+<td>Gráfico de la serie temporal. ACF (caída lenta y lineal). Contrastes de raíz unitaria (DF o ADF y KPSS)</td>
 <td>Conseguir que los datos fluctúen en torno a una media estable. En series económicas, $d$ suele ser 1 ó 2</td>
 </tr>
 <tr>
@@ -14356,8 +14356,8 @@ económicas suele ser ARMA($2,1$)</p>
 <tbody>
 <tr>
 <td>$d$, orden de diferenciación</td>
-<td>Raíces de los polinomios AR y MA</td>
-<td>Raíz AR próxima a uno: quizá conviene añadir una diferencia.  Raíz MA próxima: quizá conviene quitar una diferencia.</td>
+<td><i>Proximidad a 1</i> de alguna raíz de los polinomios AR o MA</td>
+<td>Si la raíz es AR quizá conviene diferenciar. O quitar una diferencia si es MA (<i>salvo si hay tendencia determinista</i>)</td>
 </tr>
 <tr>
 <td>$d$, orden de diferenciación</td>
@@ -14367,7 +14367,7 @@ económicas suele ser ARMA($2,1$)</p>
 <tr>
 <td>Constante</td>
 <td>Media de los residuos</td>
-<td>Si es significativa: añadir término constante</td>
+<td>Si es significativa: añadir una  constante</td>
 </tr>
 <tr>
 <td>Constante</td>
@@ -14376,18 +14376,18 @@ económicas suele ser ARMA($2,1$)</p>
 </tr>
 <tr>
 <td>$p$ y $q$,</td>
-<td>Contrastes de significación</td>
+<td>Contrastes de significación de los parámetros estimados</td>
 <td>Pueden sugerir eliminar parámetros irrelevantes</td>
 </tr>
 <tr>
 <td>$p$ y $q$,</td>
-<td>ACF y PACF de los residuos. Test Q de Ljung-Box</td>
+<td>ACF/PACF residuos. Test Q de Ljung-Box</td>
 <td>Indican posibles pautas de autocorrelación no modelizadas</td>
 </tr>
 <tr>
 <td>$p$ y $q$,</td>
-<td>Correlaciones elevadas entre parámetros estimados</td>
-<td>Puede ser un síntoma de sobreparametrización</td>
+<td>Correlaciones elevadas entre los parámetros estimados</td>
+<td>Puede ser síntoma de sobreparametrización</td>
 </tr>
 </tbody>
 </table>
@@ -14402,9 +14402,9 @@ económicas suele ser ARMA($2,1$)</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Por último, se puede aplicar un análisis exploratorio consistente en
-añadir parámetros AR y/o MA, para comprobar si resultan significativos
-y, además, mejoran el modelo</p>
+<p>Aún, una vez superadas las pruebas de diagnostico, se puede aplicar un
+análisis exploratorio consistente en añadir parámetros AR y/o MA, para
+comprobar si resultan significativos y mejoran el modelo</p>
 
 </div>
 </div>
@@ -14416,7 +14416,7 @@ y, además, mejoran el modelo</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Notaci%C3%B3n:-operadores-retardo-y-diferencia">Notaci&#243;n: operadores retardo y diferencia<a class="anchor-link" href="#Notaci%C3%B3n:-operadores-retardo-y-diferencia">&#182;</a></h3>
+<h3 id="Notaci%C3%B3n:-operadores-retardo-y-diferencia-y-modelos-ARIMA">Notaci&#243;n: operadores retardo y diferencia y modelos ARIMA<a class="anchor-link" href="#Notaci%C3%B3n:-operadores-retardo-y-diferencia-y-modelos-ARIMA">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14471,31 +14471,36 @@ Y_t = \boldsymbol{\theta}_q(\mathsf{B}) U_t; \quad t\in\mathbb{Z}$$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Cuando el polinomio AR tiene alguna raíz igual a uno, se dice que
-tiene “raíces unitarias”. Si el polinomio corresponde a un modelo
-estimado, esto es síntoma de subdiferenciación.</p>
-<p>Si la raíz unitaria está en el polinomio MA y este ha sido estimado,
-esto es síntoma de: (a) sobrediferenciación o (b) presencia de
-componentes deterministas, si además si tiene media significativa.</p>
-<p>Ejemplos</p>
+<p>Cuando un polinomio tiene alguna raíz igual a uno se dice que tiene
+“raíces unitarias”.</p>
+<p>Si el polinomio AR estimado tiene alguna raíz "próxima a uno", es 
+síntoma de subdiferenciación.</p>
+<p>Si el polinomio MA estimado tiene alguna raíz "próxima a uno", es
+síntoma de</p>
+<ol>
+<li>sobrediferenciación&#x2026; salvo cuando&#x2026;</li>
+<li>antes de diferenciar hubiera una tendencia determinista (que
+podemos comprobar, por ejemplo, con un test ADF).</li>
+</ol>
+<p>Ejemplos que ilustran los tres casos:</p>
 <table>
 <thead><tr>
-<th>Modelo expresado con raíz unitaria en $\boldsymbol{\phi}$ o $\boldsymbol{\theta}$</th>
+<th>Modelo expresado con raíces unitarias en $\boldsymbol{\phi}$ o $\boldsymbol{\theta}$</th>
 <th>Modelo equivalente sin raíces unitarias en $\boldsymbol{\phi}$ o $\boldsymbol{\theta}$</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>$(1-1.5\mathsf{B}+.5\mathsf{B}^2) Y_t = U_t$</td>
-<td>$(1-0.5\mathsf{B})\nabla Y_t=U_t$</td>
+<td>${\color{blue}{(1-0.5\mathsf{B})\nabla Y_t=U_t}}$</td>
 </tr>
 <tr>
 <td>$(1-.5\mathsf{B}+0.7\mathsf{B}^2)\nabla^2Y_t=(1-\mathsf{B})U_t$</td>
-<td>$(1-.5\mathsf{B}+0.7\mathsf{B}^2)\nabla Y_t =  U_t$</td>
+<td>${\color{blue}{(1-.5\mathsf{B}+0.7\mathsf{B}^2)\nabla Y_t =  U_t}}$</td>
 </tr>
 <tr>
-<td>$\nabla Y_t = \beta+          (1-\mathsf{B}) U_t$</td>
-<td>$Y_t = \beta t + U_t$</td>
+<td>${\color{blue}{\nabla Y_t = \beta+          (1-\mathsf{B}) U_t}}$</td>
+<td>$Y_t = \beta t + U_t\quad$ (¡no estacionario!)</td>
 </tr>
 </tbody>
 </table>
@@ -15031,7 +15036,8 @@ blanco"*</u>?</li>
 </li>
 </ul>
 <p>Si la diagnosis no es satisfactoria, se vuelve a la primera fase.</p>
-<p>Si la diagnosis es satisfactoria, se usa el modelo.</p>
+<p>Si la diagnosis es satisfactoria&#x2026; ¡hemos logrado un modelo
+aceptable!</p>
 
 </div>
 </div>

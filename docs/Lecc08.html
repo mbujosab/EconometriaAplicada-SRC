@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
 <head>
-<!-- 2024-09-20 vie 19:26 -->
+<!-- 2024-09-23 lun 10:01 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 8</title>
@@ -233,44 +233,44 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2e803f2">Carga de algunas librerías de R</a></li>
+<li><a href="#org3c4d224">Carga de algunas librerías de R</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org8a030fa">1. Identificación y diagnosis</a>
+<li><a href="#orgd91382c">1. Identificación y diagnosis</a>
 <ul>
-<li><a href="#org71c162c">1.1. Instrumentos de identificación</a></li>
+<li><a href="#org9bffe15">1.1. Instrumentos de identificación</a></li>
 <li><a href="#org6ccecf0">1.2. Instrumentos de diagnosis</a></li>
 </ul>
 </li>
-<li><a href="#org9931fb9">2. Raíces unitarias</a>
+<li><a href="#orgcf07611">2. Raíces unitarias</a>
 <ul>
-<li><a href="#org152a122">2.1. Notación: operadores retardo y diferencia</a>
+<li><a href="#orgcfa900c">2.1. Notación: operadores retardo y diferencia y modelos ARIMA</a>
 <ul>
-<li><a href="#org9531b8b">2.1.1. Notación: ARIMA</a></li>
+<li><a href="#orgd43747d">2.1.1. Notación: ARIMA</a></li>
 </ul>
 </li>
-<li><a href="#orgc90883e">2.2. Raíces unitarias en los polinomios AR y MA</a></li>
+<li><a href="#org834a550">2.2. Raíces unitarias en los polinomios AR y MA</a></li>
 <li><a href="#orgb2153ab">2.3. Paseos aleatorios</a></li>
 </ul>
 </li>
 <li><a href="#org4002e19">3. Modelos ARIMA estacionales (SARIMA)</a>
 <ul>
-<li><a href="#orge4b57d3">3.1. MA(1) estacional con raíz positiva</a></li>
-<li><a href="#orgfc02c8e">3.2. AR(1) estacional con raíz positiva</a></li>
+<li><a href="#orga0638f3">3.1. MA(1) estacional con raíz positiva</a></li>
+<li><a href="#org7cf79f9">3.2. AR(1) estacional con raíz positiva</a></li>
 <li><a href="#org6a8b645">3.3. ARIMA\((0,0,1)\times(0,0,1)_{12}\)</a></li>
 <li><a href="#org0924b05">3.4. ARIMA\((1,0,0)\times(0,0,1)_{12}\)</a></li>
 <li><a href="#org55b00d5">3.5. ARIMA\((1,0,0)\times(1,0,0)_{12}\)</a></li>
 <li><a href="#org277d088">3.6. ARIMA\((0,0,1)\times(1,0,0)_{12}\)</a></li>
 </ul>
 </li>
-<li><a href="#orgd62574b">4. Resumen del análisis univariante de series temporales</a>
+<li><a href="#orga90f76d">4. Resumen del análisis univariante de series temporales</a>
 <ul>
 <li><a href="#org94eb2a3">4.1. Ideas principales</a></li>
-<li><a href="#org7283031">4.2. Metodología</a></div>
+<li><a href="#org339fc61">4.2. Metodología</a></div>
 </div>
-<div class="abstract" id="org9bd60e8">
+<div class="abstract" id="org6d759d5">
 <p>
 En esta lección repasamos los instrumentos de identificación y
 diagnosis del análisis univariante. Extendemos la notación para
@@ -280,9 +280,9 @@ univariante.
 </p>
 
 </div>
-<div id="outline-container-org2e803f2" class="outline-4">
-<h4 id="org2e803f2">Carga de algunas librerías de R</h4>
-<div class="outline-text-4" id="text-org2e803f2">
+<div id="outline-container-org3c4d224" class="outline-4">
+<h4 id="org3c4d224">Carga de algunas librerías de R</h4>
+<div class="outline-text-4" id="text-org3c4d224">
 <div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">cargamos algunas librer&#237;as de R</span>
 <span style="color: #D0372D;">library</span>(tfarima)      <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">librer&#237;a de Jos&#233; Luis Gallego para Time Series</span>
@@ -297,8 +297,8 @@ univariante.
 </div>
 </div>
 </div>
-<div id="outline-container-org8a030fa" class="outline-2">
-<h2 id="org8a030fa"><span class="section-number-2">1.</span> Identificación y diagnosis</h2>
+<div id="outline-container-orgd91382c" class="outline-2">
+<h2 id="orgd91382c"><span class="section-number-2">1.</span> Identificación y diagnosis</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li>Combinando las herramientas gráficas y estadísticas que hemos visto,
@@ -367,8 +367,8 @@ La parametrización de mayor orden en modelos ARMA con series
 económicas suele ser ARMA(\(2,1\))
 </p>
 </div>
-<div id="outline-container-org71c162c" class="outline-3">
-<h3 id="org71c162c"><span class="section-number-3">1.1.</span> Instrumentos de identificación</h3>
+<div id="outline-container-org9bffe15" class="outline-3">
+<h3 id="org9bffe15"><span class="section-number-3">1.1.</span> Instrumentos de identificación</h3>
 <div class="outline-text-3" id="text-1-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border">
 
@@ -396,7 +396,7 @@ económicas suele ser ARMA(\(2,1\))
 
 <tr>
 <td class="org-left">\(d\), orden de diferenciación</td>
-<td class="org-left">Gráfico de la serie temporal. ACF (caída lenta y lineal). Contrastes de raíz unitaria</td>
+<td class="org-left">Gráfico de la serie temporal. ACF (caída lenta y lineal). Contrastes de raíz unitaria (DF o ADF y KPSS)</td>
 <td class="org-left">Conseguir que los datos fluctúen en torno a una media estable. En series económicas, \(d\) suele ser 1 ó 2</td>
 </tr>
 
@@ -444,8 +444,8 @@ económicas suele ser ARMA(\(2,1\))
 <tbody>
 <tr>
 <td class="org-left">\(d\), orden de diferenciación</td>
-<td class="org-left">Raíces de los polinomios AR y MA</td>
-<td class="org-left">Raíz AR próxima a uno: quizá conviene añadir una diferencia.  Raíz MA próxima: quizá conviene quitar una diferencia.</td>
+<td class="org-left"><i>Proximidad a 1</i> de alguna raíz de los polinomios AR o MA</td>
+<td class="org-left">Si la raíz es AR quizá conviene diferenciar. O quitar una diferencia si es MA (<i>salvo si hay tendencia determinista</i>)</td>
 </tr>
 
 <tr>
@@ -457,7 +457,7 @@ económicas suele ser ARMA(\(2,1\))
 <tr>
 <td class="org-left">Constante</td>
 <td class="org-left">Media de los residuos</td>
-<td class="org-left">Si es significativa: añadir término constante</td>
+<td class="org-left">Si es significativa: añadir una  constante</td>
 </tr>
 
 <tr>
@@ -468,38 +468,38 @@ económicas suele ser ARMA(\(2,1\))
 
 <tr>
 <td class="org-left">\(p\) y \(q\),</td>
-<td class="org-left">Contrastes de significación</td>
+<td class="org-left">Contrastes de significación de los parámetros estimados</td>
 <td class="org-left">Pueden sugerir eliminar parámetros irrelevantes</td>
 </tr>
 
 <tr>
 <td class="org-left">\(p\) y \(q\),</td>
-<td class="org-left">ACF y PACF de los residuos. Test Q de Ljung-Box</td>
+<td class="org-left">ACF/PACF residuos. Test Q de Ljung-Box</td>
 <td class="org-left">Indican posibles pautas de autocorrelación no modelizadas</td>
 </tr>
 
 <tr>
 <td class="org-left">\(p\) y \(q\),</td>
-<td class="org-left">Correlaciones elevadas entre parámetros estimados</td>
-<td class="org-left">Puede ser un síntoma de sobreparametrización</td>
+<td class="org-left">Correlaciones elevadas entre los parámetros estimados</td>
+<td class="org-left">Puede ser síntoma de sobreparametrización</td>
 </tr>
 </tbody>
 </table>
 
 <p>
-Por último, se puede aplicar un análisis exploratorio consistente en
-añadir parámetros AR y/o MA, para comprobar si resultan significativos
-y, además, mejoran el modelo
+Aún, una vez superadas las pruebas de diagnostico, se puede aplicar un
+análisis exploratorio consistente en añadir parámetros AR y/o MA, para
+comprobar si resultan significativos y mejoran el modelo
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org9931fb9" class="outline-2">
-<h2 id="org9931fb9"><span class="section-number-2">2.</span> Raíces unitarias</h2>
+<div id="outline-container-orgcf07611" class="outline-2">
+<h2 id="orgcf07611"><span class="section-number-2">2.</span> Raíces unitarias</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org152a122" class="outline-3">
-<h3 id="org152a122"><span class="section-number-3">2.1.</span> Notación: operadores retardo y diferencia</h3>
+<div id="outline-container-orgcfa900c" class="outline-3">
+<h3 id="orgcfa900c"><span class="section-number-3">2.1.</span> Notación: operadores retardo y diferencia y modelos ARIMA</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 El operador diferencia \(\nabla\) se define a partir del operador retardo como \(\nabla=(1 - \mathsf{B})\):
@@ -509,8 +509,8 @@ El operador diferencia estacional es
 \[\nabla_{_S}Y_t = (1 - \mathsf{B}^S)Y_t = Y_t - Y_{t-S}\]
 </p>
 </div>
-<div id="outline-container-org9531b8b" class="outline-4">
-<h4 id="org9531b8b"><span class="section-number-4">2.1.1.</span> Notación: ARIMA</h4>
+<div id="outline-container-orgd43747d" class="outline-4">
+<h4 id="orgd43747d"><span class="section-number-4">2.1.1.</span> Notación: ARIMA</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 Con ``ARIMA(\(p,d,q\))'', donde \(d\) indica el número \(d\) de diferencias
@@ -523,23 +523,31 @@ Y_t = \boldsymbol{\theta}_q(\mathsf{B}) U_t; \quad t\in\mathbb{Z}\]
 </div>
 </div>
 </div>
-<div id="outline-container-orgc90883e" class="outline-3">
-<h3 id="orgc90883e"><span class="section-number-3">2.2.</span> Raíces unitarias en los polinomios AR y MA</h3>
+<div id="outline-container-org834a550" class="outline-3">
+<h3 id="org834a550"><span class="section-number-3">2.2.</span> Raíces unitarias en los polinomios AR y MA</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
-Cuando el polinomio AR tiene alguna raíz igual a uno, se dice que
-tiene “raíces unitarias”. Si el polinomio corresponde a un modelo
-estimado, esto es síntoma de subdiferenciación.
+Cuando un polinomio tiene alguna raíz igual a uno se dice que tiene
+“raíces unitarias”.
 </p>
 
 <p>
-Si la raíz unitaria está en el polinomio MA y este ha sido estimado,
-esto es síntoma de: (a) sobrediferenciación o (b) presencia de
-componentes deterministas, si además si tiene media significativa.
+Si el polinomio AR estimado tiene alguna raíz "próxima a uno", es 
+síntoma de subdiferenciación.
 </p>
 
 <p>
-Ejemplos
+Si el polinomio MA estimado tiene alguna raíz "próxima a uno", es
+síntoma de
+</p>
+<ol class="org-ol">
+<li>sobrediferenciación&#x2026; salvo cuando&#x2026;</li>
+<li>antes de diferenciar hubiera una tendencia determinista (que
+podemos comprobar, por ejemplo, con un test ADF).</li>
+</ol>
+
+<p>
+Ejemplos que ilustran los tres casos:
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="all" frame="border">
@@ -552,24 +560,24 @@ Ejemplos
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">Modelo expresado con raíz unitaria en \(\boldsymbol{\phi}\) o \(\boldsymbol{\theta}\)</th>
+<th scope="col" class="org-left">Modelo expresado con raíces unitarias en \(\boldsymbol{\phi}\) o \(\boldsymbol{\theta}\)</th>
 <th scope="col" class="org-left">Modelo equivalente sin raíces unitarias en \(\boldsymbol{\phi}\) o \(\boldsymbol{\theta}\)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="org-left">\((1-1.5\mathsf{B}+.5\mathsf{B}^2) Y_t = U_t\)</td>
-<td class="org-left">\((1-0.5\mathsf{B})\nabla Y_t=U_t\)</td>
+<td class="org-left">\({\color{blue}{(1-0.5\mathsf{B})\nabla Y_t=U_t}}\)</td>
 </tr>
 
 <tr>
 <td class="org-left">\((1-.5\mathsf{B}+0.7\mathsf{B}^2)\nabla^2Y_t=(1-\mathsf{B})U_t\)</td>
-<td class="org-left">\((1-.5\mathsf{B}+0.7\mathsf{B}^2)\nabla Y_t =  U_t\)</td>
+<td class="org-left">\({\color{blue}{(1-.5\mathsf{B}+0.7\mathsf{B}^2)\nabla Y_t =  U_t}}\)</td>
 </tr>
 
 <tr>
-<td class="org-left">\(\nabla Y_t = \beta+          (1-\mathsf{B}) U_t\)</td>
-<td class="org-left">\(Y_t = \beta t + U_t\)</td>
+<td class="org-left">\({\color{blue}{\nabla Y_t = \beta+          (1-\mathsf{B}) U_t}}\)</td>
+<td class="org-left">\(Y_t = \beta t + U_t\quad\) (¡no estacionario!)</td>
 </tr>
 </tbody>
 </table>
@@ -595,7 +603,7 @@ ide(sim(rw, n = 500), lag.max = 20, graphs = c(<span style="color: #008000;">"pl
 </div>
 
 
-<div id="org7fe2078" class="figure">
+<div id="orge0cefa0" class="figure">
 <p><img src="./img/lecc08/ACF-RW.png" alt="ACF-RW.png" width="900px" />
 </p>
 </div>
@@ -618,7 +626,7 @@ ide(sim(rwcd, n = 500),
 </div>
 
 
-<div id="org97b3753" class="figure">
+<div id="org3aed3e4" class="figure">
 <p><img src="./img/lecc08/ACF-RWcd.png" alt="ACF-RWcd.png" width="900px" />
 </p>
 </div>
@@ -665,8 +673,8 @@ Veamos un ejemplo de un modelo MA(\(1\)) estacional y otro de un modelo
 AR(\(1\)) estacional&#x2026;
 </p>
 </div>
-<div id="outline-container-orge4b57d3" class="outline-3">
-<h3 id="orge4b57d3"><span class="section-number-3">3.1.</span> MA(1) estacional con raíz positiva</h3>
+<div id="outline-container-orga0638f3" class="outline-3">
+<h3 id="orga0638f3"><span class="section-number-3">3.1.</span> MA(1) estacional con raíz positiva</h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
@@ -682,7 +690,7 @@ MA(\(1\)) estacional:
 </p>
 
 
-<div id="org057adc7" class="figure">
+<div id="org146da88" class="figure">
 <p><img src="./img/lecc08/ACF-SMA1p.png" alt="ACF-SMA1p.png" width="900px" />
 </p>
 </div>
@@ -841,14 +849,14 @@ ide(sim(SMA1, n = 500),
 </div>
 
 
-<div id="org16f7aba" class="figure">
+<div id="orga6d43c7" class="figure">
 <p><img src="./img/lecc08/Sim-SMA1p.png" alt="Sim-SMA1p.png" width="900px" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgfc02c8e" class="outline-3">
-<h3 id="orgfc02c8e"><span class="section-number-3">3.2.</span> AR(1) estacional con raíz positiva</h3>
+<div id="outline-container-org7cf79f9" class="outline-3">
+<h3 id="org7cf79f9"><span class="section-number-3">3.2.</span> AR(1) estacional con raíz positiva</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 2, repr.plot.res = 200)
@@ -864,7 +872,7 @@ AR(\(1\)) estacional:
 </p>
 
 
-<div id="org61dd5db" class="figure">
+<div id="org24de8c1" class="figure">
 <p><img src="./img/lecc08/ACF-SAR1p.png" alt="ACF-SAR1p.png" width="900px" />
 </p>
 </div>
@@ -887,7 +895,7 @@ ide(sim(SAR1, n = 500),
 </div>
 
 
-<div id="org846edd2" class="figure">
+<div id="org914326c" class="figure">
 <p><img src="./img/lecc08/Sim-SAR1p.png" alt="Sim-SAR1p.png" width="900px" />
 </p>
 </div>
@@ -932,7 +940,7 @@ ARIMA\((0,0,1)\times(0,0,1)_{12}\):
 </p>
 
 
-<div id="orgbe7bc36" class="figure">
+<div id="orgc756964" class="figure">
 <p><img src="./img/lecc08/ACF-MA1SMA1.png" alt="ACF-MA1SMA1.png" width="900px" />
 </p>
 </div>
@@ -946,7 +954,7 @@ ide(sim(MA1SMA1, n = 500),
 </div>
 
 
-<div id="orge813734" class="figure">
+<div id="orgd76ec4d" class="figure">
 <p><img src="./img/lecc08/Sim-MA1SMA1.png" alt="Sim-MA1SMA1.png" width="900px" />
 </p>
 </div>
@@ -968,7 +976,7 @@ ARIMA\((1,0,0)\times(0,0,1)_{12}\):
 </p>
 
 
-<div id="org6eec69b" class="figure">
+<div id="org9fbada8" class="figure">
 <p><img src="./img/lecc08/ACF-AR1SMA1.png" alt="ACF-AR1SMA1.png" width="900px" />
 </p>
 </div>
@@ -982,7 +990,7 @@ ide(sim(AR1SMA1, n = 500),
 </div>
 
 
-<div id="orgac98692" class="figure">
+<div id="org133fb23" class="figure">
 <p><img src="./img/lecc08/Sim-AR1SMA1.png" alt="Sim-AR1SMA1.png" width="900px" />
 </p>
 </div>
@@ -1004,7 +1012,7 @@ ARIMA\((1,0,0)\times(1,0,0)_{12}\):
 </p>
 
 
-<div id="orgcb71ab2" class="figure">
+<div id="org990c353" class="figure">
 <p><img src="./img/lecc08/ACF-AR1SAR1.png" alt="ACF-AR1SAR1.png" width="900px" />
 </p>
 </div>
@@ -1018,7 +1026,7 @@ ide(sim(AR1SAR1, n = 500),
 </div>
 
 
-<div id="org7340eae" class="figure">
+<div id="org2f1406a" class="figure">
 <p><img src="./img/lecc08/Sim-AR1SAR1.png" alt="Sim-AR1SAR1.png" width="900px" />
 </p>
 </div>
@@ -1040,7 +1048,7 @@ ARIMA\((0,0,1)\times(1,0,0)_{12}\):
 </p>
 
 
-<div id="org7029882" class="figure">
+<div id="org0223d2b" class="figure">
 <p><img src="./img/lecc08/ACF-MA1SAR1.png" alt="ACF-MA1SAR1.png" width="900px" />
 </p>
 </div>
@@ -1054,7 +1062,7 @@ ide(sim(MA1SAR1, n = 500),
 </div>
 
 
-<div id="org40299da" class="figure">
+<div id="org2e795a3" class="figure">
 <p><img src="./img/lecc08/Sim-MA1SAR1.png" alt="Sim-MA1SAR1.png" width="900px" />
 </p>
 </div>
@@ -1073,8 +1081,8 @@ parametrización especial.</li>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd62574b" class="outline-2">
-<h2 id="orgd62574b"><span class="section-number-2">4.</span> Resumen del análisis univariante de series temporales</h2>
+<div id="outline-container-orga90f76d" class="outline-2">
+<h2 id="orga90f76d"><span class="section-number-2">4.</span> Resumen del análisis univariante de series temporales</h2>
 <div class="outline-text-2" id="text-4">
 </div>
 <div id="outline-container-org94eb2a3" class="outline-3">
@@ -1131,8 +1139,8 @@ esta propiedad mediante las transformaciones adecuadas</li>
 </table>
 </div>
 </div>
-<div id="outline-container-org7283031" class="outline-3">
-<h3 id="org7283031"><span class="section-number-3">4.2.</span> Metodología</h3>
+<div id="outline-container-org339fc61" class="outline-3">
+<h3 id="org339fc61"><span class="section-number-3">4.2.</span> Metodología</h3>
 <div class="outline-text-3" id="text-4-2">
 <p>
 Tres fases:
@@ -1158,7 +1166,8 @@ Si la diagnosis no es satisfactoria, se vuelve a la primera fase.
 </p>
 
 <p>
-Si la diagnosis es satisfactoria, se usa el modelo.
+Si la diagnosis es satisfactoria&#x2026; ¡hemos logrado un modelo
+aceptable!
 </p>
 </div>
 </div>
@@ -1166,7 +1175,7 @@ Si la diagnosis es satisfactoria, se usa el modelo.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-09-20 vie 19:26</p>
+<p class="date">Created: 2024-09-23 lun 10:01</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

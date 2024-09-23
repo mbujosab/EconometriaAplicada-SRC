@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="org44d2d55">
+<div class="abstract" id="orgabb90cb">
 <p>
 En esta lección veremos la estructura de la ACF, la PACF y la densidad
 espectral de procesos ARMA. Después indicaremos algunas herramientas
@@ -14331,7 +14331,7 @@ $\infty$ y cogrado $-\infty$.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>En la Lección 5 vimos que para un proceso ARMA($p,q$)
+<p>En la Lección 5 se demostró que para un proceso ARMA($p,q$)
 $$\boldsymbol{\phi}(\mathsf{B})\gamma_k = 
 \begin{cases}
   \sigma^2 \Big(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\Big)_k &amp; \text{para } k\leq q \\
@@ -14355,10 +14355,10 @@ $\boldsymbol{\theta}$ y los $p$ parámetros de $\boldsymbol{\phi}$</li>
 <li>Los $p$ valores de $\rho_q$ a $\rho_{q-p+1}$ son los valores
 iniciales para resolver la ecuación en diferencias
 $\boldsymbol{\phi}(\mathsf{B})\rho_k=0\;$ (con $k\geq q)$</li>
-<li>Si $q&lt;p$ toda la secuencia $\rho_j$ para $j\geq0$ decae
+<li>Si $q &lt; p$ toda la secuencia $\rho_j$ para $j \geq 0$ decae
 exponencialmente o sinusoidalmente según $\boldsymbol{\phi}$ y los
 valores iniciales $\rho_q$ a $\rho_{q-p+1}$</li>
-<li>Si $q\geq p$ los primeros $q-p+1$ valores iniciales $\rho_0$ a
+<li>Si $q \geq p$ los primeros $q-p+1$ valores iniciales $\rho_0$ a
 $\rho_{q-p}$ siguen una pauta diferente</li>
 </ul>
 <p>En cuanto a la PACF $\boldsymbol{\pi}$:</p>
@@ -14595,7 +14595,8 @@ $$(1 + 0.8\mathsf{B}){X_t}=(1 + 0.4\mathsf{B}){U_t};\quad \phi&lt;0;\;\theta&lt;
 </li>
 </ul>
 <p>¿Están sus valores correlados con su historia pasada (autocorrelados)?</p>
-<p>¿Están correlados con los valores presentes o pasados de otras series?</p>
+<p>¿Qué correlación tienen los datos con los datos $k$ periodos atrás una
+vez descontado el efecto de los datos intermedios?</p>
 <p>Veamos algunas herramientas estadísticas para poder desvelar estas
 características.</p>
 

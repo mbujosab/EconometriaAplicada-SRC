@@ -281,10 +281,10 @@ Así que, tentativamente, vamos a fijarnos /solo/ en los dos primeros
 momentos:
 
 $$E(X_t)={\color{blue}{ \mu_t}}\quad\text{ y }\quad
-Cov(X_t,X_k)=E\big[(X_t-\mu_t)(X_k-\mu_k)\big]={\color{blue}{\lambda_{t,k}}};\quad t,k\in\mathbb{Z}$$
+Cov(X_t,X_k)=E\big[(X_t-\mu_t)(X_k-\mu_k)\big]={\color{blue}{\gamma_{t,k}}};\quad t,k\in\mathbb{Z}$$
 
 #+LATEX: \noindent
-(si $\;k=t\;$ entonces $\;\lambda_{t,t}=Var(X_t)=\sigma^2_t$).
+(si $\;k=t\;$ entonces $\;\gamma_{t,t}=Var(X_t)=\sigma^2_t$).
 #+LATEX: \medskip
 
 Si el proceso $\boldsymbol{X}$ fuera gaussiano, conocer estos
@@ -297,26 +297,23 @@ aún así...
 
 - Además... para cada variable aleatoria $X_t$ hay infinitos parámetros.
 
-** Tipos de procesos estocásticos que simplifican el escenario
+** Simplificación del escenario
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
 
-- Si es [[./Lecc01.slides.html#/3/1][débilmente estacionario]] se reduce drásticamente el número de
-  parámetros:
-  \begin{eqnarray}
+Si $\boldsymbol{X}$ es [[./Lecc01.slides.html#/3/1][débilmente estacionario]] se reduce drásticamente el número de parámetros:
+\begin{eqnarray}
   E(X_t)  & = \mu \\
   Cov(X_t,X_{t-k}) & = \gamma_k
-  \end{eqnarray}
-- Si además es i.i.d. podemos interpretar la serie temporal como una
-  realización de un muestreo aleatorio simple.
+\end{eqnarray}
+
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 El desafío para el analista es (y nótese el abuso de lenguaje)
 - primero :: transformar los datos para lograr que sean "*/estacionarios/*".
   - (Algo vimos en la lección 1)) 
-- después :: transformar los datos estacionarios en una secuencia de
-  "*datos /i.i.d/*" 
-  - (Aún no lo hemos visto)
+- después :: transformar los datos estacionarios en "*/ruido blanco/*"
+  - (Es lo que iniciaremos en esta lección y las siguientes)
 
 Todo este proceso constituye la especificación y ajuste de un modelo a
 la serie temporal.
@@ -330,11 +327,10 @@ estacionarios que vamos a utilizar.
 
 * Procesos estocásticos de segundo orden
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . slide)))
+   :metadata: (slideshow . ((slide_type . skip)))
    :END:
 
-# También se conocen como estacionarios en varianza o estacionarios de segundo orden.
-
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
 El ambiente natural para estudiar las propiedades de segundo orden de
 una colección de variables aleatorias es el espacio de variables
 aleatorias $X$ definidas en un espacio de probabilidad tales que
@@ -343,10 +339,10 @@ esperanza. Denotaremos este espacio con $H$.
 
 ** Un poco de geometría
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . notes)))
+   :metadata: (slideshow . ((slide_type . skip)))
    :END:
 
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
 El espacio, dotado de producto escalar y norma $$\langle X \mid Y
 \rangle=E(XY),\qquad \lVert X \rVert= \sqrt{E(X^2)},\qquad X,Y \in
 H,$$ es un espacio de Hilbert,
@@ -359,59 +355,76 @@ correlación/. Por tanto, en este contexto los términos producto
 escalar, covarianza y esperanza del producto serán intercambiables.
 #+latex: \medskip
 
-#+attr_ipynb: (slideshow . ((slide_type . fragment)))
 Una colección de variables aleatorias pertenecientes a $H$
 $$\boldsymbol{X}=(X_t\mid t\in\mathbb{Z}) \;\text{ con }\; X_t\in H$$
 se denomina /proceso estocástico de segundo orden/.
 
-#+attr_ipynb: (slideshow . ((slide_type . fragment)))
 Si $\boldsymbol{Y}=(Y_t\mid t\in\mathbb{Z})$ es tal que
 $E(Y_t)=\mu\ne0$, entonces $\boldsymbol{Y}$ no es de segundo orden.
 
 Pero basta restar $\mu$ de cada $Y_t$ para tener un proceso
-$(\boldsymbol{Y}-\boldsymbol{\mu})$ de segundo orden.
+$(\boldsymbol{Y}-\mu\boldsymbol{1})$ de segundo orden.
 
 /Por ello siempre asumiremos/ (sin pérdida de generalidad) /que las
 variables aleatorias de los procesos estocásticos de esta lección/ (y
 la siguiente) /tienen esperanza cero/.
 
-** Función de covarianzas
+
+** Primeros momentos de procesos estocásticos de segundo orden
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
+   :metadata: (slideshow . ((slide_type . skip)))
    :END:
 
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+Si $E(X_t)<\infty$ para $t\in\mathbb{Z}$, entonces $E(\boldsymbol{X})$ es
+la secuencia $$E(\boldsymbol{X})=\big(E(X_t)\mid
+t\in\mathbb{Z}\big)=\sum\nolimits_{t\in\mathbb{Z}} E(X_t)
+z^t=\big(\ldots,\;E(X_{-1}),\;E(X_{0}),\;E(X_{1}),\ldots\big)$$
 
-La /función de covarianzas/ de un proceso estocástico $\boldsymbol{X}$
-segundo orden es $$\boldsymbol{\gamma}=(\gamma_{s,t}\mid
-s,t\in\mathbb{Z})$$ donde $\gamma_{s,t}=Cov(X_s,X_t)\quad
-s,t\in\mathbb{Z}$.
+# +attr_ipynb: (slideshow . ((slide_type . fragment)))
+Si $\boldsymbol{X}$ tiene segundos momentos finitos, la secuencia de
+autocovarianzas _de orden $k$_ es
+\begin{align*}
+%Cov(\boldsymbol{X},\boldsymbol{X}*z^k) = &
+%E\Big(\big[\boldsymbol{X}-E(\boldsymbol{X})\big]\odot\big[(\boldsymbol{X}-E(\boldsymbol{X}))*z^k\big]\Big)\\
+\left.\Big(Cov(X_t,X_{t-k})\right| t\in\mathbb{Z}\Big)
+= & 
+%\left.\Big(E\big[\big(X_t-E(X_t)\big)\big(X_{t-k}-E(X_{t-k})\big)\big]\; \right| t\in\mathbb{Z}\Big)\\
+%=&
+% \sum_{t\in\mathbb{Z}} \gamma_{_{k,t}} z^t
+(\gamma_{_{k,t}}\mid t\in\mathbb{Z})\\ % \;=\;
+= &
+(\ldots,\,\gamma_{_{k,-1}},\,{\color{blue}{\gamma_{_{k,0}}}},\,\gamma_{_{k,1}},\,\gamma_{_{k,2}},\ldots);\quad k\in\mathbb{Z}.
+\end{align*}
+#+latex: \noindent
+(nótese que la secuencia solo contiene covarianzas de orden $k$) 
+#+latex: \medskip
 
-Así, para cada par $(s,t)$, la covarianza $\gamma_{s,t}$ mide la
-dependencia lineal entre $X_s$ y $X_t$.
+Así, para cada par $(k,t)$, tenemos la covarianza $\gamma_{k,t}$ entre
+$X_t$ y $X_{t-k}$. Por tanto, en general, tenemos una esperanza para
+cada $t$ y una covarianza de orden $k$ para cada $t$. Dado que $t$
+recorre todos los números enteros, ¡esto son muchos momentos!  _Por
+eso necesitamos reducir el número de parámetros restringiéndonos a
+procesos estocásticos débilmente estacionarios_.
 
-#+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Esta función $\boldsymbol{\gamma}$ es demasiado general, por eso nos
-restringiremos a la subclase de procesos estocásticos /débilmente
-estacionarios/; pues simplifican enormemente la /función de
-covarianzas/ $\boldsymbol{\gamma}$.
-
-** Proceso estocástico (débilmente) estacionario y su ACF
+** Procesos estocásticos (débilmente) estacionarios y la ACF
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
+   :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
 Un proceso estocástico de segundo orden $\boldsymbol{X}$ se dice que
 es /débilmente estacionario/ @@latex:(estacionario en covarianza o,
-sencillamente, estacionario)@@ si la covarianza entre $X_s$ y $X_t$
-solo depende de la diferencia $s-t$ para todo $s,t\in\mathbb{Z}$.
+sencillamente, estacionario)@@ si $E(X_t)=\mu$ para todo
+$t\in\mathbb{Z}$ y la covarianza entre $X_s$ y $X_t$ solo depende de
+la diferencia $s-t$ para todo $s,t\in\mathbb{Z}$.
 
-En tal caso se denomina /función de _auto_-covarianzas/ de
-$\boldsymbol{X}$ a la secuencia
-$$\boldsymbol{\gamma}(z)\;=\;(\gamma_k\mid
-k\in\mathbb{Z})\;=\;\sum_{-\infty}^{\infty} \gamma_k z^k$$ donde
-$\;\gamma_k=Cov(X_{t+k}, X_{t})\;$ para $k\in\mathbb{Z}$.
-
+En tal caso, definimos la _función de autocovarianzas_ como:
+$$\boldsymbol{\gamma} = (\gamma_{k}\mid k\in\mathbb{Z}) =
+(\ldots,\,\gamma_{-1},\,{\color{blue}{\gamma_{0}}},\,\gamma_{1},\,\gamma_{2},\ldots)
+\;=\;\sum_{-\infty}^{\infty} \gamma_k z^k.$$
 #+BEGIN_EXPORT latex
+\noindent
+(nótese que esta secuencia sí incluye \underline{todas} las covarianzas).
 \medskip
 
 Y se denomina matriz de autocovarianzas de
@@ -441,7 +454,7 @@ Esto es equivalente a que las submatrices principales de $\boldsymbol{\Gamma}$ s
 \bigskip
 
 Es más, una secuencia $\boldsymbol{\gamma}$ es definida positiva si y solo si existe un espacio de Hilbert $H$ y un proceso estocástico estacionario $\boldsymbol{X}$ con $X_t\in H$ tales que $\gamma_k=Cov(X_t, X_{t-k})$ para todo $t,k\in\mathbb{Z}$ (Kolmogorov, 1941).
-\medskip
+\pagebreak[3]
 #+END_EXPORT
 
 *Propiedades* de la función de autocovarianzas $\boldsymbol{\gamma}$ (ACF):
@@ -450,52 +463,43 @@ Es más, una secuencia $\boldsymbol{\gamma}$ es definida positiva si y solo si e
   - $\boldsymbol{\gamma}$ es simétrica: $\gamma_k=\gamma_{-k}$
   - $\boldsymbol{\gamma}$ es acotada: $|\gamma_k|\leq\gamma_0$
 
-@@latex:Si $\gamma_0>0$,@@ llamamos /función de autocorrelación/ (ACF) a la
+Y@@latex:, si $\gamma_0>0$,@@ llamamos /función de autocorrelación/ (ACF) a la
 secuencia:
 $\;\boldsymbol{\rho}=\frac{1}{\gamma_0}(\boldsymbol{\gamma})
 =\sum\limits_{k\in\mathbb{Z}}\frac{\gamma_k}{\gamma_0}z^k$.
 
 
-* Procesos estocásticos y notación
+* Notación: convolución y el operador retardo
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
+#+BEGIN_EXPORT latex
+Los procesos estocásticos se pueden sumar elemento a elemento y se
+pueden multiplicar por escalares. Si $\boldsymbol{X}$ e
+$\boldsymbol{Y}$ son dos procesos estocásticos y $\;a\in\mathbb{R}$,
+entonces $$\boldsymbol{X}+\boldsymbol{Y}=(X_t+Y_t \mid
+t\in\mathbb{Z})\qquad\text{y}\qquad a\boldsymbol{X}=\big(a(X_t) \mid
+t\in\mathbb{Z}\big).$$ El conjunto de procesos estocásticos con la
+suma y el producto por escalares es un espacio vectorial.
+\smallskip
+#+END_EXPORT
 
-Los procesos estocásticos se pueden sumar y se pueden multiplicar por
-escalares.
-
-Si $\boldsymbol{X}$ e $\boldsymbol{Y}$ son dos procesos estocásticos y
-$\;a\in\mathbb{R}$, entonces $$\boldsymbol{X}+\boldsymbol{Y}=(X_t+Y_t
-\mid t\in\mathbb{Z})\qquad\text{y}\qquad a\boldsymbol{X}=\big(a(X_t)
-\mid t\in\mathbb{Z}\big).$$ El conjunto de procesos estocásticos junto
-con la suma elemento a elemento y el producto por escalares
-constituyen un espacio vectorial.
-#+latex:\smallskip
-
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
-Consideremos el proceso estocástico 
-$$\boldsymbol{X}=(X_t \mid t=0,\pm1,\pm2,\ldots).$$
-
-Lo podemos denotar con una función generatriz (como hicimos con las
-secuencias) $$\boldsymbol{X} \quad = \quad \sum_{t=-\infty}^\infty X_t
-z^t \quad\equiv\quad \boldsymbol{X}(z)$$ Recuerde que esto no es una
-suma; es una secuencia de variables aleatorias
-$$\sum_{t=-\infty}^\infty X_t z^t = (\ldots,\ X_{-2},\ X_{-1},\
-X_{0},\ X_{1},\ X_{2},\ldots)$$
-
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
-Sea $\boldsymbol{a}$ una secuencia de números y $\boldsymbol{X}$ un
+# +attr_ipynb: (slideshow . ((slide_type . subslide)))
+Sea $\boldsymbol{a}$ una secuencia de números y sea $\boldsymbol{X}$ un
 proceso estocástico tales que _la suma_
-$\sum\limits_{k=-\infty}^{\infty}a_kX_{t-k}\;$ _converge_ para todo
+$$\sum\limits_{k=-\infty}^{\infty}a_kX_{t-k}\;$$ _converge_ para todo
 $t.\;$ Entonces:
 #+latex:\smallskip
 
-Definimos el producto convolución ($∗$) de $\boldsymbol{a}$ con $\boldsymbol{X}$ como el proceso estocástico:
-$$\boldsymbol{a}*\boldsymbol{X}=\left(\left.\sum_{r+s=t} a_r X_s \right| t\in\mathbb{Z}\right)$$
-es decir
-$$(\boldsymbol{a}*\boldsymbol{X})_t=\sum_{r+s=t} a_r X_s,\quad \text{para } t\in\mathbb{Z}.$$
-Por tanto, cada elemento de $(\boldsymbol{a}*\boldsymbol{X})$ es una combinación de variables aleatorias de $\boldsymbol{X}$
+Definimos el producto convolución (\(*\)) de $\boldsymbol{a}$ con
+$\boldsymbol{X}$ como el proceso estocástico:
+$$\boldsymbol{a}*\boldsymbol{X}=\left(\left.\sum_{r+s=t} a_r X_s
+\right| t\in\mathbb{Z}\right)$$ es decir
+$$(\boldsymbol{a}*\boldsymbol{X})_t=\sum_{r+s=t} a_r X_s,\quad
+\text{para } t\in\mathbb{Z}.$$ Por tanto, cada elemento de
+$(\boldsymbol{a}*\boldsymbol{X})$ es una combinación de variables
+aleatorias de $\boldsymbol{X}$
 #+latex:\smallskip
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
@@ -585,9 +589,11 @@ Y el proceso es estacionario porque, usando la continuidad de los productos esca
 & = \lim_{m,n\to\infty} 
 \left\langle \sum_{i=-m}^m {b}_i U_{t+k-i}\mid \sum_{j=-n}^n {b}_j U_{t-j}\right\rangle\\
 & = \sum_{i=-\infty}^\infty \sum_{j=-\infty}^\infty {b}_i {b}_j \langle U_{t+k-i}\mid  U_{t-j} \rangle \\
-& = \sigma^2 \sum_{i=-\infty}^\infty \sum_{j=-\infty}^\infty {b}_i {b}_j \delta_{t+k-i,t-j} \; = \; \sigma^2 \sum_{i=-\infty}^\infty {b}_i {b}_{i+k}
+& = \sigma^2 \sum_{i=-\infty}^\infty \sum_{j=-\infty}^\infty {b}_i {b}_j \delta_{t+k-i,t-j}\\ 
+& = \sigma^2 \sum_{i=-\infty}^\infty {b}_i {b}_{i+k}
+\; = \; \sigma^2 (\boldsymbol{b}(z)*\boldsymbol{b}(z^{-1}))_k
 \end{align*}
-que solo depende de $k$ y donde $\delta_{p,q}$ es la delta de Kronecker.
+que solo depende de $k$ (en la tercera línea, $\delta_{p,q}$ es la delta de Kronecker; y en la cuarta  hemos usado la última ecuación de la Lección 4).
 \medskip
 
 #+END_EXPORT
@@ -598,7 +604,7 @@ una _serie formal_ (i.e.,
 $cogrado(\boldsymbol{b})\geq{\color{blue}{0}}$)
 $$X_t=\sum_{j=0}^\infty {b}_j U_{t-j};\qquad
 t\in\mathbb{Z}$$ $\;$ (pues cada $X_t$ es una suma de variables "/del
-presente y pasado/").
+presente y/o el pasado/").
 #+latex:\medskip
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
@@ -648,7 +654,6 @@ $$ X_t = U_t - \theta_1 U_{t-1} - \cdots - \theta_q U_{t-q}.$$
 
 #+attr_ipynb: (slideshow . ((slide_type . slide)))
 Hay otros procesos lineales con representación parsimoniosa.
-#+latex:\bigskip
 
 *** Proceso autorregresivo de orden $p$. AR($p$)
    :PROPERTIES:
@@ -680,7 +685,7 @@ $\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$ no tiene solución
 estacionaria). Despejemos $\boldsymbol{X}$ para verlo.
 
 Multiplicando ambos lados de la ecuación por una inversa de
-$\boldsymbol{\phi}$ lo logramos:
+$\boldsymbol{\phi}$ tenemos
 $$\boldsymbol{X}=inversa(\boldsymbol{\phi})*\boldsymbol{U}.$$ Y si
 denotamos la secuencia $inversa(\boldsymbol{\phi})$ con
 $\boldsymbol{a}$ entonces
@@ -702,9 +707,9 @@ U_{t-j}\;$ carece de sentido (pues no converge).
 #+latex:\medskip
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-*Requisitos* sobre el polinomio autorregresivo $\boldsymbol{\phi}$
+*Requisitos* sobre el polinomio autorregresivo $\boldsymbol{\phi}.\;$ Para que el proceso AR exista y sea:
 
-1) Para tener un _proceso lineal_, exigiremos que $\boldsymbol{\phi}$
+1) _estacionario_, exigiremos que $\boldsymbol{\phi}$
    _no tenga raíces de módulo 1_.
 
    Entonces existe una única inversa absolutamente sumable: $\boldsymbol{\phi}^{-1} \in
@@ -718,9 +723,9 @@ U_{t-j}\;$ carece de sentido (pues no converge).
 
    $$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=-\infty}^\infty a_j U_{t-j}$$
 
-2) Para tener un _proceso lineal causal_ exigiremos que las raíces de
-   $\boldsymbol{\phi}$ sean mayores que 1 en valor absoluto (_raíces
-   fuera del círculo unidad_):
+2) _lineal causal_ exigiremos que las raíces de $\boldsymbol{\phi}$
+   sean mayores que 1 en valor absoluto (_raíces fuera del círculo
+   unidad_):
    $\boldsymbol{\phi}^{-1}=\boldsymbol{\phi}^{-\triangleright}$.
 
    $$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=0}^\infty a_j U_{t-j}$$
@@ -770,7 +775,7 @@ $\boldsymbol{a}=\boldsymbol{\phi}^{-1}*\boldsymbol{\theta}$.
    :END:
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
-Por último, consideremos un proceso $\boldsymbol{Y}$ con media
+Consideremos un proceso $\boldsymbol{Y}$ con media
 distinta de cero, es decir, $$E(Y_t)=\mu\ne0$$ y definamos la
 secuencia constante $\boldsymbol{\mu}=\sum\limits_{j\in\mathbb{Z}} \mu
 z^j=(\ldots,\mu,\mu,\mu,\ldots)$. 
@@ -794,63 +799,22 @@ $\;\mu=E(Y_t)$, es un proceso autorregresivo de media móvil
 ARMA($p,q$) /con media no nula/.
 
 
-* Primeros momentos de procesos estocásticos
+* Primeros momentos de procesos lineales causales
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . skip)))
+   :END:
+
+
+** Esperanza y autocovarianzas de un proceso lineal causal
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
-#+BEGIN_EXPORT latex
-Por conveniencia denotaremos con $\boldsymbol{1}$ la secuencia constante uno:
-$$\boldsymbol{1}=(\ldots,1,1,1,\ldots)=\sum_{t\in\mathbb{Z}}1 z^t.$$
-Y con $\boldsymbol{0}$ la secuencia constante cero:
-$$\;\boldsymbol{0}=(\ldots,0,0,0,\ldots)=0\cdot\boldsymbol{1}.$$
-#+END_EXPORT
-
-Si $E(X_t)<\infty$ para $t\in\mathbb{Z}$, entonces $E(\boldsymbol{X})$ es
-la secuencia $$E(\boldsymbol{X})=\big(E(X_t)\mid
-t\in\mathbb{Z}\big)=\sum\nolimits_{t\in\mathbb{Z}} E(X_t)
-z^t=\big(\ldots,\;E(X_{-1}),\;E(X_{0}),\;E(X_{1}),\ldots\big)$$
-
-#+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Si $\boldsymbol{Y}$ tiene segundos momentos finitos, la secuencia de
-autocovarianzas _de orden $k$_ es
-\begin{align*}
-Cov(\boldsymbol{Y},\boldsymbol{Y}*z^k) = &
-% \boldsymbol{\gamma_k}= &
-E\Big(\big[\boldsymbol{Y}-E(\boldsymbol{Y})\big]\odot\big[(\boldsymbol{Y}-E(\boldsymbol{Y}))*z^k\big]\Big)\\
-= & 
-\left.\Big(E\big[\big(Y_t-E(Y_t)\big)\big(Y_{t-k}-E(Y_{t-k})\big)\big]\; \right| t\in\mathbb{Z}\Big)\\
-=&
-% \sum_{t\in\mathbb{Z}} \gamma_{_{k,t}} z^t
-(\gamma_{_{k,t}}\mid t\in\mathbb{Z}) \;=\;
-(\ldots,\,\gamma_{_{k,-1}},\,{\color{blue}{\gamma_{_{k,0}}}},\,\gamma_{_{k,1}},\,\gamma_{_{k,2}},\ldots);\quad k\in\mathbb{Z}.
-\end{align*}
-#+latex: \medskip
-
-#+attr_ipynb: (slideshow . ((slide_type . fragment)))
-#+latex: \noindent
-Cuando $E(X_t)=\mu$ para todo $t\in\mathbb{Z}$, entonces
-$E(\boldsymbol{X})$ es una secuencia constante: $$E(\boldsymbol{X}) =
-(\mu\mid t\in\mathbb{Z}) = \mu\boldsymbol{1}.$$
-#+latex: \smallskip
-
-#+latex: \noindent
-Si $\gamma_{_{k,t}}=\gamma_k$ 
-para todo $t\in\mathbb{Z}$, 
-entonces definimos la _función de autocovarianzas_ (todas):
-$$\boldsymbol{\gamma} = (\gamma_{k}\mid k\in\mathbb{Z}) =
-(\ldots,\,\gamma_{-1},\,{\color{blue}{\gamma_{0}}},\,\gamma_{1},\,\gamma_{2},\ldots).$$
-
-** Esperanza y autocovarianzas de un proceso lineal
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . slide)))
-   :END:
 Sea $\;\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U},\;$ donde
 $\boldsymbol{\psi}$ es una serie formal de cuadrado sumable
-@@latex:($\boldsymbol{\psi}\in\ell^2$)@@ con cogrado $0$ y
-$\;\boldsymbol{U}\sim WN(0,\sigma^2).\quad$ Recordando que la
-convolución es una operación lineal: $$E(\boldsymbol{X})
-=E(\boldsymbol{\psi}*\boldsymbol{U})
+@@latex:($\boldsymbol{\psi}\in\ell^2$)@@ y donde $\;\boldsymbol{U}\sim
+WN(0,\sigma^2).\quad$ Recordando que la convolución es una operación
+lineal: $$E(\boldsymbol{X}) =E(\boldsymbol{\psi}*\boldsymbol{U})
 =\boldsymbol{\psi}*E(\boldsymbol{U})
 =\boldsymbol{\psi}*\boldsymbol{0}=\boldsymbol{0}.$$ Consecuentemente,
 la covarianza de orden $k$ para cada $X_t$ es
@@ -894,7 +858,7 @@ menos el grado de $\boldsymbol{\psi}$.
 # \quad \text{ ya que }\; E(U_hU_j)=0\; \text{ si } \;j\ne h
 # \end{align*}
 
-*** Covarianza cruzada entre dos procesos lineales causales
+** Covarianza cruzada entre dos procesos lineales causales
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
@@ -902,9 +866,10 @@ menos el grado de $\boldsymbol{\psi}$.
 Sean $\;\boldsymbol{W}=\boldsymbol{\theta}*\boldsymbol{U}\quad$ e
 $\quad\boldsymbol{Y}=\boldsymbol{\psi}*\boldsymbol{U},\quad$ donde
 $\boldsymbol{\theta}$ y $\boldsymbol{\psi}$ son series formales de
-cuadrado sumable con cogrado $0$ y donde $\;\boldsymbol{U}\sim
+cuadrado sumable y donde $\;\boldsymbol{U}\sim
 WN(0,\sigma^2)$.
 
+#+BEGIN_EXPORT latex
 Entonces la covarianza cruzada (de orden $k\in\mathbb{Z}$) entre $W_t$
 e $Y_{t-k}$ es
 \begin{align*}
@@ -922,18 +887,20 @@ que tampoco depende de $t$. Es más, por la última ecuación de la lección 4
 $$\;\gamma_{_{\boldsymbol{W},\boldsymbol{Y}}}(k) =
 \sigma^2\sum\nolimits_{j\in\mathbb{Z}}\theta_{j+k}\psi_j =
 \sigma^2\big(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\big)_k\quad
-\text{ para todo } k\in\mathbb{Z}.$$ Por tanto, la función de
-covarianzas cruzadas es la secuencia
+\text{ para todo } k\in\mathbb{Z}.$$ Es decir...
+#+END_EXPORT
+
+Repitiendo los mismos pasos que en el caso de la autocovarianza,
+llegamos a que la _función de covarianzas cruzadas_ es la secuencia
 \begin{equation}
  \label{eqCovarianzaCruzadaProcesosLineales}
  \boldsymbol{\gamma_{_{\boldsymbol{W},\boldsymbol{Y}}}} =
  \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})
 \end{equation}
-de grado igual al grado de $\boldsymbol{\theta}$ y cogrado igual a menos
+con grado igual al grado de $\boldsymbol{\theta}$ y cogrado igual a menos
 el grado de $\boldsymbol{\psi}$.
 
 # $$\fbox{\(\)}$$
-
 
 ** Las Ecuaciones de Yule-Walker para un AR($p$) estacionario
    :PROPERTIES:
@@ -964,8 +931,8 @@ que no depende de $t$, por ser $\boldsymbol{X}$ es un proceso
 
 Si $\boldsymbol{X}$ tiene representación
 $\;\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}$ donde
-$\;\boldsymbol{U}\sim WN(0,\sigma^2)$ y $\boldsymbol{\psi}$ es una
-serie formal de cuadrado sumable con $\psi_0=1$; es decir
+$\;\boldsymbol{U}\sim WN(0,\sigma^2)$ y $\boldsymbol{\psi}\in\ell^2$ es una
+serie formal con $\psi_0=1$; es decir, si es un proceso lineal causal
 # Sea un AR($p$) estacionario:
 # $\;\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U};\;$ entonces $\;\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}$ 
 # con $\boldsymbol{\psi}=\frac{1}{\boldsymbol{\phi}}$ y $\psi_0=1$.
@@ -1019,7 +986,7 @@ Por tanto, la estructura autorregresiva del proceso impone que las
 autocovarianzas (y las autocorrelaciones) verifiquen las ecuaciones de
 Yule-Walker.
 
-** Esperanza y función de autocovarianzas para un ARMA($p,q$)
+** Función de autocovarianzas para un ARMA($p,q$)
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
@@ -1032,13 +999,16 @@ donde $\boldsymbol{\phi}$ y $\boldsymbol{\theta}$ no tienen raíces
 comunes. Multiplicando por $X_{t-k}$, tomando esperanzas y
 sustituyendo $X_{t-k}$ por su representación MA($\infty$), donde
 $\boldsymbol{\psi}=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}$:
-$$E\Big[\Big(\boldsymbol{\phi}(\mathsf{B})X_t\Big)\cdot X_{t-k}\Big] =
+$$\underbrace{E\Big[\Big(\boldsymbol{\phi}(\mathsf{B})X_t\Big)\cdot
+X_{t-k}\Big]}_{\boldsymbol{\phi}(\mathsf{B})\gamma_k\;(\text{por
+\ref{eqnLadoIzquierdoYW}})} =
 E\Big[\Big(\boldsymbol{\theta}(\mathsf{B})U_t\Big)\cdot X_{t-k}\Big]
-\;=\; E\Big[\Big(\boldsymbol{\theta}(\mathsf{B})U_t\Big)\cdot
-\Big(\boldsymbol{\psi}(\mathsf{B})U_{t-k}\Big)\Big]$$ Usando
-$\eqref{eqnLadoIzquierdoYW}$, renombrando
+\;=\;
+\underbrace{E\Big[\Big(\boldsymbol{\theta}(\mathsf{B})U_t\Big)\cdot
+\Big(\boldsymbol{\psi}(\mathsf{B})U_{t-k}\Big)\Big]}_{\boldsymbol{\gamma_{_{\boldsymbol{W},\boldsymbol{Y}}}}(k)}$$
+Donde hemos usando $\eqref{eqnLadoIzquierdoYW}$ y renombrando
 $\;\boldsymbol{\theta}(\mathsf{B})U_t=\boldsymbol{W}\;$ y
-$\;\boldsymbol{\psi}(\mathsf{B})U_t=\boldsymbol{Y}:\;$
+$\;\boldsymbol{\psi}(\mathsf{B})U_t=\boldsymbol{Y}.\;$ Así:
 \begin{align*}
   \boldsymbol{\phi}(\mathsf{B})\gamma_k & = \boldsymbol{\gamma_{_{\boldsymbol{W},\boldsymbol{Y}}}}(k)\\
   & =  \sigma^2 \Big(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\Big)_k & \text{por } \eqref{eqCovarianzaCruzadaProcesosLineales}
@@ -1047,11 +1017,11 @@ Y como $\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})$ tiene grado $q$ y cogr
 \begin{equation}
   \boldsymbol{\phi}(\mathsf{B})\gamma_k = 
   \begin{cases}
-     0 & k > q\; \text{(como en un AR)}\\
+     0 & k > q\quad \text{(como en un AR)}\\
     \sigma^2 \Big(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\Big)_k & k\leq q
+   \quad \text{(que depende de $\boldsymbol{\theta}$ y $\boldsymbol{\phi}$)}
   \end{cases}
 \end{equation}
-
 
 
 ** COMMENT Esperanza y autocovarianzas de un proceso de ruido blanco :noexports:
@@ -1066,3 +1036,11 @@ tal que: $$E(U_t)=0;\qquad t\in\mathbb{Z}$$ y $$\boldsymbol{\gamma} =
 z^0;$$ es decir, $\;\gamma_0=\sigma^2\;$ y $\;\gamma_k=0\;$ para todo
 $k\ne0$.
 #
+
+Consideremos el proceso estocástico: $\quad\boldsymbol{X}=(X_t \mid
+t=0,\pm1,\pm2,\ldots).\quad$ Lo podemos denotar con una función
+generatriz (como hicimos con las secuencias) $$\boldsymbol{X} \quad =
+\quad \sum_{t=-\infty}^\infty X_t z^t \quad\equiv\quad
+\boldsymbol{X}(z)$$ Recuerde que esto no es una suma; es una secuencia
+de variables aleatorias $$\sum_{t=-\infty}^\infty X_t z^t = (\ldots,\
+X_{-2},\ X_{-1},\ X_{0},\ X_{1},\ X_{2},\ldots)$$

@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="org332e880">
+<div class="ABSTRACT" id="orgae78ba6">
 <p>
 En esta lección veremos conceptos algebraicos usados en la
 modelización de series temporales.
@@ -14255,6 +14255,7 @@ compacta del siguiente modo $$\boldsymbol{x} \quad = \quad
 \sum_{t=-\infty}^\infty x_t z^t \quad\equiv\quad \boldsymbol{x}(z)$$
 <strong>¡Pero esta expresión no es una suma!</strong> es solo un modo de expresar una
 secuencia. Dicha expresión se denomina <em>función generatriz</em>.</p>
+<p>La sucesión $\;\boldsymbol{0}=\sum_{t=-\infty}^\infty 0 z^t\;$ se denomina <em>sucesión nula</em>.</p>
 
 </div>
 </div>
@@ -14277,7 +14278,6 @@ secuencia. Dicha expresión se denomina <em>función generatriz</em>.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>La sucesión $\;\boldsymbol{0}=\sum_{t=-\infty}^\infty 0 z^t\;$ se denomina <em>sucesión nula</em>.</p>
 <p>En una sucesión $\boldsymbol{a}$ no nula llamamos</p>
 <ul>
 <li><strong>Grado:</strong> al menor índice entero que verifica la propiedad: $$j &gt;
@@ -14422,7 +14422,6 @@ tres conjuntos de axiomas.</p>
 <li>$\boldsymbol{a} + \boldsymbol{b} = \boldsymbol{b} + \boldsymbol{a}\;$ para todo $\boldsymbol{a}, \boldsymbol{b}$ en $\mathsf{S}\qquad$ (i.e. $+$ es conmutativa).</li>
 <li>Existe un elemento $\boldsymbol{0}$ tal que $\boldsymbol{a} + \boldsymbol{0} = \boldsymbol{a}$ para todo $\boldsymbol{a}\in \mathsf{S}$.</li>
 <li>Para cada $\boldsymbol{a}\in \mathsf{S}$ existe $-\boldsymbol{a}\in \mathsf{S}$ tal que $\boldsymbol{a} + (−\boldsymbol{a}) = \boldsymbol{0}$.</li>
-<li></li>
 </ul>
 <p>En cuanto al producto</p>
 <ul>
@@ -14612,23 +14611,6 @@ $(\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{0},\ldots)=\sum_
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Si definimos la función entre secuencias
-$R:\mathbb{R}^\mathbb{Z}\to\mathbb{R}^\mathbb{Z}$ tal que
-$R(a_j)=a_{-j}$, es decir, la función <em>reverso</em>
-$$R\big(\boldsymbol{a}(z)\big)=\boldsymbol{a}(z^{-1})$$ se puede
-demostrar que para toda secuencia con final $\boldsymbol{a}$
-$$\boldsymbol{a}^{\blacktriangleleft-}=R\left(\big(R(\boldsymbol{a})\big)^{-\triangleright}\right).$$</p>
-
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h4 id="Inversas-de-polinomios">Inversas de polinomios<a class="anchor-link" href="#Inversas-de-polinomios">&#182;</a></h4>
 </div>
 </div>
@@ -14717,9 +14699,10 @@ es "la" inversa de $\boldsymbol{a}$ en $\ell^1$.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>En general, dicha inversa no tiene grado ni cogrado y se denota
-con $\boldsymbol{a}^{-1}=\frac{1}{\boldsymbol{a}}$.<br>
-(<em>es la inversa que aparece en los libros de series temporales</em>)</p>
+<p>En general, dicha inversa no tiene grado ni cogrado finitos y se
+denota con $\boldsymbol{a}^{-1}=\frac{1}{\boldsymbol{a}}$.<br>
+(<em>es la inversa que aparece en los libros de
+series temporales</em>)</p>
 <p>Evidentemente dicha inversa no existe si $\boldsymbol{a}$ tiene alguna raíz de módulo $1$.</p>
 
 </div>
@@ -14733,35 +14716,12 @@ con $\boldsymbol{a}^{-1}=\frac{1}{\boldsymbol{a}}$.<br>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>En los manuales de <em>series temporales</em> se dice que un polinomio $\boldsymbol{a}$ <strong>es invertible</strong> si</p>
-$$\text{(la inversa con principio) }\;\boldsymbol{a}^{-\triangleright}=\boldsymbol{a}^{-1}\; \text{ (la inversa absolutamente sumable)}.$$<p>(<em>si sus raíces están fuera del círculo unidad.</em>)</p>
+$$\text{(la inversa con principio) }\;\boldsymbol{a}^{-\triangleright}=\boldsymbol{a}^{-1}\; \text{ (la inversa absolutamente sumable)}.$$<p>(y solo es posible <em>si sus raíces están fuera del círculo unidad</em>).</p>
 
 </div>
 </div>
 </div>
-</div></div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Hay infinitas inversas.</strong> Si una secuencia tiene dos inversas,
-entonces tiene infinitas.</p>
-<p>Sean $\boldsymbol{a}$, $\boldsymbol{b}$ y $\boldsymbol{d}$ secuencias
-tales que $\;\boldsymbol{a}*\boldsymbol{b}={{1}}\;$ y
-$\;\boldsymbol{a}*\boldsymbol{d}={{1}};\;$ y sean $\beta$ y
-$\delta$ dos escalares tales que $\beta+\delta=1$. Entonces</p>
-$$\boldsymbol{a}*\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)=
-\beta(\boldsymbol{a}*\boldsymbol{b})+\delta(\boldsymbol{a}*\boldsymbol{d})=
-\beta{{1}}+\delta{{1}}=
-(\beta+\delta){{1}}={{1}}$$<p>Así, para $\beta$ y $\delta$ tales que $\beta+\delta=1$, sabemos
-que $\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)$ es otra
-inversa de $\boldsymbol{a}$.</p>
-
-</div>
-</div>
-</div>
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14772,23 +14732,6 @@ inversa de $\boldsymbol{a}$.</p>
 </div>
 </div>
 </div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>El cuerpo más importante en la modelización ARIMA es el <em>cuerpo de
-fracciones de polinomios</em>
-$$\left\{\boldsymbol{p}*\boldsymbol{q}^{-\triangleright} \mid
-\boldsymbol{p} \text{ y } \boldsymbol{q} \text{ son polinomios y }
-\boldsymbol{q}\ne\boldsymbol{0} \right\};$$ es un subcuerpo del cuerpo
-de las sucesiones con principio (con cogrado)</p>
-
-</div>
-</div>
-</div>
 </div><div class="fragment">
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
@@ -14796,11 +14739,11 @@ de las sucesiones con principio (con cogrado)</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><em>Toda fracción de sucesiones con grado y cogrado (con principio y
-final) pertenece al cuerpo de fracciones de polinomios</em>.</p>
-<p>El razonamiento es simple: Toda sucesión con grado $−k$ y cogrado es
-de la forma $\boldsymbol{p}*(z^k)^{-\triangleright}$, donde
-$\boldsymbol{p}$ es un polinomio.</p>
+<p>El <em>cuerpo de fracciones de polinomios</em>
+$$\left\{\boldsymbol{p}*\boldsymbol{q}^{-\triangleright} \mid
+\boldsymbol{p} \text{ y } \boldsymbol{q} \text{ son polinomios y }
+\boldsymbol{q}\ne\boldsymbol{0} \right\};$$ es un subcuerpo del cuerpo
+de las sucesiones con principio (i.e., con cogrado finito)</p>
 
 </div>
 </div>
@@ -14818,6 +14761,7 @@ $\;\boldsymbol{q}^{-\triangleright}=\boldsymbol{q}^{-1}$) es habitual
 denotar la secuencia $\boldsymbol{p}*\boldsymbol{q}^{-\triangleright}$
 así $\frac{\boldsymbol{p}}{\boldsymbol{q}}$
  $$(\boldsymbol{p}*\boldsymbol{q}^{-\triangleright})(z)=\frac{\boldsymbol{p}(z)}{\boldsymbol{q}(z)}$$</p>
+<p>Este conjunto es fundamental en la modelización ARIMA.</p>
 
 </div>
 </div>
@@ -14901,76 +14845,7 @@ secuencia $\boldsymbol{y}$, tenemos</p>
 </div>
 </div>
 </div>
-</div></div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="El-operador-retardo-y-el-producto-convoluci%C3%B3n-de-una-secuencia-$%5Cboldsymbol%7Bx%7D$-por-$z$">El operador retardo y el producto convoluci&#243;n de una secuencia $\boldsymbol{x}$ por $z$<a class="anchor-link" href="#El-operador-retardo-y-el-producto-convoluci%C3%B3n-de-una-secuencia-$%5Cboldsymbol%7Bx%7D$-por-$z$">&#182;</a></h4>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Del mismo modo que denotamos con ${{1}}$ la secuencia
-$$1=(\ldots,0,0,{\color{blue}{1}},0,0,\ldots)=1 z^0,$$ denotamos con
-${{z}}$ la secuencia
-$$z=(\ldots,0,0,{\color{blue}{0}},1,0,\ldots)=1 z^1;$$
-y con ${{z^{-1}}}$ la secuencia
-$$z^{-1}=(\ldots,0,1,{\color{blue}{0}},0,0,\ldots)=1 z^{-1}.$$
-Evidentemente
-$$z^2=z*z=(\ldots,0,0,{\color{blue}{0}},0,1,\ldots)=1 z^{2}.$$
-De ese modo $$\boldsymbol{x}*z^k=\sum_{t\in\mathbb{Z}}x_t
-z^{t+k}=(\mathsf{B}^kx_t\mid t\in\mathbb{Z}).$$</p>
-
-</div>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="El-producto-elemento-a-elemento-de-dos-secuencias">El producto elemento a elemento de dos secuencias<a class="anchor-link" href="#El-producto-elemento-a-elemento-de-dos-secuencias">&#182;</a></h3>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>El producto elemento a elemento (o producto Hadamard) de $\boldsymbol{a}$ y $\boldsymbol{b}$ es la secuencia
-$$\boldsymbol{a}\odot\boldsymbol{b}=(a_tb_t\mid
-t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}a_tb_t z^t.$$ Por tanto
-$$\boldsymbol{x}\odot(\boldsymbol{y}*z^k)=(x_t y_{t-k}\mid
-t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}x_t y_{t-k} z^t;$$ y si
-$\boldsymbol{\phi}$ es el polinomio $\;1-\phi_1 z^1-\cdots-\phi_p
-z^p$,
-$$(\boldsymbol{\phi}*\boldsymbol{x})\odot(\boldsymbol{y}*z^k)=\Big(\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
-y_{t-k}\mid
-t\in\mathbb{Z}\Big)=\sum_{t\in\mathbb{Z}}\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
-y_{t-k} z^t,$$ donde</p>
-\begin{align*}
-\big(\boldsymbol{\phi}(\mathsf{B})x_t\big) y_{t-k}
-= &amp; \big(x_t-\phi_1x_{t-1}-\cdots-\phi_px_{t-p}\big)y_{t-k}\\
-= &amp; x_ty_{t-k}-\phi_1x_{t-1}y_{t-k}-\cdots-\phi_px_{t-p}y_{t-k}.
-\end{align*}
-</div>
-</div>
-</div>
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">

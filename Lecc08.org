@@ -142,13 +142,13 @@ económicas suele ser ARMA($2,1$)
 
 #+ATTR_HTML: :border 2 :rules all :frame border
 #+ATTR_LATEX: :environment longtable :align p{2.3cm}p{5.5cm}p{7.2cm}
-|                                                         | Instrumento                                                                                                      | Objetivo y observaciones                                                                                                    |
-|---------------------------------------------------------+------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------|
-| Transf. @@latex:\mbox{@@logarítmica@@latex:}@@          | Gráficos rango-media y serie temporal                                                                            | Conseguir independizar la variabilidad de los datos de su nivel. Las series económicas suelen necesitar esta transformación |
-| $d$, orden de @@latex:\mbox{@@diferenciación@@latex:}@@ | Gráfico de la serie temporal. ACF (caída lenta y lineal). @@latex:\mbox{@@Contrastes@@latex:}@@ de raíz unitaria | Conseguir que los datos fluctúen en torno a una media estable. En series económicas, $d$ suele ser 1 ó 2                    |
-| Constante                                               | Media de la serie diferenciada. @@latex:\mbox{@@Desviación@@latex:}@@ típica de la media                         | Si la media de la serie transformada es significativa, el modelo debe incluir un término constante                          |
-| $p$, orden AR                                           | PACF de orden $p$. ACF infinita                                                                                  | PACF tiene $p$ valores no nulos. En series económicas $p$ suele ser $\leq2$                                                 |
-| $q$, orden MA                                           | ACF de orden $q$. PACF infinita                                                                                  | ACF tiene $q$ valores no nulos. En series económicas q suele ser $\leq1$                                                    |
+|                                                         | Instrumento                                                                                                                        | Objetivo y observaciones                                                                                                    |
+|---------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------|
+| Transf. @@latex:\mbox{@@logarítmica@@latex:}@@          | Gráficos rango-media y serie temporal                                                                                              | Conseguir independizar la variabilidad de los datos de su nivel. Las series económicas suelen necesitar esta transformación |
+| $d$, orden de @@latex:\mbox{@@diferenciación@@latex:}@@ | Gráfico de la serie temporal. ACF (caída lenta y lineal). @@latex:\mbox{@@Contrastes@@latex:}@@ de raíz unitaria (DF o ADF y KPSS) | Conseguir que los datos fluctúen en torno a una media estable. En series económicas, $d$ suele ser 1 ó 2                    |
+| Constante                                               | Media de la serie diferenciada. @@latex:\mbox{@@Desviación@@latex:}@@ típica de la media                                           | Si la media de la serie transformada es significativa, el modelo debe incluir un término constante                          |
+| $p$, orden AR                                           | PACF de orden $p$. ACF infinita                                                                                                    | PACF tiene $p$ valores no nulos. En series económicas $p$ suele ser $\leq2$                                                 |
+| $q$, orden MA                                           | ACF de orden $q$. PACF infinita                                                                                                    | ACF tiene $q$ valores no nulos. En series económicas q suele ser $\leq1$                                                    |
 
 ** Instrumentos de diagnosis
    :PROPERTIES:
@@ -157,20 +157,20 @@ económicas suele ser ARMA($2,1$)
 
 #+ATTR_HTML: :border 2 :rules all :frame border
 #+ATTR_LATEX: :environment longtable :align p{2.3cm}p{5.5cm}p{7.2cm}
-|                                                         | Instrumento                                       | Posible diagnóstico                                                                                                  |
-|---------------------------------------------------------+---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------|
-| $d$, orden de @@latex:\mbox{@@diferenciación@@latex:}@@ | Raíces de los polinomios AR y MA                  | Raíz AR próxima a uno: quizá conviene añadir una diferencia.  Raíz MA próxima: quizá conviene quitar una diferencia. |
-| $d$, orden de @@latex:\mbox{@@diferenciación@@latex:}@@ | Gráfico de los residuos                           | Si muestra rachas largas de residuos positivos o negativos, puede ser necesaria una diferencia adicional.            |
-| Constante                                               | Media de los residuos                             | Si es significativa: añadir término constante                                                                        |
-| Constante                                               | Constante estimada                                | Si NO es significativa: el modelo mejorará quitando el término constante                                             |
-| $p$ y $q$,                                              | Contrastes de significación                       | Pueden sugerir eliminar parámetros irrelevantes                                                                      |
-| $p$ y $q$,                                              | ACF y PACF de los residuos. Test Q de Ljung-Box   | Indican posibles pautas de autocorrelación no modelizadas                                                            |
-| $p$ y $q$,                                              | Correlaciones elevadas entre parámetros estimados | Puede ser un síntoma de sobreparametrización                                                                         |
+|                                                         | Instrumento                                               | Posible diagnóstico                                                                                                   |
+|---------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------|
+| $d$, orden de @@latex:\mbox{@@diferenciación@@latex:}@@ | /Proximidad a 1/ de alguna raíz de los polinomios AR o MA | Si la raíz es AR quizá conviene diferenciar. O quitar una diferencia si es MA (/salvo si hay tendencia determinista/) |
+| $d$, orden de @@latex:\mbox{@@diferenciación@@latex:}@@ | Gráfico de los residuos                                   | Si muestra rachas largas de residuos positivos o negativos, puede ser necesaria una diferencia adicional.             |
+| Constante                                               | Media de los residuos                                     | Si es significativa: añadir una  constante                                                                            |
+| Constante                                               | Constante estimada                                        | Si NO es significativa: el modelo mejorará quitando el término constante                                              |
+| $p$ y $q$,                                              | Contrastes de significación de los parámetros estimados   | Pueden sugerir eliminar parámetros irrelevantes                                                                       |
+| $p$ y $q$,                                              | ACF/PACF residuos. Test Q de Ljung-Box                    | Indican posibles pautas de autocorrelación no modelizadas                                                             |
+| $p$ y $q$,                                              | Correlaciones elevadas entre los parámetros estimados     | Puede ser síntoma de sobreparametrización                                                                             |
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-Por último, se puede aplicar un análisis exploratorio consistente en
-añadir parámetros AR y/o MA, para comprobar si resultan significativos
-y, además, mejoran el modelo
+Aún, una vez superadas las pruebas de diagnostico, se puede aplicar un
+análisis exploratorio consistente en añadir parámetros AR y/o MA, para
+comprobar si resultan significativos y mejoran el modelo
  
 
 * Raíces unitarias
@@ -178,7 +178,7 @@ y, además, mejoran el modelo
    :metadata: (slideshow . ((slide_type . skip)))
    :END:
 
-** Notación: operadores retardo y diferencia
+** Notación: operadores retardo y diferencia y modelos ARIMA
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
@@ -206,23 +206,27 @@ Y_t = \boldsymbol{\theta}_q(\mathsf{B}) U_t; \quad t\in\mathbb{Z}$$
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
    
-Cuando el polinomio AR tiene alguna raíz igual a uno, se dice que
-tiene “raíces unitarias”. Si el polinomio corresponde a un modelo
-estimado, esto es síntoma de subdiferenciación.
+Cuando un polinomio tiene alguna raíz igual a uno se dice que tiene
+“raíces unitarias”.
 
-Si la raíz unitaria está en el polinomio MA y este ha sido estimado,
-esto es síntoma de: (a) sobrediferenciación o (b) presencia de
-componentes deterministas, si además si tiene media significativa.
+Si el polinomio AR estimado tiene alguna raíz "próxima a uno", es 
+síntoma de subdiferenciación.
 
-Ejemplos
+Si el polinomio MA estimado tiene alguna raíz "próxima a uno", es
+síntoma de
+a) sobrediferenciación... salvo cuando...
+b) antes de diferenciar hubiera una tendencia determinista (que
+   podemos comprobar, por ejemplo, con un test ADF).
+
+Ejemplos que ilustran los tres casos:
 
 #+ATTR_HTML: :border 2 :rules all :frame border
 #+ATTR_LATEX: :environment longtable :align p{7cm}p{7cm}
-| Modelo expresado con raíz unitaria en $\boldsymbol{\phi}$ o $\boldsymbol{\theta}$ | Modelo equivalente sin raíces unitarias en $\boldsymbol{\phi}$ o $\boldsymbol{\theta}$ |
-|-----------------------------------------------------------------------------------+----------------------------------------------------------------------------------------|
-| $(1-1.5\mathsf{B}+.5\mathsf{B}^2) Y_t = U_t$                                      | $(1-0.5\mathsf{B})\nabla Y_t=U_t$                                                      |
-| $(1-.5\mathsf{B}+0.7\mathsf{B}^2)\nabla^2Y_t=(1-\mathsf{B})U_t$                   | $(1-.5\mathsf{B}+0.7\mathsf{B}^2)\nabla Y_t =  U_t$                                    |
-| $\nabla Y_t = \beta+          (1-\mathsf{B}) U_t$                                 | $Y_t = \beta t + U_t$                                                                  |
+| Modelo expresado con raíces unitarias en $\boldsymbol{\phi}$ o $\boldsymbol{\theta}$ | Modelo equivalente sin raíces unitarias en $\boldsymbol{\phi}$ o $\boldsymbol{\theta}$ |
+|--------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------|
+| $(1-1.5\mathsf{B}+.5\mathsf{B}^2) Y_t = U_t$                                         | ${\color{blue}{(1-0.5\mathsf{B})\nabla Y_t=U_t}}$                                      |
+| $(1-.5\mathsf{B}+0.7\mathsf{B}^2)\nabla^2Y_t=(1-\mathsf{B})U_t$                      | ${\color{blue}{(1-.5\mathsf{B}+0.7\mathsf{B}^2)\nabla Y_t =  U_t}}$                    |
+| ${\color{blue}{\nabla Y_t = \beta+          (1-\mathsf{B}) U_t}}$                    | $Y_t = \beta t + U_t\quad$ (¡no estacionario!)                                         |
 
 ** Paseos aleatorios
    :PROPERTIES:
@@ -632,6 +636,7 @@ Tres fases:
 
 Si la diagnosis no es satisfactoria, se vuelve a la primera fase.
 
-Si la diagnosis es satisfactoria, se usa el modelo.
+Si la diagnosis es satisfactoria... ¡hemos logrado un modelo
+aceptable!
 
 

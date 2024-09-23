@@ -198,7 +198,7 @@ $\infty$ y cogrado $-\infty$.
 #+latex: \bigskip
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-En la Lección 5 vimos que para un proceso ARMA($p,q$)
+En la Lección 5 se demostró que para un proceso ARMA($p,q$)
 $$\boldsymbol{\phi}(\mathsf{B})\gamma_k = 
 \begin{cases}
   \sigma^2 \Big(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\Big)_k & \text{para } k\leq q \\
@@ -211,17 +211,16 @@ Así, en cuanto a la ACF $\boldsymbol{\rho}$:
  - Los $p$ valores de $\rho_q$ a $\rho_{q-p+1}$ son los valores
    iniciales para resolver la ecuación en diferencias
    $\boldsymbol{\phi}(\mathsf{B})\rho_k=0\;$ (con $k\geq q)$
- - Si $q<p$ toda la secuencia $\rho_j$ para $j\geq0$ decae
+ - Si $q < p$ toda la secuencia $\rho_j$ para $j \geq 0$ decae
    exponencialmente o sinusoidalmente según $\boldsymbol{\phi}$ y los
    valores iniciales $\rho_q$ a $\rho_{q-p+1}$
- - Si $q\geq p$ los primeros $q-p+1$ valores iniciales $\rho_0$ a
+ - Si $q \geq p$ los primeros $q-p+1$ valores iniciales $\rho_0$ a
    $\rho_{q-p}$ siguen una pauta diferente
 
 En cuanto a la PACF $\boldsymbol{\pi}$:
 - Tiene grado $\infty$ y cogrado $-\infty$
 - A partir de cierto retardo se comporta como la PACF de un MA($q$),
   es decir, decae exponencialmente o sinusoidalmente.
-
 
 ** Proceso ARMA($1,1$)
    :PROPERTIES:
@@ -286,7 +285,6 @@ ide(sim(arma11R, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgra
 
 
 
-
 *** ARMA(1,1) $\phi_1=-0.7$ y $\theta_1=0.8$
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . notes)))
@@ -317,7 +315,6 @@ ide(sim(arma11A, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgra
 #+attr_html: :width 900px
 #+attr_latex: :width 425px
 [[./img/lecc06/Sim-arma11A.png]]
-
 
 *** ARMA(1,1) $\phi_1=0.4$ y $\theta_1=0.8$
    :PROPERTIES:
@@ -351,7 +348,6 @@ ide(sim(arma11NVA, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pg
 #+attr_html: :width 900px
 #+attr_latex: :width 425px
 [[./img/lecc06/Sim-arma11NVA.png]]
-
 
 *** ARMA(1,1) $\phi_1=-0.8$ y $\theta_1=-0.4$
    :PROPERTIES:
@@ -401,8 +397,8 @@ ide(sim(arma11RNV, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pg
 
 ¿Están sus valores correlados con su historia pasada (autocorrelados)?
 
-#+LATEX: \noindent
-¿Están correlados con los valores presentes o pasados de otras series?
+¿Qué correlación tienen los datos con los datos $k$ periodos atrás una
+vez descontado el efecto de los datos intermedios?
 #+LATEX: \bigskip
 
 Veamos algunas herramientas estadísticas para poder desvelar estas
@@ -436,7 +432,6 @@ temporal en el horizontal ($x$). Es útil para detectar visualmente:
 
 Es importante escalar y rotular adecuadamente los ejes y asegurar la
 comparabilidad entre series y gráficos distintos (si los hubiere).
-
 
 *** Gráfico rango-media
    :PROPERTIES:
@@ -473,6 +468,7 @@ ide(Z, graphs = c("plot", "rm"), main="Pasajeros de líneas (aéreas en miles) y
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 El gráfico de rango media a veces se acompaña de una regresión de la
 dispersión sobre los niveles para medir la relación nivel-dispersión.
+
 
 ** Determinación del orden de integración
    :PROPERTIES:
@@ -589,7 +585,6 @@ ide(TemperaturaRetiro_ts,
 En el caso de la serie de temperaturas en el Parque del Retiro, parece
 que es suficiente con tomar solo una diferencia estacional.
 
-
 *** Contrastes formales sobre el orden de integración: DF, ADF y KPSS
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
@@ -652,6 +647,7 @@ Estos test son poco potentes y son frágiles ante incumplimientos
 (heterocedasticidad o no-normalidad); por ello debemos complementarlos
 con el análisis gráfico.
 
+
 ** ACF muestral
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
@@ -674,7 +670,6 @@ blanco/) se emplea el test de Ljung-Box $$Q =
 n\left(n+2\right)\sum_{k=1}^h\frac{\hat{\rho}^2_k}{n-k}$$
 (usaremos el test de Ljung-Box para evaluar los modelos).
 
-
 ** PACF muestral
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
@@ -691,7 +686,6 @@ de orden $k$ $$\widetilde{X}_t =
 \widehat{\phi_{kk}}\widetilde{X}_{t-k} + U_t;\qquad k = 1, 2,\ldots$$
 donde $\widetilde{X}_t=X_t-\bar{X}\;$ y donde
 $\;\widehat{\pi_k}=\widehat{\phi_{kk}}$
-
 
 ** Otras herramientas estadísticas           :CómoHacerConR:
    :PROPERTIES:
@@ -746,7 +740,6 @@ normtest.W        0.9519577
 normtest.p        0.0000683
 ============  =============
 #+end_example
-
 
 *** Contraste de normalidad Jarque-Bera
    :PROPERTIES:

@@ -126,8 +126,9 @@ de la distancia temporal $k$ entre ambas variables y que
   se denomina /función de autocorrelación/ (ACF).
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Veamos otra secuencia que también describe la relación entre distintas
-variables del proceso.
+Veamos una nueva transformación de $\boldsymbol{\gamma}$ que subraya
+otras características de interdependencia temporal en un proceso
+estocástico.
 
 #+LATEX: \newline  \noindent
 
@@ -184,11 +185,14 @@ sobre $\bar{sp}(1,X_{t-1}:X_{t-(k-1)})$.
 #+LATEX: \medskip
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-La magnitud de la correlación parcial $\;\pi_k\;$ refleja la mejora en
-la predicción de $\widehat{X_t}$ si en lugar de usar una combinación
-lineal con solo los $k-1$ primeros retardos,
+La magnitud de la correlación parcial $\;\pi_k\;$ *refleja la mejora
+en la predicción de $\widehat{X_t}$ si* en lugar de usar una
+combinación lineal con solo los $k-1$ primeros retardos,
 $\widehat{X_t}=\widehat{\alpha_0}+\sum_{j=1}^{k-1}\widehat{\alpha_j}
-X_{t-j}$, empleáramos $k$ retardos (i.e., un retardo más).
+X_{t-j}$, *empleamos $k$ retardos* (i.e., un retardo más).
+#+LATEX: \medskip
+
+(Dicha propiedad nos ayudará a elegir el orden de procesos autoregresivos).
 #+LATEX: \medskip
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
@@ -201,7 +205,7 @@ recursivamente con el algoritmo Levinson-Durbin; véase
 /Pourahmadi, M. (2001, Capítulo 7)/ o /Brockwell & Davis (1991,
 Capitulo 5)/)
 
-*************** TODO Incluir algoritmo en los apuntes :@EctrApl:
+*************** TODO COMMENT Incluir algoritmo en los apuntes      :@EctrApl:
 
 # \(\pi_1=\phi_{11}=\rho_1\)
 
@@ -266,76 +270,55 @@ modelos lineales concretos.
    :END:
 
 
-** Procesos lineales
+** Procesos lineales causales
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
-Sea el proceso lineal
+Sea el proceso 
 $\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}$, donde
 $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y
-$\;\boldsymbol{\psi}\in\ell^1;\;$ es decir
-$$X_t=\sum_{j\in\mathbb{Z}}\psi_j U_{t-j}.$$ Puesto que $E(U_t)=0$
-para todo $t\in\mathbb{Z}$, entonces
-$$E(X_t)=E\left(\sum_{j\in\mathbb{Z}}\psi_j
-U_{t-j}\right)=\sum_{j\in\mathbb{Z}}\psi_j E(U_{t-j})=0$$ Y como
-además, $E(U_j\cdot U_k)=0$ cuando $j\ne k$, su función de
-autocovarianzas es 
-\begin{eqnarray*}
-\gamma_{k,t}= E\big[X_{t+k}\cdot X_{t}\big]=&
-E\left[\Big(\sum_{j\in\mathbb{Z}}\psi_j
-U_{t+k-j}\Big)\Big(\sum_{j\in\mathbb{Z}}\psi_j U_{t-j}\Big)\right]=
-\sigma^2\sum_{j\in\mathbb{Z}}\psi_{j+k}\cdot\psi_{j}\\
-=&\sigma^2\sum_{j\in\mathbb{Z}}\psi_{j+k}\cdot R(\psi_{-j}) =
-\sigma^2\left(\boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})\right)_k
-\end{eqnarray*}
-que solo depende de $k$ (el proceso es estacionario como ya sabíamos). Por tanto...
-#+latex: \medskip
-
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
-Si $\boldsymbol{X}$ es un proceso lineal
-$\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}$, con
-$\;\boldsymbol{U}\sim WN(0,\sigma^2),\;$ donde
-$\boldsymbol{\psi}\in\ell^1$ es una serie formal (i.e., cogrado $0$) y
-donde $\psi_0=1$, es decir, si  $$X_t= \sum_{j=1}^\infty\psi_j
-U_{t-j}+U_t;\qquad t\in\mathbb{Z}.$$
-
-#+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Entonces
-
+$\;\boldsymbol{\psi}\in\ell^2\;$ es una serie formal:
+$$X_t=\sum_{j\geq0}\psi_j U_{t-j}.$$ Por la lección anterior
+sabemos que $\;E(X_t)=0\;$ y que
 - $\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})$
-
- $\gamma_k = \sigma^2\sum_{j=0}^\infty \psi_{j+k}\cdot\psi_j.\quad$ Además $\;\gamma_k\to0\;$ cuando $\;k\to\infty$
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
+  Es decir, 
+  $$\gamma_k = \sigma^2\sum_{j=0}^\infty \psi_{j+|k|}\cdot\psi_j.$$ 
+  Por otra parte, $\;\gamma_k\to0\;$ cuando $\;k\to\infty$
 #+BEGIN_EXPORT latex
+\medskip
+
 \emph{Demostración}:  aplicando la desigualdad de Cauchy-Schwarz
-\begin{align*}
-|\gamma_k| & \leq  \sigma^2 
+\begin{displaymath}
+|\gamma_k| \; \leq  \; \sigma^2 
 \left(\sum_{j=0}^\infty |\psi_{j+k}|^2\right)^{\frac{1}{2}}
-\left(\sum_{j=0}^\infty |\psi_{j}|^2\right)^{\frac{1}{2}}\\
-& =
+\left(\sum_{j=0}^\infty |\psi_{j}|^2\right)^{\frac{1}{2}}
+% \\ &
+\; = \;
 \sigma^2 
 \left(\sum_{j=k}^\infty |\psi_{j}|^2\right)^{\frac{1}{2}}
-\left(\sum_{j=0}^\infty |\psi_{j}|^2\right)^{\frac{1}{2}}\\
-\end{align*}
+\left(\sum_{j=0}^\infty |\psi_{j}|^2\right)^{\frac{1}{2}} 
+\end{displaymath}
 y puesto que $\boldsymbol{\psi}$ es de cuadrado sumable, la cola 
 $\sum_{j=k}^\infty |\psi_{j}|^2$ 
 converje a cero cuando $k\to\infty$.
+\medskip
 #+END_EXPORT
-# - $\boldsymbol{\gamma} \;=\; \sum_{k\in\mathbb{Z}}\gamma_k z^k \;=\; \sigma^2 z^0 \;=\; \sigma^2\boldsymbol{1} \;=\; (\ldots,0,0,\sigma^2,0,0,\ldots)$
 
-- ACF: $\;\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+A partir de $\boldsymbol{\gamma}$ obtenemos las otras tres funciones:
 
-# - $\boldsymbol{\rho} \;=\; \sum_{k\in\mathbb{Z}}\frac{\gamma_k}{\gamma_0} z^k \;=\; 1 z^0 \;=\; \boldsymbol{1} \;=\; (\ldots,0,0,1,0,0,\ldots)$
+*ACF*: $\;\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$
 
-- Densidad espectral: $\;f(\omega) \;=\; \frac{1}{2\pi}\sum_{h\geq0}\gamma_h \cos(h\omega);\quad \omega\in[-\pi,\pi]$
+*Dens. espectral*:  \(\;f(\omega)=\frac{1}{2\pi}\sum_{h\geq0}\gamma_h\cos(h\omega)\)@@latex:;\quad\omega\in[-\pi,\pi]@@
 
-- PACF: $\;\boldsymbol{\pi}\in\ell^2,\quad$ i.e., $\;\pi_k\to0\;$ cuando $\;k\to\infty$ 
+*PACF*: $\;\boldsymbol{\pi}\in\ell^2,\quad$ i.e., $\;\pi_k\to0\;$ cuando $\;k\to\infty$ 
 
-  (Cuando $\boldsymbol{\pi}\in\ell^2$ se dice que el proceso es /no-determinista/)
-
-# \sum_{k\in\mathbb{Z}}\pi_k z^k \;=\; 1 z^0 \;=\; 
-
-
+#+BEGIN_EXPORT latex
+\noindent
+(Cuando $\boldsymbol{\pi}\in\ell^2$ se dice que el proceso es \emph{no-determinista}.)
+#+END_EXPORT
 
 
 ** Proceso de Ruido Blanco
@@ -428,12 +411,12 @@ $\boldsymbol{\pi}\;$ tiene grado $\infty$ y cogrado $-\infty\;$ y su magnitud de
 
 ** Proceso de media móvil MA($1$)
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
+   :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
 Sea $\boldsymbol{X}=(1-\theta z)*\boldsymbol{U}$ con $|\theta|<1$ y
-con $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es decir $X_t=U_t-\theta
-U_{t-1}$.
+con $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es decir $$X_t=U_t-\theta
+U_{t-1}.$$
 
 - $\boldsymbol{\gamma} \;=\; \sigma^2 (1-\theta z)*(1-\theta z^{-1})
   \;=\; \sigma^2 (\ldots,\ 0\ ,\ -\theta,\ {\color{blue}{(1+\theta^2)}},\ -\theta,\
@@ -466,7 +449,7 @@ display(list(ma1p), lag.max = 20, byrow = TRUE)
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 $$\boldsymbol{\theta}(z)=1-0.9z\quad\Rightarrow\quad X_t=
-(1-0.9 \mathsf{B})U_t.$$
+(1-0.9 \mathsf{B})U_t\qquad {\color{blue}{(\theta>0)}}$$
 
 #+attr_org: :width 800
 #+attr_html: :width 900px
@@ -515,7 +498,7 @@ display(list(ma1n), lag.max = 20, byrow = TRUE)
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 $$\boldsymbol{\theta}(z)=1+0.9z\quad\Rightarrow\quad X_t=
-(1+0.9 \mathsf{B})U_t.$$
+(1+0.9 \mathsf{B})U_t\qquad {\color{blue}{(\theta<0)}}$$
 
 #+attr_org: :width 800
 #+attr_html: :width 900px
@@ -552,7 +535,7 @@ ide(sim(ma1n, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram")
 
 ** Proceso de media móvil MA($2$)
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
+   :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
 Sea $\boldsymbol{X}=(1-\theta_1 z-\theta_2 z^2)*\boldsymbol{U}$, con
@@ -1066,20 +1049,21 @@ con grado $p$ y cogrado $-p$ (demo en los apuntes).
 
 ** Proceso autorregresivo AR($1$)
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
+   :metadata: (slideshow . ((slide_type . slide)))
    :END:
-
 Sea $\;(1-\phi z)*\boldsymbol{X}=\boldsymbol{U},\quad$ con
 $\;|\phi|<1\;$ y con $\;\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es
 decir $$X_t=\phi X_{t-1} + U_t.$$
 
-Y nótese que 
-$$(1-a z)*(1+a z+a^2 z^2+a^3 z^3+\cdots)=1;$$ 
-por lo que ahora hay que calcular infinitos términos en 
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_EXPORT latex
+\noindent
+Como $$\;(1-a z)*(1+a z+a^2 z^2+a^3 z^3+\cdots)=1,\;$$ 
+ahora hay que calcular infinitos términos en 
 $$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi z)^{-1}*(1-\phi z^{-1})^{-1}.$$
-#+latex:\medskip
+% #+latex:\medskip
 
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+% # +attr_ipynb: (slideshow . ((slide_type . subslide)))
 Hay varias formas de hacer los cálculos. Una es vía los productos convolución;
 puesto que 
 $$(1-a^2 z)^{-1}=(1+a^2 z+a^4 z^2+a^6 z^3+\cdots)=\sum_{h\in\mathbb{Z}} a^{2|h|} z^h$$ 
@@ -1091,15 +1075,16 @@ $$
 =(\ldots,& \frac{a^3}{1+a^2},& \frac{a^2}{1+a^2},& \frac{a}{1+a^2},&{\color{blue}{\frac{1}{1+a^2}}},& \frac{a}{1+a^2},& \frac{a^2}{1+a^2},& \frac{a^3}{1+a^2},& \ldots)
 \end{array}$$
 (donde además hemos sustituido $z$ por $1$, pues cada término es una suma).
-#+latex:\smallskip
+% #+latex: \smallskip
+\smallskip
 
 Es decir $(1-a z)^{-1}*(1-a z^{-1})^{-1}=\sum\limits_{k\in\mathbb{Z}}\frac{a^{|k|}}{1-a^2}z^k$; y por tanto
 $$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi z)^{-1}*(1-\phi
   z^{-1})^{-1} \;=\; \frac{\sigma^2}{1-\phi^2} \sum_{k=-\infty}^\infty
   \phi^{|k|} z^k$$
-#+latex: \bigskip
+% #+latex: \bigskip
 
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+% # +attr_ipynb: (slideshow . ((slide_type . subslide)))
 Pero también podemos usar las Ecuaciones de Yule-Walker (Lecc. 5). En
 este caso (donde el único parámetro es $\phi_1=\phi$), en cuanto a la
 ACF tenemos que: $$\rho_k=\phi\rho_{k-1}\qquad k>0$$ y como $\rho_0=1$
@@ -1109,18 +1094,21 @@ $$\gamma_0=\frac{\sigma^2}{1-\rho_1\phi}=\frac{\sigma^2}{1-\phi^2}.$$
 Por tanto, la función de autocovarianzas es $$\boldsymbol{\gamma}
 \;=\; \gamma_0\cdot\boldsymbol{\rho} \;=\; \frac{\sigma^2}{1-\phi^2}
 \sum_{k=-\infty}^\infty \phi^{|k|} z^k$$
-#+latex: \bigskip
+% #+latex: \bigskip
+\bigskip
 
-** Proceso autorregresivo AR($1$)
-   :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
-   :UNNUMBERED: t 
-   :END:
+% ** Proceso autorregresivo AR($1$)
+%    :PROPERTIES:
+%    :metadata: (slideshow . ((slide_type . subslide)))
+%    :UNNUMBERED: t 
+%    :END:
 Así pues,
 si $\;(1-\phi z)*\boldsymbol{X}=\boldsymbol{U},\quad$ con
 $\;|\phi|<1\;$ y con $\;\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es
 decir, si $$X_t=\phi X_{t-1} + U_t$$
-tenemos que
+#+END_EXPORT
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+como $\;\boldsymbol{X}=(1-\phi z)^{-1}*\boldsymbol{U},\quad$ tenemos que
 
 $\boldsymbol{\gamma} \;=\; \sigma^2 (1-\phi z)^{-1}*(1-\phi
   z^{-1})^{-1} \;=\; \frac{\sigma^2}{1-\phi^2}
@@ -1154,7 +1142,7 @@ display(list(ar1p), lag.max = 20, byrow = TRUE)
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-$$\boldsymbol{\phi}(z)=1-0.9z\quad\Rightarrow\quad X_t=0.9X_{t-1}+U_t.$$
+$$\boldsymbol{\phi}(z)=1-0.9z\quad\Rightarrow\quad X_t=0.9X_{t-1}+U_t\qquad {\color{blue}{(\phi>0)}}$$
 
 #+attr_org: :width 800
 #+attr_html: :width 900px
@@ -1203,7 +1191,7 @@ display(list(ar1n), lag.max = 20, byrow = TRUE)
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-$$\boldsymbol{\phi}(z)=1+0.9z\quad\Rightarrow\quad X_t=-0.9X_{t-1}+U_t.$$
+$$\boldsymbol{\phi}(z)=1+0.9z\quad\Rightarrow\quad X_t=-0.9X_{t-1}+U_t\qquad {\color{blue}{(\phi<0)}}$$
 
 #+attr_org: :width 800
 #+attr_html: :width 900px
@@ -1240,32 +1228,35 @@ ide(sim(ar1n, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram")
 
 ** Proceso autorregresivo AR($2$)
    :PROPERTIES:
-   :metadata: (slideshow . ((slide_type . subslide)))
+   :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
 Sea $\quad(1-\phi_1 z-\phi_2 z^2)*\boldsymbol{X}=\boldsymbol{U},\quad$
 con $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y con
 $$\phi_1+\phi_2<1;\qquad \phi_2-\phi_1<1;\qquad |\phi_2|<1;\quad
-\text{(i.e., invertible)}$$ es decir $$X_t=\phi_1 X_{t-1} + \phi_2
+\text{(i.e., estacionario)}$$ es decir $$X_t=\phi_1 X_{t-1} + \phi_2
 X_{t-2} + U_t.$$ Entonces
 #+latex: \medskip
 
 $\boldsymbol{\gamma}=\sigma^2\left(
-  \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^-1)}\right)\qquad$(Verifica
-  $\;\gamma_k=\phi_1\gamma_{k-1}+\phi_2\gamma_{k-2}\;$ y decae
-  paulatinamente)
-#+latex: \smallskip
+  \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^-1)}\right)\qquad$
+  # (Verifica Ec. Yule-Walker:  $\;\gamma_k=\phi_1\gamma_{k-1}+\phi_2\gamma_{k-2};\;$ decae paulatinamente)
 #  [[eqref:eqYuleW3][(3)]
+#+BEGIN_EXPORT latex
+\smallskip
 
- $\quad$ /(de Ec. Yule-Walker: $\gamma_0 =
+$\quad$ (\emph{de Ec. Yule-Walker: $\gamma_0 =
    \frac{\sigma^2}{1-\phi_1\rho_1-\phi_2\rho_2}$ y resolvemos
-   $\boldsymbol{\phi}(\mathsf{B})\gamma_k=0$ recursivamente)/
-   #  = \frac{1-\phi_2}{1+\phi_2}\frac{\sigma^2}{(1-\phi_2)^2-\phi_1^2}
-#+latex: \medskip
+   $\gamma_k=\phi_1\gamma_{k-1}+\phi_2\gamma_{k-2}$ recursivamente})
+%   $\boldsymbol{\phi}(\mathsf{B})\gamma_k=0$ recursivamente})
+%   #  = \frac{1-\phi_2}{1+\phi_2}\frac{\sigma^2}{(1-\phi_2)^2-\phi_1^2}
+% #+latex: \medskip
+#+END_EXPORT
 
-$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}\qquad\qquad\qquad\quad$
-  (Verifica $\;\rho_k=\phi_1\rho_{k-1}+\phi_2\rho_{k-2}\;$ y decae
-  paulatinamente)
+$\boldsymbol{\rho} \;=\;
+\frac{1}{\gamma_0}\boldsymbol{\gamma}\qquad$
+(Verifica Ec. Yule-Walker:
+$\;\rho_k=\phi_1\rho_{k-1}+\phi_2\rho_{k-2};\;\qquad$ decae@@latex: paulatinamente@@)
 #+latex: \smallskip
 
 #+latex:  $\quad$ \emph{(con $\rho_0=1$ iniciamos el cálculo de $\boldsymbol{\phi}(\mathsf{B})\rho_k=0$ recursivamente)} \medskip

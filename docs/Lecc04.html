@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-09-20 vie 19:26 -->
+<!-- 2024-09-23 lun 10:01 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 4</title>
@@ -233,23 +233,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgd461ffe">1. Secuencias de números</a>
+<li><a href="#org4e05a0f">1. Secuencias de números</a>
 <ul>
 <li><a href="#org9eb2348">1.1. El espacio vectorial de las secuencias infinitas \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a>
 <ul>
-<li><a href="#org5778379">1.1.1. Notación mediante funciones generatrices</a></li>
-<li><a href="#org71f08cd">1.1.2. Características de algunas secuencias</a></li>
+<li><a href="#org36cf5ee">1.1.1. Notación mediante funciones generatrices</a></li>
+<li><a href="#org62407b9">1.1.2. Características de algunas secuencias</a></li>
 <li><a href="#orgc1c3cae">1.1.3. Algunos subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a></li>
 </ul>
 </li>
-<li><a href="#org93f11da">1.2. Producto convolución</a></li>
+<li><a href="#orgb2d01ed">1.2. Producto convolución</a></li>
 <li><a href="#org1817ae9">1.3. Anillos conmutativos y cuerpos</a>
 <ul>
 <li><a href="#orgc70da8e">1.3.1. Anillos conmutativos</a></li>
 <li><a href="#org099a838">1.3.2. Cuerpos</a></li>
 </ul>
 </li>
-<li><a href="#orgb177721">1.4. Clasificación de algunos subconjuntos de sucesiones</a></li>
+<li><a href="#orgda0d931">1.4. Clasificación de algunos subconjuntos de sucesiones</a></li>
 <li><a href="#org1eded2f">1.5. Inversas</a>
 <ul>
 <li><a href="#org82b8dbf">1.5.1. Inversas de secuencias con principio</a></li>
@@ -261,25 +261,23 @@
 <li><a href="#org2ac125e">1.6. Operador retardo \(\mathsf{B}{}\) y suma de los elementos de una secuencia.</a>
 <ul>
 <li><a href="#orgd470d6f">1.6.1. Polinomios y secuencias en el operador retardo \(\boldsymbol{a}(\mathsf{B}{})\) actuando sobre secuencias</a></li>
-<li><a href="#orgfebdfce">1.6.2. El operador retardo y el producto convolución de una secuencia \(\boldsymbol{x}\) por \(z\)</a></li>
 </ul>
 </li>
-<li><a href="#org0527240">1.7. El producto elemento a elemento de dos secuencias</a></li>
-<li><a href="#org4f56457">1.8. Convolución de una serie formal con el "<i>reverso</i>" de otra</a></li>
+<li><a href="#org949049f">1.7. Convolución de una serie formal con el "<i>reverso</i>" de otra</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div class="ABSTRACT" id="orgb311f20">
+<div class="ABSTRACT" id="orge3d4441">
 <p>
 En esta lección veremos conceptos algebraicos usados en la
 modelización de series temporales.
 </p>
 
 </div>
-<div id="outline-container-orgd461ffe" class="outline-2">
-<h2 id="orgd461ffe"><span class="section-number-2">1.</span> Secuencias de números</h2>
+<div id="outline-container-org4e05a0f" class="outline-2">
+<h2 id="org4e05a0f"><span class="section-number-2">1.</span> Secuencias de números</h2>
 <div class="outline-text-2" id="text-1">
 </div>
 <div id="outline-container-org9eb2348" class="outline-3">
@@ -314,8 +312,8 @@ Si \(\;\boldsymbol{x},\boldsymbol{y}\in{\mathbb{R}}^\mathbb{Z}\;\) y
 producto por escalares constituyen un espacio vectorial.
 </p>
 </div>
-<div id="outline-container-org5778379" class="outline-4">
-<h4 id="org5778379"><span class="section-number-4">1.1.1.</span> Notación mediante funciones generatrices</h4>
+<div id="outline-container-org36cf5ee" class="outline-4">
+<h4 id="org36cf5ee"><span class="section-number-4">1.1.1.</span> Notación mediante funciones generatrices</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 En la expresión \(\;\boldsymbol{x} \quad = \quad (\ldots,\ x_{-2},\
@@ -346,15 +344,15 @@ compacta del siguiente modo \[\boldsymbol{x} \quad = \quad
 <b>¡Pero esta expresión no es una suma!</b> es solo un modo de expresar una
 secuencia. Dicha expresión se denomina <i>función generatriz</i>.
 </p>
-</div>
-</div>
-<div id="outline-container-org71f08cd" class="outline-4">
-<h4 id="org71f08cd"><span class="section-number-4">1.1.2.</span> Características de algunas secuencias</h4>
-<div class="outline-text-4" id="text-1-1-2">
+
 <p>
 La sucesión \(\;\boldsymbol{0}=\sum_{t=-\infty}^\infty 0 z^t\;\) se denomina <i>sucesión nula</i>.
 </p>
-
+</div>
+</div>
+<div id="outline-container-org62407b9" class="outline-4">
+<h4 id="org62407b9"><span class="section-number-4">1.1.2.</span> Características de algunas secuencias</h4>
+<div class="outline-text-4" id="text-1-1-2">
 <p>
 En una sucesión \(\boldsymbol{a}\) no nula llamamos
 </p>
@@ -400,8 +398,8 @@ son cero).  \[\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2
 </div>
 </div>
 </div>
-<div id="outline-container-org93f11da" class="outline-3">
-<h3 id="org93f11da"><span class="section-number-3">1.2.</span> Producto convolución</h3>
+<div id="outline-container-orgb2d01ed" class="outline-3">
+<h3 id="orgb2d01ed"><span class="section-number-3">1.2.</span> Producto convolución</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Sean \(\boldsymbol{a}\) y \(\boldsymbol{b}\) sucesiones <span class="underline">con principio</span>
@@ -452,8 +450,8 @@ En cuanto a la suma
 <li>\(\boldsymbol{a} + \boldsymbol{b} = \boldsymbol{b} + \boldsymbol{a}\;\) para todo \(\boldsymbol{a}, \boldsymbol{b}\) en \(\mathsf{S}\qquad\) (i.e. \(+\) es conmutativa).</li>
 <li>Existe un elemento \(\boldsymbol{0}\) tal que \(\boldsymbol{a} + \boldsymbol{0} = \boldsymbol{a}\) para todo \(\boldsymbol{a}\in \mathsf{S}\).</li>
 <li>Para cada \(\boldsymbol{a}\in \mathsf{S}\) existe \(-\boldsymbol{a}\in \mathsf{S}\) tal que \(\boldsymbol{a} + (−\boldsymbol{a}) = \boldsymbol{0}\).</li>
-<li></li>
 </ul>
+
 <p>
 En cuanto al producto 
 </p>
@@ -494,8 +492,8 @@ conjunto</i>)
 </div>
 </div>
 </div>
-<div id="outline-container-orgb177721" class="outline-3">
-<h3 id="orgb177721"><span class="section-number-3">1.4.</span> Clasificación de algunos subconjuntos de sucesiones</h3>
+<div id="outline-container-orgda0d931" class="outline-3">
+<h3 id="orgda0d931"><span class="section-number-3">1.4.</span> Clasificación de algunos subconjuntos de sucesiones</h3>
 <div class="outline-text-3" id="text-1-4">
 <dl class="org-dl">
 <dt>Son anillos el conjunto de</dt><dd><p>
@@ -587,15 +585,6 @@ Por construcción, \(grado(\boldsymbol{b}) = -p\).
 es decir
 \((\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{0},\ldots)=\sum_{j=-\infty}^{-1} -a^j z^j\)
 </p>
-
-<p>
-Si definimos la función entre secuencias
-\(R:\mathbb{R}^\mathbb{Z}\to\mathbb{R}^\mathbb{Z}\) tal que
-\(R(a_j)=a_{-j}\), es decir, la función <i>reverso</i>
-\[R\big(\boldsymbol{a}(z)\big)=\boldsymbol{a}(z^{-1})\] se puede
-demostrar que para toda secuencia con final \(\boldsymbol{a}\)
-\[\boldsymbol{a}^{\blacktriangleleft-}=R\left(\big(R(\boldsymbol{a})\big)^{-\triangleright}\right).\]
-</p>
 </div>
 </div>
 <div id="outline-container-org3c9766b" class="outline-4">
@@ -655,10 +644,10 @@ es "la" inversa de \(\boldsymbol{a}\) en \(\ell^1\).
 </p>
 
 <p>
-En general, dicha inversa no tiene grado ni cogrado y se denota
-con \(\boldsymbol{a}^{-1}=\frac{1}{\boldsymbol{a}}\).<br />
-
-(<i>es la inversa que aparece en los libros de series temporales</i>)
+En general, dicha inversa no tiene grado ni cogrado finitos y se
+denota con \(\boldsymbol{a}^{-1}=\frac{1}{\boldsymbol{a}}\).<br />
+(<i>es la inversa que aparece en los libros de
+series temporales</i>)
 </p>
 
 <p>
@@ -671,31 +660,7 @@ En los manuales de <i>series temporales</i> se dice que un polinomio \(\boldsymb
 
 <p>
 \[\text{(la inversa con principio) }\;\boldsymbol{a}^{-\triangleright}=\boldsymbol{a}^{-1}\; \text{ (la inversa absolutamente sumable)}.\]
-(<i>si sus raíces están fuera del círculo unidad.</i>)
-</p>
-<p>
-<b>Hay infinitas inversas.</b> Si una secuencia tiene dos inversas,
-entonces tiene infinitas.
-</p>
-
-<p>
-Sean \(\boldsymbol{a}\), \(\boldsymbol{b}\) y \(\boldsymbol{d}\) secuencias
-tales que \(\;\boldsymbol{a}*\boldsymbol{b}={{1}}\;\) y
-\(\;\boldsymbol{a}*\boldsymbol{d}={{1}};\;\) y sean \(\beta\) y
-\(\delta\) dos escalares tales que \(\beta+\delta=1\). Entonces
-</p>
-
-<p>
-\[\boldsymbol{a}*\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)=
-\beta(\boldsymbol{a}*\boldsymbol{b})+\delta(\boldsymbol{a}*\boldsymbol{d})=
-\beta{{1}}+\delta{{1}}=
-(\beta+\delta){{1}}={{1}}\]
-</p>
-
-<p>
-Así, para \(\beta\) y \(\delta\) tales que \(\beta+\delta=1\), sabemos
-que \(\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)\) es otra
-inversa de \(\boldsymbol{a}\).
+(y solo es posible <i>si sus raíces están fuera del círculo unidad</i>).
 </p>
 </div>
 </div>
@@ -703,23 +668,11 @@ inversa de \(\boldsymbol{a}\).
 <h4 id="org4d7231a"><span class="section-number-4">1.5.4.</span> Cuerpo de fracciones de polinomios</h4>
 <div class="outline-text-4" id="text-1-5-4">
 <p>
-El cuerpo más importante en la modelización ARIMA es el <i>cuerpo de
-fracciones de polinomios</i>
+El <i>cuerpo de fracciones de polinomios</i>
 \[\left\{\boldsymbol{p}*\boldsymbol{q}^{-\triangleright} \mid
 \boldsymbol{p} \text{ y } \boldsymbol{q} \text{ son polinomios y }
 \boldsymbol{q}\ne\boldsymbol{0} \right\};\] es un subcuerpo del cuerpo
-de las sucesiones con principio (con cogrado)
-</p>
-
-<p>
-<i>Toda fracción de sucesiones con grado y cogrado (con principio y
-final) pertenece al cuerpo de fracciones de polinomios</i>.
-</p>
-
-<p>
-El razonamiento es simple: Toda sucesión con grado \(−k\) y cogrado es
-de la forma \(\boldsymbol{p}*(z^k)^{-\triangleright}\), donde
-\(\boldsymbol{p}\) es un polinomio.
+de las sucesiones con principio (i.e., con cogrado finito)
 </p>
 
 <p>
@@ -729,6 +682,10 @@ circulo unidad (i.e.,
 denotar la secuencia \(\boldsymbol{p}*\boldsymbol{q}^{-\triangleright}\)
 así \(\frac{\boldsymbol{p}}{\boldsymbol{q}}\)
  \[(\boldsymbol{p}*\boldsymbol{q}^{-\triangleright})(z)=\frac{\boldsymbol{p}(z)}{\boldsymbol{q}(z)}\]
+</p>
+
+<p>
+Este conjunto es fundamental en la modelización ARIMA. 
 </p>
 </div>
 </div>
@@ -780,50 +737,10 @@ Y en general, si \(\boldsymbol{a}\) e \(\boldsymbol{y}\) son secuencias sumables
 \end{align*}
 </div>
 </div>
-<div id="outline-container-orgfebdfce" class="outline-4">
-<h4 id="orgfebdfce"><span class="section-number-4">1.6.2.</span> El operador retardo y el producto convolución de una secuencia \(\boldsymbol{x}\) por \(z\)</h4>
-<div class="outline-text-4" id="text-1-6-2">
-<p>
-Del mismo modo que denotamos con \({{1}}\) la secuencia
-\[1=(\ldots,0,0,{\color{blue}{1}},0,0,\ldots)=1 z^0,\] denotamos con
-\({{z}}\) la secuencia
-\[z=(\ldots,0,0,{\color{blue}{0}},1,0,\ldots)=1 z^1;\]
-y con \({{z^{-1}}}\) la secuencia
-\[z^{-1}=(\ldots,0,1,{\color{blue}{0}},0,0,\ldots)=1 z^{-1}.\]
-Evidentemente
-\[z^2=z*z=(\ldots,0,0,{\color{blue}{0}},0,1,\ldots)=1 z^{2}.\]
-De ese modo \[\boldsymbol{x}*z^k=\sum_{t\in\mathbb{Z}}x_t
-z^{t+k}=(\mathsf{B}^kx_t\mid t\in\mathbb{Z}).\]
-</p>
 </div>
-</div>
-</div>
-<div id="outline-container-org0527240" class="outline-3">
-<h3 id="org0527240"><span class="section-number-3">1.7.</span> El producto elemento a elemento de dos secuencias</h3>
+<div id="outline-container-org949049f" class="outline-3">
+<h3 id="org949049f"><span class="section-number-3">1.7.</span> Convolución de una serie formal con el "<i>reverso</i>" de otra</h3>
 <div class="outline-text-3" id="text-1-7">
-<p>
-El producto elemento a elemento (o producto Hadamard) de \(\boldsymbol{a}\) y \(\boldsymbol{b}\) es la secuencia
-\[\boldsymbol{a}\odot\boldsymbol{b}=(a_tb_t\mid
-t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}a_tb_t z^t.\] Por tanto
-\[\boldsymbol{x}\odot(\boldsymbol{y}*z^k)=(x_t y_{t-k}\mid
-t\in\mathbb{Z})=\sum_{t\in\mathbb{Z}}x_t y_{t-k} z^t;\] y si
-\(\boldsymbol{\phi}\) es el polinomio \(\;1-\phi_1 z^1-\cdots-\phi_p
-z^p\),
-\[(\boldsymbol{\phi}*\boldsymbol{x})\odot(\boldsymbol{y}*z^k)=\Big(\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
-y_{t-k}\mid
-t\in\mathbb{Z}\Big)=\sum_{t\in\mathbb{Z}}\big(\boldsymbol{\phi}(\mathsf{B})x_t\big)
-y_{t-k} z^t,\] donde
-</p>
-\begin{align*}
-\big(\boldsymbol{\phi}(\mathsf{B})x_t\big) y_{t-k}
-= & \big(x_t-\phi_1x_{t-1}-\cdots-\phi_px_{t-p}\big)y_{t-k}\\
-= & x_ty_{t-k}-\phi_1x_{t-1}y_{t-k}-\cdots-\phi_px_{t-p}y_{t-k}.
-\end{align*}
-</div>
-</div>
-<div id="outline-container-org4f56457" class="outline-3">
-<h3 id="org4f56457"><span class="section-number-3">1.8.</span> Convolución de una serie formal con el "<i>reverso</i>" de otra</h3>
-<div class="outline-text-3" id="text-1-8">
 <p>
 Por último, si tenemos dos series formales \(\boldsymbol{a}\) y
 \(\boldsymbol{b}\), entonces
@@ -852,7 +769,7 @@ es decir,
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-09-20 vie 19:26</p>
+<p class="date">Created: 2024-09-23 lun 10:01</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
