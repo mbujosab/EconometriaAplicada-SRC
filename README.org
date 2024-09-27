@@ -127,3 +127,7 @@
 - Lección 7: [[file:./Lecc07.ipynb][notebook]]
 - Lección 8: [[file:./Lecc08.ipynb][notebook]]
 
+* Ejercicios de muestra
+
+- [[file:./Ejercicios/mortality-marriages.html][Mortalidad en Reino Unido y proporción de matrimonios eclesiásticos]]
+  (Versión [[file:./Ejercicios/mortality-marriages.pdf][pdf]] para imprimir)

@@ -1,0 +1,39 @@
+
+Modelo 8: MCO, usando las observaciones 1867-1911 (T = 45)
+Variable dependiente: d_Std_mortality
+
+                      coeficiente  Desv. típica  Estadístico t  valor p 
+  ----------------------------------------------------------------------
+  const               -0,172792     0,0230316       -7,502      2,43e-09 ***
+  d_Proportion_mar~    0,00142536   0,0117781        0,1210     0,9042  
+
+Media de la vble. dep. -0,173333   D.T. de la vble. dep.   0,149848
+Suma de cuad. residuos  0,987664   D.T. de la regresión    0,151555
+R-cuadrado              0,000340   R-cuadrado corregido   -0,022907
+F(1, 43)                0,014645   Valor p (de F)          0,904241
+Log-verosimilitud       22,07697   Criterio de Akaike     -40,15393
+Criterio de Schwarz    -36,54061   Crit. de Hannan-Quinn  -38,80692
+rho                     0,089193   Durbin-Watson           1,806988
+
+
+Contraste de la hipótesis nula de distribución Normal:
+Chi-cuadrado(2) = 14,808 con valor p 0,00061
+
+
+Contraste de heterocedasticidad de White
+
+Estadístico de contraste: TR^2 = 2,149006,
+con valor p = P(Chi-cuadrado(2) > 2,149006) = 0,341467
+
+
+Contraste de Breusch-Godfrey para autocorrelación hasta el orden 5
+
+Estadístico de contraste: LMF = 0,589588,
+con valor p = P(F(5,38) > 0,589588) = 0,708
+
+Estadístico alternativo: TR^2 = 3,239657,
+con valor p = P(Chi-cuadrado(5) > 3,23966) = 0,663
+
+Ljung-Box Q' = 4,0454,
+con valor p = P(Chi-cuadrado(5) > 4,0454) = 0,543
+

@@ -1,3 +1,6 @@
+
+- [[https://www.master203.com/wp-content/uploads/2023/06/Intro_to_Gretl.pdf][Intro_to_Gretl]]
+
 https://www.master203.com/wp-content/uploads/2023/06/Intro_to_Gretl.pdf
 
 [[https://www.stat.berkeley.edu/~bartlett/courses/153-fall2010/][Introduction to Time Series (Berkeley)]]
