@@ -29,14 +29,12 @@
 #+BEGIN_SRC sh  :exports none :results silent
 rm -fr $(pwd)/mortality-marriages
 mkdir -p $(pwd)/mortality-marriages 
-gretlcli -b /home/marcos/SynologyDrive/ReposGH/Docencia/POM-EconometriaAplicada-SRC/GretlScripts/mortality-marriages.inp
+gretlcli -b /home/marcos/SynologyDrive/ReposGH/Docencia//EconometriaAplicada-SRC/Ejercicios/mortality-marriages.inp
 #+END_SRC
 
 #+BEGIN_SRC sh  :exports none :results silent
 zip mortality mortality-marriages* mortality-marriages/*
 #+END_SRC
-
-
 
 #+begin_src R :tangle mortality-marriages.inp :exports none
 # para que gretl guarde los ficheros en el directorio de la práctica
@@ -48,7 +46,9 @@ set workdir "@directory"
 
 Los datos de este ejercicio corresponden a la mortalidad anual y la
 proporción de matrimonios eclesiásticos en Inglaterra entre 1866 y
-1911 *Fuente:* Ejercicio del Prof. Miguel Jerez 
+1911 
+
+*Fuente:* Ejercicio proporcionado por el Prof. Miguel Jerez
 
 - =Std_mortality= :: Mortalidad anual por cada 1000 personas. Serie estandarizada.
 - =Proportion_marriages= :: Proporción de matrimonios eclesiásticos
@@ -61,6 +61,8 @@ proporción de matrimonios eclesiásticos en Inglaterra entre 1866 y
 open mortality-marriages.gdt
 #+end_src
 
+- Ficheros [[https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios]]
+- Versión en [[https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Ejercicios/mortality-marriages.pdf][pdf]]
 
 * Datos en nivel de la serie de mortalidad
 
@@ -178,20 +180,19 @@ apartado [[Contraste de cointegración]].
 
 ([[Respuesta 2]])
 
-
 ** Pregunta 3
 
 Sin embargo, ¿qué sugieren los resultados de las secciones [[Regresión
 de la mortalidad sobre la proporción de matrimonios eclesiásticos]] y
-[[Regresión en primeras diferencias]]?
+[[Regresión en primeras diferencias]] respecto a la relación entre
+=Std_mortality= y =Proportion_marriages=?
 
 ([[Respuesta 3]])
 
+** Pregunta 4
 
-** Pregunta 4 
-
-Los listados en [[Contraste de cointegración]] y [[Regresión de la
-mortalidad sobre la proporción de matrimonios eclesiásticos]] muestran
+Los listados en [[Regresión de la mortalidad sobre la proporción de
+matrimonios eclesiásticos]] y [[Regresión en primeras diferencias]] muestran
 los principales resultados obtenidos al estimar por MCO dos modelos de
 regresión que relacionan las dos variables consideradas en este
 ejercicio. Resuma y comente los resultados de estimación y diagnosis
@@ -209,29 +210,27 @@ Etapa 3 del [[Contraste de cointegración]].
 
 ([[Respuesta 5]])
 
-
 ** Pregunta 6
 
 Indique cuáles de las siguientes expresiones representan el modelo de
 la sección [[Estimación de un modelo univariante para la serie de
-mortalidad]], con un redondeo a tres decimales (0.2 puntos por respuesta
-correcta, -0.2 puntos por respuesta incorrecta, 0 puntos por respuesta
-“en blanco”):
+mortalidad]], con un redondeo a tres decimales 
+# (0.2 puntos por respuesta correcta, -0.2 puntos por respuesta incorrecta, 0 puntos por respuesta “en blanco”):
 
-A) \( \left( 1 - 0.997 \, \mathsf{B} \right) \, \left(X_t - 18.078 \right) = \left( 1 + 0.401 \, \mathsf{B} + 0.345 \, \mathsf{B}^2 \right) \hat U_t \) 
-B) \( \left( 1 - 0.997 \, \mathsf{B} \right) \, \left(X_t - 18.078 \right) = \left( 1 - 0.401 \, \mathsf{B}  - 0.345 \, \mathsf{B}^2 \right) \hat U_t \)
-C) \( \left( 1 + 0.997 \, \mathsf{B} \right) \, \left(X_t - 18.078 \right) = \left( 1 + 0.401 \, \mathsf{B}  + 0.345 \, \mathsf{B}^2 \right) \hat U_t \)
-D) \( \,{X_t} = 18.078 + \frac{  1 + 0.401 \, \mathsf{B}  + 0.345 \, \mathsf{B}^2 }{ 1 - 0.997 \, \mathsf{B} } \hat U_t \) 
-E) \( \,{X_t} = -18.078 + \frac{  1 + 0.401 \, \mathsf{B}  + 0.345 \, \mathsf{B}^2 }{ 1 - 0.997 \, \mathsf{B} } \hat U_t \)
-F) \( \,{X_t} = 18.078 + \frac{  1 - 0.401 \, \mathsf{B} - 0.345 \, \mathsf{B}^2 }{ 1 - 0.997 \, \mathsf{B} } \hat U_t \)
-G) \( \,{X_t} = 18.078 + \frac{  1 + 0.401 \, \mathsf{B}  + 0.345 \, \mathsf{B}^2 }{ 1 + 0.997 \, \mathsf{B} } \hat U_t \)
-H) \( \frac{ 1 - 0.997 \, \mathsf{B} }{1 + 0.401 \, \mathsf{B}  + 0.345 \, \mathsf{B}^2 } \, \left(X_t - 18.078 \right)=  \hat U_t \) 
-I) \( \frac{ 1 - 0.997 \, \mathsf{B} }{1 + 0.401 \, \mathsf{B}  + 0.345 \, \mathsf{B}^2 } \, X_t = 18.078 + \hat U_t \)
-J) \( \frac{ 1 - 0.997 \, \mathsf{B} }{1 - 0.401 \, \mathsf{B} - 0.345 \, \mathsf{B}^2 } \, \left(X_t - 18.078 \right)=  \hat U_t \)
+A) $\left( 1 - 0.997 \, \mathsf{B} \right) \, \left(X_t - 18.078 \right) = \left( 1 + 0.401 \, \mathsf{B} + 0.345 \, \mathsf{B}^2 \right) \hat U_t$ 
+B) $\left( 1 - 0.997 \, \mathsf{B} \right) \, \left(X_t - 18.078 \right) = \left( 1 - 0.401 \, \mathsf{B}  - 0.345 \, \mathsf{B}^2 \right) \hat U_t$
+C) $\left( 1 + 0.997 \, \mathsf{B} \right) \, \left(X_t - 18.078 \right) = \left( 1 + 0.401 \, \mathsf{B}  + 0.345 \, \mathsf{B}^2 \right) \hat U_t$
+D) $\,{X_t} = 18.078 + \frac{  1 + 0.401 \, \mathsf{B}  + 0.345 \, \mathsf{B}^2 }{ 1 - 0.997 \, \mathsf{B} } \hat U_t$ 
+E) $\,{X_t} = -18.078 + \frac{  1 + 0.401 \, \mathsf{B}  + 0.345 \, \mathsf{B}^2 }{ 1 - 0.997 \, \mathsf{B} } \hat U_t$
+F) $\,{X_t} = 18.078 + \frac{  1 - 0.401 \, \mathsf{B} - 0.345 \, \mathsf{B}^2 }{ 1 - 0.997 \, \mathsf{B} } \hat U_t$
+G) $\,{X_t} = 18.078 + \frac{  1 + 0.401 \, \mathsf{B}  + 0.345 \, \mathsf{B}^2 }{ 1 + 0.997 \, \mathsf{B} } \hat U_t$
+H) $\frac{ 1 - 0.997 \, \mathsf{B} }{1 + 0.401 \, \mathsf{B}  + 0.345 \, \mathsf{B}^2 } \, \left(X_t - 18.078 \right)=  \hat U_t$ 
+I) $\frac{ 1 - 0.997 \, \mathsf{B} }{1 + 0.401 \, \mathsf{B}  + 0.345 \, \mathsf{B}^2 } \, X_t = 18.078 + \hat U_t$
+J) $\frac{ 1 - 0.997 \, \mathsf{B} }{1 - 0.401 \, \mathsf{B} - 0.345 \, \mathsf{B}^2 } \, \left(X_t - 18.078 \right)=  \hat U_t$
 
 ([[Respuesta 6]])
 
-** Pregunta 7 
+** Pregunta 7
 
 A la luz de la [[Estimación de un modelo univariante para la serie de
 mortalidad]], si tuviera que clasificar el proceso estocástico
@@ -281,7 +280,7 @@ Las conclusiones de las distintas etapas del test de cointegración son los sigu
 
 Consecuentemente, el test indica que ambas series están cointegradas
 (/pero, como sugiere tanto el sentido común como la [[Regresión en
-primeras diferencias]] la relación es espuria/).
+primeras diferencias]] la relación es espuria/, véase la pregunta 3).
 
 ([[Pregunta 2]])
 
@@ -298,65 +297,76 @@ relación es espuria_.
 
 ** Respuesta 4
 
-- Modelo para datos en nivel :: ([[Regresión de la mortalidad sobre la
-  proporción de matrimonios eclesiásticos]]): Todos los coeficientes son
-  muy significativos. El ajuste del modelo, medido por el valor del
-  \(R^2\) es muy elevado. Los contrastes sobre los residuos no
-  rechazan (ni al 1%, ni al 5% ni al 10% de significación) las
-  hipótesis nulas de normalidad, ni homoscedasticidad y ni ausencia de
-  autocorrelación residual.
+- Modelo de regresión MCO para datos en nivel :: ([[Regresión de la
+  mortalidad sobre la proporción de matrimonios eclesiásticos]]): Todos
+  los coeficientes son muy significativos. El ajuste del modelo,
+  medido por el valor del \(R^2\) es muy elevado. Los contrastes sobre
+  los residuos no rechazan (ni al 1%, ni al 5% ni al 10% de
+  significación) las hipótesis nulas de normalidad, homoscedasticidad
+  y ausencia de autocorrelación. Es decir, de la salida de Gretl no se
+  puede inferir que haya ningún problema con este modelo.
 
-- Modelo para datos en primeras diferencias :: ([[Regresión en primeras
-  diferencias]]): El único coeficiente significativo es el término
+- Modelo para datos en primeras diferencias :: ([[Regresión en primeras diferencias]]): El único coeficiente significativo es el término
   constante. El ajuste del modelo, medido por el valor del \(R^2\), es
   prácticamente nulo. Los contrastes residuales rechazan la hipótesis
   nula de normalidad, aunque no rechazan las de homoscedasticidad y
   ausencia de autocorrelación. 
 
-  Si las perturbaciones no tienen distribución normales las
-  estimaciones no serán eficientes en el sentido máximo-verosímil
-  (aunque sí en el de Gauss-Markov) y la inferencia basada en los
-  tests habituales (incluyendo en particular los intervalos de
-  confianza) no estará bien realizada.
+  Si las perturbaciones no tienen distribución normal las estimaciones
+  no serán eficientes en el sentido máximo-verosímil (aunque sí en el
+  de Gauss-Markov) y la distribución de los estadísticos habituales
+  será distinta de la teórica bajo el supuesto de normalidad de las
+  perturbaciones (por ejemplo, los estadísticos de la $t$ no tendrán
+  exactamente una distribución /t/ de student).
 
-  A partir de estos resultados cabría, por ejemplo, volver a estimar
-  el modelo seleccionando la opción de _desviaciones típicas
-  robustas_, para corregir los contrastes de significación dado que
-  los errores no parecen gaussianos.
+  No obstante, dado que la relación entre variables es espuria,
+  ninguno de estos modelos de regresión es válido como explicación de
+  la tasa de mortalidad.
+
+#  A partir de estos resultados cabría, por ejemplo, volver a estimar
+#  el modelo seleccionando la opción de _desviaciones típicas
+#  _robustas_, para corregir los contrastes de significación dado que
+#  los errores no parecen gaussianos.
 
 ([[Pregunta 4]])
 
-
 ** Respuesta 5
 
-La pendiente de la regresión estimada en la Etapa 3 indica que un
-aumento de un uno por mil en la proporción de matrimonios
-eclesiásticos da lugar a un aumento de un 0.419 por mil en la
-mortalidad esperada (pero, dado que la relación es espuria,
-interpretar este resultado carece de sentido).
+La pendiente de la regresión estimada en la Etapa 3 (que es la misma
+que la de la sección de la regresión en niveles) indica que un aumento
+de un uno por mil en la proporción de matrimonios eclesiásticos da
+lugar a un aumento de un 0.419 por mil en la mortalidad esperada
+(pero, dado que la relación es espuria, interpretar este resultado
+carece de sentido).
 
 ([[Pregunta 5]])
 
-
 ** Respuesta 6
 
-La 1, 4 y 8. 
-
 Recuerde que signo de los parámetros MA en las salidas de Gretl tienen
-el signo cambiado respecto a convenio habitual, es decir, para los
-polinomios AR $(1-\phi_1\mathsf{B}-\cdots-\phi_p\mathsf{B}^p)$,
-tenemos que =phi_j= es $\phi_j$ (es decir, al escribir el modelo
-cambiamos el signo del parámetro AR); pero para los MA
-$(1-\theta_1\mathsf{B}-\cdots-\theta_p\mathsf{B}^p)$, tenemos quee
-=theta_j= es $-\theta_j$ (es decir, al escribir no cambiamos el signo
-del valor indicado por Gretl para el parámetro MA). Además, =const= es
-la estimación del valor esperado $\mu$ del proceso $\boldsymbol{X}$,
-es decir, que $(X_t-\mu\mid t\in\mathbb{Z})$ es un proceso ARMA de
-media cero.
+el signo cambiado respecto a convenio habitual en los manuales de
+series temporales, es decir, para los polinomios AR
+$(1-\phi_1\mathsf{B}-\cdots-\phi_p\mathsf{B}^p)$, tenemos que =phi_j=
+es "$\phi_j$" (es decir, al escribir el modelo el signo del parámetro
+=phi_j= aparece con un menos delante); pero para los MA
+$(1-\theta_1\mathsf{B}-\cdots-\theta_p\mathsf{B}^p)$, tenemos que
+=theta_j= es "$-\theta_j$" (es decir, al escribir no cambiamos el
+signo de parámetro =theta_j= pues ya lleva el "$-$" incorporado).
+Además, =const= es la estimación del valor esperado $\mu$ del proceso
+$\boldsymbol{X}$, es decir, que $(X_t-\mu\mid t\in\mathbb{Z})$ es un
+proceso ARMA de media cero.
+
+Por tanto, las expresiones correctas son:
+
+- Expresión 1 :: modelo ARMA($1,2$): $\;\boldsymbol{\phi}(\mathsf{B})({X_t}-\mu)=\boldsymbol{\theta}(\mathsf{B}){U_t}$
+- Expresión 4 :: su representación MA($\infty$): $\;({X_t}-\mu)=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}(\mathsf{B}){U_t}\;\rightarrow\;{X_t}=\mu+\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}(\mathsf{B}){U_t}$
+- Expresión 8 :: su representación AR($\infty$): $\;\frac{\boldsymbol{\phi}}{\boldsymbol{\theta}}(\mathsf{B})({X_t}-\mu)={U_t}$
+
+
 
 ([[Pregunta 6]])
 
-** Respuesta 7 
+** Respuesta 7
 
 La raíz AR estimada está muy próxima a 1, por lo que cabe pensar que
 la serie proviene de un proceso estocástico NO estacionario. Sin
@@ -372,18 +382,19 @@ AR($\infty$), es decir, es invertible.
 mejoras sugeriría para ellos?
 
 - En cuanto al modelo univariante :: Probablemente debería incorporar
-  una diferencia ordinaria, en lugar de un término AR.
+  una diferencia ordinaria, en lugar de un término AR(1).
 
-- En cuanto a los modelos de regresión :: en el modelo en diferencias
-  hay, probablemente, un problema de autocorrelación dado el valor del
-  estadístico Durbin-Watson, por lo que quizá debería ser estimado por
-  mínimos cuadrados generalizados.
+- En cuanto a los modelos de regresión :: En el modelo de las serie en
+  diferencias hay, probablemente, un problema de autocorrelación dado
+  el elevado valor del estadístico Durbin-Watson (es próximo a 2), por
+  lo que quizá debería ser estimado por mínimos cuadrados
+  generalizados asumiendo un modelo autorregresivo AR(1) para el
+  error.
 
-  No obstante, el modelo en diferencias sugiere que no hay relación
-  entre ambas variables
-
-  Consecuentemente ninguna de las dos regresiones ofrece un modelo
-  aceptable.
+  No obstante, el modelo en diferencias (y el sentido común) sugiere
+  que la relación entre ambas variables es espuria. Consecuentemente,
+  ninguna de las dos regresiones (en niveles o en diferencias)
+  arrojará un modelo aceptable ni siquiera con las mejoras sugeridas.
 
 ([[Pregunta 8]])
 

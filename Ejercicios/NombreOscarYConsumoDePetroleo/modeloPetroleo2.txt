@@ -1,0 +1,27 @@
+
+Evaluaciones de la función: 12
+Evaluaciones del gradiente: 3
+
+ARIpetroleo:
+ARIMA, usando las observaciones 1981-2022 (T = 42)
+Estimado usando AS 197 (MV exacta)
+Variable dependiente: (1-L) ConsumoPetroleo
+Desviaciones típicas basadas en el Hessiano
+
+             coeficiente   Desv. típica     z     valor p
+  -------------------------------------------------------
+  phi_1       0,334680       0,151047     2,216   0,0267  **
+
+Media de la vble. dep.  1,020476   D.T. de la vble. dep.   18,74413
+Media de innovaciones   0,981800   D.T. innovaciones       17,53257
+R-cuadrado              0,930469   R-cuadrado corregido    0,930469
+Log-verosimilitud      -179,9453   Criterio de Akaike      363,8907
+Criterio de Schwarz     367,3660   Crit. de Hannan-Quinn   365,1645
+
+                       Real Imaginaria     Módulo Frecuencia
+  -----------------------------------------------------------
+  AR
+   Raíz  1           2,9879     0,0000     2,9879     0,0000
+  -----------------------------------------------------------
+
+ARIpetroleo guardado

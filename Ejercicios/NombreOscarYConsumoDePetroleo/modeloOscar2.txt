@@ -1,0 +1,26 @@
+
+Evaluaciones de la función: 11
+Evaluaciones del gradiente: 4
+
+ARIoscar: ARIMA, usando las observaciones 1981-2022 (T = 42)
+Estimado usando AS 197 (MV exacta)
+Variable dependiente: (1-L) FrecuenciaOscar
+Desviaciones típicas basadas en el Hessiano
+
+             coeficiente   Desv. típica     z     valor p 
+  --------------------------------------------------------
+  phi_1       0,535976       0,129413     4,142   3,45e-05 ***
+
+Media de la vble. dep.  11,14286   D.T. de la vble. dep.   166,6352
+Media de innovaciones   7,336036   D.T. innovaciones       138,9468
+R-cuadrado              0,961704   R-cuadrado corregido    0,961704
+Log-verosimilitud      -266,9966   Criterio de Akaike      537,9932
+Criterio de Schwarz     541,4685   Crit. de Hannan-Quinn   539,2670
+
+                       Real Imaginaria     Módulo Frecuencia
+  -----------------------------------------------------------
+  AR
+   Raíz  1           1,8658     0,0000     1,8658     0,0000
+  -----------------------------------------------------------
+
+ARIoscar guardado

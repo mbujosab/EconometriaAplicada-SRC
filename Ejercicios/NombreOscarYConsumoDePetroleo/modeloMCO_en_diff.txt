@@ -1,0 +1,39 @@
+
+Modelo 16: MCO, usando las observaciones 1981-2022 (T = 42)
+Variable dependiente: d_ConsumoPetroleo
+
+                     coeficiente  Desv. típica  Estadístico t  valor p 
+  ---------------------------------------------------------------------
+  const               0,302707     2,40604         0,1258      0,9005  
+  d_FrecuenciaOscar   0,0644152    0,0145806       4,418       7,40e-05 ***
+
+Media de la vble. dep.  1,020476   D.T. de la vble. dep.   18,74413
+Suma de cuad. residuos  9681,208   D.T. de la regresión    15,55732
+R-cuadrado              0,327929   R-cuadrado corregido    0,311127
+F(1, 40)                19,51752   Valor p (de F)          0,000074
+Log-verosimilitud      -173,8411   Criterio de Akaike      351,6823
+Criterio de Schwarz     355,1576   Crit. de Hannan-Quinn   352,9561
+rho                    -0,041431   Durbin-Watson           2,000828
+
+
+Contraste de la hipótesis nula de distribución Normal:
+Chi-cuadrado(2) = 6,890 con valor p 0,03191
+
+
+Contraste de heterocedasticidad de White
+
+Estadístico de contraste: TR^2 = 2,712262,
+con valor p = P(Chi-cuadrado(2) > 2,712262) = 0,257656
+
+
+Contraste de Breusch-Godfrey para autocorrelación hasta el orden 2
+
+Estadístico de contraste: LMF = 0,162094,
+con valor p = P(F(2,38) > 0,162094) = 0,851
+
+Estadístico alternativo: TR^2 = 0,355283,
+con valor p = P(Chi-cuadrado(2) > 0,355283) = 0,837
+
+Ljung-Box Q' = 0,314886,
+con valor p = P(Chi-cuadrado(2) > 0,314886) = 0,854
+

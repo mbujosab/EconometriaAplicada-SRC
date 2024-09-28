@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
 <head>
-<!-- 2024-09-27 vie 17:38 -->
+<!-- 2024-09-28 sáb 17:59 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 3</title>
@@ -233,28 +233,28 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge48241e">Carga de algunas librerías de R</a></li>
+<li><a href="#orgd344a12">Carga de algunas librerías de R</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org9974fcf">1. Correlación</a>
+<li><a href="#org12b3d71">1. Correlación</a>
 <ul>
-<li><a href="#org1fcf97a">1.1. La causalidad y correlación</a></li>
-<li><a href="#orgf086ca5">1.2. Correlación espuria</a></li>
+<li><a href="#orgefa21e0">1.1. La causalidad y correlación</a></li>
+<li><a href="#org02c4a1e">1.2. Correlación espuria</a></li>
 <li><a href="#orgaa2c054">1.3. Las series con tendencia suelen presentar elevadas correlaciones.</a>
 <ul>
-<li><a href="#orge617b4f">1.3.1. Ejemplo de correlación espuria: PNB vs incidencia de melanoma</a></li>
+<li><a href="#org03be796">1.3.1. Ejemplo de correlación espuria: PNB vs incidencia de melanoma</a></li>
 </ul>
 </li>
-<li><a href="#org02e5a9f">1.4. Una manera de ver que la correlación es posiblemente <i>espuria</i> (que no hay causalidad)</a></li>
+<li><a href="#orge0f9540">1.4. Una manera de ver que la correlación es posiblemente <i>espuria</i> (que no hay causalidad)</a></li>
 </ul>
 </li>
-<li><a href="#orgd9b6154">2. Cointegración</a>
+<li><a href="#org1fdaa2f">2. Cointegración</a>
 <ul>
 <li><a href="#org35d0548">2.1. Ejemplo de series cointegradas: tipos de interes en UK a corto y largo plazo</a></div>
 </div>
-<div class="ABSTRACT" id="org07cd1af">
+<div class="ABSTRACT" id="org24482df">
 <p>
 En esta lección se discutirá la posible relación entre correlación y
 causalidad. Veremos casos de correlación espuria (correlación sin
@@ -269,9 +269,9 @@ usaremos R.
 <li><a href="https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc03.html">lección en html</a></li>
 <li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc03.ipynb">lección en mybinder</a></li>
 </ul>
-<div id="outline-container-orge48241e" class="outline-4">
-<h4 id="orge48241e">Carga de algunas librerías de R</h4>
-<div class="outline-text-4" id="text-orge48241e">
+<div id="outline-container-orgd344a12" class="outline-4">
+<h4 id="orgd344a12">Carga de algunas librerías de R</h4>
+<div class="outline-text-4" id="text-orgd344a12">
 <p>
 Primero cargamos la librería <code>tfarima</code> (Repositorio Cran:
 <a href="https://cran.r-project.org/web/packages/tfarima/index.html">https://cran.r-project.org/web/packages/tfarima/index.html</a>;
@@ -297,8 +297,8 @@ del notebook
 </div>
 </div>
 </div>
-<div id="outline-container-org9974fcf" class="outline-2">
-<h2 id="org9974fcf"><span class="section-number-2">1.</span> Correlación</h2>
+<div id="outline-container-org12b3d71" class="outline-2">
+<h2 id="org12b3d71"><span class="section-number-2">1.</span> Correlación</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 La correlación entre dos muestras de tamaño \(N\) (dos vectores de datos
@@ -322,8 +322,8 @@ Por tanto la correlación es algún valor entre \(-1\) y \(1\).
 \(\;\boldsymbol{x}-\boldsymbol{\bar{x}}\;\)</li>
 </ul>
 </div>
-<div id="outline-container-org1fcf97a" class="outline-3">
-<h3 id="org1fcf97a"><span class="section-number-3">1.1.</span> La causalidad y correlación</h3>
+<div id="outline-container-orgefa21e0" class="outline-3">
+<h3 id="orgefa21e0"><span class="section-number-3">1.1.</span> La causalidad y correlación</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Cuando existe relación causal entre variables sus muestras suelen
@@ -344,8 +344,8 @@ Pero <b>correlaciones significativas no indican la existencia de relaciones caus
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf086ca5" class="outline-3">
-<h3 id="orgf086ca5"><span class="section-number-3">1.2.</span> Correlación espuria</h3>
+<div id="outline-container-org02c4a1e" class="outline-3">
+<h3 id="org02c4a1e"><span class="section-number-3">1.2.</span> Correlación espuria</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 La correlación entre variables sin relación causal se denomina
@@ -379,8 +379,8 @@ Puede ser que no exista causa alguna y aún así haya correlación
 <h3 id="orgaa2c054"><span class="section-number-3">1.3.</span> Las series con tendencia suelen presentar elevadas correlaciones.</h3>
 <div class="outline-text-3" id="text-1-3">
 </div>
-<div id="outline-container-orge617b4f" class="outline-4">
-<h4 id="orge617b4f"><span class="section-number-4">1.3.1.</span> Ejemplo de correlación espuria: PNB vs incidencia de melanoma</h4>
+<div id="outline-container-org03be796" class="outline-4">
+<h4 id="org03be796"><span class="section-number-4">1.3.1.</span> Ejemplo de correlación espuria: PNB vs incidencia de melanoma</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <div class="org-src-container">
 <pre class="src src-jupyter-R">data_frame <span style="color: #D0372D;">&lt;-</span> read_csv(<span style="color: #008000;">'datos/GNPvsMelanoma.csv'</span>,show_col_types = <span style="color: #6434A3;">FALSE</span>)
@@ -451,7 +451,7 @@ de Connecticut.
 </p>
 
 
-<div id="org7d7d6e6" class="figure">
+<div id="org5f32e0b" class="figure">
 <p><img src="./img/lecc03/GNPvsMelanoma.png" alt="GNPvsMelanoma.png" width="900px" />
 </p>
 </div>
@@ -471,7 +471,7 @@ ggplot(data_frame, aes(x = Melanoma, y = GNP)) + geom_point()
 </p>
 
 
-<div id="org44d3c6c" class="figure">
+<div id="orgb66b9fd" class="figure">
 <p><img src="./img/lecc03/Scatter-GNPvsMelanoma.png" alt="Scatter-GNPvsMelanoma.png" width="250px" />
 </p>
 </div>
@@ -487,7 +487,7 @@ coeficientes muy significativos</i>).
 predictiva</b> (<i>pues la incidencia de melanoma en
 Connecticut no hace crecer la economía de EEUU</i>).
 </p>
-<pre class="example" id="org848acf4">
+<pre class="example" id="org268ecf1">
 MODEL INFO:
 Observations: 37
 Dependent Variable: GNP
@@ -509,8 +509,8 @@ Melanoma            118.98    7.81    15.23   0.00
 </div>
 </div>
 </div>
-<div id="outline-container-org02e5a9f" class="outline-3">
-<h3 id="org02e5a9f"><span class="section-number-3">1.4.</span> Una manera de ver que la correlación es posiblemente <i>espuria</i> (que no hay causalidad)</h3>
+<div id="outline-container-orge0f9540" class="outline-3">
+<h3 id="orge0f9540"><span class="section-number-3">1.4.</span> Una manera de ver que la correlación es posiblemente <i>espuria</i> (que no hay causalidad)</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Si fuera cierto que 
@@ -596,7 +596,7 @@ doubleYScale(obj1, obj2, add.ylab2 = <span style="color: #6434A3;">TRUE</span>)
 </div>
 
 
-<div id="org424c342" class="figure">
+<div id="org4cbcbca" class="figure">
 <p><img src="./img/lecc03/d_GNPvsd_Melanoma.png" alt="d_GNPvsd_Melanoma.png" width="900px" />
 </p>
 </div>
@@ -613,7 +613,7 @@ summ( lm(d_GNP ~ d_Melanoma) )
 </pre>
 </div>
 
-<pre class="example" id="orgefad433">
+<pre class="example" id="org3ed6b68">
 MODEL INFO:
 Observations: 36
 Dependent Variable: d_GNP
@@ -635,8 +635,8 @@ d_Melanoma           0.71   6.59     0.11   0.92
 </div>
 </div>
 </div>
-<div id="outline-container-orgd9b6154" class="outline-2">
-<h2 id="orgd9b6154"><span class="section-number-2">2.</span> Cointegración</h2>
+<div id="outline-container-org1fdaa2f" class="outline-2">
+<h2 id="org1fdaa2f"><span class="section-number-2">2.</span> Cointegración</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li>Una serie temporal es <i>integrada de orden \(d\)</i>, (ó \(I(d)\)) si \(d\) es
@@ -821,7 +821,7 @@ doubleYScale(obj1, obj2, add.ylab2 = <span style="color: #6434A3;">TRUE</span>)
 (Muestra: 1952Q2&#x2013;1979Q4)
 </p>
 
-<div id="org57d4abf" class="figure">
+<div id="org5267f3a" class="figure">
 <p><img src="./img/lecc03/UK_Interest_rates.png" alt="UK_Interest_rates.png" width="900px" />
 </p>
 </div>
@@ -914,7 +914,7 @@ doubleYScale(obj1, obj2, add.ylab2 = <span style="color: #6434A3;">TRUE</span>)
 
 
 
-<div id="org8424c16" class="figure">
+<div id="orgc5bfecf" class="figure">
 <p><img src="./img/lecc03/UK_Interest_ratesFirstDiff.png" alt="UK_Interest_ratesFirstDiff.png" width="900px" />
 </p>
 </div>
@@ -932,7 +932,7 @@ summ( lm(d_Short ~ d_Long) )
 </pre>
 </div>
 
-<pre class="example" id="org0312bc6">
+<pre class="example" id="orgf5cb3ac">
 MODEL INFO:
 Observations: 74
 Dependent Variable: d_Short
@@ -961,7 +961,7 @@ summ( modelo )                         <span style="color: #8D8D84;"># </span><s
 </pre>
 </div>
 
-<pre class="example" id="org69c71a9">
+<pre class="example" id="org77923cc">
 MODEL INFO:
 Observations: 75
 Dependent Variable: UK_df$Short
@@ -994,7 +994,7 @@ abline(0,0)
 </div>
 
 
-<div id="org21bdfc5" class="figure">
+<div id="org3d516a4" class="figure">
 <p><img src="./img/lecc03/UK_Interest_ratesResiduals.png" alt="UK_Interest_ratesResiduals.png" width="900px" />
 </p>
 </div>
@@ -1015,7 +1015,7 @@ estacionariedad (si son \(I(1)\) o \(I(0)\)).
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-09-27 vie 17:38</p>
+<p class="date">Created: 2024-09-28 sáb 17:59</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
