@@ -390,8 +390,7 @@ $$\boldsymbol{a}^{\blacktriangleleft-}=R\left(\big(R(\boldsymbol{a})\big)^{-\tri
 Ahora sabemos que todo polinomio
 - por tener cogrado :: tiene una inversa con cogrado (con principio)
 - por tener grado :: tiene una inversa con grado (con final)
-y que dichas inversas no son de la forma $\;\sum_{t=k}^p a_t z^t\;$
-con $k\geq0$ (i.e., no son polinomios).
+y que dichas inversas no son de la forma $\;\sum_{t=k}^\infty a_t z^t\;$ ó $\;\sum_{t=-\infty}^k a_t z^t\;$ (i.e., no son polinomios).
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 Por el ejemplo anterior sabemos que para $\;1-az\;$ ambas inversas son
