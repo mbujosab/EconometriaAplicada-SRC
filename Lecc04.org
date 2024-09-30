@@ -312,7 +312,7 @@ $$(1-az)^{-\triangleright}=\text{inversa con principio de }(1-az)=
 \begin{cases}
 0 & \text{ si } j<0\\
 1 & \text{ si } j=0\\
-a^{-1} & \text{ si } j>0
+a^{j} & \text{ si } j>0
 \end{cases}$$
 es decir
 $(\ldots,0,\ \fbox{1},\ a,\ a^2,\ a^3,\ldots)=\sum_{j=0}^\infty a^j z^j$
