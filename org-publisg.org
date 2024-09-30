@@ -132,6 +132,7 @@ jupyter nbconvert --config mycfg.py --to slides
 ** Org-publish                                                     :noexport:
 
 We need a small elisp script to setup and publish  it.
+
 #+BEGIN_SRC emacs-lisp  :tangle ~/publish.el :results silent
 (use-package htmlize)
 

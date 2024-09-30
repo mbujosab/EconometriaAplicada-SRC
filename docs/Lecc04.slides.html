@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="orged63aae">
+<div class="ABSTRACT" id="org6a38721">
 <p>
 En esta lección veremos conceptos algebraicos usados en la
 modelización de series temporales.
@@ -14285,7 +14285,7 @@ secuencia. Dicha expresión se denomina <em>función generatriz</em>.</p>
 $\boldsymbol{0}$, diremos que su grado es menos infinito
 $\;(grado(\boldsymbol{0}) = -\infty)$.</li>
 <li><strong>Cogrado:</strong> al mayor índice entero que verifica la propiedad: $$j &lt;
-  grado(\boldsymbol{a}) \Rightarrow a_j=0$$ Para la sucesión,
+  cogrado(\boldsymbol{a}) \Rightarrow a_j=0$$ Para la sucesión,
 $\boldsymbol{0}$, diremos que su cogrado es infinito
 $\;(cogrado(\boldsymbol{0}) = \infty)$.</li>
 </ul>
@@ -14549,7 +14549,8 @@ $$(1-az)^{-\triangleright}=\text{inversa con principio de }(1-az)=
 1 &amp; \text{ si } j=0\\
 a^{j} &amp; \text{ si } j&gt;0
 \end{cases}$$<p>es decir
-$(\ldots,0,\ \fbox{1},\ a,\ a^2,\ a^3,\ldots)=\sum_{j=0}^\infty a^j z^j$</p>
+$(\ldots,0,\ \fbox{${\color{blue}{1}}$},\ a,\ a^2,\ a^3,\ldots)=\sum_{j=0}^\infty a^j z^j;\quad$
+(donde la posición $j=0$ está marcada con un recuadro).</p>
 
 </div>
 </div>
@@ -14599,7 +14600,7 @@ $$(1-az)^{\blacktriangleleft-}=\text{inversa con final de }(1-az)=
 \frac{-1}{a} &amp; \text{ si } j=-1\\
 \frac{-1}{a^j} &amp; \text{ si } j&lt;-1
 \end{cases}$$<p>es decir
-$(\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{0},\ldots)=\sum_{j=-\infty}^{-1} -a^j z^j$</p>
+$(\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{${\color{blue}{0}}$},\ldots)=\sum_{j=-\infty}^{-1} -a^j z^j$</p>
 
 </div>
 </div>
@@ -14641,9 +14642,9 @@ $(\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{0},\ldots)=\sum_
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Por el ejemplo anterior sabemos que para $\;1-az\;$ ambas inversas son</p>
 <ul>
-<li><p>$(1-az)^{-\triangleright}=\sum_{j=0}^\infty a^j z^j \quad=\quad (\ldots,0,\ \fbox{1},\ a,\ a^2,\ a^3,\ldots)$</p>
+<li><p>$(1-az)^{-\triangleright}=\sum_{j=0}^\infty a^j z^j \quad=\quad (\ldots,0,\ \fbox{${\color{blue}{1}}$},\ a,\ a^2,\ a^3,\ldots)$</p>
 </li>
-<li><p>$(1-az)^{\blacktriangleleft-}=\sum_{j=-\infty}^{-1} -a^j z^j \quad=\quad (\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{0},\ldots)$</p>
+<li><p>$(1-az)^{\blacktriangleleft-}=\sum_{j=-\infty}^{-1} -a^j z^j \quad=\quad (\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{${\color{blue}{0}}$},\ldots)$</p>
 </li>
 </ul>
 <p>Es evidente que si $|a|\ne1$ una de las inversas está en $\ell^1$ y la
@@ -14835,7 +14836,7 @@ secuencia $\boldsymbol{y}$, tenemos</p>
 <p>Y en general, si $\boldsymbol{a}$ e $\boldsymbol{y}$ son secuencias sumables, entonces</p>
 \begin{align*}
 \boldsymbol{a}(\mathsf{B})y_t 
-&amp; = (\cdots+a_{-2}\mathsf{B}^{-2},a_{-1}\mathsf{B}^{-1},a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) y_t \\
+&amp; = (\cdots+a_{-2}\mathsf{B}^{-2}+a_{-1}\mathsf{B}^{-1}+a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) y_t \\
 % &amp; = a_0 y_t + a_1 \mathsf{B}^1 y_t + a_2 \mathsf{B}^2 y_t + a_3 \mathsf{B}^3 y_t \\
 &amp; = \cdots+a_{-2}y_{t+2}+a_{-1}y_{t+1}+a_0y_t+a_1y_{t-1}+a_2y_{t-2}+\cdots \\
 % &amp; =\sum\nolimits_{r=0}^3 a_r y_{t-r} \\
@@ -14870,7 +14871,7 @@ $\boldsymbol{b}$, entonces</p>
 =&amp;\Big(\ldots,
 \sum_{j\in\mathbb{Z}}a_{j+2}b_j,\; 
 \sum_{j\in\mathbb{Z}}a_{j-1}b_j,\;
-{\color{blue}{\sum_{j\in\mathbb{Z}}a_jb_j}},\;
+\fbox{\({\color{blue}{\sum_{j\in\mathbb{Z}}a_jb_j}}\)},\;
 \sum_{j\in\mathbb{Z}}a_{j+1}b_j,\;
 \sum_{j\in\mathbb{Z}}a_{j+2}b_j,\ldots\Big)\\
 =&amp;\Big(\sum_{j\in\mathbb{Z}}a_{j+k}b_j\mid k\in\mathbb{Z}\Big)

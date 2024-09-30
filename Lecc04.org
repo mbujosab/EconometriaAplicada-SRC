@@ -144,7 +144,7 @@ En una sucesión $\boldsymbol{a}$ no nula llamamos
   $\boldsymbol{0}$, diremos que su grado es menos infinito
   $\;(grado(\boldsymbol{0}) = -\infty)$.
 - Cogrado :: al mayor índice entero que verifica la propiedad: $$j <
-  grado(\boldsymbol{a}) \Rightarrow a_j=0$$ Para la sucesión,
+  cogrado(\boldsymbol{a}) \Rightarrow a_j=0$$ Para la sucesión,
   $\boldsymbol{0}$, diremos que su cogrado es infinito
   $\;(cogrado(\boldsymbol{0}) = \infty)$.
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
@@ -223,7 +223,7 @@ En cuanto al producto
 \noindent
 El elemento ${{1}}$ es la secuencia cuyos elementos son cero excepto un 1 en la posición cero:
 \begin{displaymath}
-{{1}}\;=\;1z^0\;=\;(\ldots,0,0,\fbox{$1$},0,0,\ldots)
+{{1}}\;=\;1z^0\;=\;(\ldots,0,0,\fbox{\({\color{blue}{1}}\)},0,0,\ldots)
 \end{displaymath}
 #+END_EXPORT
 
@@ -315,7 +315,8 @@ $$(1-az)^{-\triangleright}=\text{inversa con principio de }(1-az)=
 a^{j} & \text{ si } j>0
 \end{cases}$$
 es decir
-$(\ldots,0,\ \fbox{1},\ a,\ a^2,\ a^3,\ldots)=\sum_{j=0}^\infty a^j z^j$
+$(\ldots,0,\ \fbox{\({\color{blue}{1}}\)},\ a,\ a^2,\ a^3,\ldots)=\sum_{j=0}^\infty a^j z^j;\quad$
+(donde la posición $j=0$ está marcada con un recuadro).
 
 #+BEGIN_EXPORT latex
 \medskip
@@ -357,7 +358,7 @@ $$(1-az)^{\blacktriangleleft-}=\text{inversa con final de }(1-az)=
 \frac{-1}{a^j} & \text{ si } j<-1
 \end{cases}$$
 es decir
-$(\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{0},\ldots)=\sum_{j=-\infty}^{-1} -a^j z^j$
+$(\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{\({\color{blue}{0}}\)},\ldots)=\sum_{j=-\infty}^{-1} -a^j z^j$
 
 #+BEGIN_EXPORT latex
 \medskip
@@ -395,9 +396,9 @@ y que dichas inversas no son de la forma $\;\sum_{t=k}^\infty a_t z^t\;$ ó $\;\
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 Por el ejemplo anterior sabemos que para $\;1-az\;$ ambas inversas son
 
-- $(1-az)^{-\triangleright}=\sum_{j=0}^\infty a^j z^j \quad=\quad (\ldots,0,\ \fbox{1},\ a,\ a^2,\ a^3,\ldots)$
+- $(1-az)^{-\triangleright}=\sum_{j=0}^\infty a^j z^j \quad=\quad (\ldots,0,\ \fbox{\({\color{blue}{1}}\)},\ a,\ a^2,\ a^3,\ldots)$
 
-- $(1-az)^{\blacktriangleleft-}=\sum_{j=-\infty}^{-1} -a^j z^j \quad=\quad (\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{0},\ldots)$
+- $(1-az)^{\blacktriangleleft-}=\sum_{j=-\infty}^{-1} -a^j z^j \quad=\quad (\ldots,\ \frac{-1}{a^3},\ \frac{-1}{a^2},\ \frac{-1}{a},\fbox{\({\color{blue}{0}}\)},\ldots)$
 
 Es evidente que si $|a|\ne1$ una de las inversas está en $\ell^1$ y la
 otra no.
@@ -542,7 +543,7 @@ secuencia $\boldsymbol{y}$, tenemos
 Y en general, si $\boldsymbol{a}$ e $\boldsymbol{y}$ son secuencias sumables, entonces
 \begin{align*}
 \boldsymbol{a}(\mathsf{B})y_t 
-& = (\cdots+a_{-2}\mathsf{B}^{-2},a_{-1}\mathsf{B}^{-1},a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) y_t \\
+& = (\cdots+a_{-2}\mathsf{B}^{-2}+a_{-1}\mathsf{B}^{-1}+a_0+a_1\mathsf{B}+a_2\mathsf{B}^2+\cdots) y_t \\
 % & = a_0 y_t + a_1 \mathsf{B}^1 y_t + a_2 \mathsf{B}^2 y_t + a_3 \mathsf{B}^3 y_t \\
 & = \cdots+a_{-2}y_{t+2}+a_{-1}y_{t+1}+a_0y_t+a_1y_{t-1}+a_2y_{t-2}+\cdots \\
 % & =\sum\nolimits_{r=0}^3 a_r y_{t-r} \\
@@ -562,7 +563,7 @@ $\boldsymbol{b}$, entonces
 =&\Big(\ldots,
 \sum_{j\in\mathbb{Z}}a_{j+2}b_j,\; 
 \sum_{j\in\mathbb{Z}}a_{j-1}b_j,\;
-{\color{blue}{\sum_{j\in\mathbb{Z}}a_jb_j}},\;
+\fbox{\({\color{blue}{\sum_{j\in\mathbb{Z}}a_jb_j}}\)},\;
 \sum_{j\in\mathbb{Z}}a_{j+1}b_j,\;
 \sum_{j\in\mathbb{Z}}a_{j+2}b_j,\ldots\Big)\\
 =&\Big(\sum_{j\in\mathbb{Z}}a_{j+k}b_j\mid k\in\mathbb{Z}\Big)
