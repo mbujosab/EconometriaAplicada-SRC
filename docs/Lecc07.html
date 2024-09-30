@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
 <head>
-<!-- 2024-09-28 sáb 17:59 -->
+<!-- 2024-09-30 lun 13:12 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 7</title>
@@ -233,7 +233,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orga0af7d0">Carga de algunas librerías de R</a></li>
+<li><a href="#org73b3322">Carga de algunas librerías de R</a></li>
 </ul>
 </li>
 </ul>
@@ -251,31 +251,31 @@
 </li>
 </ul>
 </li>
-<li><a href="#orgcc0fb02">2. La especificación del modelo se escoge según las características de los datos.</a></li>
+<li><a href="#org985f21f">2. La especificación del modelo se escoge según las características de los datos.</a></li>
 <li><a href="#org53f0513">3. Herramientas para desvelar propiedades de una serie temporal</a>
 <ul>
-<li><a href="#orgd160f15">3.1. Análisis gráfico</a>
+<li><a href="#orgcd2a163">3.1. Análisis gráfico</a>
 <ul>
-<li><a href="#orgcd7d67d">3.1.1. Gráfico de la serie temporal</a></li>
-<li><a href="#orgc6d17df">3.1.2. Gráfico rango-media</a></li>
+<li><a href="#orgaec2b9f">3.1.1. Gráfico de la serie temporal</a></li>
+<li><a href="#org9e9769e">3.1.2. Gráfico rango-media</a></li>
 </ul>
 </li>
-<li><a href="#org201a631">3.2. Determinación del orden de integración</a>
+<li><a href="#org5c04a67">3.2. Determinación del orden de integración</a>
 <ul>
-<li><a href="#org3dcfc2b">3.2.1. Análisis gráfico</a></li>
-<li><a href="#orgb6d73d7">3.2.2. Contrastes formales sobre el orden de integración: DF, ADF y KPSS</a></li>
+<li><a href="#orgaedef9b">3.2.1. Análisis gráfico</a></li>
+<li><a href="#org305da37">3.2.2. Contrastes formales sobre el orden de integración: DF, ADF y KPSS</a></li>
 </ul>
 </li>
 <li><a href="#org1385020">3.3. ACF muestral</a></li>
 <li><a href="#orgcbcbec6">3.4. PACF muestral</a></li>
-<li><a href="#org690e710">3.5. Otras herramientas estadísticas&#xa0;&#xa0;&#xa0;<span class="tag"><span class="C_moHacerConR">CómoHacerConR</span></span></a>
+<li><a href="#org728d49c">3.5. Otras herramientas estadísticas&#xa0;&#xa0;&#xa0;<span class="tag"><span class="C_moHacerConR">CómoHacerConR</span></span></a>
 <ul>
-<li><a href="#org8af0868">3.5.1. Estadísticos descriptivos</a></li>
+<li><a href="#orgfa4f0fd">3.5.1. Estadísticos descriptivos</a></li>
 <li><a href="#orgece7246">3.5.2. Contraste de normalidad Jarque-Bera</a></li>
 </ul>
 </div>
 </div>
-<div class="abstract" id="orgd5ad300">
+<div class="abstract" id="org5e56691">
 <p>
 En esta lección veremos la estructura de la ACF, la PACF y la densidad
 espectral de procesos ARMA. Después indicaremos algunas herramientas
@@ -286,9 +286,9 @@ descriptivos y contrastes de normalidad.
 </p>
 
 </div>
-<div id="outline-container-orga0af7d0" class="outline-4">
-<h4 id="orga0af7d0">Carga de algunas librerías de R</h4>
-<div class="outline-text-4" id="text-orga0af7d0">
+<div id="outline-container-org73b3322" class="outline-4">
+<h4 id="org73b3322">Carga de algunas librerías de R</h4>
+<div class="outline-text-4" id="text-org73b3322">
 <div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">cargamos algunas librer&#237;as de R</span>
 <span style="color: #D0372D;">library</span>(tfarima)      <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">librer&#237;a de Jos&#233; Luis Gallego para Time Series</span>
@@ -481,7 +481,7 @@ display(list(arma11R), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE<
 </p>
 
 
-<div id="org0263d21" class="figure">
+<div id="orgfe20445" class="figure">
 <p><img src="./img/lecc07/ACF-arma11R.png" alt="ACF-arma11R.png" width="900px" />
 </p>
 </div>
@@ -493,7 +493,7 @@ ide(sim(arma11R, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;
 </div>
 
 
-<div id="org5c154ab" class="figure">
+<div id="org4894562" class="figure">
 <p><img src="./img/lecc06/Sim-arma11R.png" alt="Sim-arma11R.png" width="900px" />
 </p>
 </div>
@@ -514,7 +514,7 @@ display(list(arma11A), lag.max = 20, byrow = <span style="color: #6434A3;">TRUE<
 </p>
 
 
-<div id="org103c33e" class="figure">
+<div id="org0d14a69" class="figure">
 <p><img src="./img/lecc07/ACF-arma11A.png" alt="ACF-arma11A.png" width="900px" />
 </p>
 </div>
@@ -526,7 +526,7 @@ ide(sim(arma11A, n = 400), lag.max = 20, graphs = c(<span style="color: #008000;
 </div>
 
 
-<div id="orgb2bfb66" class="figure">
+<div id="orgeb6c4e8" class="figure">
 <p><img src="./img/lecc06/Sim-arma11A.png" alt="Sim-arma11A.png" width="900px" />
 </p>
 </div>
@@ -547,7 +547,7 @@ display(list(arma11NVA), lag.max = 20, byrow = <span style="color: #6434A3;">TRU
 </p>
 
 
-<div id="org526518f" class="figure">
+<div id="orged6a867" class="figure">
 <p><img src="./img/lecc07/ACF-arma11NVA.png" alt="ACF-arma11NVA.png" />
 </p>
 </div>
@@ -560,7 +560,7 @@ ide(sim(arma11NVA, n = 400), lag.max = 20, graphs = c(<span style="color: #00800
 </div>
 
 
-<div id="orga76b65d" class="figure">
+<div id="org0fd8447" class="figure">
 <p><img src="./img/lecc06/Sim-arma11NVA.png" alt="Sim-arma11NVA.png" width="900px" />
 </p>
 </div>
@@ -581,7 +581,7 @@ display(list(arma11RNV), lag.max = 20, byrow = <span style="color: #6434A3;">TRU
 </p>
 
 
-<div id="orgf18667c" class="figure">
+<div id="org5e91b39" class="figure">
 <p><img src="./img/lecc07/ACF-arma11RNV.png" alt="ACF-arma11RNV.png" width="900px" />
 </p>
 </div>
@@ -593,7 +593,7 @@ ide(sim(arma11RNV, n = 400), lag.max = 20, graphs = c(<span style="color: #00800
 </div>
 
 
-<div id="orgef0b702" class="figure">
+<div id="org59d592b" class="figure">
 <p><img src="./img/lecc06/Sim-arma11RNV.png" alt="Sim-arma11RNV.png" width="900px" />
 </p>
 </div>
@@ -601,8 +601,8 @@ ide(sim(arma11RNV, n = 400), lag.max = 20, graphs = c(<span style="color: #00800
 </div>
 </div>
 </div>
-<div id="outline-container-orgcc0fb02" class="outline-2">
-<h2 id="orgcc0fb02"><span class="section-number-2">2.</span> La especificación del modelo se escoge según las características de los datos.</h2>
+<div id="outline-container-org985f21f" class="outline-2">
+<h2 id="org985f21f"><span class="section-number-2">2.</span> La especificación del modelo se escoge según las características de los datos.</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 ¿Es la serie 
@@ -638,12 +638,12 @@ características.
 <h2 id="org53f0513"><span class="section-number-2">3.</span> Herramientas para desvelar propiedades de una serie temporal</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgd160f15" class="outline-3">
-<h3 id="orgd160f15"><span class="section-number-3">3.1.</span> Análisis gráfico</h3>
+<div id="outline-container-orgcd2a163" class="outline-3">
+<h3 id="orgcd2a163"><span class="section-number-3">3.1.</span> Análisis gráfico</h3>
 <div class="outline-text-3" id="text-3-1">
 </div>
-<div id="outline-container-orgcd7d67d" class="outline-4">
-<h4 id="orgcd7d67d"><span class="section-number-4">3.1.1.</span> Gráfico de la serie temporal</h4>
+<div id="outline-container-orgaec2b9f" class="outline-4">
+<h4 id="orgaec2b9f"><span class="section-number-4">3.1.1.</span> Gráfico de la serie temporal</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <p>
 Representa sus valores en el eje vertical (\(y\)) frente a una escala
@@ -674,8 +674,8 @@ comparabilidad entre series y gráficos distintos (si los hubiere).
 </p>
 </div>
 </div>
-<div id="outline-container-orgc6d17df" class="outline-4">
-<h4 id="orgc6d17df"><span class="section-number-4">3.1.2.</span> Gráfico rango-media</h4>
+<div id="outline-container-org9e9769e" class="outline-4">
+<h4 id="org9e9769e"><span class="section-number-4">3.1.2.</span> Gráfico rango-media</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <p>
 Cambios de variabilidad de una serie pueden evidenciarse en su gráfico
@@ -708,7 +708,7 @@ ide(Z, graphs = c(<span style="color: #008000;">"plot"</span>, <span style="colo
 </div>
 
 
-<div id="org71f5387" class="figure">
+<div id="orgcad0cbb" class="figure">
 <p><img src="./img/lecc07/rango-mediaAirPass.png" alt="rango-mediaAirPass.png" width="900px" />
 </p>
 </div>
@@ -720,12 +720,18 @@ dispersión sobre los niveles para medir la relación nivel-dispersión.
 </div>
 </div>
 </div>
-<div id="outline-container-org201a631" class="outline-3">
-<h3 id="org201a631"><span class="section-number-3">3.2.</span> Determinación del orden de integración</h3>
+<div id="outline-container-org5c04a67" class="outline-3">
+<h3 id="org5c04a67"><span class="section-number-3">3.2.</span> Determinación del orden de integración</h3>
 <div class="outline-text-3" id="text-3-2">
 <p>
-El <i>orden de integración</i> es el número mínimo de diferencias
-necesarias para lograr la estacionariedad en media.
+Un proceso estocástico sin componentes deterministas es \(I(0)\) si
+tiene una representación ARMA estacionaria e <span class="underline">invertible</span>
+</p>
+
+<p>
+El <i>orden de integración</i> de un proceso estocástico \(\boldsymbol{Y}\)
+es el número de diferencias necesarias para transformarlo en un
+proceso \(I(0)\).
 </p>
 
 <p>
@@ -741,8 +747,8 @@ Las herramientas utilizadas para tomar la decisión son
 <li>los contrastes formales</li>
 </ul>
 </div>
-<div id="outline-container-org3dcfc2b" class="outline-4">
-<h4 id="org3dcfc2b"><span class="section-number-4">3.2.1.</span> Análisis gráfico</h4>
+<div id="outline-container-orgaedef9b" class="outline-4">
+<h4 id="orgaedef9b"><span class="section-number-4">3.2.1.</span> Análisis gráfico</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <div class="org-src-container">
 <pre class="src src-jupyter-R"><span style="color: #D0372D;">options</span>(repr.plot.width = 12, repr.plot.height = 8, repr.plot.res = 200)
@@ -759,7 +765,7 @@ ide(PoblacionAustralia_ts,
 </div>
 
 
-<div id="org7cb82e9" class="figure">
+<div id="orge8b435f" class="figure">
 <p><img src="./img/lecc07/diferenciasPoblacion.png" alt="diferenciasPoblacion.png" width="900px" />
 </p>
 </div>
@@ -803,7 +809,7 @@ ide(Z,
 </div>
 
 
-<div id="orgd6362bc" class="figure">
+<div id="orga4c682e" class="figure">
 <p><img src="./img/lecc07/diferenciasPasajeros.png" alt="diferenciasPasajeros.png" width="900px" />
 </p>
 </div>
@@ -837,7 +843,7 @@ ide(TemperaturaRetiro_ts,
 </div>
 
 
-<div id="org33730fc" class="figure">
+<div id="orgea07581" class="figure">
 <p><img src="./img/lecc07/diferenciasTemperaturasRetiro.png" alt="diferenciasTemperaturasRetiro.png" width="900px" />
 </p>
 </div>
@@ -849,8 +855,8 @@ que es suficiente con tomar solo una diferencia estacional.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb6d73d7" class="outline-4">
-<h4 id="orgb6d73d7"><span class="section-number-4">3.2.2.</span> Contrastes formales sobre el orden de integración: DF, ADF y KPSS</h4>
+<div id="outline-container-org305da37" class="outline-4">
+<h4 id="org305da37"><span class="section-number-4">3.2.2.</span> Contrastes formales sobre el orden de integración: DF, ADF y KPSS</h4>
 <div class="outline-text-4" id="text-3-2-2">
 </div>
 <ol class="org-ol">
@@ -909,7 +915,7 @@ Otra variante consiste en incluir una tendencia temporal determinista:
 </p>
 </div>
 </li>
-<li><a id="orge523ec1"></a>Test Kwiatkowski–Phillips–Schmidt–Shin (KPSS)<br />
+<li><a id="orgb126111"></a>Test Kwiatkowski–Phillips–Schmidt–Shin (KPSS)<br />
 <div class="outline-text-5" id="text-3-2-2-3">
 <p>
 El contraste KPSS es un contraste alternativo (y complementario) al test DF/ADF
@@ -988,12 +994,12 @@ donde \(\widetilde{X}_t=X_t-\bar{X}\;\) y donde
 </p>
 </div>
 </div>
-<div id="outline-container-org690e710" class="outline-3">
-<h3 id="org690e710"><span class="section-number-3">3.5.</span> Otras herramientas estadísticas&#xa0;&#xa0;&#xa0;<span class="tag"><span class="C_moHacerConR">CómoHacerConR</span></span></h3>
+<div id="outline-container-org728d49c" class="outline-3">
+<h3 id="org728d49c"><span class="section-number-3">3.5.</span> Otras herramientas estadísticas&#xa0;&#xa0;&#xa0;<span class="tag"><span class="C_moHacerConR">CómoHacerConR</span></span></h3>
 <div class="outline-text-3" id="text-3-5">
 </div>
-<div id="outline-container-org8af0868" class="outline-4">
-<h4 id="org8af0868"><span class="section-number-4">3.5.1.</span> Estadísticos descriptivos</h4>
+<div id="outline-container-orgfa4f0fd" class="outline-4">
+<h4 id="orgfa4f0fd"><span class="section-number-4">3.5.1.</span> Estadísticos descriptivos</h4>
 <div class="outline-text-4" id="text-3-5-1">
 <ul class="org-ul">
 <li>el nivel de la serie (media, mediana),</li>
@@ -1020,7 +1026,7 @@ kable(stat.desc(Z, basic=<span style="color: #6434A3;">FALSE</span>, norm=<span 
 </pre>
 </div>
 
-<pre class="example" id="org2eafba0">
+<pre class="example" id="orgfb0ee6c">
 
 
 ============  =============
@@ -1105,7 +1111,7 @@ print(jb_test)
 </pre>
 </div>
 
-<pre class="example" id="org5b2e4a5">
+<pre class="example" id="org482f3e1">
 Registered S3 method overwritten by 'quantmod':
   method            from
   as.zoo.data.frame zoo 
@@ -1122,7 +1128,7 @@ X-squared = 8.9225, df = 2, p-value = 0.01155
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-09-28 sáb 17:59</p>
+<p class="date">Created: 2024-09-30 lun 13:12</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -475,8 +475,20 @@ dispersión sobre los niveles para medir la relación nivel-dispersión.
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
-El /orden de integración/ es el número mínimo de diferencias
-necesarias para lograr la estacionariedad en media.
+Un proceso estocástico sin componentes deterministas es $I(0)$ si
+tiene una representación ARMA estacionaria e _invertible_
+
+#+BEGIN_EXPORT latex
+\medskip
+
+Más formalmente, un proceso estocástico $\boldsymbol{Y}$ que satisface $Y_t-E(Y_t)=\sum_{j=0}^\infty \psi_j U_{t-j}$ se dice que es $I(0)$ si $\boldsymbol{\psi}$ es absolutamente sumable y $\sum_{j=0}^\infty \psi_j\ne0\;$ (la primera condición grarantiza que el proceso es estacionario, y la última condición excluye que el proceso no sea invertible, por ejemplo, excluye que $\boldsymbol{\psi}(z)$ sea $1-1z$).
+\medskip
+
+#+END_EXPORT
+
+El /orden de integración/ de un proceso estocástico $\boldsymbol{Y}$
+es el número de diferencias necesarias para transformarlo en un
+proceso $I(0)$.
 
 Decidir adecuadamente el orden de integración es crucial en el
 análisis de series temporales.

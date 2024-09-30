@@ -346,9 +346,9 @@ d_Melanoma           0.71   6.59     0.11   0.92
    :END:
 
 
-- Una serie temporal es /integrada de orden $d$/, (ó $I(d)$) si $d$ es
-  el mínimo número de diferencias ordinarias necesarias para lograr la
-  estacionariedad en media.
+- /Informalmente/, una serie temporal es /integrada de orden $d$/, (ó
+  $I(d)$) si $d$ es el mínimo número de diferencias ordinarias
+  necesarias para lograr la estacionariedad en media.
 
   + Consecuentemente, una serie estacionaria en media es $I(0)$.
 

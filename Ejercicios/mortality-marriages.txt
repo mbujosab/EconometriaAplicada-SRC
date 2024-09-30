@@ -247,6 +247,8 @@ mejoras sugeriría para ellos?
 
 ([[Respuesta 8]])
 
+#+latex: \newpage
+
 
 * Respuestas
 
@@ -324,7 +326,7 @@ relación es espuria_.
   la tasa de mortalidad.
 
 #  A partir de estos resultados cabría, por ejemplo, volver a estimar
-#  el modelo seleccionando la opción de _desviaciones típicas
+#  el modelo seleccionando la iopción de _desviaciones típicas
 #  _robustas_, para corregir los contrastes de significación dado que
 #  los errores no parecen gaussianos.
 
@@ -362,6 +364,11 @@ Por tanto, las expresiones correctas son:
 - Expresión 4 :: su representación MA($\infty$): $\;({X_t}-\mu)=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}(\mathsf{B}){U_t}\;\rightarrow\;{X_t}=\mu+\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}(\mathsf{B}){U_t}$
 - Expresión 8 :: su representación AR($\infty$): $\;\frac{\boldsymbol{\phi}}{\boldsymbol{\theta}}(\mathsf{B})({X_t}-\mu)={U_t}$
 
+¡Ojo, la cuarta expresión solo es posible porque $\phi_1$ no es
+exactamente 1! Si fuera 1, el polinomio autorregresivo $1-\mathsf{B}$
+no tendría una inversa sumable y, por tanto, ni el proceso sería
+estacionario, ni habría una representación del proceso como media
+móvil infinita como la Expresión 4.
 
 
 ([[Pregunta 6]])
