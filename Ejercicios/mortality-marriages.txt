@@ -258,27 +258,30 @@ La serie temporal =Std_mortality= NO es estacionaria en media, como se
 aprecia en las secciones:
 - [[Gráfico de la serie temporal y su correlograma]]. 
   - El gráfico de la serie muestra una tendencia decreciente.
-  - Si FAC muestra mucha persistencia, los coeficientes decrecen a un
+  - La FAC muestra mucha persistencia, los coeficientes decrecen a un
     ritmo aproximadamente lineal; y el primer coeficiente de la PACF
     está próximo a uno.
 - [[Estimación de un modelo univariante para la serie de mortalidad]]: El
   modelo univariante estimado tiene una raíz AR aproximadamente igual
   a $1$.
 - [[Contraste de cointegración]]: El test ADF calculado en la Etapa 1 no
-  rechaza la hipótesis (raíz unitaria) con un p-valor de 0.9902
+  rechaza la hipótesis (raíz unitaria) con un p-valor de =0.9902=
 
 ([[Pregunta 1]])
 
 ** Respuesta 2
 
 Las conclusiones de las distintas etapas del test de cointegración son los siguientes:
-- Etapa 1 :: El test ADF no rechaza que la serie de mortalidad sea I(1).
+- Etapa 1 :: El test ADF no rechaza que la serie de mortalidad sea
+  I(1). =(valor p asintótico 0,9902)=
 - Etapa 2 :: El test ADF no rechaza que la serie de proporción de
-  matrimonios eclesiásticos sea I(1).
+  matrimonios eclesiásticos sea I(1). =(valor p asintótico 0,9971)=
 - Etapa 3 :: La regresión (cointegrante) de mortalidad sobre la
-  proporción de matrimonios eclesiásticos es significativa.
+  proporción de matrimonios eclesiásticos es significativa (parámetros
+  significativos y elevado $R^2$ =(0,905434)=.
 - Etapa 4 :: El test ADF rechaza contundentemente que los residuos de
-  la regresión cointegrante sean I(1)
+  la regresión cointegrante sean I(1). =(valor p asintótico
+  5,236e-05)=
 
 Consecuentemente, el test indica que ambas series están cointegradas
 (/pero, como sugiere tanto el sentido común como la [[Regresión en

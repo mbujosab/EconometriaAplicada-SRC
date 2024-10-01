@@ -316,10 +316,12 @@ end outfile
 #+include: ./NombreOscarYConsumoDePetroleo/modeloMCO_en_diff.txt example
 
 ** Segundo modelo: Regresión en primeras diferencias con intervención en el año 2020
-Dado hubo una caída muy acusada en el consumo de petroleo del año 20
-debido al confinamiento por la Covid19, pero esto no afecto a la
-popularidad del nombre "Óscar". Introducimos una variable ficticia
-para ese año, pero en primeras diferencias como el resto de variables.
+Dado que hubo una caída muy acusada en el consumo de petroleo del año
+20 debido al confinamiento por la Covid19 (/circunstancia que no
+afectó de manera particular a la popularidad del nombre "Óscar"/), el
+siguiente modelo introduce una variable ficticia para el año 2020 (se
+introduce en primeras diferencias como el resto de variables del
+modelo).
 
 #+BEGIN_SRC R :tangle NombreOscarYConsumoDePetroleo.inp :results none :exports code 
 diff ConsumoPetroleo FrecuenciaOscar Covid
@@ -523,7 +525,7 @@ los resultados estadísticos sin un mínimo espíritu crítico!
 
   En cuanto a la heterocedasticidad, sería conveniente estimar
   indicando la opción de desviaciones típicas robustas, pues los
-  p-valores están más calculados en presencia de
+  p-valores están mal calculados en presencia de
   heterocedasticidad. Más importante es la presencia de
   autocorrelación; dado que hay indicios de autocorrelación de orden 1
   en los errores de ajuste, sería conveniente estimar el modelo
@@ -531,10 +533,10 @@ los resultados estadísticos sin un mínimo espíritu crítico!
 
 - Primer modelo para datos en primeras diferencias :: ([[Regresión en
   primeras diferencias]]): El único coeficiente significativo es la
-  pendiente (es decir, al diferenciar las series no se ha disipado la
-  relación estadística entre ellas). El ajuste del modelo, medido por
-  el valor del \(R^2\), es superior al 30%. Los contrastes residuales
-  rechazan la hipótesis nula de normalidad, pero no rechazan las de
+  pendiente (es decir, al diferenciar las series ha desaparecido la
+  relación entre ellas), y el ajuste del modelo, medido por el valor
+  del \(R^2\), es superior al 30%. Los contrastes residuales rechazan
+  la hipótesis nula de normalidad, pero no rechazan las de
   homoscedasticidad y ausencia de autocorrelación.
 
   Si las perturbaciones no tienen distribución normal las estimaciones
