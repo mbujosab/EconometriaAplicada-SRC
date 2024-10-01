@@ -528,7 +528,7 @@ converge para todo $t$, entonces
 % & = a_0 Y_t + a_1 \mathsf{B}^1 Y_t + a_2 \mathsf{B}^2 Y_t + a_3 \mathsf{B}^3 Y_t \\
 & = \cdots+a_{-2}Y_{t+2}+a_{-1}Y_{t+1}+a_0Y_t+a_1Y_{t-1}+a_2Y_{t-2}+\cdots \\
 % & =\sum\nolimits_{r=0}^3 a_r Y_{t-r} \\
-& =(\boldsymbol{a}*\boldsymbol{y})_t,\quad \text{para } t\in\mathbb{Z}
+& =(\boldsymbol{a}*\boldsymbol{Y})_t,\quad \text{para } t\in\mathbb{Z}
 \end{align*}
 
 
@@ -540,7 +540,7 @@ converge para todo $t$, entonces
 ** Proceso de ruido blanco
 
 Una secuencia $\boldsymbol{U}=(U_t\mid t\in\mathbb{Z})$ de variables
-aleatorias incorreladas y tales que $$E(U_t)=0\quad\text{ y }\quad
+aleatorias *incorreladas* y tales que $$E(U_t)=0\quad\text{ y }\quad
 Var(U_t)=E(U_t^2)=\sigma^2$$ para $\;t\in\mathbb{Z}\;$ y
 $\;0<\sigma^2<\infty\;$ se llama /proceso de ruido blanco/.
 $\quad\boldsymbol{U}\sim WN(0,\sigma^2)$.
@@ -575,6 +575,9 @@ $\boldsymbol{X}=\boldsymbol{b}*\boldsymbol{U}$ cuyos elementos son $$X_t
 \;=\;(\boldsymbol{b}*\boldsymbol{U})_t
 \;=\;\boldsymbol{b}(B)U_t \;=\;\sum_{j=-\infty}^\infty {b}_j
 U_{t-j};\qquad t\in\mathbb{Z}.$$
+#+BEGIN_EXPORT html
+Este proceso es estacionario (véase la demo en los apuntes en pdf)
+#+END_EXPORT
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
 $\boldsymbol{b}(B)$ se denomina /función de transferencia/ del
@@ -599,18 +602,16 @@ que solo depende de $k$ (en la tercera línea, $\delta_{p,q}$ es la delta de Kro
 #+END_EXPORT
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-El proceso lineal es /``causal''/ si además $\boldsymbol{b}$ es
-una _serie formal_ (i.e.,
-$cogrado(\boldsymbol{b})\geq{\color{blue}{0}}$)
-$$X_t=\sum_{j=0}^\infty {b}_j U_{t-j};\qquad
-t\in\mathbb{Z}$$ $\;$ (pues cada $X_t$ es una suma de variables "/del
-presente y/o el pasado/").
+El proceso lineal es /``causal''/ si además $\boldsymbol{b}$ es una
+_serie formal_ (i.e., $cogrado(\boldsymbol{b})\geq{\color{blue}{0}}$)
+$$X_t=\sum_{j=0}^\infty {b}_j U_{t-j};\qquad t\in\mathbb{Z}$$ 
+(pues cada $X_t$ es una suma de variables "/del presente y/o el pasado/").
 #+latex:\medskip
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-La clase de procesos lineales incluye muchas e importantes subclases
-de procesos, algunas de las cuales son objeto principal de estudio de
-este curso.
+La clase de *procesos lineales causales* incluye muchas e importantes
+subclases de procesos, algunas de las cuales son objeto principal de
+estudio de este curso.
 
 *** Media móvil infinita. MA($\infty$)
    :PROPERTIES:
@@ -628,7 +629,7 @@ infinita/ MA($\infty$).
 #+latex:\bigskip
 
 #+attr_ipynb: (slideshow . ((slide_type . slide)))
-Algunas clases de procesos lineales tienen una representación
+Algunas clases de procesos lineales causales tienen una representación
 parsimoniosa, pues basta un número finito de parámetros para
 representarlos completamente. Por ejemplo, cuando
 $\boldsymbol{\psi}$ tiene un número finito de términos no nulos...
@@ -661,10 +662,12 @@ Hay otros procesos lineales con representación parsimoniosa.
    :END:
 
 Sea $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, se denomina /proceso
-autorregresivo de orden $p$/ a aquel proceso estocástico estacionario
-$\;\boldsymbol{X}\;$ que es la solución de la siguiente ecuación en
-diferencias $$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$$ donde
-$\;\boldsymbol{\phi}\;$ un _polinomio de grado $p$_ con ${\color{#008000}{\phi_{0}=1}}$;
+autorregresivo de orden $p$/ a aquel proceso estocástico
+/estacionario/ $\;\boldsymbol{X}\;$ que es la solución de la siguiente
+ecuación en diferencias
+$$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{U}$$ donde
+$\;\boldsymbol{\phi}\;$ un _polinomio de grado $p$_ con
+${\color{#008000}{\phi_{0}=1}}$;
 #+latex:\medskip
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
@@ -675,7 +678,7 @@ Por tanto, $$(\boldsymbol{\phi}*\boldsymbol{X})_t=
 
 Si $\;\boldsymbol{\phi}=(1-\phi_1z-\cdots-\phi_pz^p)\;$ entonces
 $\boldsymbol{X}=(X_t\mid t\in\mathbb{Z})$ es solución de la ecuación:
-$$X_t + \phi_1 X_{t-1} + \cdots + \phi_q X_{t-q} = U_t.$$
+$$X_t - \phi_1 X_{t-1} - \cdots -\phi_q X_{t-q} = U_t.$$
 #+latex:\medskip
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
@@ -709,7 +712,7 @@ U_{t-j}\;$ carece de sentido (pues no converge).
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 *Requisitos* sobre el polinomio autorregresivo $\boldsymbol{\phi}.\;$ Para que el proceso AR exista y sea:
 
-1) _estacionario_, exigiremos que $\boldsymbol{\phi}$
+1) _lineal y estacionario_, exigiremos que $\boldsymbol{\phi}$
    _no tenga raíces de módulo 1_.
 
    Entonces existe una única inversa absolutamente sumable: $\boldsymbol{\phi}^{-1} \in
@@ -723,12 +726,15 @@ U_{t-j}\;$ carece de sentido (pues no converge).
 
    $$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=-\infty}^\infty a_j U_{t-j}$$
 
-2) _lineal causal_ exigiremos que las raíces de $\boldsymbol{\phi}$
-   sean mayores que 1 en valor absoluto (_raíces fuera del círculo
+2) _causal_ exigiremos que las raíces de $\boldsymbol{\phi}$ sean
+   mayores que 1 en valor absoluto (_raíces fuera del círculo
    unidad_):
-   $\boldsymbol{\phi}^{-1}=\boldsymbol{\phi}^{-\triangleright}$.
+   $\boldsymbol{\phi}^{-1}=\boldsymbol{\phi}^{-\triangleright}\;$
+   (*serie formal* $\in\ell^1\subset\ell^2$).
 
    $$X_t=\boldsymbol{\phi}^{-1}(\mathsf{B})U_t=\sum_{j=0}^\infty a_j U_{t-j}$$
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+   (¡de nuevo un proceso lineal causal!)
 #+latex:\bigskip
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
@@ -759,11 +765,13 @@ $$\text{es decir,}\qquad
 \frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}\equiv\boldsymbol{\phi}^{-1}*\boldsymbol{\theta}$$
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Tanto $\boldsymbol{\phi}^{-1}$ como $\boldsymbol{\theta}$ son
-absolutamente sumables y como $\ell^1$ es un anillo,
+Tanto $\boldsymbol{\phi}^{-1}$ como $\boldsymbol{\theta}$ son series
+formales absolutamente sumables y como $\ell^1$ y las series formales
+son anillos,
 $\boldsymbol{\phi}^{-1}*\boldsymbol{\theta}\equiv\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}\in\ell^1$
-(también es absolutamente sumable y por tanto de cuadrado sumable),
-consecuentemente el proceso estocástico es un proceso lineal.
+también es una serie formal absolutamente sumable (y por tanto de
+cuadrado sumable). Consecuentemente el proceso estocástico es un
+proceso lineal causal.
 $$X_t=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}(\mathsf{B})U_t=\sum_{j=0}^\infty
 a_j U_{t-j}$$ donde
 $\boldsymbol{a}=\boldsymbol{\phi}^{-1}*\boldsymbol{\theta}$.

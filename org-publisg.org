@@ -76,6 +76,17 @@ $(OUT_DIR)/%.pdf: %.pdf
 #+END_SRC
 
 
+#+BEGIN_SRC sh  :results silent :dir ./Ejercicios
+#pdflatex --shell-escape  -interaction=batchmode mortality-marriages.tex
+#pdflatex --shell-escape  -interaction=batchmode mortality-marriages.tex
+#latexmk -c mortality-marriages.tex
+
+#pdflatex --shell-escape  -interaction=batchmode NombreOscarYConsumoDePetroleo.tex
+#pdflatex --shell-escape  -interaction=batchmode NombreOscarYConsumoDePetroleo.tex
+#latexmk -c NombreOscarYConsumoDePetroleo.tex
+#+END_SRC
+
+
 #+BEGIN_SRC emacs-lisp :results silent
 (require 'ox-ipynb)
 ;(ox-ipynb-export-org-file-to-ipynb-file "Lecc01.org")
