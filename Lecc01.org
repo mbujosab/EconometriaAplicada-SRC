@@ -442,6 +442,9 @@ plt.tight_layout()
 #plt.savefig("./img/lecc01/airlinepass_log+hist.png")
 #+END_SRC
 
+#+RESULTS: figura-airlinepass-log
+[[./img/lecc01/airlinepass_log+hist.png]]
+
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 #+attr_org: :width 800
 #+attr_html: :width 900px
@@ -529,15 +532,17 @@ UnoPorCiento = lambda n0, t: n0 if t<=1 else 1.01 * UnoPorCiento(n0, t-1)
 TasaLogCrecimiento = pd.DataFrame({'$y_t$':[UnoPorCiento(START,t+1) for t in range(10)]})
 TasaLogCrecimiento['$\\frac{y_t-y_{t-1}}{y_{t-1}}$'] = TasaLogCrecimiento['$y_t$'].pct_change()
 TasaLogCrecimiento['$\\ln y_t$'] = np.log(TasaLogCrecimiento['$y_t$'])
-TasaLogCrecimiento['$\\nabla\\ln\\boldsymbol{y}$'] = TasaLogCrecimiento['$\\ln y_t$'] - TasaLogCrecimiento['$\\ln y_t$'].shift(+1)
+TasaLogCrecimiento['$\\;(\\ln y_t- \\ln y_{t-1})$'] = TasaLogCrecimiento['$\\ln y_t$'] - TasaLogCrecimiento['$\\ln y_t$'].shift(+1)
 TasaLogCrecimiento['$\\frac{y_t-y_{0}}{y_{0}}$'] = TasaLogCrecimiento['$y_t$'].apply(lambda x: ((x/START)-1))
-TasaLogCrecimiento['$\\ln y_t- \\ln y_{0}$'] = TasaLogCrecimiento['$\\ln y_t$'] - TasaLogCrecimiento['$\\ln y_t$'].iloc[0]
+TasaLogCrecimiento['$\\;(\\ln y_t- \\ln y_{0})$'] = TasaLogCrecimiento['$\\ln y_t$'] - TasaLogCrecimiento['$\\ln y_t$'].iloc[0]
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results file :file ./img/lecc01/TasaLogCrecimiento.png :results silent
 dfi.export(TasaLogCrecimiento, "./img/lecc01/TasaLogCrecimiento.png", use_mathjax=True, dpi=200, table_conversion="matplotlib")
 #+END_SRC
+
+#+RESULTS:
 
 La tasa logarítmica de variación de $\boldsymbol{y}$ se define como
 $z_t=\ln{y_t}-\ln{y_{t-1}};$ es decir
@@ -566,14 +571,14 @@ incremento es pequeño.
 </style>
 #+end_export
 #+ATTR_LATEX: :align |p{3.8cm}|p{11.9cm}|
-| Transformación  de la serie temporal @@latex:\newline@@ $\displaystyle \boldsymbol{y}=\{y_t\},\; t=1:n$ | Comentario                                                                                                                                                                |
-|---------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| $\boldsymbol{z}=\ln\boldsymbol{y}=\{\ln y_t\}$                                                          | A veces independiza la volatilidad del nivel e induce normalidad.                                                                                                         |
-| $\boldsymbol{z}=\nabla\boldsymbol{y}=\{y_t-y_{t-1}\}$                                                   | Indica al crecimiento absoluto entre periodos consecutivos.                                                                                                              |
-| $\boldsymbol{z}=\nabla\ln\boldsymbol{y}$                                                                | Tasa logarítmica de crecimiento. Aproximación del crecimiento relativo entre periodos consecutivos.                                                                       |
-| $\boldsymbol{z}=\nabla\nabla\ln\boldsymbol{y}=\nabla^2\ln\boldsymbol{y}$                                | Cambio en la tasa log, de crecimiento. Indica la “aceleración” en el crecimiento relativo.                                                                                |
-| $\boldsymbol{z}=\nabla_{s}\ln\boldsymbol{y}=$ @@latex:\newline\;@@ $\{\ln{y_t}-\ln{y_{t-s}}\}$          | Tasa de crecimiento acumulada en un ciclo estacional completo ($s$ períodos). Cuando el período estacional es de un año, se conoce como “tasa anual” o “tasa interanual”. |
-| $\boldsymbol{z}=\nabla\nabla_{s}\ln\boldsymbol{y}$                                                      | Cambio en la tasa de crecimiento acumulada en un ciclo estacional completo. Es un indicador de aceleración en el crecimiento acumulado.                                   |
+| Transformación  de la serie temporal @@latex:\newline@@ $\displaystyle \boldsymbol{y}=\{y_t\},\; t=1:n$                                  | Comentario                                                                                                                                                                               |
+|------------------------------------------------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| $\boldsymbol{z}=\ln\boldsymbol{y}=\{\ln y_t\}$                                                                                           | A veces independiza la volatilidad del nivel e induce normalidad.                                                                                                                        |
+| $\boldsymbol{z}=\nabla\boldsymbol{y}=\{y_t-y_{t-1}\}$                                                                                    | Indica al crecimiento absoluto entre periodos consecutivos.                                                                                                                              |
+| \(\boldsymbol{z}=\nabla\ln\boldsymbol{y}\) @@latex:\newline \mbox{\;\;}@@ $=$ @@latex:\mbox{@@\(\{\ln{y_t}-\ln{y_{t-1}}\}\) @@latex: }@@ | Tasa logarítmica de crecimiento. Aproximación del crecimiento relativo entre periodos consecutivos.                                                                                      |
+| $\boldsymbol{z}=\nabla\nabla\ln\boldsymbol{y}=\nabla^2\ln\boldsymbol{y}$                                                                 | Cambio en la tasa log, de crecimiento. Indica la “aceleración” en el crecimiento relativo.                                                                                               |
+| \(\boldsymbol{z}=\nabla_{s}\ln\boldsymbol{y}\) @@latex:\newline \mbox{\;\;}@@ $=$ @@latex:\mbox{@@\(\{\ln{y_t}-\ln{y_{t-s}}\}\) @@latex: }@@                                                                                          | Tasa de crecimiento acumulada en un ciclo estacional completo ($s$ períodos). Cuando el período estacional es de un año, se conoce como “tasa anual” o “tasa interanual” de crecimiento. |
+| $\boldsymbol{z}=\nabla\nabla_{s}\ln\boldsymbol{y}$                                                                                       | Cambio en la tasa de crecimiento acumulada en un ciclo estacional completo. Es un indicador de aceleración en el crecimiento acumulado.                                                  |
 # :float sideways 
 
 

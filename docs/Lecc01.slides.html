@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="orge3e831c">
+<div class="ABSTRACT" id="orgfc7b554">
 <p>
 En esta lección veremos algunos transformaciones de los datos para
 <i>"hacerlos estacionarios"</i>. Daremos interpretación a los datos transformados.
@@ -14412,16 +14412,16 @@ necesaria.</p>
 <p>Un proceso estocástico $\boldsymbol{X}$ se dice <strong>estacionario</strong> (<em>en
 sentido débil</em>) si para todo $t,k\in\mathbb{Z}$</p>
 \begin{equation}
-\label{orge6179f7}
+\label{org8b3336a}
 E(X_t)  = \mu
 \end{equation}\begin{equation}
-\label{org2508db7}
+\label{orgcc5eeba}
 Cov(X_t,X_{t-k}) = \gamma_k 
 \end{equation}<ul>
-<li><p>(<a href="#orge6179f7">1</a>) sugiere que las realizaciones de
+<li><p>(<a href="#org8b3336a">1</a>) sugiere que las realizaciones de
 $\boldsymbol{X}$ generalmente oscilan entorno a $\mu$.</p>
 </li>
-<li><p>(<a href="#org2508db7">2</a>) sugiere que la variabilidad de las
+<li><p>(<a href="#orgcc5eeba">2</a>) sugiere que la variabilidad de las
 realizaciones de $\boldsymbol{X}$ entorno a $\mu$ es constante, pues
 para el caso particular $k=0$</p>
 <p>$$Cov(X_t,X_{t-0})=Var(X_t) = \gamma_0\quad\text{ para todo } t$$</p>
@@ -14780,10 +14780,10 @@ incremento es pequeño.</p>
 </tr>
 <tr>
 <td>$\boldsymbol{z}=\nabla\boldsymbol{y}=\{y_t-y_{t-1}\}$</td>
-<td>Indica al crecimiento absoluto entre  periodos consecutivos.</td>
+<td>Indica al crecimiento absoluto entre periodos consecutivos.</td>
 </tr>
 <tr>
-<td>$\boldsymbol{z}=\nabla\ln\boldsymbol{y}$</td>
+<td>$\boldsymbol{z}=\nabla\ln\boldsymbol{y}$ $=$ $\{\ln{y_t}-\ln{y_{t-1}}\}$</td>
 <td>Tasa logarítmica de crecimiento. Aproximación del crecimiento relativo entre periodos consecutivos.</td>
 </tr>
 <tr>
@@ -14791,8 +14791,8 @@ incremento es pequeño.</p>
 <td>Cambio en la tasa log, de crecimiento. Indica la “aceleración” en el crecimiento relativo.</td>
 </tr>
 <tr>
-<td>$\boldsymbol{z}=\nabla_{s}\ln\boldsymbol{y}=$ $\{\ln{y_t}-\ln{y_{t-s}}\}$</td>
-<td>Tasa de crecimiento acumulada en un ciclo estacional completo ($s$ períodos). Cuando el período estacional es de un año, se conoce como “tasa anual” o “tasa interanual”.</td>
+<td>$\boldsymbol{z}=\nabla_{s}\ln\boldsymbol{y}$ $=$ $\{\ln{y_t}-\ln{y_{t-s}}\}$</td>
+<td>Tasa de crecimiento acumulada en un ciclo estacional completo ($s$ períodos). Cuando el período estacional es de un año, se conoce como “tasa anual” o “tasa interanual” de crecimiento.</td>
 </tr>
 <tr>
 <td>$\boldsymbol{z}=\nabla\nabla_{s}\ln\boldsymbol{y}$</td>

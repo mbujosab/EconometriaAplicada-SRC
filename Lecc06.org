@@ -113,22 +113,23 @@ options(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
-Ya hemos visto que si un proceso estocásticos es estacionario, la
-covarianza entre $X_t$ y $X_{t+k}$ no depende de $t$; tan solo depende
-de la distancia temporal $k$ entre ambas variables y que
+Sabemos que si un proceso estocástico es estacionario, la covarianza
+entre $X_t$ y $X_{t+k}$ no depende de $t$; tan solo depende de la
+distancia temporal $k$ entre ambas variables aleatorias:
+$\;Cov(X_t,X_{t-k})=\gamma_k.\;$ También sabemos que
 
 - La secuencia $\boldsymbol{\gamma}=(\gamma_k\mid k\in\mathbb{Z})$ se denomina /función de
   autocovarianzas/
-
-- La secuencia $\boldsymbol{\rho}=(\rho_k\mid k\in\mathbb{Z})$ donde    
-  $$\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0} $$
+- Dividiendo $\boldsymbol{\gamma}$ por $\gamma_0$ obtenemos la
+  secuencia $\boldsymbol{\rho}=(\rho_k\mid k\in\mathbb{Z})$ donde
+  $$\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0},$$
   #+LATEX: \newline  \noindent
-  se denomina /función de autocorrelación/ (ACF).
+  que se denomina /función de autocorrelación/ (ACF).
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-Veamos una nueva transformación de $\boldsymbol{\gamma}$ que subraya
-otras características de interdependencia temporal en un proceso
-estocástico.
+Veamos otras transformaciones de $\boldsymbol{\gamma}$ que subrayan
+diferentes características de la interdependencia temporal en un
+proceso estocástico.
 
 #+LATEX: \newline  \noindent
 
@@ -172,16 +173,20 @@ dependen de la distancia $k$, lo que permite definir la siguiente
 secuencia.
 #+LATEX: \medskip
 
-*Función de autocorrelación parcial* (PACF) de un proceso estacionario
-$\boldsymbol{X}$ es la siguiente secuencia
-$\boldsymbol{\pi}=(\pi_k\mid k\in\mathbb{Z}),\;$ que es simétrica pues
-$\pi_{-k}=\pi_k$: $$\begin{cases} \pi_0 & = \rho_0 ={\color{blue}{1}}\\\\ \pi_1 &=Corr(X_t,\
-X_{t-1})=\rho_1=\frac{\gamma_1}{\gamma_0}\\\\ \pi_k
-&=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widetilde{X_{t-k}})\Big)
-\end{cases},$$ donde $\widehat{X_t}$ y $\widetilde{X_{t-k}}$ son los
-ajustes de las respectivas regresiones de $X_t$ y $X_{t-k}$ sobre
-$X_{t-1},\ldots X_{t-(k-1)}.\;$ i.e., las proyecciones ortogonales
-sobre $\bar{sp}(1,X_{t-1}:X_{t-(k-1)})$.
+*La función de autocorrelación parcial* (PACF) de un proceso
+estocástico estacionario $\boldsymbol{X}$ es la siguiente secuencia
+$\boldsymbol{\pi}$ simétrica ($\pi_{-k}=\pi_k$):
+
+$$\boldsymbol{\pi}=(\pi_k\mid k\in\mathbb{Z})=
+\begin{cases} 
+  \pi_0 & = \rho_0 ={\color{blue}{1}}\\\\ 
+  \pi_1 &=Corr(X_t,\ X_{t-1})=\rho_1=\frac{\gamma_1}{\gamma_0}\\\\ 
+  \pi_k &=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widetilde{X_{t-k}})\Big)
+\end{cases},$$ 
+donde $\widehat{X_t}$ y $\widetilde{X_{t-k}}$ son los ajustes de las
+respectivas regresiones de $X_t$ y $X_{t-k}$ sobre $X_{t-1},\ldots
+X_{t-(k-1)};\;$ i.e., las proyecciones ortogonales sobre
+$\bar{sp}(1,X_{t-1},\ldots X_{t-(k-1)})$.
 #+LATEX: \medskip
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
@@ -200,8 +205,8 @@ Hay una correspondencia uno-a-uno entre la función de autocovarianzas
 $\boldsymbol{\gamma}$ y la PACF $\boldsymbol{\pi}$. 
 
 Es decir, es posible reconstruir una de las secuencias a partir de la
-otra (por ejemplo resolviendo la ecuaciones de Yule-Walker
-recursivamente con el algoritmo Levinson-Durbin; véase
+otra (por ejemplo resolviendo las [[file:./Lecc05.html#org392fab2][ecuaciones de Yule-Walker]]
+recursivamente con el algoritmo [[https://en.wikipedia.org/wiki/Levinson_recursion][Levinson-Durbin]]; véase
 /Pourahmadi, M. (2001, Capítulo 7)/ o /Brockwell & Davis (1991,
 Capitulo 5)/)
 
@@ -230,7 +235,7 @@ de autocovarianzas absolutamente sumable,
 $$\sum_{h\in\mathbb{Z}}|\gamma_h|<\infty,$$ entonces definimos la
 /densidad espectral/ de $\boldsymbol{X}$ como $$f(\omega)
 \quad=\quad\frac{1}{2\pi}\sum_{h\in\mathbb{Z}}\gamma_h e^{-i h\omega}
-\quad=\quad\frac{1}{2\pi}\sum_{h\geq0}\gamma_h \cos(h\omega),\qquad
+\quad=\quad{\color{blue}{\frac{1}{2\pi}\sum_{h\geq0}\gamma_h \cos(h\omega)}},\qquad
 \omega\in[-\pi,\pi].$$
 #+LATEX: \medskip
 
@@ -251,7 +256,12 @@ Consecuentemente, para $h=0$
 $$\sigma^2=\gamma_0=\int_{-\pi}^\pi f(\omega)d\omega.$$
 
 Por tanto podemos interpretar la densidad espectral como una
-descomposición de la varianza oscilaciones de distintas frecuencias.
+descomposición de la varianza oscilaciones de distintas frecuencias (o periodos).
+#+LATEX: \medskip
+
+#+attr_ipynb: (slideshow . ((slide_type . fragment)))
+#+LATEX: \noindent
+($Periodo=\frac{1}{Frecuencia}$, donde la Frecuencia = Nº de ciclos por unidad de tiempo).
 
 #+attr_ipynb: (slideshow . ((slide_type . slide)))
 La ACF, la PACF y la /densidad espectral/ son funciones que dependen
@@ -275,12 +285,11 @@ modelos lineales concretos.
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
-Sea el proceso 
-$\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}$, donde
-$\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y
+Sea el proceso $\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}$,
+donde $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y
 $\;\boldsymbol{\psi}\in\ell^2\;$ es una serie formal:
-$$X_t=\sum_{j\geq0}\psi_j U_{t-j}.$$ Por la lección anterior
-sabemos que $\;E(X_t)=0\;$ y que
+$$X_t=\sum_{j\geq0}\psi_j U_{t-j}.$$ Por la [[file:./Lecc05.html#org8d85be3][lección anterior]] sabemos
+que $\;E(X_t)=0\;$ y que
 - $\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})$
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
   Es decir, 
@@ -400,7 +409,7 @@ donde $\boldsymbol{\psi}=\boldsymbol{\theta}^{-\triangleright}=\boldsymbol{\thet
 #+END_EXPORT
 Entonces $E(X_t)=0$ y
 
-$\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\theta}(z^{-1}) \;=\; \sigma^2 \sum\limits_{j,k=0}^q \theta_{j+k}\theta_{j} z^{j}\;$ (grado $q$ y cogrado $-q$)
+$\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\theta}(z^{-1}) \;=\; \sigma^2 \sum\limits_{j=0}^q \theta_{j+k}\theta_{j} z^{k}\;$ (grado $q$ y cogrado $-q$) ([[file:./Lecc05.html#org8d85be3][lección anterior]])
 
 $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$
 
@@ -419,11 +428,13 @@ con $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es decir $$X_t=U_t-\theta
 U_{t-1}.$$
 
 - $\boldsymbol{\gamma} \;=\; \sigma^2 (1-\theta z)*(1-\theta z^{-1})
-  \;=\; \sigma^2 (\ldots,\ 0\ ,\ -\theta,\ {\color{blue}{(1+\theta^2)}},\ -\theta,\
-  0,\ \ldots)$
+  \;=\; \sigma^2 (\ldots,\ 0\ ,\ -\theta,\
+  {\color{blue}{(1+\theta^2)}},\ -\theta,\ 0,\ \ldots)$
 
 - $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\;
-  \frac{1}{\sigma^2(1+\theta^2)}\boldsymbol{\gamma}$
+  \frac{1}{\sigma^2(1+\theta^2)}\boldsymbol{\gamma}\;=\; (\ldots,\ 0\
+  ,\ \frac{-\theta}{1+\theta^2},\ {\color{blue}{1}},\
+  \frac{-\theta}{1+\theta^2},\ 0,\ \ldots)$
 
 - $f(\omega) \;=\;
   \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})\cdot\boldsymbol{\theta}(e^{i\omega})
@@ -1001,7 +1012,7 @@ donde $\;\boldsymbol{\phi}^{-1}=\boldsymbol{\psi}=({\color{blue}1},\
 #+latex: \noindent
 Por tanto $E(X_t)=0$ para todo $t\in\mathbb{Z}$ y
 
-$\boldsymbol{\gamma} \;=\; \sigma^2 \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^{-1})} \;=\; \sigma^2 \sum\limits_{j,k=0}^\infty \psi_{j+k}\psi_j z^{j}\quad$ (grado $\infty$ y cogrado $-\infty$)
+$\boldsymbol{\gamma} \;=\; \sigma^2 \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^{-1})} \;=\; \sigma^2 \sum\limits_{j,k=0}^\infty \psi_{j+k}\psi_j z^{j}\quad$ (grado $\infty$)$\quad$ ([[file:Lecc05.html#org392fab2][Ec. de Yule-Walker]])
 
 $\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$
 
@@ -1015,7 +1026,7 @@ $f(\omega) =
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 Pero la PACF, $\;\boldsymbol{\pi},\;$ es una secuencia
-con grado $p$ y cogrado $-p$ (demo en los apuntes).
+con grado $p$ y cogrado $-p$ ([[file:./Lecc06.pdf#subsubsection.4.6.1][demo en los apuntes]]).
 #+latex: \medskip
 
 *** Demostración de que la PACF tiene cogrado $-p$ y grado $p$
@@ -1349,10 +1360,10 @@ roots(ar2phnn)
 #+RESULTS: raices-ar2phnn
 :RESULTS:
 1. 
-   | Real | Imaginary  | Modulus  | Frequency | Period   | Mult. |
+   | Real |  Imaginary |  Modulus | Frequency |   Period | Mult. |
    |------+------------+----------+-----------+----------+-------|
-   | -0.5 | 0.9279607  | 1.054093 | 0.3286569 | 3.042687 | 1     |
-   | -0.5 | -0.9279607 | 1.054093 | 0.3286569 | 3.042687 | 1     |
+   | -0.5 |  0.9279607 | 1.054093 | 0.3286569 | 3.042687 |     1 |
+   | -0.5 | -0.9279607 | 1.054093 | 0.3286569 | 3.042687 |     1 |
    #+caption: A matrix: 2 × 6 of type dbl
 :END:
 
@@ -1399,10 +1410,10 @@ roots(ar2phpn)
 #+RESULTS: raices-ar2phpn
 :RESULTS:
 1. 
-   | Real      | Imaginary | Modulus  | Frequency | Period   | Mult. |
+   |      Real | Imaginary |  Modulus | Frequency |   Period | Mult. |
    |-----------+-----------+----------+-----------+----------+-------|
-   | 0.6111111 | 0.858868  | 1.054093 | 0.1515749 | 6.597397 | 1     |
-   | 0.6111111 | -0.858868 | 1.054093 | 0.1515749 | 6.597397 | 1     |
+   | 0.6111111 |  0.858868 | 1.054093 | 0.1515749 | 6.597397 |     1 |
+   | 0.6111111 | -0.858868 | 1.054093 | 0.1515749 | 6.597397 |     1 |
    #+caption: A matrix: 2 × 6 of type dbl
 :END:
 
@@ -1449,10 +1460,10 @@ roots(ar2phnp)
 #+RESULTS: raices-ar2phnp
 :RESULTS:
 1. 
-   | Real      | Imaginary     | Modulus  | Frequency | Period | Mult. |
+   |      Real |     Imaginary |  Modulus | Frequency | Period | Mult. |
    |-----------+---------------+----------+-----------+--------+-------|
-   | 3.081666  | 3.831501e-21  | 3.081666 | 0.0       | Inf    | 1     |
-   | -1.081666 | -3.831501e-21 | 1.081666 | 0.5       | 2      | 1     |
+   |  3.081666 |  3.831501e-21 | 3.081666 |       0.0 |    Inf |     1 |
+   | -1.081666 | -3.831501e-21 | 1.081666 |       0.5 |      2 |     1 |
    #+caption: A matrix: 2 × 6 of type dbl
 :END:
 
@@ -1502,10 +1513,10 @@ roots(ar2pn)
 #+RESULTS: raices-ar2pn
 :RESULTS:
 1. 
-   | Real     | Imaginary     | Modulus | Frequency | Period | Mult. |
+   |     Real |     Imaginary | Modulus | Frequency | Period | Mult. |
    |----------+---------------+---------+-----------+--------+-------|
-   | 1.18228  | 7.754818e-26  | 1.18228 | 0.0       | Inf    | 1     |
-   | -1.05728 | -7.754818e-26 | 1.05728 | 0.5       | 2      | 1     |
+   |  1.18228 |  7.754818e-26 | 1.18228 |       0.0 |    Inf |     1 |
+   | -1.05728 | -7.754818e-26 | 1.05728 |       0.5 |      2 |     1 |
    #+caption: A matrix: 2 × 6 of type dbl
 :END:
 
@@ -1783,6 +1794,14 @@ Desgraciadamente para los modelos ARMA (qué veremos más adelante)
 tanto la ACF como la PACF tienen infinitos términos no nulos, por lo
 que su identificación no es tan sencilla.
 
+#+ATTR_HTML: :border 2 :rules all :frame border
+#+ATTR_LATEX: :environment longtable :align p{3.4cm}p{5.4cm}p{5.4cm}
+|                    | *ACF finita*                                             | *ACF persistente*                |
+|--------------------+----------------------------------------------------------+----------------------------------|
+| *PACF finita*      | _Ruido blanco_: retardos conjuntamente NO significativos | _AR_: orden indicado por la PACF |
+| *PACF persistente* | _MA_: orden indicado por la ACF                          | _ARMA_                           |
+
+
 
 
 *** COMMENT Ecuaciones de Yule-Walker (que relacionan las autocovarianzas con los parámetros de $\boldsymbol{\phi}$)
@@ -1876,6 +1895,6 @@ ide(sim(ma2pn, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"
 #+attr_org: :width 1200 :height 200
 [[./.ob-jupyter/b62706322fa4715350cff2cff020e72e83f45582.png]]
 #+attr_org: :width 1200 :height 500
-[[./.ob-jupyter/d0631344b132a62173cc5cf447c5e81ecd1747bc.png]]
+[[./.ob-jupyter/ea263ba99dd4633508a0dbc9e846f8c7ca87e4c3.png]]
 :END:
 

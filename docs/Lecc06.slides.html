@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="orgc75dd57">
+<div class="abstract" id="orgb621677">
 <p>
 En esta lección veremos tres funciones que describen las
 características correspondientes a los momentos de segundo orden de
@@ -14258,16 +14258,17 @@ del notebook</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Ya hemos visto que si un proceso estocásticos es estacionario, la
-covarianza entre $X_t$ y $X_{t+k}$ no depende de $t$; tan solo depende
-de la distancia temporal $k$ entre ambas variables y que</p>
+<p>Sabemos que si un proceso estocástico es estacionario, la covarianza
+entre $X_t$ y $X_{t+k}$ no depende de $t$; tan solo depende de la
+distancia temporal $k$ entre ambas variables aleatorias:
+$\;Cov(X_t,X_{t-k})=\gamma_k.\;$ También sabemos que</p>
 <ul>
-<li><p>La secuencia $\boldsymbol{\gamma}=(\gamma_k\mid k\in\mathbb{Z})$ se denomina <em>función de
-autocovarianzas</em></p>
-</li>
-<li><p>La secuencia $\boldsymbol{\rho}=(\rho_k\mid k\in\mathbb{Z})$ donde<br>
-$$\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0} $$</p>
-<p>se denomina <em>función de autocorrelación</em> (ACF).</p>
+<li>La secuencia $\boldsymbol{\gamma}=(\gamma_k\mid k\in\mathbb{Z})$ se denomina <em>función de
+autocovarianzas</em></li>
+<li><p>Dividiendo $\boldsymbol{\gamma}$ por $\gamma_0$ obtenemos la
+secuencia $\boldsymbol{\rho}=(\rho_k\mid k\in\mathbb{Z})$ donde
+$$\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\gamma_0},$$</p>
+<p>que se denomina <em>función de autocorrelación</em> (ACF).</p>
 </li>
 </ul>
 
@@ -14281,9 +14282,9 @@ $$\rho_k=\frac{Cov(X_t,X_{t-k})}{\sqrt{Var(X_t)Var(X_{t-k})}}=\frac{\gamma_k}{\g
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Veamos una nueva transformación de $\boldsymbol{\gamma}$ que subraya
-otras características de interdependencia temporal en un proceso
-estocástico.</p>
+<p>Veamos otras transformaciones de $\boldsymbol{\gamma}$ que subrayan
+diferentes características de la interdependencia temporal en un
+proceso estocástico.</p>
 
 </div>
 </div>
@@ -14330,16 +14331,19 @@ $$\pi_k=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widetilde{X_{t-k}})\Big)$$</p>
 <p>En un proceso débilmente estacionario las correlaciones parciales solo
 dependen de la distancia $k$, lo que permite definir la siguiente
 secuencia.</p>
-<p><strong>Función de autocorrelación parcial</strong> (PACF) de un proceso estacionario
-$\boldsymbol{X}$ es la siguiente secuencia
-$\boldsymbol{\pi}=(\pi_k\mid k\in\mathbb{Z}),\;$ que es simétrica pues
-$\pi_{-k}=\pi_k$: $$\begin{cases} \pi_0 &amp; = \rho_0 ={\color{blue}{1}}\\\\ \pi_1 &amp;=Corr(X_t,\
-X_{t-1})=\rho_1=\frac{\gamma_1}{\gamma_0}\\\\ \pi_k
-&amp;=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widetilde{X_{t-k}})\Big)
-\end{cases},$$ donde $\widehat{X_t}$ y $\widetilde{X_{t-k}}$ son los
-ajustes de las respectivas regresiones de $X_t$ y $X_{t-k}$ sobre
-$X_{t-1},\ldots X_{t-(k-1)}.\;$ i.e., las proyecciones ortogonales
-sobre $\bar{sp}(1,X_{t-1}:X_{t-(k-1)})$.</p>
+<p><strong>La función de autocorrelación parcial</strong> (PACF) de un proceso
+estocástico estacionario $\boldsymbol{X}$ es la siguiente secuencia
+$\boldsymbol{\pi}$ simétrica ($\pi_{-k}=\pi_k$):</p>
+$$\boldsymbol{\pi}=(\pi_k\mid k\in\mathbb{Z})=
+\begin{cases} 
+  \pi_0 &amp; = \rho_0 ={\color{blue}{1}}\\\\ 
+  \pi_1 &amp;=Corr(X_t,\ X_{t-1})=\rho_1=\frac{\gamma_1}{\gamma_0}\\\\ 
+  \pi_k &amp;=Corr\Big((X_t-\widehat{X_t}),\ (X_{t-k}-\widetilde{X_{t-k}})\Big)
+\end{cases},$$<p>
+donde $\widehat{X_t}$ y $\widetilde{X_{t-k}}$ son los ajustes de las
+respectivas regresiones de $X_t$ y $X_{t-k}$ sobre $X_{t-1},\ldots
+X_{t-(k-1)};\;$ i.e., las proyecciones ortogonales sobre
+$\bar{sp}(1,X_{t-1},\ldots X_{t-(k-1)})$.</p>
 
 </div>
 </div>
@@ -14371,8 +14375,8 @@ X_{t-j}$, <strong>empleamos $k$ retardos</strong> (i.e., un retardo más).</p>
 <p>Hay una correspondencia uno-a-uno entre la función de autocovarianzas
 $\boldsymbol{\gamma}$ y la PACF $\boldsymbol{\pi}$.</p>
 <p>Es decir, es posible reconstruir una de las secuencias a partir de la
-otra (por ejemplo resolviendo la ecuaciones de Yule-Walker
-recursivamente con el algoritmo Levinson-Durbin; véase
+otra (por ejemplo resolviendo las <a href="./Lecc05.html#org392fab2">ecuaciones de Yule-Walker</a>
+recursivamente con el algoritmo <a href="https://en.wikipedia.org/wiki/Levinson_recursion">Levinson-Durbin</a>; véase
 <em>Pourahmadi, M. (2001, Capítulo 7)</em> o <em>Brockwell &amp; Davis (1991,
 Capitulo 5)</em>)</p>
 
@@ -14419,7 +14423,7 @@ de autocovarianzas absolutamente sumable,
 $$\sum_{h\in\mathbb{Z}}|\gamma_h|&lt;\infty,$$ entonces definimos la
 <em>densidad espectral</em> de $\boldsymbol{X}$ como $$f(\omega)
 \quad=\quad\frac{1}{2\pi}\sum_{h\in\mathbb{Z}}\gamma_h e^{-i h\omega}
-\quad=\quad\frac{1}{2\pi}\sum_{h\geq0}\gamma_h \cos(h\omega),\qquad
+\quad=\quad{\color{blue}{\frac{1}{2\pi}\sum_{h\geq0}\gamma_h \cos(h\omega)}},\qquad
 \omega\in[-\pi,\pi].$$</p>
 
 </div>
@@ -14467,7 +14471,19 @@ h\omega}d\omega;\quad h\in\mathbb{Z}$$</p>
 <p>Consecuentemente, para $h=0$
 $$\sigma^2=\gamma_0=\int_{-\pi}^\pi f(\omega)d\omega.$$</p>
 <p>Por tanto podemos interpretar la densidad espectral como una
-descomposición de la varianza oscilaciones de distintas frecuencias.</p>
+descomposición de la varianza oscilaciones de distintas frecuencias (o periodos).</p>
+
+</div>
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>($Periodo=\frac{1}{Frecuencia}$, donde la Frecuencia = Nº de ciclos por unidad de tiempo).</p>
 
 </div>
 </div>
@@ -14507,12 +14523,11 @@ modelos lineales concretos.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Sea el proceso 
-$\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}$, donde
-$\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y
+<p>Sea el proceso $\boldsymbol{X}=\boldsymbol{\psi}*\boldsymbol{U}$,
+donde $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$ y
 $\;\boldsymbol{\psi}\in\ell^2\;$ es una serie formal:
-$$X_t=\sum_{j\geq0}\psi_j U_{t-j}.$$ Por la lección anterior
-sabemos que $\;E(X_t)=0\;$ y que</p>
+$$X_t=\sum_{j\geq0}\psi_j U_{t-j}.$$ Por la <a href="./Lecc05.html#org8d85be3">lección anterior</a> sabemos
+que $\;E(X_t)=0\;$ y que</p>
 <ul>
 <li>$\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})$</li>
 </ul>
@@ -14637,7 +14652,7 @@ con todas sus raíces fuera del círculo unidad
 $(\boldsymbol{\theta}^{-\triangleright}\in\ell^1)$, es decir $$X_t=
 \sum_{j=1}^q\theta_j U_{t-j}+U_t.$$</p>
 <p>Entonces $E(X_t)=0$ y</p>
-<p>$\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\theta}(z^{-1}) \;=\; \sigma^2 \sum\limits_{j,k=0}^q \theta_{j+k}\theta_{j} z^{j}\;$ (grado $q$ y cogrado $-q$)</p>
+<p>$\boldsymbol{\gamma} \;=\; \sigma^2 \boldsymbol{\theta}(z)*\boldsymbol{\theta}(z^{-1}) \;=\; \sigma^2 \sum\limits_{j=0}^q \theta_{j+k}\theta_{j} z^{k}\;$ (grado $q$ y cogrado $-q$) (<a href="./Lecc05.html#org8d85be3">lección anterior</a>)</p>
 <p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$</p>
 <p>$f(\omega) \;=\; \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})\cdot\boldsymbol{\theta}(e^{i\omega}) \;=\; \frac{1}{2\pi}\sum\limits_{h=0}^q \gamma_h \cos(h\omega);\quad \omega\in[-\pi,\pi]\quad$ ($q$ cosenos $+1$)</p>
 <p>$\boldsymbol{\pi}\;$ tiene grado $\infty$ y cogrado $-\infty\;$ y su magnitud decae paulatinamente cuando $\;k\to\infty$</p>
@@ -14668,11 +14683,13 @@ con $\;\boldsymbol{U}\sim WN(0,\sigma^2)\;$, es decir $$X_t=U_t-\theta
 U_{t-1}.$$</p>
 <ul>
 <li><p>$\boldsymbol{\gamma} \;=\; \sigma^2 (1-\theta z)*(1-\theta z^{-1})
-  \;=\; \sigma^2 (\ldots,\ 0\ ,\ -\theta,\ {\color{blue}{(1+\theta^2)}},\ -\theta,\
-  0,\ \ldots)$</p>
+  \;=\; \sigma^2 (\ldots,\ 0\ ,\ -\theta,\
+  {\color{blue}{(1+\theta^2)}},\ -\theta,\ 0,\ \ldots)$</p>
 </li>
 <li><p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma} \;=\;
-  \frac{1}{\sigma^2(1+\theta^2)}\boldsymbol{\gamma}$</p>
+  \frac{1}{\sigma^2(1+\theta^2)}\boldsymbol{\gamma}\;=\; (\ldots,\ 0\
+  ,\ \frac{-\theta}{1+\theta^2},\ {\color{blue}{1}},\
+  \frac{-\theta}{1+\theta^2},\ 0,\ \ldots)$</p>
 </li>
 <li><p>$f(\omega) \;=\;
   \frac{\sigma^2}{2\pi}\boldsymbol{\theta}(e^{-i\omega})\cdot\boldsymbol{\theta}(e^{i\omega})
@@ -15174,7 +15191,7 @@ donde $\;\boldsymbol{\phi}^{-1}=\boldsymbol{\psi}=({\color{blue}1},\
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Por tanto $E(X_t)=0$ para todo $t\in\mathbb{Z}$ y</p>
-<p>$\boldsymbol{\gamma} \;=\; \sigma^2 \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^{-1})} \;=\; \sigma^2 \sum\limits_{j,k=0}^\infty \psi_{j+k}\psi_j z^{j}\quad$ (grado $\infty$ y cogrado $-\infty$)</p>
+<p>$\boldsymbol{\gamma} \;=\; \sigma^2 \frac{1}{\boldsymbol{\phi}(z)}*\frac{1}{\boldsymbol{\phi}(z^{-1})} \;=\; \sigma^2 \sum\limits_{j,k=0}^\infty \psi_{j+k}\psi_j z^{j}\quad$ (grado $\infty$)$\quad$ (<a href="Lecc05.html#org392fab2">Ec. de Yule-Walker</a>)</p>
 <p>$\boldsymbol{\rho} \;=\; \frac{1}{\gamma_0}\boldsymbol{\gamma}$</p>
 <p>$f(\omega) =
   \frac{\sigma^2}{2\pi}\frac{1}{\boldsymbol{\phi}(e^{-i\omega})\cdot\boldsymbol{\phi}(e^{i\omega})}
@@ -15193,7 +15210,7 @@ donde $\;\boldsymbol{\phi}^{-1}=\boldsymbol{\psi}=({\color{blue}1},\
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Pero la PACF, $\;\boldsymbol{\pi},\;$ es una secuencia
-con grado $p$ y cogrado $-p$ (demo en los apuntes).</p>
+con grado $p$ y cogrado $-p$ (<a href="./Lecc06.pdf#subsubsection.4.6.1">demo en los apuntes</a>).</p>
 
 </div>
 </div>
@@ -15814,6 +15831,26 @@ indica que el modelo es AR o MA (además de su grado).</p>
 <p>Desgraciadamente para los modelos ARMA (qué veremos más adelante)
 tanto la ACF como la PACF tienen infinitos términos no nulos, por lo
 que su identificación no es tan sencilla.</p>
+<table>
+<thead><tr>
+<th></th>
+<th><b>ACF finita</b></th>
+<th><b>ACF persistente</b></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><b>PACF finita</b></td>
+<td><u>Ruido blanco</u>: retardos conjuntamente NO significativos</td>
+<td><u>AR</u>: orden indicado por la PACF</td>
+</tr>
+<tr>
+<td><b>PACF persistente</b></td>
+<td><u>MA</u>: orden indicado por la ACF</td>
+<td><u>ARMA</u></td>
+</tr>
+</tbody>
+</table>
 
 </div>
 </div>

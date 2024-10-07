@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
 <head>
-<!-- 2024-10-01 mar 16:25 -->
+<!-- 2024-10-07 lun 13:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Lección 2</title>
@@ -233,28 +233,28 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgdfc801d">1. Componentes no observables del número de viajeros internacionales</a>
+<li><a href="#org408dd9a">1. Componentes no observables del número de viajeros internacionales</a>
 <ul>
-<li><a href="#org811ceb8">1.1. Actividad 1 - generar una serie con el índice temporal y su cuadrado</a></li>
+<li><a href="#org4f95bad">1.1. Actividad 1 - generar una serie con el índice temporal y su cuadrado</a></li>
 <li><a href="#orgf17fe8d">1.2. Actividad 2 - Ajustar una tendencia lineal</a></li>
-<li><a href="#org41e65c6">1.3. Actividad 3 - Ajustar una tendencia cuadrática</a></li>
-<li><a href="#orga158327">1.4. Actividad 4 - Ajustar una tendencia cuadrática y un componente estacional determinista</a></li>
+<li><a href="#orgced3b43">1.3. Actividad 3 - Ajustar una tendencia cuadrática</a></li>
+<li><a href="#org4f1f8d2">1.4. Actividad 4 - Ajustar una tendencia cuadrática y un componente estacional determinista</a></li>
 </ul>
 </li>
-<li><a href="#org79791e6">2. Componentes no observables del número de viajeros internacionales 2</a>
+<li><a href="#orgc87a28c">2. Componentes no observables del número de viajeros internacionales 2</a>
 <ul>
-<li><a href="#org25ad892">2.1. Actividad 1 - Estime el modelo con tendencia cuadrática y estacionalidad determinista</a></li>
+<li><a href="#org31fb080">2.1. Actividad 1 - Estime el modelo con tendencia cuadrática y estacionalidad determinista</a></li>
 <li><a href="#org88edbaf">2.2. Actividad 2 - Reducir el modelo eliminando secuencialmente variables no significativas</a></li>
-<li><a href="#org059e6f8">2.3. Actividad 3 - Contrastar la ausencia de autocorrelación</a></li>
-<li><a href="#org0c76afb">2.4. Actividad 4 - Estimación del modelo con errores estándar robustos</a></li>
-<li><a href="#org6b921a2">2.5. Actividad 4 - Estimación incluyendo en el modelo la autocorrelación de orden uno en las perturbaciones</a></li>
+<li><a href="#orgb7e3f7e">2.3. Actividad 3 - Contrastar la ausencia de autocorrelación</a></li>
+<li><a href="#org2f4e664">2.4. Actividad 4 - Estimación del modelo con errores estándar robustos</a></li>
+<li><a href="#org9ffcbd9">2.5. Actividad 4 - Estimación incluyendo en el modelo la autocorrelación de orden uno en las perturbaciones</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgdfc801d" class="outline-2">
-<h2 id="orgdfc801d"><span class="section-number-2">1.</span> Componentes no observables del número de viajeros internacionales</h2>
+<div id="outline-container-org408dd9a" class="outline-2">
+<h2 id="org408dd9a"><span class="section-number-2">1.</span> Componentes no observables del número de viajeros internacionales</h2>
 <div class="outline-text-2" id="text-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -305,8 +305,8 @@ Jenkins.
 </div>
 </li>
 </ol>
-<div id="outline-container-org811ceb8" class="outline-3">
-<h3 id="org811ceb8"><span class="section-number-3">1.1.</span> Actividad 1 - generar una serie con el índice temporal y su cuadrado</h3>
+<div id="outline-container-org4f95bad" class="outline-3">
+<h3 id="org4f95bad"><span class="section-number-3">1.1.</span> Actividad 1 - generar una serie con el índice temporal y su cuadrado</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Pulse en el menú desplegable <b><i><code>Añadir</code></i></b> que aparece arriba, en el centro de la
@@ -321,7 +321,7 @@ ventana principal de <a href="https://gretl.sourceforge.net/es.html">Gretl</a>.
 <i>o bien teclee en linea de comandos</i>:
 </p>
 <div class="org-src-container">
-<pre class="src src-hansl" id="orgfb47b43">      genr time
+<pre class="src src-hansl" id="org7368231">      genr time
 </pre>
 </div></li>
 </ul>
@@ -339,7 +339,7 @@ ventana principal de <a href="https://gretl.sourceforge.net/es.html">Gretl</a>.
 <i>o bien teclee en linea de comandos</i>: 
 </p>
 <div class="org-src-container">
-<pre class="src src-hansl" id="org128cef7">      square time
+<pre class="src src-hansl" id="org900f081">      square time
 </pre>
 </div></li>
 </ul>
@@ -406,7 +406,7 @@ Repita para guardar los <code>residuos</code> con el nombre <code>ehat</code>
 </ul>
 </div>
 </li>
-<li><a id="org19e40b9"></a>Gráfico de la serie y la tendencia lineal<br />
+<li><a id="orgcbac2e5"></a>Gráfico de la serie y la tendencia lineal<br />
 <div class="outline-text-6" id="text-1-2-0-0-2">
 <ul class="org-ul">
 <li><p>
@@ -431,7 +431,7 @@ serie de iconos. Uno de ellos es la <b><i><code>vista de iconos de sesión</code
 </p>
 </div>
 </li>
-<li><a id="orgc7e7947"></a>Gráfico del componente irregular<br />
+<li><a id="org3f469df"></a>Gráfico del componente irregular<br />
 <div class="outline-text-6" id="text-1-2-0-0-3">
 <ul class="org-ul">
 <li><p>
@@ -451,7 +451,7 @@ Marque la variable correspondiente al componente irregular (pulsando
 </ul>
 </div>
 </li>
-<li><a id="org409de1f"></a>Gráfico de la diferencia estacional del componente irregular<br />
+<li><a id="org9fc7cdc"></a>Gráfico de la diferencia estacional del componente irregular<br />
 <div class="outline-text-6" id="text-1-2-0-0-4">
 <ul class="org-ul">
 <li><p>
@@ -489,8 +489,8 @@ Genere un gráfico con la nueva serie diferenciada estacionalmente
 </li>
 </ol>
 </div>
-<div id="outline-container-org41e65c6" class="outline-3">
-<h3 id="org41e65c6"><span class="section-number-3">1.3.</span> Actividad 3 - Ajustar una tendencia cuadrática</h3>
+<div id="outline-container-orgced3b43" class="outline-3">
+<h3 id="orgced3b43"><span class="section-number-3">1.3.</span> Actividad 3 - Ajustar una tendencia cuadrática</h3>
 <div class="outline-text-3" id="text-1-3">
 <p>
 Repita el ejercicio anterior, pero ajustando una tendencia cuadrática
@@ -506,8 +506,8 @@ Repita el ejercicio anterior, pero ajustando una tendencia cuadrática
 </ul>
 </div>
 </div>
-<div id="outline-container-orga158327" class="outline-3">
-<h3 id="orga158327"><span class="section-number-3">1.4.</span> Actividad 4 - Ajustar una tendencia cuadrática y un componente estacional determinista</h3>
+<div id="outline-container-org4f1f8d2" class="outline-3">
+<h3 id="org4f1f8d2"><span class="section-number-3">1.4.</span> Actividad 4 - Ajustar una tendencia cuadrática y un componente estacional determinista</h3>
 <div class="outline-text-3" id="text-1-4">
 <p>
 Pulse en el menú desplegable <b><i><code>Añadir</code></i></b> que aparece arriba, en el centro de la
@@ -521,7 +521,7 @@ ventana principal de <a href="https://gretl.sourceforge.net/es.html">Gretl</a>.
 <i>o bien teclee en linea de comandos</i>:
 </p>
 <div class="org-src-container">
-<pre class="src src-hansl" id="orgcdad356">    seasonals()
+<pre class="src src-hansl" id="org0b10023">    seasonals()
 </pre>
 </div>
 <ul class="org-ul">
@@ -621,8 +621,8 @@ Genere los siguientes gráficos
 </ol>
 </div>
 </div>
-<div id="outline-container-org79791e6" class="outline-2">
-<h2 id="org79791e6"><span class="section-number-2">2.</span> Componentes no observables del número de viajeros internacionales 2</h2>
+<div id="outline-container-orgc87a28c" class="outline-2">
+<h2 id="orgc87a28c"><span class="section-number-2">2.</span> Componentes no observables del número de viajeros internacionales 2</h2>
 <div class="outline-text-2" id="text-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -645,8 +645,8 @@ Continuamos el ejemplo anterior, pero ahora vamos a reducir el modelo
 quitando variables no significativas.
 </p>
 </div>
-<div id="outline-container-org25ad892" class="outline-3">
-<h3 id="org25ad892"><span class="section-number-3">2.1.</span> Actividad 1 - Estime el modelo con tendencia cuadrática y estacionalidad determinista</h3>
+<div id="outline-container-org31fb080" class="outline-3">
+<h3 id="org31fb080"><span class="section-number-3">2.1.</span> Actividad 1 - Estime el modelo con tendencia cuadrática y estacionalidad determinista</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Repita la estimación del último modelo de la practica anterior
@@ -692,8 +692,8 @@ significación del 5% y pulse en <b><i><code>Aceptar</code></i></b>
 </ul>
 </div>
 </div>
-<div id="outline-container-org059e6f8" class="outline-3">
-<h3 id="org059e6f8"><span class="section-number-3">2.3.</span> Actividad 3 - Contrastar la ausencia de autocorrelación</h3>
+<div id="outline-container-orgb7e3f7e" class="outline-3">
+<h3 id="orgb7e3f7e"><span class="section-number-3">2.3.</span> Actividad 3 - Contrastar la ausencia de autocorrelación</h3>
 <div class="outline-text-3" id="text-2-3">
 <ul class="org-ul">
 <li>Observe bajo el valor de contraste de Durbin-Watson (0,691477).</li>
@@ -734,8 +734,8 @@ que el retardo de orden uno es muy significativo.
 </ul>
 </div>
 </div>
-<div id="outline-container-org0c76afb" class="outline-3">
-<h3 id="org0c76afb"><span class="section-number-3">2.4.</span> Actividad 4 - Estimación del modelo con errores estándar robustos</h3>
+<div id="outline-container-org2f4e664" class="outline-3">
+<h3 id="org2f4e664"><span class="section-number-3">2.4.</span> Actividad 4 - Estimación del modelo con errores estándar robustos</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 Los test de autocorrelación indican que la inferencia empleada para
@@ -791,8 +791,8 @@ febrero.
 </ul>
 </div>
 </div>
-<div id="outline-container-org6b921a2" class="outline-3">
-<h3 id="org6b921a2"><span class="section-number-3">2.5.</span> Actividad 4 - Estimación incluyendo en el modelo la autocorrelación de orden uno en las perturbaciones</h3>
+<div id="outline-container-org9ffcbd9" class="outline-3">
+<h3 id="org9ffcbd9"><span class="section-number-3">2.5.</span> Actividad 4 - Estimación incluyendo en el modelo la autocorrelación de orden uno en las perturbaciones</h3>
 <div class="outline-text-3" id="text-2-5">
 <ul class="org-ul">
 <li><p>
@@ -874,7 +874,7 @@ O bien desde la ventana principal: marque la variable <code>Residuos</code> y
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-10-01 mar 16:25</p>
+<p class="date">Created: 2024-10-07 lun 13:25</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

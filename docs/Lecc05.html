@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
 <head>
-<!-- 2024-10-01 mar 16:25 -->
+<!-- 2024-10-07 lun 13:25 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 5</title>
@@ -233,35 +233,35 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0ddc8be">Carga de algunas librerías de R</a></li>
+<li><a href="#org581f710">Carga de algunas librerías de R</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org5bd3083">1. Series temporales vs datos de sección cruzada</a>
+<li><a href="#org05f5ce0">1. Series temporales vs datos de sección cruzada</a>
 <ul>
-<li><a href="#org53342bb">1.1. Correlación serial vs muestreo aleatorio simple</a></li>
-<li><a href="#orgb0b5a30">1.2. Simplificación del escenario</a></li>
+<li><a href="#orgd38553d">1.1. Correlación serial vs muestreo aleatorio simple</a></li>
+<li><a href="#orga8a811b">1.2. Simplificación del escenario</a></li>
 </ul>
 </li>
-<li><a href="#org5a40240">2. Procesos estocásticos de segundo orden</a>
+<li><a href="#orgf16fc71">2. Procesos estocásticos de segundo orden</a>
 <ul>
-<li><a href="#org0c5a5e5">2.1. Un poco de geometría</a></li>
-<li><a href="#org8d9807c">2.2. Primeros momentos de procesos estocásticos de segundo orden</a></li>
-<li><a href="#orgb50a122">2.3. Procesos estocásticos (débilmente) estacionarios y la ACF</a></li>
+<li><a href="#org124f72b">2.1. Un poco de geometría</a></li>
+<li><a href="#org1eed53a">2.2. Primeros momentos de procesos estocásticos de segundo orden</a></li>
+<li><a href="#org025f86e">2.3. Procesos estocásticos (débilmente) estacionarios y la ACF</a></li>
 </ul>
 </li>
-<li><a href="#org88943a3">3. Notación: convolución y el operador retardo</a></li>
-<li><a href="#orgaeff50a">4. Ejemplos de procesos (débilmente) estacionarios</a>
+<li><a href="#org45fd93c">3. Notación: convolución y el operador retardo</a></li>
+<li><a href="#org564f83a">4. Ejemplos de procesos (débilmente) estacionarios</a>
 <ul>
 <li><a href="#orgb0bb725">4.1. Proceso de ruido blanco</a></li>
 <li><a href="#org71db0d9">4.2. Procesos lineales</a>
 <ul>
-<li><a href="#org2118090">4.2.1. Media móvil infinita. MA(\(\infty\))</a></li>
-<li><a href="#org73bdba1">4.2.2. Proceso de media móvil de orden \(q\). MA(\(q\))</a></li>
+<li><a href="#org5f122ae">4.2.1. Media móvil infinita. MA(\(\infty\))</a></li>
+<li><a href="#org528f4be">4.2.2. Proceso de media móvil de orden \(q\). MA(\(q\))</a></li>
 <li><a href="#orgef8ae33">4.2.3. Proceso autorregresivo de orden \(p\). AR(\(p\))</a></li>
-<li><a href="#org6a1adcd">4.2.4. Proceso autorregresivo de media móvil. ARMA(\(p,q\))</a></li>
-<li><a href="#orgf029fa2">4.2.5. Proceso autorregresivo de media móvil con media no nula</a></li>
+<li><a href="#org2042118">4.2.4. Proceso autorregresivo de media móvil. ARMA(\(p,q\))</a></li>
+<li><a href="#orga968d0b">4.2.5. Proceso autorregresivo de media móvil con media no nula</a></li>
 </ul>
 </li>
 </ul>
@@ -271,9 +271,9 @@
 <li><a href="#org8d85be3">5.1. Esperanza y autocovarianzas de un proceso lineal causal</a></li>
 <li><a href="#orgab0395e">5.2. Covarianza cruzada entre dos procesos lineales causales</a></li>
 <li><a href="#org392fab2">5.3. Las Ecuaciones de Yule-Walker para un AR(\(p\)) estacionario</a></li>
-<li><a href="#org48b4449">5.4. Función de autocovarianzas para un ARMA(\(p,q\))</a></div>
+<li><a href="#orge0690f6">5.4. Función de autocovarianzas para un ARMA(\(p,q\))</a></div>
 </div>
-<div class="abstract" id="org690b443">
+<div class="abstract" id="org2f1ee9e">
 <p>
 Esta lección veremos las dificultades que ocasiona la correlación
 serial y algunos tipos de procesos débilmente estacionarios que nos
@@ -289,9 +289,9 @@ ecuaciones de Yule-Walker.
 <li><a href="https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc05.html">lección en html</a></li>
 <li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc05.ipynb">lección en mybinder</a></li>
 </ul>
-<div id="outline-container-org0ddc8be" class="outline-4">
-<h4 id="org0ddc8be">Carga de algunas librerías de R</h4>
-<div class="outline-text-4" id="text-org0ddc8be">
+<div id="outline-container-org581f710" class="outline-4">
+<h4 id="org581f710">Carga de algunas librerías de R</h4>
+<div class="outline-text-4" id="text-org581f710">
 <p>
 Primero cargamos la librería <code>tfarima</code> (Repositorio Cran:
 <a href="https://cran.r-project.org/web/packages/tfarima/index.html">https://cran.r-project.org/web/packages/tfarima/index.html</a>;
@@ -317,8 +317,8 @@ del notebook
 </div>
 </div>
 </div>
-<div id="outline-container-org5bd3083" class="outline-2">
-<h2 id="org5bd3083"><span class="section-number-2">1.</span> Series temporales vs datos de sección cruzada</h2>
+<div id="outline-container-org05f5ce0" class="outline-2">
+<h2 id="org05f5ce0"><span class="section-number-2">1.</span> Series temporales vs datos de sección cruzada</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Corresponden a observaciones de un mismo objeto a lo largo del
@@ -345,7 +345,7 @@ Veamos algunos ejemplos de series temporales&#x2026;
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org3a9a2de"></a>Población en Australia<br />
+<li><a id="org92281e4"></a>Población en Australia<br />
 <div class="outline-text-5" id="text-1-0-0-1">
 <div class="org-src-container">
 <pre class="src src-jupyter-R">PoblacionAustralia_ts = as.ts( read.zoo(<span style="color: #008000;">'datos/PoblacionAustralia.csv'</span>, 
@@ -361,7 +361,7 @@ p
 </div>
 
 
-<div id="org6377c11" class="figure">
+<div id="orgdca779f" class="figure">
 <p><img src="./img/lecc05/PoblacionAustralia.png" alt="PoblacionAustralia.png" width="900px" />
 </p>
 </div>
@@ -385,7 +385,7 @@ P
 </div>
 
 
-<div id="org0c9a71a" class="figure">
+<div id="orgbff6ea3" class="figure">
 <p><img src="./img/lecc05/PIB_UEM.png" alt="PIB_UEM.png" width="900px" />
 </p>
 </div>
@@ -408,7 +408,7 @@ P
 </div>
 
 
-<div id="org9d93476" class="figure">
+<div id="org068f8aa" class="figure">
 <p><img src="./img/lecc05/TemperaturaReriro.png" alt="TemperaturaReriro.png" width="900px" />
 </p>
 </div>
@@ -427,7 +427,7 @@ p
 </div>
 
 
-<div id="orge9c5293" class="figure">
+<div id="orge263d68" class="figure">
 <p><img src="./img/lecc05/IBEX35.png" alt="IBEX35.png" width="900px" />
 </p>
 </div>
@@ -438,7 +438,7 @@ p
 </ul>
 </div>
 </li>
-<li><a id="orgd45154b"></a>Producción de cemento<br />
+<li><a id="org0625443"></a>Producción de cemento<br />
 <div class="outline-text-5" id="text-1-0-0-5">
 <div class="org-src-container">
 <pre class="src src-jupyter-R">ProduccionCemento_df <span style="color: #D0372D;">&lt;-</span> read_csv(<span style="color: #008000;">"datos/ProduccionCemento.csv"</span>,
@@ -456,15 +456,15 @@ P
 </div>
 
 
-<div id="orge997a89" class="figure">
+<div id="org7fb5427" class="figure">
 <p><img src="./img/lecc05/ProduccionCemento.png" alt="ProduccionCemento.png" width="900px" />
 </p>
 </div>
 </div>
 </li>
 </ol>
-<div id="outline-container-org53342bb" class="outline-3">
-<h3 id="org53342bb"><span class="section-number-3">1.1.</span> Correlación serial vs muestreo aleatorio simple</h3>
+<div id="outline-container-orgd38553d" class="outline-3">
+<h3 id="orgd38553d"><span class="section-number-3">1.1.</span> Correlación serial vs muestreo aleatorio simple</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Con datos de
@@ -528,8 +528,8 @@ aún así&#x2026;
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb0b5a30" class="outline-3">
-<h3 id="orgb0b5a30"><span class="section-number-3">1.2.</span> Simplificación del escenario</h3>
+<div id="outline-container-orga8a811b" class="outline-3">
+<h3 id="orga8a811b"><span class="section-number-3">1.2.</span> Simplificación del escenario</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Si \(\boldsymbol{X}\) es <a href="./Lecc01.slides.html#/3/1">débilmente estacionario</a> se reduce drásticamente el número de parámetros:
@@ -565,8 +565,8 @@ estacionarios que vamos a utilizar.
 </div>
 </div>
 </div>
-<div id="outline-container-org5a40240" class="outline-2">
-<h2 id="org5a40240"><span class="section-number-2">2.</span> Procesos estocásticos de segundo orden</h2>
+<div id="outline-container-orgf16fc71" class="outline-2">
+<h2 id="orgf16fc71"><span class="section-number-2">2.</span> Procesos estocásticos de segundo orden</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 El ambiente natural para estudiar las propiedades de segundo orden de
@@ -576,8 +576,8 @@ aleatorias \(X\) definidas en un espacio de probabilidad tales que
 esperanza. Denotaremos este espacio con \(H\).
 </p>
 </div>
-<div id="outline-container-org0c5a5e5" class="outline-3">
-<h3 id="org0c5a5e5"><span class="section-number-3">2.1.</span> Un poco de geometría</h3>
+<div id="outline-container-org124f72b" class="outline-3">
+<h3 id="org124f72b"><span class="section-number-3">2.1.</span> Un poco de geometría</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 El espacio, dotado de producto escalar y norma \[\langle X \mid Y
@@ -616,8 +616,8 @@ la siguiente) <i>tienen esperanza cero</i>.
 </p>
 </div>
 </div>
-<div id="outline-container-org8d9807c" class="outline-3">
-<h3 id="org8d9807c"><span class="section-number-3">2.2.</span> Primeros momentos de procesos estocásticos de segundo orden</h3>
+<div id="outline-container-org1eed53a" class="outline-3">
+<h3 id="org1eed53a"><span class="section-number-3">2.2.</span> Primeros momentos de procesos estocásticos de segundo orden</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Si \(E(X_t)<\infty\) para \(t\in\mathbb{Z}\), entonces \(E(\boldsymbol{X})\) es
@@ -655,8 +655,8 @@ procesos estocásticos débilmente estacionarios</span>.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb50a122" class="outline-3">
-<h3 id="orgb50a122"><span class="section-number-3">2.3.</span> Procesos estocásticos (débilmente) estacionarios y la ACF</h3>
+<div id="outline-container-org025f86e" class="outline-3">
+<h3 id="org025f86e"><span class="section-number-3">2.3.</span> Procesos estocásticos (débilmente) estacionarios y la ACF</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 Un proceso estocástico de segundo orden \(\boldsymbol{X}\) se dice que
@@ -692,8 +692,8 @@ secuencia:
 </div>
 </div>
 </div>
-<div id="outline-container-org88943a3" class="outline-2">
-<h2 id="org88943a3"><span class="section-number-2">3.</span> Notación: convolución y el operador retardo</h2>
+<div id="outline-container-org45fd93c" class="outline-2">
+<h2 id="org45fd93c"><span class="section-number-2">3.</span> Notación: convolución y el operador retardo</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Sea \(\boldsymbol{a}\) una secuencia de números y sea \(\boldsymbol{X}\) un
@@ -746,8 +746,8 @@ converge para todo \(t\), entonces
 \end{align*}
 </div>
 </div>
-<div id="outline-container-orgaeff50a" class="outline-2">
-<h2 id="orgaeff50a"><span class="section-number-2">4.</span> Ejemplos de procesos (débilmente) estacionarios</h2>
+<div id="outline-container-org564f83a" class="outline-2">
+<h2 id="org564f83a"><span class="section-number-2">4.</span> Ejemplos de procesos (débilmente) estacionarios</h2>
 <div class="outline-text-2" id="text-4">
 </div>
 <div id="outline-container-orgb0bb725" class="outline-3">
@@ -806,8 +806,8 @@ subclases de procesos, algunas de las cuales son objeto principal de
 estudio de este curso.
 </p>
 </div>
-<div id="outline-container-org2118090" class="outline-4">
-<h4 id="org2118090"><span class="section-number-4">4.2.1.</span> Media móvil infinita. MA(\(\infty\))</h4>
+<div id="outline-container-org5f122ae" class="outline-4">
+<h4 id="org5f122ae"><span class="section-number-4">4.2.1.</span> Media móvil infinita. MA(\(\infty\))</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <p>
 Sea \(\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\) y sea
@@ -827,8 +827,8 @@ representarlos completamente. Por ejemplo, cuando
 </p>
 </div>
 </div>
-<div id="outline-container-org73bdba1" class="outline-4">
-<h4 id="org73bdba1"><span class="section-number-4">4.2.2.</span> Proceso de media móvil de orden \(q\). MA(\(q\))</h4>
+<div id="outline-container-org528f4be" class="outline-4">
+<h4 id="org528f4be"><span class="section-number-4">4.2.2.</span> Proceso de media móvil de orden \(q\). MA(\(q\))</h4>
 <div class="outline-text-4" id="text-4-2-2">
 <p>
 Sea \(\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\) y sea
@@ -952,8 +952,8 @@ los dos anteriores.
 </p>
 </div>
 </div>
-<div id="outline-container-org6a1adcd" class="outline-4">
-<h4 id="org6a1adcd"><span class="section-number-4">4.2.4.</span> Proceso autorregresivo de media móvil. ARMA(\(p,q\))</h4>
+<div id="outline-container-org2042118" class="outline-4">
+<h4 id="org2042118"><span class="section-number-4">4.2.4.</span> Proceso autorregresivo de media móvil. ARMA(\(p,q\))</h4>
 <div class="outline-text-4" id="text-4-2-4">
 <p>
 Sea \(\;\boldsymbol{U}\sim WN(0,\sigma^2)\;\), se denomina <i>proceso
@@ -989,8 +989,8 @@ a_j U_{t-j}\] donde
 </p>
 </div>
 </div>
-<div id="outline-container-orgf029fa2" class="outline-4">
-<h4 id="orgf029fa2"><span class="section-number-4">4.2.5.</span> Proceso autorregresivo de media móvil con media no nula</h4>
+<div id="outline-container-orga968d0b" class="outline-4">
+<h4 id="orga968d0b"><span class="section-number-4">4.2.5.</span> Proceso autorregresivo de media móvil con media no nula</h4>
 <div class="outline-text-4" id="text-4-2-5">
 <p>
 Consideremos un proceso \(\boldsymbol{Y}\) con media
@@ -1184,8 +1184,8 @@ Yule-Walker.
 </p>
 </div>
 </div>
-<div id="outline-container-org48b4449" class="outline-3">
-<h3 id="org48b4449"><span class="section-number-3">5.4.</span> Función de autocovarianzas para un ARMA(\(p,q\))</h3>
+<div id="outline-container-orge0690f6" class="outline-3">
+<h3 id="orge0690f6"><span class="section-number-3">5.4.</span> Función de autocovarianzas para un ARMA(\(p,q\))</h3>
 <div class="outline-text-3" id="text-5-4">
 <p>
 Sea un ARMA(\(p,q\)) estacionario:
@@ -1226,7 +1226,7 @@ Y como \(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\) tiene grado \(q\) y 
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-10-01 mar 16:25</p>
+<p class="date">Created: 2024-10-07 lun 13:25</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
