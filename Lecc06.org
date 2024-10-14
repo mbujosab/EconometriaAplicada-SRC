@@ -771,7 +771,6 @@ ide(sim(ma2thnp, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgra
 #+attr_latex: :width 425px
 [[./img/lecc06/Sim-MA2thnp.png]]
 
-
 *** MA(2) con dos raíces reales, una positiva y la otra negativa
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . notes)))
@@ -1478,7 +1477,6 @@ ide(sim(ar2phnp, n = 400), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgra
 #+attr_html: :width 900px
 #+attr_latex: :width 425px
 [[./img/lecc06/Sim-AR2phnp.png]]
-
 
 *** AR(2) con dos raíces reales, una positiva y la otra negativa
    :PROPERTIES:

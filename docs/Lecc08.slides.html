@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="org66e47d3">
+<div class="abstract" id="orgb5bea78">
 <p>
 En esta lección repasamos los instrumentos de identificación y
 diagnosis del análisis univariante. Extendemos la notación para
@@ -14300,12 +14300,12 @@ económicas suele ser ARMA($2,1$)</p>
 <tr>
 <td>Transf. logarítmica</td>
 <td>Gráficos rango-media y serie temporal</td>
-<td>Conseguir independizar la variabilidad de los datos de su nivel. Las series económicas suelen necesitar esta transformación</td>
+<td>Conseguir independizar la variabilidad de los datos de su nivel. Las series económicas necesitan esta transformación frecuentemente</td>
 </tr>
 <tr>
 <td>$d$, orden de diferenciación</td>
 <td>Gráfico de la serie temporal. ACF (caída lenta y lineal). Contrastes de raíz unitaria (DF o ADF y KPSS)</td>
-<td>Conseguir que los datos fluctúen en torno a una media estable. En series económicas, $d$ suele ser 1 ó 2</td>
+<td>Conseguir que los datos fluctúen en torno a una media estable. En series económicas, $d$ suele ser 0, 1 ó 2</td>
 </tr>
 <tr>
 <td>Constante</td>
@@ -14357,7 +14357,7 @@ económicas suele ser ARMA($2,1$)</p>
 <tr>
 <td>$d$, orden de diferenciación</td>
 <td><i>Proximidad a 1</i> de alguna raíz de los polinomios AR o MA</td>
-<td>Si la raíz es AR quizá conviene diferenciar. O quitar una diferencia si es MA (<i>salvo si hay tendencia determinista</i>)</td>
+<td>Conviene diferenciar si la raíz es AR; o quitar una diferencia si es MA (<i>salvo si hay tendencia determinista</i>)</td>
 </tr>
 <tr>
 <td>$d$, orden de diferenciación</td>
@@ -14473,9 +14473,9 @@ Y_t = \boldsymbol{\theta}_q(\mathsf{B}) U_t; \quad t\in\mathbb{Z}$$</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Cuando un polinomio tiene alguna raíz igual a uno se dice que tiene
 “raíces unitarias”.</p>
-<p>Si el polinomio AR estimado tiene alguna raíz "próxima a uno", es 
-síntoma de subdiferenciación.</p>
-<p>Si el polinomio MA estimado tiene alguna raíz "próxima a uno", es
+<p>Si el polinomio AR estimado tiene alguna raíz "próxima a uno" es 
+síntoma de infradiferenciación.</p>
+<p>Si el polinomio MA estimado tiene alguna raíz "próxima a uno" es
 síntoma de</p>
 <ol>
 <li>sobrediferenciación&#x2026; salvo cuando&#x2026;</li>
@@ -14499,8 +14499,8 @@ podemos comprobar, por ejemplo, con un test ADF).</li>
 <td>${\color{blue}{(1-.5\mathsf{B}+0.7\mathsf{B}^2)\nabla Y_t =  U_t}}$</td>
 </tr>
 <tr>
-<td>${\color{blue}{\nabla Y_t = \beta+          (1-\mathsf{B}) U_t}}$</td>
-<td>$Y_t = \beta t + U_t\quad$ (¡no estacionario!)</td>
+<td>$\nabla Y_t = \beta+          (1-\mathsf{B}) U_t$</td>
+<td>${\color{blue}{Y_t = \beta t + U_t}}\quad$ (¡no estacionario!)</td>
 </tr>
 </tbody>
 </table>
@@ -14528,30 +14528,6 @@ podemos comprobar, por ejemplo, con un test ADF).</li>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Un paseo aleatorio representa una variable cuyos cambios son ruido
 blanco: $$Y_t = \mu + Y_{t-1} + U_t$$</p>
-<p>Cuando $\mu=0$ se denomina sencillamente <em>paseo aleatorio</em>: $\;\nabla Y_t =  U_t$</p>
-
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><img src="./img/lecc08/ACF-RW.png" alt="img"></p>
-
-</div>
-</div>
-</div>
-</div></section><section>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Cuando $\mu\ne0$ se denomina <em>paseo aleatorio con deriva</em>: $\;\nabla Y_t = \mu +  U_t$</p>
 
 </div>
@@ -14567,6 +14543,30 @@ blanco: $$Y_t = \mu + Y_{t-1} + U_t$$</p>
 <p><img src="./img/lecc08/ACF-RWcd.png" alt="img"></p>
 <p>El proceso tiene mayor inercia cuanto mayor es $|\mu|$. El signo de
 $\mu$ determina el signo de la pendiente global.</p>
+
+</div>
+</div>
+</div>
+</div></section><section>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Cuando $\mu=0$ se denomina sencillamente <em>paseo aleatorio</em>: $\;\nabla Y_t =  U_t$</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><img src="./img/lecc08/ACF-RW.png" alt="img"></p>
 
 </div>
 </div>
@@ -14591,7 +14591,8 @@ $\mu$ determina el signo de la pendiente global.</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>El período estacional $S$ es el número mínimo de observaciones
 necesarias para recorrer un ciclo estacional completo. Por ejemplo,
-$S=12$ para datos mensuales, $S=4$ para datos trimestrales, etc.</p>
+$S=12$ para datos mensuales, $S=4$ para datos trimestrales, $S=24$
+para datos horarios, etc.</p>
 <p>Describiremos comportamientos estacionales con modelos
 ARIMA$(p,d,q)\times(P,D,Q)_S$</p>
 $$\boldsymbol{\phi}_p(\mathsf{B})\boldsymbol{\Phi}_P(\mathsf{B}^S)\nabla^d\nabla_{_S}^D
@@ -14690,7 +14691,8 @@ $\quad\boldsymbol{\Phi}=1-0.9z^{12}\quad\Rightarrow\quad (1-0.9
 </div>
 </div>
 </div>
-</div>
+</div><aside class="notes">
+
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14703,6 +14705,7 @@ $\quad\boldsymbol{\Phi}=1-0.9z^{12}\quad\Rightarrow\quad (1-0.9
 </div>
 </div>
 </div>
+</aside>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -14728,12 +14731,12 @@ AR(2), pero ahora los retardos significativos corresponden a los
 retardos estacionales, es decir, a múltiplos del período estacional
 $S$.</p>
 </li>
+<li><p>En estos ejemplos, en los que $S=12$, los retardos estacionales son:
+12, 24, 36, 48, 60,&#x2026;</p>
+</li>
 <li><p>las correlaciones correspondientes a los “retardos regulares” (es
 decir, todos menos menos los estacionales) son no significativas en
 general.</p>
-</li>
-<li><p>En estos ejemplos, en los que $S=12$, los retardos estacionales son:
-12, 24, 36, 48, 60,&#x2026;</p>
 </li>
 </ul>
 
@@ -14949,7 +14952,7 @@ parametrización especial.</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Ideas-principales">Ideas principales<a class="anchor-link" href="#Ideas-principales">&#182;</a></h3>
+<h3 id="Ideas-principales-respecto-a-la-modelizaci%C3%B3n-univariante">Ideas principales respecto a la modelizaci&#243;n univariante<a class="anchor-link" href="#Ideas-principales-respecto-a-la-modelizaci%C3%B3n-univariante">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14961,17 +14964,18 @@ parametrización especial.</li>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>Se basa en modelos sin variables exógenas que resumen la
-interdependencia temporal con polinomios de órdenes reducidos.</li>
-<li>Está especialmente indicado para predecir el futuro de la serie
+<li>Son modelos sin variables exógenas</li>
+<li>Resumen la interdependencia temporal con polinomios de órdenes
+reducidos.</li>
+<li>Están especialmente indicado para predecir el futuro de una serie
 temporal.</li>
 <li>Parte de dos supuestos sobre el proceso estocástico subyacente: <ol>
 <li>es débilmente estacionario</li>
-<li>tiene representación en forma de proceso lineal $Y_t=\sum_{j=0}^\infty a_j U_{t-j}$</li>
+<li>tiene representación como proceso lineal: $Y_t=\sum_{j=0}^\infty a_j U_{t-j}$ con $\boldsymbol{a}\in\ell^2$</li>
 </ol>
 </li>
 <li>(Además se suele asumir normalidad en $U_t$)</li>
-<li>utiliza variados instrumentos: (a) gráficos (b) función de
+<li>Utiliza múltiples instrumentos: (a) gráficos (b) función de
 autocorrelación (c) función de autocorrelación parcial, (d)
 estadístico Q de Ljung-Box, etc&#x2026;</li>
 <li>Si la serie original no "parece" débilmente estacionaria, se induce
@@ -15024,14 +15028,13 @@ esta propiedad mediante las transformaciones adecuadas</li>
 <li><strong>Identificación:</strong> Elija una especificación provisional para el
 proceso estocástico generador de los datos en base a las
 características medibles de los datos: “dejar que los datos hablen”</li>
-<li><strong>Estimación:</strong> suele requerir métodos iterativos</li>
+<li><strong>Estimación:</strong> suele requerir métodos iterativos (<em>Gretl se encarga de esto</em>)</li>
 <li><strong>Diagnosis:</strong> de la calidad estadística del modelo ajustado. Algunos
 controles estándar son:<ul>
 <li>Significatividad de los parámetros estimados</li>
 <li>Estacionariedad y homocedasticidad de los residuos</li>
 <li>¿Existe un patrón de autocorrelación residual que podría ser
-modelado? ¿O hemos logrado que los residuos sean <u>*"ruido
-blanco"*</u>?</li>
+modelado? ¿O hemos logrado que los residuos sean <strong><em>"ruido blanco"</em></strong>?</li>
 </ul>
 </li>
 </ul>

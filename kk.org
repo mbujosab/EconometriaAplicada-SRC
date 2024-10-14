@@ -34,6 +34,8 @@ https://mcs.utm.utoronto.ca/~nosedal/sta457/arma-models.pdf
 
 https://rpubs.com/bachmanaaron42/airline_passengers_time_series_analysis
 
+https://math.mcmaster.ca/~bolker/eeid/2010/Ecology/Spectral.pdf Espectro
+
 #+BEGIN_SRC jupyter-R
 library(ggplot2)
 # Mostrando la serie capinst 

@@ -137,10 +137,10 @@ entonces $\boldsymbol{X}$ tiene una representación como MA($\infty$):
 $$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}
 \quad\Rightarrow\quad
 \boldsymbol{X}=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}*\boldsymbol{U}
-\quad\Rightarrow\quad X_t = U_t + \sum_{j=1}^\infty\psi_j U_{t-j};$$
+\quad\Rightarrow\quad X_t = U_t + \sum_{j=1}^\infty-\psi_j U_{t-j};$$
 donde
 $\;\boldsymbol{\psi}=\boldsymbol{\phi}^{-1}*\boldsymbol{\theta}=({\color{blue}1},\
-\psi_1,\ \psi_2,\ \psi_3,\ldots)\;$ tiene grado $\infty$.
+-\psi_1,\ -\psi_2,\ -\psi_3,\ldots)\;$ tiene grado $\infty$.
 #+latex: \bigskip
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
@@ -151,10 +151,10 @@ entonces $\boldsymbol{X}$ tiene una representación como AR($\infty$):
 $$\boldsymbol{\phi}*\boldsymbol{X}=\boldsymbol{\theta}*\boldsymbol{U}
 \quad\Rightarrow\quad
 \frac{\boldsymbol{\phi}}{\boldsymbol{\theta}}*\boldsymbol{X}=\boldsymbol{U}
-\quad\Rightarrow\quad X_t = U_t + \sum_{j=1}^\infty-\varphi_j
+\quad\Rightarrow\quad X_t = U_t + \sum_{j=1}^\infty\varphi_j
 X_{t-j};$$ donde
 $\;\boldsymbol{\varphi}=\boldsymbol{\theta}^{-1}*\boldsymbol{\phi}=({\color{blue}1},\
-\varphi_1,\ \varphi_2,\ \varphi_3,\ldots)\;$ tiene grado $\infty$.
+-\varphi_1,\ -\varphi_2,\ -\varphi_3,\ldots)\;$ tiene grado $\infty$.
 #+latex: \bigskip
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
@@ -168,7 +168,7 @@ $E(X_t)=0$ para todo $t\in\mathbb{Z}$ y
 
 $\boldsymbol{\gamma} \;=\; \sigma^2
 \frac{\boldsymbol{\theta}(z)}{\boldsymbol{\phi}(z)}*\frac{\boldsymbol{\theta}(z^{-1})}{\boldsymbol{\phi}(z^{-1})}
-= \sigma^2 \boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})\;$ donde $\;\boldsymbol{\phi}=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}$;
+= \sigma^2 \boldsymbol{\psi}(z)*\boldsymbol{\psi}(z^{-1})\;$ donde $\;\boldsymbol{\psi}=\frac{\boldsymbol{\theta}}{\boldsymbol{\phi}}$;
 #+latex: \smallskip
 
 #+latex: \noindent
@@ -198,7 +198,7 @@ $\infty$ y cogrado $-\infty$.
 #+latex: \bigskip
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-En la Lección 5 se demostró que para un proceso ARMA($p,q$)
+En la [[file:./Lecc05.pdf#subsection.5.4][Lección 5]] se [[file:./Lecc05.html#orgd60b0f9][demostró]] que para un proceso ARMA($p,q$)
 $$\boldsymbol{\phi}(\mathsf{B})\gamma_k = 
 \begin{cases}
   \sigma^2 \Big(\boldsymbol{\theta}(z)*\boldsymbol{\psi}(z^{-1})\Big)_k & \text{para } k\leq q \\
@@ -210,7 +210,7 @@ Así, en cuanto a la ACF $\boldsymbol{\rho}$:
    $\boldsymbol{\theta}$ y los $p$ parámetros de $\boldsymbol{\phi}$
  - Los $p$ valores de $\rho_q$ a $\rho_{q-p+1}$ son los valores
    iniciales para resolver la ecuación en diferencias
-   $\boldsymbol{\phi}(\mathsf{B})\rho_k=0\;$ (con $k\geq q)$
+   [[file:./Lecc05.html#orgd60b0f9][$\boldsymbol{\phi}(\mathsf{B})\rho_k=0\;$]] (con $k> q)$
  - Si $q < p$ toda la secuencia $\rho_j$ para $j \geq 0$ decae
    exponencialmente o sinusoidalmente según $\boldsymbol{\phi}$ y los
    valores iniciales $\rho_q$ a $\rho_{q-p+1}$
@@ -665,8 +665,8 @@ con el análisis gráfico.
 
 La /k/-ésima autocorrelación muestral simple ($\widehat{\rho_k}$) se
 define como:
-$$\widehat{\rho_k}=\frac{\widehat{\rho_k}}{\widehat{\rho_0}};\qquad
-\widehat{\rho_k}=\frac{1}{n}\sum_{t=k+1}^n
+$$\widehat{\rho_k}=\frac{\widehat{\gamma_k}}{\widehat{\gamma_0}};\qquad
+\widehat{\gamma_k}=\frac{1}{n}\sum_{t=k+1}^n
 \widetilde{X_t}\widetilde{X_{t-k}},\quad\text{para }\;k=1,2,\ldots$$
 donde $\widetilde{X_t}=X_t-\bar{X}$.
 
@@ -674,7 +674,7 @@ Para valorar la significatividad individual de estas autocorrelaciones
 puede usarse el error estándar asintótico:
 $s.e(\widehat{\rho_k})=1/\sqrt{n}$.
 
-Para contrastar la $H_0:$ /conjuntamente los $k$ primeros retardos son
+Para contrastar la $H_0:$ /los $k$ primeros retardos son conjuntamente 
 no significativos/ (es decir, para contrastar si el proceso es /ruido
 blanco/) se emplea el test de Ljung-Box $$Q =
 n\left(n+2\right)\sum_{k=1}^h\frac{\hat{\rho}^2_k}{n-k}$$

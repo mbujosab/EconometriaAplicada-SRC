@@ -142,13 +142,13 @@ económicas suele ser ARMA($2,1$)
 
 #+ATTR_HTML: :border 2 :rules all :frame border
 #+ATTR_LATEX: :environment longtable :align p{2.3cm}p{5.5cm}p{7.2cm}
-|                                                         | Instrumento                                                                                                                        | Objetivo y observaciones                                                                                                    |
-|---------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------|
-| Transf. @@latex:\mbox{@@logarítmica@@latex:}@@          | Gráficos rango-media y serie temporal                                                                                              | Conseguir independizar la variabilidad de los datos de su nivel. Las series económicas suelen necesitar esta transformación |
-| $d$, orden de @@latex:\mbox{@@diferenciación@@latex:}@@ | Gráfico de la serie temporal. ACF (caída lenta y lineal). @@latex:\mbox{@@Contrastes@@latex:}@@ de raíz unitaria (DF o ADF y KPSS) | Conseguir que los datos fluctúen en torno a una media estable. En series económicas, $d$ suele ser 1 ó 2                    |
-| Constante                                               | Media de la serie diferenciada. @@latex:\mbox{@@Desviación@@latex:}@@ típica de la media                                           | Si la media de la serie transformada es significativa, el modelo debe incluir un término constante                          |
-| $p$, orden AR                                           | PACF de orden $p$. ACF infinita                                                                                                    | PACF tiene $p$ valores no nulos. En series económicas $p$ suele ser $\leq2$                                                 |
-| $q$, orden MA                                           | ACF de orden $q$. PACF infinita                                                                                                    | ACF tiene $q$ valores no nulos. En series económicas q suele ser $\leq1$                                                    |
+|                                                         | Instrumento                                                                                                                        | Objetivo y observaciones                                                                                                            |
+|---------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------|
+| Transf. @@latex:\mbox{@@logarítmica@@latex:}@@          | Gráficos rango-media y serie temporal                                                                                              | Conseguir independizar la variabilidad de los datos de su nivel. Las series económicas necesitan esta transformación frecuentemente |
+| $d$, orden de @@latex:\mbox{@@diferenciación@@latex:}@@ | Gráfico de la serie temporal. ACF (caída lenta y lineal). @@latex:\mbox{@@Contrastes@@latex:}@@ de raíz unitaria (DF o ADF y KPSS) | Conseguir que los datos fluctúen en torno a una media estable. En series económicas, $d$ suele ser 0, 1 ó 2                         |
+| Constante                                               | Media de la serie diferenciada. @@latex:\mbox{@@Desviación@@latex:}@@ típica de la media                                           | Si la media de la serie transformada es significativa, el modelo debe incluir un término constante                                  |
+| $p$, orden AR                                           | PACF de orden $p$. ACF infinita                                                                                                    | PACF tiene $p$ valores no nulos. En series económicas $p$ suele ser $\leq2$                                                         |
+| $q$, orden MA                                           | ACF de orden $q$. PACF infinita                                                                                                    | ACF tiene $q$ valores no nulos. En series económicas q suele ser $\leq1$                                                            |
 
 ** Instrumentos de diagnosis
    :PROPERTIES:
@@ -157,15 +157,15 @@ económicas suele ser ARMA($2,1$)
 
 #+ATTR_HTML: :border 2 :rules all :frame border
 #+ATTR_LATEX: :environment longtable :align p{2.3cm}p{5.5cm}p{7.2cm}
-|                                                         | Instrumento                                               | Posible diagnóstico                                                                                                   |
-|---------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------|
-| $d$, orden de @@latex:\mbox{@@diferenciación@@latex:}@@ | /Proximidad a 1/ de alguna raíz de los polinomios AR o MA | Si la raíz es AR quizá conviene diferenciar. O quitar una diferencia si es MA (/salvo si hay tendencia determinista/) |
-| $d$, orden de @@latex:\mbox{@@diferenciación@@latex:}@@ | Gráfico de los residuos                                   | Si muestra rachas largas de residuos positivos o negativos, puede ser necesaria una diferencia adicional.             |
-| Constante                                               | Media de los residuos                                     | Si es significativa: añadir una  constante                                                                            |
-| Constante                                               | Constante estimada                                        | Si NO es significativa: el modelo mejorará quitando el término constante                                              |
-| $p$ y $q$,                                              | Contrastes de significación de los parámetros estimados   | Pueden sugerir eliminar parámetros irrelevantes                                                                       |
-| $p$ y $q$,                                              | ACF/PACF residuos. Test Q de Ljung-Box                    | Indican posibles pautas de autocorrelación no modelizadas                                                             |
-| $p$ y $q$,                                              | Correlaciones elevadas entre los parámetros estimados     | Puede ser síntoma de sobreparametrización                                                                             |
+|                                                         | Instrumento                                               | Posible diagnóstico                                                                                             |
+|---------------------------------------------------------+-----------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------|
+| $d$, orden de @@latex:\mbox{@@diferenciación@@latex:}@@ | /Proximidad a 1/ de alguna raíz de los polinomios AR o MA | Conviene diferenciar si la raíz es AR; o quitar una diferencia si es MA (/salvo si hay tendencia determinista/) |
+| $d$, orden de @@latex:\mbox{@@diferenciación@@latex:}@@ | Gráfico de los residuos                                   | Si muestra rachas largas de residuos positivos o negativos, puede ser necesaria una diferencia adicional.       |
+| Constante                                               | Media de los residuos                                     | Si es significativa: añadir una  constante                                                                      |
+| Constante                                               | Constante estimada                                        | Si NO es significativa: el modelo mejorará quitando el término constante                                        |
+| $p$ y $q$,                                              | Contrastes de significación de los parámetros estimados   | Pueden sugerir eliminar parámetros irrelevantes                                                                 |
+| $p$ y $q$,                                              | ACF/PACF residuos. Test Q de Ljung-Box                    | Indican posibles pautas de autocorrelación no modelizadas                                                       |
+| $p$ y $q$,                                              | Correlaciones elevadas entre los parámetros estimados     | Puede ser síntoma de sobreparametrización                                                                       |
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 Aún, una vez superadas las pruebas de diagnostico, se puede aplicar un
@@ -209,10 +209,10 @@ Y_t = \boldsymbol{\theta}_q(\mathsf{B}) U_t; \quad t\in\mathbb{Z}$$
 Cuando un polinomio tiene alguna raíz igual a uno se dice que tiene
 “raíces unitarias”.
 
-Si el polinomio AR estimado tiene alguna raíz "próxima a uno", es 
-síntoma de subdiferenciación.
+Si el polinomio AR estimado tiene alguna raíz "próxima a uno" es 
+síntoma de infradiferenciación.
 
-Si el polinomio MA estimado tiene alguna raíz "próxima a uno", es
+Si el polinomio MA estimado tiene alguna raíz "próxima a uno" es
 síntoma de
 a) sobrediferenciación... salvo cuando...
 b) antes de diferenciar hubiera una tendencia determinista (que
@@ -226,7 +226,7 @@ Ejemplos que ilustran los tres casos:
 |--------------------------------------------------------------------------------------+----------------------------------------------------------------------------------------|
 | $(1-1.5\mathsf{B}+.5\mathsf{B}^2) Y_t = U_t$                                         | ${\color{blue}{(1-0.5\mathsf{B})\nabla Y_t=U_t}}$                                      |
 | $(1-.5\mathsf{B}+0.7\mathsf{B}^2)\nabla^2Y_t=(1-\mathsf{B})U_t$                      | ${\color{blue}{(1-.5\mathsf{B}+0.7\mathsf{B}^2)\nabla Y_t =  U_t}}$                    |
-| ${\color{blue}{\nabla Y_t = \beta+          (1-\mathsf{B}) U_t}}$                    | $Y_t = \beta t + U_t\quad$ (¡no estacionario!)                                         |
+| $\nabla Y_t = \beta+          (1-\mathsf{B}) U_t$                                    | ${\color{blue}{Y_t = \beta t + U_t}}\quad$ (¡no estacionario!)                         |
 
 ** Paseos aleatorios
    :PROPERTIES:
@@ -237,23 +237,6 @@ Ejemplos que ilustran los tres casos:
 Un paseo aleatorio representa una variable cuyos cambios son ruido
 blanco: $$Y_t = \mu + Y_{t-1} + U_t$$
 
-Cuando $\mu=0$ se denomina sencillamente /paseo aleatorio/: $\;\nabla Y_t =  U_t$
-
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc08/ :file ACF-RW.png :exports code :results none
-options(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
-rw <- um(i = "(1 - B)")
-ide(sim(rw, n = 500), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"), main = "Paseo aleatorio")
-#+END_SRC
-
-#+attr_org: :width 800
-#+attr_html: :width 900px
-#+attr_latex: :width 425px
-[[./img/lecc08/ACF-RW.png]]
-
-
-
-#+attr_ipynb: (slideshow . ((slide_type . subslide)))
 Cuando $\mu\ne0$ se denomina /paseo aleatorio con deriva/: $\;\nabla Y_t = \mu +  U_t$
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
@@ -276,6 +259,25 @@ El proceso tiene mayor inercia cuanto mayor es $|\mu|$. El signo de
 $\mu$ determina el signo de la pendiente global.
 
 
+#+attr_ipynb: (slideshow . ((slide_type . subslide)))
+Cuando $\mu=0$ se denomina sencillamente /paseo aleatorio/: $\;\nabla Y_t =  U_t$
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc08/ :file ACF-RW.png :exports code :results none
+options(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
+rw <- um(i = "(1 - B)")
+ide(sim(rw, n = 500), lag.max = 20, graphs = c("plot", "acf", "pacf", "pgram"), main = "Paseo aleatorio")
+#+END_SRC
+
+#+attr_org: :width 800
+#+attr_html: :width 900px
+#+attr_latex: :width 425px
+[[./img/lecc08/ACF-RW.png]]
+
+
+
+
+
 * Modelos ARIMA estacionales (SARIMA)
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
@@ -283,7 +285,8 @@ $\mu$ determina el signo de la pendiente global.
    
 El período estacional $S$ es el número mínimo de observaciones
 necesarias para recorrer un ciclo estacional completo. Por ejemplo,
-$S=12$ para datos mensuales, $S=4$ para datos trimestrales, etc.
+$S=12$ para datos mensuales, $S=4$ para datos trimestrales, $S=24$
+para datos horarios, etc.
 
 Describiremos comportamientos estacionales con modelos
 ARIMA$(p,d,q)\times(P,D,Q)_S$ 
@@ -395,6 +398,7 @@ $\quad\boldsymbol{\Phi}=1-0.9z^{12}\quad\Rightarrow\quad (1-0.9
 #+BEGIN_SRC jupyter-R :exports result  :results value table pp :results none 
 roots(SAR1)
 #+END_SRC
+#+attr_ipynb: (slideshow . ((slide_type . notes)))
 Evidentemente las raíces son iguales a las del caso anterior (aunque ahora corresponden al polinomio autorregresivo).
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
@@ -419,12 +423,12 @@ Con estos dos ejemplos hemos podido apreciar que:
   retardos estacionales, es decir, a múltiplos del período estacional
   $S$.
 
+- En estos ejemplos, en los que $S=12$, los retardos estacionales son:
+  12, 24, 36, 48, 60,...
+
 - las correlaciones correspondientes a los “retardos regulares” (es
   decir, todos menos menos los estacionales) son no significativas en
   general.
-
-- En estos ejemplos, en los que $S=12$, los retardos estacionales son:
-  12, 24, 36, 48, 60,...
 #+latex:\bigskip
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
@@ -587,20 +591,21 @@ En estos cuatro ejemplos hemos podido apreciar que
    :metadata: (slideshow . ((slide_type . notes)))
    :END:
 
-** Ideas principales
+** Ideas principales respecto a la modelización univariante
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
 
-- Se basa en modelos sin variables exógenas que resumen la
-  interdependencia temporal con polinomios de órdenes reducidos.
-- Está especialmente indicado para predecir el futuro de la serie
+- Son modelos sin variables exógenas 
+- Resumen la interdependencia temporal con polinomios de órdenes
+  reducidos.
+- Están especialmente indicado para predecir el futuro de una serie
   temporal.
 - Parte de dos supuestos sobre el proceso estocástico subyacente: 
   a) es débilmente estacionario
-  b) tiene representación en forma de proceso lineal $Y_t=\sum_{j=0}^\infty a_j U_{t-j}$
+  b) tiene representación como proceso lineal: $Y_t=\sum_{j=0}^\infty a_j U_{t-j}$ con $\boldsymbol{a}\in\ell^2$
 - (Además se suele asumir normalidad en $U_t$)
-- utiliza variados instrumentos: (a) gráficos (b) función de
+- Utiliza múltiples instrumentos: (a) gráficos (b) función de
   autocorrelación (c) función de autocorrelación parcial, (d)
   estadístico Q de Ljung-Box, etc...
 - Si la serie original no "parece" débilmente estacionaria, se induce
@@ -615,7 +620,6 @@ En estos cuatro ejemplos hemos podido apreciar que
 | *PACF finita*      | _Ruido blanco_: retardos conjuntamente NO significativos | _AR_: orden indicado por la PACF |
 | *PACF persistente* | _MA_: orden indicado por la ACF                          | _ARMA_                           |
 
-
 ** Metodología
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
@@ -625,14 +629,13 @@ Tres fases:
 - Identificación :: Elija una especificación provisional para el
   proceso estocástico generador de los datos en base a las
   características medibles de los datos: “dejar que los datos hablen”
-- Estimación :: suele requerir métodos iterativos
+- Estimación :: suele requerir métodos iterativos (/Gretl se encarga de esto/)
 - Diagnosis :: de la calidad estadística del modelo ajustado. Algunos
   controles estándar son:
   - Significatividad de los parámetros estimados
   - Estacionariedad y homocedasticidad de los residuos
   - ¿Existe un patrón de autocorrelación residual que podría ser
-    modelado? ¿O hemos logrado que los residuos sean _/"ruido
-    blanco"/_?
+    modelado? ¿O hemos logrado que los residuos sean */"ruido blanco"/*?
 
 Si la diagnosis no es satisfactoria, se vuelve a la primera fase.
 
