@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es-es">
 <head>
-<!-- 2024-10-14 lun 12:35 -->
+<!-- 2024-10-14 lun 12:42 -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Código del material para un curso de Econometría Aplicada</title>
@@ -21,21 +21,21 @@ html,button,input,select,textarea {margin: 0; background-image: url(https://www.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgf464b88">1. Regresión con series temporales</a>
+<li><a href="#orgb27fef3">1. Regresión con series temporales</a>
 <ul>
-<li><a href="#org8938dd0">1.1. Transformación de los datos (Lecc01)</a>
+<li><a href="#orgf49fc97">1.1. Transformación de los datos (Lecc01)</a>
 <ul>
-<li><a href="#orgcea2198">1.1.1. Practicas</a></li>
+<li><a href="#org423b775">1.1.1. Practicas</a></li>
 </ul>
 </li>
-<li><a href="#org6f93fed">1.2. Regresión con series temporales - Modelos con componentes deterministas (Lecc02)</a>
+<li><a href="#orgac92ebc">1.2. Regresión con series temporales - Modelos con componentes deterministas (Lecc02)</a>
 <ul>
-<li><a href="#org76fcf21">1.2.1. Practicas</a></li>
+<li><a href="#org9a297d0">1.2.1. Practicas</a></li>
 </ul>
 </li>
-<li><a href="#org6c208b6">1.3. Correlación y causalidad. Introducción a la cointegración (Lecc03)</a>
+<li><a href="#org298389b">1.3. Correlación y causalidad. Introducción a la cointegración (Lecc03)</a>
 <ul>
-<li><a href="#org423b775">1.3.1. Practicas</a></li>
+<li><a href="#org5b7a4ce">1.3.1. Practicas</a></li>
 </ul>
 </li>
 </ul>
@@ -43,10 +43,10 @@ html,button,input,select,textarea {margin: 0; background-image: url(https://www.
 <li><a href="#org5003f89">2. Modelos univariantes de series temporales</a>
 <ul>
 <li><a href="#orge136211">2.1. Conceptos algebraicos (Lecc04)</a></li>
-<li><a href="#org882e2ea">2.2. Procesos estocásticos débilmente estacionarios (Lecc05)</a></li>
+<li><a href="#org7d7d529">2.2. Procesos estocásticos débilmente estacionarios (Lecc05)</a></li>
 <li><a href="#org72b57a8">2.3. ACF, PACF y densidad espectral de algunos modelos lineales (Lecc06)</a></li>
-<li><a href="#orgcc9dd3a">2.4. ACF, PACF y densidad espectral de algunos modelos ARMA. Herramientas estadísticas (Lecc07)</a></li>
-<li><a href="#org82a8a0f">2.5. Modelos ARIMA y SARIMA. Identificación y diagnosis del análisis univariante (Lecc08)</a></li>
+<li><a href="#orgbdc44d8">2.4. ACF, PACF y densidad espectral de algunos modelos ARMA. Herramientas estadísticas (Lecc07)</a></li>
+<li><a href="#orgaf8eb2a">2.5. Modelos ARIMA y SARIMA. Identificación y diagnosis del análisis univariante (Lecc08)</a></li>
 </ul>
 </li>
 <li><a href="#org6e25ed4">3. Ficheros .ipynb (notebooks de jupyter)</a></li>
@@ -56,7 +56,7 @@ html,button,input,select,textarea {margin: 0; background-image: url(https://www.
 </nav>
 <dl class="org-dl">
 <dt>Enlaces</dt><dd><ul class="org-ul">
-<li><a href="https://mbujosab.github.io/EconometriaAplicada-SRC/">Web</a> con el material</li>
+<li><a href="https://mbujosab.github.io/EconometriaAplicada-SRC/">Web</a> con el material (si no funciona la web, acceda al directorio <a href="./docs/">docs</a></li>
 <li><a href="https://github.com/mbujosab/EconometriaAplicada-SRC">Repositorio</a> con el material</li>
 
 <li><a href="https://drive.google.com/open?id=0Bwa1A30pN0IwWUtNNzRQRFRJUTQ">Ficha</a> de la asignatura</li>
@@ -66,22 +66,20 @@ html,button,input,select,textarea {margin: 0; background-image: url(https://www.
 <p>
 <a href="Calendario-Econometria-Aplicada.pdf">Calendario tentativo</a> 
 </p>
-<div id="outline-container-orgf464b88" class="outline-2">
-<h2 id="orgf464b88"><span class="section-number-2">1.</span> Regresión con series temporales</h2>
+<div id="outline-container-orgb27fef3" class="outline-2">
+<h2 id="orgb27fef3"><span class="section-number-2">1.</span> Regresión con series temporales</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org8938dd0" class="outline-3">
-<h3 id="org8938dd0"><span class="section-number-3">1.1.</span> Transformación de los datos (Lecc01)</h3>
+<div id="outline-container-orgf49fc97" class="outline-3">
+<h3 id="orgf49fc97"><span class="section-number-3">1.1.</span> Transformación de los datos (Lecc01)</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
-<li><a href="./docs/Lecc01.slides.html">slides</a></li>
-<li><a href="./docs/Lecc01.html">html</a></li>
 <li><a href="./docs/Lecc01.pdf">pdf</a></li>
 <li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc01.ipynb">notebook en mybinder</a></li>
 </ul>
 </div>
-<div id="outline-container-orgcea2198" class="outline-4">
-<h4 id="orgcea2198"><span class="section-number-4">1.1.1.</span> Practicas</h4>
+<div id="outline-container-org423b775" class="outline-4">
+<h4 id="org423b775"><span class="section-number-4">1.1.1.</span> Practicas</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <ul class="org-ul">
 <li><a href="./Practicas/PracticasGretl/pub/Prct-Lecc01.pdf">pdf file</a></li>
@@ -93,18 +91,16 @@ html,button,input,select,textarea {margin: 0; background-image: url(https://www.
 </div>
 </div>
 </div>
-<div id="outline-container-org6f93fed" class="outline-3">
-<h3 id="org6f93fed"><span class="section-number-3">1.2.</span> Regresión con series temporales - Modelos con componentes deterministas (Lecc02)</h3>
+<div id="outline-container-orgac92ebc" class="outline-3">
+<h3 id="orgac92ebc"><span class="section-number-3">1.2.</span> Regresión con series temporales - Modelos con componentes deterministas (Lecc02)</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
-<li><a href="./docs/Lecc02.slides.html">slides</a></li>
-<li><a href="./docs/Lecc02.html">html</a></li>
 <li><a href="./docs/Lecc02.pdf">pdf</a></li>
 <li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc02.ipynb">notebook en mybinder</a></li>
 </ul>
 </div>
-<div id="outline-container-org76fcf21" class="outline-4">
-<h4 id="org76fcf21"><span class="section-number-4">1.2.1.</span> Practicas</h4>
+<div id="outline-container-org9a297d0" class="outline-4">
+<h4 id="org9a297d0"><span class="section-number-4">1.2.1.</span> Practicas</h4>
 <div class="outline-text-4" id="text-1-2-1">
 <ul class="org-ul">
 <li><a href="./Practicas/PracticasGretl/pub/Prct-Lecc02.pdf">pdf file</a></li>
@@ -117,18 +113,16 @@ html,button,input,select,textarea {margin: 0; background-image: url(https://www.
 </div>
 </div>
 </div>
-<div id="outline-container-org6c208b6" class="outline-3">
-<h3 id="org6c208b6"><span class="section-number-3">1.3.</span> Correlación y causalidad. Introducción a la cointegración (Lecc03)</h3>
+<div id="outline-container-org298389b" class="outline-3">
+<h3 id="org298389b"><span class="section-number-3">1.3.</span> Correlación y causalidad. Introducción a la cointegración (Lecc03)</h3>
 <div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
-<li><a href="./docs/Lecc03.slides.html">slides</a></li>
-<li><a href="./docs/Lecc03.html">html</a></li>
 <li><a href="./docs/Lecc03.pdf">pdf</a></li>
 <li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc03.ipynb">notebook en mybinder</a></li>
 </ul>
 </div>
-<div id="outline-container-org423b775" class="outline-4">
-<h4 id="org423b775"><span class="section-number-4">1.3.1.</span> Practicas</h4>
+<div id="outline-container-org5b7a4ce" class="outline-4">
+<h4 id="org5b7a4ce"><span class="section-number-4">1.3.1.</span> Practicas</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <ul class="org-ul">
 <li><a href="./Practicas/PracticasGretl/pub/Prct-Lecc03.pdf">pdf file</a></li>
@@ -150,19 +144,15 @@ html,button,input,select,textarea {margin: 0; background-image: url(https://www.
 <h3 id="orge136211"><span class="section-number-3">2.1.</span> Conceptos algebraicos (Lecc04)</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
-<li><a href="./docs/Lecc04.slides.html">slides</a></li>
-<li><a href="./docs/Lecc04.html">html</a></li>
 <li><a href="./docs/Lecc04.pdf">pdf</a></li>
 <li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc04.ipynb">notebook en mybinder</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org882e2ea" class="outline-3">
-<h3 id="org882e2ea"><span class="section-number-3">2.2.</span> Procesos estocásticos débilmente estacionarios (Lecc05)</h3>
+<div id="outline-container-org7d7d529" class="outline-3">
+<h3 id="org7d7d529"><span class="section-number-3">2.2.</span> Procesos estocásticos débilmente estacionarios (Lecc05)</h3>
 <div class="outline-text-3" id="text-2-2">
 <ul class="org-ul">
-<li><a href="./docs/Lecc05.slides.html">slides</a></li>
-<li><a href="./docs/Lecc05.html">html</a></li>
 <li><a href="./docs/Lecc05.pdf">pdf</a></li>
 <li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc05.ipynb">notebook en mybinder</a></li>
 </ul>
@@ -172,30 +162,24 @@ html,button,input,select,textarea {margin: 0; background-image: url(https://www.
 <h3 id="org72b57a8"><span class="section-number-3">2.3.</span> ACF, PACF y densidad espectral de algunos modelos lineales (Lecc06)</h3>
 <div class="outline-text-3" id="text-2-3">
 <ul class="org-ul">
-<li><a href="./docs/Lecc06.slides.html">slides</a></li>
-<li><a href="./docs/Lecc06.html">html</a></li>
 <li><a href="./docs/Lecc06.pdf">pdf</a></li>
 <li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc06.ipynb">notebook en mybinder</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcc9dd3a" class="outline-3">
-<h3 id="orgcc9dd3a"><span class="section-number-3">2.4.</span> ACF, PACF y densidad espectral de algunos modelos ARMA. Herramientas estadísticas (Lecc07)</h3>
+<div id="outline-container-orgbdc44d8" class="outline-3">
+<h3 id="orgbdc44d8"><span class="section-number-3">2.4.</span> ACF, PACF y densidad espectral de algunos modelos ARMA. Herramientas estadísticas (Lecc07)</h3>
 <div class="outline-text-3" id="text-2-4">
 <ul class="org-ul">
-<li><a href="./docs/Lecc07.slides.html">slides</a></li>
-<li><a href="./docs/Lecc07.html">html</a></li>
 <li><a href="./docs/Lecc07.pdf">pdf</a></li>
 <li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc07.ipynb">notebook en mybinder</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org82a8a0f" class="outline-3">
-<h3 id="org82a8a0f"><span class="section-number-3">2.5.</span> Modelos ARIMA y SARIMA. Identificación y diagnosis del análisis univariante (Lecc08)</h3>
+<div id="outline-container-orgaf8eb2a" class="outline-3">
+<h3 id="orgaf8eb2a"><span class="section-number-3">2.5.</span> Modelos ARIMA y SARIMA. Identificación y diagnosis del análisis univariante (Lecc08)</h3>
 <div class="outline-text-3" id="text-2-5">
 <ul class="org-ul">
-<li><a href="./docs/Lecc08.slides.html">slides</a></li>
-<li><a href="./docs/Lecc08.html">html</a></li>
 <li><a href="./docs/Lecc08.pdf">pdf</a></li>
 <li><a href="https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc08.ipynb">notebook en mybinder</a></li>
 </ul>
@@ -232,7 +216,7 @@ html,button,input,select,textarea {margin: 0; background-image: url(https://www.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-10-14 lun 12:35</p>
+<p class="date">Created: 2024-10-14 lun 12:42</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

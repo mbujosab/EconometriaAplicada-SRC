@@ -15,7 +15,7 @@
 # https://www.ucm.es/data/cont/docs/3-2016-07-21-Marca%20UCM%20logo%20negro.png
 
 - Enlaces :: 
-  - [[https://mbujosab.github.io/EconometriaAplicada-SRC/][Web]] con el material
+  - [[https://mbujosab.github.io/EconometriaAplicada-SRC/][Web]] con el material (si no funciona la web, acceda al directorio [[file:./docs/][docs]]
   - [[https://github.com/mbujosab/EconometriaAplicada-SRC][Repositorio]] con el material
 
   - [[https://drive.google.com/open?id=0Bwa1A30pN0IwWUtNNzRQRFRJUTQ][Ficha]] de la asignatura
@@ -29,8 +29,8 @@
 
 ** Transformación de los datos (Lecc01)
 
-- [[file:./docs/Lecc01.slides.html][slides]]
-- [[file:./docs/Lecc01.html][html]]
+# - [[file:./docs/Lecc01.slides.html][slides]]
+# - [[file:./docs/Lecc01.html][html]]
 - [[file:./docs/Lecc01.pdf][pdf]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc01.ipynb][notebook en mybinder]]
 
@@ -43,8 +43,8 @@
 
 ** Regresión con series temporales - Modelos con componentes deterministas (Lecc02)
 
-- [[file:./docs/Lecc02.slides.html][slides]]
-- [[file:./docs/Lecc02.html][html]]
+# - [[file:./docs/Lecc02.slides.html][slides]]
+# - [[file:./docs/Lecc02.html][html]]
 - [[file:./docs/Lecc02.pdf][pdf]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc02.ipynb][notebook en mybinder]]
 
@@ -58,8 +58,8 @@
 
 ** Correlación y causalidad. Introducción a la cointegración (Lecc03)
 
-- [[file:./docs/Lecc03.slides.html][slides]]
-- [[file:./docs/Lecc03.html][html]]
+# - [[file:./docs/Lecc03.slides.html][slides]]
+# - [[file:./docs/Lecc03.html][html]]
 - [[file:./docs/Lecc03.pdf][pdf]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc03.ipynb][notebook en mybinder]]
 
@@ -78,40 +78,40 @@
 
 ** Conceptos algebraicos (Lecc04)
 
-- [[file:./docs/Lecc04.slides.html][slides]]
-- [[file:./docs/Lecc04.html][html]]
+# - [[file:./docs/Lecc04.slides.html][slides]]
+# - [[file:./docs/Lecc04.html][html]]
 - [[file:./docs/Lecc04.pdf][pdf]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc04.ipynb][notebook en mybinder]]
 
 
 ** Procesos estocásticos débilmente estacionarios (Lecc05)
 
-- [[file:./docs/Lecc05.slides.html][slides]]
-- [[file:./docs/Lecc05.html][html]]
+# - [[file:./docs/Lecc05.slides.html][slides]]
+# - [[file:./docs/Lecc05.html][html]]
 - [[file:./docs/Lecc05.pdf][pdf]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc05.ipynb][notebook en mybinder]]
 
 
 ** ACF, PACF y densidad espectral de algunos modelos lineales (Lecc06)
 
-- [[file:./docs/Lecc06.slides.html][slides]]
-- [[file:./docs/Lecc06.html][html]]
+# - [[file:./docs/Lecc06.slides.html][slides]]
+# - [[file:./docs/Lecc06.html][html]]
 - [[file:./docs/Lecc06.pdf][pdf]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc06.ipynb][notebook en mybinder]]
 
 
 ** ACF, PACF y densidad espectral de algunos modelos ARMA. Herramientas estadísticas (Lecc07)
 
-- [[file:./docs/Lecc07.slides.html][slides]]
-- [[file:./docs/Lecc07.html][html]]
+# - [[file:./docs/Lecc07.slides.html][slides]]
+# - [[file:./docs/Lecc07.html][html]]
 - [[file:./docs/Lecc07.pdf][pdf]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc07.ipynb][notebook en mybinder]]
 
 
 ** Modelos ARIMA y SARIMA. Identificación y diagnosis del análisis univariante (Lecc08)
 
-- [[file:./docs/Lecc08.slides.html][slides]]
-- [[file:./docs/Lecc08.html][html]]
+# - [[file:./docs/Lecc08.slides.html][slides]]
+# - [[file:./docs/Lecc08.html][html]]
 - [[file:./docs/Lecc08.pdf][pdf]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc08.ipynb][notebook en mybinder]]
 
