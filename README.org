@@ -29,9 +29,9 @@
 
 ** Transformación de los datos (Lecc01)
 
-- [[file:./Lecc01.slides.html][slides]]
-- [[file:./Lecc01.html][html]]
-- [[file:./Lecc01.pdf][pdf]]
+- [[file:./docs/Lecc01.slides.html][slides]]
+- [[file:./docs/Lecc01.html][html]]
+- [[file:./docs/Lecc01.pdf][pdf]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc01.ipynb][notebook en mybinder]]
 
 *** Practicas
@@ -43,9 +43,9 @@
 
 ** Regresión con series temporales - Modelos con componentes deterministas (Lecc02)
 
-- [[file:./Lecc02.slides.html][slides]]
-- [[file:./Lecc02.html][html]]
-- [[file:./Lecc02.pdf][pdf]]
+- [[file:./docs/Lecc02.slides.html][slides]]
+- [[file:./docs/Lecc02.html][html]]
+- [[file:./docs/Lecc02.pdf][pdf]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc02.ipynb][notebook en mybinder]]
 
 *** Practicas
@@ -58,9 +58,9 @@
 
 ** Correlación y causalidad. Introducción a la cointegración (Lecc03)
 
-- [[file:./Lecc03.slides.html][slides]]
-- [[file:./Lecc03.html][html]]
-- [[file:./Lecc03.pdf][pdf]]
+- [[file:./docs/Lecc03.slides.html][slides]]
+- [[file:./docs/Lecc03.html][html]]
+- [[file:./docs/Lecc03.pdf][pdf]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc03.ipynb][notebook en mybinder]]
 
 *** Practicas
@@ -78,54 +78,54 @@
 
 ** Conceptos algebraicos (Lecc04)
 
-- [[file:./Lecc04.slides.html][slides]]
-- [[file:./Lecc04.html][html]]
-- [[file:./Lecc04.pdf][pdf]]
+- [[file:./docs/Lecc04.slides.html][slides]]
+- [[file:./docs/Lecc04.html][html]]
+- [[file:./docs/Lecc04.pdf][pdf]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc04.ipynb][notebook en mybinder]]
 
 
 ** Procesos estocásticos débilmente estacionarios (Lecc05)
 
-- [[file:./Lecc05.slides.html][slides]]
-- [[file:./Lecc05.html][html]]
-- [[file:./Lecc05.pdf][pdf]]
+- [[file:./docs/Lecc05.slides.html][slides]]
+- [[file:./docs/Lecc05.html][html]]
+- [[file:./docs/Lecc05.pdf][pdf]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc05.ipynb][notebook en mybinder]]
 
 
 ** ACF, PACF y densidad espectral de algunos modelos lineales (Lecc06)
 
-- [[file:./Lecc06.slides.html][slides]]
-- [[file:./Lecc06.html][html]]
-- [[file:./Lecc06.pdf][pdf]]
+- [[file:./docs/Lecc06.slides.html][slides]]
+- [[file:./docs/Lecc06.html][html]]
+- [[file:./docs/Lecc06.pdf][pdf]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc06.ipynb][notebook en mybinder]]
 
 
 ** ACF, PACF y densidad espectral de algunos modelos ARMA. Herramientas estadísticas (Lecc07)
 
-- [[file:./Lecc07.slides.html][slides]]
-- [[file:./Lecc07.html][html]]
-- [[file:./Lecc07.pdf][pdf]]
+- [[file:./docs/Lecc07.slides.html][slides]]
+- [[file:./docs/Lecc07.html][html]]
+- [[file:./docs/Lecc07.pdf][pdf]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc07.ipynb][notebook en mybinder]]
 
 
 ** Modelos ARIMA y SARIMA. Identificación y diagnosis del análisis univariante (Lecc08)
 
-- [[file:./Lecc08.slides.html][slides]]
-- [[file:./Lecc08.html][html]]
-- [[file:./Lecc08.pdf][pdf]]
+- [[file:./docs/Lecc08.slides.html][slides]]
+- [[file:./docs/Lecc08.html][html]]
+- [[file:./docs/Lecc08.pdf][pdf]]
 - [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc08.ipynb][notebook en mybinder]]
 
 
 * Ficheros .ipynb (notebooks de jupyter)
 
-- Lección 1: [[file:./Lecc01.ipynb][notebook]]
-- Lección 1: [[file:./Lecc02.ipynb][notebook]]
-- Lección 3: [[file:./Lecc03.ipynb][notebook]]
-- Lección 4: [[file:./Lecc04.ipynb][notebook]]
-- Lección 5: [[file:./Lecc05.ipynb][notebook]]
-- Lección 6: [[file:./Lecc06.ipynb][notebook]]
-- Lección 7: [[file:./Lecc07.ipynb][notebook]]
-- Lección 8: [[file:./Lecc08.ipynb][notebook]]
+- Lección 1: [[file:./docs/Lecc01.ipynb][notebook]]
+- Lección 1: [[file:./docs/Lecc02.ipynb][notebook]]
+- Lección 3: [[file:./docs/Lecc03.ipynb][notebook]]
+- Lección 4: [[file:./docs/Lecc04.ipynb][notebook]]
+- Lección 5: [[file:./docs/Lecc05.ipynb][notebook]]
+- Lección 6: [[file:./docs/Lecc06.ipynb][notebook]]
+- Lección 7: [[file:./docs/Lecc07.ipynb][notebook]]
+- Lección 8: [[file:./docs/Lecc08.ipynb][notebook]]
 
 * Ejercicios de muestra
 
