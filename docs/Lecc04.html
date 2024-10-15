@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2024-10-14 lun 12:01 -->
+<!-- 2024-10-15 mar 15:46 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 4</title>
@@ -233,23 +233,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc878118">1. Secuencias de números</a>
+<li><a href="#org2ca9577">1. Secuencias de números</a>
 <ul>
 <li><a href="#org9eb2348">1.1. El espacio vectorial de las secuencias infinitas \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a>
 <ul>
-<li><a href="#org9acaae0">1.1.1. Notación mediante funciones generatrices</a></li>
-<li><a href="#org2066cc9">1.1.2. Características de algunas secuencias</a></li>
+<li><a href="#org0e31586">1.1.1. Notación mediante funciones generatrices</a></li>
+<li><a href="#org70f0db4">1.1.2. Características de algunas secuencias</a></li>
 <li><a href="#orgc1c3cae">1.1.3. Algunos subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a></li>
 </ul>
 </li>
-<li><a href="#org9f8cfaa">1.2. Producto convolución</a></li>
+<li><a href="#org44c1cbc">1.2. Producto convolución</a></li>
 <li><a href="#org1817ae9">1.3. Anillos conmutativos y cuerpos</a>
 <ul>
 <li><a href="#orgc70da8e">1.3.1. Anillos conmutativos</a></li>
 <li><a href="#org099a838">1.3.2. Cuerpos</a></li>
 </ul>
 </li>
-<li><a href="#org2899879">1.4. Clasificación de algunos subconjuntos de sucesiones</a></li>
+<li><a href="#orga614d2b">1.4. Clasificación de algunos subconjuntos de sucesiones</a></li>
 <li><a href="#org1eded2f">1.5. Inversas</a>
 <ul>
 <li><a href="#org82b8dbf">1.5.1. Inversas de secuencias con principio</a></li>
@@ -263,21 +263,21 @@
 <li><a href="#orgd470d6f">1.6.1. Polinomios y secuencias en el operador retardo \(\boldsymbol{a}(\mathsf{B}{})\) actuando sobre secuencias</a></li>
 </ul>
 </li>
-<li><a href="#orga4d507d">1.7. Convolución de una serie formal con el "<i>reverso</i>" de otra</a></li>
+<li><a href="#org76705d1">1.7. Convolución de una serie formal con el "<i>reverso</i>" de otra</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div class="ABSTRACT" id="org56e8eee">
+<div class="ABSTRACT" id="orgb8640ce">
 <p>
 En esta lección veremos conceptos algebraicos usados en la
 modelización de series temporales.
 </p>
 
 </div>
-<div id="outline-container-orgc878118" class="outline-2">
-<h2 id="orgc878118"><span class="section-number-2">1.</span> Secuencias de números</h2>
+<div id="outline-container-org2ca9577" class="outline-2">
+<h2 id="org2ca9577"><span class="section-number-2">1.</span> Secuencias de números</h2>
 <div class="outline-text-2" id="text-1">
 </div>
 <div id="outline-container-org9eb2348" class="outline-3">
@@ -312,8 +312,8 @@ Si \(\;\boldsymbol{x},\boldsymbol{y}\in{\mathbb{R}}^\mathbb{Z}\;\) y
 producto por escalares constituyen un espacio vectorial.
 </p>
 </div>
-<div id="outline-container-org9acaae0" class="outline-4">
-<h4 id="org9acaae0"><span class="section-number-4">1.1.1.</span> Notación mediante funciones generatrices</h4>
+<div id="outline-container-org0e31586" class="outline-4">
+<h4 id="org0e31586"><span class="section-number-4">1.1.1.</span> Notación mediante funciones generatrices</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 En la expresión \(\;\boldsymbol{x} \quad = \quad (\ldots,\ x_{-2},\
@@ -350,8 +350,8 @@ La sucesión \(\;\boldsymbol{0}=\sum_{t=-\infty}^\infty 0 z^t\;\) se denomina <i
 </p>
 </div>
 </div>
-<div id="outline-container-org2066cc9" class="outline-4">
-<h4 id="org2066cc9"><span class="section-number-4">1.1.2.</span> Características de algunas secuencias</h4>
+<div id="outline-container-org70f0db4" class="outline-4">
+<h4 id="org70f0db4"><span class="section-number-4">1.1.2.</span> Características de algunas secuencias</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 En una sucesión \(\boldsymbol{a}\) no nula llamamos
@@ -398,8 +398,8 @@ son cero).  \[\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2
 </div>
 </div>
 </div>
-<div id="outline-container-org9f8cfaa" class="outline-3">
-<h3 id="org9f8cfaa"><span class="section-number-3">1.2.</span> Producto convolución</h3>
+<div id="outline-container-org44c1cbc" class="outline-3">
+<h3 id="org44c1cbc"><span class="section-number-3">1.2.</span> Producto convolución</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Sean \(\boldsymbol{a}\) y \(\boldsymbol{b}\) sucesiones <span class="underline">con principio</span>
@@ -492,8 +492,8 @@ conjunto</i>)
 </div>
 </div>
 </div>
-<div id="outline-container-org2899879" class="outline-3">
-<h3 id="org2899879"><span class="section-number-3">1.4.</span> Clasificación de algunos subconjuntos de sucesiones</h3>
+<div id="outline-container-orga614d2b" class="outline-3">
+<h3 id="orga614d2b"><span class="section-number-3">1.4.</span> Clasificación de algunos subconjuntos de sucesiones</h3>
 <div class="outline-text-3" id="text-1-4">
 <dl class="org-dl">
 <dt>Son anillos el conjunto de</dt><dd><p>
@@ -738,8 +738,8 @@ Y en general, si \(\boldsymbol{a}\) e \(\boldsymbol{y}\) son secuencias sumables
 </div>
 </div>
 </div>
-<div id="outline-container-orga4d507d" class="outline-3">
-<h3 id="orga4d507d"><span class="section-number-3">1.7.</span> Convolución de una serie formal con el "<i>reverso</i>" de otra</h3>
+<div id="outline-container-org76705d1" class="outline-3">
+<h3 id="org76705d1"><span class="section-number-3">1.7.</span> Convolución de una serie formal con el "<i>reverso</i>" de otra</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Por último, si tenemos dos series formales \(\boldsymbol{a}\) y
@@ -769,7 +769,7 @@ es decir,
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-10-14 lun 12:01</p>
+<p class="date">Created: 2024-10-15 mar 15:46</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

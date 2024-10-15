@@ -146,9 +146,9 @@ económicas suele ser ARMA($2,1$)
 |---------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------|
 | Transf. @@latex:\mbox{@@logarítmica@@latex:}@@          | Gráficos rango-media y serie temporal                                                                                              | Conseguir independizar la variabilidad de los datos de su nivel. Las series económicas necesitan esta transformación frecuentemente |
 | $d$, orden de @@latex:\mbox{@@diferenciación@@latex:}@@ | Gráfico de la serie temporal. ACF (caída lenta y lineal). @@latex:\mbox{@@Contrastes@@latex:}@@ de raíz unitaria (DF o ADF y KPSS) | Conseguir que los datos fluctúen en torno a una media estable. En series económicas, $d$ suele ser 0, 1 ó 2                         |
-| Constante                                               | Media de la serie diferenciada. @@latex:\mbox{@@Desviación@@latex:}@@ típica de la media                                           | Si la media de la serie transformada es significativa, el modelo debe incluir un término constante                                  |
-| $p$, orden AR                                           | PACF de orden $p$. ACF infinita                                                                                                    | PACF tiene $p$ valores no nulos. En series económicas $p$ suele ser $\leq2$                                                         |
-| $q$, orden MA                                           | ACF de orden $q$. PACF infinita                                                                                                    | ACF tiene $q$ valores no nulos. En series económicas q suele ser $\leq1$                                                            |
+| Constante                                               | Media de la serie transformada. @@latex:\mbox{@@Desviación@@latex:}@@ típica de la media                                           | Si la media de la serie transformada es significativa, el modelo debe incluir un término constante                                  |
+| $p$, orden AR                                           | Si PACF de orden $p$ y ACF infinita                                                                                                | En series económicas $p$ suele ser $\leq2$                                                                                          |
+| $q$, orden MA                                           | Si ACF de orden $q$ y PACF infinita                                                                                                | En series económicas q suele ser $\leq1$                                                                                            |
 
 ** Instrumentos de diagnosis
    :PROPERTIES:
@@ -194,9 +194,9 @@ $$\nabla_{_S}Y_t = (1 - \mathsf{B}^S)Y_t = Y_t - Y_{t-S}$$
    :metadata: (slideshow . ((slide_type . skip)))
    :END:
 
-Con ``ARIMA($p,d,q$)'', donde $d$ indica el número $d$ de diferencias
-que la serie necesita para ser estacionaria en media, extendemos la
-notación a procesos con raíces autorregresivas unitarias
+Extendemos la notación a procesos con raíces autorregresivas unitarias
+Con ``ARIMA($p,d,q$)''; donde $d$ indica el número de diferencias que
+la serie necesita para ser $I(0)$,
 $$\boldsymbol{\phi}_p*\nabla^d*\boldsymbol{Y} = \boldsymbol{\theta}_q*
 \boldsymbol{U}$$ es decir $$\boldsymbol{\phi}_p(\mathsf{B})\nabla^d
 Y_t = \boldsymbol{\theta}_q(\mathsf{B}) U_t; \quad t\in\mathbb{Z}$$
@@ -599,11 +599,13 @@ En estos cuatro ejemplos hemos podido apreciar que
 - Son modelos sin variables exógenas 
 - Resumen la interdependencia temporal con polinomios de órdenes
   reducidos.
-- Están especialmente indicado para predecir el futuro de una serie
-  temporal.
-- Parte de dos supuestos sobre el proceso estocástico subyacente: 
+- Está especialmente indicada para hacer predicción.
+- Parte de dos supuestos sobre el proceso estocástico subyacente:
   a) es débilmente estacionario
-  b) tiene representación como proceso lineal: $Y_t=\sum_{j=0}^\infty a_j U_{t-j}$ con $\boldsymbol{a}\in\ell^2$
+  b) tiene representación como proceso lineal:
+     $Y_t=\mu+\sum_{j=0}^\infty a_j U_{t-j}$ con
+     $\;\mu\in\mathbb{R},\;$ $\boldsymbol{a}\in\ell^2\;$ y
+     $\;\boldsymbol{U}\sim WN(0,\sigma^2)$
 - (Además se suele asumir normalidad en $U_t$)
 - Utiliza múltiples instrumentos: (a) gráficos (b) función de
   autocorrelación (c) función de autocorrelación parcial, (d)

@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="orgb5bea78">
+<div class="abstract" id="org7dcb237">
 <p>
 En esta lección repasamos los instrumentos de identificación y
 diagnosis del análisis univariante. Extendemos la notación para
@@ -14309,18 +14309,18 @@ económicas suele ser ARMA($2,1$)</p>
 </tr>
 <tr>
 <td>Constante</td>
-<td>Media de la serie diferenciada. Desviación típica de la media</td>
+<td>Media de la serie transformada. Desviación típica de la media</td>
 <td>Si la media de la serie transformada es significativa, el modelo debe incluir un término constante</td>
 </tr>
 <tr>
 <td>$p$, orden AR</td>
-<td>PACF de orden $p$. ACF infinita</td>
-<td>PACF tiene $p$ valores no nulos. En series económicas $p$ suele ser $\leq2$</td>
+<td>Si PACF de orden $p$ y ACF infinita</td>
+<td>En series económicas $p$ suele ser $\leq2$</td>
 </tr>
 <tr>
 <td>$q$, orden MA</td>
-<td>ACF de orden $q$. PACF infinita</td>
-<td>ACF tiene $q$ valores no nulos. En series económicas q suele ser $\leq1$</td>
+<td>Si ACF de orden $q$ y PACF infinita</td>
+<td>En series económicas q suele ser $\leq1$</td>
 </tr>
 </tbody>
 </table>
@@ -14443,9 +14443,9 @@ $$\nabla_{_S}Y_t = (1 - \mathsf{B}^S)Y_t = Y_t - Y_{t-S}$$</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Con ``ARIMA($p,d,q$)'', donde $d$ indica el número $d$ de diferencias
-que la serie necesita para ser estacionaria en media, extendemos la
-notación a procesos con raíces autorregresivas unitarias
+<p>Extendemos la notación a procesos con raíces autorregresivas unitarias
+Con ``ARIMA($p,d,q$)''; donde $d$ indica el número de diferencias que
+la serie necesita para ser $I(0)$,
 $$\boldsymbol{\phi}_p*\nabla^d*\boldsymbol{Y} = \boldsymbol{\theta}_q*
 \boldsymbol{U}$$ es decir $$\boldsymbol{\phi}_p(\mathsf{B})\nabla^d
 Y_t = \boldsymbol{\theta}_q(\mathsf{B}) U_t; \quad t\in\mathbb{Z}$$</p>
@@ -14967,11 +14967,13 @@ parametrización especial.</li>
 <li>Son modelos sin variables exógenas</li>
 <li>Resumen la interdependencia temporal con polinomios de órdenes
 reducidos.</li>
-<li>Están especialmente indicado para predecir el futuro de una serie
-temporal.</li>
-<li>Parte de dos supuestos sobre el proceso estocástico subyacente: <ol>
+<li>Está especialmente indicada para hacer predicción.</li>
+<li>Parte de dos supuestos sobre el proceso estocástico subyacente:<ol>
 <li>es débilmente estacionario</li>
-<li>tiene representación como proceso lineal: $Y_t=\sum_{j=0}^\infty a_j U_{t-j}$ con $\boldsymbol{a}\in\ell^2$</li>
+<li>tiene representación como proceso lineal:
+$Y_t=\mu+\sum_{j=0}^\infty a_j U_{t-j}$ con
+$\;\mu\in\mathbb{R},\;$ $\boldsymbol{a}\in\ell^2\;$ y
+$\;\boldsymbol{U}\sim WN(0,\sigma^2)$</li>
 </ol>
 </li>
 <li>(Además se suele asumir normalidad en $U_t$)</li>
