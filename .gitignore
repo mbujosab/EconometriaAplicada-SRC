@@ -11,7 +11,7 @@ USB
 EjerciciosHide/
 Ejercicios/SeriesSimuladas12/*.csv
 Ejercicios/SeriesSimuladas4/*.csv
-Ejercicios/IdentificaEstosARIMA/*.gdt
+# Ejercicios/IdentificaEstosARIMA/*.gdt
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
