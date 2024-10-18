@@ -128,6 +128,9 @@
 - Lección 8: [[file:./docs/Lecc08.ipynb][notebook]]
 
 * Ejercicios de muestra
+:PROPERTIES:
+:ID:       6327cc90-58ce-416f-9420-3e2f57f4bf5e
+:END:
 
 - [[file:./Ejercicios/mortality-marriages.html][Mortalidad en Reino Unido y proporción de matrimonios eclesiásticos]]
   (Versión [[file:./Ejercicios/mortality-marriages.pdf][pdf]] para imprimir)
@@ -138,5 +141,5 @@
 - [[file:./Ejercicios/EjercicioIdentificacionARIMA.html][Ejercicio de identificación de modelos ARIMA]]
   (Versión [[file:./Ejercicios/EjercicioIdentificacionARIMA.pdf][pdf]] para imprimir) --- [[https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios/IdentificaEstosARIMA][Directorio con más series simuladas_]]
 
-- [[file:./Ejercicios/SegundoEjercicioIdentificacionARIMA.html][Segundo ejercicio de identificación de modelos ARIMA]]
-  (Versión [[file:./Ejercicios/SegundoEjercicioIdentificacionARIMA.pdf][pdf]] para imprimir) --- [[https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios/IdentificaEstosARIMA][Directorio con más series simuladas_]]
+- [[file:Ejercicios/SegundoEjercicioIdentificacionModeloARIMA.html][Segundo ejercicio de identificación de modelos ARIMA]]
+  (Versión [[file:Ejercicios/SegundoEjercicioIdentificacionModeloARIMA.pdf][pdf]] para imprimir) --- [[https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios/IdentificaEstosARIMA][Directorio con más series simuladas_]]
