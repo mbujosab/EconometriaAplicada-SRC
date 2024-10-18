@@ -290,6 +290,7 @@ Recuerde que los test ADF y KPSS no sirven para determinar si es
 necesario tomar diferencias estacionales (solo sirven para las
 diferencias regulares).
 
+
 * Búsqueda de un modelo ARIMA
 
 Observando al ACF y la PACF de aprecia que la ACF decae a una tasa
@@ -382,7 +383,29 @@ p-valores muy elevados*, por lo que podemos asumir que estos residuos
 son ``ruido blanco''.
 #+latex: \medskip
 
-Además, Si en la ventana del modelo estimado pincha en el menú
+También conviene mirar si los residuos tienen distribución gaussiana:
+#+latex: \medskip
+
+#+name: contraste de normalidad
+#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+modtest --normality
+#+end_src
+# normtest --all
+
+#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+outfile --quiet ContrasteNormalidadResiduos.txt
+   <<contraste de normalidad>>
+end outfile
+#+end_src
+
+#+include: ./EjercicioIdentificacionModeloARIMA/ContrasteNormalidadResiduos.txt example
+
+Claramente tienen distribución normal.
+#+latex: \medskip
+
+
+
+Además, si en la ventana del modelo estimado pincha en el menú
 desplegable =Gráficos --> Espectro con respecto al periodograma
 espectral= verá que el espectro teórico del modelo se ajusta
 perfectamente al periodograma de la serie.

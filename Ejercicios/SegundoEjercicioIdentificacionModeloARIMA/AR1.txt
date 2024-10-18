@@ -1,0 +1,27 @@
+
+Evaluaciones de la función: 15
+Evaluaciones del gradiente: 6
+
+AR1: ARMA, usando las observaciones 1985:01-2001:08 (T = 200)
+Estimado usando AS 197 (MV exacta)
+Variable dependiente: x
+Desviaciones típicas basadas en el Hessiano
+
+             coeficiente   Desv. típica     z       valor p 
+  ----------------------------------------------------------
+  const       3,92441       1,34202        2,924   0,0035    ***
+  phi_1       0,884191      0,0329736     26,82    2,15e-158 ***
+
+Media de la vble. dep.  3,780099   D.T. de la vble. dep.   4,838896
+Media de innovaciones   0,027806   D.T. innovaciones       2,279130
+R-cuadrado              0,777083   R-cuadrado corregido    0,777083
+Log-verosimilitud      −449,3076   Criterio de Akaike      904,6152
+Criterio de Schwarz     914,5102   Crit. de Hannan-Quinn   908,6196
+
+                       Real Imaginaria     Módulo Frecuencia
+  -----------------------------------------------------------
+  AR
+   Raíz  1           1,1310     0,0000     1,1310     0,0000
+  -----------------------------------------------------------
+
+AR1 guardado

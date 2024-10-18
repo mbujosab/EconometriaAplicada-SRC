@@ -1,0 +1,27 @@
+
+Evaluaciones de la función: 30
+Evaluaciones del gradiente: 9
+
+ARIMA010X100:
+ARIMA, usando las observaciones 1985:02-2001:08 (T = 199)
+Estimado usando AS 197 (MV exacta)
+Variable dependiente: (1-L) x
+Desviaciones típicas basadas en el Hessiano
+
+             coeficiente   Desv. típica     z     valor p
+  -------------------------------------------------------
+  Phi_1       0,914863      0,0238796     38,31   0,0000  ***
+
+Media de la vble. dep.  0,058438   D.T. de la vble. dep.   2,351529
+Media de innovaciones   0,004411   D.T. innovaciones       0,982934
+R-cuadrado              0,958649   R-cuadrado corregido    0,958649
+Log-verosimilitud      −289,8264   Criterio de Akaike      583,6527
+Criterio de Schwarz     590,2393   Crit. de Hannan-Quinn   586,3185
+
+                       Real Imaginaria     Módulo Frecuencia
+  -----------------------------------------------------------
+  AR (estacional)
+   Raíz  1           1,0931     0,0000     1,0931     0,0000
+  -----------------------------------------------------------
+
+ARIMA010X100 guardado

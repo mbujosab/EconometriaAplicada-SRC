@@ -1,0 +1,15 @@
+
+Contraste aumentado de Dickey-Fuller (GLS) para x
+contrastar hacia abajo desde 14 retardos, con el criterio AIC modificado, Perron-Qu
+tamaño muestral 187
+la hipótesis nula de raíz unitaria es: [a = 1]
+
+  contraste con constante 
+  incluyendo 12 retardos de (1-L)x
+  modelo: (1-L)y = b0 + (a-1)*y(-1) + ... + e
+  valor estimado de (a - 1): 0,00512099
+  estadístico de contraste: tau = 0,308206
+  valor p aproximado 0,832
+  Coef. de autocorrelación de primer orden de e: -0,038
+  diferencias retardadas: F(12, 174) = 83,063 [0,0000]
+

@@ -80,3 +80,9 @@ corrgm residuos 15
 outfile --quiet ResiduosACF-PACF.txt
    corrgm residuos 15 --quiet
 end outfile
+
+modtest --normality
+
+outfile --quiet ContrasteNormalidadResiduos.txt
+   modtest --normality
+end outfile
