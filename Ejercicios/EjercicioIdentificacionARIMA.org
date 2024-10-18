@@ -395,7 +395,7 @@ media cero.
 ** Modelo efectivamente simulado
 
 Veamos si ese es el modelo usado en su simulación. Si miramos la línea
-=37= del fichero [[file:IdentificaEstosARIMA/000-Etiquetas-12][000-Etiquetas-12]] que se encuentra en el directorio de
+=37= del fichero [[file:IdentificaEstosARIMA/000-Etiquetas-12.info][000-Etiquetas-12.info]] que se encuentra en el directorio de
 donde hemos obtenido los datos encontramos lo siguiente:
 #+latex: \medskip
 

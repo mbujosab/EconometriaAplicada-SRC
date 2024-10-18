@@ -150,8 +150,8 @@ _ = simulacion(ar, ma, I, 12)
 
 #+name: Copia las etiquetas en los directorios con los ficheros en formato Gretl
 #+BEGIN_SRC sh  :exports none :results silent
-cp -a $(pwd)/SeriesSimuladas4/Etiquetas.txt $(pwd)/IdentificaEstosARIMA/000-Etiquetas-4.txt 
-cp -a $(pwd)/SeriesSimuladas12/Etiquetas.txt $(pwd)/IdentificaEstosARIMA/000-Etiquetas-12.txt 
+cp -a $(pwd)/SeriesSimuladas4/Etiquetas.txt $(pwd)/IdentificaEstosARIMA/000-Etiquetas-4.info
+cp -a $(pwd)/SeriesSimuladas12/Etiquetas.txt $(pwd)/IdentificaEstosARIMA/000-Etiquetas-12.info
 #+END_SRC
 
 
