@@ -8,9 +8,10 @@ Lecc*.slides.html
 .ipynb_checkpoints
 .ob-jupyter
 USB
-# EjerciciosHide/
-# Ejercicios/SeriesSimuladas12/
-# Ejercicios/SeriesSimuladas4/
+EjerciciosHide/
+Ejercicios/SeriesSimuladas12/
+Ejercicios/SeriesSimuladas4/
+Ejercicios/IdentificaEstosARIMA/
 
 ## Core latex/pdflatex auxiliary files:
 *.aux

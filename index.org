@@ -134,3 +134,6 @@
 
 - [[file:./Ejercicios/NombreOscarYConsumoDePetroleo.html][Popularidad del nombre Óscar en EEUU y consumo de petroleo en Grecia]]
   (Versión [[file:./Ejercicios/NombreOscarYConsumoDePetroleo.pdf][pdf]] para imprimir)
+
+- [[file:./Ejercicios/EjercicioIdentificacionARIMA.html][Ejercicio de identificación de modelos ARIMA]]
+  (Versión [[file:./Ejercicios/EjercicioIdentificacionARIMA.pdf][pdf]] para imprimir) --- [[file:Ejercicios/IdentificaEstosARIMA/][_Directorio con más series simuladas_]]
