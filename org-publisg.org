@@ -126,7 +126,7 @@ We need a small elisp script to setup and publish  it.
 				     :base-directory ,base-directory
 				     :base-extension "org"
 				     :publishing-directory ,(concat base-directory "docs")
-				     :exclude "Almacen\\|USB\\|docs\\|EjerciciosHide\\|SeriesSimuladas4\\|SeriesSimuladas12\\|Ejercicios/IdentificaEstosARIMA\\|Calendario\\|ucarima.*\\|.ipynb_checkpoints\\|00Notas.*\\|org-publisg.*\\|*.txt\\|kk.*"
+				     :exclude "Almacen\\|USB\\|docs\\|EjerciciosHide\\|SeriesSimuladas4\\|SeriesSimuladas12\\|Calendario\\|ucarima.*\\|.ipynb_checkpoints\\|00Notas.*\\|org-publisg.*\\|*.txt\\|kk.*"
 				     :recursive t
 				     :publishing-function org-html-publish-to-html
 				     :auto-preamble t
@@ -136,7 +136,7 @@ We need a small elisp script to setup and publish  it.
 				     :base-directory ,base-directory
 				     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|dat\\|mov\\|svg\\|aiff\\|csv\\|gdt\\|inp\\|ipynb\\|html"
 				     :publishing-directory ,(concat base-directory "docs")
-				     :exclude "Almacen\\|USB\\|docs\\|EjerciciosHide\\|SeriesSimuladas4\\|SeriesSimuladas12\\|Ejercicios/IdentificaEstosARIMA\\|ucarima.*\\|.ipynb_checkpoints\\|org-publisg.*\\|*.txt\\|kk.*"
+				     :exclude "Almacen\\|USB\\|docs\\|EjerciciosHide\\|SeriesSimuladas4\\|SeriesSimuladas12\\|ucarima.*\\|.ipynb_checkpoints\\|org-publisg.*\\|*.txt\\|kk.*"
 				     :recursive t
 				     :publishing-function org-publish-attachment)
 
@@ -151,6 +151,8 @@ Podemos chequear la versión local ejecutando el siguiente bloque
 #+BEGIN_SRC emacs-lisp
 (browse-url "docs/index.html")
 #+END_SRC
+
+#+RESULTS:
 
 #+BEGIN_SRC bash
 rm Lecc*.{pdf,slides.html}

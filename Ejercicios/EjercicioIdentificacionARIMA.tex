@@ -1,4 +1,4 @@
-% Created 2024-10-18 vie 13:53
+% Created 2024-10-18 vie 16:18
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt]{article}
 \usepackage[utf8]{inputenc}
@@ -36,7 +36,7 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 
 \maketitle
 \section*{Datos}
-\label{sec:org132ede2}
+\label{sec:orgc6fbc2d}
 
 Cargue la serie de datos simulados \href{IdentificaEstosARIMA/f7dcbd-12.gdt}{f7dcbd-12.gdt}
 
@@ -44,22 +44,22 @@ Cargue la serie de datos simulados \href{IdentificaEstosARIMA/f7dcbd-12.gdt}{f7d
 open IdentificaEstosARIMA/f7dcbd-12.gdt
 \end{minted}
 \subsection*{Tareas a realizar}
-\label{sec:org1b92a63}
+\label{sec:orgacb41fc}
 
 \begin{enumerate}
-\item \hyperref[sec:org80ee06c]{Realice un primer análisis gráfico: haga
+\item \hyperref[sec:orgc654ec2]{Realice un primer análisis gráfico: haga
 un gráfico de la serie y un gráfico \emph{rango-media}}
-\item \hyperref[sec:org7036df9]{Determine si es necesario transformar logarítmicamente los datos}
-\item \hyperref[sec:org69b2d33]{Determine si es necesario tomar una o
+\item \hyperref[sec:orge7ea248]{Determine si es necesario transformar logarítmicamente los datos}
+\item \hyperref[sec:orgd333deb]{Determine si es necesario tomar una o
 más diferencias regulares de la serie}
-\item \hyperref[sec:org40fef17]{Determine si es necesario tomar una
+\item \hyperref[sec:orgc1c2f3e]{Determine si es necesario tomar una
 diferencia estacional de la serie}
-\item \hyperref[sec:org1a99f06]{Encuentre un modelo ARIMA para la
+\item \hyperref[sec:orgc1f5cb2]{Encuentre un modelo ARIMA para la
 serie que sea lo más parsimonioso posible, pero cuyos residuos se
 puedan considerar \emph{ruido blanco}.}
 \end{enumerate}
 \section*{Primer análisis gráfico}
-\label{sec:org80ee06c}
+\label{sec:orgc654ec2}
 
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
@@ -72,13 +72,13 @@ rmplot  x --output="rango-media.png"
 \includegraphics[width=0.4\textwidth]{./EjercicioIdentificacionModeloARIMA/rango-media.png} 
 \end{center}
 \section*{Estacionariedad en varianza}
-\label{sec:org7036df9}
+\label{sec:orge7ea248}
 
 A la luz de los anteriores gráficos, donde se aprecia que la
 variabilidad de los datos aumenta con el nivel de la serie, \textbf{parece
 necesaria la transformación logarítmica.}
 \subsection*{Transforme logarítmicamente los datos y grafíquelos}
-\label{sec:orgd468f65}
+\label{sec:orgc1a5d7d}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 logs x
@@ -93,7 +93,7 @@ rmplot  l_x --output="rango-media-enLogs.png"
 
 La serie en logs ya parece estacionaria en varianza.
 \section*{Estacionariedad en media}
-\label{sec:org69b2d33}
+\label{sec:orgd333deb}
 
 El gráfico de la serie \texttt{l\_x} parece mostrar una evolución en su nivel
 (una tendencia). Por tanto, parece indicado tomar una diferencia
@@ -141,7 +141,7 @@ AR1 guardado
 Tal como se anticipaba, la raíz es casi \texttt{1}. También podemos probar
 con los test formales de raíz unitaria
 \subsection*{Test ADF}
-\label{sec:org97913d6}
+\label{sec:org9a2ba0c}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 adf -1 l_x --c --gls --test-down --perron-qu 
@@ -165,7 +165,7 @@ la hipótesis nula de raíz unitaria es: [a = 1]
 
 El  p-valor es elevado, por lo que NO se rechaza la \(H_0\) de que la serie es \(I(1)\)
 \subsection*{Test KPSS}
-\label{sec:org6c08d2f}
+\label{sec:org2792db2}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 kpss -1 l_x 
@@ -187,7 +187,7 @@ El  p-valor es menor al 1\%, por lo que se rechaza la \(H_0\) de que la serie es
 
 \textbf{Todas las evidencias apuntan a que es necesaria tomar una diferencia ordinaria}
 \subsection*{Repetición del análisis con la serie diferenciada}
-\label{sec:orga92bb39}
+\label{sec:org4431875}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 diff l_x
@@ -241,7 +241,7 @@ también lo está la raíz autorregresiva).
 
 Repitamos también los tests formales
 \subsubsection*{Test ADF}
-\label{sec:org7ee1923}
+\label{sec:org0894b84}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 adf -1 d_l_x --c --gls --test-down --perron-qu 
@@ -265,7 +265,7 @@ la hipótesis nula de raíz unitaria es: [a = 1]
 
 El p-valores es muy bajo, por lo que se rechaza la \(H_0\) de que la serie es \(I(1)\)
 \subsubsection*{Test KPSS}
-\label{sec:orgc71a0f9}
+\label{sec:org77e7c00}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 kpss -1 d_l_x 
@@ -288,7 +288,7 @@ serie es \(I(0)\) al 1\%, pero sí se rechaza al 5\%. En cualquier caso,
 \textbf{las evidencias apuntan mayoritariamente a que NO es necesario tomar
 una segunda diferencia ordinaria}
 \section*{Diferencias estacionales}
-\label{sec:org40fef17}
+\label{sec:orgc1c2f3e}
 
 Observemos el gráfico de la serie diferenciada y su correlograma.
 
@@ -353,7 +353,7 @@ Recuerde que los test ADF y KPSS no sirven para determinar si es
 necesario tomar diferencias estacionales (solo sirven para las
 diferencias regulares).
 \section*{Búsqueda de un modelo ARIMA}
-\label{sec:org1a99f06}
+\label{sec:orgc1f5cb2}
 
 Observando al ACF y la PACF de aprecia que la ACF decae a una tasa
 exponencial, y la PACF se trunca tras el segundo retardo, lo cual es
@@ -442,7 +442,7 @@ Criterio de Schwarz    −860,8374   Crit. de Hannan-Quinn  −868,4326
 ARIMA210 guardado
 \end{verbatim}
 \subsection*{Análisis de los residuos}
-\label{sec:orgbe00119}
+\label{sec:orge83671a}
 
 Todo parece OK, pero debemos ver el gráfico de los residuos y su
 correlograma, así como los estadísticos Q de Ljung-Box para constatar
@@ -511,10 +511,10 @@ Por tanto, podemos concluir que la serie \texttt{f7dcbd-12.gdt}, una vez
 transformada logarítmicamente, sigue un proceso ARIMA\((2,1,0)\) con
 media cero. 
 \subsection*{Modelo efectivamente simulado}
-\label{sec:org6afd43a}
+\label{sec:orge741fd9}
 
 Veamos si ese es el modelo usado en su simulación. Si miramos la línea
-\texttt{37} del fichero \href{IdentificaEstosARIMA/Etiquetas-12.txt}{Etiquetas-12.txt} que se encuentra en el directorio de
+\texttt{37} del fichero \href{IdentificaEstosARIMA/000-Etiquetas-12}{000-Etiquetas-12} que se encuentra en el directorio de
 donde hemos obtenido los datos encontramos lo siguiente:
 \medskip
 
@@ -540,7 +540,7 @@ identificación del modelo ha sido \uline{PERFECTA}.
 \bigskip
 
 
-\textbf{\uline{Ahora escoja al azar nuevas series del \href{IdentificaEstosARIMA/}{directorio} (dispone de
+\textbf{\uline{Ahora escoja al azar nuevas series del \href{https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios/IdentificaEstosARIMA}{directorio} (dispone de
  centenares de series simuladas con distintos modelos) y practique la
  identificación hasta que adquiera seguridad.}}
 \end{document}

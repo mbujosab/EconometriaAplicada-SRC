@@ -395,7 +395,7 @@ media cero.
 ** Modelo efectivamente simulado
 
 Veamos si ese es el modelo usado en su simulación. Si miramos la línea
-=37= del fichero [[file:IdentificaEstosARIMA/Etiquetas-12.txt][Etiquetas-12.txt]] que se encuentra en el directorio de
+=37= del fichero [[file:IdentificaEstosARIMA/000-Etiquetas-12][000-Etiquetas-12]] que se encuentra en el directorio de
 donde hemos obtenido los datos encontramos lo siguiente:
 #+latex: \medskip
 
@@ -417,6 +417,9 @@ identificación del modelo ha sido _PERFECTA_.
 #+latex: \bigskip
 
 
-*_Ahora escoja al azar nuevas series del [[file:IdentificaEstosARIMA/][directorio]] (dispone de
+*_Ahora escoja al azar nuevas series del [[https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios/IdentificaEstosARIMA][directorio]] (dispone de
  centenares de series simuladas con distintos modelos) y practique la
  identificación hasta que adquiera seguridad._*
+
+
+# 00c296,	    ,	mu = 0.0,	ar = '(1 - 0.8B)(1 + 0.8B)', ma = '(1 + 0.55B)', i = '(1 - B4)'
