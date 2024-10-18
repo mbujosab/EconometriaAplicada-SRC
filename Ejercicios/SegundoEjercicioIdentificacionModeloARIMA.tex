@@ -1,4 +1,4 @@
-% Created 2024-10-18 vie 19:17
+% Created 2024-10-18 vie 19:41
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt]{article}
 \usepackage[utf8]{inputenc}
@@ -36,7 +36,7 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 
 \maketitle
 \section*{Datos}
-\label{sec:org4e7af39}
+\label{sec:org7527a7f}
 
 Cargue la serie de datos simulados \href{IdentificaEstosARIMA/00c296-12.gdt}{00c296-12.gdt}
 
@@ -44,22 +44,22 @@ Cargue la serie de datos simulados \href{IdentificaEstosARIMA/00c296-12.gdt}{00c
 open IdentificaEstosARIMA/00c296-12.gdt
 \end{minted}
 \subsection*{Tareas a realizar}
-\label{sec:org3fae9e9}
+\label{sec:org2a61fd3}
 
 \begin{enumerate}
-\item \hyperref[sec:org6c88b85]{Realice un primer análisis gráfico: haga
+\item \hyperref[sec:orgcf14149]{Realice un primer análisis gráfico: haga
 un gráfico de la serie y un gráfico \emph{rango-media}}
-\item \hyperref[sec:org6142ddf]{Determine si es necesario transformar logarítmicamente los datos}
-\item \hyperref[sec:orgd530ff7]{Determine si es necesario tomar una
+\item \hyperref[sec:orgeb2946e]{Determine si es necesario transformar logarítmicamente los datos}
+\item \hyperref[sec:orgecfb6ad]{Determine si es necesario tomar una
 diferencia estacional de la serie}
-\item \hyperref[sec:orgc98824b]{Determine si es necesario tomar una o
+\item \hyperref[sec:org8719850]{Determine si es necesario tomar una o
 más diferencias regulares de la serie}
-\item \hyperref[sec:org459f8d2]{Encuentre un modelo ARIMA para la
+\item \hyperref[sec:orgdf66cd7]{Encuentre un modelo ARIMA para la
 serie que sea lo más parsimonioso posible, pero cuyos residuos se
 puedan considerar \emph{ruido blanco}.}
 \end{enumerate}
 \section*{Primer análisis gráfico}
-\label{sec:org6c88b85}
+\label{sec:orgcf14149}
 
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
@@ -76,7 +76,7 @@ De estos gráficos se desprende que la serie tiene una acusada pauta
 estacional y que la volatilidad probablemente depende del nivel de la
 serie.
 \section*{Estacionariedad en varianza}
-\label{sec:org6142ddf}
+\label{sec:orgeb2946e}
 
 A la luz de los anteriores gráficos, donde se aprecia que la
 variabilidad de los datos aumenta con el nivel de la serie, parece
@@ -87,7 +87,7 @@ constante suficientemente elevado como para que todos los valores
 fueran positivos). Por el momento, dejemos la serie sin transformarla
 logarítmicamente.
 \section*{Diferencias estacionales}
-\label{sec:orgd530ff7}
+\label{sec:orgecfb6ad}
 
 Observemos el gráfico de la serie y su correlograma.
 
@@ -164,7 +164,7 @@ gnuplot sd_x --time-series --with-lines --output="SerieEnDiferencias.png"
 \includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionModeloARIMA/SerieEnDiferencias.png}
 \end{center}
 \subsection*{Repetición del análisis con la serie diferenciada estacionalmente}
-\label{sec:orgee64740}
+\label{sec:org0547e3d}
 
 
 La serie resultante no muestra signos de estacionalidad. Veamos si se
@@ -182,7 +182,7 @@ corrgm sd_x 36 --plot="sd_x_ACF-PACF.png"
 \textbf{No hay nada que sugiera la necesidad de tomar una segunda diferencia
 estacional}.
 \section*{Estacionariedad en media}
-\label{sec:orgc98824b}
+\label{sec:org8719850}
 
 El gráfico de la serie diferenciada estacionalmente no muestra tener
 una clara tendencia o evolución a largo plazo de su nivel.
@@ -239,7 +239,7 @@ también lo está la raíz autorregresiva).
 
 Probemos con los tests formales de raíz unitaria y estacionariedad
 \subsubsection*{Test ADF}
-\label{sec:org83999fe}
+\label{sec:orgb17de4c}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 adf -1 sd_x --c --gls --test-down --perron-qu 
@@ -262,7 +262,7 @@ la hipótesis nula de raíz unitaria es: [a = 1]
 
 El p-valores es muy bajo, por lo que se rechaza la \(H_0\) de que la serie es \(I(1)\)
 \subsubsection*{Test KPSS}
-\label{sec:org87566bf}
+\label{sec:org07fd435}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 kpss -1 sd_x 
@@ -284,7 +284,7 @@ El p-valor es elevado, por los que NO se rechaza la \(H_0\) de que la
 serie es \(I(0)\). \textbf{Todas estas evidencias indican de manera muy clara
 que NO es necesario tomar ninguna diferencia ordinaria}.
 \section*{Primer intento de búsqueda de un modelo ARIMA}
-\label{sec:org459f8d2}
+\label{sec:orgdf66cd7}
 
 Observando al ACF y la PACF de aprecia que la ACF decae a una tasa
 exponencial, y la PACF se trunca tras el primer retardo, lo cual es
@@ -369,7 +369,7 @@ Criterio de Schwarz     524,3110   Crit. de Hannan-Quinn   520,4606
 ARIMA110 guardado
 \end{verbatim}
 \subsection*{Análisis de los residuos}
-\label{sec:org8297dd5}
+\label{sec:org8bdf6ae}
 
 Todo parece OK, pero debemos ver el gráfico de los residuos y su
 correlograma, así como los estadísticos Q de Ljung-Box para constatar
@@ -473,7 +473,7 @@ la transformación logarítmica (en cualquier caso no se podía tomar sin
 aumentar previamente su nivel para hacerla positiva), sigue un proceso
 ARIMA\((1,0,0)\times(0,1,0)_S\) con media cero.
 \subsection*{Modelo efectivamente simulado}
-\label{sec:orgefc5d4d}
+\label{sec:org4e79681}
 
 Veamos si ese es el modelo usado en su simulación. Si miramos la línea
 \texttt{150} del fichero \href{IdentificaEstosARIMA/000-Etiquetas-12.txt}{000-Etiquetas-12.txt} que se encuentra en el directorio de
@@ -498,12 +498,12 @@ simulado\ldots{}
 
 \textbf{¡Hemos identificado un modelo distinto del simulado!}
 \section*{Pruebas con otro modelo ARIMA}
-\label{sec:org22fc477}
+\label{sec:org086899d}
 
 Estimemos el verdadero modelo ARIMA\((2,0,0)\times(1,1,0)_{S}\):
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
-ARIMAsimulado <- arima 2 0 0; 1 1 0 ; x --nc
+ARIMAsimulado <- arima 2 0 0; 1 1 0 ; x --nc 
 \end{minted}
 
 \begin{verbatim}
@@ -549,7 +549,8 @@ La estimación del verdadero modelo empleado en la simulación de los
 datos ¡NO ES MEJOR QUE EL MODELO QUE HEMOS IDENTIFICADO!
 
 La explicación es que el factor \((1 + 0.8\mathsf{B})\) del polinomio AR
-casi se cancela con el polinomio MA \(\;(1 + 0.55\mathsf{B})\). Por eso hemos encontrado un modelo más parsimonioso que funciona OK.
+casi se cancela con el polinomio MA \(\;(1 + 0.55\mathsf{B})\). Por eso
+hemos encontrado un modelo más parsimonioso que funciona OK.
 \bigskip
 
 

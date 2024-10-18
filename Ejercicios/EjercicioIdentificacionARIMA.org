@@ -404,7 +404,6 @@ Claramente tienen distribución normal.
 #+latex: \medskip
 
 
-
 Además, si en la ventana del modelo estimado pincha en el menú
 desplegable =Gráficos --> Espectro con respecto al periodograma
 espectral= verá que el espectro teórico del modelo se ajusta

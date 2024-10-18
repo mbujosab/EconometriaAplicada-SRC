@@ -70,5 +70,5 @@ end outfile
 ARIMAsimulado <- arima 2 0 0; 1 1 0 ; x --nc
 
 outfile --quiet ARIMAsimulado.txt
-  ARIMAsimulado <- arima 2 0 0; 1 1 0 ; x --nc
+  ARIMAsimulado <- arima 2 0 0; 1 1 0 ; x --nc 
 end outfile

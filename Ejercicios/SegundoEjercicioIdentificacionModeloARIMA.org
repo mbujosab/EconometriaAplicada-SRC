@@ -401,7 +401,7 @@ Estimemos el verdadero modelo ARIMA$(2,0,0)\times(1,1,0)_{S}$:
 
 #+NAME: Modelo ARIMAsimulado
 #+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports code 
-ARIMAsimulado <- arima 2 0 0; 1 1 0 ; x --nc
+ARIMAsimulado <- arima 2 0 0; 1 1 0 ; x --nc 
 #+end_src
 
 #+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
@@ -421,7 +421,8 @@ La estimación del verdadero modelo empleado en la simulación de los
 datos ¡NO ES MEJOR QUE EL MODELO QUE HEMOS IDENTIFICADO!
 
 La explicación es que el factor $(1 + 0.8\mathsf{B})$ del polinomio AR
-casi se cancela con el polinomio MA $\;(1 + 0.55\mathsf{B})$. Por eso hemos encontrado un modelo más parsimonioso que funciona OK.
+casi se cancela con el polinomio MA $\;(1 + 0.55\mathsf{B})$. Por eso
+hemos encontrado un modelo más parsimonioso que funciona OK.
 #+latex: \bigskip
 
 
@@ -429,5 +430,3 @@ casi se cancela con el polinomio MA $\;(1 + 0.55\mathsf{B})$. Por eso hemos enco
  centenares de series simuladas con distintos modelos) y practique la
  identificación hasta que adquiera seguridad._*
 
-
-# 00c296,	    ,	mu = 0.0,	ar = '(1 - 0.8B)(1 + 0.8B)', ma = '(1 + 0.55B)', i = '(1 - B4)'
