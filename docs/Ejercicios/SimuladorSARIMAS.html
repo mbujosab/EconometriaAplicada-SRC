@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
+<head>
+<!-- 2024-10-18 vie 13:55 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simulación de múltiples modelos lineales</title>
+<meta name="author" content="Marcos Bujosa" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Simulación de múltiples modelos lineales</h1>
+<div id="outline-container-org3357abd" class="outline-2">
+<h2 id="org3357abd"><span class="section-number-2">1.</span> Objetivo</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Que el estudiante tenga una gran batería de series para ejercitar la
+identificación. Los nombres de los ficheros impiden saber a priori de
+qué modelo se trata en cada caso (cada serie tiene un hash único). El
+alumno tendrá que observar el gráfico <i>rango-media</i> para decidir
+primero si la serie necesita la transformación logarítmica. Después
+tendrá que ir mirando el gráfico de las series, de los residuos, los
+correlogramas (también es útil mirar el gráfico del espectro del
+modelo junto al periodograma) para intentar indentificar el modelo
+lineal con el que se ha simulado la serie temporal.
+</p>
+
+<p>
+Los ficheros <code>Etiqueta.txt</code> almacenan el tipo de modelo que se ha
+simulado en cada caso. Por tanto, una vez se ha identificado un
+modelo, se puede verificar si efectivamente ese ha sido el modelo
+usado al crear la serie buscando el hash del fichero en la primera
+columna de <code>Etiqueta.txt</code>.
+</p>
+</div>
+</div>
+<div id="outline-container-orga12557f" class="outline-2">
+<h2 id="orga12557f"><span class="section-number-2">2.</span> Qué hace el código de más abajo</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Simula desde procesos de ruido blanco a procesos
+ARIMA\((p,d,q)\times(P,D,Q)_S\), con transformaciones exponenciales en
+algunos casos y con medias distintas de cero en otros.
+</p>
+
+<p>
+En total se simulan 320 modelos con periodicidad trimestral y 320 con
+periodicidad mensual.
+</p>
+
+<p>
+Las series se simulan con la librería <code>tfarima</code> de R escrita por José
+Luis Gallego y cada una de ellas se graba en un fichero <code>csv</code> con un
+nombre anonimizado (mediante un hash) para ocultar cualquier pista
+sobre cuál es el modelo subyacente.
+</p>
+
+<p>
+Para mayor comodidad del estudiante, cada serie es leída
+posteriormente con GRETL y guardada en formato Gretl (<code>*.gdt</code>) en el
+directorio <a href="IdentificaEstosARIMA/">IdentificaEstosARIMA</a> (manteniendo los nombres anonimizados
+pero añadiendo tras un guión la supuesta periodicidad de los datos).
+</p>
+
+
+<div class="org-src-container">
+<pre class="src src-jupyter-python"><span style="color: #0000FF;">import</span> itertools
+<span style="color: #0000FF;">import</span> hashlib
+<span style="color: #0000FF;">import</span> subprocess
+<span style="color: #0000FF;">import</span> os
+
+<span style="color: #BA36A5;">ar</span>  = [ <span style="color: #008000;">'(1 - 0.8B)'</span>, <span style="color: #008000;">'(1 + 0.8B)'</span>, <span style="color: #008000;">'(1 - 0.8BS)'</span> ]
+<span style="color: #BA36A5;">ma</span> =  [ <span style="color: #008000;">'(1 - 0.65B)'</span>, <span style="color: #008000;">'(1 + 0.65B)'</span>, <span style="color: #008000;">'(1 - 0.65BS)'</span>]
+<span style="color: #BA36A5;">I</span>   = [ <span style="color: #008000;">'(1 - B)'</span>, <span style="color: #008000;">'(1 - BS)'</span>]
+
+<span style="color: #0000FF;">def</span> <span style="color: #006699;">simulacion</span>(lista_AR, lista_MA, lista_I, PeriodoEstacional=12):
+    <span style="color: #BA36A5;">S</span> = <span style="color: #006FE0;">str</span>(PeriodoEstacional)
+    <span style="color: #BA36A5;">directorio</span> = <span style="color: #008000;">"SeriesSimuladas"</span>+S
+    <span style="color: #BA36A5;">d</span> = os.path.join(directorio)
+    <span style="color: #0000FF;">if</span> <span style="color: #0000FF;">not</span> os.path.exists(d):
+        os.makedirs(d)
+
+    <span style="color: #0000FF;">def</span> <span style="color: #006699;">polinomios</span>(monomios, S, NOlimita=1):
+        <span style="color: #BA36A5;">polinomios</span> = []
+        <span style="color: #0000FF;">for</span> i <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">range</span>(3):
+            <span style="color: #0000FF;">for</span> c <span style="color: #0000FF;">in</span> itertools.combinations(monomios, i):
+                <span style="color: #BA36A5;">cc</span> = <span style="color: #008000;">''</span>.join(c).replace(<span style="color: #008000;">"S"</span>, S)
+                <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">polinomios = polinomios + [cc] if ((i &lt; len(monomios)) | NOlimita) else polinomios</span>
+                <span style="color: #BA36A5;">polinomios</span> = polinomios + [cc] 
+        <span style="color: #0000FF;">return</span> polinomios
+
+    <span style="color: #BA36A5;">SampleSize</span> = 40*PeriodoEstacional
+    <span style="color: #BA36A5;">numero_de_modelos</span> = 0
+    <span style="color: #BA36A5;">etiqueta</span> = []
+    <span style="color: #0000FF;">for</span> ca,ma <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(polinomios(lista_MA,<span style="color: #006FE0;">str</span>(S),0)):
+        <span style="color: #0000FF;">for</span> cb,ar <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(polinomios(lista_AR,<span style="color: #006FE0;">str</span>(S),0)):
+            <span style="color: #0000FF;">for</span> cc,i <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(polinomios(lista_I,<span style="color: #006FE0;">str</span>(S))):
+                <span style="color: #0000FF;">for</span> l <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">range</span>(2):
+                    <span style="color: #0000FF;">if</span> <span style="color: #006FE0;">len</span>(ar)&lt;18 <span style="color: #0000FF;">or</span> <span style="color: #006FE0;">len</span>(ma)&lt;18:
+                        <span style="color: #BA36A5;">numero_de_modelos</span> += 1 
+                        <span style="color: #BA36A5;">parametros</span> = <span style="color: #008000;">"ar = '%s', ma = '%s', i = '%s'"</span>  % (ar,ma,i)
+                        <span style="color: #BA36A5;">modelo</span> = <span style="color: #008000;">"ARIMA &lt;- um(%s)"</span>  % (parametros)
+                        <span style="color: #0000FF;">if</span> l: 
+                            <span style="color: #BA36A5;">sim</span>   = <span style="color: #008000;">'y = exp((sim(ARIMA, n = %d)) * 0.1 + 2.5)'</span> % (SampleSize,)
+                            <span style="color: #BA36A5;">logs</span>  = <span style="color: #008000;">'logs'</span>
+                            <span style="color: #BA36A5;">media</span> = <span style="color: #008000;">'mu = 2.5'</span>
+                        <span style="color: #0000FF;">else</span>:
+                            <span style="color: #BA36A5;">sim</span>   = <span style="color: #008000;">'y = (sim(ARIMA, n = 200))'</span>
+                            <span style="color: #BA36A5;">logs</span>  = <span style="color: #008000;">'    '</span>
+                            <span style="color: #BA36A5;">media</span> = <span style="color: #008000;">'mu = 0.0'</span>
+
+                        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">script de R</span>
+                        <span style="color: #BA36A5;">caso</span> = <span style="color: #006FE0;">chr</span>(ca*1000+cb*100+cc*10+l)
+                        <span style="color: #BA36A5;">label</span> = (hashlib.shake_128(caso.encode()).hexdigest(3))
+                        <span style="color: #BA36A5;">caracter&#237;sticas</span> = logs + <span style="color: #008000;">',</span><span style="color: #D0372D;">\t</span><span style="color: #008000;">'</span> + media + <span style="color: #008000;">',</span><span style="color: #D0372D;">\t</span><span style="color: #008000;">'</span> + parametros
+                        <span style="color: #BA36A5;">etiqueta</span> = etiqueta + [label + <span style="color: #008000;">',</span><span style="color: #D0372D;">\t</span><span style="color: #008000;">'</span> + caracter&#237;sticas]
+                        <span style="color: #BA36A5;">fichero</span> = <span style="color: #008000;">"write.csv(y, file='%s/%s.csv')"</span>  % (directorio,label)
+                        <span style="color: #0000FF;">with</span> <span style="color: #006FE0;">open</span>(<span style="color: #008000;">'Rscript.r'</span>, <span style="color: #008000;">'w'</span>) <span style="color: #0000FF;">as</span> f:
+                            f.write(<span style="color: #008000;">'library(tfarima)'</span>+<span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>)
+                            f.write(modelo+<span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>)
+                            f.write(sim+<span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>)
+                            f.write(fichero+<span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>)                            
+                        subprocess.call ([<span style="color: #008000;">"/usr/bin/Rscript"</span>, <span style="color: #008000;">"--vanilla"</span>, <span style="color: #008000;">"./Rscript.r"</span>])
+
+                        <span style="color: #8D8D84;"># </span><span style="color: #8D8D84; font-style: italic;">script de Gretl</span>
+                        <span style="color: #BA36A5;">Tama&#241;oMuestral</span> = <span style="color: #008000;">'nulldata %d'</span> % SampleSize
+                        <span style="color: #BA36A5;">Dir</span>          = <span style="color: #008000;">'string directory = $(pwd) ~ "/IdentificaEstosARIMA"'</span>
+                        <span style="color: #BA36A5;">DirTrabajo</span>   = <span style="color: #008000;">'set workdir "@directory"'</span>
+                        <span style="color: #BA36A5;">periodicidad</span> = <span style="color: #008000;">'setobs %s 1985:1 --time-series'</span> % (S,)
+                        <span style="color: #BA36A5;">datos</span>        = <span style="color: #008000;">'open %s/%s.csv'</span> % (directorio,label,)
+                        <span style="color: #BA36A5;">guardado</span>     = <span style="color: #008000;">'store %s-%s.gdt x'</span> % (label,S)
+                        <span style="color: #BA36A5;">Guion</span> = <span style="color: #008000;">"GRETLscript"</span>+S+<span style="color: #008000;">".inp"</span>
+                        <span style="color: #0000FF;">with</span> <span style="color: #006FE0;">open</span>(Guion, <span style="color: #008000;">'w'</span>) <span style="color: #0000FF;">as</span> f:
+                            f.write(Dir+<span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>+DirTrabajo+<span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>+datos+<span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>+periodicidad+<span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>+guardado)
+                            
+                        subprocess.call ([<span style="color: #008000;">"/usr/bin/gretlcli"</span>, <span style="color: #008000;">"-b"</span>, Guion])
+                        
+    <span style="color: #006FE0;">print</span>(numero_de_modelos)
+
+    <span style="color: #0000FF;">with</span> <span style="color: #006FE0;">open</span>(directorio+<span style="color: #008000;">'/Etiquetas.txt'</span>, <span style="color: #008000;">'w'</span>) <span style="color: #0000FF;">as</span> f:
+        f.write(<span style="color: #008000;">'etiqueta'</span> + <span style="color: #008000;">',</span><span style="color: #D0372D;">\t</span><span style="color: #008000;">'</span> + <span style="color: #008000;">'logs'</span> + <span style="color: #008000;">',</span><span style="color: #D0372D;">\t</span><span style="color: #008000;">'</span> + <span style="color: #008000;">'mu'</span> + <span style="color: #008000;">',</span><span style="color: #D0372D;">\t</span><span style="color: #008000;">'</span> + <span style="color: #008000;">'ar'</span> + <span style="color: #008000;">',</span><span style="color: #D0372D;">\t</span><span style="color: #008000;">'</span> + <span style="color: #008000;">'ma'</span>+<span style="color: #008000;">',</span><span style="color: #D0372D;">\t</span><span style="color: #008000;">'</span> + <span style="color: #008000;">'nabla'</span> + <span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>)
+        <span style="color: #0000FF;">for</span> e <span style="color: #0000FF;">in</span> etiqueta:
+            f.write(e+<span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>)
+    
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-jupyter-python"><span style="color: #BA36A5;">ar</span>  = [ <span style="color: #008000;">'(1 - 0.8B)'</span>, <span style="color: #008000;">'(1 + 0.8B)'</span>, <span style="color: #008000;">'(1 - 0.8BS)'</span>]
+<span style="color: #BA36A5;">ma</span> =  [ <span style="color: #008000;">'(1 - 0.55B)'</span>, <span style="color: #008000;">'(1 + 0.55B)'</span>, <span style="color: #008000;">'(1 + 0.55BS)'</span>]
+<span style="color: #BA36A5;">I</span>   = [ <span style="color: #008000;">'(1 - B)'</span>, <span style="color: #008000;">'(1 - BS)'</span>]
+<span style="color: #BA36A5;">_</span> = simulacion(ar, ma, I, 4)
+<span style="color: #BA36A5;">_</span> = simulacion(ar, ma, I, 12)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Marcos Bujosa</p>
+<p class="date">Created: 2024-10-18 vie 13:55</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

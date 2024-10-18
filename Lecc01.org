@@ -442,9 +442,6 @@ plt.tight_layout()
 #plt.savefig("./img/lecc01/airlinepass_log+hist.png")
 #+END_SRC
 
-#+RESULTS: figura-airlinepass-log
-[[./img/lecc01/airlinepass_log+hist.png]]
-
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 #+attr_org: :width 800
 #+attr_html: :width 900px

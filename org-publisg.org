@@ -84,6 +84,10 @@ $(OUT_DIR)/%.pdf: %.pdf
 #pdflatex --shell-escape  -interaction=batchmode NombreOscarYConsumoDePetroleo.tex
 #pdflatex --shell-escape  -interaction=batchmode NombreOscarYConsumoDePetroleo.tex
 #latexmk -c NombreOscarYConsumoDePetroleo.tex
+
+#pdflatex --shell-escape  -interaction=batchmode EjercicioIdentificacionModeloARIMA.tex
+#pdflatex --shell-escape  -interaction=batchmode EjercicioIdentificacionModeloARIMA.tex
+#latexmk -c EjercicioIdentificacionModeloARIMA.tex
 #+END_SRC
 
 
@@ -107,39 +111,6 @@ jupyter nbconvert --config mycfg-GitHubPages.py --to slides --reveal-prefix reve
 jupyter nbconvert --config mycfg.py --to slides 
 #+END_SRC
 
-** USB-publish
-#+BEGIN_SRC emacs-lisp  :tangle ~/publish.el :results silent
-(use-package htmlize)
-
-(require 'ox-publish)
-
-(let* ((base-directory "./")
-       (org-export-with-broken-links t)
-       (org-publish-project-alist `(("html"
-				     :base-directory ,base-directory
-				     :base-extension "org"
-				     :publishing-directory ,(concat base-directory "USB")
-				     :exclude "Almacen\\|USB\\|docs\\|EjerciciosHide\\|Calendario\\|ucarima.*\\|.ipynb_checkpoints\\|00Notas.*\\|org-publisg.*\\|*.txt\\|kk.*"
-				     :recursive t
-				     :publishing-function org-html-publish-to-html
-				     :auto-preamble t
-				     :auto-sitemap nil)
-				    
-				    ("static-html"
-				     :base-directory ,base-directory
-				     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|dat\\|mov\\|svg\\|aiff\\|csv\\|gdt\\|inp\\|ipynb\\|html"
-				     :publishing-directory ,(concat base-directory "USB")
-				     :exclude "Almacen\\|USB\\|docs\\|EjerciciosHide\\|ucarima.*\\|.ipynb_checkpoints\\|org-publisg.*\\|*.txt\\|kk.*"
-				     :recursive t
-				     :publishing-function org-publish-attachment)
-
-				    ;; ... all the components ...
-				    ("scimax-eln" :components ("html" "static-html")))))
-
-  (org-publish "scimax-eln" t))
-#+END_SRC
-
-
 ** Org-publish                                                     :noexport:
 
 We need a small elisp script to setup and publish  it.
@@ -155,7 +126,7 @@ We need a small elisp script to setup and publish  it.
 				     :base-directory ,base-directory
 				     :base-extension "org"
 				     :publishing-directory ,(concat base-directory "docs")
-				     :exclude "Almacen\\|USB\\|docs\\|EjerciciosHide\\|Calendario\\|ucarima.*\\|.ipynb_checkpoints\\|00Notas.*\\|org-publisg.*\\|*.txt\\|kk.*"
+				     :exclude "Almacen\\|USB\\|docs\\|EjerciciosHide\\|SeriesSimuladas4\\|SeriesSimuladas12\\|Calendario\\|ucarima.*\\|.ipynb_checkpoints\\|00Notas.*\\|org-publisg.*\\|*.txt\\|kk.*"
 				     :recursive t
 				     :publishing-function org-html-publish-to-html
 				     :auto-preamble t
@@ -165,7 +136,7 @@ We need a small elisp script to setup and publish  it.
 				     :base-directory ,base-directory
 				     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|dat\\|mov\\|svg\\|aiff\\|csv\\|gdt\\|inp\\|ipynb\\|html"
 				     :publishing-directory ,(concat base-directory "docs")
-				     :exclude "Almacen\\|USB\\|docs\\|EjerciciosHide\\|ucarima.*\\|.ipynb_checkpoints\\|org-publisg.*\\|*.txt\\|kk.*"
+				     :exclude "Almacen\\|USB\\|docs\\|EjerciciosHide\\|SeriesSimuladas4\\|SeriesSimuladas12\\|ucarima.*\\|.ipynb_checkpoints\\|org-publisg.*\\|*.txt\\|kk.*"
 				     :recursive t
 				     :publishing-function org-publish-attachment)
 
@@ -261,6 +232,41 @@ git push
 #+END_SRC
 
 #+RESULTS:
+
+
+
+
+** USB-publish
+#+BEGIN_SRC emacs-lisp  :tangle ~/publish.el :results silent
+(use-package htmlize)
+
+(require 'ox-publish)
+
+(let* ((base-directory "./")
+       (org-export-with-broken-links t)
+       (org-publish-project-alist `(("html"
+				     :base-directory ,base-directory
+				     :base-extension "org"
+				     :publishing-directory ,(concat base-directory "USB")
+				     :exclude "Almacen\\|USB\\|docs\\|EjerciciosHide\\|Calendario\\|ucarima.*\\|.ipynb_checkpoints\\|00Notas.*\\|org-publisg.*\\|*.txt\\|kk.*"
+				     :recursive t
+				     :publishing-function org-html-publish-to-html
+				     :auto-preamble t
+				     :auto-sitemap nil)
+				    
+				    ("static-html"
+				     :base-directory ,base-directory
+				     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|dat\\|mov\\|svg\\|aiff\\|csv\\|gdt\\|inp\\|ipynb\\|html"
+				     :publishing-directory ,(concat base-directory "USB")
+				     :exclude "Almacen\\|USB\\|docs\\|EjerciciosHide\\|ucarima.*\\|.ipynb_checkpoints\\|org-publisg.*\\|*.txt\\|kk.*"
+				     :recursive t
+				     :publishing-function org-publish-attachment)
+
+				    ;; ... all the components ...
+				    ("scimax-eln" :components ("html" "static-html")))))
+
+  (org-publish "scimax-eln" t))
+#+END_SRC
 
 
 * slides
