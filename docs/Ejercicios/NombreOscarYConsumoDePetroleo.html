@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
 <head>
-<!-- 2024-10-18 vie 19:53 -->
+<!-- 2024-10-21 lun 13:19 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Consumo de petroleo y frecuencia del nombre Óscar</title>
@@ -288,29 +288,29 @@ org_html_manager.setup();  // activate after the parameters are set
 <li><a href="#orgc54ef4a">Datos</a></li>
 <li><a href="#org7c9d143">Datos en nivel del consumo de petroleo en Grecia</a>
 <ul>
-<li><a href="#org8e1a963">Gráfico de la serie temporal y su correlograma</a></li>
-<li><a href="#org470127c">Estimación de un primer modelo univariante para la serie de consumo de petroleo</a></li>
-<li><a href="#org0dc9217">Estimación de un segundo modelo univariante para la serie de consumo de petroleo</a></li>
+<li><a href="#org0d118eb">Gráfico de la serie temporal y su correlograma</a></li>
+<li><a href="#orgb65a763">Estimación de un primer modelo univariante para la serie de consumo de petroleo</a></li>
+<li><a href="#org9d73131">Estimación de un segundo modelo univariante para la serie de consumo de petroleo</a></li>
 </ul>
 </li>
-<li><a href="#orge0edfd5">Datos en nivel de la popularidad del nombre Óscar en EEUU</a>
+<li><a href="#org9d54f52">Datos en nivel de la popularidad del nombre Óscar en EEUU</a>
 <ul>
-<li><a href="#org600373e">Gráfico de la serie temporal y su correlograma</a></li>
-<li><a href="#org20bf7c4">Estimación de un primer modelo univariante para la serie de popularidad del nombre Óscar</a></li>
-<li><a href="#org05fee0c">Estimación de un segundo modelo univariante para la serie de popularidad del nombre Óscar</a></li>
+<li><a href="#org8a43a17">Gráfico de la serie temporal y su correlograma</a></li>
+<li><a href="#orgf584d68">Estimación de un primer modelo univariante para la serie de popularidad del nombre Óscar</a></li>
+<li><a href="#org5bb1d8c">Estimación de un segundo modelo univariante para la serie de popularidad del nombre Óscar</a></li>
 </ul>
 </li>
-<li><a href="#org82b312a">Contraste de cointegración</a></li>
-<li><a href="#orgc9e4185">Regresión del consumo de petroleo sobre la popularidad del nombre Óscar</a>
-<ul>
-<li><a href="#orga9f3a84">Primer modelo</a></li>
-<li><a href="#org4438988">Segundo modelo: regresión del consumo de petroleo sobre la popularidad del nombre Óscar con modelo de corrección de error AR1</a></li>
-</ul>
-</li>
-<li><a href="#org1543322">Regresión en primeras diferencias</a>
+<li><a href="#orgf581b10">Contraste de cointegración</a></li>
+<li><a href="#orgeaa7fbd">Regresión del consumo de petroleo sobre la popularidad del nombre Óscar</a>
 <ul>
 <li><a href="#org250d7cf">Primer modelo</a></li>
-<li><a href="#org36df546">Segundo modelo: Regresión en primeras diferencias con intervención en el año 2020</a></li>
+<li><a href="#org070fed9">Segundo modelo: regresión del consumo de petroleo sobre la popularidad del nombre Óscar con modelo de corrección de error AR1</a></li>
+</ul>
+</li>
+<li><a href="#org17c761f">Regresión en primeras diferencias</a>
+<ul>
+<li><a href="#org0ee93e2">Primer modelo</a></li>
+<li><a href="#orgf22be32">Segundo modelo: Regresión en primeras diferencias con intervención en el año 2020</a></li>
 </ul>
 </li>
 <li><a href="#orgbcf48d2">Preguntas</a>
@@ -405,9 +405,9 @@ Datos anuales. Muestra: 1980&#x2013;2022
 <h2 id="org7c9d143">Datos en nivel del consumo de petroleo en Grecia</h2>
 <div class="outline-text-2" id="text-org7c9d143">
 </div>
-<div id="outline-container-org8e1a963" class="outline-3">
-<h3 id="org8e1a963">Gráfico de la serie temporal y su correlograma</h3>
-<div class="outline-text-3" id="text-org8e1a963">
+<div id="outline-container-org0d118eb" class="outline-3">
+<h3 id="org0d118eb">Gráfico de la serie temporal y su correlograma</h3>
+<div class="outline-text-3" id="text-org0d118eb">
 <div class="org-src-container">
 <pre class="src src-R">gnuplot ConsumoPetroleo --time-series --with-lines --output=<span style="color: #008000;">"consumoPetroleo.png"</span>
 corrgm ConsumoPetroleo 9 --plot=<span style="color: #008000;">"consumoPetroleoACF-PACF.png"</span>
@@ -417,28 +417,28 @@ corrgm ConsumoPetroleo 9 --plot=<span style="color: #008000;">"consumoPetroleoAC
 
 <div class="org-center">
 
-<div id="org88dd959" class="figure">
+<div id="orge8e378a" class="figure">
 <p><img src="./NombreOscarYConsumoDePetroleo/consumoPetroleo.png" alt="consumoPetroleo.png" />
 </p>
 </div>
 
-<div id="orga2d7c2c" class="figure">
+<div id="orgd5010ae" class="figure">
 <p><img src="./NombreOscarYConsumoDePetroleo/consumoPetroleoACF-PACF.png" alt="consumoPetroleoACF-PACF.png" /> 
 </p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org470127c" class="outline-3">
-<h3 id="org470127c">Estimación de un primer modelo univariante para la serie de consumo de petroleo</h3>
-<div class="outline-text-3" id="text-org470127c">
+<div id="outline-container-orgb65a763" class="outline-3">
+<h3 id="orgb65a763">Estimación de un primer modelo univariante para la serie de consumo de petroleo</h3>
+<div class="outline-text-3" id="text-orgb65a763">
 <div class="org-src-container">
 <pre class="src src-R" id="org3a59b59">ARMApetroleo <span style="color: #D0372D;">&lt;-</span> arima 1 0 1 ; ConsumoPetroleo
 </pre>
 </div>
 
 
-<pre class="example" id="org11ca1f9">
+<pre class="example" id="org0d74d7c">
 Evaluaciones de la función: 41
 Evaluaciones del gradiente: 14
 
@@ -478,7 +478,7 @@ corrgm res1petroleo
 </div>
 
 
-<pre class="example" id="orgaed1b9d">
+<pre class="example" id="orge467a2c">
 Función de autocorrelación para res1petroleo
 ***, ** y * indica significatividad a los niveles del 1%, 5% y 10%
 utilizando la desviación típica 1/T^0,5
@@ -496,16 +496,16 @@ utilizando la desviación típica 1/T^0,5
 </pre>
 </div>
 </div>
-<div id="outline-container-org0dc9217" class="outline-3">
-<h3 id="org0dc9217">Estimación de un segundo modelo univariante para la serie de consumo de petroleo</h3>
-<div class="outline-text-3" id="text-org0dc9217">
+<div id="outline-container-org9d73131" class="outline-3">
+<h3 id="org9d73131">Estimación de un segundo modelo univariante para la serie de consumo de petroleo</h3>
+<div class="outline-text-3" id="text-org9d73131">
 <div class="org-src-container">
 <pre class="src src-R" id="orgc570172">ARIpetroleo <span style="color: #D0372D;">&lt;-</span> arima 1 1 0 --nc ; ConsumoPetroleo
 </pre>
 </div>
 
 
-<pre class="example" id="org1c9690a">
+<pre class="example" id="orgbddfd51">
 Evaluaciones de la función: 12
 Evaluaciones del gradiente: 3
 
@@ -541,7 +541,7 @@ corrgm res2petroleo
 </div>
 
 
-<pre class="example" id="org07a8652">
+<pre class="example" id="org766de9d">
 Función de autocorrelación para res2petroleo
 ***, ** y * indica significatividad a los niveles del 1%, 5% y 10%
 utilizando la desviación típica 1/T^0,5
@@ -560,13 +560,13 @@ utilizando la desviación típica 1/T^0,5
 </div>
 </div>
 </div>
-<div id="outline-container-orge0edfd5" class="outline-2">
-<h2 id="orge0edfd5">Datos en nivel de la popularidad del nombre Óscar en EEUU</h2>
-<div class="outline-text-2" id="text-orge0edfd5">
+<div id="outline-container-org9d54f52" class="outline-2">
+<h2 id="org9d54f52">Datos en nivel de la popularidad del nombre Óscar en EEUU</h2>
+<div class="outline-text-2" id="text-org9d54f52">
 </div>
-<div id="outline-container-org600373e" class="outline-3">
-<h3 id="org600373e">Gráfico de la serie temporal y su correlograma</h3>
-<div class="outline-text-3" id="text-org600373e">
+<div id="outline-container-org8a43a17" class="outline-3">
+<h3 id="org8a43a17">Gráfico de la serie temporal y su correlograma</h3>
+<div class="outline-text-3" id="text-org8a43a17">
 <div class="org-src-container">
 <pre class="src src-R">gnuplot FrecuenciaOscar --time-series --with-lines --output=<span style="color: #008000;">"consumoOscar.png"</span>
 corrgm FrecuenciaOscar --plot=<span style="color: #008000;">"consumoOscarACF-PACF.png"</span>
@@ -576,28 +576,28 @@ corrgm FrecuenciaOscar --plot=<span style="color: #008000;">"consumoOscarACF-PAC
 
 <div class="org-center">
 
-<div id="org9b40e9e" class="figure">
+<div id="orgb191ba7" class="figure">
 <p><img src="./NombreOscarYConsumoDePetroleo/consumoOscar.png" alt="consumoOscar.png" /> 
 </p>
 </div>
 
-<div id="org2859f97" class="figure">
+<div id="org731dea0" class="figure">
 <p><img src="./NombreOscarYConsumoDePetroleo/consumoOscarACF-PACF.png" alt="consumoOscarACF-PACF.png" /> 
 </p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org20bf7c4" class="outline-3">
-<h3 id="org20bf7c4">Estimación de un primer modelo univariante para la serie de popularidad del nombre Óscar</h3>
-<div class="outline-text-3" id="text-org20bf7c4">
+<div id="outline-container-orgf584d68" class="outline-3">
+<h3 id="orgf584d68">Estimación de un primer modelo univariante para la serie de popularidad del nombre Óscar</h3>
+<div class="outline-text-3" id="text-orgf584d68">
 <div class="org-src-container">
 <pre class="src src-R" id="org9915ab5">ARMAoscar <span style="color: #D0372D;">&lt;-</span> arima 1 0 1 ; FrecuenciaOscar
 </pre>
 </div>
 
 
-<pre class="example" id="org837ecad">
+<pre class="example" id="org11714ae">
 Evaluaciones de la función: 37
 Evaluaciones del gradiente: 15
 
@@ -637,7 +637,7 @@ corrgm res1Oscar
 </div>
 
 
-<pre class="example" id="org590dd18">
+<pre class="example" id="org87b49ca">
 Función de autocorrelación para res1Oscar
 ***, ** y * indica significatividad a los niveles del 1%, 5% y 10%
 utilizando la desviación típica 1/T^0,5
@@ -655,16 +655,16 @@ utilizando la desviación típica 1/T^0,5
 </pre>
 </div>
 </div>
-<div id="outline-container-org05fee0c" class="outline-3">
-<h3 id="org05fee0c">Estimación de un segundo modelo univariante para la serie de popularidad del nombre Óscar</h3>
-<div class="outline-text-3" id="text-org05fee0c">
+<div id="outline-container-org5bb1d8c" class="outline-3">
+<h3 id="org5bb1d8c">Estimación de un segundo modelo univariante para la serie de popularidad del nombre Óscar</h3>
+<div class="outline-text-3" id="text-org5bb1d8c">
 <div class="org-src-container">
 <pre class="src src-R" id="orga4ef94a">ARIoscar <span style="color: #D0372D;">&lt;-</span> arima 1 1 0 --nc ; FrecuenciaOscar
 </pre>
 </div>
 
 
-<pre class="example" id="org6382812">
+<pre class="example" id="org9b25612">
 Evaluaciones de la función: 11
 Evaluaciones del gradiente: 4
 
@@ -699,7 +699,7 @@ corrgm res2Oscar
 </div>
 
 
-<pre class="example" id="org0a3212a">
+<pre class="example" id="orgb556526">
 Función de autocorrelación para res2Oscar
 ***, ** y * indica significatividad a los niveles del 1%, 5% y 10%
 utilizando la desviación típica 1/T^0,5
@@ -718,15 +718,15 @@ utilizando la desviación típica 1/T^0,5
 </div>
 </div>
 </div>
-<div id="outline-container-org82b312a" class="outline-2">
-<h2 id="org82b312a">Contraste de cointegración</h2>
-<div class="outline-text-2" id="text-org82b312a">
+<div id="outline-container-orgf581b10" class="outline-2">
+<h2 id="orgf581b10">Contraste de cointegración</h2>
+<div class="outline-text-2" id="text-orgf581b10">
 <div class="org-src-container">
 <pre class="src src-R">coint 2 ConsumoPetroleo FrecuenciaOscar --test-down
 </pre>
 </div>
 
-<pre class="example" id="orgada2e01">
+<pre class="example" id="org0165aad">
 Etapa 1: contrastando la existencia de una raíz unitaria en ConsumoPetroleo
 
 Contraste aumentado de Dickey-Fuller para ConsumoPetroleo
@@ -796,13 +796,13 @@ Hay evidencia de una relación cointegrante si:
 </pre>
 </div>
 </div>
-<div id="outline-container-orgc9e4185" class="outline-2">
-<h2 id="orgc9e4185">Regresión del consumo de petroleo sobre la popularidad del nombre Óscar</h2>
-<div class="outline-text-2" id="text-orgc9e4185">
+<div id="outline-container-orgeaa7fbd" class="outline-2">
+<h2 id="orgeaa7fbd">Regresión del consumo de petroleo sobre la popularidad del nombre Óscar</h2>
+<div class="outline-text-2" id="text-orgeaa7fbd">
 </div>
-<div id="outline-container-orga9f3a84" class="outline-3">
-<h3 id="orga9f3a84">Primer modelo</h3>
-<div class="outline-text-3" id="text-orga9f3a84">
+<div id="outline-container-org250d7cf" class="outline-3">
+<h3 id="org250d7cf">Primer modelo</h3>
+<div class="outline-text-3" id="text-org250d7cf">
 <div class="org-src-container">
 <pre class="src src-R">MCOpetroleoOscar <span style="color: #D0372D;">&lt;-</span> ols ConsumoPetroleo 0 FrecuenciaOscar
 modtest --normality --quiet
@@ -811,7 +811,7 @@ modtest --autocorr 1 --quiet
 </pre>
 </div>
 
-<pre class="example" id="org53af11a">
+<pre class="example" id="org68572cb">
 Modelo 12: MCO, usando las observaciones 1980-2022 (T = 43)
 Variable dependiente: ConsumoPetroleo
 
@@ -852,16 +852,16 @@ con valor p = P(Chi-cuadrado(1) &gt; 11,8733) = 0,000569
 </pre>
 </div>
 </div>
-<div id="outline-container-org4438988" class="outline-3">
-<h3 id="org4438988">Segundo modelo: regresión del consumo de petroleo sobre la popularidad del nombre Óscar con modelo de corrección de error AR1</h3>
-<div class="outline-text-3" id="text-org4438988">
+<div id="outline-container-org070fed9" class="outline-3">
+<h3 id="org070fed9">Segundo modelo: regresión del consumo de petroleo sobre la popularidad del nombre Óscar con modelo de corrección de error AR1</h3>
+<div class="outline-text-3" id="text-org070fed9">
 <div class="org-src-container">
 <pre class="src src-R">MCOpetroleoOscarModeloErrorAR1 <span style="color: #D0372D;">&lt;-</span> ar1 ConsumoPetroleo 0 FrecuenciaOscar
 modtest --normality --quiet
 </pre>
 </div>
 
-<pre class="example" id="orgb225145">
+<pre class="example" id="org0a99002">
 Realizando el cálculo iterativo de rho...
 
            ITERACIÓN   RHO        SCR
@@ -898,13 +898,13 @@ Chi-cuadrado(2) = 1,743 con valor p 0,41841
 </div>
 </div>
 </div>
-<div id="outline-container-org1543322" class="outline-2">
-<h2 id="org1543322">Regresión en primeras diferencias</h2>
-<div class="outline-text-2" id="text-org1543322">
+<div id="outline-container-org17c761f" class="outline-2">
+<h2 id="org17c761f">Regresión en primeras diferencias</h2>
+<div class="outline-text-2" id="text-org17c761f">
 </div>
-<div id="outline-container-org250d7cf" class="outline-3">
-<h3 id="org250d7cf">Primer modelo</h3>
-<div class="outline-text-3" id="text-org250d7cf">
+<div id="outline-container-org0ee93e2" class="outline-3">
+<h3 id="org0ee93e2">Primer modelo</h3>
+<div class="outline-text-3" id="text-org0ee93e2">
 <div class="org-src-container">
 <pre class="src src-R">diff ConsumoPetroleo FrecuenciaOscar
 MCOpetroleoOscar_en_Diff <span style="color: #D0372D;">&lt;-</span> ols d_ConsumoPetroleo 0 d_FrecuenciaOscar
@@ -914,7 +914,7 @@ modtest --autocorr 2 --quiet
 </pre>
 </div>
 
-<pre class="example" id="org4bc447f">
+<pre class="example" id="orgdc44c4a">
 Modelo 16: MCO, usando las observaciones 1981-2022 (T = 42)
 Variable dependiente: d_ConsumoPetroleo
 
@@ -955,9 +955,9 @@ con valor p = P(Chi-cuadrado(2) &gt; 0,314886) = 0,854
 </pre>
 </div>
 </div>
-<div id="outline-container-org36df546" class="outline-3">
-<h3 id="org36df546">Segundo modelo: Regresión en primeras diferencias con intervención en el año 2020</h3>
-<div class="outline-text-3" id="text-org36df546">
+<div id="outline-container-orgf22be32" class="outline-3">
+<h3 id="orgf22be32">Segundo modelo: Regresión en primeras diferencias con intervención en el año 2020</h3>
+<div class="outline-text-3" id="text-orgf22be32">
 <p>
 Dado que hubo una caída muy acusada en el consumo de petroleo del año
 20 debido al confinamiento por la Covid19 (<i>circunstancia que no
@@ -976,7 +976,7 @@ modtest --autocorr 2 --quiet
 </pre>
 </div>
 
-<pre class="example" id="orgceb854c">
+<pre class="example" id="org8ea05ee">
 Modelo 18: MCO, usando las observaciones 1981-2022 (T = 42)
 Variable dependiente: d_ConsumoPetroleo
 
@@ -1031,8 +1031,8 @@ Discuta de todas las formas posibles si las series temporales de
 consumo de petroleo (<code>ConsumoPetroleo</code>) y popularidad del nombre Óscar
 (<code>FrecuenciaOscar</code>) son estacionarias en media (i.e., son la
 realización de procesos estocásticos estacionarios), usando para ello
-los resultados de los apartados <a href="#org7c9d143">Datos en nivel del consumo de petroleo en Grecia</a>, <a href="#orge0edfd5">Datos en nivel de la popularidad del nombre Óscar en EEUU</a> y
-<a href="#org82b312a">Contraste de cointegración</a>.
+los resultados de los apartados <a href="#org7c9d143">Datos en nivel del consumo de petroleo en Grecia</a>, <a href="#org9d54f52">Datos en nivel de la popularidad del nombre Óscar en EEUU</a> y
+<a href="#orgf581b10">Contraste de cointegración</a>.
 </p>
 
 <p>
@@ -1045,7 +1045,7 @@ los resultados de los apartados <a href="#org7c9d143">Datos en nivel del consumo
 <div class="outline-text-3" id="text-org08ec4d7">
 <p>
 Discuta si las series temporales <code>ConsumoPetroleo</code> y <code>FrecuenciaOscar</code>
-están cointegradas, a partir de los resultados del apartado <a href="#org82b312a">Contraste de cointegración</a>.
+están cointegradas, a partir de los resultados del apartado <a href="#orgf581b10">Contraste de cointegración</a>.
 </p>
 
 <p>
@@ -1057,7 +1057,7 @@ están cointegradas, a partir de los resultados del apartado <a href="#org82b312
 <h3 id="org4466b0f">Pregunta 3</h3>
 <div class="outline-text-3" id="text-org4466b0f">
 <p>
-¿Contradice la <a href="#org1543322">Regresión en primeras diferencias</a> la posibilidad de que
+¿Contradice la <a href="#org17c761f">Regresión en primeras diferencias</a> la posibilidad de que
 están relacionados el consumo de petroleo en Grecia y la popularidad
 del nombre de pila Oscar en los EEUU?
 </p>
@@ -1071,7 +1071,7 @@ del nombre de pila Oscar en los EEUU?
 <h3 id="org4493707">Pregunta 4</h3>
 <div class="outline-text-3" id="text-org4493707">
 <p>
-Los listados de la <a href="#orgc9e4185">Regresión del consumo de petroleo sobre la popularidad del nombre Óscar</a> y la <a href="#org1543322">Regresión en primeras diferencias</a>
+Los listados de la <a href="#orgeaa7fbd">Regresión del consumo de petroleo sobre la popularidad del nombre Óscar</a> y la <a href="#org17c761f">Regresión en primeras diferencias</a>
 muestran los principales resultados obtenidos al estimar por MCO dos
 modelos de regresión que relacionan las dos variables consideradas en
 este ejercicio (dichos modelos están referidos como "<i>primeros
@@ -1136,7 +1136,7 @@ si alguno de ellos es preferible y por qué.
 <h3 id="org4117ffe">Pregunta 7</h3>
 <div class="outline-text-3" id="text-org4117ffe">
 <p>
-En la Sección <a href="#orge0edfd5">Datos en nivel de la popularidad del nombre Óscar en EEUU</a> aparecen dos modelos univariantes. Compare los resultados he
+En la Sección <a href="#org9d54f52">Datos en nivel de la popularidad del nombre Óscar en EEUU</a> aparecen dos modelos univariantes. Compare los resultados he
 indique si alguno de ellos es preferible y por qué.
 </p>
 
@@ -1179,13 +1179,13 @@ coeficientes decrecen despacio y a un ritmo aproximadamente lineal);
 y el primer coeficiente de la PACF está próximo a uno en ambos
 casos.</li>
 
-<li><a href="#org470127c">Estimación de un primer modelo univariante para la serie de consumo de petroleo</a>: El modelo univariante estimado tiene una raíz AR
+<li><a href="#orgb65a763">Estimación de un primer modelo univariante para la serie de consumo de petroleo</a>: El modelo univariante estimado tiene una raíz AR
 aproximadamente igual a \(1\).</li>
 
-<li><a href="#org20bf7c4">Estimación de un primer modelo univariante para la serie de popularidad del nombre Óscar</a>: El modelo univariante estimado tiene
+<li><a href="#orgf584d68">Estimación de un primer modelo univariante para la serie de popularidad del nombre Óscar</a>: El modelo univariante estimado tiene
 una raíz AR aproximadamente igual a \(1\).</li>
 
-<li><a href="#org82b312a">Contraste de cointegración</a>: Los test ADF calculados en las etapas 1
+<li><a href="#orgf581b10">Contraste de cointegración</a>: Los test ADF calculados en las etapas 1
 y 2 no rechazan la hipótesis (raíz unitaria) con p-valores
 superiores al 0.4</li>
 </ul>
@@ -1244,10 +1244,10 @@ Entonces también debe ser cierto que
 </p>
 
 <p>
-Sorprendentemente, en la <a href="#org1543322">Regresión en primeras diferencias</a> la
+Sorprendentemente, en la <a href="#org17c761f">Regresión en primeras diferencias</a> la
 constante es NO significativa, la pendiente es muy significativa y el
 \(R^2\) no es, en absoluto, despreciable (<code>R-cuadrado 0,327929</code>). Es
-decir, <span class="underline">la <a href="#org1543322">Regresión en primeras diferencias</a> no contradice la
+decir, <span class="underline">la <a href="#org17c761f">Regresión en primeras diferencias</a> no contradice la
 posibilidad de que ambas variables estén relacionadas</span>.
 </p>
 
@@ -1270,7 +1270,7 @@ los resultados estadísticos sin un mínimo espíritu crítico!
 <div class="outline-text-3" id="text-org4034c52">
 <dl class="org-dl">
 <dt>Primer modelo para datos en nivel</dt><dd><p>
-(<a href="#orgc9e4185">Regresión del consumo de petroleo sobre la popularidad del nombre Óscar</a>): Todos los
+(<a href="#orgeaa7fbd">Regresión del consumo de petroleo sobre la popularidad del nombre Óscar</a>): Todos los
 coeficientes son muy significativos. El ajuste del modelo, medido
 por el valor del \(R^2\) es muy elevado. Los contrastes sobre los
 residuos no rechazan la hipótesis nula de normalidad, pero si
@@ -1288,7 +1288,7 @@ incorporando un modelo AR(1) para el error.
 </p></dd>
 
 <dt>Primer modelo para datos en primeras diferencias</dt><dd><p>
-(<a href="#org1543322">Regresión en primeras diferencias</a>): El único coeficiente significativo es la
+(<a href="#org17c761f">Regresión en primeras diferencias</a>): El único coeficiente significativo es la
 pendiente (es decir, al diferenciar las series ha desaparecido la
 relación entre ellas), y el ajuste del modelo, medido por el valor
 del \(R^2\), es superior al 30%. Los contrastes residuales rechazan
@@ -1316,7 +1316,7 @@ ocasiona un problema grave en general.
 <h3 id="orgea52406">Respuesta 5</h3>
 <div class="outline-text-3" id="text-orgea52406">
 <dl class="org-dl">
-<dt>Segundo modelo para datos en nivel</dt><dd>(<a href="#orgc9e4185">Regresión del consumo de petroleo sobre la popularidad del nombre Óscar</a>): El segundo modelo
+<dt>Segundo modelo para datos en nivel</dt><dd>(<a href="#orgeaa7fbd">Regresión del consumo de petroleo sobre la popularidad del nombre Óscar</a>): El segundo modelo
 corresponde a una regresión con modelo AR(1) para el error (tal y
 como se sugería en la pregunta anterior). La estimación ha
 convergido en 5 iteraciones, los parámetros son muy significativos y
@@ -1331,7 +1331,7 @@ aceptable</i>).</dd>
 
 <dl class="org-dl">
 <dt>Segundo modelo para datos en primeras diferencias</dt><dd><p>
-(<a href="#org1543322">Regresión en primeras diferencias</a>): El segundo modelo incluye un nuevo regresor
+(<a href="#org17c761f">Regresión en primeras diferencias</a>): El segundo modelo incluye un nuevo regresor
 para captar la caída de consumo de petroleo del año 2020 debida al
 confinamiento por la Covid19. Por tanto, esta modificación no tiene
 nada que ver con lo indicado en la pregunta anterior.
@@ -1443,7 +1443,7 @@ modelo aceptable o, ni siquiera, razonable.</dd>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2024-10-18 vie 19:53</p>
+<p class="date">Created: 2024-10-21 lun 13:19</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

@@ -8,6 +8,15 @@
 
 #+startup: shrink
 
+# ###########
+# ESTO DA EL FORMATO FINAL DE LA PÁGINA WEB VÉASE [[https://olmon.gitlab.io/org-themes/]]
+#+SETUPFILE: readtheorg_inline.theme
+# +SETUPFILE: simple_inlineUCM.theme  
+# +SETUPFILE: bigblow_inline.theme
+# +SETUPFILE: darksun.theme
+# +SETUPFILE: white_clean.theme  
+# ###########
+
 #+LATEX_HEADER_EXTRA: \usepackage[spanish]{babel}
 #+LATEX_HEADER_EXTRA: \usepackage{lmodern}
 #+LATEX_HEADER_EXTRA: \usepackage{tabularx}
@@ -286,11 +295,11 @@ head(DF.diferencias, 2)
 
 #+RESULTS:
 :RESULTS:
-|   |       date | d_GNP | d_Melanoma |
+|   | date       | d_GNP | d_Melanoma |
 |---+------------+-------+------------|
-|   |     <date> | <dbl> |      <dbl> |
-| 1 | 1937-01-01 |  10.2 |       -0.2 |
-| 2 | 1938-01-01 | -10.3 |        0.0 |
+|   | <date>     | <dbl> | <dbl>      |
+| 1 | 1937-01-01 | 10.2  | -0.2       |
+| 2 | 1938-01-01 | -10.3 | 0.0        |
 #+caption: A data.frame: 2 × 3
 :END:
 
@@ -321,17 +330,17 @@ summ( lm(d_GNP ~ d_Melanoma) )
 
 #+RESULTS:
 #+begin_example
-MODEL INFO:
-Observations: 36
-Dependent Variable: d_GNP
-Type: OLS linear regression 
+[4mMODEL INFO:[24m
+[3mObservations:[23m 36
+[3mDependent Variable:[23m d_GNP
+[3mType:[23m OLS linear regression 
 
-MODEL FIT:
-F(1,34) = 0.01, p = 0.92
-R² = 0.00
-Adj. R² = -0.03 
+[4mMODEL FIT:[24m
+[3mF[23m(1,34) = 0.01, [3mp[23m = 0.92
+[3mR² = [23m0.00
+[3mAdj. R² = [23m-0.03 
 
-Standard errors: OLS
+[3mStandard errors: OLS[23m
 ------------------------------------------------
                      Est.   S.E.   t val.      p
 ----------------- ------- ------ -------- ------
@@ -411,12 +420,12 @@ head(UK_df,3)
 
 #+RESULTS:
 :RESULTS:
-|   | Index     |  Long | Short |
+|   | Index     | Long  | Short |
 |---+-----------+-------+-------|
 |   | <yearqtr> | <dbl> | <dbl> |
-| 1 | 1952 Q2   |  4.23 |  2.32 |
-| 2 | 1952 Q3   |  4.36 |  2.47 |
-| 3 | 1952 Q4   |  4.19 |  2.42 |
+| 1 | 1952 Q2   | 4.23  | 2.32  |
+| 2 | 1952 Q3   | 4.36  | 2.47  |
+| 3 | 1952 Q4   | 4.19  | 2.42  |
 #+caption: A data.frame: 3 × 3
 :END:
 
@@ -431,9 +440,9 @@ head(UK_ts,3)
 :RESULTS:
 | Long | Short |
 |------+-------|
-| 4.23 |  2.32 |
-| 4.36 |  2.47 |
-| 4.19 |  2.42 |
+| 4.23 | 2.32  |
+| 4.36 | 2.47  |
+| 4.19 | 2.42  |
 #+caption: A matrix: 3 × 2 of type dbl
 :END:
 
@@ -490,11 +499,11 @@ head(UK_df.diferencias, 2)
 
 #+RESULTS:
 :RESULTS:
-|   |       date | d_Long | d_Short |
+|   | date       | d_Long | d_Short |
 |---+------------+--------+---------|
-|   |     <date> |  <dbl> |   <dbl> |
-| 1 | 1952-07-01 |   0.13 |    0.15 |
-| 2 | 1952-10-01 |  -0.17 |   -0.05 |
+|   | <date>     | <dbl>  | <dbl>   |
+| 1 | 1952-07-01 | 0.13   | 0.15    |
+| 2 | 1952-10-01 | -0.17  | -0.05   |
 #+caption: A data.frame: 2 × 3
 :END:
 
@@ -528,17 +537,17 @@ summ( lm(d_Short ~ d_Long) )
 
 #+RESULTS:
 #+begin_example
-MODEL INFO:
-Observations: 74
-Dependent Variable: d_Short
-Type: OLS linear regression 
+[4mMODEL INFO:[24m
+[3mObservations:[23m 74
+[3mDependent Variable:[23m d_Short
+[3mType:[23m OLS linear regression 
 
-MODEL FIT:
-F(1,72) = 20.11, p = 0.00
-R² = 0.22
-Adj. R² = 0.21 
+[4mMODEL FIT:[24m
+[3mF[23m(1,72) = 20.11, [3mp[23m = 0.00
+[3mR² = [23m0.22
+[3mAdj. R² = [23m0.21 
 
-Standard errors: OLS
+[3mStandard errors: OLS[23m
 ------------------------------------------------
                      Est.   S.E.   t val.      p
 ----------------- ------- ------ -------- ------
@@ -556,17 +565,17 @@ summ( modelo )                         # resultados del ajuste
 
 #+RESULTS:
 #+begin_example
-MODEL INFO:
-Observations: 75
-Dependent Variable: UK_df$Short
-Type: OLS linear regression 
+[4mMODEL INFO:[24m
+[3mObservations:[23m 75
+[3mDependent Variable:[23m UK_df$Short
+[3mType:[23m OLS linear regression 
 
-MODEL FIT:
-F(1,73) = 302.85, p = 0.00
-R² = 0.81
-Adj. R² = 0.80 
+[4mMODEL FIT:[24m
+[3mF[23m(1,73) = 302.85, [3mp[23m = 0.00
+[3mR² = [23m0.81
+[3mAdj. R² = [23m0.80 
 
-Standard errors: OLS
+[3mStandard errors: OLS[23m
 ------------------------------------------------
                      Est.   S.E.   t val.      p
 ----------------- ------- ------ -------- ------

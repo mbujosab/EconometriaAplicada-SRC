@@ -8,6 +8,14 @@
 
 #+startup: shrink
 
+# ###########
+# ESTO DA EL FORMATO FINAL DE LA PÁGINA WEB VÉASE [[https://olmon.gitlab.io/org-themes/]]
+#+SETUPFILE: readtheorg_inline.theme
+# +SETUPFILE: simple_inlineUCM.theme  
+# +SETUPFILE: bigblow_inline.theme
+# +SETUPFILE: darksun.theme
+# +SETUPFILE: white_clean.theme  
+# ###########
 
 #+LATEX_HEADER_EXTRA: \usepackage[spanish]{babel}
 #+LATEX_HEADER_EXTRA: \usepackage{lmodern}

@@ -8,6 +8,15 @@
 
 #+startup: shrink
 
+# ###########
+# ESTO DA EL FORMATO FINAL DE LA PÁGINA WEB VÉASE [[https://olmon.gitlab.io/org-themes/]]
+#+SETUPFILE: readtheorg_inline.theme
+# +SETUPFILE: simple_inlineUCM.theme  
+# +SETUPFILE: bigblow_inline.theme
+# +SETUPFILE: darksun.theme
+# +SETUPFILE: white_clean.theme  
+# ###########
+
 #+REVEAL_INIT_OPTIONS: slideNumber:true
 
 #+LATEX_HEADER_EXTRA: \usepackage[spanish]{babel}
@@ -213,12 +222,12 @@ Si el polinomio AR estimado tiene alguna raíz "próxima a uno" es
 síntoma de infradiferenciación.
 
 Si el polinomio MA estimado tiene alguna raíz "próxima a uno" es
-síntoma de
-a) sobrediferenciación... salvo cuando...
-b) antes de diferenciar hubiera una tendencia determinista (que
-   podemos comprobar, por ejemplo, con un test ADF).
+síntoma de sobrediferenciación.
+# a) sobrediferenciación... salvo cuando...
+# b) antes de diferenciar hubiera una tendencia determinista (que podemos comprobar, por ejemplo, con un test ADF).
 
-Ejemplos que ilustran los tres casos:
+Ejemplos:
+# que ilustran los tres casos:
 
 #+ATTR_HTML: :border 2 :rules all :frame border
 #+ATTR_LATEX: :environment longtable :align p{7cm}p{7cm}
@@ -363,6 +372,7 @@ roots(SMA1)
 options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
 ide(sim(SMA1, n = 500),
     lag.max = 50,
+    lags.at = 12,
     graphs = c("plot", "acf", "pacf", "pgram"))
 #+END_SRC
 
@@ -406,6 +416,7 @@ Evidentemente las raíces son iguales a las del caso anterior (aunque ahora corr
 options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
 ide(sim(SAR1, n = 500),
     lag.max = 50,
+    lags.at = 12,
     graphs = c("plot", "acf", "pacf", "pgram"))
 #+END_SRC
 
@@ -461,6 +472,7 @@ $\quad X_t= (1-0.9 \mathsf{B})(1-0.9 \mathsf{B}^{12})U_t$
 options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
 ide(sim(MA1SMA1, n = 500),
     lag.max = 50,
+    lags.at = 12,
     graphs = c("plot", "acf", "pacf", "pgram"))
 #+END_SRC
 
@@ -491,18 +503,13 @@ $\quad (1-0.9 \mathsf{B})X_t= (1-0.9 \mathsf{B}^{12})U_t$
 [[./img/lecc08/ACF-AR1SMA1.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc08/ :file Sim-AR1SMA1.png :exports code
+#+BEGIN_SRC jupyter-R :results file :output-dir ./img/lecc08/ :file Sim-AR1SMA1.png :exports code :results none 
 options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
 ide(sim(AR1SMA1, n = 500),
     lag.max = 50,
+    lags.at = 12,
     graphs = c("plot", "acf", "pacf", "pgram"))
 #+END_SRC
-
-#+RESULTS:
-:RESULTS:
-#+attr_org: :width 1200 :height 500
-[[./img/lecc08/Sim-AR1SMA1.png]]
-:END:
 
 #+attr_org: :width 800
 #+attr_html: :width 900px
@@ -535,6 +542,7 @@ $\quad (1-0.9 \mathsf{B})(1-0.9 \mathsf{B}^{12})X_t= U_t$
 options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
 ide(sim(AR1SAR1, n = 500),
     lag.max = 50,
+    lags.at = 12,
     graphs = c("plot", "acf", "pacf", "pgram"))
 #+END_SRC
 
@@ -569,6 +577,7 @@ $\quad (1-0.9 \mathsf{B}^{12})X_t= (1-0.9 \mathsf{B})U_t$
 options(repr.plot.width = 12, repr.plot.height = 5, repr.plot.res = 200)
 ide(sim(MA1SAR1, n = 500),
     lag.max = 50,
+    lags.at = 12,
     graphs = c("plot", "acf", "pacf", "pgram"))
 #+END_SRC
 
@@ -585,6 +594,7 @@ En estos cuatro ejemplos hemos podido apreciar que
 - Estos satélites son útiles para identificar en qué retardos
   estacionales hay autocorrelaciones no nulas, pero no requieren una
   parametrización especial.
+
 
 * Resumen del análisis univariante de series temporales 
    :PROPERTIES:
