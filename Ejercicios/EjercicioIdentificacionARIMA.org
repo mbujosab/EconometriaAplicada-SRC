@@ -26,19 +26,19 @@
 #+LATEX: \maketitle
 
 #+BEGIN_SRC sh  :exports none :results silent
-rm -fr $(pwd)/EjercicioIdentificacionModeloARIMA
-mkdir -p $(pwd)/EjercicioIdentificacionModeloARIMA 
-gretlcli -b /home/marcos/SynologyDrive/ReposGH/Docencia/EconometriaAplicada-SRC/EjerciciosHide/EjercicioIdentificacionModeloARIMA.inp
+rm -fr $(pwd)/EjercicioIdentificacionARIMA
+mkdir -p $(pwd)/EjercicioIdentificacionARIMA 
+gretlcli -b $(pwd)/EjercicioIdentificacionARIMA.inp
 #+END_SRC
 
 #+BEGIN_SRC sh  :exports none :results silent
-zip mortality EjercicioIdentificacionModeloARIMA* EjercicioIdentificacionModeloARIMA/*
+zip mortality EjercicioIdentificacionARIMA* EjercicioIdentificacionARIMA/*
 #+END_SRC
 
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :exports none :results silent
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :exports none :results silent
 # para que gretl guarde los ficheros en el directorio de la práctica
-string directory = $(pwd) ~ "/EjercicioIdentificacionModeloARIMA" 
+string directory = $(pwd) ~ "/EjercicioIdentificacionARIMA" 
 set workdir "@directory" 
 #+end_src
 
@@ -47,7 +47,7 @@ set workdir "@directory"
 
 Cargue la serie de datos simulados [[file:IdentificaEstosARIMA/f7dcbd-12.gdt][f7dcbd-12.gdt]]
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 open IdentificaEstosARIMA/f7dcbd-12.gdt
 #+end_src
 
@@ -64,20 +64,25 @@ open IdentificaEstosARIMA/f7dcbd-12.gdt
    serie que sea lo más parsimonioso posible, pero cuyos residuos se
    puedan considerar /ruido blanco/.]]
 
+- Ficheros [[https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios]]
+  - Versión en [[file:EjercicioIdentificacionARIMA.pdf][pdf]]
+  - Datos: [[file:IdentificaEstosARIMA/f7dcbd-12.gdt][f7dcbd-12.gdt]]
+  - Guión de gretl: [[file:EjercicioIdentificacionARIMA.inp]]
+
 
 * Primer análisis gráfico
 
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 gnuplot x --time-series --with-lines --output="SerieEnNiveles.png"
 rmplot  x --output="rango-media.png"
 #+end_src
 
 #+BEGIN_CENTER
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./EjercicioIdentificacionModeloARIMA/SerieEnNiveles.png]]
+[[./EjercicioIdentificacionARIMA/SerieEnNiveles.png]]
 #+ATTR_LATEX: :width 0.4\textwidth :center
-[[./EjercicioIdentificacionModeloARIMA/rango-media.png]] 
+[[./EjercicioIdentificacionARIMA/rango-media.png]] 
 #+END_CENTER
 
 
@@ -89,7 +94,7 @@ necesaria la transformación logarítmica.*
 
 **  Transforme logarítmicamente los datos y grafíquelos
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 logs x
 gnuplot l_x --time-series --with-lines --output="SerieEnLogs.png"
 rmplot  l_x --output="rango-media-enLogs.png"
@@ -97,9 +102,9 @@ rmplot  l_x --output="rango-media-enLogs.png"
 
 #+BEGIN_CENTER
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./EjercicioIdentificacionModeloARIMA/SerieEnLogs.png]]
+[[./EjercicioIdentificacionARIMA/SerieEnLogs.png]]
 #+ATTR_LATEX: :width 0.4\textwidth :center
-[[./EjercicioIdentificacionModeloARIMA/rango-media-enLogs.png]] 
+[[./EjercicioIdentificacionARIMA/rango-media-enLogs.png]] 
 #+END_CENTER
 
 La serie en logs ya parece estacionaria en varianza.
@@ -116,18 +121,18 @@ obtendremos un polinomio autoregresivo con una raíz muy próxima a uno
 (o incluso menor que uno en valor absoluto). 
 
 #+NAME: Modelo ARMA 1 0 0 con cte
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 AR1 <- arima 1 0 0 ; l_x
 #+end_src
 
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet AR1.txt
   <<Modelo ARMA 1 0 0 con cte>>
 end outfile
 #+end_src
 
-#+include: ./EjercicioIdentificacionModeloARIMA/AR1.txt example
+#+include: ./EjercicioIdentificacionARIMA/AR1.txt example
 
 
 Tal como se anticipaba, la raíz es casi =1=. También podemos probar
@@ -136,35 +141,35 @@ con los test formales de raíz unitaria
 ** Test ADF
 
 #+NAME: Test ADF serie en niveles
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 adf -1 l_x --c --gls --test-down --perron-qu 
 #+end_src
 # --c --gls --test-down --perron-qu
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet test_ADF.txt
     <<Test ADF serie en niveles>>
 end outfile
 #+end_src
 
-#+include: ./EjercicioIdentificacionModeloARIMA/test_ADF.txt example
+#+include: ./EjercicioIdentificacionARIMA/test_ADF.txt example
 
 El  p-valor es elevado, por lo que NO se rechaza la $H_0$ de que la serie es $I(1)$
 
 ** Test KPSS
 
 #+NAME: Test KPSS serie en niveles
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 kpss -1 l_x 
 #+end_src
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet test_KPSS.txt
     <<Test KPSS serie en niveles>>
 end outfile
 #+end_src
 
-#+include: ./EjercicioIdentificacionModeloARIMA/test_KPSS.txt example
+#+include: ./EjercicioIdentificacionARIMA/test_KPSS.txt example
 
 El  p-valor es menor al 1%, por lo que se rechaza la $H_0$ de que la serie es $I(0)$.
 
@@ -172,14 +177,14 @@ El  p-valor es menor al 1%, por lo que se rechaza la $H_0$ de que la serie es $I
 
 ** Repetición del análisis con la serie diferenciada
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 diff l_x
 gnuplot d_l_x --time-series --with-lines --output="SerieLogEnDiferencias.png"
 #+end_src
 
 #+BEGIN_CENTER
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./EjercicioIdentificacionModeloARIMA/SerieLogEnDiferencias.png]]
+[[./EjercicioIdentificacionARIMA/SerieLogEnDiferencias.png]]
 #+END_CENTER
 
 El gráfico de la serie transformada no muestra tener una clara
@@ -188,17 +193,17 @@ tendencia o evolución a largo plazo de su nivel.
 Probemos a ajustar un modelo AR a los datos diferenciados
 
 #+NAME: Modelo ARIMA 1 1 0 con cte
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 ARIMA110 <- arima 1 1 0 ; d_l_x
 #+end_src
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet ARIMA110.txt
   <<Modelo ARIMA 1 1 0 con cte>>
 end outfile
 #+end_src
 
-#+include: ./EjercicioIdentificacionModeloARIMA/ARIMA110.txt example
+#+include: ./EjercicioIdentificacionARIMA/ARIMA110.txt example
 
 El parámetro $\phi_1$ está lejos de la unidad (consecuentemente,
 también lo está la raíz autorregresiva).
@@ -208,34 +213,34 @@ Repitamos también los tests formales
 *** Test ADF
 
 #+NAME: Test ADF serie en diferencias
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 adf -1 d_l_x --c --gls --test-down --perron-qu 
 #+end_src
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet test_ADF_en_diff.txt
     <<Test ADF serie en diferencias>>
 end outfile
 #+end_src
 
-#+include: ./EjercicioIdentificacionModeloARIMA/test_ADF_en_diff.txt example
+#+include: ./EjercicioIdentificacionARIMA/test_ADF_en_diff.txt example
 
 El p-valores es muy bajo, por lo que se rechaza la $H_0$ de que la serie es $I(1)$
 
 *** Test KPSS
 
 #+NAME: Test KPSS serie en diferencias
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 kpss -1 d_l_x 
 #+end_src
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet test_KPSS_en_diff.txt
     <<Test KPSS serie en diferencias>>
 end outfile
 #+end_src
 
-#+include: ./EjercicioIdentificacionModeloARIMA/test_KPSS_en_diff.txt example
+#+include: ./EjercicioIdentificacionARIMA/test_KPSS_en_diff.txt example
 
 El p-valor no es muy concluyente: NO se rechaza la $H_0$ de que la
 serie es $I(0)$ al 1%, pero sí se rechaza al 5%. En cualquier caso,
@@ -247,16 +252,16 @@ una segunda diferencia ordinaria*
 
 Observemos el gráfico de la serie diferenciada y su correlograma.
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 corrgm d_l_x 36 --plot="d_l_x_ACF-PACF.png"
 #+end_src
 
 
 #+BEGIN_CENTER
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./EjercicioIdentificacionModeloARIMA/SerieLogEnDiferencias.png]]
+[[./EjercicioIdentificacionARIMA/SerieLogEnDiferencias.png]]
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./EjercicioIdentificacionModeloARIMA/d_l_x_ACF-PACF.png]]
+[[./EjercicioIdentificacionARIMA/d_l_x_ACF-PACF.png]]
 #+END_CENTER
 
 Ni en el gráfico de la serie se aprecia ninguna pauta estacional, ni
@@ -268,17 +273,17 @@ estacional).
 Además, si tratamos de ajustar un AR(1) estacional:
 
 #+NAME: Modelo ARIMA_010x100 sin cte
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 ARIMA010X100 <- arima 0 1 0 ; 1 0 0 ; l_x  --nc
 #+end_src
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet ARIMA010x100.txt
   <<Modelo ARIMA_010x100 sin cte>>
 end outfile
 #+end_src
 
-#+include: ./EjercicioIdentificacionModeloARIMA/ARIMA010x100.txt example
+#+include: ./EjercicioIdentificacionARIMA/ARIMA010x100.txt example
 
 constatamos que la estimación del parámetro $\Phi_1$ no es
 significativa.
@@ -299,24 +304,24 @@ compatible con un AR(2).
 
 #+BEGIN_CENTER
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./EjercicioIdentificacionModeloARIMA/d_l_x_ACF-PACF.png]]
+[[./EjercicioIdentificacionARIMA/d_l_x_ACF-PACF.png]]
 #+END_CENTER
 
 Por tanto, parece que la serie en logaritmos sigue un modelo
 ARIMA$(2,1,0)$. Veamos si es así:
 
 #+NAME: Modelo ARIMA_210 con cte
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 ARIMA210cte <- arima 2 1 0 ; l_x 
 #+end_src
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet ARIMA210cte.txt
   <<Modelo ARIMA_210 con cte>>
 end outfile
 #+end_src
 
-#+include: ./EjercicioIdentificacionModeloARIMA/ARIMA210cte.txt example
+#+include: ./EjercicioIdentificacionARIMA/ARIMA210cte.txt example
 
 Los parámetros autorregresivos son significativos y el modulo de las
 raíces es claramente mayor que la unidad en ambos casos. No obstante,
@@ -325,17 +330,17 @@ la constante no es significativa.
 Reestimemos el modelo sin constante:
 
 #+NAME: Modelo ARIMA_210 sin cte
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 ARIMA210 <- arima 2 1 0 ; l_x --nc
 #+end_src
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet ARIMA210.txt
   <<Modelo ARIMA_210 sin cte>>
 end outfile
 #+end_src
 
-#+include: ./EjercicioIdentificacionModeloARIMA/ARIMA210.txt example
+#+include: ./EjercicioIdentificacionARIMA/ARIMA210.txt example
 
 ** Análisis de los residuos
 
@@ -345,35 +350,35 @@ que podemos asumir que son la realización de un proceso de ruido
 blanco. También conviene mirar si tienen distribución gaussiana:
 
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 series residuos = $uhat
 #+end_src
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 gnuplot residuos --time-series --with-lines --output="Residuos.png"
 corrgm residuos 15 --plot="residuosACF-PACF.png"
 #+end_src
 
 #+BEGIN_CENTER
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./EjercicioIdentificacionModeloARIMA/Residuos.png]]
+[[./EjercicioIdentificacionARIMA/Residuos.png]]
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./EjercicioIdentificacionModeloARIMA/residuosACF-PACF.png]]
+[[./EjercicioIdentificacionARIMA/residuosACF-PACF.png]]
 #+END_CENTER
 
 #+name: correlograma de los residuos
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 corrgm residuos 15
 #+end_src
 
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet ResiduosACF-PACF.txt
    <<correlograma de los residuos>> --quiet
 end outfile
 #+end_src
 
-#+include: ./EjercicioIdentificacionModeloARIMA/ResiduosACF-PACF.txt example
+#+include: ./EjercicioIdentificacionARIMA/ResiduosACF-PACF.txt example
 
 El gráfico de los residuos no presenta ninguna estructura reconocible y ninguna autocorrelación es significativa. 
 
@@ -387,18 +392,18 @@ También conviene mirar si los residuos tienen distribución gaussiana:
 #+latex: \medskip
 
 #+name: contraste de normalidad
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports code 
 modtest --normality
 #+end_src
 # normtest --all
 
-#+begin_src R :tangle EjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle EjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet ContrasteNormalidadResiduos.txt
    <<contraste de normalidad>>
 end outfile
 #+end_src
 
-#+include: ./EjercicioIdentificacionModeloARIMA/ContrasteNormalidadResiduos.txt example
+#+include: ./EjercicioIdentificacionARIMA/ContrasteNormalidadResiduos.txt example
 
 Claramente tienen distribución normal.
 #+latex: \medskip

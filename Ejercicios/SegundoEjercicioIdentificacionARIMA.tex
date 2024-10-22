@@ -1,4 +1,4 @@
-% Created 2024-10-18 vie 19:41
+% Created 2024-10-22 mar 11:47
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt]{article}
 \usepackage[utf8]{inputenc}
@@ -36,7 +36,7 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 
 \maketitle
 \section*{Datos}
-\label{sec:org7527a7f}
+\label{sec:orgfd684ad}
 
 Cargue la serie de datos simulados \href{IdentificaEstosARIMA/00c296-12.gdt}{00c296-12.gdt}
 
@@ -44,22 +44,28 @@ Cargue la serie de datos simulados \href{IdentificaEstosARIMA/00c296-12.gdt}{00c
 open IdentificaEstosARIMA/00c296-12.gdt
 \end{minted}
 \subsection*{Tareas a realizar}
-\label{sec:org2a61fd3}
-
+\label{sec:org29a5943}
 \begin{enumerate}
-\item \hyperref[sec:orgcf14149]{Realice un primer análisis gráfico: haga
+\item \hyperref[sec:org798aa3c]{Realice un primer análisis gráfico: haga
 un gráfico de la serie y un gráfico \emph{rango-media}}
-\item \hyperref[sec:orgeb2946e]{Determine si es necesario transformar logarítmicamente los datos}
-\item \hyperref[sec:orgecfb6ad]{Determine si es necesario tomar una
+\item \hyperref[sec:org2f997d4]{Determine si es necesario transformar logarítmicamente los datos}
+\item \hyperref[sec:org3beacc4]{Determine si es necesario tomar una
 diferencia estacional de la serie}
-\item \hyperref[sec:org8719850]{Determine si es necesario tomar una o
+\item \hyperref[sec:org7695fc3]{Determine si es necesario tomar una o
 más diferencias regulares de la serie}
-\item \hyperref[sec:orgdf66cd7]{Encuentre un modelo ARIMA para la
+\item \hyperref[sec:orgd2947b1]{Encuentre un modelo ARIMA para la
 serie que sea lo más parsimonioso posible, pero cuyos residuos se
 puedan considerar \emph{ruido blanco}.}
+
+\item Ficheros \url{https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios}
+\begin{itemize}
+\item Versión en \href{SegundoEjercicioIdentificacionARIMA.pdf}{pdf}
+\item Datos:  \href{IdentificaEstosARIMA/00c296-12.gdt}{00c296-12.gdt}
+\item Guión de gretl: \url{SegundoEjercicioIdentificacionARIMA.inp}
+\end{itemize}
 \end{enumerate}
 \section*{Primer análisis gráfico}
-\label{sec:orgcf14149}
+\label{sec:org798aa3c}
 
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
@@ -68,15 +74,15 @@ rmplot  x --output="rango-media.png"
 \end{minted}
 
 \begin{center}
-\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionModeloARIMA/SerieEnNiveles.png}
-\includegraphics[width=0.4\textwidth]{./SegundoEjercicioIdentificacionModeloARIMA/rango-media.png} 
+\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionARIMA/SerieEnNiveles.png}
+\includegraphics[width=0.4\textwidth]{./SegundoEjercicioIdentificacionARIMA/rango-media.png} 
 \end{center}
 
 De estos gráficos se desprende que la serie tiene una acusada pauta
 estacional y que la volatilidad probablemente depende del nivel de la
 serie.
 \section*{Estacionariedad en varianza}
-\label{sec:orgeb2946e}
+\label{sec:org2f997d4}
 
 A la luz de los anteriores gráficos, donde se aprecia que la
 variabilidad de los datos aumenta con el nivel de la serie, parece
@@ -87,7 +93,7 @@ constante suficientemente elevado como para que todos los valores
 fueran positivos). Por el momento, dejemos la serie sin transformarla
 logarítmicamente.
 \section*{Diferencias estacionales}
-\label{sec:orgecfb6ad}
+\label{sec:org3beacc4}
 
 Observemos el gráfico de la serie y su correlograma.
 
@@ -97,8 +103,8 @@ corrgm x 36 --plot="x_ACF-PACF.png"
 
 
 \begin{center}
-\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionModeloARIMA/SerieEnNiveles.png}
-\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionModeloARIMA/x_ACF-PACF.png}
+\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionARIMA/SerieEnNiveles.png}
+\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionARIMA/x_ACF-PACF.png}
 \end{center}
 
 En el gráfico de la serie se aprecia una acusada pauta estacional. En
@@ -132,7 +138,7 @@ Desviaciones típicas basadas en el Hessiano
 Media de la vble. dep.  3,780099   D.T. de la vble. dep.   4,838896
 Media de innovaciones   0,358041   D.T. innovaciones       1,535258
 R-cuadrado              0,906552   R-cuadrado corregido    0,906552
-Log-verosimilitud      −384,1534   Criterio de Akaike      774,3069
+Log-verosimilitud      -384,1534   Criterio de Akaike      774,3069
 Criterio de Schwarz     784,2019   Crit. de Hannan-Quinn   778,3112
 
                        Real Imaginaria     Módulo Frecuencia
@@ -161,10 +167,10 @@ gnuplot sd_x --time-series --with-lines --output="SerieEnDiferencias.png"
 \end{minted}
 
 \begin{center}
-\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionModeloARIMA/SerieEnDiferencias.png}
+\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionARIMA/SerieEnDiferencias.png}
 \end{center}
 \subsection*{Repetición del análisis con la serie diferenciada estacionalmente}
-\label{sec:org0547e3d}
+\label{sec:orge37f4b0}
 
 
 La serie resultante no muestra signos de estacionalidad. Veamos si se
@@ -176,27 +182,27 @@ corrgm sd_x 36 --plot="sd_x_ACF-PACF.png"
 
 
 \begin{center}
-\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionModeloARIMA/sd_x_ACF-PACF.png}
+\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionARIMA/sd_x_ACF-PACF.png}
 \end{center}
 
 \textbf{No hay nada que sugiera la necesidad de tomar una segunda diferencia
 estacional}.
 \section*{Estacionariedad en media}
-\label{sec:org8719850}
+\label{sec:org7695fc3}
 
 El gráfico de la serie diferenciada estacionalmente no muestra tener
 una clara tendencia o evolución a largo plazo de su nivel.
 
 
 \begin{center}
-\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionModeloARIMA/SerieEnDiferencias.png}
+\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionARIMA/SerieEnDiferencias.png}
 \end{center}
 
 En el correlograma, la ACF decae rápidamente, indicando que la serie
 parece ser la realización de un proceso estacionario.
 
 \begin{center}
-\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionModeloARIMA/sd_x_ACF-PACF.png}
+\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionARIMA/sd_x_ACF-PACF.png}
 \end{center}
 
 Probemos a ajustar un modelo AR a los datos diferenciados estacionalmente
@@ -222,7 +228,7 @@ Desviaciones típicas basadas en el Hessiano
 Media de la vble. dep.  0,058438   D.T. de la vble. dep.   2,351529
 Media de innovaciones   0,000197   D.T. innovaciones       2,149835
 R-cuadrado              0,824333   R-cuadrado corregido    0,824333
-Log-verosimilitud      −434,7714   Criterio de Akaike      875,5428
+Log-verosimilitud      -434,7714   Criterio de Akaike      875,5428
 Criterio de Schwarz     885,4227   Crit. de Hannan-Quinn   879,5415
 
                        Real Imaginaria     Módulo Frecuencia
@@ -239,7 +245,7 @@ también lo está la raíz autorregresiva).
 
 Probemos con los tests formales de raíz unitaria y estacionariedad
 \subsubsection*{Test ADF}
-\label{sec:orgb17de4c}
+\label{sec:org63a3a0f}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 adf -1 sd_x --c --gls --test-down --perron-qu 
@@ -262,7 +268,7 @@ la hipótesis nula de raíz unitaria es: [a = 1]
 
 El p-valores es muy bajo, por lo que se rechaza la \(H_0\) de que la serie es \(I(1)\)
 \subsubsection*{Test KPSS}
-\label{sec:org07fd435}
+\label{sec:org63d6dbd}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 kpss -1 sd_x 
@@ -284,14 +290,14 @@ El p-valor es elevado, por los que NO se rechaza la \(H_0\) de que la
 serie es \(I(0)\). \textbf{Todas estas evidencias indican de manera muy clara
 que NO es necesario tomar ninguna diferencia ordinaria}.
 \section*{Primer intento de búsqueda de un modelo ARIMA}
-\label{sec:orgdf66cd7}
+\label{sec:orgd2947b1}
 
 Observando al ACF y la PACF de aprecia que la ACF decae a una tasa
 exponencial, y la PACF se trunca tras el primer retardo, lo cual es
 compatible con un AR(1).
 
 \begin{center}
-\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionModeloARIMA/sd_x_ACF-PACF.png}
+\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionARIMA/sd_x_ACF-PACF.png}
 \end{center}
 
 Por tanto, parece que la serie en logaritmos sigue un modelo
@@ -319,7 +325,7 @@ Desviaciones típicas basadas en el Hessiano
 Media de la vble. dep.  0,058438   D.T. de la vble. dep.   2,351529
 Media de innovaciones   0,000197   D.T. innovaciones       2,149835
 R-cuadrado              0,824333   R-cuadrado corregido    0,824333
-Log-verosimilitud      −434,7714   Criterio de Akaike      875,5428
+Log-verosimilitud      -434,7714   Criterio de Akaike      875,5428
 Criterio de Schwarz     885,4227   Crit. de Hannan-Quinn   879,5415
 
                        Real Imaginaria     Módulo Frecuencia
@@ -357,7 +363,7 @@ Desviaciones típicas basadas en el Hessiano
 Media de la vble. dep.  0,449786   D.T. de la vble. dep.   1,487227
 Media de innovaciones   0,095115   D.T. innovaciones       0,946555
 R-cuadrado              0,962771   R-cuadrado corregido    0,962771
-Log-verosimilitud      −256,9190   Criterio de Akaike      517,8381
+Log-verosimilitud      -256,9190   Criterio de Akaike      517,8381
 Criterio de Schwarz     524,3110   Crit. de Hannan-Quinn   520,4606
 
                        Real Imaginaria     Módulo Frecuencia
@@ -369,7 +375,7 @@ Criterio de Schwarz     524,3110   Crit. de Hannan-Quinn   520,4606
 ARIMA110 guardado
 \end{verbatim}
 \subsection*{Análisis de los residuos}
-\label{sec:org8bdf6ae}
+\label{sec:org867f565}
 
 Todo parece OK, pero debemos ver el gráfico de los residuos y su
 correlograma, así como los estadísticos Q de Ljung-Box para constatar
@@ -386,8 +392,8 @@ corrgm residuos 60 --plot="residuosACF-PACF.png"
 \end{minted}
 
 \begin{center}
-\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionModeloARIMA/Residuos.png}
-\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionModeloARIMA/residuosACF-PACF.png}
+\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionARIMA/Residuos.png}
+\includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionARIMA/residuosACF-PACF.png}
 \end{center}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
@@ -473,7 +479,7 @@ la transformación logarítmica (en cualquier caso no se podía tomar sin
 aumentar previamente su nivel para hacerla positiva), sigue un proceso
 ARIMA\((1,0,0)\times(0,1,0)_S\) con media cero.
 \subsection*{Modelo efectivamente simulado}
-\label{sec:org4e79681}
+\label{sec:org4bd7ee3}
 
 Veamos si ese es el modelo usado en su simulación. Si miramos la línea
 \texttt{150} del fichero \href{IdentificaEstosARIMA/000-Etiquetas-12.txt}{000-Etiquetas-12.txt} que se encuentra en el directorio de
@@ -498,9 +504,9 @@ simulado\ldots{}
 
 \textbf{¡Hemos identificado un modelo distinto del simulado!}
 \section*{Pruebas con otro modelo ARIMA}
-\label{sec:org086899d}
+\label{sec:orgc03d676}
 
-Estimemos el verdadero modelo ARIMA\((2,0,0)\times(1,1,0)_{S}\):
+Estimemos el verdadero modelo simulado: ARIMA\((2,0,0)\times(1,1,0)_{S}\):
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 ARIMAsimulado <- arima 2 0 0; 1 1 0 ; x --nc 
@@ -525,7 +531,7 @@ Desviaciones típicas basadas en el Hessiano
 Media de la vble. dep.  0,449786   D.T. de la vble. dep.   1,487227
 Media de innovaciones   0,093115   D.T. innovaciones       0,946381
 R-cuadrado              0,962765   R-cuadrado corregido    0,962363
-Log-verosimilitud      −256,8841   Criterio de Akaike      521,7682
+Log-verosimilitud      -256,8841   Criterio de Akaike      521,7682
 Criterio de Schwarz     534,7139   Crit. de Hannan-Quinn   527,0133
 
                        Real Imaginaria     Módulo Frecuencia

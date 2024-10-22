@@ -1,4 +1,4 @@
-% Created 2024-10-01 mar 09:03
+% Created 2024-10-22 mar 11:33
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt]{article}
 \usepackage[utf8]{inputenc}
@@ -36,7 +36,7 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 
 \maketitle
 \section*{Datos}
-\label{sec:org4a9aa4d}
+\label{sec:org2ddb80d}
 
 Ejemplo obtenido de
 \url{https://tylervigen.com/spurious/correlation/8118\_popularity-of-the-first-name-oscar\_correlates-with\_petroluem-consumption-in-greece}
@@ -77,12 +77,16 @@ gnuplot ConsumoPetroleo FrecuenciaOscar  --time-series --with-lines --output="Pe
 
 \begin{itemize}
 \item Ficheros \url{https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios}
+\begin{itemize}
 \item Versión en \href{https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/NombreOscarYConsumoDePetroleo.pdf}{pdf}
+\item Datos: \url{NombreOscarYConsumoDePetroleo.gdt}
+\item Guión de gretl: \url{NombreOscarYConsumoDePetroleo.inp}
+\end{itemize}
 \end{itemize}
 \section*{Datos en nivel del consumo de petroleo en Grecia}
-\label{sec:org174ae6d}
+\label{sec:org1e80a49}
 \subsection*{Gráfico de la serie temporal y su correlograma}
-\label{sec:org2e7a99b}
+\label{sec:org54b7057}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 gnuplot ConsumoPetroleo --time-series --with-lines --output="consumoPetroleo.png"
@@ -95,7 +99,7 @@ corrgm ConsumoPetroleo 9 --plot="consumoPetroleoACF-PACF.png"
 \includegraphics[width=0.4\textwidth]{./NombreOscarYConsumoDePetroleo/consumoPetroleoACF-PACF.png} 
 \end{center}
 \subsection*{Estimación de un primer modelo univariante para la serie de consumo de petroleo}
-\label{sec:orgdd9f0f3}
+\label{sec:orgfa116c6}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 ARMApetroleo <- arima 1 0 1 ; ConsumoPetroleo
@@ -158,7 +162,7 @@ utilizando la desviación típica 1/T^0,5
     8   0,2206        0,2638 *        5,6184  [0,690]
 \end{verbatim}
 \subsection*{Estimación de un segundo modelo univariante para la serie de consumo de petroleo}
-\label{sec:orga321618}
+\label{sec:org63f7bab}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 ARIpetroleo <- arima 1 1 0 --nc ; ConsumoPetroleo
@@ -217,9 +221,9 @@ utilizando la desviación típica 1/T^0,5
     8   0,2664  *     0,2839 *        4,8001  [0,779]
 \end{verbatim}
 \section*{Datos en nivel de la popularidad del nombre Óscar en EEUU}
-\label{sec:orgaba3ef2}
+\label{sec:org112ee2b}
 \subsection*{Gráfico de la serie temporal y su correlograma}
-\label{sec:org1eeb548}
+\label{sec:org398dc7a}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 gnuplot FrecuenciaOscar --time-series --with-lines --output="consumoOscar.png"
@@ -232,7 +236,7 @@ corrgm FrecuenciaOscar --plot="consumoOscarACF-PACF.png"
 \includegraphics[width=0.4\textwidth]{./NombreOscarYConsumoDePetroleo/consumoOscarACF-PACF.png} 
 \end{center}
 \subsection*{Estimación de un primer modelo univariante para la serie de popularidad del nombre Óscar}
-\label{sec:org776b087}
+\label{sec:orgf709119}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 ARMAoscar <- arima 1 0 1 ; FrecuenciaOscar
@@ -295,7 +299,7 @@ utilizando la desviación típica 1/T^0,5
     8   0,1386        0,1208          7,2006  [0,515]
 \end{verbatim}
 \subsection*{Estimación de un segundo modelo univariante para la serie de popularidad del nombre Óscar}
-\label{sec:org4c6b1ee}
+\label{sec:org8450059}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 ARIoscar <- arima 1 1 0 --nc ; FrecuenciaOscar
@@ -353,7 +357,7 @@ utilizando la desviación típica 1/T^0,5
     8   0,1196        0,1581          7,2920  [0,505]
 \end{verbatim}
 \section*{Contraste de cointegración}
-\label{sec:orga62a61f}
+\label{sec:orgdca7019}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 coint 2 ConsumoPetroleo FrecuenciaOscar --test-down
@@ -428,9 +432,9 @@ Hay evidencia de una relación cointegrante si:
 (b) La hipótesis de existencia de raíz unitaria se rechaza para los residuos (uhat) de la regresión cointegrante.
 \end{verbatim}
 \section*{Regresión del consumo de petroleo sobre la popularidad del nombre Óscar}
-\label{sec:org5c9cca4}
+\label{sec:orgd2adbd9}
 \subsection*{Primer modelo}
-\label{sec:orgdf7038a}
+\label{sec:org99e815d}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 MCOpetroleoOscar <- ols ConsumoPetroleo 0 FrecuenciaOscar
@@ -479,7 +483,7 @@ Ljung-Box Q' = 11,8733,
 con valor p = P(Chi-cuadrado(1) > 11,8733) = 0,000569
 \end{verbatim}
 \subsection*{Segundo modelo: regresión del consumo de petroleo sobre la popularidad del nombre Óscar con modelo de corrección de error AR1}
-\label{sec:org9c78dc2}
+\label{sec:org8bdd913}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 MCOpetroleoOscarModeloErrorAR1 <- ar1 ConsumoPetroleo 0 FrecuenciaOscar
@@ -521,9 +525,9 @@ Contraste de la hipótesis nula de distribución Normal:
 Chi-cuadrado(2) = 1,743 con valor p 0,41841
 \end{verbatim}
 \section*{Regresión en primeras diferencias}
-\label{sec:orgcb271e6}
+\label{sec:orge20fc9f}
 \subsection*{Primer modelo}
-\label{sec:org94598f4}
+\label{sec:orgee14752}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 diff ConsumoPetroleo FrecuenciaOscar
@@ -573,7 +577,7 @@ Ljung-Box Q' = 0,314886,
 con valor p = P(Chi-cuadrado(2) > 0,314886) = 0,854
 \end{verbatim}
 \subsection*{Segundo modelo: Regresión en primeras diferencias con intervención en el año 2020}
-\label{sec:org434cbac}
+\label{sec:orgadbdf01}
 Dado que hubo una caída muy acusada en el consumo de petroleo del año
 20 debido al confinamiento por la Covid19 (\emph{circunstancia que no
 afectó de manera particular a la popularidad del nombre "Óscar"}), el
@@ -630,38 +634,38 @@ Ljung-Box Q' = 0,464447,
 con valor p = P(Chi-cuadrado(2) > 0,464447) = 0,793
 \end{verbatim}
 \section*{Preguntas}
-\label{sec:orgb1242a7}
+\label{sec:orgc5baaf6}
 
 \subsection*{Pregunta 1}
-\label{sec:orgcb204b1}
+\label{sec:orgd3a3ca7}
 
 Discuta de todas las formas posibles si las series temporales de
 consumo de petroleo (\texttt{ConsumoPetroleo}) y popularidad del nombre Óscar
 (\texttt{FrecuenciaOscar}) son estacionarias en media (i.e., son la
 realización de procesos estocásticos estacionarios), usando para ello
-los resultados de los apartados \hyperref[sec:org174ae6d]{Datos en nivel del consumo de petroleo en Grecia}, \hyperref[sec:orgaba3ef2]{Datos en nivel de la popularidad del nombre Óscar en EEUU} y
-\hyperref[sec:orga62a61f]{Contraste de cointegración}.
+los resultados de los apartados \hyperref[sec:org1e80a49]{Datos en nivel del consumo de petroleo en Grecia}, \hyperref[sec:org112ee2b]{Datos en nivel de la popularidad del nombre Óscar en EEUU} y
+\hyperref[sec:orgdca7019]{Contraste de cointegración}.
 
-(\hyperref[sec:org8f22ef7]{Respuesta 1})
+(\hyperref[sec:orga953cfd]{Respuesta 1})
 \subsection*{Pregunta 2}
-\label{sec:orgab9d603}
+\label{sec:org9c9b72f}
 
 Discuta si las series temporales \texttt{ConsumoPetroleo} y \texttt{FrecuenciaOscar}
-están cointegradas, a partir de los resultados del apartado \hyperref[sec:orga62a61f]{Contraste de cointegración}.
+están cointegradas, a partir de los resultados del apartado \hyperref[sec:orgdca7019]{Contraste de cointegración}.
 
-(\hyperref[sec:orgedbd935]{Respuesta 2})
+(\hyperref[sec:orgb9e4dcc]{Respuesta 2})
 \subsection*{Pregunta 3}
-\label{sec:orgb94d845}
+\label{sec:org0f9a56b}
 
-¿Contradice la \hyperref[sec:orgcb271e6]{Regresión en primeras diferencias} la posibilidad de que
+¿Contradice la \hyperref[sec:orge20fc9f]{Regresión en primeras diferencias} la posibilidad de que
 están relacionados el consumo de petroleo en Grecia y la popularidad
 del nombre de pila Oscar en los EEUU?
 
-(\hyperref[sec:org5fe107a]{Respuesta 3})
+(\hyperref[sec:org014d2fe]{Respuesta 3})
 \subsection*{Pregunta 4}
-\label{sec:org3bfd5b4}
+\label{sec:org8e2fed6}
 
-Los listados de la \hyperref[sec:org5c9cca4]{Regresión del consumo de petroleo sobre la popularidad del nombre Óscar} y la \hyperref[sec:orgcb271e6]{Regresión en primeras diferencias}
+Los listados de la \hyperref[sec:orgd2adbd9]{Regresión del consumo de petroleo sobre la popularidad del nombre Óscar} y la \hyperref[sec:orge20fc9f]{Regresión en primeras diferencias}
 muestran los principales resultados obtenidos al estimar por MCO dos
 modelos de regresión que relacionan las dos variables consideradas en
 este ejercicio (dichos modelos están referidos como "\emph{primeros
@@ -675,9 +679,9 @@ Si detecta alguna desviación del cumplimiento de las hipótesis
 habituales, discuta sus consecuencias sobre las propiedades del
 estimador MCO y sugiera alguna forma de tratarla.
 
-(\hyperref[sec:orgf6c4126]{Respuesta 4})
+(\hyperref[sec:org4f3f44d]{Respuesta 4})
 \subsection*{Pregunta 5}
-\label{sec:orgc42d59b}
+\label{sec:org516e60d}
 
 Tanto en el caso de las regresiones en niveles como en el caso de las
 regresiones en primeras diferencias, también se muestra los resultados
@@ -690,36 +694,36 @@ cualquier caso, señale (en cada caso) si considera que ese segundo
 modelo es mejor o peor que el primero, y en qué aspectos.
 
 
-(\hyperref[sec:org9bd4016]{Respuesta 5})
+(\hyperref[sec:orgfe4b59b]{Respuesta 5})
 \subsection*{Pregunta 6}
-\label{sec:org803ac4d}
+\label{sec:org5ca64fb}
 
-En la Sección \hyperref[sec:org174ae6d]{Datos en nivel del consumo de petroleo en Grecia}
+En la Sección \hyperref[sec:org1e80a49]{Datos en nivel del consumo de petroleo en Grecia}
 aparecen dos modelos univariantes. Compare los resultados he indique
 si alguno de ellos es preferible y por qué.
 
-(\hyperref[sec:org53402f0]{Respuesta 6})
+(\hyperref[sec:org756e936]{Respuesta 6})
 \subsection*{Pregunta 7}
-\label{sec:org1e156cc}
+\label{sec:orge819da2}
 
-En la Sección \hyperref[sec:orgaba3ef2]{Datos en nivel de la popularidad del nombre Óscar en EEUU} aparecen dos modelos univariantes. Compare los resultados he
+En la Sección \hyperref[sec:org112ee2b]{Datos en nivel de la popularidad del nombre Óscar en EEUU} aparecen dos modelos univariantes. Compare los resultados he
 indique si alguno de ellos es preferible y por qué.
 
-(\hyperref[sec:org1e156cc]{Pregunta 7})
+(\hyperref[sec:orge819da2]{Pregunta 7})
 \subsection*{Pregunta 8}
-\label{sec:org6b190a5}
+\label{sec:org8534066}
 
 ¿Cuáles de los modelos de más arriba considera aceptables? ¿O qué
 mejoras sugeriría para ellos?
 
-(\hyperref[sec:org1a77a4d]{Respuesta 8})
+(\hyperref[sec:orgf9d3e51]{Respuesta 8})
 
 \newpage
 \section*{Respuestas}
-\label{sec:org15a6dad}
+\label{sec:org87a570a}
 
 \subsection*{Respuesta 1}
-\label{sec:org8f22ef7}
+\label{sec:orga953cfd}
 
 Ambas series (\texttt{ConsumoPetroleo} y \texttt{FrecuenciaOscar}) parecen ser NO
 estacionarias en media,
@@ -732,20 +736,20 @@ coeficientes decrecen despacio y a un ritmo aproximadamente lineal);
 y el primer coeficiente de la PACF está próximo a uno en ambos
 casos.
 
-\item \hyperref[sec:orgdd9f0f3]{Estimación de un primer modelo univariante para la serie de consumo de petroleo}: El modelo univariante estimado tiene una raíz AR
+\item \hyperref[sec:orgfa116c6]{Estimación de un primer modelo univariante para la serie de consumo de petroleo}: El modelo univariante estimado tiene una raíz AR
 aproximadamente igual a \(1\).
 
-\item \hyperref[sec:org776b087]{Estimación de un primer modelo univariante para la serie de popularidad del nombre Óscar}: El modelo univariante estimado tiene
+\item \hyperref[sec:orgf709119]{Estimación de un primer modelo univariante para la serie de popularidad del nombre Óscar}: El modelo univariante estimado tiene
 una raíz AR aproximadamente igual a \(1\).
 
-\item \hyperref[sec:orga62a61f]{Contraste de cointegración}: Los test ADF calculados en las etapas 1
+\item \hyperref[sec:orgdca7019]{Contraste de cointegración}: Los test ADF calculados en las etapas 1
 y 2 no rechazan la hipótesis (raíz unitaria) con p-valores
 superiores al 0.4
 \end{itemize}
 
-(\hyperref[sec:orgcb204b1]{Pregunta 1})
+(\hyperref[sec:orgd3a3ca7]{Pregunta 1})
 \subsection*{Respuesta 2}
-\label{sec:orgedbd935}
+\label{sec:orgb9e4dcc}
 
 Las conclusiones de las distintas etapas del test de cointegración son:
 \begin{description}
@@ -767,9 +771,9 @@ cointegrante sean I(1) tanto al 10\% como al 5\% de significación
 Consecuentemente, \uline{el test NO rechaza la cointegración de ambas
 series} (\emph{en contra de lo que sugiere el sentido común}).
 
-(\hyperref[sec:orgab9d603]{Pregunta 2})
+(\hyperref[sec:org9c9b72f]{Pregunta 2})
 \subsection*{Respuesta 3}
-\label{sec:org5fe107a}
+\label{sec:org014d2fe}
 
 \uline{La relación NO se desvanece al diferenciar los datos} para lograr la
 estacionariedad; que es precisamente lo que cabe esperar cuando la
@@ -782,10 +786,10 @@ $$
 \nabla\boldsymbol{y}= \beta_2 \nabla\boldsymbol{x} + \nabla\boldsymbol{u}
 $$
 
-Sorprendentemente, en la \hyperref[sec:orgcb271e6]{Regresión en primeras diferencias} la
+Sorprendentemente, en la \hyperref[sec:orge20fc9f]{Regresión en primeras diferencias} la
 constante es NO significativa, la pendiente es muy significativa y el
 \(R^2\) no es, en absoluto, despreciable (\texttt{R-cuadrado 0,327929}). Es
-decir, \uline{la \hyperref[sec:orgcb271e6]{Regresión en primeras diferencias} no contradice la
+decir, \uline{la \hyperref[sec:orge20fc9f]{Regresión en primeras diferencias} no contradice la
 posibilidad de que ambas variables estén relacionadas}.
 
 \emph{Comentario y moraleja}: Pese a los resultados estadísticos, la
@@ -795,12 +799,12 @@ frecuencia del nombre Óscar en EEUU tenga ninguna influencia sobre el
 consumo de petroleo en Grecia\ldots{} o viceversa). ¡Ojo con interpretar
 los resultados estadísticos sin un mínimo espíritu crítico!
 
-(\hyperref[sec:orgb94d845]{Pregunta 3})
+(\hyperref[sec:org0f9a56b]{Pregunta 3})
 \subsection*{Respuesta 4}
-\label{sec:orgf6c4126}
+\label{sec:org4f3f44d}
 
 \begin{description}
-\item[{Primer modelo para datos en nivel}] (\hyperref[sec:org5c9cca4]{Regresión del consumo de petroleo sobre la popularidad del nombre Óscar}): Todos los
+\item[{Primer modelo para datos en nivel}] (\hyperref[sec:orgd2adbd9]{Regresión del consumo de petroleo sobre la popularidad del nombre Óscar}): Todos los
 coeficientes son muy significativos. El ajuste del modelo, medido
 por el valor del \(R^2\) es muy elevado. Los contrastes sobre los
 residuos no rechazan la hipótesis nula de normalidad, pero si
@@ -814,7 +818,7 @@ autocorrelación; dado que hay indicios de autocorrelación de orden 1
 en los errores de ajuste, sería conveniente estimar el modelo
 incorporando un modelo AR(1) para el error.
 
-\item[{Primer modelo para datos en primeras diferencias}] (\hyperref[sec:orgcb271e6]{Regresión en primeras diferencias}): El único coeficiente significativo es la
+\item[{Primer modelo para datos en primeras diferencias}] (\hyperref[sec:orge20fc9f]{Regresión en primeras diferencias}): El único coeficiente significativo es la
 pendiente (es decir, al diferenciar las series ha desaparecido la
 relación entre ellas), y el ajuste del modelo, medido por el valor
 del \(R^2\), es superior al 30\%. Los contrastes residuales rechazan
@@ -830,13 +834,13 @@ exactamente una distribución \emph{t} de student). En la práctica esto no
 ocasiona un problema grave en general.
 \end{description}
 
-(\hyperref[sec:org3bfd5b4]{Pregunta 4})
+(\hyperref[sec:org8e2fed6]{Pregunta 4})
 \subsection*{Respuesta 5}
-\label{sec:org9bd4016}
+\label{sec:orgfe4b59b}
 
 
 \begin{description}
-\item[{Segundo modelo para datos en nivel}] (\hyperref[sec:org5c9cca4]{Regresión del consumo de petroleo sobre la popularidad del nombre Óscar}): El segundo modelo
+\item[{Segundo modelo para datos en nivel}] (\hyperref[sec:orgd2adbd9]{Regresión del consumo de petroleo sobre la popularidad del nombre Óscar}): El segundo modelo
 corresponde a una regresión con modelo AR(1) para el error (tal y
 como se sugería en la pregunta anterior). La estimación ha
 convergido en 5 iteraciones, los parámetros son muy significativos y
@@ -850,7 +854,7 @@ aceptable}).
 
 
 \begin{description}
-\item[{Segundo modelo para datos en primeras diferencias}] (\hyperref[sec:orgcb271e6]{Regresión en primeras diferencias}): El segundo modelo incluye un nuevo regresor
+\item[{Segundo modelo para datos en primeras diferencias}] (\hyperref[sec:orge20fc9f]{Regresión en primeras diferencias}): El segundo modelo incluye un nuevo regresor
 para captar la caída de consumo de petroleo del año 2020 debida al
 confinamiento por la Covid19. Por tanto, esta modificación no tiene
 nada que ver con lo indicado en la pregunta anterior.
@@ -864,9 +868,9 @@ atípico 2020, los residuos pasan todos los contrastes (incluido el
 de normalidad).
 \end{description}
 
-(\hyperref[sec:orgc42d59b]{Pregunta 5})
+(\hyperref[sec:org516e60d]{Pregunta 5})
 \subsection*{Respuesta 6}
-\label{sec:org53402f0}
+\label{sec:org756e936}
 
 El primer modelo es un ARMA(\(1,1\)) con media distinta de cero, y los
 tres parámetros estimados son muy significativos. El mayor
@@ -886,9 +890,9 @@ estadísticos Q de Ljung-Box son más elevados en este segundo modelo,
 por lo que sus residuos tienen una mayor apariencia de "ruido
 blanco". En resumen, este segundo modelo parece mejor que el primero.
 
-(\hyperref[sec:org803ac4d]{Pregunta 6})
+(\hyperref[sec:org5ca64fb]{Pregunta 6})
 \subsection*{Respuesta 7}
-\label{sec:orgda19482}
+\label{sec:orgd3033cf}
 
 Como en el caso anterior, el primer modelo es un ARMA(\(1,1\)) con media
 distinta de cero, y los tres parámetros estimados son muy
@@ -909,9 +913,9 @@ estadísticos Q de Ljung-Box son más elevados en este segundo modelo,
 por lo que sus residuos tienen una mayor apariencia de "ruido
 blanco". En resumen, este segundo modelo parece mejor que el primero.
 
-(\hyperref[sec:org803ac4d]{Pregunta 6})
+(\hyperref[sec:org5ca64fb]{Pregunta 6})
 \subsection*{Respuesta 8}
-\label{sec:org1a77a4d}
+\label{sec:orgf9d3e51}
 
 \begin{description}
 \item[{En cuanto a los modelos univariantes}] Como se ha dicho, para ambas
@@ -927,5 +931,5 @@ Grecia. Consecuentemente ninguna de estas regresiones ofrece un
 modelo aceptable o, ni siquiera, razonable.
 \end{description}
 
-(\hyperref[sec:org6b190a5]{Pregunta 8})
+(\hyperref[sec:org8534066]{Pregunta 8})
 \end{document}

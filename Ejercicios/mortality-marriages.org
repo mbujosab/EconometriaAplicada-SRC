@@ -62,7 +62,9 @@ open mortality-marriages.gdt
 #+end_src
 
 - Ficheros [[https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios]]
-- Versión en [[https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Ejercicios/mortality-marriages.pdf][pdf]]
+  - Versión en [[https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Ejercicios/mortality-marriages.pdf][pdf]]
+  - Datos: [[file:mortality-marriages.gdt][mortality-marriages.gdt]]
+  - Guión de gretl: [[file:mortality-marriages.inp][mortality-marriages.inp]]
 
 * Datos en nivel de la serie de mortalidad
 

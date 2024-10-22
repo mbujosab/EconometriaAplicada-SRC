@@ -74,7 +74,9 @@ gnuplot ConsumoPetroleo FrecuenciaOscar  --time-series --with-lines --output="Pe
 
 
 - Ficheros [[https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios]]
-- Versión en [[https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/NombreOscarYConsumoDePetroleo.pdf][pdf]]
+  - Versión en [[https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/NombreOscarYConsumoDePetroleo.pdf][pdf]]
+  - Datos: [[file:NombreOscarYConsumoDePetroleo.gdt]]
+  - Guión de gretl: [[file:NombreOscarYConsumoDePetroleo.inp]]
 
 
 * Datos en nivel del consumo de petroleo en Grecia

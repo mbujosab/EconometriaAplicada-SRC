@@ -12,11 +12,11 @@ Desviaciones típicas basadas en el Hessiano
   phi_1       0,0936419     0,0365721      2,560   0,0105   **
   phi_2       0,605180      0,0365994     16,54    2,05e-61 ***
 
-Media de la vble. dep. −0,003555   D.T. de la vble. dep.   0,124351
-Media de innovaciones  −0,001626   D.T. innovaciones       0,096534
+Media de la vble. dep. -0,003555   D.T. de la vble. dep.   0,124351
+Media de innovaciones  -0,001626   D.T. innovaciones       0,096534
 R-cuadrado              0,997634   R-cuadrado corregido    0,997629
-Log-verosimilitud       439,6762   Criterio de Akaike     −873,3525
-Criterio de Schwarz    −860,8374   Crit. de Hannan-Quinn  −868,4326
+Log-verosimilitud       439,6762   Criterio de Akaike     -873,3525
+Criterio de Schwarz    -860,8374   Crit. de Hannan-Quinn  -868,4326
 
                        Real Imaginaria     Módulo Frecuencia
   -----------------------------------------------------------

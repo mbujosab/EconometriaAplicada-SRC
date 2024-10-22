@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
 <head>
-<!-- 2024-10-18 vie 19:42 -->
+<!-- 2024-10-22 mar 11:47 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Segundo ejercicio de identificación de un modelo ARIMA</title>
@@ -285,41 +285,41 @@ org_html_manager.setup();  // activate after the parameters are set
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0cf615a">Datos</a>
+<li><a href="#orgfbb46b5">Datos</a>
 <ul>
-<li><a href="#org6c1b79e">Tareas a realizar</a></li>
+<li><a href="#org54df1a9">Tareas a realizar</a></li>
 </ul>
 </li>
-<li><a href="#org7492e18">Primer análisis gráfico</a></li>
-<li><a href="#orgf711946">Estacionariedad en varianza</a></li>
-<li><a href="#org8586fc3">Diferencias estacionales</a>
+<li><a href="#orgd286215">Primer análisis gráfico</a></li>
+<li><a href="#orga01a9b1">Estacionariedad en varianza</a></li>
+<li><a href="#org1691d63">Diferencias estacionales</a>
 <ul>
-<li><a href="#org07f6733">Repetición del análisis con la serie diferenciada estacionalmente</a></li>
+<li><a href="#org9b99d50">Repetición del análisis con la serie diferenciada estacionalmente</a></li>
 </ul>
 </li>
-<li><a href="#org0204be7">Estacionariedad en media</a>
+<li><a href="#org91b5a6e">Estacionariedad en media</a>
 <ul>
 <li>
 <ul>
-<li><a href="#org7dda0a2">Test ADF</a></li>
-<li><a href="#orgc5ff1c9">Test KPSS</a></li>
+<li><a href="#orga2ba005">Test ADF</a></li>
+<li><a href="#org24787d4">Test KPSS</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgd526073">Primer intento de búsqueda de un modelo ARIMA</a>
+<li><a href="#org80b10b9">Primer intento de búsqueda de un modelo ARIMA</a>
 <ul>
-<li><a href="#orgcee5cf4">Análisis de los residuos</a></li>
-<li><a href="#orgf10b7be">Modelo efectivamente simulado</a></li>
+<li><a href="#orgc407378">Análisis de los residuos</a></li>
+<li><a href="#orgfd7c3e5">Modelo efectivamente simulado</a></li>
 </ul>
 </li>
-<li><a href="#org595b3ac">Pruebas con otro modelo ARIMA</a></li>
+<li><a href="#orgcaa1730">Pruebas con otro modelo ARIMA</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org0cf615a" class="outline-2">
-<h2 id="org0cf615a">Datos</h2>
-<div class="outline-text-2" id="text-org0cf615a">
+<div id="outline-container-orgfbb46b5" class="outline-2">
+<h2 id="orgfbb46b5">Datos</h2>
+<div class="outline-text-2" id="text-orgfbb46b5">
 <p>
 Cargue la serie de datos simulados <a href="IdentificaEstosARIMA/00c296-12.gdt">00c296-12.gdt</a>
 </p>
@@ -329,27 +329,34 @@ Cargue la serie de datos simulados <a href="IdentificaEstosARIMA/00c296-12.gdt">
 </pre>
 </div>
 </div>
-<div id="outline-container-org6c1b79e" class="outline-3">
-<h3 id="org6c1b79e">Tareas a realizar</h3>
-<div class="outline-text-3" id="text-org6c1b79e">
+<div id="outline-container-org54df1a9" class="outline-3">
+<h3 id="org54df1a9">Tareas a realizar</h3>
+<div class="outline-text-3" id="text-org54df1a9">
 <ol class="org-ol">
-<li><a href="#org7492e18">Realice un primer análisis gráfico: haga
+<li><a href="#orgd286215">Realice un primer análisis gráfico: haga
 un gráfico de la serie y un gráfico <i>rango-media</i></a></li>
-<li><a href="#orgf711946">Determine si es necesario transformar logarítmicamente los datos</a></li>
-<li><a href="#org8586fc3">Determine si es necesario tomar una
+<li><a href="#orga01a9b1">Determine si es necesario transformar logarítmicamente los datos</a></li>
+<li><a href="#org1691d63">Determine si es necesario tomar una
 diferencia estacional de la serie</a></li>
-<li><a href="#org0204be7">Determine si es necesario tomar una o
+<li><a href="#org91b5a6e">Determine si es necesario tomar una o
 más diferencias regulares de la serie</a></li>
-<li><a href="#orgd526073">Encuentre un modelo ARIMA para la
+<li><a href="#org80b10b9">Encuentre un modelo ARIMA para la
 serie que sea lo más parsimonioso posible, pero cuyos residuos se
 puedan considerar <i>ruido blanco</i>.</a></li>
+
+<li>Ficheros <a href="https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios">https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios</a>
+<ul class="org-ul">
+<li>Versión en <a href="SegundoEjercicioIdentificacionARIMA.pdf">pdf</a></li>
+<li>Datos:  <a href="IdentificaEstosARIMA/00c296-12.gdt">00c296-12.gdt</a></li>
+<li>Guión de gretl: <a href="SegundoEjercicioIdentificacionARIMA.inp">SegundoEjercicioIdentificacionARIMA.inp</a></li>
+</ul></li>
 </ol>
 </div>
 </div>
 </div>
-<div id="outline-container-org7492e18" class="outline-2">
-<h2 id="org7492e18">Primer análisis gráfico</h2>
-<div class="outline-text-2" id="text-org7492e18">
+<div id="outline-container-orgd286215" class="outline-2">
+<h2 id="orgd286215">Primer análisis gráfico</h2>
+<div class="outline-text-2" id="text-orgd286215">
 <div class="org-src-container">
 <pre class="src src-R">gnuplot x --time-series --with-lines --output=<span style="color: #008000;">"SerieEnNiveles.png"</span>
 rmplot  x --output=<span style="color: #008000;">"rango-media.png"</span>
@@ -358,13 +365,13 @@ rmplot  x --output=<span style="color: #008000;">"rango-media.png"</span>
 
 <div class="org-center">
 
-<div id="orgc5f5e14" class="figure">
-<p><img src="./SegundoEjercicioIdentificacionModeloARIMA/SerieEnNiveles.png" alt="SerieEnNiveles.png" />
+<div id="orga7d86d1" class="figure">
+<p><img src="./SegundoEjercicioIdentificacionARIMA/SerieEnNiveles.png" alt="SerieEnNiveles.png" />
 </p>
 </div>
 
-<div id="org0a2d7ff" class="figure">
-<p><img src="./SegundoEjercicioIdentificacionModeloARIMA/rango-media.png" alt="rango-media.png" /> 
+<div id="org2d84f63" class="figure">
+<p><img src="./SegundoEjercicioIdentificacionARIMA/rango-media.png" alt="rango-media.png" /> 
 </p>
 </div>
 </div>
@@ -376,9 +383,9 @@ serie.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf711946" class="outline-2">
-<h2 id="orgf711946">Estacionariedad en varianza</h2>
-<div class="outline-text-2" id="text-orgf711946">
+<div id="outline-container-orga01a9b1" class="outline-2">
+<h2 id="orga01a9b1">Estacionariedad en varianza</h2>
+<div class="outline-text-2" id="text-orga01a9b1">
 <p>
 A la luz de los anteriores gráficos, donde se aprecia que la
 variabilidad de los datos aumenta con el nivel de la serie, parece
@@ -391,9 +398,9 @@ logarítmicamente.
 </p>
 </div>
 </div>
-<div id="outline-container-org8586fc3" class="outline-2">
-<h2 id="org8586fc3">Diferencias estacionales</h2>
-<div class="outline-text-2" id="text-org8586fc3">
+<div id="outline-container-org1691d63" class="outline-2">
+<h2 id="org1691d63">Diferencias estacionales</h2>
+<div class="outline-text-2" id="text-org1691d63">
 <p>
 Observemos el gráfico de la serie y su correlograma.
 </p>
@@ -406,13 +413,13 @@ Observemos el gráfico de la serie y su correlograma.
 
 <div class="org-center">
 
-<div id="org5eb1502" class="figure">
-<p><img src="./SegundoEjercicioIdentificacionModeloARIMA/SerieEnNiveles.png" alt="SerieEnNiveles.png" />
+<div id="org604fa0b" class="figure">
+<p><img src="./SegundoEjercicioIdentificacionARIMA/SerieEnNiveles.png" alt="SerieEnNiveles.png" />
 </p>
 </div>
 
-<div id="orga69ea7a" class="figure">
-<p><img src="./SegundoEjercicioIdentificacionModeloARIMA/x_ACF-PACF.png" alt="x_ACF-PACF.png" />
+<div id="org047e30b" class="figure">
+<p><img src="./SegundoEjercicioIdentificacionARIMA/x_ACF-PACF.png" alt="x_ACF-PACF.png" />
 </p>
 </div>
 </div>
@@ -431,11 +438,11 @@ Además, si tratamos de ajustar un AR(1) estacional:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-R" id="orgfc11c73">ARIMA000X100 <span style="color: #D0372D;">&lt;-</span> arima 0 0 0 ; 1 0 0 ; x 
+<pre class="src src-R" id="orga914645">ARIMA000X100 <span style="color: #D0372D;">&lt;-</span> arima 0 0 0 ; 1 0 0 ; x 
 </pre>
 </div>
 
-<pre class="example" id="org2518490">
+<pre class="example" id="orgfbe47bd">
 Evaluaciones de la función: 622
 Evaluaciones del gradiente: 123
 
@@ -453,7 +460,7 @@ Desviaciones típicas basadas en el Hessiano
 Media de la vble. dep.  3,780099   D.T. de la vble. dep.   4,838896
 Media de innovaciones   0,358041   D.T. innovaciones       1,535258
 R-cuadrado              0,906552   R-cuadrado corregido    0,906552
-Log-verosimilitud      −384,1534   Criterio de Akaike      774,3069
+Log-verosimilitud      -384,1534   Criterio de Akaike      774,3069
 Criterio de Schwarz     784,2019   Crit. de Hannan-Quinn   778,3112
 
                        Real Imaginaria     Módulo Frecuencia
@@ -492,15 +499,15 @@ gnuplot sd_x --time-series --with-lines --output=<span style="color: #008000;">"
 
 <div class="org-center">
 
-<div id="org93834cf" class="figure">
-<p><img src="./SegundoEjercicioIdentificacionModeloARIMA/SerieEnDiferencias.png" alt="SerieEnDiferencias.png" />
+<div id="org4b76b59" class="figure">
+<p><img src="./SegundoEjercicioIdentificacionARIMA/SerieEnDiferencias.png" alt="SerieEnDiferencias.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-org07f6733" class="outline-3">
-<h3 id="org07f6733">Repetición del análisis con la serie diferenciada estacionalmente</h3>
-<div class="outline-text-3" id="text-org07f6733">
+<div id="outline-container-org9b99d50" class="outline-3">
+<h3 id="org9b99d50">Repetición del análisis con la serie diferenciada estacionalmente</h3>
+<div class="outline-text-3" id="text-org9b99d50">
 <p>
 La serie resultante no muestra signos de estacionalidad. Veamos si se
 ve algo en el correlograma:
@@ -514,8 +521,8 @@ ve algo en el correlograma:
 
 <div class="org-center">
 
-<div id="orgad071b9" class="figure">
-<p><img src="./SegundoEjercicioIdentificacionModeloARIMA/sd_x_ACF-PACF.png" alt="sd_x_ACF-PACF.png" />
+<div id="orgea8ee1e" class="figure">
+<p><img src="./SegundoEjercicioIdentificacionARIMA/sd_x_ACF-PACF.png" alt="sd_x_ACF-PACF.png" />
 </p>
 </div>
 </div>
@@ -527,9 +534,9 @@ estacional</b>.
 </div>
 </div>
 </div>
-<div id="outline-container-org0204be7" class="outline-2">
-<h2 id="org0204be7">Estacionariedad en media</h2>
-<div class="outline-text-2" id="text-org0204be7">
+<div id="outline-container-org91b5a6e" class="outline-2">
+<h2 id="org91b5a6e">Estacionariedad en media</h2>
+<div class="outline-text-2" id="text-org91b5a6e">
 <p>
 El gráfico de la serie diferenciada estacionalmente no muestra tener
 una clara tendencia o evolución a largo plazo de su nivel.
@@ -538,8 +545,8 @@ una clara tendencia o evolución a largo plazo de su nivel.
 
 <div class="org-center">
 
-<div id="orge9f0a03" class="figure">
-<p><img src="./SegundoEjercicioIdentificacionModeloARIMA/SerieEnDiferencias.png" alt="SerieEnDiferencias.png" />
+<div id="orge5b16a7" class="figure">
+<p><img src="./SegundoEjercicioIdentificacionARIMA/SerieEnDiferencias.png" alt="SerieEnDiferencias.png" />
 </p>
 </div>
 </div>
@@ -551,8 +558,8 @@ parece ser la realización de un proceso estacionario.
 
 <div class="org-center">
 
-<div id="orgccbe91a" class="figure">
-<p><img src="./SegundoEjercicioIdentificacionModeloARIMA/sd_x_ACF-PACF.png" alt="sd_x_ACF-PACF.png" />
+<div id="org2f6a44c" class="figure">
+<p><img src="./SegundoEjercicioIdentificacionARIMA/sd_x_ACF-PACF.png" alt="sd_x_ACF-PACF.png" />
 </p>
 </div>
 </div>
@@ -562,11 +569,11 @@ Probemos a ajustar un modelo AR a los datos diferenciados estacionalmente
 </p>
 
 <div class="org-src-container">
-<pre class="src src-R" id="org8b04159">ARIMA110 <span style="color: #D0372D;">&lt;-</span> arima 1 1 0 ; x
+<pre class="src src-R" id="orgb7d8448">ARIMA110 <span style="color: #D0372D;">&lt;-</span> arima 1 1 0 ; x
 </pre>
 </div>
 
-<pre class="example" id="org548b348">
+<pre class="example" id="orgd0f6e84">
 Evaluaciones de la función: 20
 Evaluaciones del gradiente: 5
 
@@ -583,7 +590,7 @@ Desviaciones típicas basadas en el Hessiano
 Media de la vble. dep.  0,058438   D.T. de la vble. dep.   2,351529
 Media de innovaciones   0,000197   D.T. innovaciones       2,149835
 R-cuadrado              0,824333   R-cuadrado corregido    0,824333
-Log-verosimilitud      −434,7714   Criterio de Akaike      875,5428
+Log-verosimilitud      -434,7714   Criterio de Akaike      875,5428
 Criterio de Schwarz     885,4227   Crit. de Hannan-Quinn   879,5415
 
                        Real Imaginaria     Módulo Frecuencia
@@ -604,15 +611,15 @@ también lo está la raíz autorregresiva).
 Probemos con los tests formales de raíz unitaria y estacionariedad
 </p>
 </div>
-<div id="outline-container-org7dda0a2" class="outline-4">
-<h4 id="org7dda0a2">Test ADF</h4>
-<div class="outline-text-4" id="text-org7dda0a2">
+<div id="outline-container-orga2ba005" class="outline-4">
+<h4 id="orga2ba005">Test ADF</h4>
+<div class="outline-text-4" id="text-orga2ba005">
 <div class="org-src-container">
-<pre class="src src-R" id="org77ee266">adf -1 sd_x --c --gls --test-down --perron-qu 
+<pre class="src src-R" id="orgf3dad98">adf -1 sd_x --c --gls --test-down --perron-qu 
 </pre>
 </div>
 
-<pre class="example" id="org825895b">
+<pre class="example" id="org289f420">
 Contraste aumentado de Dickey-Fuller (GLS) para sd_x
 contrastar hacia abajo desde 14 retardos, con el criterio AIC modificado, Perron-Qu
 tamaño muestral 187
@@ -632,15 +639,15 @@ El p-valores es muy bajo, por lo que se rechaza la \(H_0\) de que la serie es \(
 </p>
 </div>
 </div>
-<div id="outline-container-orgc5ff1c9" class="outline-4">
-<h4 id="orgc5ff1c9">Test KPSS</h4>
-<div class="outline-text-4" id="text-orgc5ff1c9">
+<div id="outline-container-org24787d4" class="outline-4">
+<h4 id="org24787d4">Test KPSS</h4>
+<div class="outline-text-4" id="text-org24787d4">
 <div class="org-src-container">
-<pre class="src src-R" id="orgd24713f">kpss -1 sd_x 
+<pre class="src src-R" id="org843e708">kpss -1 sd_x 
 </pre>
 </div>
 
-<pre class="example" id="org6a38ece">
+<pre class="example" id="org222dd6a">
 Contraste KPSS para sd_x
 
 T = 188
@@ -660,9 +667,9 @@ que NO es necesario tomar ninguna diferencia ordinaria</b>.
 </div>
 </div>
 </div>
-<div id="outline-container-orgd526073" class="outline-2">
-<h2 id="orgd526073">Primer intento de búsqueda de un modelo ARIMA</h2>
-<div class="outline-text-2" id="text-orgd526073">
+<div id="outline-container-org80b10b9" class="outline-2">
+<h2 id="org80b10b9">Primer intento de búsqueda de un modelo ARIMA</h2>
+<div class="outline-text-2" id="text-org80b10b9">
 <p>
 Observando al ACF y la PACF de aprecia que la ACF decae a una tasa
 exponencial, y la PACF se trunca tras el primer retardo, lo cual es
@@ -671,8 +678,8 @@ compatible con un AR(1).
 
 <div class="org-center">
 
-<div id="org30c13cb" class="figure">
-<p><img src="./SegundoEjercicioIdentificacionModeloARIMA/sd_x_ACF-PACF.png" alt="sd_x_ACF-PACF.png" />
+<div id="org2ac13ed" class="figure">
+<p><img src="./SegundoEjercicioIdentificacionARIMA/sd_x_ACF-PACF.png" alt="sd_x_ACF-PACF.png" />
 </p>
 </div>
 </div>
@@ -683,11 +690,11 @@ ARIMA\((1,1,0)\). Veamos si es así:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-R" id="org6a2519d">ARIMA110cte <span style="color: #D0372D;">&lt;-</span> arima 1 1 0 ; x 
+<pre class="src src-R" id="org29645d9">ARIMA110cte <span style="color: #D0372D;">&lt;-</span> arima 1 1 0 ; x 
 </pre>
 </div>
 
-<pre class="example" id="orgc737434">
+<pre class="example" id="orgca1b4e4">
 Evaluaciones de la función: 20
 Evaluaciones del gradiente: 5
 
@@ -705,7 +712,7 @@ Desviaciones típicas basadas en el Hessiano
 Media de la vble. dep.  0,058438   D.T. de la vble. dep.   2,351529
 Media de innovaciones   0,000197   D.T. innovaciones       2,149835
 R-cuadrado              0,824333   R-cuadrado corregido    0,824333
-Log-verosimilitud      −434,7714   Criterio de Akaike      875,5428
+Log-verosimilitud      -434,7714   Criterio de Akaike      875,5428
 Criterio de Schwarz     885,4227   Crit. de Hannan-Quinn   879,5415
 
                        Real Imaginaria     Módulo Frecuencia
@@ -728,11 +735,11 @@ Reestimemos el modelo sin constante:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-R" id="org81328fe">ARIMA110 <span style="color: #D0372D;">&lt;-</span> arima 1 0 0; 0 1 0 ; x --nc
+<pre class="src src-R" id="org2010807">ARIMA110 <span style="color: #D0372D;">&lt;-</span> arima 1 0 0; 0 1 0 ; x --nc
 </pre>
 </div>
 
-<pre class="example" id="org43f1315">
+<pre class="example" id="orgdb3a413">
 Evaluaciones de la función: 16
 Evaluaciones del gradiente: 3
 
@@ -748,7 +755,7 @@ Desviaciones típicas basadas en el Hessiano
 Media de la vble. dep.  0,449786   D.T. de la vble. dep.   1,487227
 Media de innovaciones   0,095115   D.T. innovaciones       0,946555
 R-cuadrado              0,962771   R-cuadrado corregido    0,962771
-Log-verosimilitud      −256,9190   Criterio de Akaike      517,8381
+Log-verosimilitud      -256,9190   Criterio de Akaike      517,8381
 Criterio de Schwarz     524,3110   Crit. de Hannan-Quinn   520,4606
 
                        Real Imaginaria     Módulo Frecuencia
@@ -760,9 +767,9 @@ Criterio de Schwarz     524,3110   Crit. de Hannan-Quinn   520,4606
 ARIMA110 guardado
 </pre>
 </div>
-<div id="outline-container-orgcee5cf4" class="outline-3">
-<h3 id="orgcee5cf4">Análisis de los residuos</h3>
-<div class="outline-text-3" id="text-orgcee5cf4">
+<div id="outline-container-orgc407378" class="outline-3">
+<h3 id="orgc407378">Análisis de los residuos</h3>
+<div class="outline-text-3" id="text-orgc407378">
 <p>
 Todo parece OK, pero debemos ver el gráfico de los residuos y su
 correlograma, así como los estadísticos Q de Ljung-Box para constatar
@@ -783,24 +790,24 @@ corrgm residuos 60 --plot=<span style="color: #008000;">"residuosACF-PACF.png"</
 
 <div class="org-center">
 
-<div id="org5539406" class="figure">
-<p><img src="./SegundoEjercicioIdentificacionModeloARIMA/Residuos.png" alt="Residuos.png" />
+<div id="org907ba51" class="figure">
+<p><img src="./SegundoEjercicioIdentificacionARIMA/Residuos.png" alt="Residuos.png" />
 </p>
 </div>
 
-<div id="org3b587d9" class="figure">
-<p><img src="./SegundoEjercicioIdentificacionModeloARIMA/residuosACF-PACF.png" alt="residuosACF-PACF.png" />
+<div id="org1f186ae" class="figure">
+<p><img src="./SegundoEjercicioIdentificacionARIMA/residuosACF-PACF.png" alt="residuosACF-PACF.png" />
 </p>
 </div>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-R" id="org1edf04b">corrgm residuos 15
+<pre class="src src-R" id="orga59dd46">corrgm residuos 15
 </pre>
 </div>
 
 
-<pre class="example" id="orgd2b486a">
+<pre class="example" id="org4463f26">
 Función de autocorrelación para residuos
 ***, ** y * indica significatividad a los niveles del 1%, 5% y 10%
 utilizando la desviación típica 1/T^0,5
@@ -839,11 +846,11 @@ son ``ruido blanco''.
 También conviene mirar si los residuos tienen distribución gaussiana:
 </p>
 <div class="org-src-container">
-<pre class="src src-R" id="org88e3362">modtest --normality
+<pre class="src src-R" id="orgb5e3dcc">modtest --normality
 </pre>
 </div>
 
-<pre class="example" id="org4438822">
+<pre class="example" id="orgfd17e92">
 Distribución de frecuencias para uhat8, observaciones 13-200
 número de cajas = 13, Media = 0,0951153, Desv.típ.=0,944279
 
@@ -886,9 +893,9 @@ ARIMA\((1,0,0)\times(0,1,0)_S\) con media cero.
 </p>
 </div>
 </div>
-<div id="outline-container-orgf10b7be" class="outline-3">
-<h3 id="orgf10b7be">Modelo efectivamente simulado</h3>
-<div class="outline-text-3" id="text-orgf10b7be">
+<div id="outline-container-orgfd7c3e5" class="outline-3">
+<h3 id="orgfd7c3e5">Modelo efectivamente simulado</h3>
+<div class="outline-text-3" id="text-orgfd7c3e5">
 <p>
 Veamos si ese es el modelo usado en su simulación. Si miramos la línea
 <code>150</code> del fichero <a href="IdentificaEstosARIMA/000-Etiquetas-12.txt">000-Etiquetas-12.txt</a> que se encuentra en el directorio de
@@ -925,19 +932,19 @@ simulado&#x2026;
 </div>
 </div>
 </div>
-<div id="outline-container-org595b3ac" class="outline-2">
-<h2 id="org595b3ac">Pruebas con otro modelo ARIMA</h2>
-<div class="outline-text-2" id="text-org595b3ac">
+<div id="outline-container-orgcaa1730" class="outline-2">
+<h2 id="orgcaa1730">Pruebas con otro modelo ARIMA</h2>
+<div class="outline-text-2" id="text-orgcaa1730">
 <p>
-Estimemos el verdadero modelo ARIMA\((2,0,0)\times(1,1,0)_{S}\):
+Estimemos el verdadero modelo simulado: ARIMA\((2,0,0)\times(1,1,0)_{S}\):
 </p>
 
 <div class="org-src-container">
-<pre class="src src-R" id="org94ea619">ARIMAsimulado <span style="color: #D0372D;">&lt;-</span> arima 2 0 0; 1 1 0 ; x --nc 
+<pre class="src src-R" id="org0e29c6d">ARIMAsimulado <span style="color: #D0372D;">&lt;-</span> arima 2 0 0; 1 1 0 ; x --nc 
 </pre>
 </div>
 
-<pre class="example" id="orgda64207">
+<pre class="example" id="org2ef2a71">
 Evaluaciones de la función: 27
 Evaluaciones del gradiente: 7
 
@@ -956,7 +963,7 @@ Desviaciones típicas basadas en el Hessiano
 Media de la vble. dep.  0,449786   D.T. de la vble. dep.   1,487227
 Media de innovaciones   0,093115   D.T. innovaciones       0,946381
 R-cuadrado              0,962765   R-cuadrado corregido    0,962363
-Log-verosimilitud      −256,8841   Criterio de Akaike      521,7682
+Log-verosimilitud      -256,8841   Criterio de Akaike      521,7682
 Criterio de Schwarz     534,7139   Crit. de Hannan-Quinn   527,0133
 
                        Real Imaginaria     Módulo Frecuencia
@@ -995,7 +1002,7 @@ hemos encontrado un modelo más parsimonioso que funciona OK.
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2024-10-18 vie 19:42</p>
+<p class="date">Created: 2024-10-22 mar 11:47</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

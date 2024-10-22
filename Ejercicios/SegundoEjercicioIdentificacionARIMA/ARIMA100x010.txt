@@ -14,7 +14,7 @@ Desviaciones típicas basadas en el Hessiano
 Media de la vble. dep.  0,449786   D.T. de la vble. dep.   1,487227
 Media de innovaciones   0,095115   D.T. innovaciones       0,946555
 R-cuadrado              0,962771   R-cuadrado corregido    0,962771
-Log-verosimilitud      −256,9190   Criterio de Akaike      517,8381
+Log-verosimilitud      -256,9190   Criterio de Akaike      517,8381
 Criterio de Schwarz     524,3110   Crit. de Hannan-Quinn   520,4606
 
                        Real Imaginaria     Módulo Frecuencia

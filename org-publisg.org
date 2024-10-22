@@ -89,9 +89,9 @@ $(OUT_DIR)/%.pdf: %.pdf
 #pdflatex --shell-escape  -interaction=batchmode EjercicioIdentificacionModeloARIMA.tex
 #latexmk -c EjercicioIdentificacionModeloARIMA.tex
 
-#pdflatex --shell-escape  -interaction=batchmode SegundoEjercicioIdentificacionModeloARIMA.tex
-#pdflatex --shell-escape  -interaction=batchmode SegundoEjercicioIdentificacionModeloARIMA.tex
-#latexmk -c SegundoEjercicioIdentificacionModeloARIMA.tex
+#pdflatex --shell-escape  -interaction=batchmode SegundoEjercicioIdentificacionARIMA.tex
+#pdflatex --shell-escape  -interaction=batchmode SegundoEjercicioIdentificacionARIMA.tex
+#latexmk -c SegundoEjercicioIdentificacionARIMA.tex
 #+END_SRC
 
 

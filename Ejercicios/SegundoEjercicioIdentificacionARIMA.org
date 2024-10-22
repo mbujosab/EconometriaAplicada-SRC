@@ -26,19 +26,19 @@
 #+LATEX: \maketitle
 
 #+BEGIN_SRC sh  :exports none :results silent
-rm -fr $(pwd)/SegundoEjercicioIdentificacionModeloARIMA
-mkdir -p $(pwd)/SegundoEjercicioIdentificacionModeloARIMA 
-gretlcli -b /home/marcos/SynologyDrive/ReposGH/Docencia/EconometriaAplicada-SRC/EjerciciosHide/SegundoEjercicioIdentificacionModeloARIMA.inp
+rm -fr $(pwd)/SegundoEjercicioIdentificacionARIMA
+mkdir -p $(pwd)/SegundoEjercicioIdentificacionARIMA 
+gretlcli -b $(pwd)/SegundoEjercicioIdentificacionARIMA.inp
 #+END_SRC
 
 #+BEGIN_SRC sh  :exports none :results silent
-zip mortality SegundoEjercicioIdentificacionModeloARIMA* SegundoEjercicioIdentificacionModeloARIMA/*
+zip mortality SegundoEjercicioIdentificacionARIMA* SegundoEjercicioIdentificacionARIMA/*
 #+END_SRC
 
 
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :exports none :results silent
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :exports none :results silent
 # para que gretl guarde los ficheros en el directorio de la práctica
-string directory = $(pwd) ~ "/SegundoEjercicioIdentificacionModeloARIMA" 
+string directory = $(pwd) ~ "/SegundoEjercicioIdentificacionARIMA" 
 set workdir "@directory" 
 #+end_src
 
@@ -47,11 +47,14 @@ set workdir "@directory"
 
 Cargue la serie de datos simulados [[file:IdentificaEstosARIMA/00c296-12.gdt][00c296-12.gdt]]
 
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports code 
 open IdentificaEstosARIMA/00c296-12.gdt
 #+end_src
 
 ** Tareas a realizar
+:PROPERTIES:
+:ID:       6e77f87a-cb1e-4b30-928e-185f09510ccb
+:END:
 
 1) [[Primer análisis gráfico][Realice un primer análisis gráfico: haga
    un gráfico de la serie y un gráfico /rango-media/]]
@@ -64,20 +67,25 @@ open IdentificaEstosARIMA/00c296-12.gdt
    serie que sea lo más parsimonioso posible, pero cuyos residuos se
    puedan considerar /ruido blanco/.]]
 
+- Ficheros [[https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios]]
+  - Versión en [[file:SegundoEjercicioIdentificacionARIMA.pdf][pdf]]
+  - Datos:  [[file:IdentificaEstosARIMA/00c296-12.gdt][00c296-12.gdt]]
+  - Guión de gretl: [[file:SegundoEjercicioIdentificacionARIMA.inp]]
+
 
 * Primer análisis gráfico
 
 
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports code 
 gnuplot x --time-series --with-lines --output="SerieEnNiveles.png"
 rmplot  x --output="rango-media.png"
 #+end_src
 
 #+BEGIN_CENTER
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./SegundoEjercicioIdentificacionModeloARIMA/SerieEnNiveles.png]]
+[[./SegundoEjercicioIdentificacionARIMA/SerieEnNiveles.png]]
 #+ATTR_LATEX: :width 0.4\textwidth :center
-[[./SegundoEjercicioIdentificacionModeloARIMA/rango-media.png]] 
+[[./SegundoEjercicioIdentificacionARIMA/rango-media.png]] 
 #+END_CENTER
 
 De estos gráficos se desprende que la serie tiene una acusada pauta
@@ -99,16 +107,16 @@ logarítmicamente.
 
 Observemos el gráfico de la serie y su correlograma.
 
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports code 
 corrgm x 36 --plot="x_ACF-PACF.png"
 #+end_src
 
 
 #+BEGIN_CENTER
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./SegundoEjercicioIdentificacionModeloARIMA/SerieEnNiveles.png]]
+[[./SegundoEjercicioIdentificacionARIMA/SerieEnNiveles.png]]
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./SegundoEjercicioIdentificacionModeloARIMA/x_ACF-PACF.png]]
+[[./SegundoEjercicioIdentificacionARIMA/x_ACF-PACF.png]]
 #+END_CENTER
 
 En el gráfico de la serie se aprecia una acusada pauta estacional. En
@@ -121,17 +129,17 @@ decimotercero (adyacente al 12) es muy importante.
 Además, si tratamos de ajustar un AR(1) estacional:
 
 #+NAME: Modelo ARIMA_000x100 con cte
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports code 
 ARIMA000X100 <- arima 0 0 0 ; 1 0 0 ; x 
 #+end_src
 
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet ARIMA000x100.txt
   <<Modelo ARIMA_000x100 con cte>>
 end outfile
 #+end_src
 
-#+include: ./SegundoEjercicioIdentificacionModeloARIMA/ARIMA000x100.txt example
+#+include: ./SegundoEjercicioIdentificacionARIMA/ARIMA000x100.txt example
 
 constatamos que la estimación del parámetro $\Phi_1$ está muy próxima a uno.
 
@@ -144,14 +152,14 @@ diferencias regulares).
 
 Por tanto, tomamos una diferencia estacional.
 
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports code 
 sdiff x
 gnuplot sd_x --time-series --with-lines --output="SerieEnDiferencias.png"
 #+end_src
 
 #+BEGIN_CENTER
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./SegundoEjercicioIdentificacionModeloARIMA/SerieEnDiferencias.png]]
+[[./SegundoEjercicioIdentificacionARIMA/SerieEnDiferencias.png]]
 #+END_CENTER
 
 
@@ -161,14 +169,14 @@ gnuplot sd_x --time-series --with-lines --output="SerieEnDiferencias.png"
 La serie resultante no muestra signos de estacionalidad. Veamos si se
 ve algo en el correlograma:
 
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports code 
 corrgm sd_x 36 --plot="sd_x_ACF-PACF.png"
 #+end_src
 
 
 #+BEGIN_CENTER
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./SegundoEjercicioIdentificacionModeloARIMA/sd_x_ACF-PACF.png]]
+[[./SegundoEjercicioIdentificacionARIMA/sd_x_ACF-PACF.png]]
 #+END_CENTER
 
 *No hay nada que sugiera la necesidad de tomar una segunda diferencia
@@ -182,7 +190,7 @@ una clara tendencia o evolución a largo plazo de su nivel.
 
 #+BEGIN_CENTER
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./SegundoEjercicioIdentificacionModeloARIMA/SerieEnDiferencias.png]]
+[[./SegundoEjercicioIdentificacionARIMA/SerieEnDiferencias.png]]
 #+END_CENTER
 
 En el correlograma, la ACF decae rápidamente, indicando que la serie
@@ -190,23 +198,23 @@ parece ser la realización de un proceso estacionario.
 
 #+BEGIN_CENTER
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./SegundoEjercicioIdentificacionModeloARIMA/sd_x_ACF-PACF.png]]
+[[./SegundoEjercicioIdentificacionARIMA/sd_x_ACF-PACF.png]]
 #+END_CENTER
 
 Probemos a ajustar un modelo AR a los datos diferenciados estacionalmente
 
 #+NAME: Modelo ARIMA 1 1 0 con cte
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports code 
 ARIMA110 <- arima 1 1 0 ; x
 #+end_src
 
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet ARIMA110.txt
   <<Modelo ARIMA 1 1 0 con cte>>
 end outfile
 #+end_src
 
-#+include: ./SegundoEjercicioIdentificacionModeloARIMA/ARIMA110.txt example
+#+include: ./SegundoEjercicioIdentificacionARIMA/ARIMA110.txt example
 
 El parámetro $\phi_1$ está muy lejos de la unidad (consecuentemente,
 también lo está la raíz autorregresiva).
@@ -216,34 +224,34 @@ Probemos con los tests formales de raíz unitaria y estacionariedad
 *** Test ADF
 
 #+NAME: Test ADF serie en diferencias
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports code 
 adf -1 sd_x --c --gls --test-down --perron-qu 
 #+end_src
 
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet test_ADF_en_diff.txt
     <<Test ADF serie en diferencias>>
 end outfile
 #+end_src
 
-#+include: ./SegundoEjercicioIdentificacionModeloARIMA/test_ADF_en_diff.txt example
+#+include: ./SegundoEjercicioIdentificacionARIMA/test_ADF_en_diff.txt example
 
 El p-valores es muy bajo, por lo que se rechaza la $H_0$ de que la serie es $I(1)$
 
 *** Test KPSS
 
 #+NAME: Test KPSS serie en diferencias
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports code 
 kpss -1 sd_x 
 #+end_src
 
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet test_KPSS_en_diff.txt
     <<Test KPSS serie en diferencias>>
 end outfile
 #+end_src
 
-#+include: ./SegundoEjercicioIdentificacionModeloARIMA/test_KPSS_en_diff.txt example
+#+include: ./SegundoEjercicioIdentificacionARIMA/test_KPSS_en_diff.txt example
 
 El p-valor es elevado, por los que NO se rechaza la $H_0$ de que la
 serie es $I(0)$. *Todas estas evidencias indican de manera muy clara
@@ -257,24 +265,24 @@ compatible con un AR(1).
 
 #+BEGIN_CENTER
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./SegundoEjercicioIdentificacionModeloARIMA/sd_x_ACF-PACF.png]]
+[[./SegundoEjercicioIdentificacionARIMA/sd_x_ACF-PACF.png]]
 #+END_CENTER
 
 Por tanto, parece que la serie en logaritmos sigue un modelo
 ARIMA$(1,1,0)$. Veamos si es así:
 
 #+NAME: Modelo ARIMA_110 con cte
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports code 
 ARIMA110cte <- arima 1 1 0 ; x 
 #+end_src
 
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet ARIMA110cte.txt
   <<Modelo ARIMA_110 con cte>>
 end outfile
 #+end_src
 
-#+include: ./SegundoEjercicioIdentificacionModeloARIMA/ARIMA110cte.txt example
+#+include: ./SegundoEjercicioIdentificacionARIMA/ARIMA110cte.txt example
 
 Los parámetros autorregresivos son significativos y el modulo de las
 raíces es claramente mayor que la unidad en ambos casos. No obstante,
@@ -283,17 +291,17 @@ la constante no es significativa.
 Reestimemos el modelo sin constante:
 
 #+NAME: Modelo ARIMA_100x010 sin cte
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports code 
 ARIMA110 <- arima 1 0 0; 0 1 0 ; x --nc
 #+end_src
 
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet ARIMA100x010.txt
   <<Modelo ARIMA_100x010 sin cte>>
 end outfile
 #+end_src
 
-#+include: ./SegundoEjercicioIdentificacionModeloARIMA/ARIMA100x010.txt example
+#+include: ./SegundoEjercicioIdentificacionARIMA/ARIMA100x010.txt example
 
 ** Análisis de los residuos
 
@@ -302,35 +310,35 @@ correlograma, así como los estadísticos Q de Ljung-Box para constatar
 si podemos asumir que son la realización de un proceso de ruido
 blanco.
 
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports code 
 series residuos = $uhat
 #+end_src
 
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports code 
 gnuplot residuos --time-series --with-lines --output="Residuos.png"
 corrgm residuos 60 --plot="residuosACF-PACF.png"
 #+end_src
 
 #+BEGIN_CENTER
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./SegundoEjercicioIdentificacionModeloARIMA/Residuos.png]]
+[[./SegundoEjercicioIdentificacionARIMA/Residuos.png]]
 #+ATTR_LATEX: :width 0.5\textwidth :center 
-[[./SegundoEjercicioIdentificacionModeloARIMA/residuosACF-PACF.png]]
+[[./SegundoEjercicioIdentificacionARIMA/residuosACF-PACF.png]]
 #+END_CENTER
 
 #+name: correlograma de los residuos
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports code 
 corrgm residuos 15
 #+end_src
 
 
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet ResiduosACF-PACF.txt
    <<correlograma de los residuos>> --quiet
 end outfile
 #+end_src
 
-#+include: ./SegundoEjercicioIdentificacionModeloARIMA/ResiduosACF-PACF.txt example
+#+include: ./SegundoEjercicioIdentificacionARIMA/ResiduosACF-PACF.txt example
 
 El gráfico de los residuos no presenta ninguna estructura reconocible
 y ninguna autocorrelación es significativa.
@@ -345,18 +353,18 @@ También conviene mirar si los residuos tienen distribución gaussiana:
 #+latex: \medskip
 
 #+name: contraste de normalidad
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports code 
 modtest --normality
 #+end_src
 # normtest --all
 
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet ContrasteNormalidadResiduos.txt
    <<contraste de normalidad>>
 end outfile
 #+end_src
 
-#+include: ./SegundoEjercicioIdentificacionModeloARIMA/ContrasteNormalidadResiduos.txt example
+#+include: ./SegundoEjercicioIdentificacionARIMA/ContrasteNormalidadResiduos.txt example
 
 Claramente tienen distribución normal.
 
@@ -397,20 +405,20 @@ simulado...
 
 * Pruebas con otro modelo ARIMA
 
-Estimemos el verdadero modelo ARIMA$(2,0,0)\times(1,1,0)_{S}$:
+Estimemos el verdadero modelo simulado: ARIMA$(2,0,0)\times(1,1,0)_{S}$:
 
 #+NAME: Modelo ARIMAsimulado
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports code 
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports code 
 ARIMAsimulado <- arima 2 0 0; 1 1 0 ; x --nc 
 #+end_src
 
-#+begin_src R :tangle SegundoEjercicioIdentificacionModeloARIMA.inp :results none :exports none :noweb yes
+#+begin_src R :tangle SegundoEjercicioIdentificacionARIMA.inp :results none :exports none :noweb yes
 outfile --quiet ARIMAsimulado.txt
   <<Modelo ARIMAsimulado>>
 end outfile
 #+end_src
 
-#+include: ./SegundoEjercicioIdentificacionModeloARIMA/ARIMAsimulado.txt example
+#+include: ./SegundoEjercicioIdentificacionARIMA/ARIMAsimulado.txt example
 
 El ajuste es parecido (fíjese en los coeficientes de determinación)
 pero solo el parámetro $\phi_1$ resulta ser significativo (y con un

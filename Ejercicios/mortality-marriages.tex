@@ -1,4 +1,4 @@
-% Created 2024-09-30 lun 20:36
+% Created 2024-10-22 mar 11:33
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt]{article}
 \usepackage[utf8]{inputenc}
@@ -36,7 +36,7 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 
 \maketitle
 \section*{Los datos}
-\label{sec:org086b5be}
+\label{sec:org01acdab}
 
 Los datos de este ejercicio corresponden a la mortalidad anual y la
 proporción de matrimonios eclesiásticos en Inglaterra entre 1866 y
@@ -59,13 +59,17 @@ open mortality-marriages.gdt
 
 \begin{itemize}
 \item Ficheros \url{https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios}
+\begin{itemize}
 \item Versión en \href{https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Ejercicios/mortality-marriages.pdf}{pdf}
+\item Datos: \href{mortality-marriages.gdt}{mortality-marriages.gdt}
+\item Guión de gretl: \href{mortality-marriages.inp}{mortality-marriages.inp}
+\end{itemize}
 \end{itemize}
 \section*{Datos en nivel de la serie de mortalidad}
-\label{sec:org24130e1}
+\label{sec:org61b8055}
 
 \subsection*{Gráfico de la serie temporal y su correlograma}
-\label{sec:org6380ca8}
+\label{sec:orgd0ebf41}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 gnuplot Std_mortality --time-series --with-lines --output="mortality.png"
@@ -78,7 +82,7 @@ corrgm Std_mortality 9 --plot="mortalityACF-PACF.png"
 \includegraphics[width=0.4\textwidth]{./mortality-marriages/mortalityACF-PACF.png} 
 \end{center}
 \subsection*{Estimación de un modelo univariante para la serie de mortalidad}
-\label{sec:orgc79bead}
+\label{sec:org63761db}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 arima 1 0 2 ; Std_mortality
@@ -117,7 +121,7 @@ Criterio de Schwarz     0,972839   Crit. de Hannan-Quinn  -4,745268
   -----------------------------------------------------------
 \end{verbatim}
 \section*{Contraste de cointegración}
-\label{sec:orgc7c73c6}
+\label{sec:orgade5ca9}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 coint 9 Std_mortality Proportion_marriages --test-down
@@ -193,7 +197,7 @@ Hay evidencia de una relación cointegrante si:
 (b) La hipótesis de existencia de raíz unitaria se rechaza para los residuos (uhat) de la regresión cointegrante.
 \end{verbatim}
 \section*{Regresión de la mortalidad sobre la proporción de matrimonios eclesiásticos}
-\label{sec:orgdab3f38}
+\label{sec:orga07964f}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 ols Std_mortality 0 Proportion_marriages
@@ -242,7 +246,7 @@ Ljung-Box Q' = 9,05845,
 con valor p = P(Chi-cuadrado(5) > 9,05845) = 0,107
 \end{verbatim}
 \section*{Regresión en primeras diferencias}
-\label{sec:orgd7ad0ac}
+\label{sec:orgf7b75fb}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 diff Std_mortality Proportion_marriages
@@ -292,37 +296,37 @@ Ljung-Box Q' = 4,0454,
 con valor p = P(Chi-cuadrado(5) > 4,0454) = 0,543
 \end{verbatim}
 \section*{Preguntas}
-\label{sec:org8f4a7b4}
+\label{sec:org90f51c7}
 
 \subsection*{Pregunta 1}
-\label{sec:orgc081110}
+\label{sec:orgf960353}
 
 Discuta de todas las formas posibles si la serie temporal de
 mortalidad (\texttt{Std\_mortality}) es estacionaria en media (i.e., la
 realización de un proceso estocástico estacionario), usando para ello
-los resultados de los apartados \hyperref[sec:org24130e1]{Datos en nivel de la serie de mortalidad} y \hyperref[sec:orgc7c73c6]{Contraste de cointegración}.
+los resultados de los apartados \hyperref[sec:org61b8055]{Datos en nivel de la serie de mortalidad} y \hyperref[sec:orgade5ca9]{Contraste de cointegración}.
 
-(\hyperref[sec:org5a78def]{Respuesta 1})
+(\hyperref[sec:org99558d7]{Respuesta 1})
 \subsection*{Pregunta 2}
-\label{sec:orga9a08bb}
+\label{sec:orga4ecd52}
 
 Discuta si las series de mortalidad y proporción de matrimonios
 eclesiásticos están cointegradas, a partir de los resultados del
-apartado \hyperref[sec:orgc7c73c6]{Contraste de cointegración}.
+apartado \hyperref[sec:orgade5ca9]{Contraste de cointegración}.
 
-(\hyperref[sec:org6c949ac]{Respuesta 2})
+(\hyperref[sec:org40469c5]{Respuesta 2})
 \subsection*{Pregunta 3}
-\label{sec:org76a5ea3}
+\label{sec:org8e5b1e4}
 
-Sin embargo, ¿qué sugieren los resultados de las secciones \hyperref[sec:orgdab3f38]{Regresión de la mortalidad sobre la proporción de matrimonios eclesiásticos} y
-\hyperref[sec:orgd7ad0ac]{Regresión en primeras diferencias} respecto a la relación entre
+Sin embargo, ¿qué sugieren los resultados de las secciones \hyperref[sec:orga07964f]{Regresión de la mortalidad sobre la proporción de matrimonios eclesiásticos} y
+\hyperref[sec:orgf7b75fb]{Regresión en primeras diferencias} respecto a la relación entre
 \texttt{Std\_mortality} y \texttt{Proportion\_marriages}?
 
-(\hyperref[sec:orgaebad79]{Respuesta 3})
+(\hyperref[sec:orgcadebe2]{Respuesta 3})
 \subsection*{Pregunta 4}
-\label{sec:orgaf13ddc}
+\label{sec:org0ca4af8}
 
-Los listados en \hyperref[sec:orgdab3f38]{Regresión de la mortalidad sobre la proporción de matrimonios eclesiásticos} y \hyperref[sec:orgd7ad0ac]{Regresión en primeras diferencias} muestran
+Los listados en \hyperref[sec:orga07964f]{Regresión de la mortalidad sobre la proporción de matrimonios eclesiásticos} y \hyperref[sec:orgf7b75fb]{Regresión en primeras diferencias} muestran
 los principales resultados obtenidos al estimar por MCO dos modelos de
 regresión que relacionan las dos variables consideradas en este
 ejercicio. Resuma y comente los resultados de estimación y diagnosis
@@ -331,19 +335,19 @@ cumplimiento de las hipótesis habituales, discuta sus consecuencias
 sobre las propiedades del estimador MCO y sugiera una forma de
 tratarla.
 
-(\hyperref[sec:orgb5cb426]{Respuesta 4})
+(\hyperref[sec:org775c10d]{Respuesta 4})
 \subsection*{Pregunta 5}
-\label{sec:org4c44d8d}
+\label{sec:orgf1eff77}
 
 Interprete la pendiente de la regresión cointegrante estimada en la
-Etapa 3 del \hyperref[sec:orgc7c73c6]{Contraste de cointegración}.
+Etapa 3 del \hyperref[sec:orgade5ca9]{Contraste de cointegración}.
 
-(\hyperref[sec:org6554f84]{Respuesta 5})
+(\hyperref[sec:org19cb1df]{Respuesta 5})
 \subsection*{Pregunta 6}
-\label{sec:org4dd69f9}
+\label{sec:org1d7c4f5}
 
 Indique cuáles de las siguientes expresiones representan el modelo de
-la sección \hyperref[sec:orgc79bead]{Estimación de un modelo univariante para la serie de mortalidad}, con un redondeo a tres decimales 
+la sección \hyperref[sec:org63761db]{Estimación de un modelo univariante para la serie de mortalidad}, con un redondeo a tres decimales 
 
 \begin{enumerate}
 \item \(\left( 1 - 0.997 \, \mathsf{B} \right) \, \left(X_t - 18.078 \right) = \left( 1 + 0.401 \, \mathsf{B} + 0.345 \, \mathsf{B}^2 \right) \hat U_t\)
@@ -358,51 +362,51 @@ la sección \hyperref[sec:orgc79bead]{Estimación de un modelo univariante para 
 \item \(\frac{ 1 - 0.997 \, \mathsf{B} }{1 - 0.401 \, \mathsf{B} - 0.345 \, \mathsf{B}^2 } \, \left(X_t - 18.078 \right)=  \hat U_t\)
 \end{enumerate}
 
-(\hyperref[sec:orgb9368be]{Respuesta 6})
+(\hyperref[sec:org71b980b]{Respuesta 6})
 \subsection*{Pregunta 7}
-\label{sec:org8a28256}
+\label{sec:org0371e41}
 
-A la luz de la \hyperref[sec:orgc79bead]{Estimación de un modelo univariante para la serie de mortalidad}, si tuviera que clasificar el proceso estocástico
+A la luz de la \hyperref[sec:org63761db]{Estimación de un modelo univariante para la serie de mortalidad}, si tuviera que clasificar el proceso estocástico
 subyacente del que la serie temporal es una realización ¿diría que es
 invertible?  ¿O que no lo es?  ¿diría que es estacionario? ¿O que no
 lo es? Explique su respuesta.
 
-(\hyperref[sec:org17668fd]{Respuesta 7})
+(\hyperref[sec:org4079fba]{Respuesta 7})
 \subsection*{Pregunta 8}
-\label{sec:org69a8f91}
+\label{sec:org8450314}
 
 ¿Cuáles de los modelos de más arriba considera aceptables? ¿O qué
 mejoras sugeriría para ellos?
 
-(\hyperref[sec:org686879e]{Respuesta 8})
+(\hyperref[sec:orgb022449]{Respuesta 8})
 
 \newpage
 \section*{Respuestas}
-\label{sec:orgb042a82}
+\label{sec:org638eb78}
 
 \subsection*{Respuesta 1}
-\label{sec:org5a78def}
+\label{sec:org99558d7}
 
 La serie temporal \texttt{Std\_mortality} NO es estacionaria en media, como se
 aprecia en las secciones:
 \begin{itemize}
-\item \hyperref[sec:org6380ca8]{Gráfico de la serie temporal y su correlograma}. 
+\item \hyperref[sec:orgd0ebf41]{Gráfico de la serie temporal y su correlograma}. 
 \begin{itemize}
 \item El gráfico de la serie muestra una tendencia decreciente.
 \item La FAC muestra mucha persistencia, los coeficientes decrecen a un
 ritmo aproximadamente lineal; y el primer coeficiente de la PACF
 está próximo a uno.
 \end{itemize}
-\item \hyperref[sec:orgc79bead]{Estimación de un modelo univariante para la serie de mortalidad}: El
+\item \hyperref[sec:org63761db]{Estimación de un modelo univariante para la serie de mortalidad}: El
 modelo univariante estimado tiene una raíz AR aproximadamente igual
 a \(1\).
-\item \hyperref[sec:orgc7c73c6]{Contraste de cointegración}: El test ADF calculado en la Etapa 1 no
+\item \hyperref[sec:orgade5ca9]{Contraste de cointegración}: El test ADF calculado en la Etapa 1 no
 rechaza la hipótesis (raíz unitaria) con un p-valor de \texttt{0.9902}
 \end{itemize}
 
-(\hyperref[sec:orgc081110]{Pregunta 1})
+(\hyperref[sec:orgf960353]{Pregunta 1})
 \subsection*{Respuesta 2}
-\label{sec:org6c949ac}
+\label{sec:org40469c5}
 
 Las conclusiones de las distintas etapas del test de cointegración son los siguientes:
 \begin{description}
@@ -419,24 +423,24 @@ la regresión cointegrante sean I(1). \texttt{(valor p asintótico
 \end{description}
 
 Consecuentemente, el test indica que ambas series están cointegradas
-(\emph{pero, como sugiere tanto el sentido común como la \hyperref[sec:orgd7ad0ac]{Regresión en primeras diferencias} la relación es espuria}, véase la pregunta 3).
+(\emph{pero, como sugiere tanto el sentido común como la \hyperref[sec:orgf7b75fb]{Regresión en primeras diferencias} la relación es espuria}, véase la pregunta 3).
 
-(\hyperref[sec:orga9a08bb]{Pregunta 2})
+(\hyperref[sec:orga4ecd52]{Pregunta 2})
 \subsection*{Respuesta 3}
-\label{sec:orgaebad79}
+\label{sec:orgcadebe2}
 
-Aunque el modelo de \hyperref[sec:orgdab3f38]{Regresión de la mortalidad sobre la proporción de matrimonios eclesiásticos} muestra un buen ajuste (un elevado \(R^2\)) y
+Aunque el modelo de \hyperref[sec:orga07964f]{Regresión de la mortalidad sobre la proporción de matrimonios eclesiásticos} muestra un buen ajuste (un elevado \(R^2\)) y
 los parámetros estimados son muy significativos, la relación entre
 ambas variables se desvanece al diferenciar los datos para lograr la
 estacionariedad. Ello sugiere, al igual que el sentido común, que \uline{la
 relación es espuria}.
 
-(\hyperref[sec:org76a5ea3]{Pregunta 3})
+(\hyperref[sec:org8e5b1e4]{Pregunta 3})
 \subsection*{Respuesta 4}
-\label{sec:orgb5cb426}
+\label{sec:org775c10d}
 
 \begin{description}
-\item[{Modelo de regresión MCO para datos en nivel}] (\hyperref[sec:orgdab3f38]{Regresión de la mortalidad sobre la proporción de matrimonios eclesiásticos}): Todos
+\item[{Modelo de regresión MCO para datos en nivel}] (\hyperref[sec:orga07964f]{Regresión de la mortalidad sobre la proporción de matrimonios eclesiásticos}): Todos
 los coeficientes son muy significativos. El ajuste del modelo,
 medido por el valor del \(R^2\) es muy elevado. Los contrastes sobre
 los residuos no rechazan (ni al 1\%, ni al 5\% ni al 10\% de
@@ -444,7 +448,7 @@ significación) las hipótesis nulas de normalidad, homoscedasticidad
 y ausencia de autocorrelación. Es decir, de la salida de Gretl no se
 puede inferir que haya ningún problema con este modelo.
 
-\item[{Modelo para datos en primeras diferencias}] (\hyperref[sec:orgd7ad0ac]{Regresión en primeras diferencias}): El único coeficiente significativo es el término
+\item[{Modelo para datos en primeras diferencias}] (\hyperref[sec:orgf7b75fb]{Regresión en primeras diferencias}): El único coeficiente significativo es el término
 constante. El ajuste del modelo, medido por el valor del \(R^2\), es
 prácticamente nulo. Los contrastes residuales rechazan la hipótesis
 nula de normalidad, aunque no rechazan las de homoscedasticidad y
@@ -462,9 +466,9 @@ ninguno de estos modelos de regresión es válido como explicación de
 la tasa de mortalidad.
 \end{description}
 
-(\hyperref[sec:orgaf13ddc]{Pregunta 4})
+(\hyperref[sec:org0ca4af8]{Pregunta 4})
 \subsection*{Respuesta 5}
-\label{sec:org6554f84}
+\label{sec:org19cb1df}
 
 La pendiente de la regresión estimada en la Etapa 3 (que es la misma
 que la de la sección de la regresión en niveles) indica que un aumento
@@ -473,9 +477,9 @@ lugar a un aumento de un 0.419 por mil en la mortalidad esperada
 (pero, dado que la relación es espuria, interpretar este resultado
 carece de sentido).
 
-(\hyperref[sec:org4c44d8d]{Pregunta 5})
+(\hyperref[sec:orgf1eff77]{Pregunta 5})
 \subsection*{Respuesta 6}
-\label{sec:orgb9368be}
+\label{sec:org71b980b}
 
 Recuerde que signo de los parámetros MA en las salidas de Gretl tienen
 el signo cambiado respecto a convenio habitual en los manuales de
@@ -505,9 +509,9 @@ estacionario, ni habría una representación del proceso como media
 móvil infinita como la Expresión 4.
 
 
-(\hyperref[sec:org4dd69f9]{Pregunta 6})
+(\hyperref[sec:org1d7c4f5]{Pregunta 6})
 \subsection*{Respuesta 7}
-\label{sec:org17668fd}
+\label{sec:org4079fba}
 
 La raíz AR estimada está muy próxima a 1, por lo que cabe pensar que
 la serie proviene de un proceso estocástico NO estacionario. Sin
@@ -515,9 +519,9 @@ embargo, las raíces del polinomio MA tienen un módulo claramente mayor
 que uno, por lo que el modelo tiene claramente una representación
 AR(\(\infty\)), es decir, es invertible.
 
-(\hyperref[sec:org8a28256]{Pregunta 7})
+(\hyperref[sec:org0371e41]{Pregunta 7})
 \subsection*{Respuesta 8}
-\label{sec:org686879e}
+\label{sec:orgb022449}
 
 ¿Cuáles de los modelos de más arriba considera aceptables? ¿O qué
 mejoras sugeriría para ellos?
@@ -539,5 +543,5 @@ ninguna de las dos regresiones (en niveles o en diferencias)
 arrojará un modelo aceptable ni siquiera con las mejoras sugeridas.
 \end{description}
 
-(\hyperref[sec:org69a8f91]{Pregunta 8})
+(\hyperref[sec:org8450314]{Pregunta 8})
 \end{document}

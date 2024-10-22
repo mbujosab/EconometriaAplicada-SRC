@@ -1,5 +1,5 @@
 # para que gretl guarde los ficheros en el directorio de la práctica
-string directory = $(pwd) ~ "/SegundoEjercicioIdentificacionModeloARIMA" 
+string directory = $(pwd) ~ "/SegundoEjercicioIdentificacionARIMA" 
 set workdir "@directory"
 
 open IdentificaEstosARIMA/00c296-12.gdt
