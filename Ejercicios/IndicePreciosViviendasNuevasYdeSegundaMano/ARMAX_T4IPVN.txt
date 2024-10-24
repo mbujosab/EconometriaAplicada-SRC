@@ -1,0 +1,45 @@
+
+Evaluaciones de la función: 18
+Evaluaciones del gradiente: 8
+
+ARMAX_T4IPVN:
+ARMAX, usando las observaciones 2008:1-2022:4 (T = 60)
+Estimado usando AS 197 (MV exacta)
+Variable dependiente: T4IPVN
+Desviaciones típicas basadas en el Hessiano
+
+             coeficiente   Desv. típica     z     valor p 
+  --------------------------------------------------------
+  const       2,36047       1,32670       1,779   0,0752   *
+  phi_1       0,821915      0,0858539     9,573   1,03e-21 ***
+  T4IPV2M     0,612342      0,126633      4,836   1,33e-06 ***
+
+Media de la vble. dep.  1,368477   D.T. de la vble. dep.   6,683657
+Media de innovaciones  −0,108356   D.T. innovaciones       1,943328
+R-cuadrado              0,917639   R-cuadrado corregido    0,916219
+Log-verosimilitud      −125,5632   Criterio de Akaike      259,1265
+Criterio de Schwarz     267,5038   Crit. de Hannan-Quinn   262,4033
+
+                       Real Imaginaria     Módulo Frecuencia
+  -----------------------------------------------------------
+  AR
+   Raíz  1           1,2167     0,0000     1,2167     0,0000
+  -----------------------------------------------------------
+
+ARMAX_T4IPVN guardado
+
+Contraste de la hipótesis nula de distribución Normal:
+Chi-cuadrado(2) = 0,050 con valor p 0,97554
+
+
+Contraste de ARCH de orden 4
+
+Estadístico de contraste: TR^2 = 5,586830,
+con valor p = P(Chi-cuadrado(4) > 5,586830) = 0,232202
+
+
+Contraste de autocorrelación hasta el orden 15
+
+Ljung-Box Q' = 9,64319,
+con valor p = P(Chi-cuadrado(14) > 9,64319) = 0,7878
+

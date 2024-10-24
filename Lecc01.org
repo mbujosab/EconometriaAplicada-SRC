@@ -43,6 +43,7 @@ En esta lección veremos algunos transformaciones de los datos para
    :metadata: (slideshow . ((slide_type . skip)))
    :UNNUMBERED: t 
    :END:
+
    
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results none

@@ -134,13 +134,13 @@
 
 - [[file:./Ejercicios/mortality-marriages.html][Mortalidad en Reino Unido y proporción de matrimonios eclesiásticos]]
   (Versión [[file:./Ejercicios/mortality-marriages.pdf][pdf]] para imprimir)
-
 - [[file:./Ejercicios/NombreOscarYConsumoDePetroleo.html][Popularidad del nombre Óscar en EEUU y consumo de petroleo en Grecia]]
   (Versión [[file:./Ejercicios/NombreOscarYConsumoDePetroleo.pdf][pdf]] para imprimir)
+- [[file:./Ejercicios/IndicePreciosViviendasNuevasYdeSegundaMano.html][Índice de precios de viviendas nuevas y de segunda mano]]
+  (Versión [[file:./Ejercicios/IndicePreciosViviendasNuevasYdeSegundaMano.pdf][pdf]] para imprimir)
 
 
 - [[file:./Ejercicios/EjercicioIdentificacionARIMA.html][Ejercicio de identificación de modelos ARIMA]]
   (Versión [[file:./Ejercicios/EjercicioIdentificacionARIMA.pdf][pdf]] para imprimir) --- [[https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios/IdentificaEstosARIMA][_Directorio con más series simuladas_]]
-
 - [[file:Ejercicios/SegundoEjercicioIdentificacionARIMA.html][Segundo ejercicio de identificación de modelos ARIMA]]
   (Versión [[file:Ejercicios/SegundoEjercicioIdentificacionARIMA.pdf][pdf]] para imprimir) --- [[https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios/IdentificaEstosARIMA][_Directorio con más series simuladas_]]

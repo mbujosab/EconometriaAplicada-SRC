@@ -1,0 +1,43 @@
+# para que gretl guarde los ficheros en el directorio de la práctica
+string directory = $(pwd) ~ "/IndicePreciosViviendasNuevasYdeSegundaMano"
+set workdir "@directory"
+
+open IndicePreciosViviendasNuevasYdeSegundaMano.gdt
+
+gnuplot T4IPVN T4IPV2M  --time-series --with-lines --output="TasasDeVariacionAnual.png"
+
+ARIMA_T4IPVN <- arima 0 1 0 ; 0 0 1 ; T4IPVN --nc
+modtest --normality --quiet
+modtest --arch --quiet
+modtest --autocorr 15 --quiet
+
+outfile --quiet ARIMA_T4IPVN.txt
+  ARIMA_T4IPVN <- arima 0 1 0 ; 0 0 1 ; T4IPVN --nc
+  modtest --normality --quiet
+  modtest --arch --quiet
+  modtest --autocorr 15 --quiet
+end outfile
+
+ARIMA_T4IPV2M <- arima 2 1 0 ; 0 0 1 ; T4IPV2M --nc
+modtest --normality --quiet
+modtest --arch --quiet
+modtest --autocorr 15 --quiet
+
+outfile --quiet ARIMA_T4IPV2M.txt
+  ARIMA_T4IPV2M <- arima 2 1 0 ; 0 0 1 ; T4IPV2M --nc
+  modtest --normality --quiet
+  modtest --arch --quiet
+  modtest --autocorr 15 --quiet
+end outfile
+
+ARMAX_T4IPVN <- arima 1 0 0 ; T4IPVN T4IPV2M 0
+modtest --normality --quiet
+modtest --arch --quiet
+modtest --autocorr 15 --quiet
+
+outfile --quiet ARMAX_T4IPVN.txt
+  ARMAX_T4IPVN <- arima 1 0 0 ; T4IPVN T4IPV2M 0
+  modtest --normality --quiet
+  modtest --arch --quiet
+  modtest --autocorr 15 --quiet
+end outfile

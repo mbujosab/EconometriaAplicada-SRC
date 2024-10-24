@@ -476,7 +476,6 @@ $$\boldsymbol{a}*\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)=
 \beta(\boldsymbol{a}*\boldsymbol{b})+\delta(\boldsymbol{a}*\boldsymbol{d})=
 \beta{{1}}+\delta{{1}}=
 (\beta+\delta){{1}}={{1}}$$
-# \boldsymbol{a}*(\beta\boldsymbol{b})+\boldsymbol{a}*(\delta\boldsymbol{d})=
 
 Así, para $\beta$ y $\delta$ tales que $\beta+\delta=1$, sabemos
 que $\big(\beta\boldsymbol{b}+\delta\boldsymbol{d}\big)$ es otra
