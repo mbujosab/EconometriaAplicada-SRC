@@ -68,7 +68,7 @@ open IdentificaEstosARIMA/00c296-12.gdt
    puedan considerar /ruido blanco/.]]
 
 - Ficheros [[https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios]]
-  - Versión en [[file:SegundoEjercicioIdentificacionARIMA.pdf][pdf]]
+  - Versión en [[https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Ejercicios/SegundoEjercicioIdentificacionARIMA.pdf][pdf]]
   - Datos:  [[file:IdentificaEstosARIMA/00c296-12.gdt][00c296-12.gdt]]
   - Guión de gretl: [[file:SegundoEjercicioIdentificacionARIMA.inp]]
 

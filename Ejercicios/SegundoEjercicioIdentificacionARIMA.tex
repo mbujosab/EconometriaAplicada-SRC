@@ -1,4 +1,4 @@
-% Created 2024-10-22 mar 11:47
+% Created 2024-10-25 vie 16:21
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt]{article}
 \usepackage[utf8]{inputenc}
@@ -36,7 +36,7 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 
 \maketitle
 \section*{Datos}
-\label{sec:orgfd684ad}
+\label{sec:org64b2946}
 
 Cargue la serie de datos simulados \href{IdentificaEstosARIMA/00c296-12.gdt}{00c296-12.gdt}
 
@@ -44,28 +44,28 @@ Cargue la serie de datos simulados \href{IdentificaEstosARIMA/00c296-12.gdt}{00c
 open IdentificaEstosARIMA/00c296-12.gdt
 \end{minted}
 \subsection*{Tareas a realizar}
-\label{sec:org29a5943}
+\label{sec:org500ccd4}
 \begin{enumerate}
-\item \hyperref[sec:org798aa3c]{Realice un primer análisis gráfico: haga
+\item \hyperref[sec:orgab07911]{Realice un primer análisis gráfico: haga
 un gráfico de la serie y un gráfico \emph{rango-media}}
-\item \hyperref[sec:org2f997d4]{Determine si es necesario transformar logarítmicamente los datos}
-\item \hyperref[sec:org3beacc4]{Determine si es necesario tomar una
+\item \hyperref[sec:orgec107d1]{Determine si es necesario transformar logarítmicamente los datos}
+\item \hyperref[sec:orgf027ddb]{Determine si es necesario tomar una
 diferencia estacional de la serie}
-\item \hyperref[sec:org7695fc3]{Determine si es necesario tomar una o
+\item \hyperref[sec:orgd966540]{Determine si es necesario tomar una o
 más diferencias regulares de la serie}
-\item \hyperref[sec:orgd2947b1]{Encuentre un modelo ARIMA para la
+\item \hyperref[sec:org2c8f3c9]{Encuentre un modelo ARIMA para la
 serie que sea lo más parsimonioso posible, pero cuyos residuos se
 puedan considerar \emph{ruido blanco}.}
 
 \item Ficheros \url{https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios}
 \begin{itemize}
-\item Versión en \href{SegundoEjercicioIdentificacionARIMA.pdf}{pdf}
+\item Versión en \href{https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Ejercicios/SegundoEjercicioIdentificacionARIMA.pdf}{pdf}
 \item Datos:  \href{IdentificaEstosARIMA/00c296-12.gdt}{00c296-12.gdt}
 \item Guión de gretl: \url{SegundoEjercicioIdentificacionARIMA.inp}
 \end{itemize}
 \end{enumerate}
 \section*{Primer análisis gráfico}
-\label{sec:org798aa3c}
+\label{sec:orgab07911}
 
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
@@ -82,7 +82,7 @@ De estos gráficos se desprende que la serie tiene una acusada pauta
 estacional y que la volatilidad probablemente depende del nivel de la
 serie.
 \section*{Estacionariedad en varianza}
-\label{sec:org2f997d4}
+\label{sec:orgec107d1}
 
 A la luz de los anteriores gráficos, donde se aprecia que la
 variabilidad de los datos aumenta con el nivel de la serie, parece
@@ -93,7 +93,7 @@ constante suficientemente elevado como para que todos los valores
 fueran positivos). Por el momento, dejemos la serie sin transformarla
 logarítmicamente.
 \section*{Diferencias estacionales}
-\label{sec:org3beacc4}
+\label{sec:orgf027ddb}
 
 Observemos el gráfico de la serie y su correlograma.
 
@@ -170,7 +170,7 @@ gnuplot sd_x --time-series --with-lines --output="SerieEnDiferencias.png"
 \includegraphics[width=0.5\textwidth]{./SegundoEjercicioIdentificacionARIMA/SerieEnDiferencias.png}
 \end{center}
 \subsection*{Repetición del análisis con la serie diferenciada estacionalmente}
-\label{sec:orge37f4b0}
+\label{sec:orgd7412a7}
 
 
 La serie resultante no muestra signos de estacionalidad. Veamos si se
@@ -188,7 +188,7 @@ corrgm sd_x 36 --plot="sd_x_ACF-PACF.png"
 \textbf{No hay nada que sugiera la necesidad de tomar una segunda diferencia
 estacional}.
 \section*{Estacionariedad en media}
-\label{sec:org7695fc3}
+\label{sec:orgd966540}
 
 El gráfico de la serie diferenciada estacionalmente no muestra tener
 una clara tendencia o evolución a largo plazo de su nivel.
@@ -245,7 +245,7 @@ también lo está la raíz autorregresiva).
 
 Probemos con los tests formales de raíz unitaria y estacionariedad
 \subsubsection*{Test ADF}
-\label{sec:org63a3a0f}
+\label{sec:org4d2c430}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 adf -1 sd_x --c --gls --test-down --perron-qu 
@@ -268,7 +268,7 @@ la hipótesis nula de raíz unitaria es: [a = 1]
 
 El p-valores es muy bajo, por lo que se rechaza la \(H_0\) de que la serie es \(I(1)\)
 \subsubsection*{Test KPSS}
-\label{sec:org63d6dbd}
+\label{sec:orgd72468b}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 kpss -1 sd_x 
@@ -290,7 +290,7 @@ El p-valor es elevado, por los que NO se rechaza la \(H_0\) de que la
 serie es \(I(0)\). \textbf{Todas estas evidencias indican de manera muy clara
 que NO es necesario tomar ninguna diferencia ordinaria}.
 \section*{Primer intento de búsqueda de un modelo ARIMA}
-\label{sec:orgd2947b1}
+\label{sec:org2c8f3c9}
 
 Observando al ACF y la PACF de aprecia que la ACF decae a una tasa
 exponencial, y la PACF se trunca tras el primer retardo, lo cual es
@@ -375,7 +375,7 @@ Criterio de Schwarz     524,3110   Crit. de Hannan-Quinn   520,4606
 ARIMA110 guardado
 \end{verbatim}
 \subsection*{Análisis de los residuos}
-\label{sec:org867f565}
+\label{sec:orgd2318df}
 
 Todo parece OK, pero debemos ver el gráfico de los residuos y su
 correlograma, así como los estadísticos Q de Ljung-Box para constatar
@@ -479,7 +479,7 @@ la transformación logarítmica (en cualquier caso no se podía tomar sin
 aumentar previamente su nivel para hacerla positiva), sigue un proceso
 ARIMA\((1,0,0)\times(0,1,0)_S\) con media cero.
 \subsection*{Modelo efectivamente simulado}
-\label{sec:org4bd7ee3}
+\label{sec:orgcb18dc8}
 
 Veamos si ese es el modelo usado en su simulación. Si miramos la línea
 \texttt{150} del fichero \href{IdentificaEstosARIMA/000-Etiquetas-12.txt}{000-Etiquetas-12.txt} que se encuentra en el directorio de
@@ -504,7 +504,7 @@ simulado\ldots{}
 
 \textbf{¡Hemos identificado un modelo distinto del simulado!}
 \section*{Pruebas con otro modelo ARIMA}
-\label{sec:orgc03d676}
+\label{sec:org520bd91}
 
 Estimemos el verdadero modelo simulado: ARIMA\((2,0,0)\times(1,1,0)_{S}\):
 

@@ -1,4 +1,4 @@
-% Created 2024-10-24 jue 20:09
+% Created 2024-10-25 vie 16:22
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt]{article}
 \usepackage[utf8]{inputenc}
@@ -36,7 +36,7 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 
 \maketitle
 \section*{Los datos}
-\label{sec:orgb8f1538}
+\label{sec:org3794cba}
 
 Los datos de este ejercicio corresponden a los índices de precios de
 vivienda nueva y de segunda mano con base 2015. La muestra disponible
@@ -68,7 +68,7 @@ Ficheros \url{https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejer
 \item Guión de gretl: \href{IndicePreciosViviendasNuevasYdeSegundaMano.inp}{IndicePreciosViviendasNuevasYdeSegundaMano.inp}
 \end{itemize}
 \section*{Gráfico de las tasas de variación los índices de precios}
-\label{sec:org323a098}
+\label{sec:orgeb373e3}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 gnuplot T4IPVN T4IPV2M  --time-series --with-lines --output="TasasDeVariacionAnual.png"
@@ -80,19 +80,19 @@ gnuplot T4IPVN T4IPV2M  --time-series --with-lines --output="TasasDeVariacionAnu
 \includegraphics[width=0.5\textwidth]{./IndicePreciosViviendasNuevasYdeSegundaMano/TasasDeVariacionAnual.png}
 \end{center}
 
-El perfil de las series que se muestran en la \hyperref[sec:org323a098]{figura anterior} sugiere que
+El perfil de las series que se muestran en la \hyperref[sec:orgeb373e3]{figura anterior} sugiere que
 ambas podrían estar cointegradas. Para estudiar esta posibilidad se
 estiman:
 \begin{itemize}
-\item \hyperref[sec:orga28ef6b]{modelos ARIMA} para las series \texttt{T4IPVN} y \texttt{T4IPV2M}, así como
-\item \hyperref[sec:orgb2b5f38]{un modelo AR(1) para la serie \texttt{T4IPVN} con \texttt{T4IPV2M} y como input
+\item \hyperref[sec:org33bc01b]{modelos ARIMA} para las series \texttt{T4IPVN} y \texttt{T4IPV2M}, así como
+\item \hyperref[sec:org267a710]{un modelo AR(1) para la serie \texttt{T4IPVN} con \texttt{T4IPV2M} y como input
 exógeno}.
 \end{itemize}
 \section*{Modelos ARIMA}
-\label{sec:orga28ef6b}
+\label{sec:org33bc01b}
 
 \subsection*{Vivienda nueva}
-\label{sec:orgf1cf42c}
+\label{sec:org495795f}
 
 Se ajusta el siguiente modelo estacional para  \texttt{T4IPVN}:
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
@@ -146,7 +146,7 @@ Ljung-Box Q' = 12,8016,
 con valor p = P(Chi-cuadrado(14) > 12,8016) = 0,5422
 \end{verbatim}
 \subsection*{Vivienda de segunda mano}
-\label{sec:orgc0a848d}
+\label{sec:orge25c700}
 
 Se ajusta el siguiente modelo estacional para \texttt{T4IPV2M}:
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
@@ -205,7 +205,7 @@ Ljung-Box Q' = 19,2946,
 con valor p = P(Chi-cuadrado(12) > 19,2946) = 0,08166
 \end{verbatim}
 \section*{Modelo ARMAX}
-\label{sec:orgb2b5f38}
+\label{sec:org267a710}
 
 Se ajusta el siguiente modelo autorregresivo para \texttt{T4IPVN}, con una
 constante y \texttt{T4IPV2M} como variables exógenas:
@@ -263,7 +263,7 @@ Ljung-Box Q' = 9,64319,
 con valor p = P(Chi-cuadrado(14) > 9,64319) = 0,7878
 \end{verbatim}
 \subsection*{Intervalo de confianza de los parámetros estimados}
-\label{sec:orgf20e2ad}
+\label{sec:org00c134a}
 
 Los intervalos de confianza al 95 para los coeficientes del modelo
 anterior se muestra a continuación.
@@ -278,51 +278,51 @@ z(0,025) = 1,9600
        T4IPV2M            0,612342        0,364146     0,860538
 \end{verbatim}
 \section*{Preguntas}
-\label{sec:org92f01d7}
+\label{sec:org7147036}
 
 \subsection*{Pregunta 1}
-\label{sec:orgae34b5d}
+\label{sec:org8c2b7e5}
 
 Comente exhaustivamente los resultados de estimación y diagnosis de
-los \hyperref[sec:orga28ef6b]{modelos ARIMA} estimados. 
+los \hyperref[sec:org33bc01b]{modelos ARIMA} estimados. 
 
-(\hyperref[sec:orgf958857]{Respuesta 1})
+(\hyperref[sec:org55f465f]{Respuesta 1})
 \subsection*{Pregunta 2}
-\label{sec:orgcf0b556}
+\label{sec:org3f77809}
 
-Compare de todas las formas posibles los modelos \hyperref[sec:orga28ef6b]{ARIMA} y \hyperref[sec:orgb2b5f38]{ARMAX} de la
+Compare de todas las formas posibles los modelos \hyperref[sec:org33bc01b]{ARIMA} y \hyperref[sec:org267a710]{ARMAX} de la
 variable \texttt{T4IPVN}. ¿Cuál de los dos modelos
 \begin{itemize}
 \item ajusta mejor la muestra?
 \item cabe esperar que produzca mejores previsiones extra-muestrales?
 (suponiendo que se conoce el valor de la variable explicativa en el
-caso del modelo \hyperref[sec:orgb2b5f38]{ARMAX})
+caso del modelo \hyperref[sec:org267a710]{ARMAX})
 \item cabe esperar que esté mejor especificado?
 \end{itemize}
 
 Argumente su respuesta de todas las formas posibles.
 
-(\hyperref[sec:org2a85ed4]{Respuesta 2})
+(\hyperref[sec:orgeed0629]{Respuesta 2})
 \subsection*{Pregunta 3}
-\label{sec:org6915f3f}
+\label{sec:org27a1a6f}
 
 \begin{enumerate}
-\item Suponga que los modelos \hyperref[sec:orga28ef6b]{ARIMA} (para \texttt{T4IPVN} y \texttt{T4IPV2M}) y \hyperref[sec:orgb2b5f38]{ARMAX}
+\item Suponga que los modelos \hyperref[sec:org33bc01b]{ARIMA} (para \texttt{T4IPVN} y \texttt{T4IPV2M}) y \hyperref[sec:org267a710]{ARMAX}
 (para \texttt{T4IPVN}) están correctamente identificados y
 estimados. Considerando las estimaciones puntuales que se muestran,
 discuta detalladamente si las series \texttt{T4IPVN} y \texttt{T4IPV2M} están
 cointegradas (en este caso indique cuál es el vector de
 cointegración) o si, por el contrario, no lo están.
 
-\item Los \hyperref[sec:orgf20e2ad]{intervalos de confianza de los parámetros estimados} ¿Introducen
+\item Los \hyperref[sec:org00c134a]{intervalos de confianza de los parámetros estimados} ¿Introducen
 algún matiz en su respuesta previa? ¿O no la afectan en absoluto?
 \end{enumerate}
 
-(\hyperref[sec:org100762d]{Respuesta 3})
+(\hyperref[sec:org8f38cf2]{Respuesta 3})
 \subsection*{Pregunta 4}
-\label{sec:orgf5c22d6}
+\label{sec:orgfa2ce4b}
 
-Indique cuáles de las siguientes expresiones representan el modelo \hyperref[sec:orga28ef6b]{ARIMA} ajustado a \texttt{T4IPV2M} con un redondeo a tres decimales.
+Indique cuáles de las siguientes expresiones representan el modelo \hyperref[sec:org33bc01b]{ARIMA} ajustado a \texttt{T4IPV2M} con un redondeo a tres decimales.
 
 Indique cuáles de las siguientes expresiones NO están bien definidas.
 
@@ -344,12 +344,12 @@ Indique cuáles de las siguientes expresiones NO están bien definidas.
 \item[{Expresión 14}] \(\frac{1}{1 + 0.844 \mathsf{B}^4} x_t = \frac{1}{\nabla(1 -0.291 \mathsf{B} - 0.511 \mathsf{B}^2)} \hat{a}_t\)
 \item[{Expresión 15}] \(\frac{1}{1 - 0.844 \mathsf{B}^4} x_t = \frac{1}{\nabla(1 +0.291 \mathsf{B} + 0.511 \mathsf{B}^2)} \hat{a}_t\)
 
-(\hyperref[sec:orgeb89709]{Respuesta 4})
+(\hyperref[sec:orgbae1f17]{Respuesta 4})
 \end{description}
 \subsection*{Pregunta 5}
-\label{sec:org96b0c64}
+\label{sec:orgb8d9a26}
 
-Indique cuáles de las siguientes expresiones representan el modelo \hyperref[sec:orgb2b5f38]{ARMAX} ajustado a \texttt{T4IPVN} con un redondeo a tres decimales.
+Indique cuáles de las siguientes expresiones representan el modelo \hyperref[sec:org267a710]{ARMAX} ajustado a \texttt{T4IPVN} con un redondeo a tres decimales.
 
 \begin{description}
 \item[{Expresión 1}] \(T4IPVN_t = 2.361 + 0.612 \, (T4IPV2M_t) + \frac{1}{1 + 0.822 \mathsf{B}} \hat{a}_t\)
@@ -359,76 +359,76 @@ Indique cuáles de las siguientes expresiones representan el modelo \hyperref[se
 \item[{Expresión 5}] \((1 - 0.822 \mathsf{B}) \big(T4IPVN_t - 0.612 \, (T4IPV2M_t) - 2.361\big) = \hat{a}_t\)
 \end{description}
 
-(\hyperref[sec:org645e369]{Respuesta 5})
+(\hyperref[sec:orgad1516c]{Respuesta 5})
 \subsection*{Pregunta 6}
-\label{sec:orgb98a701}
+\label{sec:org062d9c1}
 
 Indique si es cierta o no la siguiente afirmación:
 \begin{quote}
-El criterio de Akaike del modelo \hyperref[sec:orga28ef6b]{ARIMA} ajustado a \texttt{T4IPV2M} es menor
-que el del modelo \hyperref[sec:orga28ef6b]{ARIMA} ajustado a \texttt{T4IPVN}, lo que indica que el
+El criterio de Akaike del modelo \hyperref[sec:org33bc01b]{ARIMA} ajustado a \texttt{T4IPV2M} es menor
+que el del modelo \hyperref[sec:org33bc01b]{ARIMA} ajustado a \texttt{T4IPVN}, lo que indica que el
 primer modelo probablemente predecirá fuera de la muestra mejor que el
 segundo.
 \end{quote}
 
-(\hyperref[sec:org7c55035]{Respuesta 6})
+(\hyperref[sec:org6b65f8d]{Respuesta 6})
 \subsection*{Pregunta 7}
-\label{sec:org954cafd}
+\label{sec:orgc0deb0e}
 
 Indique si es cierta o no la siguiente afirmación:
 
 \begin{quote}
-La pendiente estimada de la variable \texttt{T4IPV2M} en el modelo \hyperref[sec:orgb2b5f38]{ARMAX}
+La pendiente estimada de la variable \texttt{T4IPV2M} en el modelo \hyperref[sec:org267a710]{ARMAX}
 indica que, si aumenta en un \texttt{1\%} la tasa anual de variación del
 índice de precios de la vivienda de segunda mano \texttt{T4IPV2M}, cabe
 esperar que la tasa de variación del índice de precios de la vivienda
 nueva \texttt{T4IPVN\_t} aumente en un \texttt{0.612\%}.
 \end{quote}
 
-(\hyperref[sec:org9072e02]{Respuesta 7})
+(\hyperref[sec:org1f616b9]{Respuesta 7})
 \subsection*{Pregunta 8}
-\label{sec:org480c145}
+\label{sec:orgccf161c}
 
 Indique si es cierta o no la siguiente afirmación:
 
 \begin{quote}
-La pendiente estimada de la variable \texttt{T4IPV2M} en el modelo \hyperref[sec:orgb2b5f38]{ARMAX}
+La pendiente estimada de la variable \texttt{T4IPV2M} en el modelo \hyperref[sec:org267a710]{ARMAX}
 indica que, si aumenta en un punto porcentual la tasa anual de
 variación del índice de precios de la vivienda de segunda mano
 \texttt{T4IPV2M}, cabe esperar que la tasa de variación del índice de precios
 de la vivienda nueva \texttt{T4IPVN} aumente en \texttt{0.612} puntos.
 \end{quote}
 
-(\hyperref[sec:org9808af1]{Respuesta 8})
+(\hyperref[sec:orgfa2e097]{Respuesta 8})
 \subsection*{Pregunta 9}
-\label{sec:org55a4a8f}
+\label{sec:orgc9e9266}
 
 Indique si es cierta o no la siguiente afirmación:
 
 \begin{quote}
-Los resultados que se muestran en la tabla de \hyperref[sec:orgf20e2ad]{intervalos de confianza}
+Los resultados que se muestran en la tabla de \hyperref[sec:org00c134a]{intervalos de confianza}
 indican que debe rechazarse la hipótesis nula de que el parámetro
 \(\phi_1\) sea igual a 1 con un 10\% de significación.
 \end{quote}
 
-(\hyperref[sec:org44e2649]{Respuesta 9})
+(\hyperref[sec:orga3c1976]{Respuesta 9})
 \subsection*{Pregunta 10}
-\label{sec:org51a4be4}
+\label{sec:org06e548a}
 
 Indique si es cierta o no la siguiente afirmación:
 
 \begin{quote}
-Los resultados que se muestran en la tabla de \hyperref[sec:orgf20e2ad]{intervalos de confianza}
+Los resultados que se muestran en la tabla de \hyperref[sec:org00c134a]{intervalos de confianza}
 sugieren que probablemente no se rechazaría la hipótesis nula de que
 el parámetro \(phi_1\) sea igual a 1 con un 1\% de significación.
 \end{quote}
 
-(\hyperref[sec:org4d8e16e]{Respuesta 10})
+(\hyperref[sec:orga2f43c1]{Respuesta 10})
 \section*{Respuestas}
-\label{sec:org28edbaa}
+\label{sec:orgbf4ab7d}
 
 \subsection*{Respuesta 1}
-\label{sec:orgf958857}
+\label{sec:org55f465f}
 
 En ambos modelos
 
@@ -446,12 +446,12 @@ confianza habituales, y
 \item En ambos casos son modelos ARIMA no estacionarios.
 \end{itemize}
 
-(\hyperref[sec:orgae34b5d]{Pregunta 1})
+(\hyperref[sec:org8c2b7e5]{Pregunta 1})
 \subsection*{Respuesta 2}
-\label{sec:org2a85ed4}
+\label{sec:orgeed0629}
 
 
-El modelo \hyperref[sec:orgb2b5f38]{ARMAX} se ajusta mejor la muestra ya que
+El modelo \hyperref[sec:org267a710]{ARMAX} se ajusta mejor la muestra ya que
 \begin{itemize}
 \item tiene coeficientes de determinación más elevados; tanto el
 ordinario, \(R^2\), (\texttt{0,917639} frente a \texttt{0,889602}) como el corregido
@@ -460,7 +460,7 @@ por los grados de libertad (\texttt{0,916219} frente a \texttt{0,889602}) y
 frente a \texttt{2,208917}).
 \end{itemize}
 
-Por otra parte, los criterios de información del modelo \hyperref[sec:orgb2b5f38]{ARMAX} toman un
+Por otra parte, los criterios de información del modelo \hyperref[sec:org267a710]{ARMAX} toman un
 valor menores, es decir, son mejores, por lo que
 \begin{itemize}
 \item cabe esperar que este modelo prediga mejor fuera de la muestra
@@ -468,20 +468,20 @@ valor menores, es decir, son mejores, por lo que
 \item cabe esperar que esté mejor especificado (criterio de Schwarz).
 \end{itemize}
 
-(\hyperref[sec:orgcf0b556]{Pregunta 2})
+(\hyperref[sec:org3f77809]{Pregunta 2})
 \subsection*{Respuesta 3}
-\label{sec:org100762d}
+\label{sec:org8f38cf2}
 
 \begin{enumerate}
 \item Los modelos estimados sugieren que las series \texttt{T4IPVN} y \texttt{T4IPV2M}
 están cointegradas, con un vector de cointegración \texttt{[1 -
    0.612]}. Esta respuesta se apoya en que
 \begin{itemize}
-\item los modelos \hyperref[sec:orga28ef6b]{ARIMA} para las series \texttt{T4IPVN} y \texttt{T4IPV2M} son
+\item los modelos \hyperref[sec:org33bc01b]{ARIMA} para las series \texttt{T4IPVN} y \texttt{T4IPV2M} son
 ARIMA\((0,1,0)\times(0,0,1)_{12}\) y
 ARIMA\((2,1,0)\times(0,0,1)_{12}\), respectivamente, por lo que
 ambas series son integradas de primer orden, y
-\item el modelo \hyperref[sec:orgb2b5f38]{ARMAX} tiene un término de error estacionario, ya que la
+\item el modelo \hyperref[sec:org267a710]{ARMAX} tiene un término de error estacionario, ya que la
 raíz del término AR(1) está fuera del círculo de radio unidad
 (\texttt{1,2167}) y el correlograma de los residuos refuerza la hipótesis
 de que los residuos son estacionarios.
@@ -494,8 +494,8 @@ Por tanto, al relacionar ambas series mediante un modelo lineal, es
 
 
 \begin{enumerate}
-\item Las estimaciones puntuales del modelo \hyperref[sec:orgb2b5f38]{ARMAX} sugieren que los
-residuos son estacionarios. Sin embargo, al mirar los \hyperref[sec:orgf20e2ad]{intervalos de
+\item Las estimaciones puntuales del modelo \hyperref[sec:org267a710]{ARMAX} sugieren que los
+residuos son estacionarios. Sin embargo, al mirar los \hyperref[sec:org00c134a]{intervalos de
 confianza de los parámetros estimados} se ve que el límite superior
 del intervalo de confianza al 95\% para el coeficiente
 autorregresivo es \texttt{0,990186} por lo que, aunque un contraste al 5\%
@@ -507,9 +507,9 @@ series están cointegradas, pues los residuos de la relación
 encontrada no serían \(I(0)\)).
 \end{enumerate}
 
-(\hyperref[sec:org6915f3f]{Pregunta 3})
+(\hyperref[sec:org27a1a6f]{Pregunta 3})
 \subsection*{Respuesta 4}
-\label{sec:orgeb89709}
+\label{sec:orgbae1f17}
 
 Recuerde que signo de los parámetros MA en las salidas de Gretl tienen
 el signo cambiado respecto a convenio habitual en los manuales de
@@ -559,9 +559,9 @@ sumable tal que
 secuencia \(\frac{1}{\boldsymbol{\phi}}\) con dichas características NO
 existe}.
 
-(\hyperref[sec:orgf5c22d6]{Pregunta 4})
+(\hyperref[sec:orgfa2ce4b]{Pregunta 4})
 \subsection*{Respuesta 5}
-\label{sec:org645e369}
+\label{sec:orgad1516c}
 
 Son correctas 
 \begin{itemize}
@@ -576,36 +576,36 @@ multiplicando el lado izquierdo (es decir, el último sumando es una
 media móvil infinita).
 \end{itemize}
 
-(\hyperref[sec:org96b0c64]{Pregunta 5})
+(\hyperref[sec:orgb8d9a26]{Pregunta 5})
 \subsection*{Respuesta 6}
-\label{sec:org7c55035}
+\label{sec:org6b65f8d}
 
 \textbf{Falso}. Los criterios de información no son comparables ya que
 corresponden a ajustes de modelos para variables endógenas distintas
 (el primero es un modelo para \texttt{T4IPVN} y el segundo un modelo para
 \texttt{T4IPV2M})
 
-(\hyperref[sec:orgb98a701]{Pregunta 6})
+(\hyperref[sec:org062d9c1]{Pregunta 6})
 \subsection*{Respuesta 7}
-\label{sec:org9072e02}
+\label{sec:org1f616b9}
 
 \textbf{Falso}. Sería correcto si las variables dependiente y explicativa
 fueran \emph{tasas logarítmicas} anuales, en cuyo caso el coeficiente
 podría interpretarse como una elasticidad. Como se trata de tasas
 porcentuales ordinarias, la interpretación no es correcta.
 
-(\hyperref[sec:org954cafd]{Pregunta 7})
+(\hyperref[sec:orgc0deb0e]{Pregunta 7})
 \subsection*{Respuesta 8}
-\label{sec:org9808af1}
+\label{sec:orgfa2e097}
 
 \textbf{Verdadero}. Las variables dependiente y explicativa son tasas
 porcentuales de variación anual y la pendiente, por tanto, se
 interpreta como el aumento esperado en la variable endógena cuando la
 explicativa crece en una unidad.
 
-(\hyperref[sec:org480c145]{Pregunta 8})
+(\hyperref[sec:orgccf161c]{Pregunta 8})
 \subsection*{Respuesta 9}
-\label{sec:org44e2649}
+\label{sec:orga3c1976}
 
 \textbf{Falso}. El intervalo de confianza indica que la hipótesis nula
 \(H_0:\; \phi_1=1\) se rechaza con un nivel de significación del
@@ -613,9 +613,9 @@ explicativa crece en una unidad.
 significación al 10\% ya que el correspondiente intervalo de confianza
 al 90\% es aún más reducido.
 
-(\hyperref[sec:org55a4a8f]{Pregunta 9})
+(\hyperref[sec:orgc9e9266]{Pregunta 9})
 \subsection*{Respuesta 10}
-\label{sec:org4d8e16e}
+\label{sec:orga2f43c1}
 
 \textbf{Cierto}. El valor \texttt{1} queda fuera del del intervalo de confianza al
 95\%, pero está muy, muy próximo al límite superior de dicho intervalo.
@@ -626,5 +626,5 @@ corresponderá a una confianza del 99\%) es previsible que al 1\% no se
 rechace \(H_0:\; \phi_1=1\) (\emph{de hecho lo puede comprobar si quiere
 abriendo la base de datos en Gretl}).
 
-(\hyperref[sec:org51a4be4]{Pregunta 10})
+(\hyperref[sec:org06e548a]{Pregunta 10})
 \end{document}
