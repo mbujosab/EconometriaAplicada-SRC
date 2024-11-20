@@ -523,7 +523,8 @@ los resultados estadísticos sin un mínimo espíritu crítico!
   coeficientes son muy significativos. El ajuste del modelo, medido
   por el valor del \(R^2\) es muy elevado. Los contrastes sobre los
   residuos no rechazan la hipótesis nula de normalidad, pero si
-  rechazan la hipótesis de homocedasticidad y de autocorrelación.
+  rechazan la hipótesis de homocedasticidad y de ausencia de
+  autocorrelación.
 
   En cuanto a la heterocedasticidad, sería conveniente estimar
   indicando la opción de desviaciones típicas robustas, pues los
@@ -535,11 +536,11 @@ los resultados estadísticos sin un mínimo espíritu crítico!
 
 - Primer modelo para datos en primeras diferencias :: ([[Regresión en
   primeras diferencias]]): El único coeficiente significativo es la
-  pendiente (es decir, al diferenciar las series ha desaparecido la
+  pendiente (es decir, al diferenciar las series NO ha desaparecido la
   relación entre ellas), y el ajuste del modelo, medido por el valor
   del \(R^2\), es superior al 30%. Los contrastes residuales rechazan
   la hipótesis nula de normalidad, pero no rechazan las de
-  homoscedasticidad y ausencia de autocorrelación.
+  homocedasticidad y ausencia de autocorrelación.
 
   Si las perturbaciones no tienen distribución normal las estimaciones
   no serán eficientes en el sentido máximo-verosímil (aunque sí en el

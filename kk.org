@@ -36,6 +36,8 @@ https://rpubs.com/bachmanaaron42/airline_passengers_time_series_analysis
 
 https://math.mcmaster.ca/~bolker/eeid/2010/Ecology/Spectral.pdf Espectro
 
+- regARIMA :: https://timeseriesreasoning.com/contents/regression-with-arima-errors-model/
+
 #+BEGIN_SRC jupyter-R
 library(ggplot2)
 # Mostrando la serie capinst 

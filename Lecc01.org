@@ -16,6 +16,8 @@
 # +SETUPFILE: darksun.theme
 # +SETUPFILE: white_clean.theme  
 # ###########
+#+LATEX_HEADER_EXTRA: \usepackage{fullpage}
+
 
 #+LATEX_HEADER_EXTRA: \usepackage[spanish]{babel}
 #+LATEX_HEADER_EXTRA: \usepackage{lmodern}

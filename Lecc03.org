@@ -295,11 +295,11 @@ head(DF.diferencias, 2)
 
 #+RESULTS:
 :RESULTS:
-|   | date       | d_GNP | d_Melanoma |
+|   |       date | d_GNP | d_Melanoma |
 |---+------------+-------+------------|
-|   | <date>     | <dbl> | <dbl>      |
-| 1 | 1937-01-01 | 10.2  | -0.2       |
-| 2 | 1938-01-01 | -10.3 | 0.0        |
+|   |     <date> | <dbl> |      <dbl> |
+| 1 | 1937-01-01 |  10.2 |       -0.2 |
+| 2 | 1938-01-01 | -10.3 |        0.0 |
 #+caption: A data.frame: 2 × 3
 :END:
 
@@ -420,12 +420,12 @@ head(UK_df,3)
 
 #+RESULTS:
 :RESULTS:
-|   | Index     | Long  | Short |
+|   | Index     |  Long | Short |
 |---+-----------+-------+-------|
 |   | <yearqtr> | <dbl> | <dbl> |
-| 1 | 1952 Q2   | 4.23  | 2.32  |
-| 2 | 1952 Q3   | 4.36  | 2.47  |
-| 3 | 1952 Q4   | 4.19  | 2.42  |
+| 1 | 1952 Q2   |  4.23 |  2.32 |
+| 2 | 1952 Q3   |  4.36 |  2.47 |
+| 3 | 1952 Q4   |  4.19 |  2.42 |
 #+caption: A data.frame: 3 × 3
 :END:
 
@@ -440,9 +440,9 @@ head(UK_ts,3)
 :RESULTS:
 | Long | Short |
 |------+-------|
-| 4.23 | 2.32  |
-| 4.36 | 2.47  |
-| 4.19 | 2.42  |
+| 4.23 |  2.32 |
+| 4.36 |  2.47 |
+| 4.19 |  2.42 |
 #+caption: A matrix: 3 × 2 of type dbl
 :END:
 
@@ -499,11 +499,11 @@ head(UK_df.diferencias, 2)
 
 #+RESULTS:
 :RESULTS:
-|   | date       | d_Long | d_Short |
+|   |       date | d_Long | d_Short |
 |---+------------+--------+---------|
-|   | <date>     | <dbl>  | <dbl>   |
-| 1 | 1952-07-01 | 0.13   | 0.15    |
-| 2 | 1952-10-01 | -0.17  | -0.05   |
+|   |     <date> |  <dbl> |   <dbl> |
+| 1 | 1952-07-01 |   0.13 |    0.15 |
+| 2 | 1952-10-01 |  -0.17 |   -0.05 |
 #+caption: A data.frame: 2 × 3
 :END:
 
