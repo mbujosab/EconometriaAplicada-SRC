@@ -218,7 +218,7 @@ Así, en cuanto a la ACF $\boldsymbol{\rho}$:
  - De $\rho_1$ a $\rho_q$ dependen de los $q$ parámetros de
    $\boldsymbol{\theta}$ y los $p$ parámetros de $\boldsymbol{\phi}$
  - Los $p$ valores de $\rho_q$ a $\rho_{q-p+1}$ son los valores
-   iniciales para resolver la ecuación en diferencias
+   iniciales para resolver la ecuación en diferencias de Yule-Walker
    [[file:./Lecc05.html#orgd60b0f9][$\boldsymbol{\phi}(\mathsf{B})\rho_k=0\;$]] (con $k> q)$
  - Si $q < p$ toda la secuencia $\rho_j$ para $j \geq 0$ decae
    exponencialmente o sinusoidalmente según $\boldsymbol{\phi}$ y los
@@ -658,7 +658,7 @@ Las hipótesis del test KPSS están invertidas respecto a las del Test DF
 - $H_0$ :: la serie es $I(0)$.
 - $H_1$ :: la serie es $I(1)$ o estacionaria en torno a una tendencia determinista
 
-*DF/ADF y KPSS se complementan.* Si la series es:
+*DF/ADF y KPSS se complementan.* Si la serie es:
 - /estacionaria/: el test DF/ADF debería rechazar su $H_0:$ la serie es $I(1)$
 - /NO estacionaria/: el test KPSS debería rechazar su $H_0:$ la serie es $I(0)$
 
@@ -681,7 +681,7 @@ donde $\widetilde{X_t}=X_t-\bar{X}$.
 
 Para valorar la significatividad individual de estas autocorrelaciones
 puede usarse el error estándar asintótico:
-$s.e(\widehat{\rho_k})=1/\sqrt{n}$.
+$s.e.(\widehat{\rho_k})=1/\sqrt{n}$.
 
 Para contrastar la $H_0:$ /los $k$ primeros retardos son conjuntamente 
 no significativos/ (es decir, para contrastar si el proceso es /ruido

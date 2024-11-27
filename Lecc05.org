@@ -302,7 +302,7 @@ aún así...
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 - necesitaríamos para cada $X_t$ una muestra suficiente para estimar los parámetros 
-  + pero en una serie temporal tenemos una sola realización de cada $X_t$.  
+  + pero en una serie temporal $\boldsymbol{x}$ tenemos una sola realización de cada $X_t$.  
 
 - Además... para cada variable aleatoria $X_t$ hay infinitos parámetros.
 
@@ -361,7 +361,9 @@ producto escalar entre $X,Y\in H$ también es $$\langle X \mid Y
 \rangle=Cov(X,Y).$$ Por tanto, en este espacio $H$ la noción
 geométrica de ortogonalidad coincide con la noción estadística de /no
 correlación/. Por tanto, en este contexto los términos producto
-escalar, covarianza y esperanza del producto serán intercambiables.
+escalar, covarianza y esperanza del producto serán intercambiables
+(esto deja de ser cierto cuando hay variables aleatorias con esperanza
+no nula).
 #+latex: \medskip
 
 Una colección de variables aleatorias pertenecientes a $H$
@@ -406,7 +408,7 @@ autocovarianzas _de orden $k$_ es
 (\ldots,\,\gamma_{_{k,-1}},\,{\color{blue}{\gamma_{_{k,0}}}},\,\gamma_{_{k,1}},\,\gamma_{_{k,2}},\ldots);\quad k\in\mathbb{Z}.
 \end{align*}
 #+latex: \noindent
-(nótese que la secuencia solo contiene covarianzas de orden $k$) 
+(la secuencia solo contiene la covarianza de orden $k$... pero en distintos instantes $t$).
 #+latex: \medskip
 
 Así, para cada par $(k,t)$, tenemos la covarianza $\gamma_{k,t}$ entre
@@ -433,7 +435,7 @@ $$\boldsymbol{\gamma} = (\gamma_{k}\mid k\in\mathbb{Z}) =
 \;=\;\sum_{-\infty}^{\infty} \gamma_k z^k.$$
 #+BEGIN_EXPORT latex
 \noindent
-(nótese que esta secuencia sí incluye \underline{todas} las covarianzas).
+(nótese que esta secuencia sí incluye covarianzas de \underline{todos} los órdenes).
 \medskip
 
 Y se denomina matriz de autocovarianzas de

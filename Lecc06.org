@@ -206,7 +206,7 @@ $\widehat{X_t}=\widehat{\alpha_0}+\sum_{j=1}^{k-1}\widehat{\alpha_j}
 X_{t-j}$, *empleamos $k$ retardos* (i.e., un retardo más).
 #+LATEX: \medskip
 
-(Dicha propiedad nos ayudará a elegir el orden de procesos autoregresivos).
+Así, la PACF nos ayudará a identificar el orden de procesos autoregresivos.
 #+LATEX: \medskip
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
@@ -265,7 +265,7 @@ Consecuentemente, para $h=0$
 $$\sigma^2=\gamma_0=\int_{-\pi}^\pi f(\omega)d\omega.$$
 
 Por tanto podemos interpretar la densidad espectral como una
-descomposición de la varianza oscilaciones de distintas frecuencias (o periodos).
+descomposición de la varianza en sumas de oscilaciones con distintas frecuencias (o periodos).
 #+LATEX: \medskip
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
@@ -1722,7 +1722,7 @@ $(\boldsymbol{\theta}^{-\triangleright}=\boldsymbol{\theta}^{-1}\in\ell^1)$
   \frac{1}{\boldsymbol{\theta}}(\mathsf{B})X_t=U_t$$
 #+latex: \bigskip
 
-#+latex: {\bf Comportamiento de las funciones asociadas a los segundo momentos}
+#+latex: {\bf Comportamiento de las funciones asociadas a los segundos momentos}
 #+latex: \medskip
 
 #+latex: \noindent
