@@ -485,7 +485,7 @@ explicativa crece en una unidad.
 
 ** Respuesta 9
 
-*Falso*. El intervalo de confianza indica que la hipótesis nula
+*Verdadero*. El intervalo de confianza indica que la hipótesis nula
 $H_0:\; \phi_1=1$ se rechaza con un nivel de significación del
 5%. Consecuentemente, también se rechaza si se aumenta el nivel de
 significación al 10% ya que el correspondiente intervalo de confianza
