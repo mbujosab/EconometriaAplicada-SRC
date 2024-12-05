@@ -15,7 +15,7 @@
 # https://www.ucm.es/data/cont/docs/3-2016-07-21-Marca%20UCM%20logo%20negro.png
 
 - Enlaces :: 
-  - [[https://mbujosab.github.io/EconometriaAplicada-SRC/][Web]] con el material (si no funciona la web, acceda al directorio [[file:./docs/][docs]]
+  - [[https://mbujosab.github.io/EconometriaAplicada-SRC/][Web]] con el material
   - [[https://github.com/mbujosab/EconometriaAplicada-SRC][Repositorio]] con el material
 
   - [[https://drive.google.com/open?id=0Bwa1A30pN0IwWUtNNzRQRFRJUTQ][Ficha]] de la asignatura
