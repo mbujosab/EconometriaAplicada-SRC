@@ -1,0 +1,11 @@
+
+Contraste KPSS para TB3
+
+T = 2383
+Parámetro de truncamiento de los retardos = 3
+Estadístico de contraste = 8,99282
+
+                      10%      5%      1%
+Valores críticos: 0,348   0,462   0,744
+Valor p < .01
+

@@ -138,6 +138,8 @@
   (Versión [[file:./Ejercicios/NombreOscarYConsumoDePetroleo.pdf][pdf]] para imprimir)
 - [[file:./Ejercicios/IndicePreciosViviendasNuevasYdeSegundaMano.html][Índice de precios de viviendas nuevas y de segunda mano]]
   (Versión [[file:./Ejercicios/IndicePreciosViviendasNuevasYdeSegundaMano.pdf][pdf]] para imprimir)
+- [[file:./Ejercicios/LetrasTesoroAmericano3y6meses.html][LetrasTesoroAmericano3y6meses]]
+  (Versión [[file:./Ejercicios/LetrasTesoroAmericano3y6meses.pdf][pdf]] para imprimir)
 
 
 - [[file:./Ejercicios/EjercicioIdentificacionARIMA.html][Ejercicio de identificación de modelos ARIMA]]

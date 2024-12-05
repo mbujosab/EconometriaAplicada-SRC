@@ -1,0 +1,22 @@
+
+Modelo 2: MCO, usando las observaciones 1959-01-09:2004-08-06 (T = 2379)
+Variable dependiente: d_TB3
+
+             coeficiente   Desv. típica   Estadístico t   valor p 
+  ----------------------------------------------------------------
+  const       0,0204353     0,00950288        2,150       0,0316   **
+  TB3_1      -0,00371135    0,00152221       -2,438       0,0148   **
+  d_TB3_1     0,271457      0,0204924        13,25        1,07e-38 ***
+  d_TB3_2    -0,0148460     0,0212326        -0,6992      0,4845  
+  d_TB3_3     0,0381931     0,0205139         1,862       0,0628   *
+
+Media de la vble. dep. -0,000513   D.T. de la vble. dep.   0,212547
+Suma de cuad. residuos  99,33579   D.T. de la regresión    0,204556
+R-cuadrado              0,075335   R-cuadrado corregido    0,073777
+F(4, 2374)              48,35422   Valor p (de F)          3,80e-39
+Log-verosimilitud       402,1135   Criterio de Akaike     -794,2269
+Criterio de Schwarz    -765,3547   Crit. de Hannan-Quinn  -783,7185
+rho                    -0,002760   h de Durbin            -4,320544
+
+Sin considerar la constante, el valor p más alto fue el de la variable 6 (d_TB3_2)
+

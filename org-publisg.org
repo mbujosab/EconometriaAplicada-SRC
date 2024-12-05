@@ -98,6 +98,10 @@ $(OUT_DIR)/%.pdf: %.pdf
 #pdflatex --shell-escape  -interaction=batchmode IndicePreciosViviendasNuevasYdeSegundaMano.tex
 #latexmk -c IndicePreciosViviendasNuevasYdeSegundaMano.tex
 
+#pdflatex --shell-escape  -interaction=batchmode LetrasTesoroAmericano3y6meses.tex
+#pdflatex --shell-escape  -interaction=batchmode LetrasTesoroAmericano3y6meses.tex
+#latexmk -c LetrasTesoroAmericano3y6meses.tex
+
 #+END_SRC
 
 

@@ -1,0 +1,39 @@
+
+Modelo 10: MCO, usando las observaciones 1958-12-19:2004-08-06 (T = 2382)
+Variable dependiente: d_TB3
+
+             coeficiente   Desv. típica   Estadístico t   valor p
+  ---------------------------------------------------------------
+  const      8,20245e-06    0,00179898       0,004560     0,9964 
+  d_TB6      1,02172        0,00950382     107,5          0,0000  ***
+
+Media de la vble. dep. -0,000575   D.T. de la vble. dep.   0,212426
+Suma de cuad. residuos  18,34704   D.T. de la regresión    0,087800
+R-cuadrado              0,829239   R-cuadrado corregido    0,829167
+F(1, 2380)              11557,57   Valor p (de F)          0,000000
+Log-verosimilitud       2415,765   Criterio de Akaike     -4827,531
+Criterio de Schwarz    -4815,979   Crit. de Hannan-Quinn  -4823,327
+rho                     0,042154   Durbin-Watson           1,915514
+
+
+Contraste de la hipótesis nula de distribución Normal:
+Chi-cuadrado(2) = 3551,267 con valor p 0,00000
+
+
+Contraste de heterocedasticidad de White
+
+Estadístico de contraste: TR^2 = 271,546715,
+con valor p = P(Chi-cuadrado(2) > 271,546715) = 0,000000
+
+
+Contraste de Breusch-Godfrey para autocorrelación hasta el orden 2
+
+Estadístico de contraste: LMF = 57,661126,
+con valor p = P(F(2,2378) > 57,6611) = 3,52e-25
+
+Estadístico alternativo: TR^2 = 110,173325,
+con valor p = P(Chi-cuadrado(2) > 110,173) = 1,19e-24
+
+Ljung-Box Q' = 108,32,
+con valor p = P(Chi-cuadrado(2) > 108,32) = 3,01e-24
+

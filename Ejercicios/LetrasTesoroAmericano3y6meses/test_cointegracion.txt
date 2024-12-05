@@ -1,0 +1,68 @@
+
+Etapa 1: contrastando la existencia de una raíz unitaria en TB3
+
+Contraste aumentado de Dickey-Fuller para TB3
+incluyendo 3 retardos de (1-L)TB3
+tamaño muestral 2379
+la hipótesis nula de raíz unitaria es: [a = 1]
+
+  contraste con constante 
+  modelo: (1-L)y = b0 + (a-1)*y(-1) + ... + e
+  valor estimado de (a - 1): -0,00371135
+  estadístico de contraste: tau_c(1) = -2,43813
+  valor p asintótico 0,1312
+  Coef. de autocorrelación de primer orden de e: -0,003
+  diferencias retardadas: F(3, 2374) = 63,404 [0,0000]
+
+Etapa 2: contrastando la existencia de una raíz unitaria en TB6
+
+Contraste aumentado de Dickey-Fuller para TB6
+incluyendo 3 retardos de (1-L)TB6
+tamaño muestral 2379
+la hipótesis nula de raíz unitaria es: [a = 1]
+
+  contraste con constante 
+  modelo: (1-L)y = b0 + (a-1)*y(-1) + ... + e
+  valor estimado de (a - 1): -0,0033284
+  estadístico de contraste: tau_c(1) = -2,43963
+  valor p asintótico 0,1308
+  Coef. de autocorrelación de primer orden de e: -0,002
+  diferencias retardadas: F(3, 2374) = 80,572 [0,0000]
+
+Etapa 3: regresión cointegrante
+
+Regresión cointegrante - 
+MCO, usando las observaciones 1958-12-12:2004-08-06 (T = 2383)
+Variable dependiente: TB3
+
+             coeficiente   Desv. típica   Estadístico t   valor p 
+  ----------------------------------------------------------------
+  const       -0,227230     0,0103472        -21,96       1,73e-97 ***
+  TB6          1,01277      0,00162648       622,7        0,0000   ***
+
+Media de la vble. dep.  5,595682   D.T. de la vble. dep.   2,766766
+Suma de cuad. residuos  111,2926   D.T. de la regresión    0,216199
+R-cuadrado              0,993896   R-cuadrado corregido    0,993894
+Log-verosimilitud       269,3694   Criterio de Akaike     -534,7387
+Criterio de Schwarz    -523,1865   Crit. de Hannan-Quinn  -530,5345
+rho                     0,917536   Durbin-Watson           0,164916
+
+Etapa 4: contrastando la existencia de una raíz unitaria en uhat
+
+Contraste aumentado de Dickey-Fuller para uhat
+incluyendo 3 retardos de (1-L)uhat
+tamaño muestral 2379
+la hipótesis nula de raíz unitaria es: [a = 1]
+
+  contraste sin constante 
+  modelo: (1-L)y = (a-1)*y(-1) + ... + e
+  valor estimado de (a - 1): -0,0714629
+  estadístico de contraste: tau_c(2) = -8,40176
+  valor p asintótico 3,55e-13
+  Coef. de autocorrelación de primer orden de e: -0,001
+  diferencias retardadas: F(3, 2375) = 31,962 [0,0000]
+
+Hay evidencia de una relación cointegrante si:
+(a) La hipótesis de existencia de raíz unitaria no se rechaza para las variables individuales y
+(b) La hipótesis de existencia de raíz unitaria se rechaza para los residuos (uhat) de la regresión cointegrante.
+

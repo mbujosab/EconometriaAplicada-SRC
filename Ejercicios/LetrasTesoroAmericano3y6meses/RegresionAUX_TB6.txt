@@ -1,0 +1,20 @@
+
+Modelo 4: MCO, usando las observaciones 1959-01-09:2004-08-06 (T = 2379)
+Variable dependiente: d_TB6
+
+             coeficiente   Desv. típica   Estadístico t   valor p 
+  ----------------------------------------------------------------
+  const       0,0188423     0,00868102        2,171       0,0301   **
+  TB6_1      -0,00332840    0,00136431       -2,440       0,0148   **
+  d_TB6_1     0,273770      0,0204870        13,36        2,52e-39 ***
+  d_TB6_2     0,0535491     0,0212198         2,524       0,0117   **
+  d_TB6_3     0,0408834     0,0205125         1,993       0,0464   **
+
+Media de la vble. dep. -0,000509   D.T. de la vble. dep.   0,189439
+Suma de cuad. residuos  77,37722   D.T. de la regresión    0,180537
+R-cuadrado              0,093303   R-cuadrado corregido    0,091775
+F(4, 2374)              61,07380   Valor p (de F)          3,60e-49
+Log-verosimilitud       699,2666   Criterio de Akaike     -1388,533
+Criterio de Schwarz    -1359,661   Crit. de Hannan-Quinn  -1378,025
+rho                    -0,001784   h de Durbin            -2,253222
+

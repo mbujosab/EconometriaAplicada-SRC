@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="abstract" id="orgf0202a4">
+<div class="abstract" id="orgceb437e">
 <p>
 En esta lección veremos la estructura de la ACF, la PACF y la densidad
 espectral de procesos ARMA. Después indicaremos algunas herramientas
@@ -14353,7 +14353,7 @@ $$\boldsymbol{\phi}(\mathsf{B})\gamma_k =
 <li>De $\rho_1$ a $\rho_q$ dependen de los $q$ parámetros de
 $\boldsymbol{\theta}$ y los $p$ parámetros de $\boldsymbol{\phi}$</li>
 <li>Los $p$ valores de $\rho_q$ a $\rho_{q-p+1}$ son los valores
-iniciales para resolver la ecuación en diferencias de Yule-Walker
+iniciales para resolver la ecuación en diferencias
 <a href="./Lecc05.html#orgd60b0f9">$\boldsymbol{\phi}(\mathsf{B})\rho_k=0\;$</a> (con $k&gt; q)$</li>
 <li>Si $q &lt; p$ toda la secuencia $\rho_j$ para $j \geq 0$ decae
 exponencialmente o sinusoidalmente según $\boldsymbol{\phi}$ y los
@@ -14986,7 +14986,7 @@ $$\nabla Y_t = \underbrace{c + \beta t} + \delta Y_{t-1} + \pi_1 \nabla Y_{t-1} 
 <li><strong>$H_0$:</strong> la serie es $I(0)$.</li>
 <li><strong>$H_1$:</strong> la serie es $I(1)$ o estacionaria en torno a una tendencia determinista</li>
 </ul>
-<p><strong>DF/ADF y KPSS se complementan.</strong> Si la serie es:</p>
+<p><strong>DF/ADF y KPSS se complementan.</strong> Si la series es:</p>
 <ul>
 <li><em>estacionaria</em>: el test DF/ADF debería rechazar su $H_0:$ la serie es $I(1)$</li>
 <li><em>NO estacionaria</em>: el test KPSS debería rechazar su $H_0:$ la serie es $I(0)$</li>
@@ -15024,7 +15024,7 @@ $$\widehat{\rho_k}=\frac{\widehat{\gamma_k}}{\widehat{\gamma_0}};\qquad
 donde $\widetilde{X_t}=X_t-\bar{X}$.</p>
 <p>Para valorar la significatividad individual de estas autocorrelaciones
 puede usarse el error estándar asintótico:
-$s.e.(\widehat{\rho_k})=1/\sqrt{n}$.</p>
+$s.e(\widehat{\rho_k})=1/\sqrt{n}$.</p>
 <p>Para contrastar la $H_0:$ <em>los $k$ primeros retardos son conjuntamente 
 no significativos</em> (es decir, para contrastar si el proceso es <em>ruido
 blanco</em>) se emplea el test de Ljung-Box $$Q =
