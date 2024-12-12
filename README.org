@@ -1,6 +1,6 @@
 #+title: Código del material para un curso de Econometría Aplicada
 #+author: Marcos Bujosa
-#+LANGUAGE: es-es
+#+LANGUAGE: es
 # +OPTIONS: toc:nil
 
 # +MACRO: imglnk @@html:<a href="$1"><img src="$2"></a>@@

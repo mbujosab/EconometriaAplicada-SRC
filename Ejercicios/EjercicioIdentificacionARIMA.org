@@ -2,7 +2,7 @@
 
 #+title: Ejercicio de identificación de un modelo ARIMA
 # +author: Marcos Bujosa
-#+LANGUAGE: es-es
+#+LANGUAGE: es
 #+OPTIONS: toc:nil
 #+OPTIONS: author:nil
 #+OPTIONS: date:nil

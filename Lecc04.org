@@ -1,6 +1,7 @@
 
 #+TITLE: Econometría Aplicada. Lección 4
 #+author: Marcos Bujosa
+#+LANGUAGE: es
 
 # +OPTIONS: toc:nil
 

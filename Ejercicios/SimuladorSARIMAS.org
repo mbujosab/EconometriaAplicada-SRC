@@ -1,6 +1,6 @@
 #+TITLE: Simulación de múltiples modelos lineales
 #+author: Marcos Bujosa
-#+LANGUAGE: es-es
+#+LANGUAGE: es
 
 #+OPTIONS: toc:nil
 

@@ -1,6 +1,6 @@
 #+TITLE: Econometría Aplicada. Lección 3
 #+author: Marcos Bujosa
-#+LANGUAGE: es-es
+#+LANGUAGE: es
 
 # +OPTIONS: toc:nil
 

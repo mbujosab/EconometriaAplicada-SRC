@@ -2,7 +2,7 @@
 
 #+title: Consumo de petroleo y frecuencia del nombre Óscar
 # +author: Marcos Bujosa
-#+LANGUAGE: es-es
+#+LANGUAGE: es
 #+OPTIONS: toc:nil
 #+OPTIONS: author:nil
 #+OPTIONS: date:nil
