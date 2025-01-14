@@ -1,4 +1,4 @@
-% Created 2024-12-12 jue 18:21
+% Created 2025-01-14 mar 13:13
 % Intended LaTeX compiler: pdflatex
 \documentclass[10pt]{article}
 \usepackage[utf8]{inputenc}
@@ -37,7 +37,7 @@ citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
 
 \maketitle
 \section*{Datos}
-\label{sec:org090c35c}
+\label{sec:orgd0221b9}
 
 Datos semanales desde el 12 de diciembre de 1958 al 6 de agosto de
 2004 (en total 2383 observaciones). \emph{Fuente}: ejemplo 8.6.5 del libro
@@ -65,9 +65,9 @@ gnuplot TB3 TB6  --time-series --with-lines --output="TB3yTB6.png"
 \end{itemize}
 \end{itemize}
 \section*{Letras a tres meses}
-\label{sec:org3af9dc8}
+\label{sec:org0629652}
 \subsection*{Gráfico y correlograma de la serie temporal TB3}
-\label{sec:orgd416850}
+\label{sec:org7cf15cc}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 gnuplot TB3 --time-series --with-lines --output="TB3.png"
@@ -80,7 +80,7 @@ corrgm TB3 --plot="TB3ACF-PACF.png"
 \includegraphics[width=0.4\textwidth]{./LetrasTesoroAmericano3y6meses/TB3ACF-PACF.png} 
 \end{center}
 \subsection*{Regresión auxiliar para TB3}
-\label{sec:org81eaa70}
+\label{sec:org8ca14f3}
 
 Consideremos la regresión $$\nabla TB3_{t} = \nu + \delta TB3_{t-1} +
 \sum_{j=1}^3 \pi_j \nabla TB3_{t-j} + U_t.$$ Y consideremos la
@@ -119,7 +119,7 @@ Sin considerar la constante, el valor p más alto fue el de la variable 6 (d_TB3
 \end{verbatim}
 }
 \subsubsection*{Contraste de la hipótesis nula}
-\label{sec:orgdc2133e}
+\label{sec:orgef395d4}
 
 Respecto al contraste de la hipótesis nula sobre el parámetro \(\delta\)
 de la anterior regresión auxiliar:
@@ -130,7 +130,7 @@ Para el tamaño muestral considerado, y bajo la hipótesis nula, el
 valor crítico del contraste para un nivel de significación del 5\% es
 \texttt{-2.86}
 \subsection*{Contraste aumentado de Dickey Fuller sobre la existencia de una raíz unitaria para TB3}
-\label{sec:org3611544}
+\label{sec:orgcf37992}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 adf 3 TB3 --c
@@ -153,7 +153,7 @@ la hipótesis nula de raíz unitaria es: [a = 1]
 \end{verbatim}
 }
 \subsection*{Conteste KPSS de estacionariedad para TB3}
-\label{sec:orgd224762}
+\label{sec:org9e3bcc4}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 kpss 3 TB3
@@ -173,9 +173,9 @@ Valor p < .01
 \end{verbatim}
 }
 \section*{Letras a seis meses}
-\label{sec:org0a29207}
+\label{sec:orgc010fde}
 \subsection*{Gráfico y correlograma de la serie temporal TB6}
-\label{sec:org48972af}
+\label{sec:org564a5d3}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 gnuplot TB6 --time-series --with-lines --output="TB6.png"
@@ -188,7 +188,7 @@ corrgm TB6 --plot="TB6ACF-PACF.png"
 \includegraphics[width=0.4\textwidth]{./LetrasTesoroAmericano3y6meses/TB6ACF-PACF.png} 
 \end{center}
 \subsection*{Regresión auxiliar para TB6}
-\label{sec:org9dfd97f}
+\label{sec:org614118e}
 
 Consideremos la regresión $$\nabla TB6_{t} = \nu + \delta TB6_{t-1} +
 \sum_{j=1}^3 \pi_j \nabla TB6_{t-j} + U_t.$$ Y consideremos la
@@ -225,7 +225,7 @@ rho                    -0,001784   h de Durbin            -2,253222
 \end{verbatim}
 }
 \subsubsection*{Contraste de la hipótesis nula}
-\label{sec:org96ba038}
+\label{sec:org9d3488e}
 
 Respecto al contraste de la hipótesis nula sobre el parámetro \(\delta\)
 de la anterior regresión auxiliar:
@@ -236,7 +236,7 @@ Para el tamaño muestral considerado, y bajo la hipótesis nula, el
 valor crítico del contraste para un nivel de significación del 5\% es
 \texttt{-2.86}
 \subsection*{Contraste aumentado de Dickey Fuller sobre la existencia de una raíz unitaria para TB6}
-\label{sec:org9274ddc}
+\label{sec:orgf4185fd}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 adf 3 TB6 --c
@@ -259,7 +259,7 @@ la hipótesis nula de raíz unitaria es: [a = 1]
 \end{verbatim}
 }
 \subsection*{Conteste KPSS de estacionariedad para TB6}
-\label{sec:orgc860bb3}
+\label{sec:org1388d23}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 kpss 3 TB6
@@ -279,7 +279,7 @@ Valor p < .01
 \end{verbatim}
 }
 \section*{Contraste de cointegración de Engle y Granger}
-\label{sec:org17e476f}
+\label{sec:org4a0caf1}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 coint 3 TB3 TB6
@@ -356,7 +356,7 @@ Hay evidencia de una relación cointegrante si:
 \end{verbatim}
 }
 \section*{Regresión de los tipos a 3 meses sobre los tipos a 6 meses}
-\label{sec:org0c4e31d}
+\label{sec:org6fc9b76}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 MCO3sobre6 <- ols TB3 0 TB6
@@ -407,7 +407,7 @@ con valor p = P(Chi-cuadrado(1) > 2008,6) = 0
 \end{verbatim}
 }
 \section*{Regresión en primeras diferencias}
-\label{sec:orgaad9f0b}
+\label{sec:org752efb0}
 
 \begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{r}
 diff TB3 TB6
@@ -459,41 +459,41 @@ con valor p = P(Chi-cuadrado(2) > 108,32) = 3,01e-24
 \end{verbatim}
 }
 \section*{Preguntas}
-\label{sec:org57edb85}
+\label{sec:orgea1cf18}
 
 
 \subsection*{Pregunta 1}
-\label{sec:org6b7b13e}
+\label{sec:orge0eda41}
 
 Discuta de todas las formas posibles si las series temporales de
 letras del tesoro norteamericano a tres meses (\texttt{TB3}) y a seis meses
 (\texttt{TB6}) son estacionarias en media (i.e., son la realización de
 procesos estocásticos estacionarios en media), usando para ello los
-resultados de los apartados \hyperref[sec:org3af9dc8]{Letras a tres meses} y \hyperref[sec:org0a29207]{Letras a seis meses}
+resultados de los apartados \hyperref[sec:org0629652]{Letras a tres meses} y \hyperref[sec:orgc010fde]{Letras a seis meses}
 así como sus subapartados.
 
-(\hyperref[sec:orgc24f3d4]{Respuesta 1})
+(\hyperref[sec:org065ed06]{Respuesta 1})
 \subsection*{Pregunta 2}
-\label{sec:orge2c4c4a}
+\label{sec:org90607d1}
 
 Discuta si las series temporales \texttt{TB3} y \texttt{TB6} están cointegradas, a
-partir de los resultados del apartado \hyperref[sec:org17e476f]{Contraste de cointegración de Engle y Granger}.
+partir de los resultados del apartado \hyperref[sec:org4a0caf1]{Contraste de cointegración de Engle y Granger}.
 
-(\hyperref[sec:org27b785e]{Respuesta 2})
+(\hyperref[sec:orga3ba9ba]{Respuesta 2})
 \subsection*{Pregunta 3}
-\label{sec:org107e533}
+\label{sec:org5960aaa}
 
 ¿Qué relación existe entre el contraste de la hipótesis \(H_0: \delta =
-0\) para la \hyperref[sec:org81eaa70]{Regresión auxiliar para TB3} y el \hyperref[sec:org3611544]{Contraste aumentado de Dickey Fuller sobre la existencia de una raíz unitaria para TB3}?
+0\) para la \hyperref[sec:org8ca14f3]{Regresión auxiliar para TB3} y el \hyperref[sec:orgcf37992]{Contraste aumentado de Dickey Fuller sobre la existencia de una raíz unitaria para TB3}?
 
 ¿Qué relación existe entre el contraste de la hipótesis \(H_0: \delta =
-0\) para la \hyperref[sec:org9dfd97f]{Regresión auxiliar para TB6} y el \hyperref[sec:org9274ddc]{Contraste aumentado de Dickey Fuller sobre la existencia de una raíz unitaria para TB6}?
+0\) para la \hyperref[sec:org614118e]{Regresión auxiliar para TB6} y el \hyperref[sec:orgf4185fd]{Contraste aumentado de Dickey Fuller sobre la existencia de una raíz unitaria para TB6}?
 
-(\hyperref[sec:orgee5b773]{Respuesta 3})
+(\hyperref[sec:org6956953]{Respuesta 3})
 \subsection*{Pregunta 4}
-\label{sec:orge9abf7a}
+\label{sec:org1464cae}
 
-Los listados de la \hyperref[sec:org0c4e31d]{Regresión de los tipos a 3 meses sobre los tipos a 6 meses} y la \hyperref[sec:orgaad9f0b]{Regresión en primeras diferencias} muestran los
+Los listados de la \hyperref[sec:org6fc9b76]{Regresión de los tipos a 3 meses sobre los tipos a 6 meses} y la \hyperref[sec:org752efb0]{Regresión en primeras diferencias} muestran los
 principales resultados obtenidos al estimar por MCO dos modelos de
 regresión.
 
@@ -504,15 +504,15 @@ niveles y el segundo en diferencias).
 ¿Detecta alguna desviación del cumplimiento de las hipótesis
 habituales en dichos modelos?
 
-(\hyperref[sec:org044d4ea]{Respuesta 4})
+(\hyperref[sec:org0e7c6d9]{Respuesta 4})
 
 \newpage
 \section*{Respuestas}
-\label{sec:org47301d2}
+\label{sec:orgfb36878}
 
 
 \subsection*{Respuesta 1}
-\label{sec:orgc24f3d4}
+\label{sec:org065ed06}
 
 Ambas series (\texttt{TB3} y \texttt{TB6}) parecen ser NO
 estacionarias en media,
@@ -533,7 +533,7 @@ hipótesis nula de existencia de una raíz unitaria ni al 1\%, ni al
 contundentemente que las series sean estacionarias.
 
 \item Además (aunque el enunciado no hace referencia a la sección
-"\hyperref[sec:org17e476f]{Contraste de cointegración de Engle y Granger}"), los test ADF
+"\hyperref[sec:org4a0caf1]{Contraste de cointegración de Engle y Granger}"), los test ADF
 calculados en las etapas 1 y 2 no rechazan la hipótesis (raíz
 unitaria) pues, de hecho, son los mismos test mostrados más arriba.
 \end{itemize}
@@ -566,9 +566,9 @@ que no lo sea}.
 \end{quote}
 
 
-(\hyperref[sec:org6b7b13e]{Pregunta 1})
+(\hyperref[sec:orge0eda41]{Pregunta 1})
 \subsection*{Respuesta 2}
-\label{sec:org27b785e}
+\label{sec:orga3ba9ba}
 
 El resumen de las distintas etapas del test de cointegración son:
 \begin{description}
@@ -616,9 +616,9 @@ decir, su interpretación \textbf{NO ES} que la media de \texttt{TB3} sea negati
 \end{itemize}
 \end{quote}
 
-(\hyperref[sec:orge2c4c4a]{Pregunta 2})
+(\hyperref[sec:org90607d1]{Pregunta 2})
 \subsection*{Respuesta 3}
-\label{sec:orgee5b773}
+\label{sec:org6956953}
 
 Precisamente, ambas regresiones auxiliares son las que se han empleado
 en los respectivos contrastes ADF (en este caso incluyendo tres
@@ -640,18 +640,18 @@ hipótesis alternativa es \(\delta<0\), y que por tanto el contraste es
 de una sola cola: la cola izquierda; por tanto, para rechazar la
 hipótesis el ratio debería tomar valores a la izquierda de \texttt{-2.86}).
 
-(\hyperref[sec:org107e533]{Pregunta 3})
+(\hyperref[sec:org5960aaa]{Pregunta 3})
 \subsection*{Respuesta 4}
-\label{sec:org044d4ea}
+\label{sec:org0e7c6d9}
 
 \begin{description}
-\item[{\hyperref[sec:org0c4e31d]{Regresión de los tipos a 3 meses sobre los tipos a 6 meses}}] Los
+\item[{\hyperref[sec:org6fc9b76]{Regresión de los tipos a 3 meses sobre los tipos a 6 meses}}] Los
 coeficientes estimados son muy significativos. El ajuste del modelo,
 medido por el valor del \(R^2\) es muy elevado, pero los contrastes
 rechazan las hipótesis habituales de distribución normal,
 homocedasticidad y ausencia de autocorrelación en los residuos.
 
-\item[{\hyperref[sec:orgaad9f0b]{Regresión en primeras diferencias}}] El único coeficiente
+\item[{\hyperref[sec:org752efb0]{Regresión en primeras diferencias}}] El único coeficiente
 significativo es la pendiente (es decir, al diferenciar las series
 NO desaparece la relación entre ellas; como cabe esperar entre
 series cointegradas), y el ajuste del modelo, medido por el valor
@@ -670,7 +670,7 @@ confunda lo que es un \emph{ajuste} con lo que es una \emph{explicación}\ldots{
 no lo entiende, repase el concepto de correlación espuria).
 \item En un modelo con constante, el coeficiente de determinación (\(R^2\))
 indica el porcentaje de la varianza de los datos del regresando que
-son explicados por los datos de los regresores (es una medida de
+es replicada por los datos de los regresores (es una medida de
 \emph{ajuste de los datos}).
 \item La lectura de los criterios de información o del coeficiente de
 determinación \emph{ajustado} es diferente al del \(R^2\). Dichos
@@ -706,7 +706,7 @@ sentido de Gauss-Markov (tampoco en el máximo-verosímil).
 \end{itemize}
 \end{quote}
 
-(\hyperref[sec:orge9abf7a]{Pregunta 4})
+(\hyperref[sec:org1464cae]{Pregunta 4})
 
 
 \begin{quote}

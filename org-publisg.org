@@ -102,6 +102,10 @@ $(OUT_DIR)/%.pdf: %.pdf
 #pdflatex --shell-escape  -interaction=batchmode LetrasTesoroAmericano3y6meses.tex
 #latexmk -c LetrasTesoroAmericano3y6meses.tex
 
+#pdflatex --shell-escape  -interaction=batchmode SerieCuentasFinancierasBE.tex
+#pdflatex --shell-escape  -interaction=batchmode SerieCuentasFinancierasBE.tex
+#latexmk -c SerieCuentasFinancierasBE.tex
+
 #+END_SRC
 
 

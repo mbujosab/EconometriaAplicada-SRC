@@ -137,6 +137,8 @@
   (Versión [[file:./Ejercicios/IndicePreciosViviendasNuevasYdeSegundaMano.pdf][pdf]] para imprimir)
 - [[file:./Ejercicios/LetrasTesoroAmericano3y6meses.html][LetrasTesoroAmericano3y6meses]]
   (Versión [[file:./Ejercicios/LetrasTesoroAmericano3y6meses.pdf][pdf]] para imprimir)
+- [[file:./Ejercicios/SerieCuentasFinancierasBE.html][SerieCuentasFinancierasBE]]
+  (Versión [[file:./Ejercicios/SerieCuentasFinancierasBE.pdf][pdf]] para imprimir)
 
 
 - [[file:./Ejercicios/EjercicioIdentificacionARIMA.html][Ejercicio de identificación de modelos ARIMA]]

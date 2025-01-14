@@ -530,7 +530,7 @@ hipótesis el ratio debería tomar valores a la izquierda de =-2.86=).
   no lo entiende, repase el concepto de correlación espuria).
 - En un modelo con constante, el coeficiente de determinación ($R^2$)
   indica el porcentaje de la varianza de los datos del regresando que
-  son explicados por los datos de los regresores (es una medida de
+  es replicada por los datos de los regresores (es una medida de
   /ajuste de los datos/).
 - La lectura de los criterios de información o del coeficiente de
   determinación /ajustado/ es diferente al del $R^2$. Dichos

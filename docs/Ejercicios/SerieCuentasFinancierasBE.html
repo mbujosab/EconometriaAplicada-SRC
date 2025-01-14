@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2025-01-14 mar 13:13 -->
+<!-- 2025-01-14 mar 13:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Tipos de interés a 3 y 6 meses en EEUU</title>
+<title>Saldo de otros activos/pasivos con respecto al resto del mundo</title>
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
   #content { max-width: 60em; margin: auto; }
@@ -280,955 +280,925 @@ org_html_manager.setup();  // activate after the parameters are set
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">Tipos de interés a 3 y 6 meses en EEUU</h1>
+<h1 class="title">Saldo de otros activos/pasivos con respecto al resto del mundo</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>&Iacute;ndice</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge83d665">Datos</a></li>
-<li><a href="#org0becfa4">Letras a tres meses</a>
+<li><a href="#org37667ad">Los datos</a></li>
+<li><a href="#org1ca760c">Cuentas Financieras. Metodología SEC2010. Saldo. Otros activos/pasivos. Todos los sectores. Resto del mundo, Miles de Euros</a>
 <ul>
-<li><a href="#org928b72e">Gráfico y correlograma de la serie temporal TB3</a></li>
-<li><a href="#org54a2085">Regresión auxiliar para TB3</a>
+<li><a href="#orgac67b0e">Gráfico de la serie temporal y su correlograma:</a></li>
+<li><a href="#orgcb21278">Contrastes de raíz unitaria</a>
 <ul>
-<li><a href="#org291c9d5">Contraste de la hipótesis nula</a></li>
+<li><a href="#orgc2cdd23">Contraste Dickey-Fuller aumentado de raíz unitaria</a></li>
+<li><a href="#org1020c1d">Contraste KPSS de estacionariedad</a></li>
 </ul>
 </li>
-<li><a href="#orgf9d8236">Contraste aumentado de Dickey Fuller sobre la existencia de una raíz unitaria para TB3</a></li>
-<li><a href="#org39ab00f">Conteste KPSS de estacionariedad para TB3</a></li>
 </ul>
 </li>
-<li><a href="#orgd9fa0c8">Letras a seis meses</a>
+<li><a href="#orgf9a0834">Datos en primeras diferencias</a>
 <ul>
-<li><a href="#orgb3965dd">Gráfico y correlograma de la serie temporal TB6</a></li>
-<li><a href="#org729892c">Regresión auxiliar para TB6</a>
+<li><a href="#org5f87d21">Gráfico de la serie temporal en diferencias y su correlograma:</a></li>
+<li><a href="#org4f1bab2">Contrastes de raíz unitaria</a>
 <ul>
-<li><a href="#org764484f">Contraste de la hipótesis nula</a></li>
+<li><a href="#orgeafc067">Contraste Dickey-Fuller aumentado de raíz unitaria</a></li>
+<li><a href="#org4b4d70b">Contraste KPSS de estacionariedad</a></li>
 </ul>
 </li>
-<li><a href="#orgc507ff2">Contraste aumentado de Dickey Fuller sobre la existencia de una raíz unitaria para TB6</a></li>
-<li><a href="#org29c5ce6">Conteste KPSS de estacionariedad para TB6</a></li>
 </ul>
 </li>
-<li><a href="#org080ec77">Contraste de cointegración de Engle y Granger</a></li>
-<li><a href="#org963c4b7">Regresión de los tipos a 3 meses sobre los tipos a 6 meses</a></li>
-<li><a href="#orgd60a2ae">Regresión en primeras diferencias</a></li>
-<li><a href="#org976da8c">Preguntas</a>
+<li><a href="#org1965df7">Primer modelo univariante tentativo</a>
 <ul>
-<li><a href="#orgf17acd3">Pregunta 1</a></li>
-<li><a href="#org13b0499">Pregunta 2</a></li>
-<li><a href="#org91c28eb">Pregunta 3</a></li>
-<li><a href="#orge0d8869">Pregunta 4</a></li>
+<li><a href="#org983ac9f">Residuos y su correlograma</a>
+<ul>
+<li><a href="#org1e83409">Estadístico Ljung-Box para los residuos</a></li>
 </ul>
 </li>
-<li><a href="#orgc838d2c">Respuestas</a>
+</ul>
+</li>
+<li><a href="#org851a7c2">Segundo modelo univariante tentativo</a>
 <ul>
-<li><a href="#orgb67a72e">Respuesta 1</a></li>
-<li><a href="#orga7e5dc9">Respuesta 2</a></li>
-<li><a href="#orge422542">Respuesta 3</a></li>
-<li><a href="#org64a7072">Respuesta 4</a></li>
+<li><a href="#org1af89fa">Residuos y su correlograma</a>
+<ul>
+<li><a href="#org2855ce6">Estadístico Ljung-Box para los residuos</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org12578c9">Preguntas</a>
+<ul>
+<li><a href="#orgd02e8c6">Pregunta 1</a></li>
+<li><a href="#org6e7d9fc">Pregunta 2</a></li>
+<li><a href="#org5159a39">Pregunta 3</a></li>
+<li><a href="#org21db046">Pregunta 4</a></li>
+<li><a href="#org311f3af">Pregunta 5</a></li>
+<li><a href="#org9a30b62">Pregunta 6</a></li>
+</ul>
+</li>
+<li><a href="#orga30e67d">Respuestas</a>
+<ul>
+<li><a href="#orgf9e484b">Respuesta 1</a></li>
+<li><a href="#org5fbee75">Respuesta 2</a></li>
+<li><a href="#org28a507e">Respuesta 3</a></li>
+<li><a href="#org819afac">Respuesta 4</a></li>
+<li><a href="#org1da8e23">Respuesta 5</a></li>
+<li><a href="#orgdf0a694">Respuesta 6</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orge83d665" class="outline-2">
-<h2 id="orge83d665">Datos</h2>
-<div class="outline-text-2" id="text-orge83d665">
+<div id="outline-container-org37667ad" class="outline-2">
+<h2 id="org37667ad">Los datos</h2>
+<div class="outline-text-2" id="text-org37667ad">
+<div class="ABSTRACT" id="org8fb6b96">
 <p>
-Datos semanales desde el 12 de diciembre de 1958 al 6 de agosto de
-2004 (en total 2383 observaciones). <i>Fuente</i>: ejemplo 8.6.5 del libro
-de Ruey S. Tsay, <i>Multivariate Time Series Analysis and its
-applications</i> (<a href="https://www.chicagobooth.edu/-/media/faculty/ruey-s-tsay/teaching/fts2/w-tb3n6ms.txt">w-tb3n6ms.txt</a>).
+Los datos de este ejercicio corresponden a la serie temporal de la
+base de datos del <b>Banco de España</b> correspondiente la cuenta
+financiera del <i>saldo de otros activos/pasivos con respecto al resto
+del mundo</i> (todos los sectores). Son datos trimestrales en miles de
+euros.
 </p>
-<dl class="org-dl">
-<dt><code>TB3</code></dt><dd>3-month Treasury Bill</dd>
-<dt><code>TB6</code></dt><dd>6-month Treasury Bill</dd>
-</dl>
 
-
-<div class="org-src-container">
-<pre class="src src-R">open LetrasTesoroAmericano3y6meses.gdt
-gnuplot TB3 TB6  --time-series --with-lines --output=<span style="color: #008000;">"TB3yTB6.png"</span>
-</pre>
 </div>
 
-
-<div id="org59437cf" class="figure">
-<p><img src="./LetrasTesoroAmericano3y6meses/TB3yTB6.png" alt="TB3yTB6.png" />
+<blockquote>
+<p>
+Para abrir los datos debe estar instalada la base de datos del Banco
+de España: ``Pinchar'' en menú desplegable: <i>Archivo &#x2013;&gt; Bases de datos</i>
+y pulsar en el icono <i>Mirar en el Servidor</i>. Buscar en el listado la
+base de datos <code>be</code> y pulsar con el ratón dos veces sobre ella.
 </p>
-</div>
+</blockquote>
+
 
 <ul class="org-ul">
 <li>Ficheros <a href="https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios">https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios</a>
 <ul class="org-ul">
-<li>Versión en <a href="https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/LetrasTesoroAmericano3y6meses.pdf">pdf</a></li>
-<li>Datos: <a href="LetrasTesoroAmericano3y6meses.gdt">LetrasTesoroAmericano3y6meses.gdt</a></li>
-<li>Guión de gretl: <a href="LetrasTesoroAmericano3y6meses.inp">LetrasTesoroAmericano3y6meses.inp</a></li>
+<li>Versión en <a href="https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/SerieCuentasFinancierasBE.pdf">pdf</a></li>
+<li>Datos: <a href="SerieCuentasFinancierasBE.gdt">SerieCuentasFinancierasBE.gdt</a></li>
+<li>Guión de gretl: <a href="SerieCuentasFinancierasBE.inp">SerieCuentasFinancierasBE.inp</a></li>
 </ul></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org0becfa4" class="outline-2">
-<h2 id="org0becfa4">Letras a tres meses</h2>
-<div class="outline-text-2" id="text-org0becfa4">
+<div id="outline-container-org1ca760c" class="outline-2">
+<h2 id="org1ca760c">Cuentas Financieras. Metodología SEC2010. Saldo. Otros activos/pasivos. Todos los sectores. Resto del mundo, Miles de Euros</h2>
+<div class="outline-text-2" id="text-org1ca760c">
 </div>
-<div id="outline-container-org928b72e" class="outline-3">
-<h3 id="org928b72e">Gráfico y correlograma de la serie temporal TB3</h3>
-<div class="outline-text-3" id="text-org928b72e">
+<div id="outline-container-orgac67b0e" class="outline-3">
+<h3 id="orgac67b0e">Gráfico de la serie temporal y su correlograma:</h3>
+<div class="outline-text-3" id="text-orgac67b0e">
 <div class="org-src-container">
-<pre class="src src-R">gnuplot TB3 --time-series --with-lines --output=<span style="color: #008000;">"TB3.png"</span>
-corrgm TB3 --plot=<span style="color: #008000;">"TB3ACF-PACF.png"</span>
+<pre class="src src-R">gnuplot BE_2_5_8_16 --time-series --with-lines --output=<span style="color: #008000;">"otros.png"</span>
+corrgm BE_2_5_8_16 14 --plot=<span style="color: #008000;">"otrosACF-PACF.png"</span>
 </pre>
 </div>
-
 
 <div class="org-center">
 
-<div id="orgb887418" class="figure">
-<p><img src="./LetrasTesoroAmericano3y6meses/TB3.png" alt="TB3.png" />
+<div id="org4d15a7e" class="figure">
+<p><img src="./SerieCuentasFinancierasBE/otros.png" alt="otros.png" /> 
 </p>
 </div>
 
-<div id="org0b01494" class="figure">
-<p><img src="./LetrasTesoroAmericano3y6meses/TB3ACF-PACF.png" alt="TB3ACF-PACF.png" /> 
+<div id="orgb848459" class="figure">
+<p><img src="./SerieCuentasFinancierasBE/otrosACF-PACF.png" alt="otrosACF-PACF.png" /> 
 </p>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-org54a2085" class="outline-3">
-<h3 id="org54a2085">Regresión auxiliar para TB3</h3>
-<div class="outline-text-3" id="text-org54a2085">
-<p>
-Consideremos la regresión \[\nabla TB3_{t} = \nu + \delta TB3_{t-1} +
-\sum_{j=1}^3 \pi_j \nabla TB3_{t-j} + U_t.\] Y consideremos la
-siguiente hipótesis nula acerca del parámetro \(\delta\):
-</p>
-<blockquote>
-<p>
-\(\,H_0: \delta = 0\), frente a \(H_1: \delta < 0\)
-</p>
-</blockquote>
-
+<div id="outline-container-orgcb21278" class="outline-3">
+<h3 id="orgcb21278">Contrastes de raíz unitaria</h3>
+<div class="outline-text-3" id="text-orgcb21278">
+</div>
+<div id="outline-container-orgc2cdd23" class="outline-4">
+<h4 id="orgc2cdd23">Contraste Dickey-Fuller aumentado de raíz unitaria</h4>
+<div class="outline-text-4" id="text-orgc2cdd23">
 <div class="org-src-container">
-<pre class="src src-R">diff TB3
-RegresionAUX_TB3 <span style="color: #D0372D;">&lt;-</span> ols d_TB3 0 TB3(-1) d_TB3(-1) d_TB3(-2) d_TB3(-3) 
+<pre class="src src-R" id="orgc41c571">adf 4 BE_2_5_8_16 --nc --test-down=AIC
 </pre>
 </div>
 
-<pre class="example" id="org67804a3">
-Modelo 2: MCO, usando las observaciones 1959-01-09:2004-08-06 (T = 2379)
-Variable dependiente: d_TB3
-
-             coeficiente   Desv. típica   Estadístico t   valor p 
-  ----------------------------------------------------------------
-  const       0,0204353     0,00950288        2,150       0,0316   **
-  TB3_1      -0,00371135    0,00152221       -2,438       0,0148   **
-  d_TB3_1     0,271457      0,0204924        13,25        1,07e-38 ***
-  d_TB3_2    -0,0148460     0,0212326        -0,6992      0,4845  
-  d_TB3_3     0,0381931     0,0205139         1,862       0,0628   *
-
-Media de la vble. dep. -0,000513   D.T. de la vble. dep.   0,212547
-Suma de cuad. residuos  99,33579   D.T. de la regresión    0,204556
-R-cuadrado              0,075335   R-cuadrado corregido    0,073777
-F(4, 2374)              48,35422   Valor p (de F)          3,80e-39
-Log-verosimilitud       402,1135   Criterio de Akaike     -794,2269
-Criterio de Schwarz    -765,3547   Crit. de Hannan-Quinn  -783,7185
-rho                    -0,002760   h de Durbin            -4,320544
-
-Sin considerar la constante, el valor p más alto fue el de la variable 6 (d_TB3_2)
-</pre>
-</div>
-<div id="outline-container-org291c9d5" class="outline-4">
-<h4 id="org291c9d5">Contraste de la hipótesis nula</h4>
-<div class="outline-text-4" id="text-org291c9d5">
-<p>
-Respecto al contraste de la hipótesis nula sobre el parámetro \(\delta\)
-de la anterior regresión auxiliar:
-</p>
-<blockquote>
-<p>
-\(\,H_0: \delta = 0\), frente a \(H_1: \delta < 0\)
-</p>
-</blockquote>
-<p>
-Para el tamaño muestral considerado, y bajo la hipótesis nula, el
-valor crítico del contraste para un nivel de significación del 5% es
-<code>-2.86</code>
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-orgf9d8236" class="outline-3">
-<h3 id="orgf9d8236">Contraste aumentado de Dickey Fuller sobre la existencia de una raíz unitaria para TB3</h3>
-<div class="outline-text-3" id="text-orgf9d8236">
-<div class="org-src-container">
-<pre class="src src-R">adf 3 TB3 --c
-</pre>
-</div>
-
-<pre class="example" id="org5c46a0e">
-Contraste aumentado de Dickey-Fuller para TB3
-incluyendo 3 retardos de (1-L)TB3
-tamaño muestral 2379
-la hipótesis nula de raíz unitaria es: [a = 1]
-
-  contraste con constante 
-  modelo: (1-L)y = b0 + (a-1)*y(-1) + ... + e
-  valor estimado de (a - 1): -0,00371135
-  estadístico de contraste: tau_c(1) = -2,43813
-  valor p asintótico 0,1312
-  Coef. de autocorrelación de primer orden de e: -0,003
-  diferencias retardadas: F(3, 2374) = 63,404 [0,0000]
-</pre>
-</div>
-</div>
-<div id="outline-container-org39ab00f" class="outline-3">
-<h3 id="org39ab00f">Conteste KPSS de estacionariedad para TB3</h3>
-<div class="outline-text-3" id="text-org39ab00f">
-<div class="org-src-container">
-<pre class="src src-R">kpss 3 TB3
-</pre>
-</div>
-
-<pre class="example" id="orgac61573">
-Contraste KPSS para TB3
-
-T = 2383
-Parámetro de truncamiento de los retardos = 3
-Estadístico de contraste = 8,99282
-
-                      10%      5%      1%
-Valores críticos: 0,348   0,462   0,744
-Valor p &lt; .01
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-orgd9fa0c8" class="outline-2">
-<h2 id="orgd9fa0c8">Letras a seis meses</h2>
-<div class="outline-text-2" id="text-orgd9fa0c8">
-</div>
-<div id="outline-container-orgb3965dd" class="outline-3">
-<h3 id="orgb3965dd">Gráfico y correlograma de la serie temporal TB6</h3>
-<div class="outline-text-3" id="text-orgb3965dd">
-<div class="org-src-container">
-<pre class="src src-R">gnuplot TB6 --time-series --with-lines --output=<span style="color: #008000;">"TB6.png"</span>
-corrgm TB6 --plot=<span style="color: #008000;">"TB6ACF-PACF.png"</span>
-</pre>
-</div>
-
-
-<div class="org-center">
-
-<div id="org8e6a8c7" class="figure">
-<p><img src="./LetrasTesoroAmericano3y6meses/TB6.png" alt="TB6.png" /> 
-</p>
-</div>
-
-<div id="org176fced" class="figure">
-<p><img src="./LetrasTesoroAmericano3y6meses/TB6ACF-PACF.png" alt="TB6ACF-PACF.png" /> 
-</p>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-org729892c" class="outline-3">
-<h3 id="org729892c">Regresión auxiliar para TB6</h3>
-<div class="outline-text-3" id="text-org729892c">
-<p>
-Consideremos la regresión \[\nabla TB6_{t} = \nu + \delta TB6_{t-1} +
-\sum_{j=1}^3 \pi_j \nabla TB6_{t-j} + U_t.\] Y consideremos la
-siguiente hipótesis nula acerca del parámetro \(\delta\):
-</p>
-<blockquote>
-<p>
-\(\,H_0: \delta = 0\), frente a \(H_1: \delta < 0\)
-</p>
-</blockquote>
-
-<div class="org-src-container">
-<pre class="src src-R">diff TB6
-RegresionAUX_TB6 <span style="color: #D0372D;">&lt;-</span> ols d_TB6 0 TB6(-1) d_TB6(-1) d_TB6(-2) d_TB6(-3) 
-</pre>
-</div>
-
-<pre class="example" id="org4ab0b58">
-Modelo 4: MCO, usando las observaciones 1959-01-09:2004-08-06 (T = 2379)
-Variable dependiente: d_TB6
-
-             coeficiente   Desv. típica   Estadístico t   valor p 
-  ----------------------------------------------------------------
-  const       0,0188423     0,00868102        2,171       0,0301   **
-  TB6_1      -0,00332840    0,00136431       -2,440       0,0148   **
-  d_TB6_1     0,273770      0,0204870        13,36        2,52e-39 ***
-  d_TB6_2     0,0535491     0,0212198         2,524       0,0117   **
-  d_TB6_3     0,0408834     0,0205125         1,993       0,0464   **
-
-Media de la vble. dep. -0,000509   D.T. de la vble. dep.   0,189439
-Suma de cuad. residuos  77,37722   D.T. de la regresión    0,180537
-R-cuadrado              0,093303   R-cuadrado corregido    0,091775
-F(4, 2374)              61,07380   Valor p (de F)          3,60e-49
-Log-verosimilitud       699,2666   Criterio de Akaike     -1388,533
-Criterio de Schwarz    -1359,661   Crit. de Hannan-Quinn  -1378,025
-rho                    -0,001784   h de Durbin            -2,253222
-</pre>
-</div>
-<div id="outline-container-org764484f" class="outline-4">
-<h4 id="org764484f">Contraste de la hipótesis nula</h4>
-<div class="outline-text-4" id="text-org764484f">
-<p>
-Respecto al contraste de la hipótesis nula sobre el parámetro \(\delta\)
-de la anterior regresión auxiliar:
-</p>
-<blockquote>
-<p>
-\(\,H_0: \delta = 0\), frente a \(H_1: \delta < 0\)
-</p>
-</blockquote>
-<p>
-Para el tamaño muestral considerado, y bajo la hipótesis nula, el
-valor crítico del contraste para un nivel de significación del 5% es
-<code>-2.86</code>
-</p>
-</div>
-</div>
-</div>
-<div id="outline-container-orgc507ff2" class="outline-3">
-<h3 id="orgc507ff2">Contraste aumentado de Dickey Fuller sobre la existencia de una raíz unitaria para TB6</h3>
-<div class="outline-text-3" id="text-orgc507ff2">
-<div class="org-src-container">
-<pre class="src src-R">adf 3 TB6 --c
-</pre>
-</div>
-
-<pre class="example" id="orga4b1edc">
-Contraste aumentado de Dickey-Fuller para TB6
-incluyendo 3 retardos de (1-L)TB6
-tamaño muestral 2379
-la hipótesis nula de raíz unitaria es: [a = 1]
-
-  contraste con constante 
-  modelo: (1-L)y = b0 + (a-1)*y(-1) + ... + e
-  valor estimado de (a - 1): -0,0033284
-  estadístico de contraste: tau_c(1) = -2,43963
-  valor p asintótico 0,1308
-  Coef. de autocorrelación de primer orden de e: -0,002
-  diferencias retardadas: F(3, 2374) = 80,572 [0,0000]
-</pre>
-</div>
-</div>
-<div id="outline-container-org29c5ce6" class="outline-3">
-<h3 id="org29c5ce6">Conteste KPSS de estacionariedad para TB6</h3>
-<div class="outline-text-3" id="text-org29c5ce6">
-<div class="org-src-container">
-<pre class="src src-R">kpss 3 TB6
-</pre>
-</div>
-
-<pre class="example" id="orgb5e7635">
-Contraste KPSS para TB6
-
-T = 2383
-Parámetro de truncamiento de los retardos = 3
-Estadístico de contraste = 9,29618
-
-                      10%      5%      1%
-Valores críticos: 0,348   0,462   0,744
-Valor p &lt; .01
-</pre>
-</div>
-</div>
-</div>
-<div id="outline-container-org080ec77" class="outline-2">
-<h2 id="org080ec77">Contraste de cointegración de Engle y Granger</h2>
-<div class="outline-text-2" id="text-org080ec77">
-<div class="org-src-container">
-<pre class="src src-R">coint 3 TB3 TB6
-</pre>
-</div>
-
-<pre class="example" id="org89954b5">
-Etapa 1: contrastando la existencia de una raíz unitaria en TB3
-
-Contraste aumentado de Dickey-Fuller para TB3
-incluyendo 3 retardos de (1-L)TB3
-tamaño muestral 2379
-la hipótesis nula de raíz unitaria es: [a = 1]
-
-  contraste con constante 
-  modelo: (1-L)y = b0 + (a-1)*y(-1) + ... + e
-  valor estimado de (a - 1): -0,00371135
-  estadístico de contraste: tau_c(1) = -2,43813
-  valor p asintótico 0,1312
-  Coef. de autocorrelación de primer orden de e: -0,003
-  diferencias retardadas: F(3, 2374) = 63,404 [0,0000]
-
-Etapa 2: contrastando la existencia de una raíz unitaria en TB6
-
-Contraste aumentado de Dickey-Fuller para TB6
-incluyendo 3 retardos de (1-L)TB6
-tamaño muestral 2379
-la hipótesis nula de raíz unitaria es: [a = 1]
-
-  contraste con constante 
-  modelo: (1-L)y = b0 + (a-1)*y(-1) + ... + e
-  valor estimado de (a - 1): -0,0033284
-  estadístico de contraste: tau_c(1) = -2,43963
-  valor p asintótico 0,1308
-  Coef. de autocorrelación de primer orden de e: -0,002
-  diferencias retardadas: F(3, 2374) = 80,572 [0,0000]
-
-Etapa 3: regresión cointegrante
-
-Regresión cointegrante - 
-MCO, usando las observaciones 1958-12-12:2004-08-06 (T = 2383)
-Variable dependiente: TB3
-
-             coeficiente   Desv. típica   Estadístico t   valor p 
-  ----------------------------------------------------------------
-  const       -0,227230     0,0103472        -21,96       1,73e-97 ***
-  TB6          1,01277      0,00162648       622,7        0,0000   ***
-
-Media de la vble. dep.  5,595682   D.T. de la vble. dep.   2,766766
-Suma de cuad. residuos  111,2926   D.T. de la regresión    0,216199
-R-cuadrado              0,993896   R-cuadrado corregido    0,993894
-Log-verosimilitud       269,3694   Criterio de Akaike     -534,7387
-Criterio de Schwarz    -523,1865   Crit. de Hannan-Quinn  -530,5345
-rho                     0,917536   Durbin-Watson           0,164916
-
-Etapa 4: contrastando la existencia de una raíz unitaria en uhat
-
-Contraste aumentado de Dickey-Fuller para uhat
-incluyendo 3 retardos de (1-L)uhat
-tamaño muestral 2379
+<pre class="example" id="orgf0e6c26">
+Contraste aumentado de Dickey-Fuller para BE_2_5_8_16
+contrastar hacia abajo desde 4 retardos, con el criterio AIC
+tamaño muestral 57
 la hipótesis nula de raíz unitaria es: [a = 1]
 
   contraste sin constante 
+  incluyendo 2 retardos de (1-L)BE_2_5_8_16
   modelo: (1-L)y = (a-1)*y(-1) + ... + e
-  valor estimado de (a - 1): -0,0714629
-  estadístico de contraste: tau_c(2) = -8,40176
-  valor p asintótico 3,55e-13
-  Coef. de autocorrelación de primer orden de e: -0,001
-  diferencias retardadas: F(3, 2375) = 31,962 [0,0000]
-
-Hay evidencia de una relación cointegrante si:
-(a) La hipótesis de existencia de raíz unitaria no se rechaza para las variables individuales y
-(b) La hipótesis de existencia de raíz unitaria se rechaza para los residuos (uhat) de la regresión cointegrante.
+  valor estimado de (a - 1): -0,000864383
+  estadístico de contraste: tau_nc(1) = -0,122204
+  valor p asintótico 0,6417
+  Coef. de autocorrelación de primer orden de e: 0,005
+  diferencias retardadas: F(2, 54) = 6,490 [0,0030]
 </pre>
 </div>
 </div>
-<div id="outline-container-org963c4b7" class="outline-2">
-<h2 id="org963c4b7">Regresión de los tipos a 3 meses sobre los tipos a 6 meses</h2>
-<div class="outline-text-2" id="text-org963c4b7">
+<div id="outline-container-org1020c1d" class="outline-4">
+<h4 id="org1020c1d">Contraste KPSS de estacionariedad</h4>
+<div class="outline-text-4" id="text-org1020c1d">
 <div class="org-src-container">
-<pre class="src src-R">MCO3sobre6 <span style="color: #D0372D;">&lt;-</span> ols TB3 0 TB6
-modtest --normality --quiet
-modtest --white --quiet
-modtest --autocorr 1 --quiet
+<pre class="src src-R" id="org56e5c23">kpss 4 BE_1_2_1
 </pre>
 </div>
 
-<pre class="example" id="org356624b">
-Modelo 8: MCO, usando las observaciones 1958-12-12:2004-08-06 (T = 2383)
-Variable dependiente: TB3
+<pre class="example" id="org2541558">
+Contraste KPSS para BE_1_2_1
 
-             coeficiente   Desv. típica   Estadístico t   valor p 
-  ----------------------------------------------------------------
-  const       -0,227230     0,0103472        -21,96       1,73e-97 ***
-  TB6          1,01277      0,00162648       622,7        0,0000   ***
+T = 60
+Parámetro de truncamiento de los retardos = 4
+Estadístico de contraste = 0,724905
 
-Media de la vble. dep.  5,595682   D.T. de la vble. dep.   2,766766
-Suma de cuad. residuos  111,2926   D.T. de la regresión    0,216199
-R-cuadrado              0,993896   R-cuadrado corregido    0,993894
-F(1, 2381)              387722,5   Valor p (de F)          0,000000
-Log-verosimilitud       269,3694   Criterio de Akaike     -534,7387
-Criterio de Schwarz    -523,1865   Crit. de Hannan-Quinn  -530,5345
-rho                     0,917536   Durbin-Watson           0,164916
-
-
-Contraste de la hipótesis nula de distribución Normal:
-Chi-cuadrado(2) = 1605,555 con valor p 0,00000
-
-
-Contraste de heterocedasticidad de White
-
-Estadístico de contraste: TR^2 = 334,788512,
-con valor p = P(Chi-cuadrado(2) &gt; 334,788512) = 0,000000
-
-
-Contraste de Breusch-Godfrey para autocorrelación de primer orden
-
-Estadístico de contraste: LMF = 12669,718945,
-con valor p = P(F(1,2380) &gt; 12669,7) = 0
-
-Estadístico alternativo: TR^2 = 2006,146451,
-con valor p = P(Chi-cuadrado(1) &gt; 2006,15) = 0
-
-Ljung-Box Q' = 2008,6,
-con valor p = P(Chi-cuadrado(1) &gt; 2008,6) = 0
+                      10%      5%      1%
+Valores críticos: 0,351   0,462   0,728
+Valor p interpolado 0,010
 </pre>
 </div>
 </div>
-<div id="outline-container-orgd60a2ae" class="outline-2">
-<h2 id="orgd60a2ae">Regresión en primeras diferencias</h2>
-<div class="outline-text-2" id="text-orgd60a2ae">
+</div>
+</div>
+<div id="outline-container-orgf9a0834" class="outline-2">
+<h2 id="orgf9a0834">Datos en primeras diferencias</h2>
+<div class="outline-text-2" id="text-orgf9a0834">
 <div class="org-src-container">
-<pre class="src src-R">diff TB3 TB6
-MCO3sobre6_en_Diff <span style="color: #D0372D;">&lt;-</span> ols d_TB3 0 d_TB6
-modtest --normality --quiet
-modtest --white --quiet
-modtest --autocorr 2 --quiet
-</pre>
-</div>
-
-<pre class="example" id="org866971d">
-Modelo 10: MCO, usando las observaciones 1958-12-19:2004-08-06 (T = 2382)
-Variable dependiente: d_TB3
-
-             coeficiente   Desv. típica   Estadístico t   valor p
-  ---------------------------------------------------------------
-  const      8,20245e-06    0,00179898       0,004560     0,9964 
-  d_TB6      1,02172        0,00950382     107,5          0,0000  ***
-
-Media de la vble. dep. -0,000575   D.T. de la vble. dep.   0,212426
-Suma de cuad. residuos  18,34704   D.T. de la regresión    0,087800
-R-cuadrado              0,829239   R-cuadrado corregido    0,829167
-F(1, 2380)              11557,57   Valor p (de F)          0,000000
-Log-verosimilitud       2415,765   Criterio de Akaike     -4827,531
-Criterio de Schwarz    -4815,979   Crit. de Hannan-Quinn  -4823,327
-rho                     0,042154   Durbin-Watson           1,915514
-
-
-Contraste de la hipótesis nula de distribución Normal:
-Chi-cuadrado(2) = 3551,267 con valor p 0,00000
-
-
-Contraste de heterocedasticidad de White
-
-Estadístico de contraste: TR^2 = 271,546715,
-con valor p = P(Chi-cuadrado(2) &gt; 271,546715) = 0,000000
-
-
-Contraste de Breusch-Godfrey para autocorrelación hasta el orden 2
-
-Estadístico de contraste: LMF = 57,661126,
-con valor p = P(F(2,2378) &gt; 57,6611) = 3,52e-25
-
-Estadístico alternativo: TR^2 = 110,173325,
-con valor p = P(Chi-cuadrado(2) &gt; 110,173) = 1,19e-24
-
-Ljung-Box Q' = 108,32,
-con valor p = P(Chi-cuadrado(2) &gt; 108,32) = 3,01e-24
+<pre class="src src-R">diff BE_2_5_8_16
 </pre>
 </div>
 </div>
-<div id="outline-container-org976da8c" class="outline-2">
-<h2 id="org976da8c">Preguntas</h2>
-<div class="outline-text-2" id="text-org976da8c">
+<div id="outline-container-org5f87d21" class="outline-3">
+<h3 id="org5f87d21">Gráfico de la serie temporal en diferencias y su correlograma:</h3>
+<div class="outline-text-3" id="text-org5f87d21">
+<div class="org-src-container">
+<pre class="src src-R">gnuplot d_BE_2_5_8_16 --time-series --with-lines --output=<span style="color: #008000;">"d_otros.png"</span>
+corrgm d_BE_2_5_8_16 10 --plot=<span style="color: #008000;">"d_otrosACF-PACF.png"</span>
+</pre>
 </div>
-<div id="outline-container-orgf17acd3" class="outline-3">
-<h3 id="orgf17acd3">Pregunta 1</h3>
-<div class="outline-text-3" id="text-orgf17acd3">
-<p>
-Discuta de todas las formas posibles si las series temporales de
-letras del tesoro norteamericano a tres meses (<code>TB3</code>) y a seis meses
-(<code>TB6</code>) son estacionarias en media (i.e., son la realización de
-procesos estocásticos estacionarios en media), usando para ello los
-resultados de los apartados <a href="#org0becfa4">Letras a tres meses</a> y <a href="#orgd9fa0c8">Letras a seis meses</a>
-así como sus subapartados.
-</p>
 
-<p>
-(<a href="#orgb67a72e">Respuesta 1</a>)
+<div class="org-center">
+
+<div id="org63ccbe7" class="figure">
+<p><img src="./SerieCuentasFinancierasBE/d_otros.png" alt="d_otros.png" /> 
 </p>
 </div>
-</div>
-<div id="outline-container-org13b0499" class="outline-3">
-<h3 id="org13b0499">Pregunta 2</h3>
-<div class="outline-text-3" id="text-org13b0499">
-<p>
-Discuta si las series temporales <code>TB3</code> y <code>TB6</code> están cointegradas, a
-partir de los resultados del apartado <a href="#org080ec77">Contraste de cointegración de Engle y Granger</a>.
-</p>
 
-<p>
-(<a href="#orga7e5dc9">Respuesta 2</a>)
-</p>
-</div>
-</div>
-<div id="outline-container-org91c28eb" class="outline-3">
-<h3 id="org91c28eb">Pregunta 3</h3>
-<div class="outline-text-3" id="text-org91c28eb">
-<p>
-¿Qué relación existe entre el contraste de la hipótesis \(H_0: \delta =
-0\) para la <a href="#org54a2085">Regresión auxiliar para TB3</a> y el <a href="#orgf9d8236">Contraste aumentado de Dickey Fuller sobre la existencia de una raíz unitaria para TB3</a>?
-</p>
-
-<p>
-¿Qué relación existe entre el contraste de la hipótesis \(H_0: \delta =
-0\) para la <a href="#org729892c">Regresión auxiliar para TB6</a> y el <a href="#orgc507ff2">Contraste aumentado de Dickey Fuller sobre la existencia de una raíz unitaria para TB6</a>?
-</p>
-
-<p>
-(<a href="#orge422542">Respuesta 3</a>)
-</p>
-</div>
-</div>
-<div id="outline-container-orge0d8869" class="outline-3">
-<h3 id="orge0d8869">Pregunta 4</h3>
-<div class="outline-text-3" id="text-orge0d8869">
-<p>
-Los listados de la <a href="#org963c4b7">Regresión de los tipos a 3 meses sobre los tipos a 6 meses</a> y la <a href="#orgd60a2ae">Regresión en primeras diferencias</a> muestran los
-principales resultados obtenidos al estimar por MCO dos modelos de
-regresión.
-</p>
-
-<p>
-Resuma y comente los resultados de estimación y diagnosis que le
-parezcan más relevantes para cada uno de los modelos (el primero en
-niveles y el segundo en diferencias).
-</p>
-
-<p>
-¿Detecta alguna desviación del cumplimiento de las hipótesis
-habituales en dichos modelos?
-</p>
-
-<p>
-(<a href="#org64a7072">Respuesta 4</a>)
+<div id="org9f36b11" class="figure">
+<p><img src="./SerieCuentasFinancierasBE/d_otrosACF-PACF.png" alt="d_otrosACF-PACF.png" />
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgc838d2c" class="outline-2">
-<h2 id="orgc838d2c">Respuestas</h2>
-<div class="outline-text-2" id="text-orgc838d2c">
 </div>
-<div id="outline-container-orgb67a72e" class="outline-3">
-<h3 id="orgb67a72e">Respuesta 1</h3>
-<div class="outline-text-3" id="text-orgb67a72e">
-<p>
-Ambas series (<code>TB3</code> y <code>TB6</code>) parecen ser NO
-estacionarias en media,
-</p>
-<ul class="org-ul">
-<li>Analizando los gráficos de las series, ambas parecen tener una
-tendencia estocástica sin deriva.</li>
+<div id="outline-container-org4f1bab2" class="outline-3">
+<h3 id="org4f1bab2">Contrastes de raíz unitaria</h3>
+<div class="outline-text-3" id="text-org4f1bab2">
+</div>
+<div id="outline-container-orgeafc067" class="outline-4">
+<h4 id="orgeafc067">Contraste Dickey-Fuller aumentado de raíz unitaria</h4>
+<div class="outline-text-4" id="text-orgeafc067">
+<div class="org-src-container">
+<pre class="src src-R" id="org3af04ad">adf 4 d_BE_2_5_8_16 --nc --test-down=AIC
+</pre>
+</div>
 
-<li>Ambas funciones de autocorrelación (FAC) muestran persistencia (sus
-coeficientes decrecen despacio y a un ritmo aproximadamente lineal);
-y el primer coeficiente de la PACF está próximo a uno en ambos
-casos.</li>
+<pre class="example" id="org71c907f">
+Contraste aumentado de Dickey-Fuller para d_BE_2_5_8_16
+contrastar hacia abajo desde 4 retardos, con el criterio AIC
+tamaño muestral 57
+la hipótesis nula de raíz unitaria es: [a = 1]
 
-<li>En ambos casos el contraste Dickey-Fuller aumentado no rechaza la
-hipótesis nula de existencia de una raíz unitaria ni al 1%, ni al
-5%, ni tampoco al 10% de significación.</li>
-
-<li>En consonancia con lo anterior, en ambos casos el test KPSS rechaza
-contundentemente que las series sean estacionarias.</li>
-
-<li>Además (aunque el enunciado no hace referencia a la sección
-"<a href="#org080ec77">Contraste de cointegración de Engle y Granger</a>"), los test ADF
-calculados en las etapas 1 y 2 no rechazan la hipótesis (raíz
-unitaria) pues, de hecho, son los mismos test mostrados más arriba.</li>
-</ul>
-
-<blockquote>
-<p>
-<b>Aclaraciones a algunas respuestas incorrectas en los exámenes</b>:
-</p>
-
-<ul class="org-ul">
-<li><p>
-Las regresiones auxiliares corresponden al contraste Dickey-Fuller
-(en este caso Dickey-Fuller <i>aumentado</i> por incluir tanto un término
-constante como tres retardos de la variable). <b>De este contraste
-solo nos interesa el ratio</b> \(t\) (parámetro estimado dividido por
-desviación típica) para \(\delta\) (la pendiente correspondiente al
-primer retardo de la variable). 
-</p>
-
-<p>
-Dicho ratio, bajo la \(H_0\) de que la serie es \(I(1)\), no tiene la
-habitual distribución <i>t</i>-student. Por eso se compara el ratio con
-unas tablas especiales (las del Dickey-Fuller aumentado con
-constante, tres retardos y en tamaño muestral correspondiente) que
-para una significación del 5% arrojan un valor crítico de <code>-2.86</code>
-como se indica tras los resultados de la regresión.
-</p>
-
-<p>
-<b>El valor de \(R^2\) o los criterios de información, o cualquier otro
-estadístico no nos importan</b> (esta regresión auxiliar no trata de
-encontrar un modelo para la serie, solo pretende contrastar si hay
-una raíz unitaria, es decir, contrastar si \(\delta=0\)). Por último,
-<b>que el \(R^2\) sea bajo NO indica ni que la serie sea estacionaria ni
-que no lo sea</b>.
-</p></li>
-</ul>
-</blockquote>
-
-
-<p>
-(<a href="#orgf17acd3">Pregunta 1</a>)
-</p>
+  contraste sin constante 
+  incluyendo un retardo de (1-L)d_BE_2_5_8_16
+  modelo: (1-L)y = (a-1)*y(-1) + ... + e
+  valor estimado de (a - 1): -0,455524
+  estadístico de contraste: tau_nc(1) = -3,02904
+  valor p asintótico 0,002394
+  Coef. de autocorrelación de primer orden de e: 0,005
+</pre>
 </div>
 </div>
-<div id="outline-container-orga7e5dc9" class="outline-3">
-<h3 id="orga7e5dc9">Respuesta 2</h3>
-<div class="outline-text-3" id="text-orga7e5dc9">
-<p>
-El resumen de las distintas etapas del test de cointegración son:
+<div id="outline-container-org4b4d70b" class="outline-4">
+<h4 id="org4b4d70b">Contraste KPSS de estacionariedad</h4>
+<div class="outline-text-4" id="text-org4b4d70b">
+<div class="org-src-container">
+<pre class="src src-R" id="org208595e">kpss 4 d_BE_2_5_8_16
+</pre>
+</div>
+
+<pre class="example" id="org38db848">
+Contraste KPSS para d_BE_2_5_8_16
+
+T = 59
+Parámetro de truncamiento de los retardos = 4
+Estadístico de contraste = 0,216133
+
+                      10%      5%      1%
+Valores críticos: 0,351   0,462   0,727
+Valor p &gt; .10
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org1965df7" class="outline-2">
+<h2 id="org1965df7">Primer modelo univariante tentativo</h2>
+<div class="outline-text-2" id="text-org1965df7">
+<pre class="example" id="org55515cc">
+Evaluaciones de la función: 20
+Evaluaciones del gradiente: 7
+
+Modelo 2: ARIMA, usando las observaciones 1999:2-2013:4 (T = 59)
+Estimado usando AS 197 (MV exacta)
+Variable dependiente: (1-L) BE_2_5_8_16
+Desviaciones típicas basadas en el Hessiano
+
+              coeficiente    Desv. típica      z      valor p
+  -----------------------------------------------------------
+  const      416687          765151          0,5446   0,5860 
+  phi_1           0,192168        0,122755   1,565    0,1175 
+  phi_2           0,325667        0,122300   2,663    0,0077  ***
+
+Media de la vble. dep.  463234,6   D.T. de la vble. dep.    3256442
+Media de innovaciones  -15733,57   D.T. innovaciones        2915003
+R-cuadrado              0,970881   R-cuadrado corregido    0,970370
+Log-verosimilitud      -962,1093   Criterio de Akaike      1932,219
+Criterio de Schwarz     1940,529   Crit. de Hannan-Quinn   1935,463
+
+                       Real Imaginaria     Módulo Frecuencia
+  -----------------------------------------------------------
+  AR
+   Raíz  1           1,4819     0,0000     1,4819     0,0000
+   Raíz  2          -2,0720     0,0000     2,0720     0,5000
+  -----------------------------------------------------------
+</pre>
+</div>
+<div id="outline-container-org983ac9f" class="outline-3">
+<h3 id="org983ac9f">Residuos y su correlograma</h3>
+<div class="outline-text-3" id="text-org983ac9f">
+<div class="org-src-container">
+<pre class="src src-R">res1 = $uhat
+gnuplot res1 --time-series --with-lines --output=<span style="color: #008000;">"res1.png"</span>
+corrgm res1 10 --plot=<span style="color: #008000;">"res1_ACF-PACF.png"</span>
+</pre>
+</div>
+
+<div class="org-center">
+
+<div id="org26e69c6" class="figure">
+<p><img src="./SerieCuentasFinancierasBE/res1.png" alt="res1.png" /> 
 </p>
-<dl class="org-dl">
-<dt>Etapa 1</dt><dd>El test ADF no rechaza que la serie <code>TB3</code> sea
-I(1) para niveles de significación inferiores al 13% (p-valor
-asintótico <code>0,1312</code>).</dd>
-<dt>Etapa 2</dt><dd>El test ADF no rechaza que la serie <code>TB6</code> sea
-I(1) para niveles de significación inferiores al 13% (p-valor
-asintótico <code>0,1308</code>).</dd>
-<dt>Etapa 3</dt><dd>En la regresión (cointegrante) de las letras a 3 meses
-sobre las letras a 6 meses la pendiente es muy significativa, y el
-\(R^2\) está próximo a 1.</dd>
-<dt>Etapa 4</dt><dd>El test ADF rechaza <b>contundentemente</b> que los residuos
-de la regresión cointegrante sean I(1) a casi cualquier nivel
-de significación (p-valor asintótico <code>0.000000000000355</code>)</dd>
-</dl>
+</div>
 
-<p>
-Por lo que podemos concluir que, siendo las series <code>TB3</code> y <code>TB6</code> no
-estacionarias (etapas 1 y 2), la regresión cointegrante muestra que
-existe una estrecha y significativa relación entre ellas (etapa 3) con
-residuos estacionarios (etapa 4). En otras palabras, aunque <code>TB3</code> y
-<code>TB6</code> no son estacionarias en media, la diferencia entre ellas
-\(TB3-\widehat{\beta_2}TB6\) sí es estacionaria en
-media. Consecuentemente, <span class="underline">el test NO rechaza la cointegración de los
-tipos de interés a 3 y 6 meses</span>.
-</p>
-
-<blockquote>
-<p>
-<b>Aclaraciones a algunas respuestas incorrectas en los exámenes</b>:
-</p>
-
-<ul class="org-ul">
-<li>La etapa 3 es tan importante como el resto de etapas (en dicha etapa
-3 lo importante es que la pendiente sea significativa y el ajuste
-elevado, pues indica que una serie ajusta los datos de la otra). Las
-otras etapas añaden que ambas series son no estacionarias en media,
-pero los residuos sí son estacionarios, es decir, que
-\(y_t-\widehat{cte}-\widehat{\beta_2} x_t\) (i.e. los residuos) es una
-serie estacionaria en media.</li>
-<li>En la regresión cointegrante, la interpretación de la constante es
-que, en media, el tipo de interés <code>TB3</code> es <code>-0,227230</code> puntos más
-bajo que el <code>TB6</code>. Si se fija en la primera gráfica con ambas series
-se puede apreciar que en casi todo el periodo muestral <code>TB3</code> (en
-verde) se encuentra ligeramente por debajo de <code>TB6</code> (en naranja). Es
-decir, su interpretación <b>NO ES</b> que la media de <code>TB3</code> sea negativa
-(basta mirar el gráfico para constatar que su media no es negativa).</li>
-</ul>
-</blockquote>
-
-<p>
-(<a href="#org13b0499">Pregunta 2</a>)
+<div id="org26f06bd" class="figure">
+<p><img src="./SerieCuentasFinancierasBE/res1_ACF-PACF.png" alt="res1_ACF-PACF.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-orge422542" class="outline-3">
-<h3 id="orge422542">Respuesta 3</h3>
-<div class="outline-text-3" id="text-orge422542">
-<p>
-Precisamente, ambas regresiones auxiliares son las que se han empleado
-en los respectivos contrastes ADF (en este caso incluyendo tres
-retardos) \[\nabla Y_{t} = \nu + \delta Y_{t-1} + \sum_{j=1}^3 \pi_j
-\nabla Y_{t-j} + U_t,\] un \(\delta=0\) implica, bajo la hipótesis de que
-la serie \(Y_t\) es \(I(1)\), que la primera diferencia es estacionaria en
-media, pues \[Y_{t}-Y_{t-1} = \nu + \underbrace{\sum_{j=1}^3 \pi_j
-\nabla Y_{t-j}}_{I(0)} + U_t.\]
-</p>
+</div>
+<div id="outline-container-org1e83409" class="outline-4">
+<h4 id="org1e83409">Estadístico Ljung-Box para los residuos</h4>
+<div class="outline-text-4" id="text-org1e83409">
+<pre class="example" id="org3792671">
+Función de autocorrelación para res1
+***, ** y * indica significatividad a los niveles del 1%, 5% y 10%
+utilizando la desviación típica 1/T^0,5
 
-<p>
-Bajo la hipótesis \(H_0\) de que la serie \(Y_t\) es \(I(1)\), el ratio \(t\)
-correspondiente al parámetro \(\delta\) no se distribuye como una
-<i>t</i>-student, por lo que el estadístico <i>t</i> y el correspondiente
-p-valor mostrados en las regresiones auxiliares no son válidos. Por
-eso el contraste ADF emplea unos valores críticos distintos (en este
-ejemplo <code>-2.86</code>). Como los ratios <i>t</i> (<code>-2,438</code> y <code>-2,440</code>) no superan
-el valor crítico, no se rechaza la hipótesis nula \(\delta=0\), es
-decir, no se rechaza que las series sean \(I(0)\) (nótese que la
-hipótesis alternativa es \(\delta<0\), y que por tanto el contraste es
-de una sola cola: la cola izquierda; por tanto, para rechazar la
-hipótesis el ratio debería tomar valores a la izquierda de <code>-2.86</code>).
-</p>
+ RETARDO    FAC          FACP         Estad-Q. [valor p]
 
-<p>
-(<a href="#org91c28eb">Pregunta 3</a>)
+    1   0,0088        0,0088          0,0048  [0,945]
+    2   0,0051        0,0051          0,0065  [0,997]
+    3  -0,0017       -0,0018          0,0067  [1,000]
+    4   0,0472        0,0473          0,1527  [0,997]
+    5   0,0311        0,0304          0,2174  [0,999]
+    6   0,0714        0,0707          0,5638  [0,997]
+    7  -0,2278  *    -0,2308 *        4,1565  [0,762]
+    8  -0,0685       -0,0691          4,4872  [0,811]
+    9  -0,0007        0,0010          4,4872  [0,877]
+   10  -0,1106       -0,1233          5,3855  [0,864]
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org851a7c2" class="outline-2">
+<h2 id="org851a7c2">Segundo modelo univariante tentativo</h2>
+<div class="outline-text-2" id="text-org851a7c2">
+<pre class="example" id="orga4fc4b9">
+Evaluaciones de la función: 38
+Evaluaciones del gradiente: 11
+
+Modelo 4: ARIMA, usando las observaciones 1999:2-2013:4 (T = 59)
+Estimado usando AS 197 (MV exacta)
+Variable dependiente: (1-L) BE_2_5_8_16
+Desviaciones típicas basadas en el Hessiano
+
+              coeficiente    Desv. típica      z      valor p
+  -----------------------------------------------------------
+  const      436176          585387          0,7451   0,4562 
+  theta_1         0,196262        0,122525   1,602    0,1092 
+  theta_2         0,339626        0,125911   2,697    0,0070  ***
+
+Media de la vble. dep.  463234,6   D.T. de la vble. dep.    3256442
+Media de innovaciones  -7429,336   D.T. innovaciones        2955062
+R-cuadrado              0,969732   R-cuadrado corregido    0,969201
+Log-verosimilitud      -962,8936   Criterio de Akaike      1933,787
+Criterio de Schwarz     1942,097   Crit. de Hannan-Quinn   1937,031
+
+                       Real Imaginaria     Módulo Frecuencia
+  -----------------------------------------------------------
+  MA
+   Raíz  1          -0,2889    -1,6914     1,7159    -0,2769
+   Raíz  2          -0,2889     1,6914     1,7159     0,2769
+  -----------------------------------------------------------
+</pre>
+</div>
+<div id="outline-container-org1af89fa" class="outline-3">
+<h3 id="org1af89fa">Residuos y su correlograma</h3>
+<div class="outline-text-3" id="text-org1af89fa">
+<div class="org-src-container">
+<pre class="src src-R">res2 = $uhat
+gnuplot res2 --time-series --with-lines --output=<span style="color: #008000;">"res2.png"</span>
+corrgm res1 10 --plot=<span style="color: #008000;">"res2_ACF-PACF.png"</span>
+</pre>
+</div>
+
+<div class="org-center">
+
+<div id="org87c986e" class="figure">
+<p><img src="./SerieCuentasFinancierasBE/res2.png" alt="res2.png" /> 
+</p>
+</div>
+
+<div id="org97a4430" class="figure">
+<p><img src="./SerieCuentasFinancierasBE/res2_ACF-PACF.png" alt="res2_ACF-PACF.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-org64a7072" class="outline-3">
-<h3 id="org64a7072">Respuesta 4</h3>
-<div class="outline-text-3" id="text-org64a7072">
-<dl class="org-dl">
-<dt><a href="#org963c4b7">Regresión de los tipos a 3 meses sobre los tipos a 6 meses</a></dt><dd>Los
-coeficientes estimados son muy significativos. El ajuste del modelo,
-medido por el valor del \(R^2\) es muy elevado, pero los contrastes
-rechazan las hipótesis habituales de distribución normal,
-homocedasticidad y ausencia de autocorrelación en los residuos.</dd>
+</div>
+<div id="outline-container-org2855ce6" class="outline-4">
+<h4 id="org2855ce6">Estadístico Ljung-Box para los residuos</h4>
+<div class="outline-text-4" id="text-org2855ce6">
+<pre class="example" id="org352fa86">
+Función de autocorrelación para res2
+***, ** y * indica significatividad a los niveles del 1%, 5% y 10%
+utilizando la desviación típica 1/T^0,5
 
-<dt><a href="#orgd60a2ae">Regresión en primeras diferencias</a></dt><dd>El único coeficiente
-significativo es la pendiente (es decir, al diferenciar las series
-NO desaparece la relación entre ellas; como cabe esperar entre
-series cointegradas), y el ajuste del modelo, medido por el valor
-del \(R^2\), es superior al 80%. Los contrastes residuales rechazan
-las hipótesis habituales de distribución normal, homocedasticidad y
-ausencia de autocorrelación en los residuos.</dd>
-</dl>
+ RETARDO    FAC          FACP         Estad-Q. [valor p]
 
-<blockquote>
+    1   0,0258        0,0258          0,0414  [0,839]
+    2   0,0453        0,0447          0,1710  [0,918]
+    3   0,1074        0,1054          0,9126  [0,822]
+    4   0,1205        0,1153          1,8622  [0,761]
+    5   0,0287        0,0165          1,9169  [0,861]
+    6   0,0768        0,0572          2,3173  [0,888]
+    7  -0,2228  *    -0,2579 **       5,7542  [0,569]
+    8  -0,0422       -0,0653          5,8798  [0,661]
+    9   0,0156        0,0144          5,8974  [0,750]
+   10  -0,1513       -0,1226          7,5796  [0,670]
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org12578c9" class="outline-2">
+<h2 id="org12578c9">Preguntas</h2>
+<div class="outline-text-2" id="text-org12578c9">
+</div>
+<div id="outline-container-orgd02e8c6" class="outline-3">
+<h3 id="orgd02e8c6">Pregunta 1</h3>
+<div class="outline-text-3" id="text-orgd02e8c6">
 <p>
-<b>Aclaraciones a algunas respuestas incorrectas en los exámenes</b>
-</p>
-
-<ul class="org-ul">
-<li>Un coeficiente de determinación (\(R^2\)) muy elevado indica un buen
-<b>ajuste</b> de los datos. Eso no significa una buena <i>explicación</i> (no
-confunda lo que es un <i>ajuste</i> con lo que es una <i>explicación</i>&#x2026; si
-no lo entiende, repase el concepto de correlación espuria).</li>
-<li>En un modelo con constante, el coeficiente de determinación (\(R^2\))
-indica el porcentaje de la varianza de los datos del regresando que
-es replicada por los datos de los regresores (es una medida de
-<i>ajuste de los datos</i>).</li>
-<li><p>
-La lectura de los criterios de información o del coeficiente de
-determinación <i>ajustado</i> es diferente al del \(R^2\). Dichos
-estadísticos sirven para comparar modelos con el mismo
-regresando. Por eso no tiene sentido comparar dichos estadísticos
-para un modelo de <code>TB3</code> y otro para su primera diferencia <code>d_TB3</code>
-(al ser regresandos distintos, no cabe la comparación). Fíjese que
-en mi respuesta solo indico la magnitud del \(R^2\) en cada modelo,
-pero no los comparo entre si.
+Discuta de todas las formas posibles si la serie temporal
+(<code>BE_2_5_8_16</code>) es estacionaria en media (i.e., si podemos asumir que
+es una realización de un proceso estocástico estacionario en media),
+usando para ello los resultados del apartado <a href="#org1ca760c">Cuentas Financieras. Metodología SEC2010. Saldo. Otros activos/pasivos. Todos los sectores. Resto del mundo, Miles de Euros</a> así como sus
+subapartados.
 </p>
 
 <p>
-Los valores de los criterios de información no nos indican la
-calidad del modelo; es la comparación de dichos valores entre
-modelos distintos la que nos indica comparativamente determinadas
-cualidades de dichos modelos.
-</p></li>
+(<a href="#orgf9e484b">Respuesta 1</a>)
+</p>
+</div>
+</div>
+<div id="outline-container-org6e7d9fc" class="outline-3">
+<h3 id="org6e7d9fc">Pregunta 2</h3>
+<div class="outline-text-3" id="text-org6e7d9fc">
+<p>
+Discuta de todas las formas posibles si la primera diferencia de serie
+temporal (<code>BE_2_5_8_16</code>) es estacionaria en media usando para ello los
+resultados de los subapartados de la sección <a href="#orgf9a0834">Datos en primeras diferencias</a>.
+</p>
 
-<li>Las hipótesis habituales y que se han contrastado como hipótesis
-nulas (\(H_0\)) en las salidas de Gretl son:
+<p>
+(<a href="#org5fbee75">Respuesta 2</a>)
+</p>
+</div>
+</div>
+<div id="outline-container-org5159a39" class="outline-3">
+<h3 id="org5159a39">Pregunta 3</h3>
+<div class="outline-text-3" id="text-org5159a39">
+<p>
+Destaque los principales resultados de cada uno de los dos modelos
+univariantes.
+</p>
+
+<p>
+(<a href="#org28a507e">Respuesta 3</a>)
+</p>
+</div>
+</div>
+<div id="outline-container-org21db046" class="outline-3">
+<h3 id="org21db046">Pregunta 4</h3>
+<div class="outline-text-3" id="text-org21db046">
+<p>
+Compare los dos modelos univariantes. ¿Cuál considera que es mejor? ¿por qué?
+</p>
+
+<p>
+(<a href="#org819afac">Respuesta 4</a>)
+</p>
+</div>
+</div>
+<div id="outline-container-org311f3af" class="outline-3">
+<h3 id="org311f3af">Pregunta 5</h3>
+<div class="outline-text-3" id="text-org311f3af">
+<p>
+¿Que modificaciones sugiere para el modelo que haya escogido en el
+apartado anterior?
+</p>
+
+<p>
+(<a href="#org1da8e23">Respuesta 5</a>)
+</p>
+</div>
+</div>
+<div id="outline-container-org9a30b62" class="outline-3">
+<h3 id="org9a30b62">Pregunta 6</h3>
+<div class="outline-text-3" id="text-org9a30b62">
 <ol class="org-ol">
-<li><b>Distribución normal</b> (o gaussiana) de las perturbaciones</li>
-<li><b>Homocedasticidad</b> (que la varianza de las perturbaciones es
-constante a lo largo de la muestra). Cuando las perturbaciones no
-son homocedásticas se dice que son <i>heterocedásticas</i>. Por tanto
-la \(H_0\) es la <i>homocedasticidad</i> (igual varianza) y NO la
-<i>heterocedasticidad</i>.</li>
-<li><b><i>Ausencia</i> de autocorrelación</b> en las perturbaciones (es decir
-que no hay autocorrelación). Por tanto, rechazar esta \(H_0\)
-significa que vamos a asumir que hay autocorrelación.</li>
-</ol></li>
-<li>El teorema de Gauss-Markov NO exige la distribución normal&#x2026; pero
-SI exige homocedasticidad y ausencia de autocorrelación. Por tanto
-las estimaciones de las dos regresiones NO son eficientes en el
-sentido de Gauss-Markov (tampoco en el máximo-verosímil).</li>
-</ul>
-</blockquote>
+<li>Escriba el primer modelo univariante en forma de ecuación ARIMA.</li>
+<li>Escriba el segundo modelo univariante en forma de ecuación ARIMA.</li>
+</ol>
 
 <p>
-(<a href="#orge0d8869">Pregunta 4</a>)
+(<a href="#orgdf0a694">Respuesta 6</a>)
 </p>
+</div>
+</div>
+</div>
+<div id="outline-container-orga30e67d" class="outline-2">
+<h2 id="orga30e67d">Respuestas</h2>
+<div class="outline-text-2" id="text-orga30e67d">
+</div>
+<div id="outline-container-orgf9e484b" class="outline-3">
+<h3 id="orgf9e484b">Respuesta 1</h3>
+<div class="outline-text-3" id="text-orgf9e484b">
+<p>
+La serie <code>BE_2_5_8_16</code> parece ser NO estacionarias en media:
+</p>
+<ul class="org-ul">
+<li>En el gráfico se observa una persistente evolución creciente hasta
+el año 2008 y decreciente tras 2008</li>
 
+<li>La función de autocorrelación (FAC) muestra persistencia (sus
+coeficientes decrecen despacio y a un ritmo aproximadamente lineal).
+Además el primer coeficiente tiene un valor próximo a uno.</li>
+
+<li>El contraste Dickey-Fuller aumentado no rechaza la hipótesis nula de
+existencia de una raíz unitaria a niveles de significación
+inferiores al 64%.</li>
+
+<li>En consonancia con lo anterior, el test KPSS rechaza que la serie
+sea estacionaria tanto al 10% como al 5% (aunque por muy poco no lo
+rechaza al 1%).</li>
+</ul>
 
 <blockquote>
 <p>
-<b>Aclaraciones generales</b>
+<b>Aclaraciones a algunas respuestas incorrectas en los exámenes</b>:
 </p>
-
-<ul class="org-ul">
-<li>En un contraste de hipótesis NO se rechaza ni el test, ni el
-contraste, ni el p-valor, etc. <b>Se rechaza una hipótesis nula</b>, y
-cada contraste corresponde a una hipótesis particular. Por tanto,
-siempre se debe enunciar en qué consiste la hipótesis en cuestión.
-Limitarse a decir que se rechaza la hipótesis nula <b>no indica nada
-si no se explicita cuál es la hipótesis</b>&#x2026; del mismo modo que
-tampoco estoy informando de nada a quien me pregunta por el destino
-de mi último viaje si le contesto&#x2026; "pues es donde estuve").</li>
-</ul>
-
 
 <ul class="org-ul">
 <li><p>
-Hablar de la significatividad de un parámetro es un modo abreviado
-de decir que se rechaza la hipótesis de que el parámetro sea
-cero. Así que decir que un parámetro es no significativo es un modo
-de decir <i>no rechazamos la hipótesis de que sea cero</i>.
+La identificación de un modelo ARIMA se hace analizando el
+correlograma de datos de los que podamos asumir que son realización
+de un proceso <i>estacionario</i> (y el primer apartado precisamente
+induce a rechazar que <code>BE_2_5_8_16</code> sea ``estacionaria'').
 </p>
 
 <p>
-La significatividad se refiere a un parámetro, hablar de la
-significatividad de un <i>p</i>-valor NO TIENE NINGÚN SENTIDO (el
-<i>p</i>-valor es una probabilidad y no un parámetro). Afirmar que los
-datos son (estadísticamente) significativos tiene el mismo sentido
-que decir que un atardecer es muy esdrújulo o un teorema muy
-longevo.
+Por tanto, identificar un modelo a partir de los datos <code>BE_2_5_8_16</code>
+en niveles <b>es completamente incorrecto</b> (pues no son estacionarios
+y previamente hay que diferenciarlos). Consecuentemente, aunque el
+primer retardo de la PACF es el único significativo (dado que la ACF
+no decae exponencialmente) no podemos identificar que el modelo sea
+un AR(1). Si quiere comprobarlo, estime un modelo AR(1) con los
+datos en niveles, verá que los residuos no son (ni remotamente) la
+realización de un proceso de ruido blanco; es decir, el modelo no es
+un AR(1).
 </p></li>
 </ul>
 
 
 <ul class="org-ul">
-<li>La significación (o nivel de significación) \(\alpha\) es una
-probabilidad fijada a priori que sirve para estableces los valores
-críticos de un contraste limitando la probabilidad de cometer el
-error tipo I bajo la hipótesis nula del contraste. Decir que la
-variable de un modelo tiene un alto nivel de significación NO TIENE
-NINGÚN SENTIDO (pero decir que es estadísticamente significativa
-SÍ).</li>
+<li>Al realizar el contraste <b>KPSS</b> se rechaza (o quizá NO) la
+<b>hipótesis nula del contraste KPSS</b>; es decir, la hipótesis \(H_0\):
+<i>el proceso es I(0)</i>. Por tanto, es incorrecto afirmar que al
+realizar el contraste <b>KPSS</b> se rechaza la hipótesis nula del
+contraste <b>ADF</b>, puesto que la \(H_0\) de este último contraste es que
+<i>el proceso es I(1)</i> (¡que es una hipótesis distinta!).</li>
 </ul>
 
 
 <ul class="org-ul">
-<li>Correlación (tiene que ver con los momentos de una variable) y
-regresión (es un modelo) son conceptos muy
-distintos. Consecuentemente también lo son autocorrelación (entre
-variables) y la expresión AR(p) (que es una abreviatura de modelo
-autorregresivo de orden \(p\)). Así pues, las variables pueden mostrar
-autocorrelación (PERO NO AUTORREGRESIÓN), y se contrasta la ausencia
-de autocorrelación (NO AUTORREGRESIÓN). En el correlograma, el
-primer palote representa la magnitud de la autocorrelación de orden
-1 (eso NO ES UN AR(1)&#x2026; recuerde que un AR(1) es un modelo y el
-palote representa el valor de un parámetro).</li>
+<li>Decir que ``se rechaza el <i>contraste</i> ADF'' (o cualquier otro
+<i>contraste</i>) es incorrecto. Lo que se rechaza es la <i>hipótesis nula</i>
+del contraste (pero nunca el <i>contraste</i>). Por poner otra analogía
+absurda\(\ldots{}\) se mastica la comida que hay en el plato (pero no
+se mastica ``el plato'').</li>
 </ul>
 
 
 <ul class="org-ul">
-<li>Un proceso estocástico cuyo modelo univariante posee un polinomio AR
-(o polinomio autorregresivo) con raíces en el círculo unidad no es
-estacionario. Pero un proceso no estacionario no tiene por que tener
-un modelo con raíces autorregresivas en el círculo unidad (su modelo
-puede no tener nada que ver con los modelos ARIMA). El curso solo ha
-tratado con modelos univariantes ARIMA, pero dichos modelos no
-cubren todos los posibles procesos estocásticos.</li>
-</ul>
+<li><p>
+En el correlograma, el primer palote (tanto de la ACF como la PACF)
+representa la magnitud de la autocorrelación de orden 1 (por tanto,
+el ``palote'' NO ES UN AR(1)\(\ldots{}\) recuerde que un AR(1) es un
+modelo y el palote representa el valor de un parámetro). Afirmar que
+un AR (es decir un modelo autorregresivo) es muy próximo a uno no
+tiene ningún sentido.
+</p>
 
-
-<ul class="org-ul">
-<li>En las salidas de Gretl aparecen expresiones como <code>(1-L)</code>, en dichas
-expresiones, <code>L</code> es el operador retardo (que en otros programas o
-libros también se denota con <code>B</code>). Por tanto el símbolo <code>L</code> NADA
-TIENE QUE VER CON LOS LOGARITMOS.</li>
+<p>
+El primer primer ``palote'' de la ACF (y también de la PACF) es la
+correlación de orden uno. Usted debe saber que la correlación es un
+estadístico acotado entre -1 y 1, por tanto: JAMAS el primer
+coeficiente de la PACF (o la ACF) será mayor que uno (o menor que
+\(-1\)).
+</p></li>
 </ul>
 </blockquote>
+
+<p>
+(<a href="#orgd02e8c6">Pregunta 1</a>)
+</p>
+</div>
+</div>
+<div id="outline-container-org5fbee75" class="outline-3">
+<h3 id="org5fbee75">Respuesta 2</h3>
+<div class="outline-text-3" id="text-org5fbee75">
+<p>
+La serie <code>d_BE_2_5_8_16</code> (la primera diferencia regular de
+<code>BE_2_5_8_16</code>) parece ``estacionaria'' en media:
+</p>
+<ul class="org-ul">
+<li>Analizando el gráfico podemos observar que oscila de manera regular
+alrededor de su media (aunque muestra un altibajo en su nivel en los
+años 2007 y 2008, por lo que es importante analizar otros posibles
+indicios que refuercen nuestra conclusión).</li>
+
+<li>La función de autocorrelación (FAC) decae rápidamente (tan solo son
+significativos los dos primeros retardos). El primer coeficiente
+tiene un valor muy inferior a uno.</li>
+
+<li>El contraste Dickey-Fuller aumentado rechaza contundentemente la
+hipótesis nula de existencia de una raíz unitaria (<code>valor p
+  asintótico 0,002394</code>).</li>
+
+<li>En consonancia con lo anterior, el test KPSS NO rechaza que la serie
+sea estacionaria ni siquiera al 10% (por tanto tampoco al 5% o al
+1%).</li>
+</ul>
+
+<blockquote>
+<p>
+<b>Aclaraciones a algunas respuestas incorrectas en los exámenes</b>:
+</p>
+
+<ul class="org-ul">
+<li>No se rechazan los test de hipótesis, se rechazan las hipótesis
+nulas de los contrastes (véase de nuevo las aclaraciones generales
+al final del ejercicio <a href="https://mbujosab.github.io/EconometriaAplicada-SRC/Ejercicios/LetrasTesoroAmericano3y6meses.html#outline-container-org96e4dfc">LetrasTesoroAmericano3y6meses</a>). Y es
+<b>fundamental</b> indicar qué dice cada hipótesis en cada caso; decir
+que se rechaza la hipótesis del contraste es no decir nada (véase de
+nuevo las aclaraciones generales al final del ejercicio
+<a href="https://mbujosab.github.io/EconometriaAplicada-SRC/Ejercicios/LetrasTesoroAmericano3y6meses.html#outline-container-org96e4dfc">LetrasTesoroAmericano3y6meses</a>).</li>
+</ul>
+
+
+
+<ul class="org-ul">
+<li>El concepto de ``tendencia'' hace referencia a una descripción
+(subjetiva) de la evolución a medio o largo plazo del <b>nivel</b> de la
+serie. Por eso, en el caso de una serie ``estacionaria'', es mejor
+decir: <i>``en esta serie se aprecia un <b>nivel</b> aproximadamente
+constante''</i>, en lugar de <i>``una <b>tendencia</b> aproximadamente
+constante''</i> (pues <i>tendencia</i> hace referencia a la evolución del
+nivel; y en una serie estacionaria se espera que el nivel se
+mantenga estable, por eso, <i>tendencia constante</i> es una expresión
+poco adecuada).</li>
+</ul>
+</blockquote>
+
+
+<p>
+(<a href="#org6e7d9fc">Pregunta 2</a>)
+</p>
+</div>
+</div>
+<div id="outline-container-org28a507e" class="outline-3">
+<h3 id="org28a507e">Respuesta 3</h3>
+<div class="outline-text-3" id="text-org28a507e">
+<dl class="org-dl">
+<dt>Primer modelo.</dt><dd><b>Es un AR(2)</b> para la primera diferencia ordinaria
+de la serie (\(\nabla \mathbf{y}\)); es decir, es un modelo
+ARIMA(2,1,0). Las raíces del polinomio AR están claramente fuera del
+círculo unidad (indicando que este modelo para la primera diferencia
+de los datos es <b>estacionario</b>). Es más, mirando la ACF y la PACF se
+aprecia que los residuos parecen ser una realización de un proceso
+de ruido blanco, pues ningún retardo es estadísticamente
+significativo y, sobre todo, los p-valores de los estadísticos de
+Ljung-Box de los residuos son muy elevados, por lo que no se puede
+rechazar la hipótesis nula de que los residuos sean ``ruido
+blanco''. Por otra parte, aunque NI la constante NI el parámetro
+correspondiente al primer retardo del modelo AR son estadísticamente
+significativos, el modelo ajusta bastante bien los datos; pues tiene
+un \(R^2\) muy elevado (<code>0,970881</code>).</dd>
+
+<dt>Segundo modelo.</dt><dd><b>Es un MA(2)</b> para la primera diferencia
+ordinaria de la serie (\(\nabla \mathbf{y}\)); es decir, es un modelo
+ARIMA(0,1,2). Las raíces del polinomio MA están claramente fuera del
+círculo unidad (indicando que este modelo para la primera diferencia
+de los datos es <b>invertible</b>). Es más, al igual que en el modelo
+anterior (y por los mismos motivos) no se puede rechazar la
+hipótesis de que los residuos sean ``ruido blanco''. Por otra parte,
+aunque NI la constante, NI el parámetro correspondiente al primer
+retardo del modelo MA son estadísticamente significativos, este
+modelo también ajusta muy bien los datos, pues tiene un \(R^2\) muy
+elevado (<code>0,969732</code>).</dd>
+</dl>
+
+<blockquote>
+<p>
+<b>Aclaraciones a algunas respuestas incorrectas en los exámenes</b>:
+</p>
+
+<ul class="org-ul">
+<li>Lo primero y <b>fundamental</b> es indicar el tipo de modelo: si el
+modelo es AR, MA o ARMA. Para ello es imprescindible indicar si es
+un modelo de los datos en niveles o si lo es de los datos en
+diferencias.</li>
+
+<li><p>
+El \(R^2\) es el ratio entre la varianza de los datos ajustados y la
+<b>varianza de los datos de la muestra</b> (en este caso de los datos de
+la muestra <i>en primeras diferencias</i>). Dado que la serie no es
+estacionaria, hablar de la varianza del <i>modelo</i> es
+<b>incorrecto</b>. Como el modelo no es estacionario, pues incorpora una
+diferencia ordinaria, la varianza no está definida. Consecuentemente
+no tiene sentido hablar de <i>la varianza del modelo</i> (aunque si lo
+tiene hablar de la varianza de los datos).
+</p>
+
+<p>
+Por otra parte, que el \(R^2\) esté próximo a 1 no significa que el
+modelo sea muy <i>``explicativo''</i>. Un modelo puede tener un \(R^2\) muy
+elevado y simultáneamente ser completamente inútil para explicar
+nada (hemos visto algunos ejemplos durante el curso\(\ldots{}\) repase
+el tema sobre la correlación espuria).
+</p>
+
+<p>
+Es habitual escuchar la coloquial expresión de que <i>``un modelo
+explica el \(X\) por ciento''</i> pero la frase no puede acabar ahí. Es
+necesario completarla diciendo <i>``el \(X\) por ciento de la varianza
+de los datos''</i>.
+</p>
+
+<p>
+Y no olvide que en realidad un \(R^2\) elevado, por sí solo, no
+``explica'' nada.  El \(R^2\) en modelos con constante tan solo es un
+ratio de varianzas. Y que solo cabe pretender dar una interpretación
+a ese ratio si el modelo es <i>previamente</i> considerado como una
+descripción ``aceptable'' de la variable estudiada. Además, el verbo
+<i>``explica''</i> es un sinónimo &#x2014;mal escogido&#x2014; de <i>``replica (o
+reproduce)</i> un \(X\) por ciento de la varianza de los datos''.
+</p></li>
+
+<li>Cuando se habla de si las raíces están fuera del círculo unidad,
+<b>hay que especificar si las raíces son de un polinomio AR o MA</b>,
+pues la lectura es distinta en cada caso (``modelo estacionario'' en
+el primer caso o ``modelo invertible'' en el segundo).</li>
+
+<li>En un modelo <i>univariante</i> no cabe hablar de correlaciones espurias
+(eso corresponde a correlaciones entre dos series distintas)</li>
+
+<li>Todo modelo AR es invertible (pues invertible significa que tiene
+representación AR); consecuentemente decir AR ``invertible'' es como
+decir: tengo un gato ``felino'' (¿hay alguno que no lo sea?).</li>
+
+<li>Todo modelo MA es estacionario; consecuentemente decir MA
+``estacionario'' es como lo del ``gato felino''.</li>
+
+<li>El primer modelo univariante es un AR(2) y el segundo un
+MA(2). Estos modelos son MUY DISTINTOS entre si. Afirmar que son
+parecidos no está justificado de ningún modo. Lo que sí es parecido
+entre ambos es <i>el nivel de ajuste</i> logrado por cada uno de ellos.</li>
+
+<li>Un retardo significativo en la ACF o la PACF no es ``un
+atípico''. Aunque algunos datos pueden ser calificados de atípicos,
+los retardos de un correlograma NO.</li>
+
+<li>La alusión a los \(R^2\) <i>ajustados</i> o los <i>criterios de información</i>
+no debe hacerse aquí. Debe hacerse en la <a href="#org21db046">Pregunta 4</a>, que es donde se
+pide comparar los dos modelos de la misma variable <code>d_BE_2_5_8_16</code></li>
+
+<li><p>
+Afirmar (y transcribo literalmente): <i>``El módulo del AR resulta ser
+mayor que uno''</i> NO TIENE SENTIDO. En todo caso sería <b>el módulo de
+la raíz del polinomio AR</b>. Pero en este caso hay dos raíces, por lo
+que la frase tiene aún menos sentido. Lo que se puede decir del
+primer modelo es que las dos raíces del polinomio autorregresivo
+tiene módulos mayores que uno (o que ambas raíces autorregresivas
+están fuera del círculo unidad).
+</p>
+
+<p>
+Peor aún (y vuelvo a transcribir): <i>``MA <b>contiene</b> un modulo mayor
+que uno''</i> (la negrita es mía pero la frase es del mismo examen).
+</p>
+
+<p>
+En algún otro examen he leído: <i>el modelo univariante no presenta MA
+y solo AR</i>&#x2026; otra frase más de esas sin ningún sentido&#x2026;
+</p>
+
+<p>
+<b>En un examen escrito se debe cuidar especialmente el lenguaje, para
+lograr construir expresiones con pleno significado. Para ello se
+debe escoger correctamente el vocabulario; y esto solo es posible
+tras una adecuada comprensión de los conceptos</b>.
+</p></li>
+</ul>
+</blockquote>
+
+
+<p>
+(<a href="#org5159a39">Pregunta 3</a>)
+</p>
+</div>
+</div>
+<div id="outline-container-org819afac" class="outline-3">
+<h3 id="org819afac">Respuesta 4</h3>
+<div class="outline-text-3" id="text-org819afac">
+<p>
+Respecto a la identificación de los modelos: el correlograma de la
+serie en diferencias muestra un decaimiento más lento en la ACF que en
+la PACF; de hecho, la PACF muestra un abrupto decaimiento en el tercer
+retardo. <b>Esto sugiere que el modelo es un AR(2)</b>.
+</p>
+
+<p>
+En cuanto al \(R^2\) <i>ajustado</i>, es ligeramente superior en el primer
+modelo (en consonancia con ello la desviación típica de las
+innovaciones del primer modelo es menor). Además, los criterios de
+información son ligeramente inferiores en el primer modelo. Todos
+estos estadísticos apuntan a una ligera ventaja del primer modelo
+frente al segundo. Es más, los estadísticos de Ljung-Box para los
+residuos del primer modelo muestran unos p-valores sistemáticamente
+superiores a los del segundo. 
+</p>
+
+<p>
+Todo lo anterior, <span class="underline">indica que el primer modelo es más adecuado que el
+segundo.</span>
+</p>
+
+<blockquote>
+<p>
+<b>Aclaraciones a algunas respuestas incorrectas en los exámenes</b>:
+</p>
+
+<ul class="org-ul">
+<li>El <i>p</i>-valor es una probabilidad: la probabilidad (bajo la \(H_0\)) de
+que una variable aleatoria con la misma distribución del estadístico
+del contraste, tome un valor ``más extremo'' que el observado en la
+muestra (con más extremo queremos decir, más en el ``interior'' de
+la región crítica).</li>
+
+<li>Consecuentemente, hablar del <i>p</i>-valor de los residuos no tiene
+sentido. Lo que si tiene sentido es referirse a los <i>p</i>-valores de
+los estadísticos del contraste Ljung-Box realizado sobre los
+residuos.</li>
+</ul>
+</blockquote>
+
+
+<p>
+(<a href="#org21db046">Pregunta 4</a>)
+</p>
+</div>
+</div>
+<div id="outline-container-org1da8e23" class="outline-3">
+<h3 id="org1da8e23">Respuesta 5</h3>
+<div class="outline-text-3" id="text-org1da8e23">
+<p>
+Ambos modelos tienen parámetros no significativos. Por tanto cabe la
+posibilidad de que el modelo mejore si se restringe la estimación para
+que tanto la constante como el parámetro correspondiente al primer
+retardo (en los respectivos modelos) sean cero. Es decir, cabe la
+posibilidad de que el modelo mejore si se eliminan los parámetros no
+significativos del modelo.
+</p>
+
+<blockquote>
+<p>
+<b>Aclaraciones a algunas respuestas incorrectas en los exámenes</b>:
+</p>
+
+<ul class="org-ul">
+<li>Un modelo en el que \(\phi_1=0\) pero \(\phi_2\ne0\) sigue siendo un
+modelo AR(2); del mismo modo \(1-x+x^2\) es un polinomio de grado 2,
+pero también lo es \(1+x^2\) o incluso \(7x^2\). El orden del modelo AR
+lo da el mayor <i>retardo</i> significativo (y no el número de parámetros
+significativos).</li>
+
+<li>Lo mismo se puede decir de los modelos MA.</li>
+</ul>
+</blockquote>
+
+
+
+<p>
+(<a href="#org311f3af">Pregunta 5</a>)
+</p>
+</div>
+</div>
+<div id="outline-container-orgdf0a694" class="outline-3">
+<h3 id="orgdf0a694">Respuesta 6</h3>
+<div class="outline-text-3" id="text-orgdf0a694">
+<p>
+Redondeando:
+</p>
+<dl class="org-dl">
+<dt>El primer modelo es:</dt><dd>\(\quad(1-0,192\ \mathsf{B}-0,326\ \mathsf{B}^2)\nabla Y_t = 416687 +U_t\)</dd>
+
+<dt>El segundo modelo es:</dt><dd>\(\quad\nabla Y_t = 436176 + (1+0,196\ \mathsf{B}+0,340\ \mathsf{B}^2) U_t\)</dd>
+</dl>
+
+<p>
+(<a href="#org9a30b62">Pregunta 6</a>)
+</p>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2025-01-14 mar 13:13</p>
+<p class="date">Created: 2025-01-14 mar 13:28</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

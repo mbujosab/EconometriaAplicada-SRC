@@ -1,0 +1,14 @@
+
+Contraste aumentado de Dickey-Fuller para d_BE_2_5_8_16
+contrastar hacia abajo desde 4 retardos, con el criterio AIC
+tamaño muestral 57
+la hipótesis nula de raíz unitaria es: [a = 1]
+
+  contraste sin constante 
+  incluyendo un retardo de (1-L)d_BE_2_5_8_16
+  modelo: (1-L)y = (a-1)*y(-1) + ... + e
+  valor estimado de (a - 1): -0,455524
+  estadístico de contraste: tau_nc(1) = -3,02904
+  valor p asintótico 0,002394
+  Coef. de autocorrelación de primer orden de e: 0,005
+
