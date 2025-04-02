@@ -14122,10 +14122,10 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="orgdaac1f8">
+<div class="ABSTRACT" id="orgcf11697">
 <p>
-En esta lección veremos algunos transformaciones de los datos para
-<i>"hacerlos estacionarios"</i>. Daremos interpretación a los datos transformados.
+En esta lección veremos algunas transformaciones de los datos para
+<i>"hacerlos estacionarios"</i>; y daremos interpretación a los datos transformados.
 </p>
 
 </div><ul>
@@ -14161,13 +14161,12 @@ $(\mathbb{Z})$.  $$\boldsymbol{X}\;=\;
   (\ldots,X_{-2},X_{-1},X_0,X_1,\ldots)\;=\; 
   (X_t \mid t\in\mathbb{Z});$$</p>
 </li>
-<li><p><strong>Serie temporal:</strong> es una secuencia finita de datos tomados a lo
-largo del tiempo</p>
+<li><p><strong>Muestra:</strong> es una secuencia finita de datos</p>
 <p>$$\boldsymbol{x} = (x_1, x_2,\ldots x_n)$$</p>
 <ul>
 <li><p>Consideraremos cada dato $x_t$ como una <em>realización de</em> $X_t$.</p>
 </li>
-<li><p>Consecuentemente, consideraremos que una <em>serie temporal</em> es una
+<li><p>Consecuentemente, consideraremos que una <em>muestra</em> es una
 <em>realización de un tramo finito</em> de un proceso estocástico:</p>
 <p>$$(x_1, x_2,\ldots x_n) \text{ es una realización de }(X_t \mid t=1:n).$$</p>
 </li>
@@ -14196,17 +14195,15 @@ largo del tiempo</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Consideremos dos tipos de muestras $\boldsymbol{x} = (x_1, x_2,\ldots x_n):$</p>
 <ul>
-<li><p><strong>Sección cruzada:</strong> el índice NO es cronológico. La numeración (la
+<li><strong>Sección cruzada:</strong> el índice NO es cronológico. La numeración (la
 indexación) de cada dato es solo una asignación arbitraria de
 <em>etiquetas</em> que identifican a cada individuo, empresa, objeto,
-etc. que ha sido medido. Consecuentemente:</p>
-<ul>
-<li><p><em>el orden en el que aparecen los datos en la muestra es irrelevante</em>.</p>
-</li>
-<li><p>es decir, conocer únicamente el índice de un dato no permite
-deducir nada respecto de cualquier otro dato.</p>
-</li>
+etc. que ha sido medido. Consecuentemente:<ul>
+<li><em>el orden en el que aparecen los datos de la muestra es irrelevante</em>.</li>
+<li>conocer el índice de un dato no permite deducir nada respecto de
+cualquier otro dato.</li>
 </ul>
 </li>
 </ul>
@@ -14383,8 +14380,8 @@ muestra finita (serie temporal) $\boldsymbol{x}=(x_t \mid t=1:n)$.</p>
 <li><strong>Predecir:</strong> datos futuros</li>
 <li><strong>Controlar:</strong> datos futuros</li>
 </ul>
-<p>Pero esto es casi imposible si los datos son inestables o caóticos a
-lo largo del tiempo</p>
+<p>Pero esto es casi imposible si los datos son inestables a lo largo del
+tiempo</p>
 <p>Por tanto, algún tipo de <u>estabilidad</u> o <u>estacionariedad</u> es
 necesaria.</p>
 
@@ -14412,20 +14409,20 @@ necesaria.</p>
 <p>Un proceso estocástico $\boldsymbol{X}$ se dice <strong>estacionario</strong> (<em>en
 sentido débil</em>) si para todo $t,k\in\mathbb{Z}$</p>
 \begin{equation}
-\label{org707ee60}
+\label{org8a30a4c}
 E(X_t)  = \mu
 \end{equation}\begin{equation}
-\label{orgee349fe}
+\label{org9f96a27}
 Cov(X_t,X_{t-k}) = \gamma_k 
 \end{equation}<ul>
-<li><p>(<a href="#org707ee60">1</a>) sugiere que las realizaciones de
+<li><p>(<a href="#org8a30a4c">1</a>) sugiere que las realizaciones de
 $\boldsymbol{X}$ generalmente oscilan entorno a $\mu$.</p>
 </li>
-<li><p>(<a href="#orgee349fe">2</a>) sugiere que la variabilidad de las
-realizaciones de $\boldsymbol{X}$ entorno a $\mu$ es constante, pues
-para el caso particular $k=0$</p>
+<li><p>(<a href="#org9f96a27">2</a>) entre otras cosas, sugiere que la
+variabilidad de las realizaciones de $\boldsymbol{X}$ entorno a
+$\mu$ es constante, pues para el caso particular $k=0$</p>
 <p>$$Cov(X_t,X_{t-0})=Var(X_t) = \gamma_0\quad\text{ para todo } t$$</p>
-<p>Es decir, $\gamma_0$ es la varianza común a todas las variables
+<p>Por tanto, $\gamma_0$ es la varianza común a todas las variables
 aleatorias del proceso.</p>
 </li>
 </ul>
@@ -14548,7 +14545,7 @@ se denomina <em>función de autocorrelación</em> (ACF).</li>
 <p>Veamos un ejemplo de serie temporal para la que</p>
 <ul>
 <li>no podemos asumir que sea realización de un proceso estocástico
-estacionario</li>
+<em>estacionario</em></li>
 <li><p>y algunos intentos de transformación para obtener datos
 "<strong>estacionarios</strong>" (*)</p>
 <p>(<em>recuerde que esta expresión, aunque extendida, es un abuso del
@@ -14672,10 +14669,10 @@ $$\ln\boldsymbol{x}=\Big(\ln(x_1),\ldots \ln(x_{114})\Big)$$<p>Ésta tampoco par
 <p><img src="./img/lecc01/airlinepass_logDiff+hist.png" alt="img"></p>
 $$\boldsymbol{y}=\nabla\ln\boldsymbol{x}=\Big(\big[\ln(x_2)-\ln(x_1)\big],\ldots\; \big[\ln(x_{114})-\ln(x_{113})\big]\Big)$$<p>Esta serie tampoco parece <em>"estacionaria"</em> (*)</p>
 <ul>
-<li>Hay un componente periódico (de naturaleza estacional), debido a que
-hay pocos viajes en otoño y muchos en Navidad, Semana Santa y verano
-(i.e., el número esperado de viajeros parece cambiar en función del
-mes o estación del año).</li>
+<li>Hay un <em>persistente</em> componente periódico (de naturaleza
+estacional), debido a que hay pocos viajes en otoño y muchos en
+Navidad, Semana Santa y verano (i.e., el número esperado de viajeros
+parece cambiar en función del mes o estación).</li>
 </ul>
 
 </div>
@@ -14766,7 +14763,7 @@ incremento es pequeño.</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <style>
-.reveal  td {font-size: 95%;}
+.reveal  td {font-size: 90%;}
 </style><table>
 <thead><tr>
 <th>Transformación  de la serie temporal $\displaystyle \boldsymbol{y}=\{y_t\},\; t=1:n$</th>
@@ -14776,7 +14773,7 @@ incremento es pequeño.</p>
 <tbody>
 <tr>
 <td>$\boldsymbol{z}=\ln\boldsymbol{y}=\{\ln y_t\}$</td>
-<td>A veces independiza la volatilidad del nivel e induce normalidad.</td>
+<td>A veces independiza la volatilidad del nivel. A veces induce normalidad.</td>
 </tr>
 <tr>
 <td>$\boldsymbol{z}=\nabla\boldsymbol{y}=\{y_t-y_{t-1}\}$</td>

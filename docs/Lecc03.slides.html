@@ -14122,7 +14122,7 @@ div.jp-OutputPrompt {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="ABSTRACT" id="orgc10888d">
+<div class="ABSTRACT" id="org2518c89">
 <p>
 En esta lección se discutirá la posible relación entre correlación y
 causalidad. Veremos casos de correlación espuria (correlación sin
@@ -14350,9 +14350,9 @@ negativa con la temperatura ambiente</li>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>Que haya correlación espuria no significa que "en realidad no hay correlación".</li>
+<li>Que haya correlación espuria <em>NO significa que realmente no hay correlación</em>.</li>
 <li>Que haya correlación espuria significa que <em>es erróneo interpretar</em>
-que dicha correlación se debe a <em>una relación causal</em>.</li>
+que la correlación existente se deba a <em>una relación causal</em>.</li>
 </ul>
 
 </div>
@@ -14529,12 +14529,12 @@ de Connecticut.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Si regresamos el PNB sobre la incidencia de casos de melanoma
-obtenemos un excelente ajuste (<em>coef. de determinación de $0.87$ y
-coeficientes muy significativos</em>).</p>
-<p><strong>Ello no significa que el modelo tenga alguna capacidad explicativa o
-predictiva</strong> (<em>pues la incidencia de melanoma en
-Connecticut no hace crecer la economía de EEUU</em>).</p>
+<p>La regresión del PNB sobre los casos de melanoma arroja un excelente
+ajuste (<em>coef. de determinación de $0.87$ y coeficientes muy
+significativos</em>).</p>
+<p><strong>Esto no significa que el modelo sea bueno o tenga alguna capacidad
+explicativa o predictiva</strong> (<em>casos de melanoma en Connecticut no
+aumentan la producción de EEUU</em>).</p>
 
 </div>
 </div>
@@ -14603,7 +14603,7 @@ Melanoma            118.98    7.81    15.23   0.00
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Una-manera-de-ver-que-la-correlaci%C3%B3n-es-posiblemente-espuria-(que-no-hay-causalidad)">Una manera de ver que la correlaci&#243;n es posiblemente <em>espuria</em> (que no hay causalidad)<a class="anchor-link" href="#Una-manera-de-ver-que-la-correlaci%C3%B3n-es-posiblemente-espuria-(que-no-hay-causalidad)">&#182;</a></h3>
+<h3 id="Explorando-si-la-correlaci%C3%B3n-es-probablemente-espuria-(no-causalidad)">Explorando si la correlaci&#243;n es probablemente <em>espuria</em> (no causalidad)<a class="anchor-link" href="#Explorando-si-la-correlaci%C3%B3n-es-probablemente-espuria-(no-causalidad)">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -14616,11 +14616,11 @@ Melanoma            118.98    7.81    15.23   0.00
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Si fuera cierto que 
 $$
-\boldsymbol{y}=\beta_1 \boldsymbol{1} + \beta_2 \boldsymbol{x} + \boldsymbol{u}
+\boldsymbol{y}=\beta_1 \boldsymbol{1} + \beta_2 \boldsymbol{x} + \boldsymbol{u};
 $$
-Entonces también sería cierto que
+entonces también sería cierto que
 $$
-\nabla\boldsymbol{y}= \beta_2 \nabla\boldsymbol{x} + \nabla\boldsymbol{u}
+\nabla\boldsymbol{y}= \beta_2 \nabla\boldsymbol{x} + \nabla\boldsymbol{u}.
 $$</p>
 
 </div>
@@ -14740,7 +14740,8 @@ $$</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Sin embargo, al realizar la regresión de la primera diferencia de
 <code>GNP</code> sobre la primera diferencia de <code>Melanoma</code> obtenemos un ajuste
-pésimo (tan solo la constante es significativa&#x2026; ¡cuando en teoría $\beta_1=0$!).</p>
+pésimo (tan solo la constante es significativa&#x2026; cuando en teoría
+$\beta_1=0$).</p>
 
 </div>
 </div>
@@ -14834,8 +14835,8 @@ orden menor a $d$; entonces se dice que están <em>cointegradas</em>:</p>
 <p>$\boldsymbol{x}$, $\boldsymbol{y}$ y $\boldsymbol{z}$ <em>están
 cointegradas</em> si son $I(d)$ y existen $a$, $b$, $c$ tales que
 $$a\boldsymbol{x}+b\boldsymbol{y}+c\boldsymbol{z}\quad\text{es
-  cointegrada de orden $d-m$},$$ con $m&gt;0\;$ (se dice que tienen $m$
-relaciones de integración).</p>
+  cointegrada de orden $d-m$},$$ con $m&gt;0\;$ (entonces se dice que
+hay $m$ relaciones de integración).</p>
 </li>
 </ul>
 
@@ -14869,15 +14870,15 @@ es $I(0)$.</li>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>La cointegración entre series temporales suele tener dos
-interpretaciones relacionadas entre sí:</p>
+<p>La cointegración entre series temporales tiene dos interpretaciones
+interrelacionadas:</p>
 <ol>
 <li><p>Las series poseen <em>una tendencia común</em> (pues hay una combinación
-lineal entre ellas que cancela dicha tendencia)</p>
+lineal entre ellas que cancela dicha tendencia).</p>
 </li>
 <li><p><em>Existe un equilibrio a largo plazo entre dichas series</em>, de manera
 que las desviaciones del equilibrio tienden a desaparecer a corto
-plazo</p>
+plazo.</p>
 </li>
 </ol>
 
@@ -14891,7 +14892,7 @@ plazo</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Ejemplo-de-series-cointegradas:-tipos-de-interes-en-UK-a-corto-y-largo-plazo">Ejemplo de series cointegradas: tipos de interes en UK a corto y largo plazo<a class="anchor-link" href="#Ejemplo-de-series-cointegradas:-tipos-de-interes-en-UK-a-corto-y-largo-plazo">&#182;</a></h3>
+<h3 id="Ejemplo-de-cointegraci%C3%B3n:-tipos-de-interes-en-UK-a-corto-y-largo-plazo">Ejemplo de cointegraci&#243;n: tipos de interes en UK a corto y largo plazo<a class="anchor-link" href="#Ejemplo-de-cointegraci%C3%B3n:-tipos-de-interes-en-UK-a-corto-y-largo-plazo">&#182;</a></h3>
 </div>
 </div>
 </div>
@@ -15071,7 +15072,7 @@ plazo</p>
 <p>(Muestra: 1952Q2&#x2013;1979Q4)</p>
 <p><img src="./img/lecc03/UK_Interest_rates.png" alt="img"></p>
 <p><strong>La correlación es $0.898$</strong> (<em>ambas series poseen una tendencia
- creciente&#x2026; veamos si dicha tendencia es común a ambas</em>)</p>
+ creciente&#x2026; veamos si es común a ambas</em>)</p>
 
 </div>
 </div>
@@ -15231,9 +15232,9 @@ plazo</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>La regresión de la primera diferencia de <code>Short</code> sobre la primera
-diferencia de <code>Long</code> <strong>NO sugiere que la correlación sea espuria</strong>:
-obtenemos un ajuste razonable con una pendiente muy significativa y
-una constante NO significativa.</p>
+diferencia de <code>Long</code> <strong>NO sugiere que la correlación sea espuria</strong>: el
+ajuste es elevado, con una pendiente muy significativa y una constante
+NO significativa.</p>
 
 </div>
 </div>
@@ -15405,11 +15406,12 @@ jerga habitual&#x2026; "<em>veamos si los residuos son estacionarios</em>")</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><img src="./img/lecc03/UK_Interest_ratesResiduals.png" alt="img"></p>
-<p>Aparentan ser "estacionarios en media" (i.e., no se aprecia una
+<p>Aparentan ser "<em>estacionarios en media</em>" (i.e., no se aprecia una
 tendencia evidente); por lo que <strong>los tipos de interés a corto y largo
 plazo podrían estar cointegrados</strong>.</p>
-<p>Más adelante veremos test estadísticos (Dickey-Fuller y KPSS) que contrastan la
-estacionariedad (si son $I(1)$ o $I(0)$).</p>
+<p>Más adelante veremos test estadísticos (Dickey-Fuller y KPSS) para
+contrastar estadísticamente la estacionariedad (si son $I(1)$ o
+$I(0)$).</p>
 
 </div>
 </div>

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2025-01-14 mar 13:35 -->
+<!-- 2025-04-02 mié 19:49 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Simulación de múltiples modelos lineales</title>
@@ -253,8 +253,8 @@ columna de <code>Etiqueta.txt</code>.
 </p>
 </div>
 </div>
-<div id="outline-container-org68f1b61" class="outline-2">
-<h2 id="org68f1b61"><span class="section-number-2">2.</span> Qué hace el código de más abajo</h2>
+<div id="outline-container-orgf574ed5" class="outline-2">
+<h2 id="orgf574ed5"><span class="section-number-2">2.</span> Qué hace el código de más abajo</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Simula desde procesos de ruido blanco a procesos
@@ -283,47 +283,47 @@ pero añadiendo tras un guión la supuesta periodicidad de los datos).
 
 
 <div class="org-src-container">
-<pre class="src src-jupyter-python"><span style="color: #0000FF;">import</span> itertools
-<span style="color: #0000FF;">import</span> hashlib
-<span style="color: #0000FF;">import</span> subprocess
-<span style="color: #0000FF;">import</span> os
+<pre class="src src-jupyter-python"><span style="color: #0000FF; font-weight: bold;">import</span> itertools
+<span style="color: #0000FF; font-weight: bold;">import</span> hashlib
+<span style="color: #0000FF; font-weight: bold;">import</span> subprocess
+<span style="color: #0000FF; font-weight: bold;">import</span> os
 
 <span style="color: #BA36A5;">ar</span>  = [ <span style="color: #008000;">'(1 - 0.8B)'</span>, <span style="color: #008000;">'(1 + 0.8B)'</span>, <span style="color: #008000;">'(1 - 0.8BS)'</span> ]
 <span style="color: #BA36A5;">ma</span> =  [ <span style="color: #008000;">'(1 - 0.65B)'</span>, <span style="color: #008000;">'(1 + 0.65B)'</span>, <span style="color: #008000;">'(1 - 0.65BS)'</span>]
 <span style="color: #BA36A5;">I</span>   = [ <span style="color: #008000;">'(1 - B)'</span>, <span style="color: #008000;">'(1 - BS)'</span>]
 
-<span style="color: #0000FF;">def</span> <span style="color: #006699;">simulacion</span>(lista_AR, lista_MA, lista_I, PeriodoEstacional=12):
+<span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">simulacion</span>(lista_AR, lista_MA, lista_I, PeriodoEstacional=12):
     <span style="color: #BA36A5;">S</span> = <span style="color: #006FE0;">str</span>(PeriodoEstacional)
     <span style="color: #BA36A5;">directorio</span> = <span style="color: #008000;">"SeriesSimuladas"</span>+S
     <span style="color: #BA36A5;">d</span> = os.path.join(directorio)
-    <span style="color: #0000FF;">if</span> <span style="color: #0000FF;">not</span> os.path.exists(d):
+    <span style="color: #0000FF; font-weight: bold;">if</span> <span style="color: #0000FF; font-weight: bold;">not</span> os.path.exists(d):
         os.makedirs(d)
 
-    <span style="color: #0000FF;">def</span> <span style="color: #006699;">polinomios</span>(monomios, S, NOlimita=1):
+    <span style="color: #0000FF; font-weight: bold;">def</span> <span style="color: #006699;">polinomios</span>(monomios, S, NOlimita=1):
         <span style="color: #BA36A5;">polinomios</span> = []
-        <span style="color: #0000FF;">for</span> i <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">range</span>(3):
-            <span style="color: #0000FF;">for</span> c <span style="color: #0000FF;">in</span> itertools.combinations(monomios, i):
+        <span style="color: #0000FF; font-weight: bold;">for</span> i <span style="color: #0000FF; font-weight: bold;">in</span> <span style="color: #006FE0;">range</span>(3):
+            <span style="color: #0000FF; font-weight: bold;">for</span> c <span style="color: #0000FF; font-weight: bold;">in</span> itertools.combinations(monomios, i):
                 <span style="color: #BA36A5;">cc</span> = <span style="color: #008000;">''</span>.join(c).replace(<span style="color: #008000;">"S"</span>, S)
                 <span style="color: #8D8D84;">#</span><span style="color: #8D8D84; font-style: italic;">polinomios = polinomios + [cc] if ((i &lt; len(monomios)) | NOlimita) else polinomios</span>
                 <span style="color: #BA36A5;">polinomios</span> = polinomios + [cc] 
-        <span style="color: #0000FF;">return</span> polinomios
+        <span style="color: #0000FF; font-weight: bold;">return</span> polinomios
 
     <span style="color: #BA36A5;">SampleSize</span> = 40*PeriodoEstacional
     <span style="color: #BA36A5;">numero_de_modelos</span> = 0
     <span style="color: #BA36A5;">etiqueta</span> = []
-    <span style="color: #0000FF;">for</span> ca,ma <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(polinomios(lista_MA,<span style="color: #006FE0;">str</span>(S),0)):
-        <span style="color: #0000FF;">for</span> cb,ar <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(polinomios(lista_AR,<span style="color: #006FE0;">str</span>(S),0)):
-            <span style="color: #0000FF;">for</span> cc,i <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">enumerate</span>(polinomios(lista_I,<span style="color: #006FE0;">str</span>(S))):
-                <span style="color: #0000FF;">for</span> l <span style="color: #0000FF;">in</span> <span style="color: #006FE0;">range</span>(2):
-                    <span style="color: #0000FF;">if</span> <span style="color: #006FE0;">len</span>(ar)&lt;18 <span style="color: #0000FF;">or</span> <span style="color: #006FE0;">len</span>(ma)&lt;18:
+    <span style="color: #0000FF; font-weight: bold;">for</span> ca,ma <span style="color: #0000FF; font-weight: bold;">in</span> <span style="color: #006FE0;">enumerate</span>(polinomios(lista_MA,<span style="color: #006FE0;">str</span>(S),0)):
+        <span style="color: #0000FF; font-weight: bold;">for</span> cb,ar <span style="color: #0000FF; font-weight: bold;">in</span> <span style="color: #006FE0;">enumerate</span>(polinomios(lista_AR,<span style="color: #006FE0;">str</span>(S),0)):
+            <span style="color: #0000FF; font-weight: bold;">for</span> cc,i <span style="color: #0000FF; font-weight: bold;">in</span> <span style="color: #006FE0;">enumerate</span>(polinomios(lista_I,<span style="color: #006FE0;">str</span>(S))):
+                <span style="color: #0000FF; font-weight: bold;">for</span> l <span style="color: #0000FF; font-weight: bold;">in</span> <span style="color: #006FE0;">range</span>(2):
+                    <span style="color: #0000FF; font-weight: bold;">if</span> <span style="color: #006FE0;">len</span>(ar)&lt;18 <span style="color: #0000FF; font-weight: bold;">or</span> <span style="color: #006FE0;">len</span>(ma)&lt;18:
                         <span style="color: #BA36A5;">numero_de_modelos</span> += 1 
                         <span style="color: #BA36A5;">parametros</span> = <span style="color: #008000;">"ar = '%s', ma = '%s', i = '%s'"</span>  % (ar,ma,i)
                         <span style="color: #BA36A5;">modelo</span> = <span style="color: #008000;">"ARIMA &lt;- um(%s)"</span>  % (parametros)
-                        <span style="color: #0000FF;">if</span> l: 
+                        <span style="color: #0000FF; font-weight: bold;">if</span> l: 
                             <span style="color: #BA36A5;">sim</span>   = <span style="color: #008000;">'y = exp((sim(ARIMA, n = %d)) * 0.1 + 2.5)'</span> % (SampleSize,)
                             <span style="color: #BA36A5;">logs</span>  = <span style="color: #008000;">'logs'</span>
                             <span style="color: #BA36A5;">media</span> = <span style="color: #008000;">'mu = 2.5'</span>
-                        <span style="color: #0000FF;">else</span>:
+                        <span style="color: #0000FF; font-weight: bold;">else</span>:
                             <span style="color: #BA36A5;">sim</span>   = <span style="color: #008000;">'y = (sim(ARIMA, n = 200))'</span>
                             <span style="color: #BA36A5;">logs</span>  = <span style="color: #008000;">'    '</span>
                             <span style="color: #BA36A5;">media</span> = <span style="color: #008000;">'mu = 0.0'</span>
@@ -334,7 +334,7 @@ pero añadiendo tras un guión la supuesta periodicidad de los datos).
                         <span style="color: #BA36A5;">caracter&#237;sticas</span> = logs + <span style="color: #008000;">',</span><span style="color: #D0372D;">\t</span><span style="color: #008000;">'</span> + media + <span style="color: #008000;">',</span><span style="color: #D0372D;">\t</span><span style="color: #008000;">'</span> + parametros
                         <span style="color: #BA36A5;">etiqueta</span> = etiqueta + [label + <span style="color: #008000;">',</span><span style="color: #D0372D;">\t</span><span style="color: #008000;">'</span> + caracter&#237;sticas]
                         <span style="color: #BA36A5;">fichero</span> = <span style="color: #008000;">"write.csv(y, file='%s/%s.csv')"</span>  % (directorio,label)
-                        <span style="color: #0000FF;">with</span> <span style="color: #006FE0;">open</span>(<span style="color: #008000;">'Rscript.r'</span>, <span style="color: #008000;">'w'</span>) <span style="color: #0000FF;">as</span> f:
+                        <span style="color: #0000FF; font-weight: bold;">with</span> <span style="color: #006FE0;">open</span>(<span style="color: #008000;">'Rscript.r'</span>, <span style="color: #008000;">'w'</span>) <span style="color: #0000FF; font-weight: bold;">as</span> f:
                             f.write(<span style="color: #008000;">'library(tfarima)'</span>+<span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>)
                             f.write(modelo+<span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>)
                             f.write(sim+<span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>)
@@ -349,16 +349,16 @@ pero añadiendo tras un guión la supuesta periodicidad de los datos).
                         <span style="color: #BA36A5;">datos</span>        = <span style="color: #008000;">'open %s/%s.csv'</span> % (directorio,label,)
                         <span style="color: #BA36A5;">guardado</span>     = <span style="color: #008000;">'store %s-%s.gdt x'</span> % (label,S)
                         <span style="color: #BA36A5;">Guion</span> = <span style="color: #008000;">"GRETLscript"</span>+S+<span style="color: #008000;">".inp"</span>
-                        <span style="color: #0000FF;">with</span> <span style="color: #006FE0;">open</span>(Guion, <span style="color: #008000;">'w'</span>) <span style="color: #0000FF;">as</span> f:
+                        <span style="color: #0000FF; font-weight: bold;">with</span> <span style="color: #006FE0;">open</span>(Guion, <span style="color: #008000;">'w'</span>) <span style="color: #0000FF; font-weight: bold;">as</span> f:
                             f.write(Dir+<span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>+DirTrabajo+<span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>+datos+<span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>+periodicidad+<span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>+guardado)
                             
                         subprocess.call ([<span style="color: #008000;">"/usr/bin/gretlcli"</span>, <span style="color: #008000;">"-b"</span>, Guion])
                         
     <span style="color: #006FE0;">print</span>(numero_de_modelos)
 
-    <span style="color: #0000FF;">with</span> <span style="color: #006FE0;">open</span>(directorio+<span style="color: #008000;">'/Etiquetas.txt'</span>, <span style="color: #008000;">'w'</span>) <span style="color: #0000FF;">as</span> f:
+    <span style="color: #0000FF; font-weight: bold;">with</span> <span style="color: #006FE0;">open</span>(directorio+<span style="color: #008000;">'/Etiquetas.txt'</span>, <span style="color: #008000;">'w'</span>) <span style="color: #0000FF; font-weight: bold;">as</span> f:
         f.write(<span style="color: #008000;">'etiqueta'</span> + <span style="color: #008000;">',</span><span style="color: #D0372D;">\t</span><span style="color: #008000;">'</span> + <span style="color: #008000;">'logs'</span> + <span style="color: #008000;">',</span><span style="color: #D0372D;">\t</span><span style="color: #008000;">'</span> + <span style="color: #008000;">'mu'</span> + <span style="color: #008000;">',</span><span style="color: #D0372D;">\t</span><span style="color: #008000;">'</span> + <span style="color: #008000;">'ar'</span> + <span style="color: #008000;">',</span><span style="color: #D0372D;">\t</span><span style="color: #008000;">'</span> + <span style="color: #008000;">'ma'</span>+<span style="color: #008000;">',</span><span style="color: #D0372D;">\t</span><span style="color: #008000;">'</span> + <span style="color: #008000;">'nabla'</span> + <span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>)
-        <span style="color: #0000FF;">for</span> e <span style="color: #0000FF;">in</span> etiqueta:
+        <span style="color: #0000FF; font-weight: bold;">for</span> e <span style="color: #0000FF; font-weight: bold;">in</span> etiqueta:
             f.write(e+<span style="color: #008000;">'</span><span style="color: #D0372D;">\n</span><span style="color: #008000;">'</span>)
     
 </pre>
@@ -377,7 +377,7 @@ pero añadiendo tras un guión la supuesta periodicidad de los datos).
 </div>
 <div id="postamble" class="status">
 <p class="author">Autor: Marcos Bujosa</p>
-<p class="date">Created: 2025-01-14 mar 13:35</p>
+<p class="date">Created: 2025-04-02 mié 19:49</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

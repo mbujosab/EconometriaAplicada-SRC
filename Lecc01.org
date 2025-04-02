@@ -32,8 +32,8 @@
 #+END_SRC
 
 #+BEGIN_ABSTRACT
-En esta lección veremos algunos transformaciones de los datos para
-/"hacerlos estacionarios"/. Daremos interpretación a los datos transformados.
+En esta lección veremos algunas transformaciones de los datos para
+/"hacerlos estacionarios"/; y daremos interpretación a los datos transformados.
 #+END_ABSTRACT
 
 - [[https://mbujosab.github.io/EconometriaAplicada-SRC/Lecc01.html][lección en html]]
@@ -82,14 +82,14 @@ def repr_png(tex, ImgFile):
   (\ldots,X_{-2},X_{-1},X_0,X_1,\ldots)\;=\; 
   (X_t \mid t\in\mathbb{Z});$$
 
-- Serie temporal :: es una secuencia finita de datos tomados a lo
-  largo del tiempo
+- Muestra :: es una secuencia finita de datos
+  # a lo largo del tiempo
   
   $$\boldsymbol{x} = (x_1, x_2,\ldots x_n)$$
 
   - Consideraremos cada dato $x_t$ como una /realización de/ $X_t$.
 
-  - Consecuentemente, consideraremos que una /serie temporal/ es una
+  - Consecuentemente, consideraremos que una /muestra/ es una
     /realización de un tramo finito/ de un proceso estocástico:
 
    $$(x_1, x_2,\ldots x_n) \text{ es una realización de }(X_t \mid t=1:n).$$
@@ -99,17 +99,15 @@ def repr_png(tex, ImgFile):
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
 
-
+Consideremos dos tipos de muestras $\boldsymbol{x} = (x_1, x_2,\ldots x_n):$
 - Sección cruzada ::  el índice NO es cronológico. La numeración (la
   indexación) de cada dato es solo una asignación arbitraria de
   /etiquetas/ que identifican a cada individuo, empresa, objeto,
   etc. que ha sido medido. Consecuentemente:
+  - /el orden en el que aparecen los datos de la muestra es irrelevante/.
+  - conocer el índice de un dato no permite deducir nada respecto de
+    cualquier otro dato.
   
-  - /el orden en el que aparecen los datos en la muestra es irrelevante/.
-
-  - es decir, conocer únicamente el índice de un dato no permite
-    deducir nada respecto de cualquier otro dato.
-
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 - Series temporales :: Corresponden a mediciones de un mismo objeto a
   lo largo del tiempo. El índice indica el instante de cada medición.
@@ -225,8 +223,8 @@ muestra finita (serie temporal) $\boldsymbol{x}=(x_t \mid t=1:n)$.
 Así podremos
 - Predecir :: datos futuros
 - Controlar :: datos futuros
-Pero esto es casi imposible si los datos son inestables o caóticos a
-lo largo del tiempo
+Pero esto es casi imposible si los datos son inestables a lo largo del
+tiempo
 
 Por tanto, algún tipo de _estabilidad_ o _estacionariedad_ es
 necesaria.
@@ -252,14 +250,14 @@ Cov(X_t,X_{t-k}) = \gamma_k
 - ([[estacionario_media]]) sugiere que las realizaciones de
   $\boldsymbol{X}$ generalmente oscilan entorno a $\mu$.
 
-- ([[estacionario_covarianza]]) sugiere que la variabilidad de las
-  realizaciones de $\boldsymbol{X}$ entorno a $\mu$ es constante, pues
-  para el caso particular $k=0$
+- ([[estacionario_covarianza]]) entre otras cosas, sugiere que la
+  variabilidad de las realizaciones de $\boldsymbol{X}$ entorno a
+  $\mu$ es constante, pues para el caso particular $k=0$
 
   $$Cov(X_t,X_{t-0})=Var(X_t) = \gamma_0\quad\text{ para todo } t$$
 
   #+LATEX: \newline  \noindent
-  Es decir, $\gamma_0$ es la varianza común a todas las variables
+  Por tanto, $\gamma_0$ es la varianza común a todas las variables
   aleatorias del proceso.
  
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
@@ -322,7 +320,7 @@ Separar o distinguir ambos tipos de no estacionariedad no es sencillo.
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 Veamos un ejemplo de serie temporal para la que 
 - no podemos asumir que sea realización de un proceso estocástico
-  estacionario
+  /estacionario/
 - y algunos intentos de transformación para obtener datos
   "*estacionarios*" (*)
   #+LATEX: \newline  \noindent
@@ -493,10 +491,10 @@ plt.tight_layout()
 $$\boldsymbol{y}=\nabla\ln\boldsymbol{x}=\Big(\big[\ln(x_2)-\ln(x_1)\big],\ldots\; \big[\ln(x_{114})-\ln(x_{113})\big]\Big)$$
 
 Esta serie tampoco parece /"estacionaria"/ (*)
-- Hay un componente periódico (de naturaleza estacional), debido a que
-  hay pocos viajes en otoño y muchos en Navidad, Semana Santa y verano
-  (i.e., el número esperado de viajeros parece cambiar en función del
-  mes o estación del año).
+- Hay un /persistente/ componente periódico (de naturaleza
+  estacional), debido a que hay pocos viajes en otoño y muchos en
+  Navidad, Semana Santa y verano (i.e., el número esperado de viajeros
+  parece cambiar en función del mes o estación).
 # - Por tanto la varianza también cambia en las distintas estaciones.
 
 *** Diferencia estacional de la primera diferencia del logarítmo de los datos
@@ -576,13 +574,13 @@ incremento es pequeño.
 
 #+begin_export html
 <style>
-.reveal  td {font-size: 95%;}
+.reveal  td {font-size: 90%;}
 </style>
 #+end_export
 #+ATTR_LATEX: :align |p{3.8cm}|p{11.9cm}|
 | Transformación  de la serie temporal @@latex:\newline@@ $\displaystyle \boldsymbol{y}=\{y_t\},\; t=1:n$                                      | Comentario                                                                                                                                                                                    |
 |----------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| $\boldsymbol{z}=\ln\boldsymbol{y}=\{\ln y_t\}$                                                                                               | A veces independiza la volatilidad del nivel e induce normalidad.                                                                                                                             |
+| $\boldsymbol{z}=\ln\boldsymbol{y}=\{\ln y_t\}$                                                                                               | A veces independiza la volatilidad del nivel. A veces induce normalidad.                                                                                                                    |
 | $\boldsymbol{z}=\nabla\boldsymbol{y}=\{y_t-y_{t-1}\}$                                                                                        | Indica al crecimiento absoluto entre periodos consecutivos.                                                                                                                                   |
 | \(\boldsymbol{z}=\nabla\ln\boldsymbol{y}\) @@latex:\newline \mbox{\;\;}@@ $=$ @@latex:\mbox{@@\(\{\ln{y_t}-\ln{y_{t-1}}\}\) @@latex: }@@     | Tasa logarítmica de crecimiento. Aproximación del crecimiento relativo entre periodos consecutivos.                                                                                           |
 | $\boldsymbol{z}=\nabla\nabla\ln\boldsymbol{y}=\nabla^2\ln\boldsymbol{y}$                                                                     | Cambio en la tasa log. de crecimiento. Indica la “aceleración” en el crecimiento relativo.                                                                                                    |

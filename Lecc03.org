@@ -147,9 +147,9 @@ La correlación entre variables sin relación causal se denomina
 /correlación espuria/.
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-- Que haya correlación espuria no significa que "en realidad no hay correlación".
+- Que haya correlación espuria /NO significa que realmente no hay correlación/.
 - Que haya correlación espuria significa que /es erróneo interpretar/
-  que dicha correlación se debe a /una relación causal/.
+  que la correlación existente se deba a /una relación causal/.
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 Puede ser que una causa común induzca la correlación entre ambas variables
@@ -225,13 +225,13 @@ options(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
 [[./img/lecc03/Scatter-GNPvsMelanoma.png]]
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-Si regresamos el PNB sobre la incidencia de casos de melanoma
-obtenemos un excelente ajuste (/coef. de determinación de $0.87$ y
-coeficientes muy significativos/).
+La regresión del PNB sobre los casos de melanoma arroja un excelente
+ajuste (/coef. de determinación de $0.87$ y coeficientes muy
+significativos/).
 
-*Ello no significa que el modelo tenga alguna capacidad explicativa o
-predictiva* @@latex:\newline@@ (/pues la incidencia de melanoma en
-Connecticut no hace crecer la economía de EEUU/).
+*Esto no significa que el modelo sea bueno o tenga alguna capacidad
+explicativa o predictiva* (/casos de melanoma en Connecticut no
+aumentan la producción de EEUU/).
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 #+BEGIN_SRC jupyter-R :exports results :results plain
 # regresión de la variable GNP sobre la variable Melanoma del data_frame
@@ -259,18 +259,18 @@ Melanoma            118.98    7.81    15.23   0.00
 --------------------------------------------------
 #+end_example
 
-** Una manera de ver que la correlación es posiblemente /espuria/ (que no hay causalidad)
+** Explorando si la correlación es probablemente /espuria/ (no causalidad)
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
 
 Si fuera cierto que 
 $$
-\boldsymbol{y}=\beta_1 \boldsymbol{1} + \beta_2 \boldsymbol{x} + \boldsymbol{u}
+\boldsymbol{y}=\beta_1 \boldsymbol{1} + \beta_2 \boldsymbol{x} + \boldsymbol{u};
 $$
-Entonces también sería cierto que
+entonces también sería cierto que
 $$
-\nabla\boldsymbol{y}= \beta_2 \nabla\boldsymbol{x} + \nabla\boldsymbol{u}
+\nabla\boldsymbol{y}= \beta_2 \nabla\boldsymbol{x} + \nabla\boldsymbol{u}.
 $$
 
 #+attr_ipynb: (slideshow . ((slide_type . notes)))
@@ -321,7 +321,8 @@ doubleYScale(obj1, obj2, add.ylab2 = TRUE)
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 Sin embargo, al realizar la regresión de la primera diferencia de
 =GNP= sobre la primera diferencia de =Melanoma= obtenemos un ajuste
-pésimo (tan solo la constante es significativa... ¡cuando en teoría $\beta_1=0$!).
+pésimo (tan solo la constante es significativa... cuando en teoría
+$\beta_1=0$).
 
 #+BEGIN_SRC jupyter-R
 # resultados del ajuste MCO entre d_GNP y d_Melanoma
@@ -368,8 +369,8 @@ d_Melanoma           0.71   6.59     0.11   0.92
   $\boldsymbol{x}$, $\boldsymbol{y}$ y $\boldsymbol{z}$ /están
   cointegradas/ si son $I(d)$ y existen $a$, $b$, $c$ tales que
   $$a\boldsymbol{x}+b\boldsymbol{y}+c\boldsymbol{z}\quad\text{es
-  cointegrada de orden $d-m$},$$ con $m>0\;$ (se dice que tienen $m$
-  relaciones de integración).
+  cointegrada de orden $d-m$},$$ con $m>0\;$ (entonces se dice que
+  hay $m$ relaciones de integración).
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 Para estimar la relación de cointegración, se ajusta una regresión
@@ -382,17 +383,17 @@ estacionariedad o el orden de integración de los residuos
   es $I(0)$.
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
-La cointegración entre series temporales suele tener dos
-interpretaciones relacionadas entre sí:
+La cointegración entre series temporales tiene dos interpretaciones
+interrelacionadas:
 
 1) Las series poseen /una tendencia común/ (pues hay una combinación
-   lineal entre ellas que cancela dicha tendencia)
+   lineal entre ellas que cancela dicha tendencia).
 
 2) /Existe un equilibrio a largo plazo entre dichas series/, de manera
    que las desviaciones del equilibrio tienden a desaparecer a corto
-   plazo
+   plazo.
 
-** Ejemplo de series cointegradas: tipos de interes en UK a corto y largo plazo
+** Ejemplo de cointegración: tipos de interes en UK a corto y largo plazo
    :PROPERTIES:
    :metadata: (slideshow . ((slide_type . slide)))
    :END:
@@ -464,7 +465,7 @@ doubleYScale(obj1, obj2, add.ylab2 = TRUE)
 [[./img/lecc03/UK_Interest_rates.png]]
 
 *La correlación es $0.898$* (/ambas series poseen una tendencia
- creciente... veamos si dicha tendencia es común a ambas/)
+ creciente... veamos si es común a ambas/)
 
 
 #+name: CorrelacionUKinterestRates
@@ -526,9 +527,9 @@ doubleYScale(obj1, obj2, add.ylab2 = TRUE)
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 La regresión de la primera diferencia de =Short= sobre la primera
-diferencia de =Long= *NO sugiere que la correlación sea espuria*:
-obtenemos un ajuste razonable con una pendiente muy significativa y
-una constante NO significativa.
+diferencia de =Long= *NO sugiere que la correlación sea espuria*: el
+ajuste es elevado, con una pendiente muy significativa y una constante
+NO significativa.
 
 #+BEGIN_SRC jupyter-R
 # resultados del ajuste MCO
@@ -601,10 +602,11 @@ abline(0,0)
 #+attr_latex: :width 425px
 [[./img/lecc03/UK_Interest_ratesResiduals.png]]
 
-Aparentan ser "estacionarios en media" (i.e., no se aprecia una
+Aparentan ser "/estacionarios en media/" (i.e., no se aprecia una
 tendencia evidente); por lo que *los tipos de interés a corto y largo
 plazo podrían estar cointegrados*.
 
-Más adelante veremos test estadísticos (Dickey-Fuller y KPSS) que contrastan la
-estacionariedad (si son $I(1)$ o $I(0)$).
+Más adelante veremos test estadísticos (Dickey-Fuller y KPSS) para
+contrastar estadísticamente la estacionariedad (si son $I(1)$ o
+$I(0)$).
 

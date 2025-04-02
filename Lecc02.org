@@ -46,6 +46,8 @@ autocorrelación en las perturbaciones y como lidiar con ellos.
    :metadata: (slideshow . ((slide_type . skip)))
    :UNNUMBERED: t 
    :END:
+
+# pip install --upgrade --user  numpy pandas statsmodels matplotlib --break-system-packages
    
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results none
@@ -118,17 +120,17 @@ print(TransformedData.head())
 En la lección anterior vimos que una estrategia para analizar series
 temporales es transformar los datos para
 
-1) primero lograr que sean "*/estacionarios/*" y
+1) primero lograr que sean "*/estacionarios/*" 
 2) después, mediante más transformaciones, lograr una secuencia de
-   "*ruido blanco*" (este segundo paso aún no lo hemos abordado)
+   "/*ruido blanco*/" (este segundo paso lo veremos cuando veamos los modelos ARIMA)
 #+LATEX:  \newline \noindent
-(/recuerde que las expresiones "datos estacionarios" o secuencia de
-"ruido blanco" son un abuso del lenguaje/).
+(recuerde que las expresiones /datos estacionarios/ y /secuencia de
+ruido blanco/ son un abuso del lenguaje).
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 #+LATEX: \medskip \noindent
 Pero existe otro enfoque que pretende descomponer la serie temporal en
-los siguientes componentes /"no observables"/ (o en un subconjunto de
+los siguientes componentes /no observables/ (o en un subconjunto de
 ellos):
 
 $$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{c} + \boldsymbol{s} + \boldsymbol{e}$$
@@ -139,9 +141,9 @@ donde:
 - La tendencia "$\boldsymbol{t}$" :: recoge la lenta evolución de la
   media a /largo plazo/.
 
-- El componente estacional "$\boldsymbol{s}$" :: recoge las
-  oscilaciones periódicas que se repiten regularmente en ciclos
-  estacionales (de año en año, o de semana en semana, etc.).
+- El componente estacional "$\boldsymbol{s}$" :: recoge oscilaciones
+  periódicas que se repiten regularmente en ciclos estacionales (o
+  semanales, u horarios, etc.).
 
 - El componente cíclico "$\boldsymbol{c}$" :: Cuando aparece
   explícitamente en el modelo, $\boldsymbol{c}$ recoge las
@@ -152,9 +154,9 @@ donde:
   denominar /tendencia-ciclo/.
 
 - El componente irregular "$\boldsymbol{e}$" :: recoge las
-  oscilaciones no captadas por el resto de componentes, ya que debe
-  cumplir la siguiente identidad: $\boldsymbol{e} = \boldsymbol{y} -
-  \boldsymbol{t} - \boldsymbol{c} - \boldsymbol{s}$.
+  oscilaciones no captadas por el resto de componentes, pues:
+  $\boldsymbol{e} = \boldsymbol{y} - \boldsymbol{t} - \boldsymbol{c} -
+  \boldsymbol{s}$.
 
 Ajuste aceptable si (como poco) el componente irregular
 $\boldsymbol{e}$ parece "/estacionario/".
@@ -195,7 +197,7 @@ plt.grid()
 plt.ylabel(r"Log-Passengers, ($\ln\boldsymbol{x}$) ")
 #+END_SRC
 
-El modelo de tendencia más simple es la recta de regresión (el
+El modelo de tendencia más simple es la recta de regresión (donde el
 regresor no constante es el índice $t$):
 
 $$\ln{y_t}=\underbrace{\beta_1+\beta_2\cdot t}_{\text{tendencia}} + e_t; \quad t=1:114$$
@@ -238,14 +240,14 @@ plt.plot(results1.resid)
 #+attr_latex: :width 425px
 [[file:./img/lecc02/airlinepass+irreg.png]]
 
-En este caso, el modelo 
+En este caso, el ajuste del modelo 
 
-$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$
+$$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e},$$
 
-@@latex:\noindent@@ donde $\boldsymbol{t}$ es una tendencia lineal no
-es un ajuste satisfactorio, pues el /componente irregular/
-$$\boldsymbol{e}=\boldsymbol{y}-\boldsymbol{t}$$
-no tiene la apariencia de realización de un proceso estacionario.
+@@latex:\noindent@@ (donde $\boldsymbol{t}$ es una tendencia lineal)
+no es satisfactorio, ya que el /componente irregular/
+$$\boldsymbol{e}=\boldsymbol{y}-\boldsymbol{t}$$ no tiene la
+apariencia de realización de un proceso estacionario.
 
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
@@ -256,9 +258,9 @@ plt.plot(datosModelo1['ehatDiff12'])
 #+END_SRC
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-Adicionalmente podemos ver que diferencia de orden 12 del componente
-irregular parece mostrar un componente cíclico con un periodo de unos
-4 años.
+Adicionalmente podemos ver que la diferencia de orden 12 del
+componente irregular parece mostrar un componente cíclico con un
+periodo de unos 4 años.
 
 #+attr_org: :width 800
 #+attr_html: :width 900px
@@ -358,9 +360,10 @@ $$\widehat{\ln{y_t}}=4.7364+(0.0132)\cdot t +(-2.191e-05)\cdot t^2, \qquad t=1:1
  
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/resultsModel2.png :resuts silent 
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/resultsModel2.png :results silent 
 print(results2.summary()) 
 #+END_SRC
+
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 #+attr_org: :width 600
@@ -372,7 +375,7 @@ print(results2.summary())
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
 *_Componente irregular_*
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/airlinepass+irreg2.png :resuts silent 
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/airlinepass+irreg2.png :results silent 
 plt.grid()  
 plt.plot(results2.resid)
 #+END_SRC
@@ -383,12 +386,12 @@ plt.plot(results2.resid)
 #+attr_latex: :width 425px
 [[./img/lecc02/airlinepass+irreg2.png]]
 
-De manera análoga al caso anterior, el modelo
+De manera análoga al caso anterior, el ajuste del modelo
 
 $$\boldsymbol{y} = \boldsymbol{t} + \boldsymbol{e}$$
 
-@@latex:\noindent@@ donde $\boldsymbol{t}$ ahora es una /tendencia
-cuadrática/ tampoco es un ajuste satisfactorio, pues el componente
+@@latex:\noindent@@ (donde $\boldsymbol{t}$ ahora es una /tendencia
+cuadrática/) tampoco es satisfactorio, puesto que el componente
 irregular $\boldsymbol{e}$ sigue sin parecerse a la realización de un
 proceso estacionario.
 
@@ -409,10 +412,10 @@ irregular muestra un componente cíclico con un periodo de unos 4 años.
 #+attr_latex: :width 425px
 [[file:./img/lecc02/airlinepass+irregDiff12.png]]
 
-Para obtener una /tendencia-ciclo/ que capte este ciclo, son
-necesarios procedimientos más sofisticados (por ejemplo TRAMO-SEATS, o
-X13-ARIMA, o STAMP, o LDHR, o E4, etc.) que estiman tendencias y
-componentes estacionales estocásticos.
+Para obtener una /tendencia-ciclo/ que capte este ciclo son necesarios
+procedimientos más sofisticados (por ejemplo TRAMO-SEATS, o X13-ARIMA,
+o STAMP, o LDHR, o E4, etc.) que estiman tendencias y componentes
+estacionales estocásticos.
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 En el siguiente ejercicio estimaremos un *componente estacional
@@ -572,8 +575,8 @@ plt.plot(results3.resid)
 - Pero suelen funcionar bastante mal como herramienta de predicción:
 
   - no tienen en cuenta la dependencia inter-temporal de los datos (se
-    han estimado mediante una regresión como si los datos hubieran
-    sido de sección cruzada)
+    estiman mediante regresión, es decir, como si los datos fueran de
+    sección cruzada)
 
   - Por ejemplo, a la hora de prever el dato de enero de 1961, en este
     modelo pesa tanto el dato de enero de 1949 como el dato de enero
@@ -677,9 +680,9 @@ print(results4.summary())
 
 @@latex:\bigskip@@
 
-Pero esta inferencia es incorrecta. Con auto-correlación la varianza
-del estimador MCO es diferente (*la estimación por defecto de las
-desviaciones típicas es incorrecta*)
+Pero esta inferencia es incorrecta. En presencia de auto-correlación
+*la estimación por defecto de las desviaciones típicas del estimador
+MCO es incorrecta*. Veámoslo:
 
 **************  Codigo aux                                       :noexport:
 
@@ -731,7 +734,8 @@ $$Var(\widehat{\boldsymbol{\beta}}\mid\boldsymbol{\mathsf{X}})=Var(\widehat{\bol
    :metadata: (slideshow . ((slide_type . subslide)))
    :END:
 
-El tests Breusch-Godfrey (y el Durbin-Watson) contrastan la $H_0$ de /no autocorrelación/.
+El tests Breusch-Godfrey (y el Durbin-Watson) contrasta la $H_0$ de
+/no autocorrelación/.
 
 #+attr_ipynb: (slideshow . ((slide_type . fragment)))
 @@latex:\noindent@@
@@ -768,15 +772,6 @@ donde $R^2$ es el coeficiente de determinación de la regresión
 auxiliar y $n=T-p$.
 @@latex:\medskip@@
 
-#+attr_ipynb: (slideshow . ((slide_type . notes)))
-*El test de Durbin-Watson* contrasta la autocorrelación _de orden
-uno_. Para muestras grandes, el test es aproximadamente igual a
-$2(1-{\hat {\rho }})$, donde ${\hat{\rho}}$ es la autocorrelación de
-orden uno de los residuos. Por tanto, valores del test próximos a 2
-indican no autocorrelación, valores próximos a 0 indican fuerte
-autocorrelación positiva y valores próximos a 4 indican fuerte
-autocorrelación negativa.
-
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python 
 import statsmodels.stats.diagnostic as dg
@@ -807,7 +802,7 @@ repr_png(arbg[-1].resols.summary().as_latex(), "./img/lecc02/resultsBreusch-Godf
 #+label: Test-Breusch-Godfrey
 #+RESULTS: my-latex-code-Breusch-Godfrey
 :results:
-- Valor del estadístico: $\quad \qquad$ (p-valor: $\; 1.55e-13$)
+- Valor del estadístico: $\quad 62.7119\qquad$ (p-valor: $\; 1.55e-13$)
 - $x_{12}$ corresponde al primer retardo en la regresión auxiliar y es muy significativo
 :end:
 
@@ -816,6 +811,19 @@ repr_png(arbg[-1].resols.summary().as_latex(), "./img/lecc02/resultsBreusch-Godf
 <img src="./img/lecc02/resultsBreusch-Godfrey.png" width="450" class="center"/>
 </div>
 #+END_EXPORT
+
+** Test de Durbin-Watson
+   :PROPERTIES:
+   :metadata: (slideshow . ((slide_type . notes)))
+   :END:
+
+El test de Durbin-Watson contrasta la autocorrelación _de orden
+uno_. Para muestras grandes, el test es aproximadamente igual a
+$2(1-{\hat {\rho }})$, donde ${\hat{\rho}}$ es la autocorrelación de
+orden uno de los residuos. Por tanto, valores del test próximos a 2
+indican no autocorrelación, valores próximos a 0 indican fuerte
+autocorrelación positiva y valores próximos a 4 indican fuerte
+autocorrelación negativa.
 
 **************  Codigo aux                                       :noexport:
 
@@ -830,17 +838,11 @@ repr_png(arbg[-1].resols.summary().as_latex(), "./img/lecc02/resultsBreusch-Godf
 #+NAME: Breusch-Godfrey test value
 #+BEGIN_SRC jupyter-python  :results value :exports results 
 # valor del estadístico del test
-round(arbg[0], 4) :results silent
+round(arbg[0], 4)
 #+END_SRC
 
 #+RESULTS: Breusch-Godfrey test value
-:RESULTS:
-# [goto error]
-:   Cell In [45], line 2
-:     round(arbg[0], 4) :results silent
-:     ^
-: SyntaxError: illegal target for annotation
-:END:
+: 62.7119
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+NAME: Breusch-Godfrey test p-value
@@ -851,7 +853,6 @@ round(arbg[1], 15)
 
 #+RESULTS: Breusch-Godfrey test p-value
 : 1.55e-13
-
 
 ** Errores estándar robustos
    :PROPERTIES:
@@ -866,9 +867,9 @@ realizar inferencia con la estimación de los parámetros.
 
 1) las estimaciones serán insesgadas, consistentes pero ineficientes,
 
-2) los residuos son los mismos y, por tanto, estarán autocorrelados, aunque
+2) los residuos son los mismos y, por tanto, estarán autocorrelados,
 
-3) la inferencia a partir de errores estándar robustos será válida
+3) pero la inferencia se realizará a partir de errores estándar robustos.
 
 # https://stats.stackexchange.com/questions/523952/estimate-hac-covariance-matrix-from-data-by-hand-newey-west
 
@@ -884,7 +885,9 @@ print(results5.get_robustcov_results(cov_type='HAC', maxlags=3, use_correction=T
  
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/resultsModel5.png 
-repr_png(results5.get_robustcov_results(cov_type='HAC', maxlags=3, use_correction=True).summary().as_latex(), "./img/lecc02/resultsModel5.png")
+repr_png(results5.get_robustcov_results(cov_type='HAC',
+                                        maxlags=3,
+                                        use_correction=True).summary().as_latex(), "./img/lecc02/resultsModel5.png")
 #+END_SRC
 
 #+RESULTS:
@@ -909,9 +912,9 @@ repr_png(results5.get_robustcov_results(cov_type='HAC', maxlags=3, use_correctio
 </div>
 #+END_EXPORT
 
-Ahora, y empleando errores estándar robustos (HAC), podemos reducir el
-modelo de manera más cuidadosa usando desviaciones típicas
-robustas. El modelo reducido es...
+Empleando errores estándar robustos (HAC), podemos reducir el modelo
+de manera más cuidadosa usando desviaciones típicas robustas. El
+modelo reducido es...
 
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
@@ -956,7 +959,7 @@ repr_png(robustResults.summary().as_latex(), "./img/lecc02/resultsModel6.png")
 <img src="./img/lecc02/resultsModel6.png" width="400" class="center"/>
 </div>
 #+END_EXPORT
-- Nótese que ahora (HAC) se aprecia que enero y octubre son significativos al 5%
+- Nótese que con HAC se aprecia que enero y octubre son significativos al 5%
 - Pero la estimación MCO no es eficiente en presencia de auto-correlación
 
 
@@ -972,13 +975,12 @@ repr_png(robustResults.summary().as_latex(), "./img/lecc02/resultsModel6.png")
    :END:
 
 En el modelo
-$\boldsymbol{y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U},\;$ si las
-perturbaciones presentan heterocedasticidad y/o auto-correlación, y
-por tanto
+$\boldsymbol{y}=\boldsymbol{\mathsf{X}\beta}+\boldsymbol{U},\;$ cuando
+las perturbaciones presentan heterocedasticidad y/o auto-correlación
 $$Var(\boldsymbol{U}\mid\boldsymbol{\mathsf{X}})=\boldsymbol{\Sigma}\ne\sigma^2\boldsymbol{\mathsf{I}},$$
-el Teorema de Gauss-Markov ya no es válido, ya que es posible explotar
-la estructura de la matriz $\boldsymbol{\Sigma}$ para minimizar la
-varianza del estimador.
+por tanto, el Teorema de Gauss-Markov ya no es válido. En esta
+situación es posible explotar la estructura de la matriz
+$\boldsymbol{\Sigma}$ para minimizar la varianza del estimador.
 
 # https://mbujosab.github.io/CursoDeAlgebraLineal/libro.pdf#section.alph6.18.Alph1
 
@@ -990,18 +992,19 @@ $$\;\widehat{\boldsymbol{\beta}}=(\boldsymbol{\mathsf{X'}}\boldsymbol{\mathsf{\S
 El problema es que, en general, la matriz $\boldsymbol{\Sigma}$ es
 desconocida.
 
-Una solución es aplicar un procedimiento iterativo en el que se estima
-la matriz $\boldsymbol{\Sigma}$ empleando los errores del ajuste de
-una primera regresión. Con dicha matriz
+Una solución es aplicar un procedimiento iterativo en el que con los
+errores de ajuste de una primera regresión que se estima la matriz
+$\boldsymbol{\Sigma}$. Con dicha matriz
 $\widehat{\boldsymbol{\Sigma}}$ se re-estima el modelo por MCG... con
-los nuevos errores se re-estima $\boldsymbol{\Sigma}$... y vuelta a
-empezar...
+los nuevos errores se re-estima $\boldsymbol{\Sigma}$... que se usa
+para re-estimar el modelo por MCG... y vuelta a empezar: con los
+nuevos errores...
 
 El algoritmo se detiene cuando las estimaciones convergen a valores
 estables.
 
 #+attr_ipynb: (slideshow . ((slide_type . subslide)))
-Cuando realizamos el Test de Breusch-Godfrey vimos que en la regresión
+Cuando hicimos el Test de Breusch-Godfrey vimos que en la regresión
 auxiliar el primer retardo de los errores era significativo. Por
 tanto, vamos a indicar que las perturbaciones siguen un proceso AR(1).
 El decir, vamos a estimar el modelo
