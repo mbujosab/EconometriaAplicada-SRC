@@ -8,3 +8,4 @@ dependencies:
   - seaborn
   - dataframe_image
   - sympy
+  - statsmodels
