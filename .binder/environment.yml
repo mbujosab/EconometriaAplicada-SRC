@@ -9,9 +9,9 @@ dependencies:
   - pip
   - pip:
     - dataframe-image
-      - numpy
-      - pandas
-      - matplotlib
-      - seaborn
-      - dataframe_image
-      - statsmodels
+    - numpy
+    - pandas
+    - matplotlib
+    - seaborn
+    - dataframe_image
+    - statsmodels
