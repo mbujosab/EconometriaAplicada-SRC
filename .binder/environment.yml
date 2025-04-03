@@ -10,7 +10,7 @@ dependencies:
   - pip:
     - dataframe-image
     - numpy
-    - symtpy
+    - sympy
     - pandas
     - matplotlib
     - seaborn
