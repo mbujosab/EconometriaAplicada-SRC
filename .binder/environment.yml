@@ -5,6 +5,16 @@ dependencies:
   - python=3.10
   - jupyter
   - matplotlib
+  - r-base
+  - r-essentials
+  - r-irkernel
+  - r-tfarima
+  - r-latticeextra
+  - r-readr
+  - r-ggplot2
+  - r-ggfortify
+  - r-jtools
+  - r-zoo
   - pip
   - pip:
     - numpy

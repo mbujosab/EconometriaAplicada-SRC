@@ -6,3 +6,4 @@ install.packages("ggplot2")      # para el scatterplot (alternaticamente library
 install.packages("ggfortify")    # para pintar series temporales
 install.packages("jtools")       # para representación resultados estimación
 install.packages("zoo")          # para generar objetos ts (time series)
+IRkernel::installspec(user = FALSE)
