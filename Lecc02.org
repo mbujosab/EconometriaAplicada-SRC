@@ -58,8 +58,9 @@ import statsmodels.api as sm  # modelos estadísticos
 import matplotlib as mpl
 import matplotlib.pyplot as plt # data visualization
 # definimos parámetros para mejorar los gráficos
-mpl.rc('text', usetex=True)
-mpl.rc('text.latex', preamble=r'\usepackage{amsmath}')
+#mpl.rc('text', usetex=True)
+#mpl.rc('text.latex', preamble=r'\usepackage{amsmath}')
+mpl.rc('text', usetex=False)
 from matplotlib import rcParams
 rcParams['figure.figsize'] = 15,5
 #+END_SRC

@@ -4,4 +4,3 @@ pandas
 matplotlib
 statsmodels
 dataframe_image
-texlive-full
