@@ -548,7 +548,11 @@ TasaLogCrecimiento['$\\;(\\ln y_t- \\ln y_{0})$'] = TasaLogCrecimiento['$\\ln y_
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results file :file ./img/lecc01/TasaLogCrecimiento.png :results silent
-dfi.export(TasaLogCrecimiento, "./img/lecc01/TasaLogCrecimiento.png", use_mathjax=True, dpi=200, table_conversion="matplotlib")
+dfi.export(TasaLogCrecimiento,
+           "./img/lecc01/TasaLogCrecimiento.png",
+           #use_mathjax=True,
+           dpi=200,
+           table_conversion="matplotlib")
 #+END_SRC
 
 #+RESULTS:
