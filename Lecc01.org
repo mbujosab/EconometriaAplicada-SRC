@@ -53,17 +53,24 @@ En esta lección veremos algunas transformaciones de los datos para
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import matplotlib as mpl
-#mpl.rc('text', usetex=True)
-#mpl.rc('text.latex', preamble=r'\usepackage{amsmath}')
+# definimos parámetros para mejorar los gráficos
 mpl.rc('text', usetex=False)
 import matplotlib.pyplot as plt   # data visualization
-import dataframe_image as dfi
 #+END_SRC
+
+**************  Codigo aux                                       :noexport:
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results none
-from sympy.printing.preview import preview
+# definimos parámetros para mejorar los gráficos
+mpl.rc('text', usetex=True)
+mpl.rc('text.latex', preamble=r'\usepackage{amsmath}')
 
+# Usaré la siguiente función para transformar salidas en \LaTeX{} de statsmodels a ficheros png 
+# que incluiré en las transparencias
+import dataframe_image as dfi
+
+from sympy.printing.preview import preview
 def repr_png(tex, ImgFile):
     preamble = "\\documentclass[preview]{standalone}\n" \
         "\\usepackage{booktabs,amsmath,amsfonts}\\begin{document}"    
@@ -546,17 +553,6 @@ TasaLogCrecimiento['$\\frac{y_t-y_{0}}{y_{0}}$'] = TasaLogCrecimiento['$y_t$'].a
 TasaLogCrecimiento['$\\;(\\ln y_t- \\ln y_{0})$'] = TasaLogCrecimiento['$\\ln y_t$'] - TasaLogCrecimiento['$\\ln y_t$'].iloc[0]
 #+END_SRC
 
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file :file ./img/lecc01/TasaLogCrecimiento.png :results silent
-dfi.export(TasaLogCrecimiento,
-           "./img/lecc01/TasaLogCrecimiento.png",
-           #use_mathjax=True,
-           dpi=200,
-           table_conversion="matplotlib")
-#+END_SRC
-
-#+RESULTS:
-
 La tasa logarítmica de variación de $\boldsymbol{y}$ se define como
 $z_t=\ln{y_t}-\ln{y_{t-1}};$ es decir
 
@@ -571,6 +567,21 @@ incremento es pequeño.
 #+attr_html: :width 500px
 #+attr_latex: :width 250px
 [[file:./img/lecc01/TasaLogCrecimiento.png]]
+
+
+**************  Codigo aux                                       :noexport:
+
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc01/TasaLogCrecimiento.png :results silent
+dfi.export(TasaLogCrecimiento,
+           "./img/lecc01/TasaLogCrecimiento.png",
+           #use_mathjax=True,
+           dpi=200,
+           table_conversion="matplotlib")
+#+END_SRC
+
+#+RESULTS:
 
 *** Comentarios sobre los datos transformados
    :PROPERTIES:

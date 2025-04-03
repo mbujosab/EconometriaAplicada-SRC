@@ -58,32 +58,27 @@ import statsmodels.api as sm  # modelos estadísticos
 import matplotlib as mpl
 import matplotlib.pyplot as plt # data visualization
 # definimos parámetros para mejorar los gráficos
-#mpl.rc('text', usetex=True)
-#mpl.rc('text.latex', preamble=r'\usepackage{amsmath}')
 mpl.rc('text', usetex=False)
 from matplotlib import rcParams
 rcParams['figure.figsize'] = 15,5
 #+END_SRC
 
+
+***** tablas de resultados en formato png                          :noexport:
+
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results none
+mpl.rc('text', usetex=True)
+mpl.rc('text.latex', preamble=r'\usepackage{amsmath}')
+
 # Usaré la siguiente función para transformar salidas en \LaTeX{} de statsmodels a ficheros png 
 # que incluiré en las transparencias
-import os
-import shutil
 from sympy.printing.preview import preview
 def repr_png(tex, ImgFile):
     preamble = "\\documentclass[10pt,preview]{standalone}\n" \
-               "\\usepackage{booktabs,amsmath,amsfonts}\\begin{document}"
-    
-    # Crear el directorio si no existe y asegurarse de que tiene permisos de escritura
-    img_dir = os.path.dirname(ImgFile)
-    os.makedirs(img_dir, exist_ok=True)
-    os.chmod(img_dir, 0o777)  # Cambiar permisos del directorio a 777 (lectura, escritura y ejecución para todos)
-    
+               "\\usepackage{booktabs,amsmath,amsfonts}\\begin{document}"    
     preview(tex, filename=ImgFile, viewer='file', preamble=preamble, dvioptions=['-D', '250'])
 #+END_SRC
-
 
 ***** Datos                                                        :noexport:
 
@@ -603,13 +598,6 @@ Pero sigamos explorando este modelo...
 *Hay parámetros no significativos...* (p-valores para dummies enero,
 febrero y octubre).
 
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/resultsModel3.png
-repr_png(results3.summary().as_latex(), "./img/lecc02/resultsModel3.png")
-#+END_SRC
-
-#+RESULTS:
-
 #+BEGIN_EXPORT latex
 \begin{center}
   \includegraphics[width=.55\textwidth]{./img/lecc02/resultsModel3.png}
@@ -694,6 +682,14 @@ Pero esta inferencia es incorrecta. En presencia de auto-correlación
 MCO es incorrecta*. Veámoslo:
 
 **************  Codigo aux                                       :noexport:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/resultsModel3.png
+repr_png(results3.summary().as_latex(), "./img/lecc02/resultsModel3.png")
+#+END_SRC
+
+#+RESULTS:
+
 
 #+attr_ipynb: (slideshow . ((slide_type . skip)))
 #+BEGIN_SRC jupyter-python :results file silent :file ./img/lecc02/resultsModel4.png
@@ -787,10 +783,10 @@ import statsmodels.stats.diagnostic as dg
 #perform Breusch-Godfrey t :results silentest of order p = 3
 arbg = dg.acorr_breusch_godfrey(results4, nlags=3, store=True)
 arbg[:1]
-repr_png(arbg[-1].resols.summary().as_latex(), "./img/lecc02/resultsBreusch-Godfrey.png") 
 #+END_SRC
 
 #+RESULTS:
+| 62.71194311498567 |
 
 #+BEGIN_EXPORT latex
 \begin{center}
@@ -820,6 +816,16 @@ repr_png(arbg[-1].resols.summary().as_latex(), "./img/lecc02/resultsBreusch-Godf
 <img src="./img/lecc02/resultsBreusch-Godfrey.png" width="450" class="center"/>
 </div>
 #+END_EXPORT
+
+**************  Codigo aux                                       :noexport:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/resultsModel3.png
+repr_png(arbg[-1].resols.summary().as_latex(), "./img/lecc02/resultsBreusch-Godfrey.png") 
+#+END_SRC
+
+#+RESULTS:
+
 
 ** Test de Durbin-Watson
    :PROPERTIES:
@@ -891,15 +897,6 @@ results5 = model5.fit()
 print(results5.get_robustcov_results(cov_type='HAC', maxlags=3, use_correction=True).summary())
 #+END_SRC
 
- 
-#+attr_ipynb: (slideshow . ((slide_type . skip)))
-#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/resultsModel5.png 
-repr_png(results5.get_robustcov_results(cov_type='HAC',
-                                        maxlags=3,
-                                        use_correction=True).summary().as_latex(), "./img/lecc02/resultsModel5.png")
-#+END_SRC
-
-#+RESULTS:
 
 #+BEGIN_EXPORT latex
 \begin{center}
@@ -952,7 +949,6 @@ while insignificant_feature:
             else:            
                 X = remove_most_insignificant(X, results6)
 print(robustResults.summary())
-repr_png(robustResults.summary().as_latex(), "./img/lecc02/resultsModel6.png") 
 #+END_SRC
 
 #+BEGIN_EXPORT latex
@@ -973,6 +969,24 @@ repr_png(robustResults.summary().as_latex(), "./img/lecc02/resultsModel6.png")
 
 
 **************  Codigo aux                                       :noexport:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/resultsModel5.png 
+repr_png(results5.get_robustcov_results(cov_type='HAC',
+                                        maxlags=3,
+                                        use_correction=True).summary().as_latex(), "./img/lecc02/resultsModel5.png")
+#+END_SRC
+
+#+RESULTS:
+
+#+attr_ipynb: (slideshow . ((slide_type . skip)))
+#+BEGIN_SRC jupyter-python :results file :file ./img/lecc02/resultsModel3.png
+repr_png(robustResults.summary().as_latex(), "./img/lecc02/resultsModel6.png") 
+#+END_SRC
+
+#+RESULTS:
+
+
 
 # [[https://towardsdatascience.com/solving-autocorrelation-problems-in-general-linear-model-on-a-real-world-application-0bd3eeda20a1]]
 
