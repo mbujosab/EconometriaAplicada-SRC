@@ -69,11 +69,19 @@ rcParams['figure.figsize'] = 15,5
 #+BEGIN_SRC jupyter-python :results none
 # Usaré la siguiente función para transformar salidas en \LaTeX{} de statsmodels a ficheros png 
 # que incluiré en las transparencias
+import os
+import shutil
 from sympy.printing.preview import preview
 def repr_png(tex, ImgFile):
     preamble = "\\documentclass[10pt,preview]{standalone}\n" \
-        "\\usepackage{booktabs,amsmath,amsfonts}\\begin{document}"    
-    preview(tex, filename=ImgFile, viewer='file', preamble=preamble, dvioptions=['-D','250'])
+               "\\usepackage{booktabs,amsmath,amsfonts}\\begin{document}"
+    
+    # Crear el directorio si no existe y asegurarse de que tiene permisos de escritura
+    img_dir = os.path.dirname(ImgFile)
+    os.makedirs(img_dir, exist_ok=True)
+    os.chmod(img_dir, 0o777)  # Cambiar permisos del directorio a 777 (lectura, escritura y ejecución para todos)
+    
+    preview(tex, filename=ImgFile, viewer='file', preamble=preamble, dvioptions=['-D', '250'])
 #+END_SRC
 
 
@@ -1084,3 +1092,12 @@ repr_png(results.summary().as_latex(), "./img/lecc02/resultsModel7.png")
 
 # [[https://machinelearningmastery.com/time-series-forecasting-methods-in-python-cheat-sheet/]]
 
+#+BEGIN_SRC jupyter-python
+#from sympy import preview
+#def repr_png(tex, ImgFile):
+#    preamble = "\\documentclass[10pt,preview]{standalone}\n" \
+#        "\\usepackage{booktabs,amsmath,amsfonts}\\begin{document}"    
+#    preview(tex, filename=ImgFile, viewer='file', preamble=preamble, dvioptions=['-D','250'])
+#+END_SRC
+
+#+RESULTS:
