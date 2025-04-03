@@ -1,11 +1,17 @@
+name: econometria-aplicada
 channels:
   - conda-forge
-
 dependencies:
-  - numpy
-  - pandas
+  - python=3.10
+  - jupyter
   - matplotlib
-  - seaborn
-  - dataframe_image
-  - sympy
-  - statsmodels
+  - texlive-core
+  - pip
+  - pip:
+    - dataframe-image
+      - numpy
+      - pandas
+      - matplotlib
+      - seaborn
+      - dataframe_image
+      - statsmodels
