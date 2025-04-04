@@ -166,29 +166,34 @@ Incluye ejemplos sobre análisis de datos, visualización, series temporales, en
 
 **R:**
 - tfarima
-- latticeExtra
-- readr
 - ggplot2
 - ggfortify
 - jtools
+- latticeextra
+- readr
+- tidyverse
 - zoo
+- pastecs
+- knitr
+- moments
+- tseries
 
 ** 🚀 Ejecutar en Binder
 
 Haz clic en el siguiente botón para abrir los notebooks en Binder:
 
 #+BEGIN_CENTER
-[[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD][file:https://mybinder.org/badge_logo.svg]
+[[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD][file:https://mybinder.org/badge_logo.svg]]
 #+END_CENTER
-
-_Recuerda reemplazar `tu-usuario/tu-repo` con la URL real de tu repositorio._
 
 ** 📁 Estructura del repositorio
 
 #+BEGIN_SRC text
 📁 EconometriaAplicada-SRC/
-├── ejemplo_python.ipynb
-│── ejemplo_r.ipynb
+├── Lecc01.ipynb
+├── Lecc02.ipynb
+:
+├── Lecc08.ipynb
 ├── 📁 .binder/
 │   ├── environment.yml
 │   ├── install.R
