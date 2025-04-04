@@ -178,7 +178,7 @@ Incluye ejemplos sobre análisis de datos, visualización, series temporales, en
 Haz clic en el siguiente botón para abrir los notebooks en Binder:
 
 #+BEGIN_CENTER
-[[https://mybinder.org/v2/gh/tu-usuario/tu-repo/HEAD][file:https://mybinder.org/badge_logo.svg]]
+[[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD][file:https://mybinder.org/badge_logo.svg]
 #+END_CENTER
 
 _Recuerda reemplazar `tu-usuario/tu-repo` con la URL real de tu repositorio._
@@ -186,10 +186,9 @@ _Recuerda reemplazar `tu-usuario/tu-repo` con la URL real de tu repositorio._
 ** 📁 Estructura del repositorio
 
 #+BEGIN_SRC text
-📁 tu-repo/
-├── 📁 notebooks/
-│   ├── ejemplo_python.ipynb
-│   └── ejemplo_r.ipynb
+📁 EconometriaAplicada-SRC/
+├── ejemplo_python.ipynb
+│── ejemplo_r.ipynb
 ├── 📁 .binder/
 │   ├── environment.yml
 │   ├── install.R
