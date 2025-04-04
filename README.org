@@ -148,3 +148,65 @@
   (Versión [[file:./Ejercicios/EjercicioIdentificacionARIMA.pdf][pdf]] para imprimir) --- [[https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios/IdentificaEstosARIMA][_Directorio con más series simuladas_]]
 - [[file:Ejercicios/SegundoEjercicioIdentificacionARIMA.html][Segundo ejercicio de identificación de modelos ARIMA]]
   (Versión [[file:Ejercicios/SegundoEjercicioIdentificacionARIMA.pdf][pdf]] para imprimir) --- [[https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios/IdentificaEstosARIMA][_Directorio con más series simuladas_]]
+
+* Ejecutar notebooks en mybinder o en local
+
+Este repositorio contiene notebooks de Jupyter escritos en *Python* y *R*, diseñados para ejecutarse de forma interactiva a través de [[https://mybinder.org][Binder]].
+
+Incluye ejemplos sobre análisis de datos, visualización, series temporales, entre otros, usando las siguientes bibliotecas:
+
+**Python:**
+- numpy
+- pandas
+- matplotlib
+- seaborn
+- sympy
+- statsmodels
+- dataframe_image
+
+**R:**
+- tfarima
+- latticeExtra
+- readr
+- ggplot2
+- ggfortify
+- jtools
+- zoo
+
+** 🚀 Ejecutar en Binder
+
+Haz clic en el siguiente botón para abrir los notebooks en Binder:
+
+#+BEGIN_CENTER
+[[https://mybinder.org/v2/gh/tu-usuario/tu-repo/HEAD][file:https://mybinder.org/badge_logo.svg]]
+#+END_CENTER
+
+_Recuerda reemplazar `tu-usuario/tu-repo` con la URL real de tu repositorio._
+
+** 📁 Estructura del repositorio
+
+#+BEGIN_SRC text
+📁 tu-repo/
+├── 📁 notebooks/
+│   ├── ejemplo_python.ipynb
+│   └── ejemplo_r.ipynb
+├── 📁 .binder/
+│   ├── environment.yml
+│   ├── install.R
+│   └── runtime.txt
+└── README.org
+#+END_SRC
+
+** 🧪 Requisitos para reproducir localmente
+
+1. Instala [[https://docs.conda.io/en/latest/][conda]] si aún no lo tienes.
+2. Crea el entorno:
+   #+BEGIN_SRC bash
+   conda env create -f .binder/environment.yml
+   conda activate binder-env
+   #+END_SRC
+3. Ejecuta Jupyter:
+   #+BEGIN_SRC bash
+   jupyter notebook
+   #+END_SRC
+

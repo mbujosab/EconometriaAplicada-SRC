@@ -1,24 +1,35 @@
-name: econometria-aplicada
+name: binder-env
 channels:
   - conda-forge
+  - defaults
 dependencies:
-  - python=3.10
-  - jupyter
+  # Python y herramientas base
+  - python=3.11
+  - pip
+  - ipykernel  # necesario para ejecutar notebooks Python
+
+  # Paquetes de Python
+  - numpy
+  - pandas
   - matplotlib
-  - r-base
-  - r-essentials
-  - r-irkernel
-  - r-tfarima
-  - r-latticeextra
-  - r-readr
+  - seaborn
+  - sympy
+  - statsmodels
+
+  # dataframe_image se instala vía pip
+  - pip:
+      - dataframe_image
+
+  # R base y kernel
+  - r-base=4.3
+  - r-irkernel  # para ejecutar notebooks en R
+  - r-devtools  # para instalar desde GitHub si hace falta
+
+  # Paquetes de R disponibles en conda-forge
   - r-ggplot2
   - r-ggfortify
   - r-jtools
+  - r-latticeextra
+  - r-readr
+  - r-tidyverse  # incluye dplyr, ggplot2, readr, etc.
   - r-zoo
-  - pip
-  - pip:
-    - numpy
-    - sympy
-    - pandas
-    - seaborn
-    - statsmodels
