@@ -33,3 +33,9 @@ dependencies:
   - r-readr
   - r-tidyverse
   - r-zoo
+  - r-pastecs
+  - r-knitr
+  - r-moments
+  - r-tseries
+  
+  
