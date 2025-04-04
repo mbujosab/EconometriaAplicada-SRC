@@ -1,2 +1,11 @@
 # install.R
-install.packages("tfarima", repos = "https://cloud.r-project.org")
+
+# Función auxiliar para instalar desde CRAN si no está ya instalado
+install_if_missing <- function(pkg) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    install.packages(pkg, repos = "https://cloud.r-project.org")
+  }
+}
+
+# Instalar tfarima desde CRAN
+install_if_missing("tfarima")

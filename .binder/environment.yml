@@ -3,12 +3,12 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  # Python y herramientas base
+  # Versión de Python y herramientas base
   - python=3.11
   - pip
-  - ipykernel  # necesario para ejecutar notebooks Python
+  - ipykernel
 
-  # Paquetes de Python
+  # Paquetes Python
   - numpy
   - pandas
   - matplotlib
@@ -16,20 +16,20 @@ dependencies:
   - sympy
   - statsmodels
 
-  # dataframe_image se instala vía pip
+  # dataframe_image solo vía pip
   - pip:
       - dataframe_image
 
   # R base y kernel
   - r-base=4.3
-  - r-irkernel  # para ejecutar notebooks en R
-  - r-devtools  # para instalar desde GitHub si hace falta
+  - r-irkernel
+  - r-devtools
 
-  # Paquetes de R disponibles en conda-forge
+  # Paquetes R disponibles en conda-forge
   - r-ggplot2
   - r-ggfortify
   - r-jtools
   - r-latticeextra
   - r-readr
-  - r-tidyverse  # incluye dplyr, ggplot2, readr, etc.
+  - r-tidyverse
   - r-zoo
