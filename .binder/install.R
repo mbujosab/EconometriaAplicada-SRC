@@ -9,3 +9,9 @@ install_if_missing <- function(pkg) {
 
 # Instalar tfarima desde CRAN
 install_if_missing("tfarima")
+cat("tfarima instalado correctamente\n")
+
+install_if_missing("devtools")
+
+# Instala tfarima desde GitHub
+devtools::install_github("fiorucci/tfarima")
