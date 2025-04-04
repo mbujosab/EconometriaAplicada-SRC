@@ -1,11 +1,8 @@
 # install.R
-
-# Función auxiliar para instalar desde CRAN si no está ya instalado
-install_if_missing <- function(pkg) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    install.packages(pkg, repos = "https://cloud.r-project.org")
-  }
-}
-
-# Instalar tfarima desde CRAN
-install_if_missing("tfarima")
+# Install R packages at build time install.packages() syntax
+install.packages("tfarima")      # librería de José Luis Gallego para Time Series
+install.packages("latticeExtra") # para gráficos con doble eje vertical (doubleYScale)
+install.packages("readr")        # para leer ficheros CSV
+install.packages("ggplot2")      # para el scatterplot (alternaticamente library(tidyverse))
+install.packages("jtools")       # para representación resultados estimación
+install.packages("zoo")          # para generar objetos ts (time series)
