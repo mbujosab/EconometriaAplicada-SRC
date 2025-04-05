@@ -127,6 +127,15 @@
 - Lección 7: [[file:./Lecc07.ipynb][notebook]]
 - Lección 8: [[file:./Lecc08.ipynb][notebook]]
 
+** 🚀 Ejecutar notebooks en Binder
+
+Haz clic en el siguiente botón para abrir los notebooks en Binder:
+
+#+BEGIN_CENTER
+[[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD][file:https://mybinder.org/badge_logo.svg]]
+#+END_CENTER
+
+
 * Ejercicios de muestra
 
 - [[file:./Ejercicios/mortality-marriages.html][Mortalidad en Reino Unido y proporción de matrimonios eclesiásticos]]
