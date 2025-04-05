@@ -1,0 +1,147 @@
+#+title: Material para un curso de Econometría Aplicada
+#+author: Marcos Bujosa
+#+LANGUAGE: es
+# +OPTIONS: toc:nil
+
+# +MACRO: imglnk @@html:<a href="$1"><img src="$2"></a>@@
+
+# ###########
+# ESTO DA EL FORMATO FINAL DE LA PÁGINA WEB VÉASE [[https://olmon.gitlab.io/org-themes/]]
+#+SETUPFILE: simple_inlineUCM.theme  
+# ###########
+
+# +attr_html: :width 320px
+# file:./3-2016-07-21-Marca_UCM_logo_negro.png
+# https://www.ucm.es/data/cont/docs/3-2016-07-21-Marca%20UCM%20logo%20negro.png
+
+- Enlaces :: 
+  - [[https://mbujosab.github.io/EconometriaAplicada-SRC/][Web]] con el material
+  - [[https://github.com/mbujosab/EconometriaAplicada-SRC][Repositorio]] con el material
+
+  - [[https://drive.google.com/open?id=0Bwa1A30pN0IwWUtNNzRQRFRJUTQ][Ficha]] de la asignatura
+
+[[file:Calendario-Econometria-Aplicada.pdf][Calendario tentativo]] 
+
+* Regresión con series temporales
+    :PROPERTIES:  
+    :UNNUMBERED: nil
+    :END:  
+
+** Transformación de los datos (Lecc01)
+
+- [[file:./Lecc01.slides.html][slides]]
+- [[file:./Lecc01.html][html]]
+- [[file:./Lecc01.pdf][pdf]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc01.ipynb][notebook en mybinder]]
+
+*** Practicas
+
+- [[file:./Practicas/PracticasGretl/pub/Prct-Lecc01.pdf][pdf file]]
+- Guiones de gretl
+  + [[file:./Practicas/PracticasGretl/pub/scripts/airlinePass.inp][airlinePass.inp]]
+
+
+** Regresión con series temporales - Modelos con componentes deterministas (Lecc02)
+
+- [[file:./Lecc02.slides.html][slides]]
+- [[file:./Lecc02.html][html]]
+- [[file:./Lecc02.pdf][pdf]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc02.ipynb][notebook en mybinder]]
+
+*** Practicas
+
+- [[file:./Practicas/PracticasGretl/pub/Prct-Lecc02.pdf][pdf file]]
+- Guiones de gretl
+  + [[file:./Practicas/PracticasGretl/pub/scripts/componentesAirlinePass.inp][componentesAirlinePass.inp]]
+  + [[file:./Practicas/PracticasGretl/pub/scripts/componentesAirlinePass2.inp][componentesAirlinePass2.inp]]
+
+
+** Correlación y causalidad. Introducción a la cointegración (Lecc03)
+
+- [[file:./Lecc03.slides.html][slides]]
+- [[file:./Lecc03.html][html]]
+- [[file:./Lecc03.pdf][pdf]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc03.ipynb][notebook en mybinder]]
+
+*** Practicas
+
+- [[file:./Practicas/PracticasGretl/pub/Prct-Lecc03.pdf][pdf file]]
+- Guiones de gretl
+  + [[file:./Practicas/PracticasGretl/pub/scripts/GNPvsMelanoma.inp][GNPvsMelanoma.inp]]
+  + [[file:./Practicas/PracticasGretl/pub/scripts/UKinterestRates.inp][UKinterestRates.inp]]
+
+
+* Modelos univariantes de series temporales
+    :PROPERTIES:  
+    :UNNUMBERED: nil
+    :END:  
+
+** Conceptos algebraicos (Lecc04)
+
+- [[file:./Lecc04.slides.html][slides]]
+- [[file:./Lecc04.html][html]]
+- [[file:./Lecc04.pdf][pdf]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc04.ipynb][notebook en mybinder]]
+
+
+** Procesos estocásticos débilmente estacionarios (Lecc05)
+
+- [[file:./Lecc05.slides.html][slides]]
+- [[file:./Lecc05.html][html]]
+- [[file:./Lecc05.pdf][pdf]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc05.ipynb][notebook en mybinder]]
+
+
+** ACF, PACF y densidad espectral de algunos modelos lineales (Lecc06)
+
+- [[file:./Lecc06.slides.html][slides]]
+- [[file:./Lecc06.html][html]]
+- [[file:./Lecc06.pdf][pdf]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc06.ipynb][notebook en mybinder]]
+
+
+** ACF, PACF y densidad espectral de algunos modelos ARMA. Herramientas estadísticas (Lecc07)
+
+- [[file:./Lecc07.slides.html][slides]]
+- [[file:./Lecc07.html][html]]
+- [[file:./Lecc07.pdf][pdf]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc07.ipynb][notebook en mybinder]]
+
+
+** Modelos ARIMA y SARIMA. Identificación y diagnosis del análisis univariante (Lecc08)
+
+- [[file:./Lecc08.slides.html][slides]]
+- [[file:./Lecc08.html][html]]
+- [[file:./Lecc08.pdf][pdf]]
+- [[https://mybinder.org/v2/gh/mbujosab/EconometriaAplicada-SRC/HEAD?labpath=Lecc08.ipynb][notebook en mybinder]]
+
+
+* Ficheros .ipynb (notebooks de jupyter)
+
+- Lección 1: [[file:./Lecc01.ipynb][notebook]]
+- Lección 1: [[file:./Lecc02.ipynb][notebook]]
+- Lección 3: [[file:./Lecc03.ipynb][notebook]]
+- Lección 4: [[file:./Lecc04.ipynb][notebook]]
+- Lección 5: [[file:./Lecc05.ipynb][notebook]]
+- Lección 6: [[file:./Lecc06.ipynb][notebook]]
+- Lección 7: [[file:./Lecc07.ipynb][notebook]]
+- Lección 8: [[file:./Lecc08.ipynb][notebook]]
+
+* Ejercicios de muestra
+
+- [[file:./Ejercicios/mortality-marriages.html][Mortalidad en Reino Unido y proporción de matrimonios eclesiásticos]]
+  (Versión [[file:./Ejercicios/mortality-marriages.pdf][pdf]] para imprimir)
+- [[file:./Ejercicios/NombreOscarYConsumoDePetroleo.html][Popularidad del nombre Óscar en EEUU y consumo de petroleo en Grecia]]
+  (Versión [[file:./Ejercicios/NombreOscarYConsumoDePetroleo.pdf][pdf]] para imprimir)
+- [[file:./Ejercicios/IndicePreciosViviendasNuevasYdeSegundaMano.html][Índice de precios de viviendas nuevas y de segunda mano]]
+  (Versión [[file:./Ejercicios/IndicePreciosViviendasNuevasYdeSegundaMano.pdf][pdf]] para imprimir)
+- [[file:./Ejercicios/LetrasTesoroAmericano3y6meses.html][LetrasTesoroAmericano3y6meses]]
+  (Versión [[file:./Ejercicios/LetrasTesoroAmericano3y6meses.pdf][pdf]] para imprimir)
+- [[file:./Ejercicios/SerieCuentasFinancierasBE.html][SerieCuentasFinancierasBE]]
+  (Versión [[file:./Ejercicios/SerieCuentasFinancierasBE.pdf][pdf]] para imprimir)
+
+
+- [[file:./Ejercicios/EjercicioIdentificacionARIMA.html][Ejercicio de identificación de modelos ARIMA]]
+  (Versión [[file:./Ejercicios/EjercicioIdentificacionARIMA.pdf][pdf]] para imprimir) --- [[https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios/IdentificaEstosARIMA][_Directorio con más series simuladas_]]
+- [[file:Ejercicios/SegundoEjercicioIdentificacionARIMA.html][Segundo ejercicio de identificación de modelos ARIMA]]
+  (Versión [[file:Ejercicios/SegundoEjercicioIdentificacionARIMA.pdf][pdf]] para imprimir) --- [[https://github.com/mbujosab/EconometriaAplicada-SRC/tree/main/Ejercicios/IdentificaEstosARIMA][_Directorio con más series simuladas_]]

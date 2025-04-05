@@ -1,0 +1,569 @@
+#+title:  Lección 2
+#+author: Marcos Bujosa
+#+STARTUP: show4levels
+#+LANGUAGE: es-es
+
+#+EXPORT_FILE_NAME: pub/Prct-Lecc02
+
+# +OPTIONS: toc:nil
+#+OPTIONS: tags:nil
+
+#+LATEX_CLASS: article
+#+LATEX_HEADER: \usepackage[spanish]{babel}
+#+LATEX_HEADER: \usepackage[margin=0.5in]{geometry}
+#+LaTeX_HEADER: \usepackage[svgnames,x11names]{xcolor}
+#+LaTeX_HEADER: \hypersetup{linktoc = all, colorlinks = true, urlcolor = DodgerBlue4, citecolor = PaleGreen1, linkcolor = SpringGreen4}
+#+LaTeX_HEADER: \PassOptionsToPackage{hyphens}{url}
+# +LaTeX_HEADER: \input{notacionLinAlg.tex}
+#+LaTeX_HEADER: \usepackage{nacal}
+
+#+LaTeX_HEADER: \usepackage{framed}
+
+#+LaTeX_HEADER: \usepackage{listings}
+#+LaTeX_HEADER: \input{hansl.tex}
+#+LaTeX_HEADER: \lstnewenvironment{hansl-gretl}
+#+LaTeX_HEADER: {\lstset{language={hansl},basicstyle={\ttfamily\footnotesize},numbers,rame=single,breaklines=true}}
+#+LaTeX_HEADER: {}
+#+LaTeX_HEADER: \newcommand{\hansl}[1]{\lstset{language={hansl},basicstyle={\ttfamily\small}}\lstinline{#1}}
+# +LaTeX_HEADER: \lstset{backgroundcolor=\color{white},basicstyle=\ttfamily\footnotesize,breaklines=true, captionpos=b,commentstyle=\color{mygreen},escapeinside={\%*}{*)}, keywordstyle=\color{blue},stringstyle=\color{mymauve}, }
+# +LaTeX_HEADER: \lstset{backgroundcolor=\color{lightgray!20},basicstyle=\ttfamily\footnotesize,breaklines=true, }
+#+LaTeX_HEADER: \lstset{backgroundcolor=\color{lightgray!20}, }
+
+#+name: setup-listings
+#+begin_src emacs-lisp :exports none :results silent
+  (setq org-latex-listings 'listings)
+  (setq org-latex-custom-lang-environments
+  	;'((emacs-lisp "common-lispcode")))
+  	'((emacs-lisp "hansl-gretl")))
+  (setq org-latex-listings-options
+	'(("frame" "lines")
+	  ("basicstyle" "\\scriptsize")
+	  ("basicstyle" "\\ttfamily")
+	  ("numbers=none" "left")
+	  ("backgroundcolor=\\color{lightgray!20}")
+	  ("numberstyle" "\\tiny")))
+  (setq org-latex-to-pdf-process
+	'("pdflatex -interaction nonstopmode -output-directory %o %f"
+	"pdflatex -interaction nonstopmode -output-directory %o %f"
+	"pdflatex -interaction nonstopmode -output-directory %o %f"))
+  (org-add-link-type
+   "latex" nil
+   (lambda (path desc format)
+     (cond
+      ((eq format 'html)
+       (format "<span class=\"%s\">%s</span>" path desc))
+      ((eq format 'latex)
+       (format "\\%s{%s}" path desc)))))
+#+end_src
+
+# \lstnewenvironment{code}
+#     {\lstset{language=haskell,
+#     basicstyle=\small\ttfamily,
+#     numbers=left,
+#     numberstyle=\tiny\color{gray},
+#     backgroundcolor=\color{lightgray},
+#     firstnumber=auto
+#     }}
+#     {}
+
+#+bibliography: ref.bib
+
+# +latex: \clearpage
+
+
+* Componentes no observables del número de viajeros internacionales
+   :PROPERTIES:
+   :header-args: :tangle ./pub/scripts/componentesAirlinePass.inp
+   :END:
+
+   | Guión: | [[https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Practicas/PracticasGretl/pub/scripts/componentesAirlinePass.inp][componentesAirlinePass.inp]] |
+   
+Vamos a reproducir el ejemplo de estimación de componentes no
+observables visto en clase. Los datos son mensuales y contienen el
+número de viajeros internacionales (en miles) en las líneas aéreas
+norteamericanas en los años 1949--1960 que aparece en manual de Box &
+Jenkins.
+
+***** Objetivo
+1. Reproducir el ejemplo visto en la lección 2.
+
+***** Carga de datos
+*/~Archivo --> Abrir datos --> Archivo de muestra~/* y en la pestaña
+*/~Gretl~/* seleccione =bjg=.
+
+#+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+/o bien teclee en linea de comandos/:
+#+NAME: Lectura del fichero de datos
+#+begin_src hansl 
+open bjg
+#+end_src
+#+latex: }
+
+** Actividad 1 - generar una serie con el índice temporal y su cuadrado
+Pulse en el menú desplegable */~Añadir~/* que aparece arriba, en el centro de la
+ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
+  + */~Añadir -> Variable índices~/*
+
+    #+latex: {\vspace{1pt} \footnotesize \color{gray!70!black}
+    /o bien teclee en linea de comandos/:
+      #+NAME: Mostramos los valores de los datos en columna
+      #+begin_src hansl
+      genr time
+      #+end_src
+    #+latex: }
+
+Seleccione con el ratón la variable =time= y luego pulse en el menú desplegable */~Añadir~/* que aparece arriba, en el centro de la
+ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
+  + */~Añadir -> Cuadrados de las variables seleccionadas~/*
+
+    #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+    /o bien teclee en linea de comandos/: 
+      #+NAME: Aplicamos la transformación logarítmica
+      #+begin_src hansl 
+      square time
+      #+end_src
+    #+latex: }
+ 
+#+latex: \vspace{-3pt}   
+
+** Actividad 2 - Ajustar una tendencia lineal
+#+ATTR_BEAMER: :overlay <+->
+- Estime el modelo mediante los menús desplegables: */~Modelo ->
+  Mínimos Cuadrados Ordinarios~/*; indique a [[https://gretl.sourceforge.net/es.html][Gretl]] el regresando y los
+  regresores y pulse */~Aceptar~/*.
+  
+- ``Pinche'' */~Archivo~/* en la ventana del modelo estimado y
+  seleccione */~guardar como un icono y cerrar~/*
+
+  #+latex: {\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+begin_src hansl
+    TendenciaLineal  <- ols lg 0 time
+    #+end_src
+    (/el cero/ =0= /indica el término constante/: =const=)
+  #+latex: }
+  
+- Recupere el modelo ``pinchando'' sobre su icono
+
+  #+latex: {\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
+  /o teclee en linea de comandos el nombre que ha dado al icono
+  seguido de/ =.show=, /es decir/:
+    #+NAME: Mostramos la ventana del ajuste MCO
+    #+begin_src hansl 
+    TendenciaLineal.show
+    #+end_src
+  #+latex: }
+
+***** Recuperemos los valores ajustados 
+    :PROPERTIES:
+    :BEAMER_ENV: block
+    :BEAMER_ACT: <+->
+    :END:
+    
+- Desde la ventana del modelo ajustado (recupérese con su icono),
+  ``pinche'' en */~guardar -> valores estimados~/*. Elija como nombre
+  =phat= (puede añadir una descripción de la variable). Pulse en
+  */~Aceptar~/*
+- Repita para guardar los =residuos= con el nombre =ehat=
+  
+  #+latex: {\vspace{1pt} \footnotesize \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+NAME: Guardamos las series de valores ajustados y de errores
+    #+begin_src hansl 
+    series TendenciaLineal =  $yhat
+    series Comp_irregular =  $uhat
+    #+end_src
+  #+latex: }
+
+
+***** Gráfico de la serie y la tendencia lineal
+- Marque las variables =lg= y =Tendencia= (pulsando ~ctrl~). Pinche
+  con el botón derecho del ratón sobre ellas. Elija */~Gráfico de
+  series temporales~/*
+
+  #+latex: {\vspace{1pt} \footnotesize \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+begin_src hansl 
+    GraficoTendenciaLineal <- gnuplot lg TendenciaLineal --time-series --with-lines
+    GraficoTendenciaLineal.show
+    #+end_src
+  #+latex: }
+  
+En la zona inferior izquierda de la ventana principal puede ver una
+serie de iconos. Uno de ellos es la */~vista de iconos de sesión~/*.
+
+
+***** Gráfico del componente irregular
+
+- Marque la variable correspondiente al componente irregular (pulsando
+  ~ctrl~) y pinche con el botón derecho del ratón sobre ella. Elija
+  */~Gráfico de series temporales~/*
+
+  #+latex: {\vspace{1pt} \footnotesize \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+begin_src hansl 
+    GraficoComponenteIrregular <- gnuplot Comp_irregular --time-series --with-lines
+    GraficoComponenteIrregular.show
+    #+end_src
+  #+latex: }
+
+***** Gráfico de la diferencia estacional del componente irregular
+
+- Seleccione con el ratón la variable correspondiente al componente
+  irregular y luego pulse en el menú desplegable */~Añadir~/* que
+  aparece arriba, en el centro de la ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
+    + */~Añadir -> Diferencias estacionales de las variables
+      seleccionadas~/*
+
+  #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+  /o bien teclee en linea de comandos/: 
+    #+begin_src hansl 
+    sdiff Comp_irregular
+    #+end_src
+  #+latex: }
+
+- Genere un gráfico con la nueva serie diferenciada estacionalmente
+
+  #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black} 
+  /en linea de comandos/: 
+    #+begin_src hansl 
+    GraficoComponenteIrregularD12 <- gnuplot sd_Comp_irregular --time-series --with-lines
+    GraficoComponenteIrregularD12.show
+    #+end_src
+  #+latex: }
+
+
+** Actividad 3 - Ajustar una tendencia cuadrática
+
+Repita el ejercicio anterior, pero ajustando una tendencia cuadrática
+
+- Estime la tendencia por MCO y vea los resultados de la regresión
+- Guarde los valores ajustados (TendenciaCuadratica)
+- Guarde los residuos (ComponenteIrregular2)
+- Dibuje la tendencia
+- Dibuje el componente irregular
+- Dibuje la diferencia estacional del componente irregular
+  
+#+latex: {\vspace{1pt} \footnotesize \color{gray!70!black}
+  #+NAME: Guardamos las series de valores ajustados y de errores
+  #+begin_src hansl :exports none
+  # modelo con tendencia cuadrática
+  TendenciaCuadratica  <- ols lg 0 time sq_time
+  TendenciaCuadratica.show
+    
+  series TendenciaCuadratica =  $yhat
+  series Comp_irregular2 =  $uhat
+
+  GraficoTendenciaCuadratica <- gnuplot lg TendenciaCuadratica --time-series --with-lines
+  GraficoTendenciaCuadratica.show
+
+  GraficoComponenteIrregular2 <- gnuplot Comp_irregular2 --time-series --with-lines
+  GraficoComponenteIrregular2.show
+
+  sdiff Comp_irregular2
+
+  GraficoComponenteIrregular2D12 <- gnuplot sd_Comp_irregular2 --time-series --with-lines
+  GraficoComponenteIrregular2D12.show
+  #+end_src
+#+latex: }
+
+
+** Actividad 4 - Ajustar una tendencia cuadrática y un componente estacional determinista
+
+#+begin_src hansl :exports none
+# modelo con tendencia cuadrática
+#+end_src
+
+Pulse en el menú desplegable */~Añadir~/* que aparece arriba, en el centro de la
+ventana principal de [[https://gretl.sourceforge.net/es.html][Gretl]].
+  + */~Añadir -> Variables ficticias estacionales~/*
+
+  #+latex: {\vspace{1pt} \footnotesize \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+NAME: Mostramos los valores de los datos en columna
+    #+begin_src hansl 
+    seasonals()
+    #+end_src
+  #+latex: }
+
+- Estime el modelo mediante los menús desplegables: */~Modelo ->
+  Mínimos Cuadrados Ordinarios~/*; indique a [[https://gretl.sourceforge.net/es.html][Gretl]] el regresando y los
+  regresores y pulse */~Aceptar~/*.
+  
+- ``Pinche'' */~Archivo~/* en la ventana del modelo estimado y
+  seleccione */~guardar como un icono y cerrar~/*
+
+  #+latex: {\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+begin_src hansl
+    ModeloCompleto  <- ols lg const time sq_time S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 S11
+    ModeloCompleto.show
+    #+end_src
+  #+latex: }
+
+***** Genere una nueva serie con la tendencia y otra con el componente estacional estimados
+    :PROPERTIES:
+    :BEAMER_ENV: block
+    :BEAMER_ACT: <+->
+    :END:
+
+- Cálculo de la tendencia estimada: \Estmc{\beta_1} =const= + \Estmc{\beta_2} =time= + \Estmc{\beta_3} =sq_time=
+    
+  */~Guardar -> Definir una nueva variable~/* y teclee:
+  #+latex: {\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
+    #+begin_src hansl 
+    series Tendencia3 = $coeff[1] + $coeff[2]*time + $coeff[3]*sq_time
+    #+end_src
+  #+latex: }
+  o bien:
+  #+latex: {\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
+    #+begin_src hansl 
+    series Tendencia3 = $coeff(const) + $coeff(time)*time + $coeff(sq_time)*sq_time
+    #+end_src
+  #+latex: }
+
+- De manera análoga genere una serie con el componente estacional
+
+  #+latex: {\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
+    #+begin_src hansl 
+    series Comp_Estacional3 = $coeff(S1)*S1 + $coeff(S2)*S2 + $coeff(S3)*S3 + $coeff(S4)*S4 \
+                            + $coeff(S5)*S5 + $coeff(S6)*S6 + $coeff(S7)*S7 + $coeff(S8)*S8 \
+                            + $coeff(S9)*S9 + $coeff(S10)*S10 + $coeff(S11)*S11 
+    #+end_src
+  #+latex: }
+
+- Genere los siguientes gráficos
+  + la serie y su tendencia cuadrática
+
+  + El componente estacional
+
+  + El componente irregular
+
+  + La serie y su ajuste
+
+  #+latex: {\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
+    #+begin_src hansl 
+    GraficoTendencia3 <- gnuplot lg Tendencia3 --time-series --with-lines
+    GraficoTendencia3.show
+
+    GraficoComponenteEstacional3 <- gnuplot Comp_Estacional3 --time-series --with-lines
+    GraficoComponenteEstacional3.show
+
+    series ComponenteIrregular3 = $uhat
+    GraficoComponenteIrregular3 <- gnuplot ComponenteIrregular3 --time-series --with-lines
+    GraficoComponenteIrregular3.show
+
+    series Ajuste3 = $yhat
+    GraficoAjuste3 <- gnuplot lg Ajuste3 --time-series --with-lines
+    GraficoAjuste3.show
+    #+end_src
+  #+latex: }
+
+
+# +LATEX: \clearpage
+#+latex: \vspace{10pt}
+#+latex: \noindent
+*Código completo de la práctica* ~componentesAirlinePass.inp~
+#+latex: \vspace{10pt}
+\lstinputlisting{scripts/componentesAirlinePass.inp}
+#+LATEX: \clearpage
+
+
+* Componentes no observables del número de viajeros internacionales 2
+   :PROPERTIES:
+   :header-args: :tangle ./pub/scripts/componentesAirlinePass2.inp
+   :END:
+
+   | Guión: | [[https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Practicas/PracticasGretl/pub/scripts/componentesAirlinePass2.inp][componentesAirlinePass2.inp]] |
+   
+Continuamos el ejemplo anterior, pero ahora vamos a reducir el modelo
+quitando variables no significativas.
+
+** Actividad 1 - Estime el modelo con tendencia cuadrática y estacionalidad determinista
+
+Repita la estimación del último modelo de la practica anterior
+
+#+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+  #+begin_src hansl 
+  open bjg
+  genr time
+  square time
+  seasonals()
+  ModeloInicial  <- ols lg const time sq_time S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 S11
+  ModeloInicial.show
+ #+end_src
+#+latex: }
+
+** Actividad 2 - Reducir el modelo eliminando secuencialmente variables no significativas
+
+Los p-valores de algunos parámetros indican que sus estimaciones son
+no significativas. En particular los correspondientes a las variables
+ficticias de enero, febrero y octubre.
+
+Reduzca el modelo, eliminando aquellas variables no significativas al
+5%. Verifique que el conjunto de variables excluidas es conjuntamente
+no significativo.
+
++ Desde la ventana del modelo estimado ``pinche'' en */~contrastes -->
+  omitir variables~/* y marque la opción /~Eliminación secuencial de
+  variables utilizando el valor p a dos colas~/, indique una
+  significación del 5% y pulse en */~Aceptar~/*
+  #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+    #+begin_src hansl 
+    PrimeraReduccion <- omit --auto=0.05
+    #+end_src
+  #+latex: }
+
+
+** Actividad 3 - Contrastar la ausencia de autocorrelación
+
+- Observe bajo el valor de contraste de Durbin-Watson (0,691477).
+
+- Desde la ventana del modelo estimado ``pinche'' en */~contrastes -->
+  valor p del estadístico Durbin-Watson~/*. 
+  #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+begin_src hansl 
+    scalar DW = $dw
+    scalar PDW = $dwpval
+    print DW
+    print PDW
+    #+end_src
+  #+latex: }
+
+  Claramente se rechaza la ausencia de autocorrelación de orden uno.
+
+- Desde la ventana del modelo estimado ``pinche'' en */~contrastes -->
+  Autocorrelación~/*. E indique por ejemplo 3 retardos. 
+  #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+begin_src hansl
+    modtest --autocorr 3
+    #+end_src
+  #+latex: }
+
+  Claramente se rechaza la ausencia de autocorrelación y se observa
+  que el retardo de orden uno es muy significativo.
+
+
+** Actividad 4 - Estimación del modelo con errores estándar robustos
+
+Los test de autocorrelación indican que la inferencia empleada para
+reducir el modelo es incorrecta. A la hora de calcular las
+desviaciones típicas de las estimaciones hay que tener en cuenta que
+las perturbaciones están autocorreladas.
+
+- Estime el modelo inicial con errores estándar robustos: */~Modelo ->
+  Mínimos Cuadrados Ordinarios~/*; indique a [[https://gretl.sourceforge.net/es.html][Gretl]] el regresando y los
+  regresores; marque la opción /~Desviaciones típicas robustas~/ y
+  pulse */~Aceptar~/*.
+
+  #+latex: {\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+begin_src hansl
+    ModeloInicialDTR  <- ols lg const time sq_time S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 S11 --robust
+    ModeloInicialDTR.show
+    #+end_src
+  #+latex: }
+
+  Fíjese que al 5% de significación, solo es no significativa al
+  dummie correspondiente al mes de febrero.
+
+- Reduzca el modelo, eliminando aquellas variables no significativas
+  al 5%. Verifique que el conjunto de variables excluidas es
+  conjuntamente no significativo.
+
+  Desde la ventana del modelo estimado ``pinche'' en */~contrastes -->
+  omitir variables~/* y marque la opción /~Eliminación secuencial de
+  variables utilizando el valor p a dos colas~/, indique una
+  significación del 5% y pulse en */~Aceptar~/*
+  #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+begin_src hansl 
+    ModeloReducidoDTR <- omit --auto=0.05
+    #+end_src
+  #+latex: }
+
+  Fíjese que únicamente se elimina la dummie correspondiente a
+  febrero.
+
+** Actividad 4 - Estimación incluyendo en el modelo la autocorrelación de orden uno en las perturbaciones
+
+- Re-estime el modelo incluyendo en el modelo un AR(1) para las
+  perturbaciones: */~Modelo -> Series temporales univariantes ->
+  Errores AR -> AR(1)~/* y pulse */~Aceptar~/*.
+  
+  #+latex: {\vspace{0pt} \footnotesize \color{gray!70!black}
+  /o bien teclee en linea de comandos/:
+    #+begin_src hansl 
+    ModeloAR1  <- ar1 lg const time sq_time S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 S11
+    ModeloAR1.show
+    #+end_src
+  #+latex: }
+
+- Elimine secuencialmente las variables no significativas al 5%
+
+  #+begin_src hansl :exports none
+  ModeloAR1Reducido <- omit --auto=0.05 
+  ModeloAR1Reducido.show
+  #+end_src
+
+- Haga un gráfico de los residuos y observe que "son estacionarios"
+  (es decir, que tienen el aspecto de una realización de un proceso
+  estacionario)
+  #+begin_src hansl :exports none
+  series Residuos = $uhat
+  GraficoResiduos <- gnuplot Residuos --time-series --with-lines
+  GraficoResiduos.show
+  #+end_src
+
+- Haga un gráfico de frecuencias de los residuos y observe que tiene
+  la forma campaniforme compatible con una distribución gaussiana.
+
+  Marque con el ratón la variable =Residuos= y pinchado en la serie
+  marcada con el botón derecho del ratón seleccione */~Distribución de
+  frecuencias~/*.
+
+  #+latex: {\vspace{3pt} \color{gray!70!black}
+  /O bien mediante el comando/
+    #+begin_src hansl
+    freq Residuos --show-plot
+    #+end_src
+  #+latex: }
+  donde ~--show-plot~ indica que se genere el gráfico en una
+  ventana. Observe que dicho comando también genera una ventana de texto
+  con la distribución de frecuencias relativa y acumulada.
+
+  #+begin_src hansl :exports none
+  series Residuos = $uhat
+  GraficoResiduos <- gnuplot Residuos --time-series --with-lines
+  GraficoResiduos.show
+  #+end_src
+  
+
+- Realice el contraste de normalidad de los residuos: Desde la ventana
+  del modelo estimado ``pinche'' en */~contrastes --> Normalidad de
+  los residuos~/* y marque la opción /~Eliminación secuencial de
+  variables utilizando el valor p a dos colas~/, indique una
+  significación del 5% y pulse en */~Aceptar~/*
+
+  O bien desde la ventana principal: marque la variable =Residuos= y
+  ``pinche'' en */~Variable --> Contraste de Normalidad~/*
+
+  #+latex: {\vspace{3pt} \color{gray!70!black}
+  /O bien mediante el comando/
+    #+begin_src hansl
+    normtest Residuos --all
+    #+end_src
+  #+latex: }
+
+
+# +LATEX: \clearpage
+#+latex: \vspace{10pt}
+#+latex: \noindent
+*Código completo de la práctica* ~componentesAirlinePass2.inp~
+#+latex: \vspace{10pt}
+\lstinputlisting{scripts/componentesAirlinePass2.inp}
+#+LATEX: \clearpage
+  
+

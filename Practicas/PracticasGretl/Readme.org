@@ -1,0 +1,11 @@
+
+1. Los .org de este directorio son para trabajar con ellos con emacs,
+   no con scimax
+
+2. Los guiones se extraen con C-c C-v C-t
+
+3. Los pdfs se crean con C-c C-e l o
+
+4. La versión screen es para ser exporada con beamer C-c C-e l O
+
+M-x  org-beamer-export-to-pdf

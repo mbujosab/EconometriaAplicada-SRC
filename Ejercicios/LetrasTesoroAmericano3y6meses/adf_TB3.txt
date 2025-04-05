@@ -1,0 +1,14 @@
+
+Contraste aumentado de Dickey-Fuller para TB3
+incluyendo 3 retardos de (1-L)TB3
+tamaño muestral 2379
+la hipótesis nula de raíz unitaria es: [a = 1]
+
+  contraste con constante 
+  modelo: (1-L)y = b0 + (a-1)*y(-1) + ... + e
+  valor estimado de (a - 1): -0,00371135
+  estadístico de contraste: tau_c(1) = -2,43813
+  valor p asintótico 0,1312
+  Coef. de autocorrelación de primer orden de e: -0,003
+  diferencias retardadas: F(3, 2374) = 63,404 [0,0000]
+

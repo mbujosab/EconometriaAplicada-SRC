@@ -1,0 +1,48 @@
+
+Evaluaciones de la función: 37
+Evaluaciones del gradiente: 14
+
+ARIMA_T4IPV2M:
+ARIMA, usando las observaciones 2008:2-2022:4 (T = 59)
+Estimado usando AS 197 (MV exacta)
+Variable dependiente: (1-L) T4IPV2M
+Desviaciones típicas basadas en el Hessiano
+
+             coeficiente   Desv. típica     z      valor p 
+  ---------------------------------------------------------
+  phi_1        0,290799      0,118903      2,446   0,0145   **
+  phi_2        0,510969      0,149725      3,413   0,0006   ***
+  Theta_1     −0,843988      0,177320     −4,760   1,94e-06 ***
+
+Media de la vble. dep.  0,100821   D.T. de la vble. dep.   2,138823
+Media de innovaciones   0,069384   D.T. innovaciones       1,521217
+R-cuadrado              0,957548   R-cuadrado corregido    0,956032
+Log-verosimilitud      −110,6874   Criterio de Akaike      229,3748
+Criterio de Schwarz     237,6849   Crit. de Hannan-Quinn   232,6187
+
+                       Real Imaginaria     Módulo Frecuencia
+  -----------------------------------------------------------
+  AR
+   Raíz  1           1,1430     0,0000     1,1430     0,0000
+   Raíz  2          -1,7122     0,0000     1,7122     0,5000
+  MA (estacional)
+   Raíz  1           1,1849     0,0000     1,1849     0,0000
+  -----------------------------------------------------------
+
+ARIMA_T4IPV2M guardado
+
+Contraste de la hipótesis nula de distribución Normal:
+Chi-cuadrado(2) = 1,017 con valor p 0,60142
+
+
+Contraste de ARCH de orden 4
+
+Estadístico de contraste: TR^2 = 0,710542,
+con valor p = P(Chi-cuadrado(4) > 0,710542) = 0,950023
+
+
+Contraste de autocorrelación hasta el orden 15
+
+Ljung-Box Q' = 19,2946,
+con valor p = P(Chi-cuadrado(12) > 19,2946) = 0,08166
+

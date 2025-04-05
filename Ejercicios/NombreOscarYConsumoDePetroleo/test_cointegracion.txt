@@ -1,0 +1,68 @@
+
+Etapa 1: contrastando la existencia de una raíz unitaria en ConsumoPetroleo
+
+Contraste aumentado de Dickey-Fuller para ConsumoPetroleo
+contrastar hacia abajo desde 2 retardos, con el criterio AIC
+tamaño muestral 41
+la hipótesis nula de raíz unitaria es: [a = 1]
+
+  contraste con constante 
+  incluyendo un retardo de (1-L)ConsumoPetroleo
+  modelo: (1-L)y = b0 + (a-1)*y(-1) + ... + e
+  valor estimado de (a - 1): -0,0697783
+  estadístico de contraste: tau_c(1) = -1,6299
+  valor p asintótico 0,4672
+  Coef. de autocorrelación de primer orden de e: -0,087
+
+Etapa 2: contrastando la existencia de una raíz unitaria en FrecuenciaOscar
+
+Contraste aumentado de Dickey-Fuller para FrecuenciaOscar
+contrastar hacia abajo desde 2 retardos, con el criterio AIC
+tamaño muestral 41
+la hipótesis nula de raíz unitaria es: [a = 1]
+
+  contraste con constante 
+  incluyendo un retardo de (1-L)FrecuenciaOscar
+  modelo: (1-L)y = b0 + (a-1)*y(-1) + ... + e
+  valor estimado de (a - 1): -0,0550591
+  estadístico de contraste: tau_c(1) = -1,71873
+  valor p asintótico 0,4218
+  Coef. de autocorrelación de primer orden de e: -0,038
+
+Etapa 3: regresión cointegrante
+
+Regresión cointegrante - 
+MCO, usando las observaciones 1980-2022 (T = 43)
+Variable dependiente: ConsumoPetroleo
+
+                   coeficiente  Desv. típica  Estadístico t  valor p 
+  -------------------------------------------------------------------
+  const            109,882       9,52812          11,53      1,90e-14 ***
+  FrecuenciaOscar    0,0900421   0,00375080       24,01      9,21e-26 ***
+
+Media de la vble. dep.  329,9135   D.T. de la vble. dep.   65,44053
+Suma de cuad. residuos  11946,32   D.T. de la regresión    17,06967
+R-cuadrado              0,933581   R-cuadrado corregido    0,931961
+Log-verosimilitud      -181,9944   Criterio de Akaike      367,9888
+Criterio de Schwarz     371,5112   Crit. de Hannan-Quinn   369,2878
+rho                     0,538577   Durbin-Watson           0,872979
+
+Etapa 4: contrastando la existencia de una raíz unitaria en uhat
+
+Contraste aumentado de Dickey-Fuller para uhat
+contrastar hacia abajo desde 2 retardos, con el criterio AIC
+tamaño muestral 42
+la hipótesis nula de raíz unitaria es: [a = 1]
+
+  contraste sin constante 
+  incluyendo 0 retardos de (1-L)uhat
+  modelo: (1-L)y = (a-1)*y(-1) + e
+  valor estimado de (a - 1): -0,461423
+  estadístico de contraste: tau_c(2) = -3,49843
+  valor p asintótico 0,03258
+  Coef. de autocorrelación de primer orden de e: 0,094
+
+Hay evidencia de una relación cointegrante si:
+(a) La hipótesis de existencia de raíz unitaria no se rechaza para las variables individuales y
+(b) La hipótesis de existencia de raíz unitaria se rechaza para los residuos (uhat) de la regresión cointegrante.
+

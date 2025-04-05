@@ -1,0 +1,69 @@
+
+Etapa 1: contrastando la existencia de una raíz unitaria en Std_mortality
+
+Contraste aumentado de Dickey-Fuller para Std_mortality
+contrastar hacia abajo desde 9 retardos, con el criterio AIC
+tamaño muestral 45
+la hipótesis nula de raíz unitaria es: [a = 1]
+
+  contraste con constante 
+  incluyendo 0 retardos de (1-L)Std_mortality
+  modelo: (1-L)y = b0 + (a-1)*y(-1) + e
+  valor estimado de (a - 1): 0,00678121
+  estadístico de contraste: tau_c(1) = 0,615887
+  valor p asintótico 0,9902
+  Coef. de autocorrelación de primer orden de e: 0,085
+
+Etapa 2: contrastando la existencia de una raíz unitaria en Proportion_marriages
+
+Contraste aumentado de Dickey-Fuller para Proportion_marriages
+contrastar hacia abajo desde 9 retardos, con el criterio AIC
+tamaño muestral 39
+la hipótesis nula de raíz unitaria es: [a = 1]
+
+  contraste con constante 
+  incluyendo 6 retardos de (1-L)Proportion_marriages
+  modelo: (1-L)y = b0 + (a-1)*y(-1) + ... + e
+  valor estimado de (a - 1): 0,0831149
+  estadístico de contraste: tau_c(1) = 1,04236
+  valor p asintótico 0,9971
+  Coef. de autocorrelación de primer orden de e: -0,068
+  diferencias retardadas: F(6, 31) = 3,197 [0,0147]
+
+Etapa 3: regresión cointegrante
+
+Regresión cointegrante - 
+MCO, usando las observaciones 1866-1911 (T = 46)
+Variable dependiente: Std_mortality
+
+                      coeficiente  Desv. típica  Estadístico t  valor p 
+  ----------------------------------------------------------------------
+  const               -10,8466      1,42447         -7,614      1,45e-09 ***
+  Proportion_marri~     0,418536    0,0203914       20,53       3,67e-24 ***
+
+Media de la vble. dep.  18,32174   D.T. de la vble. dep.   2,135615
+Suma de cuad. residuos  19,40865   D.T. de la regresión    0,664158
+R-cuadrado              0,905434   R-cuadrado corregido    0,903284
+Log-verosimilitud      -45,42395   Criterio de Akaike      94,84790
+Criterio de Schwarz     98,50518   Crit. de Hannan-Quinn   96,21794
+rho                     0,228283   Durbin-Watson           1,535570
+
+Etapa 4: contrastando la existencia de una raíz unitaria en uhat
+
+Contraste aumentado de Dickey-Fuller para uhat
+contrastar hacia abajo desde 9 retardos, con el criterio AIC
+tamaño muestral 45
+la hipótesis nula de raíz unitaria es: [a = 1]
+
+  contraste sin constante 
+  incluyendo 0 retardos de (1-L)uhat
+  modelo: (1-L)y = (a-1)*y(-1) + e
+  valor estimado de (a - 1): -0,771717
+  estadístico de contraste: tau_c(2) = -5,22784
+  valor p asintótico 5,236e-05
+  Coef. de autocorrelación de primer orden de e: 0,023
+
+Hay evidencia de una relación cointegrante si:
+(a) La hipótesis de existencia de raíz unitaria no se rechaza para las variables individuales y
+(b) La hipótesis de existencia de raíz unitaria se rechaza para los residuos (uhat) de la regresión cointegrante.
+

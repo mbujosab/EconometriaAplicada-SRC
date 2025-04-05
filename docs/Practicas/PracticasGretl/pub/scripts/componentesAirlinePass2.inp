@@ -1,0 +1,38 @@
+open bjg
+genr time
+square time
+seasonals()
+ModeloInicial  <- ols lg const time sq_time S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 S11
+ModeloInicial.show
+
+PrimeraReduccion <- omit --auto=0.05
+
+scalar DW = $dw
+scalar PDW = $dwpval
+print DW
+print PDW
+
+modtest --autocorr 3
+
+ModeloInicialDTR  <- ols lg const time sq_time S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 S11 --robust
+ModeloInicialDTR.show
+
+ModeloReducidoDTR <- omit --auto=0.05
+
+ModeloAR1  <- ar1 lg const time sq_time S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 S11
+ModeloAR1.show
+
+ModeloAR1Reducido <- omit --auto=0.05 
+ModeloAR1Reducido.show
+
+series Residuos = $uhat
+GraficoResiduos <- gnuplot Residuos --time-series --with-lines
+GraficoResiduos.show
+
+freq Residuos --show-plot
+
+series Residuos = $uhat
+GraficoResiduos <- gnuplot Residuos --time-series --with-lines
+GraficoResiduos.show
+
+normtest Residuos --all

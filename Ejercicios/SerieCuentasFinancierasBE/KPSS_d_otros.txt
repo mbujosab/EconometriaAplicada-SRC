@@ -1,0 +1,11 @@
+
+Contraste KPSS para d_BE_2_5_8_16
+
+T = 59
+Parámetro de truncamiento de los retardos = 4
+Estadístico de contraste = 0,216133
+
+                      10%      5%      1%
+Valores críticos: 0,351   0,462   0,727
+Valor p > .10
+

@@ -1,0 +1,11 @@
+
+Contraste KPSS para l_x
+
+T = 480
+Parámetro de truncamiento de los retardos = 5
+Estadístico de contraste = 1,77747
+
+                      10%      5%      1%
+Valores críticos: 0,348   0,462   0,742
+Valor p < .01
+

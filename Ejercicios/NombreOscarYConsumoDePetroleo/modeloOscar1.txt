@@ -1,0 +1,31 @@
+
+Evaluaciones de la función: 37
+Evaluaciones del gradiente: 15
+
+ARMAoscar:
+ARMA, usando las observaciones 1980-2022 (T = 43)
+Estimado usando AS 197 (MV exacta)
+Variable dependiente: FrecuenciaOscar
+Desviaciones típicas basadas en el Hessiano
+
+             coeficiente   Desv. típica     z       valor p 
+  ----------------------------------------------------------
+  const      2083,23       517,026         4,029   5,60e-05  ***
+  phi_1         0,951550     0,0384860    24,72    5,82e-135 ***
+  theta_1       0,567719     0,127542      4,451   8,54e-06  ***
+
+Media de la vble. dep.  2443,651   D.T. de la vble. dep.   702,2265
+Media de innovaciones   16,93553   D.T. innovaciones       138,9316
+R-cuadrado              0,960578   R-cuadrado corregido    0,959616
+Log-verosimilitud      -274,9813   Criterio de Akaike      557,9626
+Criterio de Schwarz     565,0074   Crit. de Hannan-Quinn   560,5605
+
+                       Real Imaginaria     Módulo Frecuencia
+  -----------------------------------------------------------
+  AR
+   Raíz  1           1,0509     0,0000     1,0509     0,0000
+  MA
+   Raíz  1          -1,7614     0,0000     1,7614     0,5000
+  -----------------------------------------------------------
+
+ARMAoscar guardado

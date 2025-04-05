@@ -1,0 +1,31 @@
+
+Evaluaciones de la función: 289
+Evaluaciones del gradiente: 80
+
+Modelo 2: ARMA, usando las observaciones 1866-1911 (T = 46)
+Estimado usando AS 197 (MV exacta)
+Variable dependiente: Std_mortality
+Desviaciones típicas basadas en el Hessiano
+
+             coeficiente   Desv. típica      z      valor p 
+  ----------------------------------------------------------
+  const       18,0782       3,69647         4,891   1,00e-06 ***
+  phi_1        0,996455     0,00501938    198,5     0,0000   ***
+  theta_1      0,401166     0,171108        2,345   0,0191   **
+  theta_2      0,345176     0,108887        3,170   0,0015   ***
+
+Media de la vble. dep.  18,32174   D.T. de la vble. dep.   2,135615
+Media de innovaciones  -0,094657   D.T. innovaciones       0,185241
+R-cuadrado              0,994379   R-cuadrado corregido    0,994117
+Log-verosimilitud       9,085184   Criterio de Akaike     -8,170368
+Criterio de Schwarz     0,972839   Crit. de Hannan-Quinn  -4,745268
+
+                       Real Imaginaria     Módulo Frecuencia
+  -----------------------------------------------------------
+  AR
+   Raíz  1           1,0036     0,0000     1,0036     0,0000
+  MA
+   Raíz  1          -0,5811    -1,5998     1,7021    -0,3055
+   Raíz  2          -0,5811     1,5998     1,7021     0,3055
+  -----------------------------------------------------------
+

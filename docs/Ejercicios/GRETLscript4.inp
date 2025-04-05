@@ -1,0 +1,5 @@
+string directory = $(pwd) ~ "/IdentificaEstosARIMA"
+set workdir "@directory"
+open SeriesSimuladas4/3fc69e.csv
+setobs 4 1985:1 --time-series
+store 3fc69e-4.gdt x

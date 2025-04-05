@@ -1,0 +1,39 @@
+
+Modelo 6: MCO, usando las observaciones 1866-1911 (T = 46)
+Variable dependiente: Std_mortality
+
+                      coeficiente  Desv. típica  Estadístico t  valor p 
+  ----------------------------------------------------------------------
+  const               -10,8466      1,42447         -7,614      1,45e-09 ***
+  Proportion_marri~     0,418536    0,0203914       20,53       3,67e-24 ***
+
+Media de la vble. dep.  18,32174   D.T. de la vble. dep.   2,135615
+Suma de cuad. residuos  19,40865   D.T. de la regresión    0,664158
+R-cuadrado              0,905434   R-cuadrado corregido    0,903284
+F(1, 44)                421,2815   Valor p (de F)          3,67e-24
+Log-verosimilitud      -45,42395   Criterio de Akaike      94,84790
+Criterio de Schwarz     98,50518   Crit. de Hannan-Quinn   96,21794
+rho                     0,228283   Durbin-Watson           1,535570
+
+
+Contraste de la hipótesis nula de distribución Normal:
+Chi-cuadrado(2) = 0,260 con valor p 0,87796
+
+
+Contraste de heterocedasticidad de White
+
+Estadístico de contraste: TR^2 = 1,729996,
+con valor p = P(Chi-cuadrado(2) > 1,729996) = 0,421052
+
+
+Contraste de Breusch-Godfrey para autocorrelación hasta el orden 5
+
+Estadístico de contraste: LMF = 1,947454,
+con valor p = P(F(5,39) > 1,94745) = 0,108
+
+Estadístico alternativo: TR^2 = 9,190388,
+con valor p = P(Chi-cuadrado(5) > 9,19039) = 0,102
+
+Ljung-Box Q' = 9,05845,
+con valor p = P(Chi-cuadrado(5) > 9,05845) = 0,107
+

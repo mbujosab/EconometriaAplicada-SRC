@@ -1,0 +1,35 @@
+name: binder-env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Versión de Python y herramientas base
+  - python=3.11
+  - pip
+  - ipykernel
+
+  # Paquetes Python
+  - numpy
+  - pandas
+  - matplotlib
+  - seaborn
+  - sympy
+  - statsmodels
+
+  # dataframe_image solo vía pip
+  - pip:
+      - dataframe_image
+
+  # R base y kernel
+  - r-base=4.3
+  - r-irkernel
+  - r-devtools
+
+  # Paquetes R disponibles en conda-forge
+  - r-ggplot2
+  - r-ggfortify
+  - r-jtools
+  - r-latticeextra
+  - r-readr
+  - r-tidyverse
+  - r-zoo

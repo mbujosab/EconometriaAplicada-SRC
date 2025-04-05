@@ -1,0 +1,428 @@
+% Created 2024-07-27 sáb 14:12
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[top=1in, bottom=1.in, left=1in, right=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[theorems, skins]{tcolorbox}
+\usepackage[version=3]{mhchem}
+\usepackage[numbers,super,sort&compress]{natbib}
+\usepackage{natmove}
+\usepackage{url}
+\usepackage[cache=false]{minted}
+\usepackage[strings]{underscore}
+\usepackage[linktocpage,pdfstartview=FitH,colorlinks,
+linkcolor=blue,anchorcolor=blue,
+citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
+\usepackage{attachfile}
+\usepackage{setspace}
+\usepackage{lmodern}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\author{Marcos Bujosa}
+\date{\today}
+\title{Notas de cómo hacer algunas cosas con R}
+\begin{document}
+
+\maketitle
+
+\begin{ABSTRACT}
+Algunas notas de cómo hacer cosas en R.
+\end{ABSTRACT}
+\subsubsection*{Carga de algunas librerías de R que vamos a usar aquí}
+\label{sec:org804f088}
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+library(readr)        # para leer ficheros CSV
+library(zoo)          # para leer datos con índices temporales
+library(ggplot2)
+library(jtools)       # para representación resultados estimación (summ)
+\end{minted}
+y además fijamos los parámetros por defecto para las figuras en \texttt{png}
+del notebook
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+# fijamos el tamaño de las figuras que se generan en el notebook
+options(repr.plot.width = 12, repr.plot.height = 4, repr.plot.res = 200)
+\end{minted}
+\section{De \texttt{CSV} a \texttt{data\_frame}}
+\label{sec:org504daff}
+
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+datos_df <- read_csv('datos/GNPvsMelanoma.csv',show_col_types = FALSE)
+head(datos_df, 3)
+\end{minted}
+
+\phantomsection
+\label{}
+\begin{center}
+\begin{tabular}{rrr}
+obs & GNP & Melanoma\\
+\hline
+<dbl> & <dbl> & <dbl>\\
+1936 & 193.0 & 1.0\\
+1937 & 203.2 & 0.8\\
+1938 & 192.9 & 0.8\\
+\end{tabular}
+\end{center}
+\section{De \texttt{data\_frame} a \texttt{ts}}
+\label{sec:orga2b3057}
+
+Este método permite volver al \texttt{data\_frame}
+
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+datos_ts   <- ts(data = datos_df,
+                 start = 1936,
+                 end = 1972,
+                 frequency = 1)
+head(datos_ts, 3)
+\end{minted}
+
+\phantomsection
+\label{}
+\begin{center}
+\begin{tabular}{rrr}
+obs & GNP & Melanoma\\
+\hline
+1936 & 193.0 & 1.0\\
+1937 & 203.2 & 0.8\\
+1938 & 192.9 & 0.8\\
+\end{tabular}
+\end{center}
+\section{De \texttt{CSV} a \texttt{ts} (vía \texttt{zoo})}
+\label{sec:org1eac034}
+
+\subsection{Primero \texttt{zoo}}
+\label{sec:org2c8be8b}
+
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+data <- read.zoo('datos/GNPvsMelanoma.csv', header=TRUE, index.column = 1, sep=",", FUN = as.yearmon)
+class(data)
+head(data, 3)
+plot(data)
+plot(data[,'Melanoma'])
+\end{minted}
+
+\phantomsection
+\label{}
+'zoo'
+\begin{verbatim}
+           GNP Melanoma
+ene 1936 193.0      1.0
+ene 1937 203.2      0.8
+ene 1938 192.9      0.8
+\end{verbatim}
+
+\begin{center}
+\includegraphics[width=.9\linewidth]{./.ob-jupyter/830f097ae96cace5d8551bab02d80b0909167ec8.png}
+\end{center}
+\begin{center}
+\includegraphics[width=.9\linewidth]{./.ob-jupyter/36ee1e6970faaee38291f3c39058cbbca9d90da2.png}
+\end{center}
+\subsection{Luego a \texttt{ts}}
+\label{sec:org87ad3f1}
+
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+data_ts = as.ts( data )
+class(data_ts)
+head(data_ts, 3)
+
+plot(data_ts[,'GNP'])
+\end{minted}
+
+\phantomsection
+\label{}
+\begin{enumerate}
+\item 'mts'
+\item 'ts'
+\item 'matrix'
+\end{enumerate}
+\begin{center}
+\begin{tabular}{rr}
+GNP & Melanoma\\
+\hline
+193.0 & 1.0\\
+203.2 & 0.8\\
+192.9 & 0.8\\
+\end{tabular}
+\end{center}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{./.ob-jupyter/2faba2bd21f48f6ca00f34a3db03dd81b8a2356d.png}
+\caption{A matrix: 3 × 2 of type dbl}
+\end{figure}
+\section{De dataframe a ts}
+\label{sec:org798f20b}
+
+
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+#+BEGIN_SRC jupyter-R
+tseries <- as.ts( read.zoo( datos_df ) )
+head(tseries)
+plot(tseries)
+\end{minted}
+
+\phantomsection
+\label{}
+\begin{center}
+\begin{tabular}{rr}
+GNP & Melanoma\\
+\hline
+193.0 & 1.0\\
+203.2 & 0.8\\
+192.9 & 0.8\\
+209.4 & 1.4\\
+227.2 & 1.2\\
+263.7 & 1.0\\
+\end{tabular}
+\end{center}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=.9\linewidth]{./.ob-jupyter/5754f919bdc2564f8e6d8f8ee0681f5fe000ed0c.png}
+\caption{A matrix: 6 × 2 of type dbl}
+\end{figure}
+\section{De \texttt{ts} a \texttt{data\_frame}}
+\label{sec:org47f0c9a}
+
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+DF = data.frame(date = zoo::as.Date(time(tseries[,"GNP"])),
+                GNP = as.matrix(tseries[,"GNP"]),
+                Melanoma = as.matrix(tseries[,"Melanoma"]))
+head(DF,3)
+\end{minted}
+
+\phantomsection
+\label{}
+\begin{center}
+\begin{tabular}{rrrr}
+ & date & GNP & Melanoma\\
+\hline
+ & <date> & <dbl> & <dbl>\\
+1 & 1936-01-01 & 193.0 & 1.0\\
+2 & 1937-01-01 & 203.2 & 0.8\\
+3 & 1938-01-01 & 192.9 & 0.8\\
+\end{tabular}
+\end{center}
+\section{Resumen: dos formas de pasar de datos anuales en \texttt{CSV} a \texttt{ts}}
+\label{sec:org7884c9a}
+
+Una forma
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+time_series <- ts(data = read_csv('datos/GNPvsMelanoma.csv',show_col_types = FALSE),
+                  start = 1936,
+                  end = 1972,
+                  frequency = 1)
+head(time_series, 2)
+\end{minted}
+
+\phantomsection
+\label{}
+\begin{center}
+\begin{tabular}{rrr}
+obs & GNP & Melanoma\\
+\hline
+1936 & 193.0 & 1.0\\
+1937 & 203.2 & 0.8\\
+\end{tabular}
+\end{center}
+
+donde \texttt{read\_csv('datos/GNPvsMelanoma.csv',show\_col\_types = FALSE)} es un \texttt{data\_frame}
+
+
+Otra forma (vía \texttt{zoo})
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+# library(zoo)
+data_ts = as.ts( read.zoo('datos/GNPvsMelanoma.csv', header=TRUE, index.column = 1, sep=",", FUN = as.yearmon) )
+head(data_ts, 3)
+\end{minted}
+
+\phantomsection
+\label{}
+\begin{center}
+\begin{tabular}{rr}
+GNP & Melanoma\\
+\hline
+193.0 & 1.0\\
+203.2 & 0.8\\
+192.9 & 0.8\\
+\end{tabular}
+\end{center}
+\section{Gráfico de dos series temporales con sendos ejes verticales}
+\label{sec:org68b5d49}
+
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+# Mostrando la serie GNP
+p <- autoplot(as.zoo(data_ts[,'GNP']))
+p <- p + geom_line(aes(y = as.zoo(data_ts[,'GNP'])), colour="blue")
+
+# como tienen escalar distintas se requiere ajustar los datos
+sf<-max(data_ts[,'GNP'])/max(data_ts[,'Melanoma'])
+
+# Se agrega Melanoma a Y multiplicada por el factor
+p <- p + geom_line(aes(y = as.zoo(data_ts[,'Melanoma'])*sf), colour="red")
+p <- p + scale_y_continuous(sec.axis = sec_axis(~./sf, name = "Incidencia casos de melanoma"))
+p <- p + labs(y = "GNP",
+              x = "Fechas")
+
+# Se modifican los colores de los ejes
+p <- p + theme(
+    axis.title.y.left=element_text(color="blue"),
+    axis.text.y.left=element_text(color="blue"),
+    axis.ticks.y.left = element_line(color = "blue"),
+    axis.title.y.right=element_text(color="red"),
+    axis.text.y.right=element_text(color="red"),
+    axis.ticks.y.right = element_line(color = "red")
+  )
+p
+\end{minted}
+
+\phantomsection
+\label{}
+\begin{center}
+\includegraphics[width=.9\linewidth]{./.ob-jupyter/b222b0f9346ec6bd7ee140e2bdaf4c330523f733.png}
+\end{center}
+\subsection{Desde el dataframe}
+\label{sec:orgec9220e}
+
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+# Mostrando la serie GNP
+p <- ggplot(DF, aes(x = date))
+p <- p + geom_line(aes(y = GNP), colour="blue")
+
+# como tienen escalar distintas se requiere ajustar los datos
+sf<-max(DF['GNP'])/max(DF['Melanoma'])
+
+# Se agrega Melanoma a Y multiplicada por el factor
+p <- p + geom_line(aes(y = Melanoma*sf), colour="red")
+
+p <- p + scale_y_continuous(sec.axis = sec_axis(~./sf, name = "Casos de melanoma"))
+p <- p + labs(y = "GNP",
+              x = "Fechas")
+# Se modifican los colores de los ejes
+p <- p + theme(
+    axis.title.y.left=element_text(color="blue"),
+    axis.text.y.left=element_text(color="blue"),
+    axis.ticks.y.left = element_line(color = "blue"),
+    axis.title.y.right=element_text(color="red"),
+    axis.text.y.right=element_text(color="red"),
+    axis.ticks.y.right = element_line(color = "red")
+  )
+p
+\end{minted}
+
+\phantomsection
+\label{}
+\begin{center}
+\includegraphics[width=.9\linewidth]{./.ob-jupyter/3be9906e34c3328f6897efbef175c3ed5e0e683b.png}
+\end{center}
+\subsubsection{Y otra manera con \texttt{xyplot} (de \texttt{latticeExtra})}
+\label{sec:org868a8a5}
+
+Y ahora generamos el gráfico
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+library(latticeExtra) # alternativa para gráficos con doble eje vertical (doubleYScale)
+kk <- xyplot(GNP + Melanoma ~ date, DF, type="l")
+# se agrega dos ejes Y se construye cada serie por separado
+obj1 <- xyplot(GNP ~ date, DF, type = "l" , lwd=2, ylab="GNP (miles de millones de $)",  xlab="Years")
+obj2 <- xyplot(Melanoma ~ date, DF, type = "l", lwd=2, ylab="Casos de melanoma")
+# --> se realiza la grafica con el segundo eje Y
+doubleYScale(obj1, obj2, add.ylab2 = TRUE)
+\end{minted}
+
+\phantomsection
+\label{}
+\begin{center}
+\includegraphics[width=.9\linewidth]{./.ob-jupyter/33e057f85f65c733c486361f74b08bc1e8d2c473.png}
+\end{center}
+\section{Añadir nueva columna a un \texttt{ts}}
+\label{sec:org232f3cd}
+
+
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+d_GNP      = diff(datos_ts[,"GNP"])
+d_Melanoma = diff(datos_ts[,"Melanoma"])
+\end{minted}
+
+\phantomsection
+\label{}
+\begin{verbatim}
+5f061e65-c149-4dee-bc7d-a5338e092fb4
+\end{verbatim}
+
+
+este método cambia el nombre de las primeras columnas
+
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+serie = ts.union(data_ts, d_GNP, d_Melanoma)
+head(serie,3)
+\end{minted}
+
+\phantomsection
+\label{}
+\begin{verbatim}
+76659920-41c9-4bd6-a654-09e26c8b2a20
+\end{verbatim}
+
+
+Este método es mejor, pero es pesado
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+serie = ts.union(GNP = data_ts[,'GNP'], Melanoma = data_ts[,'Melanoma'], d_GNP, d_Melanoma)
+head(serie,3)
+\end{minted}
+
+\phantomsection
+\label{}
+\begin{verbatim}
+db11562d-7198-478f-953f-40fdfaf12282
+\end{verbatim}
+
+
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+DF.diferencias = data.frame(date = zoo::as.Date(time(d_GNP)),
+                            d_GNP = as.matrix(d_GNP),
+                            d_Melanoma = as.matrix(d_Melanoma))
+head(DF.diferencias, 2)
+\end{minted}
+
+\phantomsection
+\label{}
+\begin{verbatim}
+cd42271e-0f3a-4cd9-a1c4-1cdf0b4cb9c9
+\end{verbatim}
+\section{Otros}
+\label{sec:org49630d6}
+
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+mal_modelo <- lm(d_GNP ~ d_Melanoma)
+summ( mal_modelo )
+\end{minted}
+
+\phantomsection
+\label{}
+\begin{verbatim}
+1ceafe33-19a8-41f8-885a-cec3987c19fa
+\end{verbatim}
+
+
+\begin{minted}[frame=lines,fontsize=\scriptsize,linenos=]{R}
+plot(as.ts(resid(mal_modelo))) 
+abline(0,0) 
+\end{minted}
+
+\phantomsection
+\label{}
+\begin{verbatim}
+9fb7d7f2-2948-46c7-8240-ca2e9384cc2d
+\end{verbatim}
+\end{document}

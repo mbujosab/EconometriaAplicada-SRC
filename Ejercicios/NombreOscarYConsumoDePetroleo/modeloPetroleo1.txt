@@ -1,0 +1,31 @@
+
+Evaluaciones de la función: 41
+Evaluaciones del gradiente: 14
+
+ARMApetroleo:
+ARMA, usando las observaciones 1980-2022 (T = 43)
+Estimado usando AS 197 (MV exacta)
+Variable dependiente: ConsumoPetroleo
+Desviaciones típicas basadas en el Hessiano
+
+             coeficiente   Desv. típica     z      valor p 
+  ---------------------------------------------------------
+  const      313,739        39,2711        7,989   1,36e-15 ***
+  phi_1        0,930826      0,0477685    19,49    1,44e-84 ***
+  theta_1      0,289746      0,135530      2,138   0,0325   **
+
+Media de la vble. dep.  329,9135   D.T. de la vble. dep.   65,44053
+Media de innovaciones   1,463908   D.T. innovaciones       17,36101
+R-cuadrado              0,928461   R-cuadrado corregido    0,926717
+Log-verosimilitud      -185,0353   Criterio de Akaike      378,0707
+Criterio de Schwarz     385,1155   Crit. de Hannan-Quinn   380,6686
+
+                       Real Imaginaria     Módulo Frecuencia
+  -----------------------------------------------------------
+  AR
+   Raíz  1           1,0743     0,0000     1,0743     0,0000
+  MA
+   Raíz  1          -3,4513     0,0000     3,4513     0,5000
+  -----------------------------------------------------------
+
+ARMApetroleo guardado

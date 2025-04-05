@@ -1,0 +1,532 @@
+% Created 2024-09-17 mar 13:14
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[spanish, ]{babel}
+\usepackage[margin=0.5in]{geometry}
+\usepackage[svgnames,x11names]{xcolor}
+\hypersetup{linktoc = all, colorlinks = true, urlcolor = DodgerBlue4, citecolor = PaleGreen1, linkcolor = SpringGreen4}
+\PassOptionsToPackage{hyphens}{url}
+\usepackage{nacal}
+\usepackage{framed}
+\usepackage{listings}
+\input{hansl.tex}
+\lstnewenvironment{hansl-gretl}
+{\lstset{language={hansl},basicstyle={\ttfamily\footnotesize},numbers,rame=single,breaklines=true}}
+{}
+\newcommand{\hansl}[1]{\lstset{language={hansl},basicstyle={\ttfamily\small}}\lstinline{#1}}
+\lstset{backgroundcolor=\color{lightgray!20}, }
+\author{Marcos Bujosa}
+\date{\today}
+\title{Lección 2}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+
+\section{Componentes no observables del número de viajeros internacionales}
+\label{sec:org6f2bd9e}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Practicas/PracticasGretl/pub/scripts/componentesAirlinePass.inp}{componentesAirlinePass.inp}\\[0pt]
+\end{tabular}
+\end{center}
+
+Vamos a reproducir el ejemplo de estimación de componentes no
+observables visto en clase. Los datos son mensuales y contienen el
+número de viajeros internacionales (en miles) en las líneas aéreas
+norteamericanas en los años 1949--1960 que aparece en manual de Box \&
+Jenkins.
+
+\begin{enumerate}
+\item Objetivo
+\label{sec:org733ba9a}
+\begin{enumerate}
+\item Reproducir el ejemplo visto en la lección 2.
+\end{enumerate}
+
+\item Carga de datos
+\label{sec:orga19a3b2}
+\textbf{\emph{\texttt{Archivo -{}-{}> Abrir datos -{}-{}> Archivo de muestra}}} y en la pestaña
+\textbf{\emph{\texttt{Gretl}}} seleccione \texttt{bjg}.
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+open bjg
+\end{verbatim}
+}
+\end{enumerate}
+
+\subsection{Actividad 1 - generar una serie con el índice temporal y su cuadrado}
+\label{sec:org9500fa3}
+Pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
+ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
+\begin{itemize}
+\item \textbf{\emph{\texttt{Añadir -> Variable índices}}}
+
+{\vspace{1pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+genr time
+\end{verbatim}
+}
+\end{itemize}
+
+Seleccione con el ratón la variable \texttt{time} y luego pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
+ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
+\begin{itemize}
+\item \textbf{\emph{\texttt{Añadir -> Cuadrados de las variables seleccionadas}}}
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}: 
+\begin{verbatim}
+square time
+\end{verbatim}
+}
+\end{itemize}
+
+\vspace{-3pt}
+
+\subsection{Actividad 2 - Ajustar una tendencia lineal}
+\label{sec:orga5aaf26}
+\begin{itemize}
+\item Estime el modelo mediante los menús desplegables: \textbf{\emph{\texttt{Modelo ->
+  Mínimos Cuadrados Ordinarios}}}; indique a \href{https://gretl.sourceforge.net/es.html}{Gretl} el regresando y los
+regresores y pulse \textbf{\emph{\texttt{Aceptar}}}.
+
+\item ``Pinche'' \textbf{\emph{\texttt{Archivo}}} en la ventana del modelo estimado y
+seleccione \textbf{\emph{\texttt{guardar como un icono y cerrar}}}
+
+{\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+TendenciaLineal  <- ols lg 0 time
+\end{verbatim}
+(\emph{el cero} \texttt{0} \emph{indica el término constante}: \texttt{const})
+}
+
+\item Recupere el modelo ``pinchando'' sobre su icono
+
+{\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
+\emph{o teclee en linea de comandos el nombre que ha dado al icono
+seguido de} \texttt{.show}, \emph{es decir}:
+\begin{verbatim}
+TendenciaLineal.show
+\end{verbatim}
+}
+\end{itemize}
+
+\begin{enumerate}
+\item Recuperemos los valores ajustados
+\label{sec:orgcd65ad1}
+\begin{itemize}
+\item Desde la ventana del modelo ajustado (recupérese con su icono),
+``pinche'' en \textbf{\emph{\texttt{guardar -> valores estimados}}}. Elija como nombre
+\texttt{phat} (puede añadir una descripción de la variable). Pulse en
+\textbf{\emph{\texttt{Aceptar}}}
+\item Repita para guardar los \texttt{residuos} con el nombre \texttt{ehat}
+
+{\vspace{1pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+series TendenciaLineal =  $yhat
+series Comp_irregular =  $uhat
+\end{verbatim}
+}
+\end{itemize}
+
+
+\item Gráfico de la serie y la tendencia lineal
+\label{sec:org74dc6b3}
+\begin{itemize}
+\item Marque las variables \texttt{lg} y \texttt{Tendencia} (pulsando \texttt{ctrl}). Pinche
+con el botón derecho del ratón sobre ellas. Elija \textbf{\emph{\texttt{Gráfico de
+  series temporales}}}
+
+{\vspace{1pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+GraficoTendenciaLineal <- gnuplot lg TendenciaLineal --time-series --with-lines
+GraficoTendenciaLineal.show
+\end{verbatim}
+}
+\end{itemize}
+
+En la zona inferior izquierda de la ventana principal puede ver una
+serie de iconos. Uno de ellos es la \textbf{\emph{\texttt{vista de iconos de sesión}}}.
+
+
+\item Gráfico del componente irregular
+\label{sec:orga31ea9b}
+
+\begin{itemize}
+\item Marque la variable correspondiente al componente irregular (pulsando
+\texttt{ctrl}) y pinche con el botón derecho del ratón sobre ella. Elija
+\textbf{\emph{\texttt{Gráfico de series temporales}}}
+
+{\vspace{1pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+GraficoComponenteIrregular <- gnuplot Comp_irregular --time-series --with-lines
+GraficoComponenteIrregular.show
+\end{verbatim}
+}
+\end{itemize}
+
+\item Gráfico de la diferencia estacional del componente irregular
+\label{sec:orgcb072b9}
+
+\begin{itemize}
+\item Seleccione con el ratón la variable correspondiente al componente
+irregular y luego pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que
+aparece arriba, en el centro de la ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
+\begin{itemize}
+\item \textbf{\emph{\texttt{Añadir -> Diferencias estacionales de las variables
+      seleccionadas}}}
+\end{itemize}
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}: 
+\begin{verbatim}
+sdiff Comp_irregular
+\end{verbatim}
+}
+
+\item Genere un gráfico con la nueva serie diferenciada estacionalmente
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{en linea de comandos}: 
+\begin{verbatim}
+GraficoComponenteIrregularD12 <- gnuplot sd_Comp_irregular --time-series --with-lines
+GraficoComponenteIrregularD12.show
+\end{verbatim}
+}
+\end{itemize}
+\end{enumerate}
+
+
+\subsection{Actividad 3 - Ajustar una tendencia cuadrática}
+\label{sec:org9173245}
+
+Repita el ejercicio anterior, pero ajustando una tendencia cuadrática
+
+\begin{itemize}
+\item Estime la tendencia por MCO y vea los resultados de la regresión
+\item Guarde los valores ajustados (TendenciaCuadratica)
+\item Guarde los residuos (ComponenteIrregular2)
+\item Dibuje la tendencia
+\item Dibuje el componente irregular
+\item Dibuje la diferencia estacional del componente irregular
+\end{itemize}
+
+{\vspace{1pt} \footnotesize \color{gray!70!black}
+}
+
+
+\subsection{Actividad 4 - Ajustar una tendencia cuadrática y un componente estacional determinista}
+\label{sec:org2b46e04}
+
+Pulse en el menú desplegable \textbf{\emph{\texttt{Añadir}}} que aparece arriba, en el centro de la
+ventana principal de \href{https://gretl.sourceforge.net/es.html}{Gretl}.
+\begin{itemize}
+\item \textbf{\emph{\texttt{Añadir -> Variables ficticias estacionales}}}
+\end{itemize}
+
+{\vspace{1pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+seasonals()
+\end{verbatim}
+}
+
+\begin{itemize}
+\item Estime el modelo mediante los menús desplegables: \textbf{\emph{\texttt{Modelo ->
+  Mínimos Cuadrados Ordinarios}}}; indique a \href{https://gretl.sourceforge.net/es.html}{Gretl} el regresando y los
+regresores y pulse \textbf{\emph{\texttt{Aceptar}}}.
+
+\item ``Pinche'' \textbf{\emph{\texttt{Archivo}}} en la ventana del modelo estimado y
+seleccione \textbf{\emph{\texttt{guardar como un icono y cerrar}}}
+
+{\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+ModeloCompleto  <- ols lg const time sq_time S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 S11
+ModeloCompleto.show
+\end{verbatim}
+}
+\end{itemize}
+
+\begin{enumerate}
+\item Genere una nueva serie con la tendencia y otra con el componente estacional estimados
+\label{sec:orgcd802ab}
+\begin{itemize}
+\item Cálculo de la tendencia estimada: \Estmc{\beta_1} \texttt{const} + \Estmc{\beta_2} \texttt{time} + \Estmc{\beta_3} \texttt{sq\_time}
+
+\textbf{\emph{\texttt{Guardar -> Definir una nueva variable}}} y teclee:
+{\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
+\begin{verbatim}
+series Tendencia3 = $coeff[1] + $coeff[2]*time + $coeff[3]*sq_time
+\end{verbatim}
+}
+o bien:
+{\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
+\begin{verbatim}
+series Tendencia3 = $coeff(const) + $coeff(time)*time + $coeff(sq_time)*sq_time
+\end{verbatim}
+}
+
+\item De manera análoga genere una serie con el componente estacional
+
+{\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
+\begin{verbatim}
+series Comp_Estacional3 = $coeff(S1)*S1 + $coeff(S2)*S2 + $coeff(S3)*S3 + $coeff(S4)*S4 \
+                        + $coeff(S5)*S5 + $coeff(S6)*S6 + $coeff(S7)*S7 + $coeff(S8)*S8 \
+                        + $coeff(S9)*S9 + $coeff(S10)*S10 + $coeff(S11)*S11 
+\end{verbatim}
+}
+
+\item Genere los siguientes gráficos
+\begin{itemize}
+\item la serie y su tendencia cuadrática
+
+\item El componente estacional
+
+\item El componente irregular
+
+\item La serie y su ajuste
+\end{itemize}
+
+{\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
+\begin{verbatim}
+GraficoTendencia3 <- gnuplot lg Tendencia3 --time-series --with-lines
+GraficoTendencia3.show
+
+GraficoComponenteEstacional3 <- gnuplot Comp_Estacional3 --time-series --with-lines
+GraficoComponenteEstacional3.show
+
+series ComponenteIrregular3 = $uhat
+GraficoComponenteIrregular3 <- gnuplot ComponenteIrregular3 --time-series --with-lines
+GraficoComponenteIrregular3.show
+
+series Ajuste3 = $yhat
+GraficoAjuste3 <- gnuplot lg Ajuste3 --time-series --with-lines
+GraficoAjuste3.show
+\end{verbatim}
+}
+\end{itemize}
+
+
+\vspace{10pt}
+\noindent
+\textbf{Código completo de la práctica} \texttt{componentesAirlinePass.inp}
+\vspace{10pt}
+\lstinputlisting{scripts/componentesAirlinePass.inp}
+\clearpage
+\end{enumerate}
+
+
+\section{Componentes no observables del número de viajeros internacionales 2}
+\label{sec:org67d71e0}
+\begin{center}
+\begin{tabular}{ll}
+Guión: & \href{https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Practicas/PracticasGretl/pub/scripts/componentesAirlinePass2.inp}{componentesAirlinePass2.inp}\\[0pt]
+\end{tabular}
+\end{center}
+
+Continuamos el ejemplo anterior, pero ahora vamos a reducir el modelo
+quitando variables no significativas.
+
+\subsection{Actividad 1 - Estime el modelo con tendencia cuadrática y estacionalidad determinista}
+\label{sec:org530e692}
+
+Repita la estimación del último modelo de la practica anterior
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\begin{verbatim}
+open bjg
+genr time
+square time
+seasonals()
+ModeloInicial  <- ols lg const time sq_time S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 S11
+ModeloInicial.show
+\end{verbatim}
+}
+
+\subsection{Actividad 2 - Reducir el modelo eliminando secuencialmente variables no significativas}
+\label{sec:org3646755}
+
+Los p-valores de algunos parámetros indican que sus estimaciones son
+no significativas. En particular los correspondientes a las variables
+ficticias de enero, febrero y octubre.
+
+Reduzca el modelo, eliminando aquellas variables no significativas al
+5\%. Verifique que el conjunto de variables excluidas es conjuntamente
+no significativo.
+
+\begin{itemize}
+\item Desde la ventana del modelo estimado ``pinche'' en \textbf{\emph{\texttt{contrastes -{}-{}>
+  omitir variables}}} y marque la opción \emph{\texttt{Eliminación secuencial de
+  variables utilizando el valor p a dos colas}}, indique una
+significación del 5\% y pulse en \textbf{\emph{\texttt{Aceptar}}}
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\begin{verbatim}
+PrimeraReduccion <- omit --auto=0.05
+\end{verbatim}
+}
+\end{itemize}
+
+
+\subsection{Actividad 3 - Contrastar la ausencia de autocorrelación}
+\label{sec:org027957e}
+
+\begin{itemize}
+\item Observe bajo el valor de contraste de Durbin-Watson (0,691477).
+
+\item Desde la ventana del modelo estimado ``pinche'' en \textbf{\emph{\texttt{contrastes -{}-{}>
+  valor p del estadístico Durbin-Watson}}}. 
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+scalar DW = $dw
+scalar PDW = $dwpval
+print DW
+print PDW
+\end{verbatim}
+}
+
+Claramente se rechaza la ausencia de autocorrelación de orden uno.
+
+\item Desde la ventana del modelo estimado ``pinche'' en \textbf{\emph{\texttt{contrastes -{}-{}>
+  Autocorrelación}}}. E indique por ejemplo 3 retardos. 
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+modtest --autocorr 3
+\end{verbatim}
+}
+
+Claramente se rechaza la ausencia de autocorrelación y se observa
+que el retardo de orden uno es muy significativo.
+\end{itemize}
+
+
+\subsection{Actividad 4 - Estimación del modelo con errores estándar robustos}
+\label{sec:orge404a15}
+
+Los test de autocorrelación indican que la inferencia empleada para
+reducir el modelo es incorrecta. A la hora de calcular las
+desviaciones típicas de las estimaciones hay que tener en cuenta que
+las perturbaciones están autocorreladas.
+
+\begin{itemize}
+\item Estime el modelo inicial con errores estándar robustos: \textbf{\emph{\texttt{Modelo ->
+  Mínimos Cuadrados Ordinarios}}}; indique a \href{https://gretl.sourceforge.net/es.html}{Gretl} el regresando y los
+regresores; marque la opción \emph{\texttt{Desviaciones típicas robustas}} y
+pulse \textbf{\emph{\texttt{Aceptar}}}.
+
+{\vspace{1pt} \footnotesize \color{gray!70!black} \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+ModeloInicialDTR  <- ols lg const time sq_time S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 S11 --robust
+ModeloInicialDTR.show
+\end{verbatim}
+}
+
+Fíjese que al 5\% de significación, solo es no significativa al
+dummie correspondiente al mes de febrero.
+
+\item Reduzca el modelo, eliminando aquellas variables no significativas
+al 5\%. Verifique que el conjunto de variables excluidas es
+conjuntamente no significativo.
+
+Desde la ventana del modelo estimado ``pinche'' en \textbf{\emph{\texttt{contrastes -{}-{}>
+  omitir variables}}} y marque la opción \emph{\texttt{Eliminación secuencial de
+  variables utilizando el valor p a dos colas}}, indique una
+significación del 5\% y pulse en \textbf{\emph{\texttt{Aceptar}}}
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+ModeloReducidoDTR <- omit --auto=0.05
+\end{verbatim}
+}
+
+Fíjese que únicamente se elimina la dummie correspondiente a
+febrero.
+\end{itemize}
+
+\subsection{Actividad 4 - Estimación incluyendo en el modelo la autocorrelación de orden uno en las perturbaciones}
+\label{sec:org63fba2b}
+
+\begin{itemize}
+\item Re-estime el modelo incluyendo en el modelo un AR(1) para las
+perturbaciones: \textbf{\emph{\texttt{Modelo -> Series temporales univariantes ->
+  Errores AR -> AR(1)}}} y pulse \textbf{\emph{\texttt{Aceptar}}}.
+
+{\vspace{0pt} \footnotesize \color{gray!70!black}
+\emph{o bien teclee en linea de comandos}:
+\begin{verbatim}
+ModeloAR1  <- ar1 lg const time sq_time S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 S11
+ModeloAR1.show
+\end{verbatim}
+}
+
+\item Elimine secuencialmente las variables no significativas al 5\%
+
+\item Haga un gráfico de los residuos y observe que "son estacionarios"
+(es decir, que tienen el aspecto de una realización de un proceso
+estacionario)
+\item Haga un gráfico de frecuencias de los residuos y observe que tiene
+la forma campaniforme compatible con una distribución gaussiana.
+
+Marque con el ratón la variable \texttt{Residuos} y pinchado en la serie
+marcada con el botón derecho del ratón seleccione \textbf{\emph{\texttt{Distribución de
+  frecuencias}}}.
+
+{\vspace{3pt} \color{gray!70!black}
+\emph{O bien mediante el comando}
+\begin{verbatim}
+freq Residuos --show-plot
+\end{verbatim}
+}
+donde \texttt{-{}-{}show-plot} indica que se genere el gráfico en una
+ventana. Observe que dicho comando también genera una ventana de texto
+con la distribución de frecuencias relativa y acumulada.
+
+\item Realice el contraste de normalidad de los residuos: Desde la ventana
+del modelo estimado ``pinche'' en \textbf{\emph{\texttt{contrastes -{}-{}> Normalidad de
+  los residuos}}} y marque la opción \emph{\texttt{Eliminación secuencial de
+  variables utilizando el valor p a dos colas}}, indique una
+significación del 5\% y pulse en \textbf{\emph{\texttt{Aceptar}}}
+
+O bien desde la ventana principal: marque la variable \texttt{Residuos} y
+``pinche'' en \textbf{\emph{\texttt{Variable -{}-{}> Contraste de Normalidad}}}
+
+{\vspace{3pt} \color{gray!70!black}
+\emph{O bien mediante el comando}
+\begin{verbatim}
+normtest Residuos --all
+\end{verbatim}
+}
+\end{itemize}
+
+
+\vspace{10pt}
+\noindent
+\textbf{Código completo de la práctica} \texttt{componentesAirlinePass2.inp}
+\vspace{10pt}
+\lstinputlisting{scripts/componentesAirlinePass2.inp}
+\clearpage
+\end{document}

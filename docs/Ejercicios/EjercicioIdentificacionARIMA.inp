@@ -1,0 +1,7 @@
+series residuos = $uhat
+
+corrgm residuos 13
+
+outfile --quiet ResiduosACF-PACF.txt
+   corrgm residuos 13 --quiet
+end outfile

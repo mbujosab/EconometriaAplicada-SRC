@@ -1,0 +1,28 @@
+
+Evaluaciones de la función: 20
+Evaluaciones del gradiente: 7
+
+Modelo 2: ARIMA, usando las observaciones 1999:2-2013:4 (T = 59)
+Estimado usando AS 197 (MV exacta)
+Variable dependiente: (1-L) BE_2_5_8_16
+Desviaciones típicas basadas en el Hessiano
+
+              coeficiente    Desv. típica      z      valor p
+  -----------------------------------------------------------
+  const      416687          765151          0,5446   0,5860 
+  phi_1           0,192168        0,122755   1,565    0,1175 
+  phi_2           0,325667        0,122300   2,663    0,0077  ***
+
+Media de la vble. dep.  463234,6   D.T. de la vble. dep.    3256442
+Media de innovaciones  -15733,57   D.T. innovaciones        2915003
+R-cuadrado              0,970881   R-cuadrado corregido    0,970370
+Log-verosimilitud      -962,1093   Criterio de Akaike      1932,219
+Criterio de Schwarz     1940,529   Crit. de Hannan-Quinn   1935,463
+
+                       Real Imaginaria     Módulo Frecuencia
+  -----------------------------------------------------------
+  AR
+   Raíz  1           1,4819     0,0000     1,4819     0,0000
+   Raíz  2          -2,0720     0,0000     2,0720     0,5000
+  -----------------------------------------------------------
+

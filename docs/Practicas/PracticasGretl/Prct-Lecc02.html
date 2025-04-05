@@ -1,0 +1,881 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es-es" xml:lang="es-es">
+<head>
+<!-- 2025-04-03 jue 20:35 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lección 2</title>
+<meta name="author" content="Marcos Bujosa" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<script>
+  window.MathJax = {
+    tex: {
+      ams: {
+        multlineWidth: '85%'
+      },
+      tags: 'ams',
+      tagSide: 'right',
+      tagIndent: '.8em'
+    },
+    chtml: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    svg: {
+      scale: 1.0,
+      displayAlign: 'center',
+      displayIndent: '0em'
+    },
+    output: {
+      font: 'mathjax-modern',
+      displayOverflow: 'overflow'
+    }
+  };
+</script>
+
+<script
+  id="MathJax-script"
+  async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Lección 2</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org44f1afa">1. Componentes no observables del número de viajeros internacionales</a>
+<ul>
+<li><a href="#orgf76bda5">1.1. Actividad 1 - generar una serie con el índice temporal y su cuadrado</a></li>
+<li><a href="#orgf17fe8d">1.2. Actividad 2 - Ajustar una tendencia lineal</a></li>
+<li><a href="#org9bc60a5">1.3. Actividad 3 - Ajustar una tendencia cuadrática</a></li>
+<li><a href="#orgcf8c0cf">1.4. Actividad 4 - Ajustar una tendencia cuadrática y un componente estacional determinista</a></li>
+</ul>
+</li>
+<li><a href="#org0dccc8f">2. Componentes no observables del número de viajeros internacionales 2</a>
+<ul>
+<li><a href="#orgc4d370f">2.1. Actividad 1 - Estime el modelo con tendencia cuadrática y estacionalidad determinista</a></li>
+<li><a href="#org88edbaf">2.2. Actividad 2 - Reducir el modelo eliminando secuencialmente variables no significativas</a></li>
+<li><a href="#org4c70fa9">2.3. Actividad 3 - Contrastar la ausencia de autocorrelación</a></li>
+<li><a href="#orga3d82d2">2.4. Actividad 4 - Estimación del modelo con errores estándar robustos</a></li>
+<li><a href="#org19c8865">2.5. Actividad 4 - Estimación incluyendo en el modelo la autocorrelación de orden uno en las perturbaciones</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org44f1afa" class="outline-2">
+<h2 id="org44f1afa"><span class="section-number-2">1.</span> Componentes no observables del número de viajeros internacionales</h2>
+<div class="outline-text-2" id="text-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Guión:</td>
+<td class="org-left"><a href="https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Practicas/PracticasGretl/pub/scripts/componentesAirlinePass.inp">componentesAirlinePass.inp</a></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Vamos a reproducir el ejemplo de estimación de componentes no
+observables visto en clase. Los datos son mensuales y contienen el
+número de viajeros internacionales (en miles) en las líneas aéreas
+norteamericanas en los años 1949&#x2013;1960 que aparece en manual de Box &amp;
+Jenkins.
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org6e12399"></a>Objetivo<br />
+<div class="outline-text-6" id="text-1-0-0-0-1">
+<ol class="org-ol">
+<li>Reproducir el ejemplo visto en la lección 2.</li>
+</ol>
+</div>
+</li>
+<li><a id="org58e8cfd"></a>Carga de datos<br />
+<div class="outline-text-6" id="text-1-0-0-0-2">
+<p>
+<b><i><code>Archivo --&gt; Abrir datos --&gt; Archivo de muestra</code></i></b> y en la pestaña
+<b><i><code>Gretl</code></i></b> seleccione <code>bjg</code>.
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl" id="org7febe6d">open bjg
+</pre>
+</div>
+</div>
+</li>
+</ol>
+<div id="outline-container-orgf76bda5" class="outline-3">
+<h3 id="orgf76bda5"><span class="section-number-3">1.1.</span> Actividad 1 - generar una serie con el índice temporal y su cuadrado</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Pulse en el menú desplegable <b><i><code>Añadir</code></i></b> que aparece arriba, en el centro de la
+ventana principal de <a href="https://gretl.sourceforge.net/es.html">Gretl</a>.
+</p>
+<ul class="org-ul">
+<li><p>
+<b><i><code>Añadir -&gt; Variable índices</code></i></b>
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl" id="orgaf8683d">      genr time
+</pre>
+</div></li>
+</ul>
+
+<p>
+Seleccione con el ratón la variable <code>time</code> y luego pulse en el menú desplegable <b><i><code>Añadir</code></i></b> que aparece arriba, en el centro de la
+ventana principal de <a href="https://gretl.sourceforge.net/es.html">Gretl</a>.
+</p>
+<ul class="org-ul">
+<li><p>
+<b><i><code>Añadir -&gt; Cuadrados de las variables seleccionadas</code></i></b>
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>: 
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl" id="org67879e5">      square time
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf17fe8d" class="outline-3">
+<h3 id="orgf17fe8d"><span class="section-number-3">1.2.</span> Actividad 2 - Ajustar una tendencia lineal</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>Estime el modelo mediante los menús desplegables: <b><i><code>Modelo -&gt;
+  Mínimos Cuadrados Ordinarios</code></i></b>; indique a <a href="https://gretl.sourceforge.net/es.html">Gretl</a> el regresando y los
+regresores y pulse <b><i><code>Aceptar</code></i></b>.</li>
+
+<li><p>
+``Pinche'' <b><i><code>Archivo</code></i></b> en la ventana del modelo estimado y
+seleccione <b><i><code>guardar como un icono y cerrar</code></i></b>
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">    TendenciaLineal  &lt;- ols lg 0 time
+</pre>
+</div>
+<p>
+(<i>el cero</i> <code>0</code> <i>indica el término constante</i>: <code>const</code>)
+</p></li>
+
+<li><p>
+Recupere el modelo ``pinchando'' sobre su icono
+</p>
+
+<p>
+<i>o teclee en linea de comandos el nombre que ha dado al icono
+seguido de</i> <code>.show</code>, <i>es decir</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl" id="org1be0b6b">    TendenciaLineal.show
+</pre>
+</div></li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="orgc5021ae"></a>Recuperemos los valores ajustados<br />
+<div class="outline-text-6" id="text-1-2-0-0-1">
+<ul class="org-ul">
+<li>Desde la ventana del modelo ajustado (recupérese con su icono),
+``pinche'' en <b><i><code>guardar -&gt; valores estimados</code></i></b>. Elija como nombre
+<code>phat</code> (puede añadir una descripción de la variable). Pulse en
+<b><i><code>Aceptar</code></i></b></li>
+<li><p>
+Repita para guardar los <code>residuos</code> con el nombre <code>ehat</code>
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl" id="org5d159f1">    series TendenciaLineal =  $yhat
+    series Comp_irregular =  $uhat
+</pre>
+</div></li>
+</ul>
+</div>
+</li>
+<li><a id="org7065122"></a>Gráfico de la serie y la tendencia lineal<br />
+<div class="outline-text-6" id="text-1-2-0-0-2">
+<ul class="org-ul">
+<li><p>
+Marque las variables <code>lg</code> y <code>Tendencia</code> (pulsando <code>ctrl</code>). Pinche
+con el botón derecho del ratón sobre ellas. Elija <b><i><code>Gráfico de
+  series temporales</code></i></b>
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">    GraficoTendenciaLineal &lt;- gnuplot lg TendenciaLineal --time-series --with-lines
+    GraficoTendenciaLineal.show
+</pre>
+</div></li>
+</ul>
+
+<p>
+En la zona inferior izquierda de la ventana principal puede ver una
+serie de iconos. Uno de ellos es la <b><i><code>vista de iconos de sesión</code></i></b>.
+</p>
+</div>
+</li>
+<li><a id="org587416e"></a>Gráfico del componente irregular<br />
+<div class="outline-text-6" id="text-1-2-0-0-3">
+<ul class="org-ul">
+<li><p>
+Marque la variable correspondiente al componente irregular (pulsando
+<code>ctrl</code>) y pinche con el botón derecho del ratón sobre ella. Elija
+<b><i><code>Gráfico de series temporales</code></i></b>
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">    GraficoComponenteIrregular &lt;- gnuplot Comp_irregular --time-series --with-lines
+    GraficoComponenteIrregular.show
+</pre>
+</div></li>
+</ul>
+</div>
+</li>
+<li><a id="org4a925a5"></a>Gráfico de la diferencia estacional del componente irregular<br />
+<div class="outline-text-6" id="text-1-2-0-0-4">
+<ul class="org-ul">
+<li><p>
+Seleccione con el ratón la variable correspondiente al componente
+irregular y luego pulse en el menú desplegable <b><i><code>Añadir</code></i></b> que
+aparece arriba, en el centro de la ventana principal de <a href="https://gretl.sourceforge.net/es.html">Gretl</a>.
+</p>
+<ul class="org-ul">
+<li><b><i><code>Añadir -&gt; Diferencias estacionales de las variables
+      seleccionadas</code></i></b></li>
+</ul>
+
+<p>
+<i>o bien teclee en linea de comandos</i>: 
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">    sdiff Comp_irregular
+</pre>
+</div></li>
+
+<li><p>
+Genere un gráfico con la nueva serie diferenciada estacionalmente
+</p>
+
+<p>
+<i>en linea de comandos</i>: 
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">    GraficoComponenteIrregularD12 &lt;- gnuplot sd_Comp_irregular --time-series --with-lines
+    GraficoComponenteIrregularD12.show
+</pre>
+</div></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div id="outline-container-org9bc60a5" class="outline-3">
+<h3 id="org9bc60a5"><span class="section-number-3">1.3.</span> Actividad 3 - Ajustar una tendencia cuadrática</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+Repita el ejercicio anterior, pero ajustando una tendencia cuadrática
+</p>
+
+<ul class="org-ul">
+<li>Estime la tendencia por MCO y vea los resultados de la regresión</li>
+<li>Guarde los valores ajustados (TendenciaCuadratica)</li>
+<li>Guarde los residuos (ComponenteIrregular2)</li>
+<li>Dibuje la tendencia</li>
+<li>Dibuje el componente irregular</li>
+<li>Dibuje la diferencia estacional del componente irregular</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgcf8c0cf" class="outline-3">
+<h3 id="orgcf8c0cf"><span class="section-number-3">1.4.</span> Actividad 4 - Ajustar una tendencia cuadrática y un componente estacional determinista</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Pulse en el menú desplegable <b><i><code>Añadir</code></i></b> que aparece arriba, en el centro de la
+ventana principal de <a href="https://gretl.sourceforge.net/es.html">Gretl</a>.
+</p>
+<ul class="org-ul">
+<li><b><i><code>Añadir -&gt; Variables ficticias estacionales</code></i></b></li>
+</ul>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl" id="org169956f">    seasonals()
+</pre>
+</div>
+<ul class="org-ul">
+<li>Estime el modelo mediante los menús desplegables: <b><i><code>Modelo -&gt;
+  Mínimos Cuadrados Ordinarios</code></i></b>; indique a <a href="https://gretl.sourceforge.net/es.html">Gretl</a> el regresando y los
+regresores y pulse <b><i><code>Aceptar</code></i></b>.</li>
+
+<li><p>
+``Pinche'' <b><i><code>Archivo</code></i></b> en la ventana del modelo estimado y
+seleccione <b><i><code>guardar como un icono y cerrar</code></i></b>
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">    ModeloCompleto  &lt;- ols lg const time sq_time S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 S11
+    ModeloCompleto.show
+</pre>
+</div></li>
+</ul>
+</div>
+<ol class="org-ol">
+<li><a id="orgf252ec5"></a>Genere una nueva serie con la tendencia y otra con el componente estacional estimados<br />
+<div class="outline-text-6" id="text-1-4-0-0-1">
+<ul class="org-ul">
+<li><p>
+Cálculo de la tendencia estimada: \Estmc{\beta_1} <code>const</code> + \Estmc{\beta_2} <code>time</code> + \Estmc{\beta_3} <code>sq_time</code>
+</p>
+
+<p>
+<b><i><code>Guardar -&gt; Definir una nueva variable</code></i></b> y teclee:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">    series Tendencia3 = $coeff[1] + $coeff[2]*time + $coeff[3]*sq_time
+</pre>
+</div>
+<p>
+o bien:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">    series Tendencia3 = $coeff(const) + $coeff(time)*time + $coeff(sq_time)*sq_time
+</pre>
+</div></li>
+
+<li><p>
+De manera análoga genere una serie con el componente estacional
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hansl">    series Comp_Estacional3 = $coeff(S1)*S1 + $coeff(S2)*S2 + $coeff(S3)*S3 + $coeff(S4)*S4 \
+                            + $coeff(S5)*S5 + $coeff(S6)*S6 + $coeff(S7)*S7 + $coeff(S8)*S8 \
+                            + $coeff(S9)*S9 + $coeff(S10)*S10 + $coeff(S11)*S11 
+</pre>
+</div></li>
+
+<li><p>
+Genere los siguientes gráficos
+</p>
+<ul class="org-ul">
+<li>la serie y su tendencia cuadrática</li>
+
+<li>El componente estacional</li>
+
+<li>El componente irregular</li>
+
+<li>La serie y su ajuste</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-hansl">    GraficoTendencia3 &lt;- gnuplot lg Tendencia3 --time-series --with-lines
+    GraficoTendencia3.show
+
+    GraficoComponenteEstacional3 &lt;- gnuplot Comp_Estacional3 --time-series --with-lines
+    GraficoComponenteEstacional3.show
+
+    series ComponenteIrregular3 = $uhat
+    GraficoComponenteIrregular3 &lt;- gnuplot ComponenteIrregular3 --time-series --with-lines
+    GraficoComponenteIrregular3.show
+
+    series Ajuste3 = $yhat
+    GraficoAjuste3 &lt;- gnuplot lg Ajuste3 --time-series --with-lines
+    GraficoAjuste3.show
+</pre>
+</div></li>
+</ul>
+
+
+<p>
+<b>Código completo de la práctica</b> <code>componentesAirlinePass.inp</code>
+</p>
+<p>
+\lstinputlisting{scripts/componentesAirlinePass.inp}
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org0dccc8f" class="outline-2">
+<h2 id="org0dccc8f"><span class="section-number-2">2.</span> Componentes no observables del número de viajeros internacionales 2</h2>
+<div class="outline-text-2" id="text-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Guión:</td>
+<td class="org-left"><a href="https://github.com/mbujosab/EconometriaAplicada-SRC/blob/main/Practicas/PracticasGretl/pub/scripts/componentesAirlinePass2.inp">componentesAirlinePass2.inp</a></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Continuamos el ejemplo anterior, pero ahora vamos a reducir el modelo
+quitando variables no significativas.
+</p>
+</div>
+<div id="outline-container-orgc4d370f" class="outline-3">
+<h3 id="orgc4d370f"><span class="section-number-3">2.1.</span> Actividad 1 - Estime el modelo con tendencia cuadrática y estacionalidad determinista</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Repita la estimación del último modelo de la practica anterior
+</p>
+
+<div class="org-src-container">
+<pre class="src src-hansl">  open bjg
+  genr time
+  square time
+  seasonals()
+  ModeloInicial  &lt;- ols lg const time sq_time S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 S11
+  ModeloInicial.show
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org88edbaf" class="outline-3">
+<h3 id="org88edbaf"><span class="section-number-3">2.2.</span> Actividad 2 - Reducir el modelo eliminando secuencialmente variables no significativas</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Los p-valores de algunos parámetros indican que sus estimaciones son
+no significativas. En particular los correspondientes a las variables
+ficticias de enero, febrero y octubre.
+</p>
+
+<p>
+Reduzca el modelo, eliminando aquellas variables no significativas al
+5%. Verifique que el conjunto de variables excluidas es conjuntamente
+no significativo.
+</p>
+
+<ul class="org-ul">
+<li><p>
+Desde la ventana del modelo estimado ``pinche'' en <b><i><code>contrastes --&gt;
+  omitir variables</code></i></b> y marque la opción <i><code>Eliminación secuencial de
+  variables utilizando el valor p a dos colas</code></i>, indique una
+significación del 5% y pulse en <b><i><code>Aceptar</code></i></b>
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">    PrimeraReduccion &lt;- omit --auto=0.05
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4c70fa9" class="outline-3">
+<h3 id="org4c70fa9"><span class="section-number-3">2.3.</span> Actividad 3 - Contrastar la ausencia de autocorrelación</h3>
+<div class="outline-text-3" id="text-2-3">
+<ul class="org-ul">
+<li>Observe bajo el valor de contraste de Durbin-Watson (0,691477).</li>
+
+<li><p>
+Desde la ventana del modelo estimado ``pinche'' en <b><i><code>contrastes --&gt;
+  valor p del estadístico Durbin-Watson</code></i></b>. 
+</p>
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">    scalar DW = $dw
+    scalar PDW = $dwpval
+    print DW
+    print PDW
+</pre>
+</div>
+<p>
+Claramente se rechaza la ausencia de autocorrelación de orden uno.
+</p></li>
+
+<li><p>
+Desde la ventana del modelo estimado ``pinche'' en <b><i><code>contrastes --&gt;
+  Autocorrelación</code></i></b>. E indique por ejemplo 3 retardos. 
+</p>
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">    modtest --autocorr 3
+</pre>
+</div>
+<p>
+Claramente se rechaza la ausencia de autocorrelación y se observa
+que el retardo de orden uno es muy significativo.
+</p></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga3d82d2" class="outline-3">
+<h3 id="orga3d82d2"><span class="section-number-3">2.4.</span> Actividad 4 - Estimación del modelo con errores estándar robustos</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+Los test de autocorrelación indican que la inferencia empleada para
+reducir el modelo es incorrecta. A la hora de calcular las
+desviaciones típicas de las estimaciones hay que tener en cuenta que
+las perturbaciones están autocorreladas.
+</p>
+
+<ul class="org-ul">
+<li><p>
+Estime el modelo inicial con errores estándar robustos: <b><i><code>Modelo -&gt;
+  Mínimos Cuadrados Ordinarios</code></i></b>; indique a <a href="https://gretl.sourceforge.net/es.html">Gretl</a> el regresando y los
+regresores; marque la opción <i><code>Desviaciones típicas robustas</code></i> y
+pulse <b><i><code>Aceptar</code></i></b>.
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">    ModeloInicialDTR  &lt;- ols lg const time sq_time S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 S11 --robust
+    ModeloInicialDTR.show
+</pre>
+</div>
+<p>
+Fíjese que al 5% de significación, solo es no significativa al
+dummie correspondiente al mes de febrero.
+</p></li>
+
+<li><p>
+Reduzca el modelo, eliminando aquellas variables no significativas
+al 5%. Verifique que el conjunto de variables excluidas es
+conjuntamente no significativo.
+</p>
+
+<p>
+Desde la ventana del modelo estimado ``pinche'' en <b><i><code>contrastes --&gt;
+  omitir variables</code></i></b> y marque la opción <i><code>Eliminación secuencial de
+  variables utilizando el valor p a dos colas</code></i>, indique una
+significación del 5% y pulse en <b><i><code>Aceptar</code></i></b>
+</p>
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">    ModeloReducidoDTR &lt;- omit --auto=0.05
+</pre>
+</div>
+<p>
+Fíjese que únicamente se elimina la dummie correspondiente a
+febrero.
+</p></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org19c8865" class="outline-3">
+<h3 id="org19c8865"><span class="section-number-3">2.5.</span> Actividad 4 - Estimación incluyendo en el modelo la autocorrelación de orden uno en las perturbaciones</h3>
+<div class="outline-text-3" id="text-2-5">
+<ul class="org-ul">
+<li><p>
+Re-estime el modelo incluyendo en el modelo un AR(1) para las
+perturbaciones: <b><i><code>Modelo -&gt; Series temporales univariantes -&gt;
+  Errores AR -&gt; AR(1)</code></i></b> y pulse <b><i><code>Aceptar</code></i></b>.
+</p>
+
+<p>
+<i>o bien teclee en linea de comandos</i>:
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">    ModeloAR1  &lt;- ar1 lg const time sq_time S1 S2 S3 S4 S5 S6 S7 S8 S9 S10 S11
+    ModeloAR1.show
+</pre>
+</div></li>
+
+<li>Elimine secuencialmente las variables no significativas al 5%</li>
+
+<li>Haga un gráfico de los residuos y observe que "son estacionarios"
+(es decir, que tienen el aspecto de una realización de un proceso
+estacionario)</li>
+<li><p>
+Haga un gráfico de frecuencias de los residuos y observe que tiene
+la forma campaniforme compatible con una distribución gaussiana.
+</p>
+
+<p>
+Marque con el ratón la variable <code>Residuos</code> y pinchado en la serie
+marcada con el botón derecho del ratón seleccione <b><i><code>Distribución de
+  frecuencias</code></i></b>.
+</p>
+
+<p>
+<i>O bien mediante el comando</i>
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">    freq Residuos --show-plot
+</pre>
+</div>
+<p>
+donde <code>--show-plot</code> indica que se genere el gráfico en una
+ventana. Observe que dicho comando también genera una ventana de texto
+con la distribución de frecuencias relativa y acumulada.
+</p></li>
+
+<li><p>
+Realice el contraste de normalidad de los residuos: Desde la ventana
+del modelo estimado ``pinche'' en <b><i><code>contrastes --&gt; Normalidad de
+  los residuos</code></i></b> y marque la opción <i><code>Eliminación secuencial de
+  variables utilizando el valor p a dos colas</code></i>, indique una
+significación del 5% y pulse en <b><i><code>Aceptar</code></i></b>
+</p>
+
+<p>
+O bien desde la ventana principal: marque la variable <code>Residuos</code> y
+``pinche'' en <b><i><code>Variable --&gt; Contraste de Normalidad</code></i></b>
+</p>
+
+<p>
+<i>O bien mediante el comando</i>
+</p>
+<div class="org-src-container">
+<pre class="src src-hansl">    normtest Residuos --all
+</pre>
+</div></li>
+</ul>
+
+
+<p>
+<b>Código completo de la práctica</b> <code>componentesAirlinePass2.inp</code>
+</p>
+<p>
+\lstinputlisting{scripts/componentesAirlinePass2.inp}
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Marcos Bujosa</p>
+<p class="date">Created: 2025-04-03 jue 20:35</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

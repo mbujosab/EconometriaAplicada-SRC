@@ -1,0 +1,15 @@
+open datos/GNPvsMelanoma.gdt
+
+GraficoSeriesEnNiveles <- gnuplot GNP Melanoma --time-series --with-lines
+
+DiagramDispersion <- gnuplot GNP Melanoma --fit=none
+
+corr GNP Melanoma
+
+AjusteEnNiveles <- ols GNP 0 Melanoma
+
+diff GNP Melanoma
+GraficoSeriesEnDiferencias <- gnuplot d_GNP d_Melanoma --time-series --with-lines
+corr d_GNP d_Melanoma
+
+AjusteEnDiferencias <- ols d_GNP 0 d_Melanoma

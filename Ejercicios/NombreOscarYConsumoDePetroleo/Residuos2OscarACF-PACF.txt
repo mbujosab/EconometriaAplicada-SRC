@@ -1,0 +1,16 @@
+
+Función de autocorrelación para res2Oscar
+***, ** y * indica significatividad a los niveles del 1%, 5% y 10%
+utilizando la desviación típica 1/T^0,5
+
+ RETARDO    FAC          FACP         Estad-Q. [valor p]
+
+    1   0,0027        0,0027          0,0003  [0,986]
+    2  -0,0436       -0,0436          0,0881  [0,957]
+    3   0,2378        0,2385          2,7683  [0,429]
+    4  -0,1974       -0,2158          4,6634  [0,324]
+    5  -0,1357       -0,1103          5,5826  [0,349]
+    6   0,1327        0,0768          6,4862  [0,371]
+    7  -0,0229        0,0634          6,5140  [0,481]
+    8   0,1196        0,1581          7,2920  [0,505]
+

@@ -1,0 +1,396 @@
+
+#+BEGIN_SRC  makefile :noweb no-export :results silent :exports none :tangle makefile
+OUT_DIR=./
+# Using GNU Make-specific functions here
+FILES=$(patsubst Lecc%.org,$(OUT_DIR)/Lecc%.tex,$(wildcard *.org))
+PDF-FILES=$(patsubst Lecc%.tex,$(OUT_DIR)/Lecc%.pdf,$(wildcard *.tex))
+
+#.PHONY: all clean install-doc
+.PHONY: all install-doc
+
+Lecc01.pdf: %.tex
+	latexmk -c $@ 
+
+all: install-doc
+
+#install-doc: $(FILES)  $(PDF-FILES)
+install-doc: $(PDF-FILES)
+
+$(OUT_DIR):
+	mkdir -v -p $(OUT_DIR)
+
+#%.tex: %.org
+#	emacs -q -l ~/Software/scimax/init.el $< --batch -f org-latex-export-to-latex --kill
+
+%.pdf: %.tex
+	latexmk -pdf --shell-escape -interaction=batchmode $< 
+	latexmk -c
+
+pedeefes: %.pdf
+
+#$(OUT_DIR)/%.tex: %.tex
+#	install -v -m 644 -t $(OUT_DIR) $<
+#	rm $<
+$(OUT_DIR)/%.pdf: %.pdf
+	install -v -m 644 -t ./notas $<
+
+#clean:
+#	rm *.tex
+#+END_SRC
+
+
+
+#+BEGIN_SRC sh :results silent
+#pdflatex --shell-escape  -interaction=batchmode Lecc01.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc01.tex
+#latexmk -c Lecc01.tex
+
+#pdflatex --shell-escape  -interaction=batchmode Lecc02.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc02.tex
+#latexmk -c Lecc02.tex
+
+#pdflatex --shell-escape  -interaction=batchmode Lecc03.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc03.tex
+#latexmk -c Lecc03.tex
+
+#pdflatex --shell-escape  -interaction=batchmode Lecc04.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc04.tex
+#latexmk -c Lecc04.tex
+
+#pdflatex --shell-escape  -interaction=batchmode Lecc05.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc05.tex
+#latexmk -c Lecc05.tex
+
+#pdflatex --shell-escape  -interaction=batchmode Lecc06.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc06.tex
+#latexmk -c Lecc06.tex
+
+#pdflatex --shell-escape  -interaction=batchmode Lecc07.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc07.tex
+#latexmk -c Lecc07.tex
+
+#pdflatex --shell-escape  -interaction=batchmode Lecc08.tex
+#pdflatex --shell-escape  -interaction=batchmode Lecc08.tex
+#latexmk -c Lecc08.tex
+
+#+END_SRC
+
+
+#+BEGIN_SRC sh  :results silent :dir ./Ejercicios
+
+#pdflatex --shell-escape  -interaction=batchmode mortality-marriages.tex
+#pdflatex --shell-escape  -interaction=batchmode mortality-marriages.tex
+#latexmk -c mortality-marriages.tex
+
+#pdflatex --shell-escape  -interaction=batchmode NombreOscarYConsumoDePetroleo.tex
+#pdflatex --shell-escape  -interaction=batchmode NombreOscarYConsumoDePetroleo.tex
+#latexmk -c NombreOscarYConsumoDePetroleo.tex
+
+#pdflatex --shell-escape  -interaction=batchmode EjercicioIdentificacionModeloARIMA.tex
+#pdflatex --shell-escape  -interaction=batchmode EjercicioIdentificacionModeloARIMA.tex
+#latexmk -c EjercicioIdentificacionModeloARIMA.tex
+
+#pdflatex --shell-escape  -interaction=batchmode SegundoEjercicioIdentificacionARIMA.tex
+#pdflatex --shell-escape  -interaction=batchmode SegundoEjercicioIdentificacionARIMA.tex
+#latexmk -c SegundoEjercicioIdentificacionARIMA.tex
+
+#pdflatex --shell-escape  -interaction=batchmode IndicePreciosViviendasNuevasYdeSegundaMano.tex
+#pdflatex --shell-escape  -interaction=batchmode IndicePreciosViviendasNuevasYdeSegundaMano.tex
+#latexmk -c IndicePreciosViviendasNuevasYdeSegundaMano.tex
+
+#pdflatex --shell-escape  -interaction=batchmode LetrasTesoroAmericano3y6meses.tex
+#pdflatex --shell-escape  -interaction=batchmode LetrasTesoroAmericano3y6meses.tex
+#latexmk -c LetrasTesoroAmericano3y6meses.tex
+
+#pdflatex --shell-escape  -interaction=batchmode SerieCuentasFinancierasBE.tex
+#pdflatex --shell-escape  -interaction=batchmode SerieCuentasFinancierasBE.tex
+#latexmk -c SerieCuentasFinancierasBE.tex
+
+#+END_SRC
+
+
+#+BEGIN_SRC emacs-lisp :results silent
+(require 'ox-ipynb)
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc01.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc02.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc03.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc04.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc05.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc06.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc07.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc08.org")
+#+END_SRC
+
+#+BEGIN_SRC sh :results silent
+jupyter nbconvert --config mycfg-GitHubPages.py --to slides --reveal-prefix reveal.js 
+#+END_SRC
+
+#+BEGIN_SRC sh :results none
+jupyter nbconvert --config mycfg.py --to slides 
+#+END_SRC
+
+** Org-publish                                                     :noexport:
+
+We need a small elisp script to setup and publish  it.
+
+#+BEGIN_SRC emacs-lisp  :tangle ~/publish.el :results silent
+(use-package htmlize)
+
+(require 'ox-publish)
+
+(let* ((base-directory "./")
+       (org-export-with-broken-links t)
+       (org-publish-project-alist `(("html"
+				     :base-directory ,base-directory
+				     :base-extension "org"
+				     :publishing-directory ,(concat base-directory "docs")
+				     :exclude "Almacen\\|USB\\|docs\\|EjerciciosHide\\|SeriesSimuladas4\\|SeriesSimuladas12\\|Calendario\\|ucarima.*\\|.ipynb_checkpoints\\|00Notas.*\\|org-publisg.*\\|kk.*"
+				     :recursive t
+				     :publishing-function org-html-publish-to-html
+				     :auto-preamble t
+				     :auto-sitemap nil)
+				    
+				    ("static-html"
+				     :base-directory ,base-directory
+				     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|dat\\|mov\\|svg\\|aiff\\|csv\\|gdt\\|inp\\|ipynb\\|html"
+				     :publishing-directory ,(concat base-directory "docs")
+				     :exclude "Almacen\\|USB\\|docs\\|EjerciciosHide\\|SeriesSimuladas4\\|SeriesSimuladas12\\|ucarima.*\\|.ipynb_checkpoints\\|org-publisg.*\\|kk.*"
+				     :recursive t
+				     :publishing-function org-publish-attachment)
+
+				    ;; ... all the components ...
+				    ("scimax-eln" :components ("html" "static-html")))))
+
+  (org-publish "scimax-eln" t))
+#+END_SRC
+
+Podemos chequear la versión local ejecutando el siguiente bloque
+
+#+BEGIN_SRC emacs-lisp
+(browse-url "docs/index.html")
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC bash
+rm Lecc*.{pdf,slides.html}
+#+END_SRC
+
+#+RESULTS:
+
+# ~/CloudStation/ReposGH/Docencia/Econometria-SRC/
+# ~/CloudStation/Nextcloud/Docencia/Ectr/
+# ~/CloudStation/Nextcloud/Docencia/Ectr/
+
+
+
+#+RESULTS:
+
+*** Commit and publish the html pages                              :noexport:
+
+To publish these we go into the html directory, commit all the files and push them to GitHUB.
+
+
+#+BEGIN_SRC sh 
+#git add docs
+git commit -m "update"
+git push
+#+END_SRC
+
+
+
+*** con pdfs
+
+#+BEGIN_SRC emacs-lisp
+(require 'ox-publish)
+
+(let* ((base-directory "./")
+       (public-directory "~/repos/Ectrkk/")
+       (org-export-with-broken-links t)
+       (org-publish-project-alist `(("html"
+				     :base-directory ,base-directory
+				     :base-extension "org"
+				     :publishing-directory ,(concat public-directory "docs")
+				     :exclude "docs"
+				     :exclude "Calendario"
+				     :exclude ".ipynb_checkpoints"
+				     :exclude "reveal.js.old"
+				     :exclude "USB"
+				     :recursive t
+				     :publishing-function org-html-publish-to-html
+				     :auto-preamble t
+				     :auto-sitemap t)
+				    ("pdf"
+				     :base-directory ,base-directory
+				     :base-extension "org"
+				     :publishing-directory ,(concat public-directory "docs/pdfs")
+				     :exclude "docs"
+				     :exclude "Calendario"
+				     :exclude ".ipynb_checkpoints"
+				     :exclude "reveal.js.old"
+				     :exclude "USB"
+				     :recursive t
+				     :publishing-function org-latex-publish-to-pdf
+				     :auto-preamble t
+				     :auto-sitemap nil)
+				    
+				    ("static-html"
+				     :base-directory ,base-directory
+				     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|dat\\|mov\\|txt\\|svg\\|aiff\\|csv\\|gdt\\|inp\\|ipynb"
+				     :publishing-directory ,(concat public-directory "docs")
+				     :exclude "docs"
+				     :exclude "Calendario"
+				     :exclude ".ipynb_checkpoints"
+				     :exclude "reveal.js.old"
+				     :exclude "USB"
+				     :recursive t
+				     :publishing-function org-publish-attachment)
+
+				    ;; ... all the components ...
+				    ("scimax-eln" :components ("html" "static-html" "pdf")))))
+
+  (org-publish "scimax-eln" t))
+#+END_SRC
+
+#+RESULTS:
+
+
+
+
+** USB-publish
+#+BEGIN_SRC emacs-lisp  :tangle ~/publish.el :results silent
+(use-package htmlize)
+
+(require 'ox-publish)
+
+(let* ((base-directory "./")
+       (org-export-with-broken-links t)
+       (org-publish-project-alist `(("html"
+				     :base-directory ,base-directory
+				     :base-extension "org"
+				     :publishing-directory ,(concat base-directory "USB")
+				     :exclude "Almacen\\|USB\\|docs\\|EjerciciosHide\\|Calendario\\|ucarima.*\\|.ipynb_checkpoints\\|00Notas.*\\|org-publisg.*\\|*.txt\\|kk.*"
+				     :recursive t
+				     :publishing-function org-html-publish-to-html
+				     :auto-preamble t
+				     :auto-sitemap nil)
+				    
+				    ("static-html"
+				     :base-directory ,base-directory
+				     :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|dat\\|mov\\|svg\\|aiff\\|csv\\|gdt\\|inp\\|ipynb\\|html"
+				     :publishing-directory ,(concat base-directory "USB")
+				     :exclude "Almacen\\|USB\\|docs\\|EjerciciosHide\\|ucarima.*\\|.ipynb_checkpoints\\|org-publisg.*\\|*.txt\\|kk.*"
+				     :recursive t
+				     :publishing-function org-publish-attachment)
+
+				    ;; ... all the components ...
+				    ("scimax-eln" :components ("html" "static-html")))))
+
+  (org-publish "scimax-eln" t))
+#+END_SRC
+
+
+* slides
+
+[[https://nbconvert.readthedocs.io/en/latest/config_options.html][Configuración para nbconvert]] (las slides usan ficheros locales)
+
+#+BEGIN_SRC python :tangle mycfg.py
+c = get_config()
+c.NbConvertApp.notebooks = ["Lecc01.ipynb",
+                            "Lecc02.ipynb",
+                            "Lecc03.ipynb",
+                            "Lecc04.ipynb",
+                            "Lecc05.ipynb",
+                            "Lecc06.ipynb"]
+c.SlidesExporter.reveal_theme = 'solarized'
+c.SlidesExporter.reveal_scroll = True
+#+END_SRC
+
+# :tangle custom.css
+#+BEGIN_SRC css 
+.slides {
+  width: 90% !important;
+}
+#+END_SRC
+
+
+#+BEGIN_SRC sh :results none
+#jupyter nbconvert --config mycfg.py --to notebook
+jupyter nbconvert --config mycfg.py --to slides 
+#+END_SRC
+
+# omite las celdas de código
+#+BEGIN_SRC sh :results silent
+#jupyter nbconvert --config mycfg.py --to notebook
+jupyter nbconvert --config mycfg.py --to slides --no-input
+#+END_SRC
+
+
+# emacs --batch  --eval "(require 'org)(use-package ox-ipynb)" Lecc02.org --funcall ox-ipynb-export-org-file-to-ipynb-file
+
+# emacsclient -e '(progn (switch-to-buffer "my-presentation.org") (org-beamer-export-to-pdf))'
+
+# emacs --batch --load=plugin.el --load=my-funcs.el --eval=my-func file.v
+
+# c.SlidesExporter.reveal_theme = 'beige'
+# c.SlidesExporter.SlidesExporter.reveal_number = 'c/t'
+# c.SlidesExporter.slideNumber = True
+# c.SlidesExporter.reveal_width = 5500
+# c.SlidesExporter.reveal_height = 800
+
+
+* slides para GitHubpages
+
+
+[[https://nbconvert.readthedocs.io/en/latest/config_options.html][Configuración para nbconvert]] (las slides usan ficheros de la web para poder funcionar en GitHubPages)
+
+[[https://dbafromthecold.com/2021/02/21/creating-presentations-with-reveal-and-github-pages/][creating-presentations-with-reveal-and-github-pages]]
+
+https://github.com/RichardAfolabi/Presentation_js
+
+https://emasuriano.com/til/2024-07-01-create-presentations-from-notebook/
+
+https://github.com/yjwen/org-reveal
+https://github.com/hexmode/ox-reveal
+
+#+BEGIN_SRC python :tangle mycfg-GitHubPages.py
+c = get_config()
+c.NbConvertApp.notebooks = ["Lecc01.ipynb",
+                            "Lecc02.ipynb",
+                            "Lecc03.ipynb",
+                            "Lecc04.ipynb",
+                            "Lecc05.ipynb",
+                            "Lecc06.ipynb"]
+
+c.SlidesExporter.reveal_theme = 'solarized'
+c.SlidesExporter.reveal_scroll = True
+c.SlidesExporter.language_code = 'es'
+
+c.SlidesExporter.mathjax_url = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"
+
+c.SlidesExporter.jquery_url = "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"
+
+c.SlidesExporter.require_js_url = "https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"
+#+END_SRC
+
+#+BEGIN_SRC sh :results silent
+jupyter nbconvert --config mycfg-GitHubPages.py --to slides --reveal-prefix reveal.js --no-input
+#+END_SRC
+
+
+#+BEGIN_SRC emacs-lisp
+(require 'ox-ipynb)
+(ox-ipynb-export-org-file-to-ipynb-file "Lecc01.org")
+(ox-ipynb-export-org-file-to-ipynb-file "Lecc02.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc03.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc04.org")
+;(ox-ipynb-export-org-file-to-ipynb-file "Lecc05.org")
+#+END_SRC
+
+#+RESULTS:
+: Lecc01.ipynb
+
+
+# jupyter nbconvert --config mycfg.py
+# jupyter nbconvert --config mycfg.py  --to slides --reveal-prefix reveal.js
+# jupyter nbconvert --config mycfg.py  --to slides --offline embed --reveal-prefix reveal.js
