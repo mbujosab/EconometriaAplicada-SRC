@@ -1,0 +1,14 @@
+
+Contraste aumentado de Dickey-Fuller para Tasa_Incendios
+contrastar hacia abajo desde 4 retardos, con el criterio AIC
+tamaño muestral 19
+la hipótesis nula de raíz unitaria es: [a = 1]
+
+  contraste con constante 
+  incluyendo un retardo de (1-L)Tasa_Incendios
+  modelo: (1-L)y = b0 + (a-1)*y(-1) + ... + e
+  valor estimado de (a - 1): -0,0782544
+  estadístico de contraste: tau_c(1) = -1,15001
+  valor p asintótico 0,698
+  Coef. de autocorrelación de primer orden de e: -0,097
+

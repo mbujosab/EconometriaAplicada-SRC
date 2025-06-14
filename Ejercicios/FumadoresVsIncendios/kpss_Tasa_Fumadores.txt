@@ -1,0 +1,11 @@
+
+Contraste KPSS para Tasa_Fumadores
+
+T = 21
+Parámetro de truncamiento de los retardos = 4
+Estadístico de contraste = 0,534078
+
+                      10%      5%      1%
+Valores críticos: 0,357   0,462   0,697
+Valor p interpolado 0,038
+

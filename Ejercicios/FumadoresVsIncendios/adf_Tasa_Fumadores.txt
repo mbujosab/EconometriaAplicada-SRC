@@ -1,0 +1,15 @@
+
+Contraste aumentado de Dickey-Fuller para Tasa_Fumadores
+contrastar hacia abajo desde 4 retardos, con el criterio AIC
+tamaño muestral 18
+la hipótesis nula de raíz unitaria es: [a = 1]
+
+  contraste con constante 
+  incluyendo 2 retardos de (1-L)Tasa_Fumadores
+  modelo: (1-L)y = b0 + (a-1)*y(-1) + ... + e
+  valor estimado de (a - 1): 0,0822928
+  estadístico de contraste: tau_c(1) = 1,41073
+  valor p asintótico 0,9991
+  Coef. de autocorrelación de primer orden de e: 0,049
+  diferencias retardadas: F(2, 14) = 2,476 [0,1200]
+

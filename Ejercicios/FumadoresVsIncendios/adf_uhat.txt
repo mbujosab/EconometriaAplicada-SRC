@@ -1,0 +1,14 @@
+
+Contraste aumentado de Dickey-Fuller para uhat
+contrastar hacia abajo desde 4 retardos, con el criterio AIC
+tamaño muestral 20
+la hipótesis nula de raíz unitaria es: [a = 1]
+
+  contraste con constante 
+  incluyendo 0 retardos de (1-L)uhat
+  modelo: (1-L)y = b0 + (a-1)*y(-1) + e
+  valor estimado de (a - 1): -0,544803
+  estadístico de contraste: tau_c(1) = -2,71633
+  valor p asintótico 0,07119
+  Coef. de autocorrelación de primer orden de e: -0,105
+

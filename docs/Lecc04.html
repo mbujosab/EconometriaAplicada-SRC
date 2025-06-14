@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es">
 <head>
-<!-- 2024-10-21 lun 10:15 -->
+<!-- 2025-06-14 sáb 21:15 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Econometría Aplicada. Lección 4</title>
@@ -248,58 +248,58 @@ $(function() {    $('.note').before("<p class='admonition-title note'>Note</p>")
 <div id="content" class="content">
 <h1 class="title">Econometría Aplicada. Lección 4</h1>
 <div id="table-of-contents" role="doc-toc">
-<h2>Table of Contents</h2>
+<h2>&Iacute;ndice</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgaa3e08b">1. Secuencias de números</a>
+<li><a href="#org4ea1325">1. Secuencias de números</a>
 <ul>
-<li><a href="#orgef28c31">1.1. El espacio vectorial de las secuencias infinitas \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a>
+<li><a href="#org59efe5b">1.1. El espacio vectorial de las secuencias infinitas \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a>
 <ul>
-<li><a href="#org5929c0e">1.1.1. Notación mediante funciones generatrices</a></li>
-<li><a href="#orgd6cd016">1.1.2. Características de algunas secuencias</a></li>
-<li><a href="#orgd62893b">1.1.3. Algunos subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a></li>
+<li><a href="#org4608139">1.1.1. Notación mediante funciones generatrices</a></li>
+<li><a href="#orgd4d1a22">1.1.2. Características de algunas secuencias</a></li>
+<li><a href="#org6d5fab0">1.1.3. Algunos subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</a></li>
 </ul>
 </li>
-<li><a href="#org472cb27">1.2. Producto convolución</a></li>
-<li><a href="#org7eb747d">1.3. Anillos conmutativos y cuerpos</a>
+<li><a href="#orgf36f327">1.2. Producto convolución</a></li>
+<li><a href="#org0fbaecb">1.3. Anillos conmutativos y cuerpos</a>
 <ul>
-<li><a href="#org28dd99e">1.3.1. Anillos conmutativos</a></li>
-<li><a href="#org0e0af9f">1.3.2. Cuerpos</a></li>
+<li><a href="#org7d736af">1.3.1. Anillos conmutativos</a></li>
+<li><a href="#org0192705">1.3.2. Cuerpos</a></li>
 </ul>
 </li>
-<li><a href="#org42bec31">1.4. Clasificación de algunos subconjuntos de sucesiones</a></li>
-<li><a href="#orgcbcb8df">1.5. Inversas</a>
+<li><a href="#orgaf57934">1.4. Clasificación de algunos subconjuntos de sucesiones</a></li>
+<li><a href="#orgb9944b0">1.5. Inversas</a>
 <ul>
-<li><a href="#orga5f7e35">1.5.1. Inversas de secuencias con principio</a></li>
-<li><a href="#org4dfb5ea">1.5.2. Inversas de secuencias con final</a></li>
-<li><a href="#orga41576a">1.5.3. Inversas de polinomios</a></li>
-<li><a href="#orgf18b61b">1.5.4. Cuerpo de fracciones de polinomios</a></li>
+<li><a href="#org850c6ec">1.5.1. Inversas de secuencias con principio</a></li>
+<li><a href="#org8501b5d">1.5.2. Inversas de secuencias con final</a></li>
+<li><a href="#orgaeb1bc5">1.5.3. Inversas de polinomios</a></li>
+<li><a href="#org717f89c">1.5.4. Cuerpo de fracciones de polinomios</a></li>
 </ul>
 </li>
-<li><a href="#org372c642">1.6. Operador retardo \(\mathsf{B}{}\) y suma de los elementos de una secuencia.</a>
+<li><a href="#orga914c11">1.6. Operador retardo \(\mathsf{B}{}\) y suma de los elementos de una secuencia.</a>
 <ul>
-<li><a href="#org36f9582">1.6.1. Polinomios y secuencias en el operador retardo \(\boldsymbol{a}(\mathsf{B}{})\) actuando sobre secuencias</a></li>
+<li><a href="#orgd166937">1.6.1. Polinomios y secuencias en el operador retardo \(\boldsymbol{a}(\mathsf{B}{})\) actuando sobre secuencias</a></li>
 </ul>
 </li>
-<li><a href="#org7d46e3a">1.7. Convolución de una serie formal con el "<i>reverso</i>" de otra</a></li>
+<li><a href="#org39683d1">1.7. Convolución de una serie formal con el "<i>reverso</i>" de otra</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div class="ABSTRACT" id="org02cfd1a">
+<div class="ABSTRACT" id="orgc8b5dfa">
 <p>
 En esta lección veremos conceptos algebraicos usados en la
 modelización de series temporales.
 </p>
 
 </div>
-<div id="outline-container-orgaa3e08b" class="outline-2">
-<h2 id="orgaa3e08b"><span class="section-number-2">1.</span> Secuencias de números</h2>
+<div id="outline-container-org4ea1325" class="outline-2">
+<h2 id="org4ea1325"><span class="section-number-2">1.</span> Secuencias de números</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgef28c31" class="outline-3">
-<h3 id="orgef28c31"><span class="section-number-3">1.1.</span> El espacio vectorial de las secuencias infinitas \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</h3>
+<div id="outline-container-org59efe5b" class="outline-3">
+<h3 id="org59efe5b"><span class="section-number-3">1.1.</span> El espacio vectorial de las secuencias infinitas \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Consideremos el conjunto \({\mathbb{R}}^\mathbb{Z}\) de secuencias
@@ -330,8 +330,8 @@ Si \(\;\boldsymbol{x},\boldsymbol{y}\in{\mathbb{R}}^\mathbb{Z}\;\) y
 producto por escalares constituyen un espacio vectorial.
 </p>
 </div>
-<div id="outline-container-org5929c0e" class="outline-4">
-<h4 id="org5929c0e"><span class="section-number-4">1.1.1.</span> Notación mediante funciones generatrices</h4>
+<div id="outline-container-org4608139" class="outline-4">
+<h4 id="org4608139"><span class="section-number-4">1.1.1.</span> Notación mediante funciones generatrices</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 En la expresión \(\;\boldsymbol{x} \quad = \quad (\ldots,\ x_{-2},\
@@ -368,8 +368,8 @@ La sucesión \(\;\boldsymbol{0}=\sum_{t=-\infty}^\infty 0 z^t\;\) se denomina <i
 </p>
 </div>
 </div>
-<div id="outline-container-orgd6cd016" class="outline-4">
-<h4 id="orgd6cd016"><span class="section-number-4">1.1.2.</span> Características de algunas secuencias</h4>
+<div id="outline-container-orgd4d1a22" class="outline-4">
+<h4 id="orgd4d1a22"><span class="section-number-4">1.1.2.</span> Características de algunas secuencias</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 En una sucesión \(\boldsymbol{a}\) no nula llamamos
@@ -397,8 +397,8 @@ Una sucesión absolutamente sumable siempre es de cuadrado sumable,
 </p>
 </div>
 </div>
-<div id="outline-container-orgd62893b" class="outline-4">
-<h4 id="orgd62893b"><span class="section-number-4">1.1.3.</span> Algunos subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</h4>
+<div id="outline-container-org6d5fab0" class="outline-4">
+<h4 id="org6d5fab0"><span class="section-number-4">1.1.3.</span> Algunos subespacios de \(\big({\mathbb{R}}^\mathbb{Z},+,\cdot\big)\)</h4>
 <div class="outline-text-4" id="text-1-1-3">
 <dl class="org-dl">
 <dt>Secuencias con final</dt><dd>si tienen grado (a partir de cierto índice son
@@ -416,8 +416,8 @@ son cero).  \[\boldsymbol{a}(z) = (\ldots,\ 0,\ 0,\ 0,\ a_{k},\ a_{k+1},\ a_{k+2
 </div>
 </div>
 </div>
-<div id="outline-container-org472cb27" class="outline-3">
-<h3 id="org472cb27"><span class="section-number-3">1.2.</span> Producto convolución</h3>
+<div id="outline-container-orgf36f327" class="outline-3">
+<h3 id="orgf36f327"><span class="section-number-3">1.2.</span> Producto convolución</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 Sean \(\boldsymbol{a}\) y \(\boldsymbol{b}\) sucesiones <span class="underline">con principio</span>
@@ -447,12 +447,12 @@ respectivos grados.</li>
 </div>
 </div>
 </div>
-<div id="outline-container-org7eb747d" class="outline-3">
-<h3 id="org7eb747d"><span class="section-number-3">1.3.</span> Anillos conmutativos y cuerpos</h3>
+<div id="outline-container-org0fbaecb" class="outline-3">
+<h3 id="org0fbaecb"><span class="section-number-3">1.3.</span> Anillos conmutativos y cuerpos</h3>
 <div class="outline-text-3" id="text-1-3">
 </div>
-<div id="outline-container-org28dd99e" class="outline-4">
-<h4 id="org28dd99e"><span class="section-number-4">1.3.1.</span> Anillos conmutativos</h4>
+<div id="outline-container-org7d736af" class="outline-4">
+<h4 id="org7d736af"><span class="section-number-4">1.3.1.</span> Anillos conmutativos</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <p>
 Un <b>anillo conmutativo</b> es un conjunto \(\mathsf{S}\) equipado con dos
@@ -488,8 +488,8 @@ El producto es distributivo respecto de la suma: Para todo \(\boldsymbol{a}, \bo
 </ul>
 </div>
 </div>
-<div id="outline-container-org0e0af9f" class="outline-4">
-<h4 id="org0e0af9f"><span class="section-number-4">1.3.2.</span> Cuerpos</h4>
+<div id="outline-container-org0192705" class="outline-4">
+<h4 id="org0192705"><span class="section-number-4">1.3.2.</span> Cuerpos</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <p>
 Un <b>cuerpo</b> es un anillo conmutativo que adicionalmente satisface:
@@ -510,8 +510,8 @@ conjunto</i>)
 </div>
 </div>
 </div>
-<div id="outline-container-org42bec31" class="outline-3">
-<h3 id="org42bec31"><span class="section-number-3">1.4.</span> Clasificación de algunos subconjuntos de sucesiones</h3>
+<div id="outline-container-orgaf57934" class="outline-3">
+<h3 id="orgaf57934"><span class="section-number-3">1.4.</span> Clasificación de algunos subconjuntos de sucesiones</h3>
 <div class="outline-text-3" id="text-1-4">
 <dl class="org-dl">
 <dt>Son anillos el conjunto de</dt><dd><p>
@@ -526,16 +526,16 @@ inversas de un polinomio no son polinomios en general).
 </p></dd>
 
 <dt>Son cuerpos el conjunto de</dt><dd>secuencias con principio, secuencias
-con final (y el <a href="#orgf18b61b">Cuerpo de fracciones de polinomios</a>)</dd>
+con final (y el <a href="#org717f89c">Cuerpo de fracciones de polinomios</a>)</dd>
 </dl>
 </div>
 </div>
-<div id="outline-container-orgcbcb8df" class="outline-3">
-<h3 id="orgcbcb8df"><span class="section-number-3">1.5.</span> Inversas</h3>
+<div id="outline-container-orgb9944b0" class="outline-3">
+<h3 id="orgb9944b0"><span class="section-number-3">1.5.</span> Inversas</h3>
 <div class="outline-text-3" id="text-1-5">
 </div>
-<div id="outline-container-orga5f7e35" class="outline-4">
-<h4 id="orga5f7e35"><span class="section-number-4">1.5.1.</span> Inversas de secuencias con principio</h4>
+<div id="outline-container-org850c6ec" class="outline-4">
+<h4 id="org850c6ec"><span class="section-number-4">1.5.1.</span> Inversas de secuencias con principio</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <p>
 Supongamos que \(\boldsymbol{a}\ne\boldsymbol{0}\) y que \(k =
@@ -575,8 +575,8 @@ es decir
 </p>
 </div>
 </div>
-<div id="outline-container-org4dfb5ea" class="outline-4">
-<h4 id="org4dfb5ea"><span class="section-number-4">1.5.2.</span> Inversas de secuencias con final</h4>
+<div id="outline-container-org8501b5d" class="outline-4">
+<h4 id="org8501b5d"><span class="section-number-4">1.5.2.</span> Inversas de secuencias con final</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <p>
 Supongamos que \(\boldsymbol{a}\ne\boldsymbol{0}\) y que \(p =
@@ -606,8 +606,8 @@ es decir
 </p>
 </div>
 </div>
-<div id="outline-container-orga41576a" class="outline-4">
-<h4 id="orga41576a"><span class="section-number-4">1.5.3.</span> Inversas de polinomios</h4>
+<div id="outline-container-orgaeb1bc5" class="outline-4">
+<h4 id="orgaeb1bc5"><span class="section-number-4">1.5.3.</span> Inversas de polinomios</h4>
 <div class="outline-text-4" id="text-1-5-3">
 <p>
 Ahora sabemos que todo polinomio
@@ -682,8 +682,8 @@ En los manuales de <i>series temporales</i> se dice que un polinomio \(\boldsymb
 </p>
 </div>
 </div>
-<div id="outline-container-orgf18b61b" class="outline-4">
-<h4 id="orgf18b61b"><span class="section-number-4">1.5.4.</span> Cuerpo de fracciones de polinomios</h4>
+<div id="outline-container-org717f89c" class="outline-4">
+<h4 id="org717f89c"><span class="section-number-4">1.5.4.</span> Cuerpo de fracciones de polinomios</h4>
 <div class="outline-text-4" id="text-1-5-4">
 <p>
 El <i>cuerpo de fracciones de polinomios</i>
@@ -708,8 +708,8 @@ Este conjunto es fundamental en la modelización ARIMA.
 </div>
 </div>
 </div>
-<div id="outline-container-org372c642" class="outline-3">
-<h3 id="org372c642"><span class="section-number-3">1.6.</span> Operador retardo \(\mathsf{B}{}\) y suma de los elementos de una secuencia.</h3>
+<div id="outline-container-orga914c11" class="outline-3">
+<h3 id="orga914c11"><span class="section-number-3">1.6.</span> Operador retardo \(\mathsf{B}{}\) y suma de los elementos de una secuencia.</h3>
 <div class="outline-text-3" id="text-1-6">
 <p>
 Por conveniencia se usa el operador retardo \(\mathsf{B}\) en la notación:
@@ -727,8 +727,8 @@ sumable, entonces la expresión
 \[\boldsymbol{x}(\mathsf{B})=\sum_{t=-\infty}^\infty x_t \mathsf{B}^t\;=\;\cdots+x_{-2}+x_{-1}+x_{0}+x_{1}+\cdots\] tiene sentido como suma.
 </p>
 </div>
-<div id="outline-container-org36f9582" class="outline-4">
-<h4 id="org36f9582"><span class="section-number-4">1.6.1.</span> Polinomios y secuencias en el operador retardo \(\boldsymbol{a}(\mathsf{B}{})\) actuando sobre secuencias</h4>
+<div id="outline-container-orgd166937" class="outline-4">
+<h4 id="orgd166937"><span class="section-number-4">1.6.1.</span> Polinomios y secuencias en el operador retardo \(\boldsymbol{a}(\mathsf{B}{})\) actuando sobre secuencias</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <p>
 Así, para el polinomio \(\boldsymbol{a}(z)=a_0+a_1z+a_2z^2+a_3z^3\), y la
@@ -756,8 +756,8 @@ Y en general, si \(\boldsymbol{a}\) e \(\boldsymbol{y}\) son secuencias sumables
 </div>
 </div>
 </div>
-<div id="outline-container-org7d46e3a" class="outline-3">
-<h3 id="org7d46e3a"><span class="section-number-3">1.7.</span> Convolución de una serie formal con el "<i>reverso</i>" de otra</h3>
+<div id="outline-container-org39683d1" class="outline-3">
+<h3 id="org39683d1"><span class="section-number-3">1.7.</span> Convolución de una serie formal con el "<i>reverso</i>" de otra</h3>
 <div class="outline-text-3" id="text-1-7">
 <p>
 Por último, si tenemos dos series formales \(\boldsymbol{a}\) y
@@ -786,8 +786,8 @@ es decir,
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="author">Author: Marcos Bujosa</p>
-<p class="date">Created: 2024-10-21 lun 10:15</p>
+<p class="author">Autor: Marcos Bujosa</p>
+<p class="date">Created: 2025-06-14 sáb 21:15</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

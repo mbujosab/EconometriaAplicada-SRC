@@ -148,6 +148,8 @@ Haz clic en el siguiente botón para abrir los notebooks en Binder:
   (Versión [[file:./Ejercicios/LetrasTesoroAmericano3y6meses.pdf][pdf]] para imprimir)
 - [[file:./Ejercicios/SerieCuentasFinancierasBE.html][SerieCuentasFinancierasBE]]
   (Versión [[file:./Ejercicios/SerieCuentasFinancierasBE.pdf][pdf]] para imprimir)
+- [[file:./Ejercicios/FumadoresVsIncendios.html][FumadoresVsIncendios]]
+  (Versión [[file:./Ejercicios/FumadoresVsIncendios.pdf][pdf]] para imprimir)
 
 
 - [[file:./Ejercicios/EjercicioIdentificacionARIMA.html][Ejercicio de identificación de modelos ARIMA]]

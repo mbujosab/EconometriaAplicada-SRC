@@ -1,4 +1,5 @@
 
+
 #+BEGIN_SRC  makefile :noweb no-export :results silent :exports none :tangle makefile
 OUT_DIR=./
 # Using GNU Make-specific functions here
@@ -104,6 +105,10 @@ $(OUT_DIR)/%.pdf: %.pdf
 
 #pdflatex --shell-escape  -interaction=batchmode SerieCuentasFinancierasBE.tex
 #pdflatex --shell-escape  -interaction=batchmode SerieCuentasFinancierasBE.tex
+#latexmk -c SerieCuentasFinancierasBE.tex
+
+#pdflatex --shell-escape  -interaction=batchmode FumadoresVsIncendios.tex
+#pdflatex --shell-escape  -interaction=batchmode FumadoresVsIncendios.tex
 #latexmk -c SerieCuentasFinancierasBE.tex
 
 #+END_SRC

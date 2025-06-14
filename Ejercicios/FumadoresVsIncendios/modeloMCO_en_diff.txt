@@ -1,0 +1,39 @@
+
+Modelo 4: MCO, usando las observaciones 2002-2021 (T = 20)
+Variable dependiente: d_Tasa_Incendios
+
+                    coeficiente  Desv. típica  Estadístico t  valor p
+  -------------------------------------------------------------------
+  const             -0,951343      0,467488      -2,035       0,0568  *
+  d_Tasa_Fumadores  -0,0200761     0,531889      -0,03774     0,9703 
+
+Media de la vble. dep. -0,940000   D.T. de la vble. dep.   1,558812
+Suma de cuad. residuos  46,16435   D.T. de la regresión    1,601464
+R-cuadrado              0,000079   R-cuadrado corregido   -0,055472
+F(1, 18)                0,001425   Valor p (de F)          0,970307
+Log-verosimilitud      -36,74353   Criterio de Akaike      77,48705
+Criterio de Schwarz     79,47852   Crit. de Hannan-Quinn   77,87581
+rho                    -0,614047   Durbin-Watson           2,429053
+
+
+Contraste de la hipótesis nula de distribución Normal:
+Chi-cuadrado(2) = 12,244 con valor p 0,00219
+
+
+Contraste de heterocedasticidad de White
+
+Estadístico de contraste: TR^2 = 1,380003,
+con valor p = P(Chi-cuadrado(2) > 1,380003) = 0,501575
+
+
+Contraste de Breusch-Godfrey para autocorrelación hasta el orden 4
+
+Estadístico de contraste: LMF = 2,023163,
+con valor p = P(F(4,14) > 2,02316) = 0,146
+
+Estadístico alternativo: TR^2 = 7,326102,
+con valor p = P(Chi-cuadrado(4) > 7,3261) = 0,12
+
+Ljung-Box Q' = 4,62915,
+con valor p = P(Chi-cuadrado(4) > 4,62915) = 0,328
+
